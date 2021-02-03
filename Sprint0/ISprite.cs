@@ -16,7 +16,7 @@ namespace Sprint0
     public class NonMovingNonAnimatedSprite : ISprite
     {
         private Texture2D texture;
-
+        /* Alan Wu */
         public NonMovingNonAnimatedSprite(Texture2D texture)
         {
             this.texture = texture;
