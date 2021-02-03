@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sprint0
 {
-    public interface IController
+    public interface IController //KT Goldstein
     {
         void Update();
     }
