@@ -5,6 +5,7 @@ namespace Sprint0
 {
 
     /*Yonace Ghebrehiwet*/ 
+    /* Alan Wu */
 
     public interface ISprite
     {
