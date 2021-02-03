@@ -6,6 +6,7 @@ namespace Sprint0
 
     /*Yonace Ghebrehiwet*/ 
     /* Alan Wu */
+    /* Kristin Bradshaw*/
 
     public interface ISprite
     {
