@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint0
 {
+
+    /*Yonace Ghebrehiwet*/ 
+
     public interface ISprite
     {
         public void Update();
