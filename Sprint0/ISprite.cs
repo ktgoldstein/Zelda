@@ -1,12 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint0
+namespace LegendOfZelda
 {
-
-    /*Yonace Ghebrehiwet*/ 
-    /* Alan Wu */
-    /* Kristin Bradshaw*/
 
     public interface ISprite
     {

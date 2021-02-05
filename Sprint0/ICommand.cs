@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-//jaci taylor has added a comment here
-namespace Sprint0
+
+namespace LegendOfZelda
 {
     public interface ICommand
     {

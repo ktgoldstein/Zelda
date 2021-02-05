@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
-namespace Sprint0
+namespace LegendOfZelda
 {
-    public interface IController //KT Goldstein edit #2
+    public interface IController
     {
         void Update();
     }
