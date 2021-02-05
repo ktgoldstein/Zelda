@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
-namespace LegendOfZelda
+namespace LegendOfZeldaClone
 {
     public interface IController
     {
@@ -39,9 +39,9 @@ namespace LegendOfZelda
     public class MouseController : IController
     {
         private Dictionary<string, ICommand> controllerMappings;
-        private LegendOfZeldaClone myGame;
+        private LegendOfZeldaDungeon myGame;
 
-        public MouseController(LegendOfZeldaClone game)
+        public MouseController(LegendOfZeldaDungeon game)
         {
             controllerMappings = new Dictionary<string, ICommand>();
             myGame = game;

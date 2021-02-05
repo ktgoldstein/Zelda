@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace LegendOfZelda
+namespace LegendOfZeldaClone
 {
 
     public interface ISprite
@@ -13,7 +13,7 @@ namespace LegendOfZelda
     public class NonMovingNonAnimatedSprite : ISprite
     {
         private Texture2D texture;
-        /* Alan Wu */
+  
         public NonMovingNonAnimatedSprite(Texture2D texture)
         {
             this.texture = texture;

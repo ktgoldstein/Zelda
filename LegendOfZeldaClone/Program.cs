@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace LegendOfZelda
+namespace LegendOfZeldaClone
 {
     public static class Program
     {
         [STAThread]
         static void Main()
         {
-            using (var game = new LegendOfZeldaClone())
+            using (var game = new LegendOfZeldaDungeon())
                 game.Run();
         }
     }

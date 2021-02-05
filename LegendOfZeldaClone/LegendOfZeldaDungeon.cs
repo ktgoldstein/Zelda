@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
-namespace LegendOfZelda
+namespace LegendOfZeldaClone
 {
-    public class LegendOfZeldaClone : Game
+    public class LegendOfZeldaDungeon : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -18,7 +18,7 @@ namespace LegendOfZelda
         public int GameWidth;
         public int GameHeight;
 
-        public LegendOfZeldaClone()
+        public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

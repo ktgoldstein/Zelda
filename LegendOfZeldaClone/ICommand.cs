@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace LegendOfZelda
+namespace LegendOfZeldaClone
 {
     public interface ICommand
     {
@@ -9,9 +9,9 @@ namespace LegendOfZelda
 
     public class QuitGame : ICommand
     {
-        private LegendOfZeldaClone myGame;
+        private LegendOfZeldaDungeon myGame;
 
-        public QuitGame(LegendOfZeldaClone game)
+        public QuitGame(LegendOfZeldaDungeon game)
         {
             myGame = game;
         }
@@ -24,9 +24,9 @@ namespace LegendOfZelda
 
     public class SetSpriteNonMovingNonAnimated : ICommand
     {
-        private LegendOfZeldaClone myGame;
+        private LegendOfZeldaDungeon myGame;
 
-        public SetSpriteNonMovingNonAnimated(LegendOfZeldaClone game)
+        public SetSpriteNonMovingNonAnimated(LegendOfZeldaDungeon game)
         {
             myGame = game;
         }
@@ -39,9 +39,9 @@ namespace LegendOfZelda
 
     public class SetSpriteNonMovingAnimated : ICommand
     {
-        private LegendOfZeldaClone myGame;
+        private LegendOfZeldaDungeon myGame;
 
-        public SetSpriteNonMovingAnimated(LegendOfZeldaClone game)
+        public SetSpriteNonMovingAnimated(LegendOfZeldaDungeon game)
         {
             myGame = game;
         }
@@ -54,9 +54,9 @@ namespace LegendOfZelda
 
     public class SetSpriteMovingNonAnimated : ICommand
     {
-        private LegendOfZeldaClone myGame;
+        private LegendOfZeldaDungeon myGame;
 
-        public SetSpriteMovingNonAnimated(LegendOfZeldaClone game)
+        public SetSpriteMovingNonAnimated(LegendOfZeldaDungeon game)
         {
             myGame = game;
         }
@@ -69,9 +69,9 @@ namespace LegendOfZelda
 
     public class SetSpriteMovingAnimated : ICommand
     {
-        private LegendOfZeldaClone myGame;
+        private LegendOfZeldaDungeon myGame;
 
-        public SetSpriteMovingAnimated(LegendOfZeldaClone game)
+        public SetSpriteMovingAnimated(LegendOfZeldaDungeon game)
         {
             myGame = game;
         }
