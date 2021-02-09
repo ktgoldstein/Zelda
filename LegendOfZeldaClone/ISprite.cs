@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone
 {
-
     public interface ISprite
     {
         public void Update();
