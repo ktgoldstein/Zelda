@@ -13,7 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../../../../Documents/OSU Work/CSE 3902/Boomerang.png
+#begin ../../../../../../Documents/OSU Work/CSE 3902/Boomerang2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,7 +23,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../../../../../../Documents/OSU Work/CSE 3902/Boomerang.png;EnemySprites/Boomerang.png
+/build:../../../../../../Documents/OSU Work/CSE 3902/Boomerang2.png;EnemySprites/Boomerang2.png
 
 #begin Bosses.png
 /importer:TextureImporter
@@ -67,18 +67,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:EnemySprites/Aquamentus.png
-
-#begin EnemySprites/Boomerang.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:EnemySprites/Boomerang.png
 
 #begin EnemySprites/fireball.png
 /importer:TextureImporter

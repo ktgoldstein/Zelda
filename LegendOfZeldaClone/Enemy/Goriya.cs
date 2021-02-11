@@ -11,7 +11,7 @@ namespace LegendOfZeldaClone.Enemy
       
         private ISprite goriyaSprite;
         private Vector2 location = new Vector2(400, 120);
-        private float speed = 3;
+        private float speed = 6;
         private Vector2 direction = new Vector2(0, 1);
         private int timer = 0;
         private Boomerang boomerang;
@@ -23,19 +23,25 @@ namespace LegendOfZeldaClone.Enemy
         public void Draw(SpriteBatch spritebatch)
         {
             goriyaSprite.Draw(spritebatch, location);
-            boomerang.Draw(spritebatch);
+            if (boomerang != null)
+            {
+                boomerang.Draw(spritebatch);
+            }
         }
 
         public void Update()
         {
             goriyaSprite.Update();
-            //boomerang.Update();
+            if(boomerang != null)
+            {
+                boomerang.Update();
+            }
 
             location.Y += speed * direction.Y;
             location.X += speed * direction.X;
             if(timer % 20 == 0)
             {
-                ThrowBoomerang();
+                ThrowBoomerang(direction);
             }
             if (timer == 0)
             {
@@ -65,9 +71,22 @@ namespace LegendOfZeldaClone.Enemy
             }
         }
 
-        private void ThrowBoomerang()
+        private void ThrowBoomerang(Vector2 direction)
         {
-            boomerang = new Boomerang(this.location, this.direction);
+            if(boomerang == null)
+            {
+                boomerang = new Boomerang(this.location, direction, this);
+            }
+        }
+
+        public Vector2 getGoriyaLocation()
+        {
+            return location;
+        }
+
+        public void catchBoomerang()
+        {
+            boomerang = null;
         }
     }
 }

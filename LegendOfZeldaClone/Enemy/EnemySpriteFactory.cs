@@ -34,7 +34,7 @@ namespace LegendOfZeldaClone.Enemy
 			goriyaUpSprite = content.Load<Texture2D>("EnemySprites\\Goriya\\GoriyaUp");
 			goriyaRightSprite = content.Load<Texture2D>("EnemySprites\\Goriya\\GoriyaRight");
 			goriyaLeftSprite = content.Load<Texture2D>("EnemySprites\\Goriya\\GoriyaLeft");
-			boomerangSprite = content.Load<Texture2D>("EnemySprites\\Boomerang");
+			boomerangSprite = content.Load<Texture2D>("EnemySprites\\Boomerang2");
 			stalfosSprite = content.Load<Texture2D>("EnemySprites\\Stalfos");
 
 
@@ -72,7 +72,7 @@ namespace LegendOfZeldaClone.Enemy
 
 		public ISprite createBoomerangSprite()
         {
-			return new EnemySprite(boomerangSprite, 6, 1, 6);
+			return new EnemySprite(boomerangSprite, 8, 1, 8, 1);
         }
 
 		public ISprite CreateStalfosSprite()

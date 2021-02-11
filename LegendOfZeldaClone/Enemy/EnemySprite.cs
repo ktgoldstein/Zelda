@@ -14,20 +14,23 @@ namespace LegendOfZeldaClone.Enemy
         private int totalFrames;
         private Texture2D texture;
         private int count = 0;
+        private float animationSpeed;
 
 
-        public EnemySprite(Texture2D texture, int columns, int rows, int totalFrames)
+        public EnemySprite(Texture2D texture, int columns, int rows, int totalFrames, float animationSpeed = 5)
         {
             this.texture = texture;
             this.columns = columns;
             this.rows = rows;
             this.totalFrames = totalFrames;
+            this.animationSpeed = animationSpeed;
 
         }
         public void Update()
         {
+            
             count++;
-            if (count == 5)
+            if (count == animationSpeed)
             {
                 count = 0;
                 currentFrame++;
@@ -45,7 +48,7 @@ namespace LegendOfZeldaClone.Enemy
             int column = currentFrame % columns;
 
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 4, height * 4);
 
             spritebatch.Begin();
             spritebatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);

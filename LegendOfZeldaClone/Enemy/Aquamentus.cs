@@ -14,6 +14,7 @@ namespace LegendOfZeldaClone.Enemy
         private int direction = 1;
         private int timer = 0;
         private List<Fireball> fireballs = new List<Fireball>();
+    
         public Aquamentus()
         {
             aquamentusSprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();

@@ -35,8 +35,8 @@ namespace LegendOfZeldaClone
         {
             LoadContent();
 
-            GameWidth = 512;
-            GameHeight = 256;
+            GameWidth = 512*2;
+            GameHeight = 256*2;
 
             _graphics.PreferredBackBufferWidth = GameWidth;
             _graphics.PreferredBackBufferHeight = GameHeight;
@@ -75,8 +75,8 @@ namespace LegendOfZeldaClone
 
             enemyList = new List<IEnemy>
             {
-                //new Aquamentus(),
-                //new Goriya(),
+                new Aquamentus(),
+                new Goriya(),
                 new Stalfos()
             };
 
