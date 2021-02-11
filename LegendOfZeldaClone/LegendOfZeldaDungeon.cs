@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZeldaClone.Enemy;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace LegendOfZeldaClone
         private SpriteBatch _spriteBatch;
 
         private List<IController> controllerList;
+        private List<IEnemy> enemyList;
 
         public Texture2D LinkTextures;
         public ISprite SpriteLink;
@@ -31,6 +33,8 @@ namespace LegendOfZeldaClone
 
         protected override void Initialize()
         {
+            LoadContent();
+
             GameWidth = 512;
             GameHeight = 256;
 
@@ -69,6 +73,13 @@ namespace LegendOfZeldaClone
                 mouseController
             };
 
+            enemyList = new List<IEnemy>
+            {
+                //new Aquamentus(),
+                //new Goriya(),
+                new Stalfos()
+            };
+
             base.Initialize();
         }
 
@@ -83,13 +94,22 @@ namespace LegendOfZeldaClone
             SpriteFont font = Content.Load<SpriteFont>("DefaultFont");
             string credits = "Credits\nProgram Made By: Simon Kirksey\nSprites from: spriters-resource.com/nes/legendofzelda/";
             SpriteCredits = new TextSprite(font, credits);
-    }
+
+            EnemySpriteFactory.Instance.LoadAllTextures(Content);
+
+
+        }
 
         protected override void Update(GameTime gameTime)
         {
             foreach(IController controller in controllerList)
             {
                 controller.Update();
+            }
+
+            foreach(IEnemy enemy in enemyList)
+            {
+                enemy.Update();
             }
 
             SpriteLink.Update();
@@ -103,6 +123,11 @@ namespace LegendOfZeldaClone
 
             SpriteCredits.Draw(_spriteBatch, new Vector2(GameWidth /10, GameHeight *2 /3));
             SpriteLink.Draw(_spriteBatch, new Vector2(GameWidth /2 -16, GameHeight /2 -16));
+
+            foreach (IEnemy enemy in enemyList)
+            {
+                enemy.Draw(_spriteBatch);
+            }
 
             base.Draw(gameTime);
         }
