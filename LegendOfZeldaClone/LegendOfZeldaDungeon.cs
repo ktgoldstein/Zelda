@@ -16,7 +16,7 @@ namespace LegendOfZeldaClone
 
         public Texture2D LinkTextures;
         public ISprite SpriteLink;
-        public ISprite SpriteCredits;
+        public ISprite SpriteCredits; 
         public int GameWidth;
         public int GameHeight;
 
