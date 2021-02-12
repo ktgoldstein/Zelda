@@ -19,7 +19,9 @@ namespace LegendOfZeldaClone
         public int GameHeight;
 
         public Texture2D ItemTextures;
+        public ItemInterface[] Items;
         public ItemInterface CurrItem;
+        public int index;
 
         public LegendOfZeldaDungeon()
         {
@@ -59,6 +61,11 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.NumPad3, setSpriteMovingNonAnimated);
             keyboardController.RegisterCommand(Keys.NumPad4, setSpriteMovingAnimated);
 
+            ICommand nextItem = new NextItem(this);
+            ICommand prevItem = new PreviousItem(this);
+            keyboardController.RegisterCommand(Keys.U, nextItem);
+            keyboardController.RegisterCommand(Keys.I, prevItem);
+
             MouseController mouseController = new MouseController(this);
             mouseController.RegisterCommand("rightClick", quitGame);
             mouseController.RegisterCommand("leftClick topLeft", setSpriteNonMovingNonAnimated);
@@ -71,6 +78,8 @@ namespace LegendOfZeldaClone
                 keyboardController,
                 mouseController
             };
+
+            index = 0;
 
             base.Initialize();
         }
@@ -87,10 +96,10 @@ namespace LegendOfZeldaClone
             string credits = "Credits\nProgram Made By: Simon Kirksey\nSprites from: spriters-resource.com/nes/legendofzelda/";
             SpriteCredits = new TextSprite(font, credits);
 
-            /* Not currently working, fix later
-             * ItemTextures = Content.Load<Texture2D>("ItemsSpriteSheet");
-             * CurrItem = new Compass(ItemTextures);
-            */
+            ItemTextures = Content.Load<Texture2D>("LoZItemsSpreadsheet");
+            Items[0] = new Compass(ItemTextures);
+            Items[1] = new Key(ItemTextures);
+            Items[2] = new Boomerang(ItemTextures);
     }
 
         protected override void Update(GameTime gameTime)
@@ -112,9 +121,7 @@ namespace LegendOfZeldaClone
             SpriteCredits.Draw(_spriteBatch, new Vector2(GameWidth /10, GameHeight *2 /3));
             SpriteLink.Draw(_spriteBatch, new Vector2(GameWidth /2 -16, GameHeight /2 -16));
 
-            /* Undo comment once texture load is working
-             * CurrItem.Draw(_spriteBatch, new Vector2(GameWidth / 2, GameHeight / 2));
-            */
+            CurrItem.Draw(_spriteBatch, new Vector2(GameWidth / 2 + 32, GameHeight / 2));
 
             base.Draw(gameTime);
         }

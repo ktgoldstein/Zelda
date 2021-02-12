@@ -81,4 +81,34 @@ namespace LegendOfZeldaClone
             myGame.SpriteLink = new MovingAnimatedSprite(myGame.LinkTextures, myGame.GameWidth);
         }
     }
+
+    public class PreviousItem : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public PreviousItem(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            
+        }
+    }
+
+    public class NextItem : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public NextItem(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+
+        }
+    }
 }
