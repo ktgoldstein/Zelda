@@ -18,6 +18,9 @@ namespace LegendOfZeldaClone
         public int GameWidth;
         public int GameHeight;
 
+        public Texture2D ItemTextures;
+        public ItemInterface CurrItem;
+
         public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -83,6 +86,11 @@ namespace LegendOfZeldaClone
             SpriteFont font = Content.Load<SpriteFont>("DefaultFont");
             string credits = "Credits\nProgram Made By: Simon Kirksey\nSprites from: spriters-resource.com/nes/legendofzelda/";
             SpriteCredits = new TextSprite(font, credits);
+
+            /* Not currently working, fix later
+             * ItemTextures = Content.Load<Texture2D>("ItemsSpriteSheet");
+             * CurrItem = new Compass(ItemTextures);
+            */
     }
 
         protected override void Update(GameTime gameTime)
@@ -103,6 +111,10 @@ namespace LegendOfZeldaClone
 
             SpriteCredits.Draw(_spriteBatch, new Vector2(GameWidth /10, GameHeight *2 /3));
             SpriteLink.Draw(_spriteBatch, new Vector2(GameWidth /2 -16, GameHeight /2 -16));
+
+            /* Undo comment once texture load is working
+             * CurrItem.Draw(_spriteBatch, new Vector2(GameWidth / 2, GameHeight / 2));
+            */
 
             base.Draw(gameTime);
         }
