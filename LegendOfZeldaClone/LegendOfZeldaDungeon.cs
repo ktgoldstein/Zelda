@@ -80,6 +80,7 @@ namespace LegendOfZeldaClone
             };
 
             index = 0;
+            Items = new ItemInterface[3];
 
             base.Initialize();
         }
