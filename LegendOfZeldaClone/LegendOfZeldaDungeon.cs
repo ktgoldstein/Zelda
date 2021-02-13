@@ -63,8 +63,8 @@ namespace LegendOfZeldaClone
 
             ICommand nextItem = new NextItem(this);
             ICommand prevItem = new PreviousItem(this);
-            keyboardController.RegisterCommand(Keys.U, nextItem);
-            keyboardController.RegisterCommand(Keys.I, prevItem);
+            keyboardController.RegisterCommand(Keys.I, nextItem);
+            keyboardController.RegisterCommand(Keys.U, prevItem);
 
             MouseController mouseController = new MouseController(this);
             mouseController.RegisterCommand("rightClick", quitGame);
@@ -80,7 +80,7 @@ namespace LegendOfZeldaClone
             };
 
             index = 0;
-            Items = new ItemInterface[3];
+            Items = new ItemInterface[13];
 
             base.Initialize();
         }
@@ -101,6 +101,16 @@ namespace LegendOfZeldaClone
             Items[0] = new Compass(ItemTextures);
             Items[1] = new Key(ItemTextures);
             Items[2] = new Boomerang(ItemTextures);
+            Items[3] = new Bow(ItemTextures);
+            Items[4] = new Heart(ItemTextures);
+            Items[5] = new Rupee(ItemTextures);
+            Items[6] = new Arrow(ItemTextures);
+            Items[7] = new Bomb(ItemTextures);
+            Items[8] = new Fairy(ItemTextures);
+            Items[9] = new Clock(ItemTextures);
+            Items[10] = new TriforcePiece(ItemTextures);
+            Items[11] = new HeartContainer(ItemTextures);
+            Items[12] = new Map(ItemTextures);
             CurrItem = Items[0];
     }
 
