@@ -48,9 +48,4 @@ namespace LegendOfZeldaClone
             linkSpriteSheet = content.Load<Texture2D>("linkSpriteSheet");
         }
     }
-
-    public interface IPlayerSprite : ISprite
-    {
-        public bool AnimationDone();
-    }
 }
