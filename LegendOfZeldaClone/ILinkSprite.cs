@@ -70,7 +70,7 @@ namespace LegendOfZeldaClone
             currentFrame += currentFrame < totalFrames ? 1 : 0;
         }
 
-        public bool AnimationDone => currentFrame == totalFrames;
+        public bool AnimationDone() => currentFrame == totalFrames;
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
@@ -115,7 +115,7 @@ namespace LegendOfZeldaClone
             currentFrame += currentFrame < totalFrames ? 1 : 0;
         }
 
-        public bool AnimationDone => currentFrame == totalFrames;
+        public bool AnimationDone() => currentFrame == totalFrames;
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
@@ -155,33 +155,19 @@ namespace LegendOfZeldaClone
             currentFrame += currentFrame < totalFrames ? 1 : 0;
         }
 
-        public bool AnimationDone => currentFrame == totalFrames;
+        public bool AnimationDone() => currentFrame == totalFrames;
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle;
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
-
-
-            //Alternative single-line solution:
-            //xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
-
-            switch (currentFrame)
+            Rectangle sourceRectangle = currentFrame switch
             {
-                case 1:
-                    xCoordStart += atlasGap;
-                    break;
-                case 2:
-                    xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
-                    break;
+                0 => new Rectangle(xCoordStart, yCoordStart, width, height),
+                1 => new Rectangle(xCoordStart + (atlasGap + width), yCoordStart, width, height),
+                _ => new Rectangle(0, 0, width, height)
+            };
 
-            }
-
-            sourceRectangle = new Rectangle(xCoordStart, yCoordStart, width, height);
-
-            spriteBatch.Begin();
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-            spriteBatch.End();
         }
     }
 }
