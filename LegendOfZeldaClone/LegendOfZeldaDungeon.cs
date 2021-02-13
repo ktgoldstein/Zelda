@@ -40,29 +40,13 @@ namespace LegendOfZeldaClone
             _graphics.ApplyChanges();
 
             ICommand quitGame = new QuitGame(this);
-            ICommand setSpriteNonMovingNonAnimated = new SetSpriteNonMovingNonAnimated(this);
-            ICommand setSpriteNonMovingAnimated = new SetSpriteNonMovingAnimated(this);
-            ICommand setSpriteMovingNonAnimated = new SetSpriteMovingNonAnimated(this);
-            ICommand setSpriteMovingAnimated = new SetSpriteMovingAnimated(this);
 
             KeyboardController keyboardController = new KeyboardController();
             keyboardController.RegisterCommand(Keys.D0, quitGame);
-            keyboardController.RegisterCommand(Keys.D1, setSpriteNonMovingNonAnimated);
-            keyboardController.RegisterCommand(Keys.D2, setSpriteNonMovingAnimated);
-            keyboardController.RegisterCommand(Keys.D3, setSpriteMovingNonAnimated);
-            keyboardController.RegisterCommand(Keys.D4, setSpriteMovingAnimated);
             keyboardController.RegisterCommand(Keys.NumPad0, quitGame);
-            keyboardController.RegisterCommand(Keys.NumPad1, setSpriteNonMovingNonAnimated);
-            keyboardController.RegisterCommand(Keys.NumPad2, setSpriteNonMovingAnimated);
-            keyboardController.RegisterCommand(Keys.NumPad3, setSpriteMovingNonAnimated);
-            keyboardController.RegisterCommand(Keys.NumPad4, setSpriteMovingAnimated);
 
             MouseController mouseController = new MouseController(this);
             mouseController.RegisterCommand("rightClick", quitGame);
-            mouseController.RegisterCommand("leftClick topLeft", setSpriteNonMovingNonAnimated);
-            mouseController.RegisterCommand("leftClick topRight", setSpriteNonMovingAnimated);
-            mouseController.RegisterCommand("leftClick bottomLeft", setSpriteMovingNonAnimated);
-            mouseController.RegisterCommand("leftClick bottomRight", setSpriteMovingAnimated);
 
             controllerList = new List<IController>
             {
@@ -77,13 +61,7 @@ namespace LegendOfZeldaClone
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: load/initialize text sprite
             LinkTextures = Content.Load<Texture2D>("ZoLSpriteSheet");
-            SpriteLink = new NonMovingNonAnimatedSprite(LinkTextures);
-
-            SpriteFont font = Content.Load<SpriteFont>("DefaultFont");
-            string credits = "Credits\nProgram Made By: Simon Kirksey\nSprites from: spriters-resource.com/nes/legendofzelda/";
-            SpriteCredits = new TextSprite(font, credits);
     }
 
         protected override void Update(GameTime gameTime)
@@ -104,7 +82,6 @@ namespace LegendOfZeldaClone
 
             _spriteBatch.Begin();
 
-            SpriteCredits.Draw(_spriteBatch, new Vector2(GameWidth /10, GameHeight *2 /3));
             SpriteLink.Draw(_spriteBatch, new Vector2(GameWidth /2 -16, GameHeight /2 -16));
 
             _spriteBatch.End();

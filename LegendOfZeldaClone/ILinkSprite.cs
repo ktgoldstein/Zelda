@@ -119,8 +119,8 @@ namespace LegendOfZeldaClone
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height))
-            Rectangle sourceRectangle = new Rectangle(xCoordStart, yCoordStart, LoZHelpers.Scale(width), LoZHelpers.Scale(height))
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
+            Rectangle sourceRectangle = new Rectangle(xCoordStart, yCoordStart, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
@@ -159,7 +159,7 @@ namespace LegendOfZeldaClone
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height))
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
             Rectangle sourceRectangle = currentFrame switch
             {
                 0 => new Rectangle(xCoordStart, yCoordStart, LoZHelpers.Scale(width), LoZHelpers.Scale(height)),
