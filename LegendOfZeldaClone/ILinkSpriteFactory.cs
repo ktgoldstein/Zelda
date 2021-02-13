@@ -3,29 +3,31 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone
 {
-    public interface ILinkSpriteFactory
+    public enum LinkSkinType
     {
-        public static ILinkSpriteFactory Instance { get; }
-        public void LoadAllTextures(ContentManager content);
-        public void UnloadAllTextures(ContentManager content);
-        public ISprite CreateLinkStandingDownSprite();
-        public ISprite CreateLinkStandingUpSprite();
-        public ISprite CreateLinkStandingLeftSprite();
-        public ISprite CreateLinkStandingRightSprite();
-        public ISprite CreateLinkWalkingDownSprite();
-        public ISprite CreateLinkWalkingUpSprite();
-        public ISprite CreateLinkWalkingLeftSprite();
-        public ISprite CreateLinkWalkingRightSprite();
-        public ISprite CreateLinkUsingItemDownSprite();
-        public ISprite CreateLinkUsingItemUpSprite();
-        public ISprite CreateLinkUsingItemLeftSprite();
-        public ISprite CreateLinkUsingItemRightSprite();
-        public ISprite CreateLinkPickingUpItemSprite();
+        Normal = 0,
+        BlueRing = 1,
+        DamagedOne = 6,
+        DamagedTwo = 7,
+        DamagedThreeDungeonOne = 9
     }
 
-    public class NormalLinkSpriteFactory : ILinkSpriteFactory
+    public enum LinkSpriteType
     {
-        public static NormalLinkSpriteFactory Instance
+        FacingDown = 0,
+        FacingUp = 2,
+        FacingRight = 4,
+        FacingLeft = 6,
+        UsingItemDown = 14,
+        UsingItemUp = 15,
+        UsingItemRight = 16,
+        UsingItemLeft = 17,
+        PickingUpItem = 18
+    }
+
+    public class LinkSpriteFactory
+    {
+        public static LinkSpriteFactory Instance
         {
             get
             {
@@ -33,19 +35,110 @@ namespace LegendOfZeldaClone
             }
         }
 
-        private static NormalLinkSpriteFactory instance = new NormalLinkSpriteFactory();
+        private static LinkSpriteFactory instance = new LinkSpriteFactory();
         private Texture2D linkSpriteSheet;
         private int spriteWidth = 16;
         private int spriteHeight = 16;
         private int atlasGap = 2;
         
-        private NormalLinkSpriteFactory()
+        private LinkSpriteFactory()
         {
         }
 
         public void LoadAllTextures(ContentManager content)
         {
             linkSpriteSheet = content.Load<Texture2D>("linkSpriteSheet");
+        }
+
+        public ISprite CreateLinkStandingDownSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingDown;
+            return new LinkStandingSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+ 
+        public ISprite CreateLinkStandingUpSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingUp;
+            return new LinkStandingSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+
+        public ISprite CreateLinkStandingLeftSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingLeft;
+            return new LinkStandingSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+
+        public ISprite CreateLinkStandingRightSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingRight;
+            return new LinkStandingSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+
+        public ISprite CreateLinkWalkingDownSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingDown;
+            return new LinkWalkingSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+
+        public ISprite CreateLinkWalkingUpSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingUp;
+            return new LinkWalkingSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+
+        public ISprite CreateLinkWalkingLeftSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingLeft;
+            return new LinkWalkingSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+
+        public ISprite CreateLinkWalkingRightSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingRight;
+            return new LinkWalkingSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+
+        public ISprite CreateLinkUsingItemDownSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.UsingItemDown;
+            return new LinkUsingItemSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+
+        public ISprite CreateLinkUsingItemUpSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.UsingItemUp;
+            return new LinkUsingItemSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+
+        public ISprite CreateLinkUsingItemLeftSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.UsingItemLeft;
+            return new LinkUsingItemSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+
+        public ISprite CreateLinkUsingItemRightSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.UsingItemRight;
+            return new LinkUsingItemSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+        }
+
+        public ISprite CreateLinkPickingUpItemSprite(LinkSkinType skinOffset)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.UsingItemDown;
+            return new LinkPickingUpItemSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
         }
     }
 }

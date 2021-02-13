@@ -36,8 +36,6 @@ namespace LegendOfZeldaClone
             Sword = sword;
             HeldItem = heldItem;
 
-            SpriteFactory = new LinkSpriteFactory();
-
             this.game = game;
             this.location = location;            
             this.health = health;
