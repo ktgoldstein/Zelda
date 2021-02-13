@@ -17,7 +17,7 @@ namespace LegendOfZeldaClone
 
     public class LinkNormalStandingDown : ILinkState
     {
-        public LinkNormalStandingDown()
+        public LinkNormalStandingDown(IPlayer Link)
         {
 
         }
@@ -61,7 +61,7 @@ namespace LegendOfZeldaClone
 
     public class LinkNormalStandingUp : ILinkState
     {
-        public LinkNormalStandingUp()
+        public LinkNormalStandingUp(IPlayer Link)
         {
 
         }
@@ -104,7 +104,7 @@ namespace LegendOfZeldaClone
     public class LinkNormalStandingLeft : ILinkState
     {
 
-        public LinkNormalStandingLeft()
+        public LinkNormalStandingLeft(IPlayer Link)
         {
 
         }
@@ -146,7 +146,7 @@ namespace LegendOfZeldaClone
 
     public class LinkNormalStandingRight : ILinkState
     {
-        public LinkNormalStandingRight()
+        public LinkNormalStandingRight(IPlayer Link)
         {
 
         }
@@ -188,7 +188,7 @@ namespace LegendOfZeldaClone
 
     public class LinkNormalWalkingDown : ILinkState
     {
-        public LinkNormalWalkingDown()
+        public LinkNormalWalkingDown(IPlayer Link)
         {
 
         }
@@ -230,7 +230,7 @@ namespace LegendOfZeldaClone
 
     public class LinkNormalWalkingUp : ILinkState
     {
-        public LinkNormalWalkingUp()
+        public LinkNormalWalkingUp(IPlayer Link)
         {
 
         }
@@ -272,7 +272,7 @@ namespace LegendOfZeldaClone
 
     public class LinkNormalWalkingLeft : ILinkState
     {
-        public LinkNormalWalkingLeft()
+        public LinkNormalWalkingLeft(IPlayer Link)
         {
 
         }
@@ -313,7 +313,7 @@ namespace LegendOfZeldaClone
     }
     public class LinkNormalWalkingRight : ILinkState
     {
-        public LinkNormalWalkingRight()
+        public LinkNormalWalkingRight(IPlayer Link)
         {
 
         }
