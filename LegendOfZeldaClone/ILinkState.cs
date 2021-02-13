@@ -5,8 +5,6 @@ namespace LegendOfZeldaClone
 {
     public interface ILinkState
     {
-        public LinkPlayer Link { get; set; }
-
         public void MoveUp();
         public void MoveDown();
         public void MoveLeft();
@@ -17,393 +15,121 @@ namespace LegendOfZeldaClone
         public void Update(Vector2 location);
     }
 
-    public class LinkNormalStandingDown : ILinkState
+    public class LinkStandingDown : ILinkState
     {
-        public LinkNormalStandingDown(IPlayer Link)
-        {
+        private ILinkPlayer link;
 
+        public LinkStandingDown(ILinkPlayer link)
+        {
+            this.link = link;
         }
+
         public void MoveUp()
         {
 
         }
-        public void MoveDown()
-        {
-
-        }
-        public void MoveLeft()
-        {
-
-        }
-        public void MoveRight()
-        {
-
-        }
-        public void Action()
-        {
-
-        }
-        public int Damage(int amount)
-        {
-
-
-            return 0;
-        }
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
-        {
-
-        }
-        public void Update(Vector2 location)
-        {
-
-        }
-
-
+        public void MoveDown();
+        public void MoveLeft();
+        public void MoveRight();
+        public void Action();
+        public int Damage(int amount);
+        public void Draw(SpriteBatch spriteBatch, Vector2 location);
+        public void Update(Vector2 location);
     }
 
-    public class LinkNormalStandingUp : ILinkState
+    public class LinkStandingUp : ILinkState
     {
-        public LinkNormalStandingUp(IPlayer Link)
-        {
-
-        }
-        public void MoveUp()
-        {
-
-        }
-        public void MoveDown()
-        {
-
-        }
-        public void MoveLeft()
-        {
-
-        }
-        public void MoveRight()
-        {
-
-        }
-        public void Action()
-        {
-
-        }
-        public int Damage(int amount)
-        {
-
-
-            return 0;
-        }
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
-        {
-
-        }
-        public void Update(Vector2 location)
+        public LinkStandingUp(ILinkPlayer link)
         {
 
         }
     }
 
-    public class LinkNormalStandingLeft : ILinkState
+    public class LinkStandingLeft : ILinkState
     {
-
-        public LinkNormalStandingLeft(IPlayer Link)
-        {
-
-        }
-        public void MoveUp()
-        {
-
-        }
-        public void MoveDown()
-        {
-
-        }
-        public void MoveLeft()
-        {
-
-        }
-        public void MoveRight()
-        {
-
-        }
-        public void Action()
-        {
-
-        }
-        public int Damage(int amount)
-        {
-
-
-            return 0;
-        }
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
-        {
-
-        }
-        public void Update(Vector2 location)
+        public LinkStandingLeft(ILinkPlayer link)
         {
 
         }
     }
 
-    public class LinkNormalStandingRight : ILinkState
+    public class LinkStandingRight : ILinkState
     {
-        public LinkNormalStandingRight(IPlayer Link)
-        {
-
-        }
-        public void MoveUp()
-        {
-
-        }
-        public void MoveDown()
-        {
-
-        }
-        public void MoveLeft()
-        {
-
-        }
-        public void MoveRight()
-        {
-
-        }
-        public void Action()
-        {
-
-        }
-        public int Damage(int amount)
-        {
-
-
-            return 0;
-        }
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
-        {
-
-        }
-        public void Update(Vector2 location)
+        public LinkStandingRight(ILinkPlayer link)
         {
 
         }
     }
 
-    public class LinkNormalWalkingDown : ILinkState
+    public class LinkWalkingDown : ILinkState
     {
-        public LinkNormalWalkingDown(IPlayer Link)
-        {
-
-        }
-        public void MoveUp()
-        {
-
-        }
-        public void MoveDown()
-        {
-
-        }
-        public void MoveLeft()
-        {
-
-        }
-        public void MoveRight()
-        {
-
-        }
-        public void Action()
-        {
-
-        }
-        public int Damage(int amount)
-        {
-
-
-            return 0;
-        }
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
-        {
-
-        }
-        public void Update(Vector2 location)
+        public LinkWalkingDown(ILinkPlayer link)
         {
 
         }
     }
 
-    public class LinkNormalWalkingUp : ILinkState
+    public class LinkWalkingUp : ILinkState
     {
-        public LinkNormalWalkingUp(IPlayer Link)
-        {
-
-        }
-        public void MoveUp()
-        {
-
-        }
-        public void MoveDown()
-        {
-
-        }
-        public void MoveLeft()
-        {
-
-        }
-        public void MoveRight()
-        {
-
-        }
-        public void Action()
-        {
-
-        }
-        public int Damage(int amount)
-        {
-
-
-            return 0;
-        }
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
-        {
-
-        }
-        public void Update(Vector2 location)
+        public LinkWalkingUp(ILinkPlayer link)
         {
 
         }
     }
 
-    public class LinkNormalWalkingLeft : ILinkState
+    public class LinkWalkingLeft : ILinkState
     {
-        public LinkNormalWalkingLeft(IPlayer Link)
-        {
-
-        }
-        public void MoveUp()
-        {
-
-        }
-        public void MoveDown()
-        {
-
-        }
-        public void MoveLeft()
-        {
-
-        }
-        public void MoveRight()
-        {
-
-        }
-        public void Action()
-        {
-
-        }
-        public int Damage(int amount)
-        {
-
-
-            return 0;
-        }
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
-        {
-
-        }
-        public void Update(Vector2 location)
-        {
-
-        }
-    }
-    public class LinkNormalWalkingRight : ILinkState
-    {
-        public LinkNormalWalkingRight(IPlayer Link)
-        {
-
-        }
-        public void MoveUp()
-        {
-
-        }
-        public void MoveDown()
-        {
-
-        }
-        public void MoveLeft()
-        {
-
-        }
-        public void MoveRight()
-        {
-
-        }
-        public void Action()
-        {
-
-        }
-        public int Damage(int amount)
-        {
-
-
-            return 0;
-        }
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
-        {
-
-        }
-        public void Update(Vector2 location)
+        public LinkWalkingLeft(ILinkPlayer link)
         {
 
         }
     }
 
-    // Simon edit after this comment
+    public class LinkWalkingRight : ILinkState
+    {
+        public LinkWalkingRight(ILinkPlayer link)
+        {
+
+        }
+    }
 
     public class LinkUsingItemDown : ILinkState
     {
-        public LinkPlayer Link { get; set; }
-
-        public LinkUsingItemDown(LinkPlayer link)
+        public LinkUsingItemDown(ILinkPlayer link)
         {
-            Link = link;
+
         }
     }
 
     public class LinkUsingItemUp : ILinkState
     {
-        public LinkPlayer Link { get; set; }
-
-        public LinkUsingItemUp(LinkPlayer link)
+        public LinkUsingItemUp(ILinkPlayer link)
         {
-            Link = link;
+
         }
     }
 
     public class LinkUsingItemLeft : ILinkState
     {
-        public LinkPlayer Link { get; set; }
-
-        public LinkUsingItemLeft(LinkPlayer link)
+        public LinkUsingItemLeft(ILinkPlayer link)
         {
-            Link = link;
+
         }
     }
 
     public class LinkUsingItemRight : ILinkState
     {
-        public LinkPlayer Link { get; set; }
-
-        public LinkUsingItemRight(LinkPlayer link)
+        public LinkUsingItemRight(ILinkPlayer link)
         {
-            Link = link;
+
         }
     }
 
     public class LinkPickingUpItem : ILinkState
     {
-        public LinkPlayer Link { get; set; }
-
         public LinkPickingUpItem(LinkPlayer link)
         {
-            Link = link;
+
         }
     }
 }

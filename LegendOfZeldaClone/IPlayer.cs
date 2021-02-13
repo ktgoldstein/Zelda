@@ -137,5 +137,24 @@ namespace LegendOfZeldaClone
             HeldItem.Update();
             linkState.Update(location);
         }
+
+        public void SetState(ILinkState linkState)
+        {
+            this.linkState = linkState;
+        }
+
+        public ILinkState GetStateStandingDown() => new LinkStandingDown(this);
+        public ILinkState GetStateStandingUp();
+        public ILinkState GetStateStandingLeft();
+        public ILinkState GetStateStandingRight();
+        public ILinkState GetStateWalkingingDown();
+        public ILinkState GetStateWalkingingUp();
+        public ILinkState GetStateWalkingingLeft();
+        public ILinkState GetStateWalkingingRight();
+        public ILinkState GetStateUsingItemDown();
+        public ILinkState GetStateUsingItemUp();
+        public ILinkState GetStateUsingItemLeft();
+        public ILinkState GetStateUsingItemRight();
+        public ILinkState GetStatePickingUpItem();
     }
 }
