@@ -30,7 +30,7 @@ namespace LegendOfZeldaClone
 
         public void Update() { }
 
-        public bool AnimationDone => true;
+        public bool AnimationDone() => true;
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
@@ -69,6 +69,8 @@ namespace LegendOfZeldaClone
         {
             currentFrame += currentFrame < totalFrames ? 1 : 0;
         }
+
+        public bool AnimationDone => currentFrame == totalFrames;
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
@@ -113,6 +115,8 @@ namespace LegendOfZeldaClone
             currentFrame += currentFrame < totalFrames ? 1 : 0;
         }
 
+        public bool AnimationDone => currentFrame == totalFrames;
+
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
@@ -150,6 +154,8 @@ namespace LegendOfZeldaClone
         {
             currentFrame += currentFrame < totalFrames ? 1 : 0;
         }
+
+        public bool AnimationDone => currentFrame == totalFrames;
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
