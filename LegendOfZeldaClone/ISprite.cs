@@ -21,8 +21,8 @@ namespace LegendOfZeldaClone
         public LinkStandingSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap)
         {
             this.texture = texture;
-            this.xCoordStart = x;
-            this.yCoordStart = y;
+            xCoordStart = x;
+            yCoordStart = y;
             width = spriteWidth;
             height = spriteHeight;
             atlasGap = spriteAtlasGap;
@@ -33,13 +33,9 @@ namespace LegendOfZeldaClone
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle sourceRectangle = new Rectangle(xCoordStart, yCoordStart, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
-
-            spriteBatch.Begin(); //saw a comment about leaving Begin() and End() only to be -
-            //called in the main Game1/LegendOfZeldaDungeon class
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-            spriteBatch.End();
         }
     }
 
@@ -90,7 +86,6 @@ namespace LegendOfZeldaClone
                 case 2:
                     xCoordStart += (atlasGap * currentFrame) + (width*(currentFrame-1));
                     break;
-
             }
 
             sourceRectangle = new Rectangle(xCoordStart, yCoordStart, width, height);

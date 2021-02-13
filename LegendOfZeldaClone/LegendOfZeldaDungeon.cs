@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace LegendOfZeldaClone
 {
+
     public class LegendOfZeldaDungeon : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -101,8 +102,12 @@ namespace LegendOfZeldaClone
         {
             GraphicsDevice.Clear(Color.Black);
 
+            _spriteBatch.Begin();
+
             SpriteCredits.Draw(_spriteBatch, new Vector2(GameWidth /10, GameHeight *2 /3));
             SpriteLink.Draw(_spriteBatch, new Vector2(GameWidth /2 -16, GameHeight /2 -16));
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
