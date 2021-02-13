@@ -22,8 +22,9 @@ namespace LegendOfZeldaClone
 
     public class LinkPlayer : IPlayer
     {
-        public IUsableItem Sword;
-        public IUsableItem HeldItem;
+        public IUsableItem Sword { get; set; }
+        public IUsableItem HeldItem { get; set; }
+        public LinkSpriteFactory SpriteFactory { get; }
 
         private ILinkState linkState;
         private Vector2 location;
@@ -34,6 +35,8 @@ namespace LegendOfZeldaClone
         {
             Sword = sword;
             HeldItem = heldItem;
+
+            SpriteFactory = new LinkSpriteFactory();
 
             this.location = location;            
             this.health = health;

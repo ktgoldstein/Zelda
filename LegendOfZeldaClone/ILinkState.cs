@@ -5,6 +5,8 @@ namespace LegendOfZeldaClone
 {
     public interface ILinkState
     {
+        public LinkPlayer Link { get; set; }
+
         public void MoveUp();
         public void MoveDown();
         public void MoveLeft();
@@ -355,4 +357,53 @@ namespace LegendOfZeldaClone
 
     // Simon edit after this comment
 
+    public class LinkUsingItemDown : ILinkState
+    {
+        public LinkPlayer Link { get; set; }
+
+        public LinkUsingItemDown(LinkPlayer link)
+        {
+            Link = link;
+        }
+    }
+
+    public class LinkUsingItemUp : ILinkState
+    {
+        public LinkPlayer Link { get; set; }
+
+        public LinkUsingItemUp(LinkPlayer link)
+        {
+            Link = link;
+        }
+    }
+
+    public class LinkUsingItemLeft : ILinkState
+    {
+        public LinkPlayer Link { get; set; }
+
+        public LinkUsingItemLeft(LinkPlayer link)
+        {
+            Link = link;
+        }
+    }
+
+    public class LinkUsingItemRight : ILinkState
+    {
+        public LinkPlayer Link { get; set; }
+
+        public LinkUsingItemRight(LinkPlayer link)
+        {
+            Link = link;
+        }
+    }
+
+    public class LinkPickingUpItem : ILinkState
+    {
+        public LinkPlayer Link { get; set; }
+
+        public LinkPickingUpItem(LinkPlayer link)
+        {
+            Link = link;
+        }
+    }
 }
