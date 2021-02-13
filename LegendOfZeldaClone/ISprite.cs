@@ -80,7 +80,7 @@ namespace LegendOfZeldaClone
 
 
             //Alternative single-line solution:
-            xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame-1));
+           //xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame-1));
 
             switch (currentFrame)
             {
@@ -116,7 +116,7 @@ namespace LegendOfZeldaClone
         {
             this.texture = texture;
             currentFrame = 0;
-            totalFrames = 2;
+            totalFrames = 4;
             xCoordStart = x;
             yCoordStart = y;
             width = spriteWidth;
@@ -138,7 +138,7 @@ namespace LegendOfZeldaClone
 
 
             //Alternative single-line solution:
-            xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
+            //xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
 
             switch (currentFrame)
             {
@@ -202,7 +202,7 @@ namespace LegendOfZeldaClone
 
 
             //Alternative single-line solution:
-            xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
+            //xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
 
             switch (currentFrame)
             {
