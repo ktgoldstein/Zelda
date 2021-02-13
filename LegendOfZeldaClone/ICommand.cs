@@ -93,7 +93,14 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            
+            if (myGame.index == 0)
+            {
+                myGame.CurrItem = myGame.Items[myGame.Items.Length - 1];
+            }
+            else
+            {
+                myGame.CurrItem = myGame.Items[myGame.index - 1];
+            }
         }
     }
 
@@ -108,7 +115,14 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-
+            if (myGame.index == myGame.Items.Length - 1)
+            {
+                myGame.CurrItem = myGame.Items[0];
+            }
+            else
+            {
+                myGame.CurrItem = myGame.Items[myGame.index + 1];
+            }
         }
     }
 }

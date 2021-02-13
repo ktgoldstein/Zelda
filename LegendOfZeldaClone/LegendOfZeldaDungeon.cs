@@ -100,6 +100,7 @@ namespace LegendOfZeldaClone
             Items[0] = new Compass(ItemTextures);
             Items[1] = new Key(ItemTextures);
             Items[2] = new Boomerang(ItemTextures);
+            CurrItem = Items[0];
     }
 
         protected override void Update(GameTime gameTime)
