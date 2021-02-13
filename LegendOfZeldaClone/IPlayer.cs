@@ -20,7 +20,25 @@ namespace LegendOfZeldaClone
         public void Update();
     }
 
-    public class LinkPlayer : IPlayer
+    public interface ILinkPlayer : IPlayer
+    {
+        public void SetState(ILinkState linkState);
+        public ILinkState GetStateStandingDown();
+        public ILinkState GetStateStandingUp();
+        public ILinkState GetStateStandingLeft();
+        public ILinkState GetStateStandingRight();
+        public ILinkState GetStateWalkingingDown();
+        public ILinkState GetStateWalkingingUp();
+        public ILinkState GetStateWalkingingLeft();
+        public ILinkState GetStateWalkingingRight();
+        public ILinkState GetStateUsingItemDown();
+        public ILinkState GetStateUsingItemUp();
+        public ILinkState GetStateUsingItemLeft();
+        public ILinkState GetStateUsingItemRight();
+        public ILinkState GetStatePickingUpItem();
+    }
+
+    public class LinkPlayer : ILinkPlayer
     {
         public IUsableItem Sword { get; set; }
         public IUsableItem HeldItem { get; set; }
@@ -119,10 +137,5 @@ namespace LegendOfZeldaClone
             HeldItem.Update();
             linkState.Update(location);
         }
-    }
-
-    public class DamagedLinkPlayer : IPlayer
-    {
-        private LegendOfZeldaDungeon game;
     }
 }
