@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    class EnemySpriteFactory
+    public class EnemySpriteFactory 
     {
 		private Texture2D aquamentusSprite, fireballSprite;
 		private Texture2D goriyaDownSprite, goriyaUpSprite, goriyaRightSprite, goriyaLeftSprite;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfZeldaClone
 {
@@ -81,4 +82,51 @@ namespace LegendOfZeldaClone
             myGame.SpriteLink = new MovingAnimatedSprite(myGame.LinkTextures, myGame.GameWidth);
         }
     }
+
+    public class SetSpriteEnemy : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public SetSpriteEnemy(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            // Cycle counter
+            if (Keyboard.GetState().IsKeyDown(Keys.P))
+            {
+                myGame.switchEnemyNum++;
+                myGame.switchEnemyNum %= 3;
+
+            }
+            else
+            {
+                this.myGame.switchEnemyNum--;
+                if (myGame.switchEnemyNum == -1)
+                {
+                    myGame.switchEnemyNum = 2;
+                }
+            }
+
+            // Draw correct enemy
+            if (myGame.switchEnemyNum == 1)
+            {
+                myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Aquamentus();
+
+            }
+            else if (myGame.switchEnemyNum == 2)
+            {
+                myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Goriya();
+            }
+            else
+            {
+                myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos();
+            }
+
+        }
+
+    }
 }
+

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    class Goriya : IEnemy
+    public class Goriya : IEnemy
     {
       
         private ISprite goriyaSprite;

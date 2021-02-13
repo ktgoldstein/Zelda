@@ -10,6 +10,8 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Content\EnemySprites\Boomerang.png" />
+    <None Remove="Content\EnemySprites\Boomerang2.png" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>

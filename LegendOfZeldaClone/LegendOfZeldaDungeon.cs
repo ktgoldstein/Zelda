@@ -12,11 +12,17 @@ namespace LegendOfZeldaClone
         private SpriteBatch _spriteBatch;
 
         private List<IController> controllerList;
-        private List<IEnemy> enemyList;
+        public List<IEnemy> enemyList;
 
         public Texture2D LinkTextures;
         public ISprite SpriteLink;
-        public ISprite SpriteCredits; 
+        public ISprite SpriteCredits;
+
+        public int switchEnemyNum;
+        public IEnemy SpriteEnemy;
+
+        
+
         public int GameWidth;
         public int GameHeight;
 
@@ -37,6 +43,7 @@ namespace LegendOfZeldaClone
 
             GameWidth = 512*2;
             GameHeight = 256*2;
+            switchEnemyNum = 0;
 
             _graphics.PreferredBackBufferWidth = GameWidth;
             _graphics.PreferredBackBufferHeight = GameHeight;
@@ -47,6 +54,8 @@ namespace LegendOfZeldaClone
             ICommand setSpriteNonMovingAnimated = new SetSpriteNonMovingAnimated(this);
             ICommand setSpriteMovingNonAnimated = new SetSpriteMovingNonAnimated(this);
             ICommand setSpriteMovingAnimated = new SetSpriteMovingAnimated(this);
+            ICommand setSpriteEnemy = new SetSpriteEnemy(this);
+
 
             KeyboardController keyboardController = new KeyboardController();
             keyboardController.RegisterCommand(Keys.D0, quitGame);
@@ -59,6 +68,9 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.NumPad2, setSpriteNonMovingAnimated);
             keyboardController.RegisterCommand(Keys.NumPad3, setSpriteMovingNonAnimated);
             keyboardController.RegisterCommand(Keys.NumPad4, setSpriteMovingAnimated);
+
+            keyboardController.RegisterCommand(Keys.P, setSpriteEnemy);
+            keyboardController.RegisterCommand(Keys.O, setSpriteEnemy);
 
             MouseController mouseController = new MouseController(this);
             mouseController.RegisterCommand("rightClick", quitGame);
@@ -124,6 +136,8 @@ namespace LegendOfZeldaClone
             SpriteCredits.Draw(_spriteBatch, new Vector2(GameWidth /10, GameHeight *2 /3));
             SpriteLink.Draw(_spriteBatch, new Vector2(GameWidth /2 -16, GameHeight /2 -16));
 
+
+            //SpriteEnemy.Draw(_spriteBatch);
             foreach (IEnemy enemy in enemyList)
             {
                 enemy.Draw(_spriteBatch);
