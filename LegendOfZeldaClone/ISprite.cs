@@ -9,167 +9,91 @@ namespace LegendOfZeldaClone
         public void Draw(SpriteBatch spriteBatch, Vector2 location);
     }
 
-    public class NonMovingNonAnimatedSprite : ISprite
+    public class LinkStandingSprite : ISprite
     {
         private Texture2D texture;
+        private int xCoordStart;
+        private int yCoordStart;
+        private int width;
+        private int height;
+        private int atlasGap;
   
-        public NonMovingNonAnimatedSprite(Texture2D texture)
+        public LinkStandingSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap)
         {
             this.texture = texture;
+            this.xCoordStart = x;
+            this.yCoordStart = y;
+            width = spriteWidth;
+            height = spriteHeight;
+            atlasGap = spriteAtlasGap;
         }
 
         public void Update() { }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(1, 11, 16, 16);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, 32, 32);
+            Rectangle sourceRectangle = new Rectangle(xCoordStart, yCoordStart, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(); //saw a comment about leaving Begin() and End() only to be -
+            //called in the main Game1/LegendOfZeldaDungeon class
+
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
         }
     }
 
-    public class NonMovingAnimatedSprite : ISprite
+    public class LinkWalkingSprite : ISprite
     {
         private Texture2D texture;
         private int currentFrame;
         private int totalFrames;
+        private int xCoordStart;
+        private int yCoordStart;
+        private int width;
+        private int height;
+        private int atlasGap;
 
-        public NonMovingAnimatedSprite(Texture2D texture)
-        {
-            this.texture = texture;
-            currentFrame = 0;
-            totalFrames = 6;
-        }
-
-        public void Update()
-        {
-            currentFrame++;
-            currentFrame %= totalFrames;
-        }
-
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
-        {
-            Rectangle sourceRectangle;
-            Rectangle destinationRectangle;
-
-            if(currentFrame == 1)
-            {
-                destinationRectangle = new Rectangle((int)location.X, (int)location.Y, 32, 32);
-                sourceRectangle = new Rectangle(94, 47, 16, 16);
-            }
-            else if(currentFrame == 2)
-            {
-
-                destinationRectangle = new Rectangle((int)location.X, (int)location.Y, 32, 54);
-                sourceRectangle = new Rectangle(111, 47, 16, 27);
-            }
-            else if(currentFrame == 3)
-            {
-
-                destinationRectangle = new Rectangle((int)location.X, (int)location.Y, 32, 46);
-                sourceRectangle = new Rectangle(128, 47, 16, 23);
-            }
-            else if(currentFrame == 4)
-            {
-
-                destinationRectangle = new Rectangle((int)location.X, (int)location.Y, 32, 38);
-                sourceRectangle = new Rectangle(145, 47, 16, 19);
-            }
-            else
-            {
-                destinationRectangle = new Rectangle((int)location.X, (int)location.Y, 32, 32);
-                sourceRectangle = new Rectangle(1, 11, 16, 16);
-            }
-
-            spriteBatch.Begin();
-            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-            spriteBatch.End();
-        }
-    }
-
-    public class MovingNonAnimatedSprite : ISprite
-    {
-        private Texture2D texture;
-        private int currentFrame;
-        private int totalFrames;
-
-        public MovingNonAnimatedSprite(Texture2D texture)
-        {
-            this.texture = texture;
-            currentFrame = 0;
-            totalFrames = 8;
-        }
-
-        public void Update()
-        {
-            currentFrame++;
-            currentFrame %= totalFrames;
-        }
-
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
-        {
-            Rectangle sourceRectangle = new Rectangle(1, 11, 16, 16);
-            Rectangle destinationRectangle;
-
-            if(currentFrame < 4)
-            {
-                destinationRectangle = new Rectangle((int)location.X, (int)location.Y + currentFrame, 32, 32);
-            }
-            else
-            {
-                destinationRectangle = new Rectangle((int)location.X, (int)location.Y + totalFrames - currentFrame, 32, 32);
-            }
-
-            spriteBatch.Begin();
-            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-            spriteBatch.End();
-        }
-}
-
-    public class MovingAnimatedSprite : ISprite
-    {
-        private Texture2D texture;
-        private int currentFrame;
-        private int totalFrames;
-        private int displacement;
-        private int maxDisplacement;
-
-        public MovingAnimatedSprite(Texture2D texture, int gameWidth)
+        public LinkWalkingSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap)
         {
             this.texture = texture;
             currentFrame = 0;
             totalFrames = 2;
-            displacement = 0;
-            maxDisplacement = gameWidth /2;
+            xCoordStart = x;
+            yCoordStart = y;
+            width = spriteWidth;
+            height = spriteHeight;
+            atlasGap = spriteAtlasGap;
+
         }
 
         public void Update()
         {
             currentFrame++;
             currentFrame %= totalFrames;
-            displacement += 4;
-            if(displacement > maxDisplacement)
-            {
-                displacement = -maxDisplacement;
-            }
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle sourceRectangle;
-            Rectangle destinationRectangle = new Rectangle((int)location.X + displacement, (int)location.Y, 32, 32);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
 
-            if(currentFrame % 2 == 0)
+
+            //Alternative single-line solution:
+            xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame-1));
+
+            switch (currentFrame)
             {
-                sourceRectangle = new Rectangle(35, 11, 16, 16);
+                case 1:
+                    xCoordStart += atlasGap;
+                    break;
+                case 2:
+                    xCoordStart += (atlasGap * currentFrame) + (width*(currentFrame-1));
+                    break;
+
             }
-            else
-            {
-                sourceRectangle = new Rectangle(52, 11, 16, 16);
-            }
+
+            sourceRectangle = new Rectangle(xCoordStart, yCoordStart, width, height);
 
             spriteBatch.Begin();
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -177,24 +101,127 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class TextSprite : ISprite
+    public class LinkUsingItemSprite : ISprite
     {
-        private string content;
-        private SpriteFont font;
+        private Texture2D texture;
+        private int currentFrame;
+        private int totalFrames;
+        private int xCoordStart;
+        private int yCoordStart;
+        private int width;
+        private int height;
+        private int atlasGap;
 
-        public TextSprite(SpriteFont font, string text)
+        public LinkUsingItemSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap)
         {
-            this.font = font;
-            content = text;
+            this.texture = texture;
+            currentFrame = 0;
+            totalFrames = 2;
+            xCoordStart = x;
+            yCoordStart = y;
+            width = spriteWidth;
+            height = spriteHeight;
+            atlasGap = spriteAtlasGap;
+
         }
 
-        public void Update() { }
+        public void Update()
+        {
+            currentFrame++;
+            currentFrame %= totalFrames;
+        }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
+            Rectangle sourceRectangle;
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
+
+
+            //Alternative single-line solution:
+            xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
+
+            switch (currentFrame)
+            {
+                case 1:
+                    xCoordStart += atlasGap;
+                    break;
+                case 2:
+                    xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
+                    break;
+                case 3:
+                    xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
+                    break;
+                case 4:
+                    xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
+                    break;
+
+            }
+
+            sourceRectangle = new Rectangle(xCoordStart, yCoordStart, width, height);
+
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, content, location, Color.White);
+            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
         }
     }
+
+    public class LinkPickingUpItemSprite : ISprite
+    {
+        private Texture2D texture;
+        private int currentFrame;
+        private int totalFrames;
+        private int xCoordStart;
+        private int yCoordStart;
+        private int width;
+        private int height;
+        private int atlasGap;
+
+        public LinkPickingUpItemSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap)
+        {
+            this.texture = texture;
+            currentFrame = 0;
+            totalFrames = 2;
+            xCoordStart = x;
+            yCoordStart = y;
+            width = spriteWidth;
+            height = spriteHeight;
+            atlasGap = spriteAtlasGap;
+
+        }
+
+        public void Update()
+        {
+            currentFrame++;
+            currentFrame %= totalFrames;
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 location)
+        {
+            Rectangle sourceRectangle;
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
+
+
+            //Alternative single-line solution:
+            xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
+
+            switch (currentFrame)
+            {
+                case 1:
+                    xCoordStart += atlasGap;
+                    break;
+                case 2:
+                    xCoordStart += (atlasGap * currentFrame) + (width * (currentFrame - 1));
+                    break;
+
+            }
+
+            sourceRectangle = new Rectangle(xCoordStart, yCoordStart, width, height);
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
+            spriteBatch.End();
+        }
+    }
+
+   
 }
