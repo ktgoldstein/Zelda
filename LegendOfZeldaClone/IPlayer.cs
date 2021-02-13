@@ -24,20 +24,19 @@ namespace LegendOfZeldaClone
     {
         public IUsableItem Sword { get; set; }
         public IUsableItem HeldItem { get; set; }
-        public LinkSpriteFactory SpriteFactory { get; }
 
-        private ILinkState linkState;
+        private LegendOfZeldaDungeon game;
         private Vector2 location;
         private int health;
         private int maxHealth;
+        private ILinkState linkState;
 
-        public LinkPlayer(int maxHealth, int health, IUsableItem sword, IUsableItem heldItem, Vector2 location)
+        public LinkPlayer(LegendOfZeldaDungeon game, IUsableItem sword, IUsableItem heldItem, Vector2 location, int maxHealth, int health)
         {
             Sword = sword;
             HeldItem = heldItem;
 
-            SpriteFactory = new LinkSpriteFactory();
-
+            this.game = game;
             this.location = location;            
             this.health = health;
             this.maxHealth = maxHealth;
@@ -120,5 +119,10 @@ namespace LegendOfZeldaClone
             HeldItem.Update();
             linkState.Update(location);
         }
+    }
+
+    public class DamagedLinkPlayer : IPlayer
+    {
+        private LegendOfZeldaDungeon game;
     }
 }
