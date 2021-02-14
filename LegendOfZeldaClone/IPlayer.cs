@@ -22,32 +22,34 @@ namespace LegendOfZeldaClone
 
     public interface ILinkPlayer : IPlayer
     {
-        public void SetState(ILinkState linkState);
-        public ILinkState GetStateStandingDown();
-        public ILinkState GetStateStandingUp();
-        public ILinkState GetStateStandingLeft();
-        public ILinkState GetStateStandingRight();
-        public ILinkState GetStateWalkingingDown();
-        public ILinkState GetStateWalkingingUp();
-        public ILinkState GetStateWalkingingLeft();
-        public ILinkState GetStateWalkingingRight();
-        public ILinkState GetStateUsingItemDown();
-        public ILinkState GetStateUsingItemUp();
-        public ILinkState GetStateUsingItemLeft();
-        public ILinkState GetStateUsingItemRight();
-        public ILinkState GetStatePickingUpItem();
+        public LinkSkinType SkinType { get; set; }
+        public void SetState(LinkState linkState);
+        public LinkState GetStateStandingDown();
+        public LinkState GetStateStandingUp();
+        public LinkState GetStateStandingLeft();
+        public LinkState GetStateStandingRight();
+        public LinkState GetStateWalkingingDown();
+        public LinkState GetStateWalkingingUp();
+        public LinkState GetStateWalkingingLeft();
+        public LinkState GetStateWalkingingRight();
+        public LinkState GetStateUsingItemDown();
+        public LinkState GetStateUsingItemUp();
+        public LinkState GetStateUsingItemLeft();
+        public LinkState GetStateUsingItemRight();
+        public LinkState GetStatePickingUpItem();
     }
 
     public class LinkPlayer : ILinkPlayer
     {
         public IUsableItem Sword { get; set; }
         public IUsableItem HeldItem { get; set; }
+        public LinkSkinType SkinType { get; set; }
 
         private LegendOfZeldaDungeon game;
         private Vector2 location;
         private int health;
         private int maxHealth;
-        private ILinkState linkState;
+        private LinkState linkState;
 
         public LinkPlayer(LegendOfZeldaDungeon game, IUsableItem sword, IUsableItem heldItem, Vector2 location, int maxHealth, int health)
         {
@@ -59,7 +61,7 @@ namespace LegendOfZeldaClone
             this.health = health;
             this.maxHealth = maxHealth;
 
-            linkState = new LinkNormalStandingDown(this);
+            linkState = new LinkStandingDown(this);
         }
 
         public void MoveUp()
@@ -138,23 +140,23 @@ namespace LegendOfZeldaClone
             linkState.Update(location);
         }
 
-        public void SetState(ILinkState linkState)
+        public void SetState(LinkState linkState)
         {
             this.linkState = linkState;
         }
 
-        public ILinkState GetStateStandingDown() => new LinkStandingDown(this);
-        public ILinkState GetStateStandingUp();
-        public ILinkState GetStateStandingLeft();
-        public ILinkState GetStateStandingRight();
-        public ILinkState GetStateWalkingingDown();
-        public ILinkState GetStateWalkingingUp();
-        public ILinkState GetStateWalkingingLeft();
-        public ILinkState GetStateWalkingingRight();
-        public ILinkState GetStateUsingItemDown();
-        public ILinkState GetStateUsingItemUp();
-        public ILinkState GetStateUsingItemLeft();
-        public ILinkState GetStateUsingItemRight();
-        public ILinkState GetStatePickingUpItem();
+        public LinkState GetStateStandingDown() => new LinkStandingDown(this);
+        public LinkState GetStateStandingUp() => new LinkStandingUp(this);
+        public LinkState GetStateStandingLeft() => new LinkStandingLeft(this);
+        public LinkState GetStateStandingRight() => new LinkStandingRight(this);
+        public LinkState GetStateWalkingingDown() => new LinkWalkingDown(this);
+        public LinkState GetStateWalkingingUp() => new LinkWalkingUp(this);
+        public LinkState GetStateWalkingingLeft() => new LinkWalkingLeft(this);
+        public LinkState GetStateWalkingingRight() => new LinkWalkingRight(this);
+        public LinkState GetStateUsingItemDown() => new LinkUsingItemDown(this);
+        public LinkState GetStateUsingItemUp() => new LinkUsingItemUp(this);
+        public LinkState GetStateUsingItemLeft() => new LinkUsingItemLeft(this);
+        public LinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
+        public LinkState GetStatePickingUpItem() => new LinkPickingUpItem(this);
     }
 }

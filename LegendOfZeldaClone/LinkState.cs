@@ -3,9 +3,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone
 {
-    public interface ILinkState
+    public abstract class LinkState
     {
-        public void MoveUp();
+        public abstract ILinkPlayer Link { };
+        public abstract ILinkSprite Sprite { };
+
+        public void MoveUp()
+        {
+            if (sprite.AnimationDone())
+                link.SetState(link.GetStateWalkingingUp());
+        }
+
         public void MoveDown();
         public void MoveLeft();
         public void MoveRight();
@@ -15,20 +23,27 @@ namespace LegendOfZeldaClone
         public void Update(Vector2 location);
     }
 
-    public class LinkStandingDown : ILinkState
+    public class LinkStandingDown : LinkState
     {
         private ILinkPlayer link;
+        private ILinkSprite sprite;
 
         public LinkStandingDown(ILinkPlayer link)
         {
             this.link = link;
+            sprite = LinkSpriteFactory.Instance.CreateLinkStandingDownSprite(link.SkinType);
         }
 
         public void MoveUp()
         {
-
         }
-        public void MoveDown();
+
+        public void MoveDown()
+        {
+            if (sprite.AnimationDone())
+                link.SetState(link.GetStateWalkingingDown());
+        }
+
         public void MoveLeft();
         public void MoveRight();
         public void Action();
@@ -37,7 +52,7 @@ namespace LegendOfZeldaClone
         public void Update(Vector2 location);
     }
 
-    public class LinkStandingUp : ILinkState
+    public class LinkStandingUp : LinkState
     {
         public LinkStandingUp(ILinkPlayer link)
         {
@@ -45,7 +60,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class LinkStandingLeft : ILinkState
+    public class LinkStandingLeft : LinkState
     {
         public LinkStandingLeft(ILinkPlayer link)
         {
@@ -53,7 +68,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class LinkStandingRight : ILinkState
+    public class LinkStandingRight : LinkState
     {
         public LinkStandingRight(ILinkPlayer link)
         {
@@ -61,7 +76,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class LinkWalkingDown : ILinkState
+    public class LinkWalkingDown : LinkState
     {
         public LinkWalkingDown(ILinkPlayer link)
         {
@@ -69,7 +84,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class LinkWalkingUp : ILinkState
+    public class LinkWalkingUp : LinkState
     {
         public LinkWalkingUp(ILinkPlayer link)
         {
@@ -77,7 +92,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class LinkWalkingLeft : ILinkState
+    public class LinkWalkingLeft : LinkState
     {
         public LinkWalkingLeft(ILinkPlayer link)
         {
@@ -85,7 +100,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class LinkWalkingRight : ILinkState
+    public class LinkWalkingRight : LinkState
     {
         public LinkWalkingRight(ILinkPlayer link)
         {
@@ -93,7 +108,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class LinkUsingItemDown : ILinkState
+    public class LinkUsingItemDown : LinkState
     {
         public LinkUsingItemDown(ILinkPlayer link)
         {
@@ -101,7 +116,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class LinkUsingItemUp : ILinkState
+    public class LinkUsingItemUp : LinkState
     {
         public LinkUsingItemUp(ILinkPlayer link)
         {
@@ -109,7 +124,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class LinkUsingItemLeft : ILinkState
+    public class LinkUsingItemLeft : LinkState
     {
         public LinkUsingItemLeft(ILinkPlayer link)
         {
@@ -117,7 +132,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class LinkUsingItemRight : ILinkState
+    public class LinkUsingItemRight : LinkState
     {
         public LinkUsingItemRight(ILinkPlayer link)
         {
@@ -125,7 +140,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class LinkPickingUpItem : ILinkState
+    public class LinkPickingUpItem : LinkState
     {
         public LinkPickingUpItem(LinkPlayer link)
         {
