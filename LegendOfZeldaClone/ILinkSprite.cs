@@ -8,6 +8,7 @@ namespace LegendOfZeldaClone
     {
         public int CurrentFrame { get; set; }
         public bool AnimationDone();
+        public void Reset();
     }
 
     public class LinkStandingSprite : ILinkSprite
@@ -37,10 +38,12 @@ namespace LegendOfZeldaClone
 
         public bool AnimationDone() => true;
 
+        public void Reset() => CurrentFrame = 0;
+
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(xCoordStart, yCoordStart, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
+            Rectangle sourceRectangle = new Rectangle(xCoordStart, yCoordStart, width, height);
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
@@ -63,7 +66,7 @@ namespace LegendOfZeldaClone
             CurrentFrame = currentFrame;
 
             this.texture = texture;
-            totalFrames = 2;
+            totalFrames = 4;
             xCoordStart = x;
             yCoordStart = y;
             width = spriteWidth;
@@ -79,14 +82,25 @@ namespace LegendOfZeldaClone
 
         public bool AnimationDone() => CurrentFrame == totalFrames;
 
+        public void Reset() => CurrentFrame = 0;
+
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
-            Rectangle sourceRectangle = CurrentFrame switch
+            Rectangle sourceRectangle;
+            switch (CurrentFrame)
             {
-                0 => new Rectangle(xCoordStart, yCoordStart, LoZHelpers.Scale(width), LoZHelpers.Scale(height)),
-                1 => new Rectangle(xCoordStart + (atlasGap + width), yCoordStart, LoZHelpers.Scale(width), LoZHelpers.Scale(height)),
-                _ => new Rectangle(0, 0, LoZHelpers.Scale(width), LoZHelpers.Scale(height))
+                case 0:
+                case 1:
+                    sourceRectangle = new Rectangle(xCoordStart, yCoordStart, width, height);
+                    break;
+                case 2:
+                case 3:
+                    sourceRectangle = new Rectangle(xCoordStart + (atlasGap + width), yCoordStart, width, height);
+                    break;
+                default:
+                    sourceRectangle = new Rectangle(0, 0, width, height);
+                    break;
             };
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -110,7 +124,7 @@ namespace LegendOfZeldaClone
             CurrentFrame = currentFrame;
 
             this.texture = texture;
-            totalFrames = 4;
+            totalFrames = 8;
             xCoordStart = x;
             yCoordStart = y;
             width = spriteWidth;
@@ -126,10 +140,12 @@ namespace LegendOfZeldaClone
 
         public bool AnimationDone() => CurrentFrame == totalFrames;
 
+        public void Reset() => CurrentFrame = 0;
+
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
-            Rectangle sourceRectangle = new Rectangle(xCoordStart, yCoordStart, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
+            Rectangle sourceRectangle = new Rectangle(xCoordStart, yCoordStart, width, height);
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
@@ -152,7 +168,7 @@ namespace LegendOfZeldaClone
             CurrentFrame = currentFrame;
 
             this.texture = texture;
-            totalFrames = 2;
+            totalFrames = 4;
             xCoordStart = x;
             yCoordStart = y;
             width = spriteWidth;
@@ -168,14 +184,25 @@ namespace LegendOfZeldaClone
 
         public bool AnimationDone() => CurrentFrame == totalFrames;
 
+        public void Reset() => CurrentFrame = 0;
+
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
-            Rectangle sourceRectangle = CurrentFrame switch
+            Rectangle sourceRectangle;
+            switch (CurrentFrame)
             {
-                0 => new Rectangle(xCoordStart, yCoordStart, LoZHelpers.Scale(width), LoZHelpers.Scale(height)),
-                1 => new Rectangle(xCoordStart + (atlasGap + width), yCoordStart, LoZHelpers.Scale(width), LoZHelpers.Scale(height)),
-                _ => new Rectangle(0, 0, LoZHelpers.Scale(width), LoZHelpers.Scale(height))
+                case 0:
+                case 1:
+                    sourceRectangle = new Rectangle(xCoordStart, yCoordStart, width, height);
+                    break;
+                case 2:
+                case 3:
+                    sourceRectangle = new Rectangle(xCoordStart + (atlasGap + width), yCoordStart, width, height);
+                    break;
+                default:
+                    sourceRectangle = new Rectangle(0, 0, width, height);
+                    break;
             };
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);

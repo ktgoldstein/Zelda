@@ -11,13 +11,9 @@ namespace LegendOfZeldaClone
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private List<IController> controllerList;
+        private IController controller;
 
-        public Texture2D LinkTextures;
-        public ISprite SpriteLink;
-        public ISprite SpriteCredits;
-        public int GameWidth;
-        public int GameHeight;
+        public IPlayer Link;
 
         public LegendOfZeldaDungeon()
         {
@@ -32,27 +28,32 @@ namespace LegendOfZeldaClone
 
         protected override void Initialize()
         {
-            GameWidth = 512;
-            GameHeight = 256;
-
-            _graphics.PreferredBackBufferWidth = GameWidth;
-            _graphics.PreferredBackBufferHeight = GameHeight;
+            _graphics.PreferredBackBufferWidth = LoZHelpers.GameWidth;
+            _graphics.PreferredBackBufferHeight = LoZHelpers.GameHeight;
             _graphics.ApplyChanges();
 
             ICommand quitGame = new QuitGame(this);
+            ICommand moveDown = new MoveDown(this);
+            ICommand moveUp = new MoveUp(this);
+            ICommand moveLeft = new MoveLeft(this);
+            ICommand moveRight = new MoveRight(this);
+            ICommand ActionA = new ActionA(this);
+            ICommand ActionB = new ActionB(this);
 
             KeyboardController keyboardController = new KeyboardController();
-            keyboardController.RegisterCommand(Keys.D0, quitGame);
-            keyboardController.RegisterCommand(Keys.NumPad0, quitGame);
+            keyboardController.RegisterCommand(Keys.Q, quitGame);
+            keyboardController.RegisterCommand(Keys.S, moveDown);
+            keyboardController.RegisterCommand(Keys.W, moveUp);
+            keyboardController.RegisterCommand(Keys.A, moveLeft);
+            keyboardController.RegisterCommand(Keys.D, moveRight);
+            keyboardController.RegisterCommand(Keys.Down, moveDown);
+            keyboardController.RegisterCommand(Keys.Up, moveUp);
+            keyboardController.RegisterCommand(Keys.Left, moveLeft);
+            keyboardController.RegisterCommand(Keys.Right, moveRight);
+            keyboardController.RegisterCommand(Keys.Z, ActionA);
+            keyboardController.RegisterCommand(Keys.N, ActionA);
 
-            MouseController mouseController = new MouseController(this);
-            mouseController.RegisterCommand("rightClick", quitGame);
-
-            controllerList = new List<IController>
-            {
-                keyboardController,
-                mouseController
-            };
+            controller = keyboardController;
 
             base.Initialize();
         }
@@ -61,17 +62,17 @@ namespace LegendOfZeldaClone
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            LinkTextures = Content.Load<Texture2D>("ZoLSpriteSheet");
-    }
+            LinkSpriteFactory.Instance.LoadAllTextures(Content);
+
+            Vector2 linkStartingLocation = new Vector2(LoZHelpers.GameWidth / 2 - 16, LoZHelpers.GameHeight / 2 - 16);
+            Link = new LinkPlayer(this, linkStartingLocation, 3, 3);
+        }
 
         protected override void Update(GameTime gameTime)
         {
-            foreach(IController controller in controllerList)
-            {
-                controller.Update();
-            }
-
-            SpriteLink.Update();
+            controller.Update();
+            
+            Link.Update();
 
             base.Update(gameTime);
         }
@@ -82,7 +83,7 @@ namespace LegendOfZeldaClone
 
             _spriteBatch.Begin();
 
-            SpriteLink.Draw(_spriteBatch, new Vector2(GameWidth /2 -16, GameHeight /2 -16));
+            Link.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

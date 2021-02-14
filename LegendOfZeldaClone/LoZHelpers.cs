@@ -24,8 +24,10 @@
 
     public static class LoZHelpers
     {
+        public static int GameHeight => 256;
+        public static int GameWidth => 512;
+        public static int LinkSpeed => 2;
         public static int SpriteSizeMultiplier => 2;
-
         public static int Scale(int original) => original * SpriteSizeMultiplier;
     }
 }
