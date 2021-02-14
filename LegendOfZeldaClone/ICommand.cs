@@ -126,4 +126,19 @@ namespace LegendOfZeldaClone
             blueRing.Use();
         }
     }
+
+    public class ResetLink : ICommand
+    {
+        private LegendOfZeldaDungeon game;
+
+        public ResetLink(LegendOfZeldaDungeon game)
+        {
+            this.game = game;
+        }
+
+        public void Execute()
+        {
+            game.Link = new LinkPlayer(game, LoZHelpers.LinkStartingLocation);
+        }
+    }
 }
