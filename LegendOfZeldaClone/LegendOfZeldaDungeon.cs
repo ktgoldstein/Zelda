@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace LegendOfZeldaClone
 {
-
     public class LegendOfZeldaDungeon : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -16,12 +15,13 @@ namespace LegendOfZeldaClone
         public List<IEnemy> enemyList;
 
         public Texture2D LinkTextures;
-        public ISprite SpriteLink;
-        public ISprite SpriteCredits;
 
         public int switchEnemyNum;
         public IEnemy SpriteEnemy;
         public IPlayer Link;
+
+        public List<ISprite> objList;
+        public ISprite currentObject;
 
         public Texture2D ItemTextures;
         public ItemInterface[] Items;
@@ -58,6 +58,8 @@ namespace LegendOfZeldaClone
             ICommand setSpriteEnemy = new SetSpriteEnemy(this);
             ICommand nextItem = new NextItem(this);
             ICommand prevItem = new PreviousItem(this);
+            ICommand nextObject = new NextObject(this);
+            ICommand previousObject = new PreviousObject(this);
 
             KeyboardController keyboardController = new KeyboardController();
             keyboardController.RegisterCommand(Keys.Q, quitGame);
@@ -79,6 +81,8 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.U, prevItem);
             keyboardController.RegisterCommand(Keys.P, setSpriteEnemy);
             keyboardController.RegisterCommand(Keys.O, setSpriteEnemy);
+            keyboardController.RegisterCommand(Keys.Y, nextObject);
+            keyboardController.RegisterCommand(Keys.T, previousObject);
 
             controller = keyboardController;
 
@@ -97,6 +101,8 @@ namespace LegendOfZeldaClone
             ItemIndex = 0;
             Items = new ItemInterface[20];
 
+            objList = new List<ISprite>();
+
             base.Initialize();
         }
 
@@ -110,6 +116,31 @@ namespace LegendOfZeldaClone
 
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             SpriteEnemy = new Stalfos();
+
+            ObjectSpriteFactory.Instance.LoadAllTextures(Content);
+            currentObject = ObjectSpriteFactory.Instance.CreatedefaultFlatBlock();
+            objList.Add(ObjectSpriteFactory.Instance.CreateflatBlock());
+            objList.Add(ObjectSpriteFactory.Instance.CreateraisedBlock());
+            objList.Add(ObjectSpriteFactory.Instance.CreateraisedBlock());
+            objList.Add(ObjectSpriteFactory.Instance.Createstatue());
+            objList.Add(ObjectSpriteFactory.Instance.Createstatue2());
+            objList.Add(ObjectSpriteFactory.Instance.CreateblueStatue());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreateblueStatue2());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.Createsand());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.Createstairs());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.Createwater());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatekeyDoorUp());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatekeyDoorDown());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatekeyDoorLeft());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatekeyDoorRight());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatelockedDoorUp());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatelockedDoorDown());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatelockedDoorLeft());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatelockedDoorRight());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreateopenDoorUp());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreateopenDoorDown());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreateopenDoorLeft());
+            //spriteObject.Add(ObjectSpriteFactory.Instance.CreateopenDoorRight());
 
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
             Items[0] = ItemSpriteFactory.Instance.CreateCompass();
@@ -157,6 +188,8 @@ namespace LegendOfZeldaClone
             Link.Draw(_spriteBatch);
             SpriteEnemy.Draw(_spriteBatch);
             CurrItem.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 32, LoZHelpers.GameHeight / 2));
+
+            currentObject.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6));
 
             _spriteBatch.End();
 

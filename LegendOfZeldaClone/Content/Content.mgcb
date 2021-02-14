@@ -25,18 +25,6 @@
 /processorParam:TextureFormat=Color
 /build:Bosses.png
 
-#begin linkSpriteSheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:linkSpriteSheet.png
-
 #begin DungeonEnemies.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -193,6 +181,18 @@
 /processorParam:TextureFormat=Color
 /build:EnemySprites/Wallmaster.png
 
+#begin linkSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:linkSpriteSheet.png
+
 #begin LoZItemsSpreadsheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -204,6 +204,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:LoZItemsSpreadsheet.png
+
+#begin ZeldaObjects.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:ZeldaObjects.png
 
 #begin ZoLSpriteSheet.png
 /importer:TextureImporter
