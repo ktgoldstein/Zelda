@@ -98,7 +98,7 @@ namespace LegendOfZeldaClone
 
         public void Damage(int amount)
         {
-            health -= linkState.Damage(amount);
+            health -= amount;
             if (health < 0)
                 health = 0;
             // TODO: Handle the grief of Link dying

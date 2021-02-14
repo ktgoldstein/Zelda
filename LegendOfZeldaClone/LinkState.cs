@@ -5,49 +5,61 @@ namespace LegendOfZeldaClone
 {
     public abstract class LinkState
     {
-        public abstract ILinkPlayer Link { };
-        public abstract ILinkSprite Sprite { };
+        public abstract ILinkPlayer Link { get; set; }
+        public abstract ILinkSprite Sprite { get; set; }
 
         public void MoveUp()
         {
-            if (sprite.AnimationDone())
-                link.SetState(link.GetStateWalkingingUp());
-        }
-
-        public void MoveDown();
-        public void MoveLeft();
-        public void MoveRight();
-        public void Action();
-        public int Damage(int amount);
-        public void Draw(SpriteBatch spriteBatch, Vector2 location);
-        public void Update(Vector2 location);
-    }
-
-    public class LinkStandingDown : LinkState
-    {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
-
-        public LinkStandingDown(ILinkPlayer link)
-        {
-            this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkStandingDownSprite(link.SkinType);
-        }
-
-        public void MoveUp()
-        {
+            if (Sprite.AnimationDone())
+                Link.SetState(Link.GetStateWalkingingUp());
         }
 
         public void MoveDown()
         {
-            if (sprite.AnimationDone())
-                link.SetState(link.GetStateWalkingingDown());
+            if (Sprite.AnimationDone())
+                Link.SetState(Link.GetStateWalkingingDown());
         }
 
-        public void MoveLeft();
-        public void MoveRight();
-        public void Action();
-        public int Damage(int amount);
+        public void MoveLeft()
+        {
+            if (Sprite.AnimationDone())
+                Link.SetState(Link.GetStateWalkingingLeft());
+        }
+
+        public void MoveRight()
+        {
+            if (Sprite.AnimationDone())
+                Link.SetState(Link.GetStateWalkingingRight());
+        }
+
+        public abstract void Action();
+        public abstract void Damage();
+        public abstract void Draw(SpriteBatch spriteBatch, Vector2 location);
+        public abstract void Update(Vector2 location);
+    }
+
+    public class LinkStandingDown : LinkState
+    {
+        public override ILinkPlayer Link { get; set; }
+        public override ILinkSprite Sprite { get; set; }
+
+        public LinkStandingDown(ILinkPlayer link)
+        {
+            Link = link;
+            Sprite = LinkSpriteFactory.Instance.CreateLinkStandingDownSprite(Link.SkinType);
+        }
+
+        public override void Action()
+        {
+            if (Sprite.AnimationDone())
+                Link.SetState(Link.GetStateUsingItemDown());
+        }
+
+        public override void Damage()
+        {
+            Link.
+        }
+
         public void Draw(SpriteBatch spriteBatch, Vector2 location);
         public void Update(Vector2 location);
     }
