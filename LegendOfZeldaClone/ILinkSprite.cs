@@ -21,7 +21,7 @@ namespace LegendOfZeldaClone
         private int height;
         private int atlasGap;
 
-        public LinkStandingSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap, int currentFrame = 0)
+        public LinkStandingSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap, int currentFrame)
         {
             CurrentFrame = currentFrame;
 
@@ -58,7 +58,7 @@ namespace LegendOfZeldaClone
         private int height;
         private int atlasGap;
 
-        public LinkWalkingSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap, int currentFrame = 0)
+        public LinkWalkingSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap, int currentFrame)
         {
             CurrentFrame = currentFrame;
 
@@ -105,7 +105,7 @@ namespace LegendOfZeldaClone
         private int height;
         private int atlasGap;
 
-        public LinkUsingItemSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap, int currentFrame = 0)
+        public LinkUsingItemSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap, int currentFrame)
         {
             CurrentFrame = currentFrame;
 
@@ -147,7 +147,7 @@ namespace LegendOfZeldaClone
         private int height;
         private int atlasGap;
 
-        public LinkPickingUpItemSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap, int currentFrame = 0)
+        public LinkPickingUpItemSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap, int currentFrame)
         {
             CurrentFrame = currentFrame;
 

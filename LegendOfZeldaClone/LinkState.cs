@@ -32,9 +32,14 @@ namespace LegendOfZeldaClone
                 Link.SetState(Link.GetStateWalkingingRight());
         }
 
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 location)
+        {
+            Sprite.Draw(spriteBatch, location);
+        }
+
         public abstract void Action();
         public abstract void Damage();
-        public abstract void Draw(SpriteBatch spriteBatch, Vector2 location);
         public abstract void Update(Vector2 location);
     }
 
@@ -55,13 +60,9 @@ namespace LegendOfZeldaClone
                 Link.SetState(Link.GetStateUsingItemDown());
         }
 
-        public override void Damage()
-        {
-            Link.
-        }
+        public override void Damage() { }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location);
-        public void Update(Vector2 location);
+        public override void Update(Vector2 location) { }
     }
 
     public class LinkStandingUp : LinkState
