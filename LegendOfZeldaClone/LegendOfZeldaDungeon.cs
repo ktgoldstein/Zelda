@@ -23,9 +23,6 @@ namespace LegendOfZeldaClone
         public IEnemy SpriteEnemy;
         public IPlayer Link;
 
-        public int GameWidth;
-        public int GameHeight;
-
         public Texture2D ItemTextures;
         public ItemInterface[] Items;
         public ItemInterface CurrItem;
@@ -159,7 +156,7 @@ namespace LegendOfZeldaClone
 
             Link.Draw(_spriteBatch);
             SpriteEnemy.Draw(_spriteBatch);
-            CurrItem.Draw(_spriteBatch, new Vector2(GameWidth / 2 + 32, GameHeight / 2));
+            CurrItem.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 32, LoZHelpers.GameHeight / 2));
 
             _spriteBatch.End();
 

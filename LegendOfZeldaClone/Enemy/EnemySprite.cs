@@ -50,9 +50,7 @@ namespace LegendOfZeldaClone.Enemy
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 4, height * 4);
 
-            spritebatch.Begin();
             spritebatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-            spritebatch.End();
         }
     }
 }
