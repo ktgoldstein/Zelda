@@ -94,5 +94,40 @@ namespace LegendOfZeldaClone
         {
             return new Map(itemTexture);
         }
+
+        public ItemInterface CreatePotion()
+        {
+            return new Potion(itemTexture);
+        }
+
+        public ItemInterface CreateSword()
+        {
+            return new Sword(itemTexture);
+        }
+
+        public ItemInterface CreateShield()
+        {
+            return new Shield(itemTexture);
+        }
+
+        public ItemInterface CreateCandle()
+        {
+            return new Candle(itemTexture);
+        }
+
+        public ItemInterface CreateRing()
+        {
+            return new Ring(itemTexture);
+        }
+
+        public ItemInterface CreateStaff()
+        {
+            return new Staff(itemTexture);
+        }
+
+        public ItemInterface CreateBook()
+        {
+            return new Book(itemTexture);
+        }
     }
 }

@@ -80,7 +80,7 @@ namespace LegendOfZeldaClone
             };
 
             index = 0;
-            Items = new ItemInterface[13];
+            Items = new ItemInterface[20];
 
             base.Initialize();
         }
@@ -111,6 +111,13 @@ namespace LegendOfZeldaClone
             Items[10] = ItemSpriteFactory.Instance.CreateTriforcePiece();
             Items[11] = ItemSpriteFactory.Instance.CreateHeartContainer();
             Items[12] = ItemSpriteFactory.Instance.CreateMap();
+            Items[13] = ItemSpriteFactory.Instance.CreatePotion();
+            Items[14] = ItemSpriteFactory.Instance.CreateSword();
+            Items[15] = ItemSpriteFactory.Instance.CreateShield();
+            Items[16] = ItemSpriteFactory.Instance.CreateCandle();
+            Items[17] = ItemSpriteFactory.Instance.CreateRing();
+            Items[18] = ItemSpriteFactory.Instance.CreateStaff();
+            Items[19] = ItemSpriteFactory.Instance.CreateBook();
             CurrItem = Items[0];
     }
 
@@ -122,6 +129,8 @@ namespace LegendOfZeldaClone
             }
 
             SpriteLink.Update();
+
+            CurrItem.Update();
 
             base.Update(gameTime);
         }
