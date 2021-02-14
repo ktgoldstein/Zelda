@@ -149,9 +149,55 @@ namespace LegendOfZeldaClone
                         break;
                     }
             }
+        }
+    }
 
+    public class PreviousItem : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public PreviousItem(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
         }
 
+        public void Execute()
+        {
+            if (myGame.index == 0)
+            {
+                myGame.index = myGame.Items.Length - 1;
+                myGame.CurrItem = myGame.Items[myGame.index];
+            }
+            else
+            {
+                myGame.index -= 1;
+                myGame.CurrItem = myGame.Items[myGame.index];
+            }
+        }
+    }
+
+    public class NextItem : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public NextItem(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            if (myGame.index == myGame.Items.Length - 1)
+            {
+                myGame.index = 0;
+                myGame.CurrItem = myGame.Items[0];
+            }
+            else
+            {
+                myGame.index += 1;
+                myGame.CurrItem = myGame.Items[myGame.index];
+            }
+        }
     }
 }
 

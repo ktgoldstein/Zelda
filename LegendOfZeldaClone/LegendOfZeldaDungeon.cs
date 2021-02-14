@@ -26,6 +26,11 @@ namespace LegendOfZeldaClone
         public int GameWidth;
         public int GameHeight;
 
+        public Texture2D ItemTextures;
+        public ItemInterface[] Items;
+        public ItemInterface CurrItem;
+        public int ItemIndex;
+
         public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -55,6 +60,8 @@ namespace LegendOfZeldaClone
             ICommand setSpriteMovingNonAnimated = new SetSpriteMovingNonAnimated(this);
             ICommand setSpriteMovingAnimated = new SetSpriteMovingAnimated(this);
             ICommand setSpriteEnemy = new SetSpriteEnemy(this);
+            ICommand nextItem = new NextItem(this);
+            ICommand prevItem = new PreviousItem(this);
 
 
             KeyboardController keyboardController = new KeyboardController();
@@ -68,7 +75,8 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.NumPad2, setSpriteNonMovingAnimated);
             keyboardController.RegisterCommand(Keys.NumPad3, setSpriteMovingNonAnimated);
             keyboardController.RegisterCommand(Keys.NumPad4, setSpriteMovingAnimated);
-
+            keyboardController.RegisterCommand(Keys.I, nextItem);
+            keyboardController.RegisterCommand(Keys.U, prevItem);
             keyboardController.RegisterCommand(Keys.P, setSpriteEnemy);
             keyboardController.RegisterCommand(Keys.O, setSpriteEnemy);
 
@@ -96,6 +104,9 @@ namespace LegendOfZeldaClone
                 new Wallmaster()
             };
 
+            ItemIndex = 0;
+            Items = new ItemInterface[20];
+
             base.Initialize();
         }
 
@@ -110,12 +121,31 @@ namespace LegendOfZeldaClone
             string credits = "Credits\nProgram Made By: Simon Kirksey\nSprites from: spriters-resource.com/nes/legendofzelda/";
             SpriteCredits = new TextSprite(font, credits);
 
-
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             SpriteEnemy = new Stalfos();
-           
 
-
+            ItemSpriteFactory.Instance.LoadAllTextures(Content);
+            Items[0] = ItemSpriteFactory.Instance.CreateCompass();
+            Items[1] = ItemSpriteFactory.Instance.CreateKey();
+            Items[2] = ItemSpriteFactory.Instance.CreateBoomerang();
+            Items[3] = ItemSpriteFactory.Instance.CreateBow();
+            Items[4] = ItemSpriteFactory.Instance.CreateHeart();
+            Items[5] = ItemSpriteFactory.Instance.CreateRupee();
+            Items[6] = ItemSpriteFactory.Instance.CreateArrow();
+            Items[7] = ItemSpriteFactory.Instance.CreateBomb();
+            Items[8] = ItemSpriteFactory.Instance.CreateFairy();
+            Items[9] = ItemSpriteFactory.Instance.CreateClock();
+            Items[10] = ItemSpriteFactory.Instance.CreateTriforcePiece();
+            Items[11] = ItemSpriteFactory.Instance.CreateHeartContainer();
+            Items[12] = ItemSpriteFactory.Instance.CreateMap();
+            Items[13] = ItemSpriteFactory.Instance.CreatePotion();
+            Items[14] = ItemSpriteFactory.Instance.CreateSword();
+            Items[15] = ItemSpriteFactory.Instance.CreateShield();
+            Items[16] = ItemSpriteFactory.Instance.CreateCandle();
+            Items[17] = ItemSpriteFactory.Instance.CreateRing();
+            Items[18] = ItemSpriteFactory.Instance.CreateStaff();
+            Items[19] = ItemSpriteFactory.Instance.CreateBook();
+            CurrItem = Items[0];
         }
 
         protected override void Update(GameTime gameTime)
@@ -127,6 +157,8 @@ namespace LegendOfZeldaClone
 
             SpriteLink.Update();
             SpriteEnemy.Update();
+
+            CurrItem.Update();
 
             base.Update(gameTime);
         }
@@ -140,6 +172,8 @@ namespace LegendOfZeldaClone
             SpriteEnemy.Draw(_spriteBatch);
 
     
+
+            CurrItem.Draw(_spriteBatch, new Vector2(GameWidth / 2 + 32, GameHeight / 2));
 
             base.Draw(gameTime);
         }
