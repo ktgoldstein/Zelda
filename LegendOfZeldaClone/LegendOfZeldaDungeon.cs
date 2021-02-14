@@ -56,6 +56,7 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.Z, ActionA);
             keyboardController.RegisterCommand(Keys.N, ActionA);
             keyboardController.RegisterCommand(Keys.D6, PickUpBlueRing);
+            keyboardController.RegisterCommand(Keys.NumPad6, PickUpBlueRing);
             keyboardController.RegisterCommand(Keys.R, ResetLink);
 
             controller = keyboardController;
