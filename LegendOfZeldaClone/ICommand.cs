@@ -98,7 +98,7 @@ namespace LegendOfZeldaClone
             if (Keyboard.GetState().IsKeyDown(Keys.P))
             {
                 myGame.switchEnemyNum++;
-                myGame.switchEnemyNum %= 3;
+                myGame.switchEnemyNum %= 7;
 
             }
             else
@@ -106,23 +106,48 @@ namespace LegendOfZeldaClone
                 this.myGame.switchEnemyNum--;
                 if (myGame.switchEnemyNum == -1)
                 {
-                    myGame.switchEnemyNum = 2;
+                    myGame.switchEnemyNum = 6;
                 }
             }
 
-            // Draw correct enemy
-            if (myGame.switchEnemyNum == 1)
+            int pickSprite = myGame.switchEnemyNum;
+            switch (pickSprite)
             {
-                myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Aquamentus();
-
-            }
-            else if (myGame.switchEnemyNum == 2)
-            {
-                myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Goriya();
-            }
-            else
-            {
-                myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos();
+                case 1:
+                    {
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Aquamentus();
+                        break;
+                    }
+                case 2:
+                    {
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Goriya();
+                        break;
+                    }
+                case 3:
+                    {
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.BladeTrap();
+                        break;
+                    }
+                case 4:
+                    {
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Keese();
+                        break;
+                    }
+                case 5:
+                    {
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Gel();
+                        break;
+                    }
+                case 6:
+                    {
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Wallmaster();
+                        break;
+                    }
+                default:
+                    {
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos();
+                        break;
+                    }
             }
 
         }

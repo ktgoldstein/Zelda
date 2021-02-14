@@ -89,7 +89,11 @@ namespace LegendOfZeldaClone
             {
                 new Aquamentus(),
                 new Goriya(),
-                new Stalfos()
+                new Stalfos(),
+                new BladeTrap(),
+                new Gel(),
+                new Keese(),
+                new Wallmaster()
             };
 
             base.Initialize();
@@ -99,7 +103,6 @@ namespace LegendOfZeldaClone
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: load/initialize text sprite
             LinkTextures = Content.Load<Texture2D>("ZoLSpriteSheet");
             SpriteLink = new NonMovingNonAnimatedSprite(LinkTextures);
 
@@ -107,7 +110,10 @@ namespace LegendOfZeldaClone
             string credits = "Credits\nProgram Made By: Simon Kirksey\nSprites from: spriters-resource.com/nes/legendofzelda/";
             SpriteCredits = new TextSprite(font, credits);
 
+
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
+            SpriteEnemy = new Stalfos();
+           
 
 
         }
@@ -119,12 +125,8 @@ namespace LegendOfZeldaClone
                 controller.Update();
             }
 
-            foreach(IEnemy enemy in enemyList)
-            {
-                enemy.Update();
-            }
-
             SpriteLink.Update();
+            SpriteEnemy.Update();
 
             base.Update(gameTime);
         }
@@ -135,13 +137,9 @@ namespace LegendOfZeldaClone
 
             SpriteCredits.Draw(_spriteBatch, new Vector2(GameWidth /10, GameHeight *2 /3));
             SpriteLink.Draw(_spriteBatch, new Vector2(GameWidth /2 -16, GameHeight /2 -16));
+            SpriteEnemy.Draw(_spriteBatch);
 
-
-            //SpriteEnemy.Draw(_spriteBatch);
-            foreach (IEnemy enemy in enemyList)
-            {
-                enemy.Draw(_spriteBatch);
-            }
+    
 
             base.Draw(gameTime);
         }

@@ -11,6 +11,10 @@ namespace LegendOfZeldaClone.Enemy
 		private Texture2D aquamentusSprite, fireballSprite;
 		private Texture2D goriyaDownSprite, goriyaUpSprite, goriyaRightSprite, goriyaLeftSprite;
 		private Texture2D boomerangSprite, stalfosSprite;
+		private Texture2D bladeTrapSprite;
+		private Texture2D gelSprite;
+		private Texture2D keeseSprite;
+		private Texture2D wallmasterSprite;
 
 		private static EnemySpriteFactory instance = new EnemySpriteFactory();
 
@@ -36,6 +40,12 @@ namespace LegendOfZeldaClone.Enemy
 			goriyaLeftSprite = content.Load<Texture2D>("EnemySprites\\Goriya\\GoriyaLeft");
 			boomerangSprite = content.Load<Texture2D>("EnemySprites\\Boomerang2");
 			stalfosSprite = content.Load<Texture2D>("EnemySprites\\Stalfos");
+			bladeTrapSprite = content.Load<Texture2D>("EnemySprites\\BladeTrap");
+			gelSprite = content.Load<Texture2D>("EnemySprites\\Gel");
+			keeseSprite = content.Load<Texture2D>("EnemySprites\\Keese");
+			wallmasterSprite = content.Load<Texture2D>("EnemySprites\\Wallmaster");
+
+
 
 
 		}
@@ -79,5 +89,27 @@ namespace LegendOfZeldaClone.Enemy
         {
 			return new EnemySprite(stalfosSprite, 2, 1, 2);
         }
+
+
+		// Sunday
+		public ISprite CreateBladeTrapSprite()
+		{
+			return new EnemySprite(bladeTrapSprite, 1, 1, 1);
+		}
+
+		public ISprite CreateGelSprite()
+		{
+			return new EnemySprite(gelSprite, 2, 1, 2);
+		}
+
+		public ISprite CreateKeeseSprite()
+		{
+			return new EnemySprite(keeseSprite, 2, 1, 2);
+		}
+
+		public ISprite CreateWallmasterSprite()
+		{
+			return new EnemySprite(wallmasterSprite, 2, 1, 2);
+		}
 	}
 }
