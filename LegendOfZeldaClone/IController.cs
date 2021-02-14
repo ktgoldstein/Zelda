@@ -35,40 +35,4 @@ namespace LegendOfZeldaClone
             }
         }
     }
-
-    public class MouseController : IController
-    {
-        private Dictionary<string, ICommand> controllerMappings;
-        private LegendOfZeldaDungeon myGame;
-
-        public MouseController(LegendOfZeldaDungeon game)
-        {
-            controllerMappings = new Dictionary<string, ICommand>();
-            myGame = game;
-        }
-
-        public void RegisterCommand(string key, ICommand command)
-        {
-            controllerMappings.Add(key, command);
-        }
-
-        public void Update()
-        {
-            MouseState mouseState = Mouse.GetState();
-
-            if(mouseState.RightButton == ButtonState.Pressed)
-            {
-                controllerMappings["rightClick"].Execute();
-            }
-            else if (mouseState.LeftButton == ButtonState.Pressed)
-            {
-                bool clickedOnTop = mouseState.Y < myGame.GameHeight /2;
-                bool clickedOnLeft = mouseState.X < myGame.GameWidth /2;
-                string clickLocation = clickedOnTop ? "top" : "bottom";
-                clickLocation += clickedOnLeft ? "Left" : "Right";
-
-                controllerMappings[$"leftClick {clickLocation}"].Execute();
-            }
-        }
-    }
 }

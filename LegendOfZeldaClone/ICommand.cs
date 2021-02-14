@@ -23,63 +23,123 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class SetSpriteNonMovingNonAnimated : ICommand
+    public class MoveDown : ICommand
     {
         private LegendOfZeldaDungeon myGame;
 
-        public SetSpriteNonMovingNonAnimated(LegendOfZeldaDungeon game)
+        public MoveDown(LegendOfZeldaDungeon game)
         {
             myGame = game;
         }
 
         public void Execute()
         {
-            myGame.SpriteLink = new NonMovingNonAnimatedSprite(myGame.LinkTextures);
+            myGame.Link.MoveDown();
         }
     }
 
-    public class SetSpriteNonMovingAnimated : ICommand
+    public class MoveUp : ICommand
     {
         private LegendOfZeldaDungeon myGame;
 
-        public SetSpriteNonMovingAnimated(LegendOfZeldaDungeon game)
+        public MoveUp(LegendOfZeldaDungeon game)
         {
             myGame = game;
         }
 
         public void Execute()
         {
-            myGame.SpriteLink = new NonMovingAnimatedSprite(myGame.LinkTextures);
+            myGame.Link.MoveUp();
         }
     }
 
-    public class SetSpriteMovingNonAnimated : ICommand
+    public class MoveLeft : ICommand
     {
         private LegendOfZeldaDungeon myGame;
 
-        public SetSpriteMovingNonAnimated(LegendOfZeldaDungeon game)
+        public MoveLeft(LegendOfZeldaDungeon game)
         {
             myGame = game;
         }
 
         public void Execute()
         {
-            myGame.SpriteLink = new MovingNonAnimatedSprite(myGame.LinkTextures);
+            myGame.Link.MoveLeft();
         }
     }
 
-    public class SetSpriteMovingAnimated : ICommand
+    public class MoveRight : ICommand
     {
         private LegendOfZeldaDungeon myGame;
 
-        public SetSpriteMovingAnimated(LegendOfZeldaDungeon game)
+        public MoveRight(LegendOfZeldaDungeon game)
         {
             myGame = game;
         }
 
         public void Execute()
         {
-            myGame.SpriteLink = new MovingAnimatedSprite(myGame.LinkTextures, myGame.GameWidth);
+            myGame.Link.MoveRight();
+        }
+    }
+
+    public class ActionA : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public ActionA(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            myGame.Link.ActionA();
+        }
+    }
+
+    public class ActionB : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public ActionB(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            myGame.Link.ActionB();
+        }
+    }
+
+    public class PickUpBlueRing : ICommand
+    {
+        private IUsableItem blueRing;
+
+        public PickUpBlueRing(LegendOfZeldaDungeon game)
+        {
+            blueRing = new BlueRing(game);
+        }
+
+        public void Execute()
+        {
+            blueRing.Use();
+        }
+    }
+
+    public class ResetLink : ICommand
+    {
+        private LegendOfZeldaDungeon game;
+
+        public ResetLink(LegendOfZeldaDungeon game)
+        {
+            this.game = game;
+        }
+
+        public void Execute()
+        {
+            game.Link = new LinkPlayer(game, LoZHelpers.LinkStartingLocation);
         }
     }
 

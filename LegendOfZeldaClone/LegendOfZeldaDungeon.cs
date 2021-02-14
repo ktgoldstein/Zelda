@@ -6,12 +6,13 @@ using System.Collections.Generic;
 
 namespace LegendOfZeldaClone
 {
+
     public class LegendOfZeldaDungeon : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private List<IController> controllerList;
+        private IController controller;
         public List<IEnemy> enemyList;
 
         public Texture2D LinkTextures;
@@ -20,8 +21,7 @@ namespace LegendOfZeldaClone
 
         public int switchEnemyNum;
         public IEnemy SpriteEnemy;
-
-        
+        public IPlayer Link;
 
         public int GameWidth;
         public int GameHeight;
@@ -44,53 +44,48 @@ namespace LegendOfZeldaClone
 
         protected override void Initialize()
         {
-            GameWidth = 512*2;
-            GameHeight = 256*2;
-            switchEnemyNum = 0;
-
-            _graphics.PreferredBackBufferWidth = GameWidth;
-            _graphics.PreferredBackBufferHeight = GameHeight;
+            _graphics.PreferredBackBufferWidth = LoZHelpers.GameWidth;
+            _graphics.PreferredBackBufferHeight = LoZHelpers.GameHeight;
             _graphics.ApplyChanges();
 
             ICommand quitGame = new QuitGame(this);
-            ICommand setSpriteNonMovingNonAnimated = new SetSpriteNonMovingNonAnimated(this);
-            ICommand setSpriteNonMovingAnimated = new SetSpriteNonMovingAnimated(this);
-            ICommand setSpriteMovingNonAnimated = new SetSpriteMovingNonAnimated(this);
-            ICommand setSpriteMovingAnimated = new SetSpriteMovingAnimated(this);
+            ICommand moveDown = new MoveDown(this);
+            ICommand moveUp = new MoveUp(this);
+            ICommand moveLeft = new MoveLeft(this);
+            ICommand moveRight = new MoveRight(this);
+            ICommand actionA = new ActionA(this);
+            ICommand actionB = new ActionB(this);
+            ICommand pickUpBlueRing = new PickUpBlueRing(this);
+            ICommand resetLink = new ResetLink(this);
+            
             ICommand setSpriteEnemy = new SetSpriteEnemy(this);
             ICommand nextItem = new NextItem(this);
             ICommand prevItem = new PreviousItem(this);
 
-
             KeyboardController keyboardController = new KeyboardController();
-            keyboardController.RegisterCommand(Keys.D0, quitGame);
-            keyboardController.RegisterCommand(Keys.D1, setSpriteNonMovingNonAnimated);
-            keyboardController.RegisterCommand(Keys.D2, setSpriteNonMovingAnimated);
-            keyboardController.RegisterCommand(Keys.D3, setSpriteMovingNonAnimated);
-            keyboardController.RegisterCommand(Keys.D4, setSpriteMovingAnimated);
-            keyboardController.RegisterCommand(Keys.NumPad0, quitGame);
-            keyboardController.RegisterCommand(Keys.NumPad1, setSpriteNonMovingNonAnimated);
-            keyboardController.RegisterCommand(Keys.NumPad2, setSpriteNonMovingAnimated);
-            keyboardController.RegisterCommand(Keys.NumPad3, setSpriteMovingNonAnimated);
-            keyboardController.RegisterCommand(Keys.NumPad4, setSpriteMovingAnimated);
+            keyboardController.RegisterCommand(Keys.Q, quitGame);
+            keyboardController.RegisterCommand(Keys.S, moveDown);
+            keyboardController.RegisterCommand(Keys.W, moveUp);
+            keyboardController.RegisterCommand(Keys.A, moveLeft);
+            keyboardController.RegisterCommand(Keys.D, moveRight);
+            keyboardController.RegisterCommand(Keys.Down, moveDown);
+            keyboardController.RegisterCommand(Keys.Up, moveUp);
+            keyboardController.RegisterCommand(Keys.Left, moveLeft);
+            keyboardController.RegisterCommand(Keys.Right, moveRight);
+            keyboardController.RegisterCommand(Keys.Z, actionA);
+            keyboardController.RegisterCommand(Keys.N, actionA);
+            keyboardController.RegisterCommand(Keys.D6, pickUpBlueRing);
+            keyboardController.RegisterCommand(Keys.NumPad6, pickUpBlueRing);
+            keyboardController.RegisterCommand(Keys.R, resetLink);
+            
             keyboardController.RegisterCommand(Keys.I, nextItem);
             keyboardController.RegisterCommand(Keys.U, prevItem);
             keyboardController.RegisterCommand(Keys.P, setSpriteEnemy);
             keyboardController.RegisterCommand(Keys.O, setSpriteEnemy);
 
-            MouseController mouseController = new MouseController(this);
-            mouseController.RegisterCommand("rightClick", quitGame);
-            mouseController.RegisterCommand("leftClick topLeft", setSpriteNonMovingNonAnimated);
-            mouseController.RegisterCommand("leftClick topRight", setSpriteNonMovingAnimated);
-            mouseController.RegisterCommand("leftClick bottomLeft", setSpriteMovingNonAnimated);
-            mouseController.RegisterCommand("leftClick bottomRight", setSpriteMovingAnimated);
+            controller = keyboardController;
 
-            controllerList = new List<IController>
-            {
-                keyboardController,
-                mouseController
-            };
-
+            switchEnemyNum = 0;
             enemyList = new List<IEnemy>
             {
                 new Aquamentus(),
@@ -112,12 +107,9 @@ namespace LegendOfZeldaClone
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            LinkTextures = Content.Load<Texture2D>("ZoLSpriteSheet");
-            SpriteLink = new NonMovingNonAnimatedSprite(LinkTextures);
+            LinkSpriteFactory.Instance.LoadAllTextures(Content);
 
-            SpriteFont font = Content.Load<SpriteFont>("DefaultFont");
-            string credits = "Credits\nProgram Made By: Simon Kirksey\nSprites from: spriters-resource.com/nes/legendofzelda/";
-            SpriteCredits = new TextSprite(font, credits);
+            Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation);
 
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             SpriteEnemy = new Stalfos();
@@ -148,12 +140,10 @@ namespace LegendOfZeldaClone
 
         protected override void Update(GameTime gameTime)
         {
-            foreach(IController controller in controllerList)
-            {
-                controller.Update();
-            }
-
-            SpriteLink.Update();
+            controller.Update();
+            
+            Link.Update();
+            
             SpriteEnemy.Update();
 
             CurrItem.Update();
@@ -165,13 +155,13 @@ namespace LegendOfZeldaClone
         {
             GraphicsDevice.Clear(Color.Black);
 
-            SpriteCredits.Draw(_spriteBatch, new Vector2(GameWidth /10, GameHeight *2 /3));
-            SpriteLink.Draw(_spriteBatch, new Vector2(GameWidth /2 -16, GameHeight /2 -16));
+            _spriteBatch.Begin();
+
+            Link.Draw(_spriteBatch);
             SpriteEnemy.Draw(_spriteBatch);
-
-    
-
             CurrItem.Draw(_spriteBatch, new Vector2(GameWidth / 2 + 32, GameHeight / 2));
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
