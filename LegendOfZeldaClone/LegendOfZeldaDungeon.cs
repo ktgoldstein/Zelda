@@ -37,11 +37,10 @@ namespace LegendOfZeldaClone
             ICommand moveUp = new MoveUp(this);
             ICommand moveLeft = new MoveLeft(this);
             ICommand moveRight = new MoveRight(this);
-            ICommand ActionA = new ActionA(this);
-            ICommand ActionB = new ActionB(this);
-            ICommand PickUpBlueRing = new PickUpBlueRing(this);
-            ICommand ResetLink = new ResetLink(this);
-
+            ICommand actionA = new ActionA(this);
+            ICommand actionB = new ActionB(this);
+            ICommand pickUpBlueRing = new PickUpBlueRing(this);
+            ICommand resetLink = new ResetLink(this);
 
             KeyboardController keyboardController = new KeyboardController();
             keyboardController.RegisterCommand(Keys.Q, quitGame);
@@ -53,11 +52,11 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.Up, moveUp);
             keyboardController.RegisterCommand(Keys.Left, moveLeft);
             keyboardController.RegisterCommand(Keys.Right, moveRight);
-            keyboardController.RegisterCommand(Keys.Z, ActionA);
-            keyboardController.RegisterCommand(Keys.N, ActionA);
-            keyboardController.RegisterCommand(Keys.D6, PickUpBlueRing);
-            keyboardController.RegisterCommand(Keys.NumPad6, PickUpBlueRing);
-            keyboardController.RegisterCommand(Keys.R, ResetLink);
+            keyboardController.RegisterCommand(Keys.Z, actionA);
+            keyboardController.RegisterCommand(Keys.N, actionA);
+            keyboardController.RegisterCommand(Keys.D6, pickUpBlueRing);
+            keyboardController.RegisterCommand(Keys.NumPad6, pickUpBlueRing);
+            keyboardController.RegisterCommand(Keys.R, resetLink);
 
             controller = keyboardController;
 
