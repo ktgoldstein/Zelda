@@ -39,6 +39,8 @@ namespace LegendOfZeldaClone
             ICommand moveRight = new MoveRight(this);
             ICommand ActionA = new ActionA(this);
             ICommand ActionB = new ActionB(this);
+            ICommand PickUpBlueRing = new PickUpBlueRing(this);
+
 
             KeyboardController keyboardController = new KeyboardController();
             keyboardController.RegisterCommand(Keys.Q, quitGame);
@@ -52,6 +54,7 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.Right, moveRight);
             keyboardController.RegisterCommand(Keys.Z, ActionA);
             keyboardController.RegisterCommand(Keys.N, ActionA);
+            keyboardController.RegisterCommand(Keys.D6, PickUpBlueRing);
 
             controller = keyboardController;
 
@@ -65,7 +68,7 @@ namespace LegendOfZeldaClone
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
 
             Vector2 linkStartingLocation = new Vector2(LoZHelpers.GameWidth / 2 - 16, LoZHelpers.GameHeight / 2 - 16);
-            Link = new LinkPlayer(this, linkStartingLocation, 3, 3);
+            Link = new LinkPlayer(this, linkStartingLocation);
         }
 
         protected override void Update(GameTime gameTime)

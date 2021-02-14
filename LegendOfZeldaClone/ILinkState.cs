@@ -17,8 +17,8 @@ namespace LegendOfZeldaClone
 
     public class LinkStandingDown : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkStandingDown(ILinkPlayer link)
         {
@@ -44,8 +44,8 @@ namespace LegendOfZeldaClone
 
     public class LinkStandingUp : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkStandingUp(ILinkPlayer link)
         {
@@ -71,8 +71,8 @@ namespace LegendOfZeldaClone
 
     public class LinkStandingLeft : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkStandingLeft(ILinkPlayer link)
         {
@@ -98,8 +98,8 @@ namespace LegendOfZeldaClone
 
     public class LinkStandingRight : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkStandingRight(ILinkPlayer link)
         {
@@ -125,8 +125,8 @@ namespace LegendOfZeldaClone
 
     public class LinkWalkingDown : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkWalkingDown(ILinkPlayer link)
         {
@@ -159,8 +159,8 @@ namespace LegendOfZeldaClone
 
     public class LinkWalkingUp : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkWalkingUp(ILinkPlayer link)
         {
@@ -193,8 +193,8 @@ namespace LegendOfZeldaClone
 
     public class LinkWalkingLeft : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkWalkingLeft(ILinkPlayer link)
         {
@@ -227,8 +227,8 @@ namespace LegendOfZeldaClone
 
     public class LinkWalkingRight : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkWalkingRight(ILinkPlayer link)
         {
@@ -261,8 +261,8 @@ namespace LegendOfZeldaClone
 
     public class LinkUsingItemDown : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkUsingItemDown(ILinkPlayer link)
         {
@@ -288,8 +288,8 @@ namespace LegendOfZeldaClone
 
     public class LinkUsingItemUp : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkUsingItemUp(ILinkPlayer link)
         {
@@ -315,8 +315,8 @@ namespace LegendOfZeldaClone
 
     public class LinkUsingItemLeft : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkUsingItemLeft(ILinkPlayer link)
         {
@@ -342,8 +342,8 @@ namespace LegendOfZeldaClone
 
     public class LinkUsingItemRight : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkUsingItemRight(ILinkPlayer link)
         {
@@ -369,8 +369,8 @@ namespace LegendOfZeldaClone
 
     public class LinkPickingUpItem : ILinkState
     {
-        private ILinkPlayer link;
-        private ILinkSprite sprite;
+        private readonly ILinkPlayer link;
+        private readonly ILinkSprite sprite;
 
         public LinkPickingUpItem(ILinkPlayer link)
         {

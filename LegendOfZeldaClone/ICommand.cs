@@ -111,4 +111,19 @@ namespace LegendOfZeldaClone
             myGame.Link.ActionB();
         }
     }
+
+    public class PickUpBlueRing : ICommand
+    {
+        private IUsableItem blueRing;
+
+        public PickUpBlueRing(LegendOfZeldaDungeon game)
+        {
+            blueRing = new BlueRing(game);
+        }
+
+        public void Execute()
+        {
+            blueRing.Use();
+        }
+    }
 }
