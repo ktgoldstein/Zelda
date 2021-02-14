@@ -43,7 +43,7 @@ namespace LegendOfZeldaClone
         public abstract void Update(Vector2 location);
     }
 
-    public class LinkStandingDown : LinkState
+    public class LinkStandingDown : LinkState //DONE
     {
         public override ILinkPlayer Link { get; set; }
         public override ILinkSprite Sprite { get; set; }
@@ -62,31 +62,83 @@ namespace LegendOfZeldaClone
 
         public override void Damage() { }
 
-        public override void Update(Vector2 location) { }
+        public override void Update(Vector2 location) {
+            Sprite.Update();
+        }
     }
 
-    public class LinkStandingUp : LinkState
+    public class LinkStandingUp : LinkState //TODO
     {
+        public override ILinkPlayer Link { get; set; }
+        public override ILinkSprite Sprite { get; set; }
+
         public LinkStandingUp(ILinkPlayer link)
         {
-
+            Link = link;
+            Sprite = LinkSpriteFactory.Instance.CreateLinkStandingUpSprite(Link.SkinType);
         }
+
+        public override void Action()
+        {
+            if (Sprite.AnimationDone())
+                Link.SetState(Link.GetStateUsingItemUp());
+        }
+
+        public override void Damage() { }
+
+        public override void Update(Vector2 location) {
+            Sprite.Update();
+        }
+
+
     }
 
     public class LinkStandingLeft : LinkState
     {
+        public override ILinkPlayer Link { get; set; }
+        public override ILinkSprite Sprite { get; set; }
+
         public LinkStandingLeft(ILinkPlayer link)
         {
+            Link = link;
+            Sprite = LinkSpriteFactory.Instance.CreateLinkStandingLeftSprite(Link.SkinType);
+        }
 
+        public override void Action()
+        {
+            if (Sprite.AnimationDone())
+                Link.SetState(Link.GetStateUsingItemLeft());
+        }
+
+        public override void Damage() { }
+
+        public override void Update(Vector2 location) {
+            Sprite.Update();
         }
     }
 
     public class LinkStandingRight : LinkState
     {
+        public override ILinkPlayer Link { get; set; }
+        public override ILinkSprite Sprite { get; set; }
+
         public LinkStandingRight(ILinkPlayer link)
         {
-
+            Link = link;
+            Sprite = LinkSpriteFactory.Instance.CreateLinkStandingRightSprite(Link.SkinType);
         }
+
+        public override void Action()
+        {
+            if (Sprite.AnimationDone())
+                Link.SetState(Link.GetStateUsingItemRight());
+        }
+
+        public override void Damage() { }
+
+        public override void Update(Vector2 location) {
+            Sprite.Update();
+                }
     }
 
     public class LinkWalkingDown : LinkState

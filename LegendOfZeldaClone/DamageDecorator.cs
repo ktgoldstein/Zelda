@@ -2,9 +2,10 @@
 
 namespace LegendOfZeldaClone
 {
-    public class DamageDecorator : IPlayer
+    public class DamageDecorator : ILinkPlayer
     {
 
+        private ILinkPlayer decoratedPlayer { get; }
         public void MoveUp()
         {
 
