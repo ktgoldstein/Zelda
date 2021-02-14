@@ -97,20 +97,20 @@ namespace LegendOfZeldaClone
             string credits = "Credits\nProgram Made By: Simon Kirksey\nSprites from: spriters-resource.com/nes/legendofzelda/";
             SpriteCredits = new TextSprite(font, credits);
 
-            ItemTextures = Content.Load<Texture2D>("LoZItemsSpreadsheet");
-            Items[0] = new Compass(ItemTextures);
-            Items[1] = new Key(ItemTextures);
-            Items[2] = new Boomerang(ItemTextures);
-            Items[3] = new Bow(ItemTextures);
-            Items[4] = new Heart(ItemTextures);
-            Items[5] = new Rupee(ItemTextures);
-            Items[6] = new Arrow(ItemTextures);
-            Items[7] = new Bomb(ItemTextures);
-            Items[8] = new Fairy(ItemTextures);
-            Items[9] = new Clock(ItemTextures);
-            Items[10] = new TriforcePiece(ItemTextures);
-            Items[11] = new HeartContainer(ItemTextures);
-            Items[12] = new Map(ItemTextures);
+            ItemSpriteFactory.Instance.LoadAllTextures(Content);
+            Items[0] = ItemSpriteFactory.Instance.CreateCompass();
+            Items[1] = ItemSpriteFactory.Instance.CreateKey();
+            Items[2] = ItemSpriteFactory.Instance.CreateBoomerang();
+            Items[3] = ItemSpriteFactory.Instance.CreateBow();
+            Items[4] = ItemSpriteFactory.Instance.CreateHeart();
+            Items[5] = ItemSpriteFactory.Instance.CreateRupee();
+            Items[6] = ItemSpriteFactory.Instance.CreateArrow();
+            Items[7] = ItemSpriteFactory.Instance.CreateBomb();
+            Items[8] = ItemSpriteFactory.Instance.CreateFairy();
+            Items[9] = ItemSpriteFactory.Instance.CreateClock();
+            Items[10] = ItemSpriteFactory.Instance.CreateTriforcePiece();
+            Items[11] = ItemSpriteFactory.Instance.CreateHeartContainer();
+            Items[12] = ItemSpriteFactory.Instance.CreateMap();
             CurrItem = Items[0];
     }
 

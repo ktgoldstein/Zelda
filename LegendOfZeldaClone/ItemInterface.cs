@@ -10,7 +10,7 @@ namespace LegendOfZeldaClone
     {
         public void Draw(SpriteBatch spriteBatch, Vector2 location);
     }
-    class Compass : ItemInterface
+    public class Compass : ItemInterface
     {
         private Texture2D texture;
         public Compass(Texture2D texture)
