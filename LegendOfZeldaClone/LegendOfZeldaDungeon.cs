@@ -44,8 +44,6 @@ namespace LegendOfZeldaClone
 
         protected override void Initialize()
         {
-            LoadContent();
-
             GameWidth = 512*2;
             GameHeight = 256*2;
             switchEnemyNum = 0;
