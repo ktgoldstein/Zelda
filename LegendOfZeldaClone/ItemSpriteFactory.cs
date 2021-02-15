@@ -20,49 +20,86 @@ namespace LegendOfZeldaClone
             }
         }
 
-        private ItemSpriteFactory()
-        {
-
-        }
+        private ItemSpriteFactory() { }
 
         public void LoadAllTextures(ContentManager content)
         {
             itemTexture = content.Load<Texture2D>("LoZItemsSpreadsheet");
         }
 
-        public ItemInterface CreateCompass()
+        public ISprite CreateCompass()
         {
-            return new Compass(itemTexture);
+            return new NonAnimatedItem(itemTexture, 140, 0, 12, 12, 12, 12);
         }
 
-        public ItemInterface CreateKey()
+        public ISprite CreateKey()
         {
-            return new Key(itemTexture);
+            return new NonAnimatedItem(itemTexture, 130, 17, 8, 16, 8, 16);
         }
 
-        public ItemInterface CreateBoomerang()
+        public ISprite CreateLionKey()
         {
-            return new Boomerang(itemTexture);
+            return new NonAnimatedItem(itemTexture, 129, 36, 8, 16, 8, 16);
         }
 
-        public ItemInterface CreateBow()
+        public ISprite CreateBoomerang()
         {
-            return new Bow(itemTexture);
+            return new NonAnimatedItem(itemTexture, 0, 36, 6, 8, 8, 8);
         }
 
-        public ItemInterface CreateHeart()
+        public ISprite CreateBlueBoomerang()
         {
-            return new Heart(itemTexture);
+            return new NonAnimatedItem(itemTexture, 0, 46, 6, 8, 8, 8);
         }
 
-        public ItemInterface CreateRupee()
+        public ISprite CreateBow()
         {
-            return new Rupee(itemTexture);
+            return new NonAnimatedItem(itemTexture, 12, 98, 12, 17, 12, 16);
         }
 
-        public ItemInterface CreateArrow()
+        public ISprite CreateHeart()
         {
-            return new Arrow(itemTexture);
+            return new AnimatedItem(itemTexture, 0, 0, 7, 7, 8, 8);
+        }
+
+        public ISprite CreateFullHealthHeart()
+        {
+            return new NonAnimatedItem(itemTexture, 0, 0, 7, 7, 8, 8);
+        }
+
+        public ISprite CreateHalfHealthHeart()
+        {
+            return new NonAnimatedItem(itemTexture, 0, 19, 7, 7, 8, 8);
+        }
+
+        public ISprite CreateNoHealthHeart()
+        {
+            return new NonAnimatedItem(itemTexture, 0, 29, 7, 7, 8, 8);
+        }
+
+        public ISprite CreateFlashingRupee()
+        {
+            return new AnimatedItem(itemTexture, 36, 0, 9, 15, 8, 16);
+        }
+
+        public ISprite CreateGoldRupee()
+        {
+            return new NonAnimatedItem(itemTexture, 36, 0, 9, 15, 8, 16);
+        }
+
+        public ISprite CreateBlueRupee()
+        {
+            return new NonAnimatedItem(itemTexture, 36, 17, 9, 15, 8, 16);
+        }
+
+        public ISprite CreateArrow()
+        {
+            return new NonAnimatedItem(itemTexture, 78, 0, 6, 15, 8, 16);
+        }
+
+        public ISprite CreateBlueArrow()
+        {
+            return new NonAnimatedItem(itemTexture, 78, 17, 6, 15, 8, 16);
         }
 
         public ItemInterface CreateBomb()

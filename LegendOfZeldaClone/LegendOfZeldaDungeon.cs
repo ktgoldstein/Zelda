@@ -24,8 +24,8 @@ namespace LegendOfZeldaClone
         public ISprite currentObject;
 
         public Texture2D ItemTextures;
-        public ItemInterface[] Items;
-        public ItemInterface CurrItem;
+        public ISprite[] Items;
+        public ISprite CurrItem;
         public int ItemIndex;
 
         public LegendOfZeldaDungeon()
@@ -99,7 +99,7 @@ namespace LegendOfZeldaClone
             };
 
             ItemIndex = 0;
-            Items = new ItemInterface[20];
+            Items = new ISprite[28];
 
             objList = new List<ISprite>();
 
@@ -148,7 +148,7 @@ namespace LegendOfZeldaClone
             Items[2] = ItemSpriteFactory.Instance.CreateBoomerang();
             Items[3] = ItemSpriteFactory.Instance.CreateBow();
             Items[4] = ItemSpriteFactory.Instance.CreateHeart();
-            Items[5] = ItemSpriteFactory.Instance.CreateRupee();
+            Items[5] = ItemSpriteFactory.Instance.CreateFlashingRupee();
             Items[6] = ItemSpriteFactory.Instance.CreateArrow();
             Items[7] = ItemSpriteFactory.Instance.CreateBomb();
             Items[8] = ItemSpriteFactory.Instance.CreateFairy();
@@ -163,6 +163,14 @@ namespace LegendOfZeldaClone
             Items[17] = ItemSpriteFactory.Instance.CreateRing();
             Items[18] = ItemSpriteFactory.Instance.CreateStaff();
             Items[19] = ItemSpriteFactory.Instance.CreateBook();
+            Items[20] = ItemSpriteFactory.Instance.CreateLionKey();
+            Items[21] = ItemSpriteFactory.Instance.CreateBlueBoomerang();
+            Items[22] = ItemSpriteFactory.Instance.CreateFullHealthHeart();
+            Items[23] = ItemSpriteFactory.Instance.CreateHalfHealthHeart();
+            Items[24] = ItemSpriteFactory.Instance.CreateNoHealthHeart();
+            Items[25] = ItemSpriteFactory.Instance.CreateGoldRupee();
+            Items[26] = ItemSpriteFactory.Instance.CreateBlueRupee();
+            Items[27] = ItemSpriteFactory.Instance.CreateBlueArrow();
             CurrItem = Items[0];
         }
 
