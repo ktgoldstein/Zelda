@@ -99,7 +99,7 @@ namespace LegendOfZeldaClone
             };
 
             ItemIndex = 0;
-            Items = new ISprite[28];
+            Items = new ISprite[29];
 
             objList = new List<ISprite>();
 
@@ -156,21 +156,23 @@ namespace LegendOfZeldaClone
             Items[10] = ItemSpriteFactory.Instance.CreateTriforcePiece();
             Items[11] = ItemSpriteFactory.Instance.CreateHeartContainer();
             Items[12] = ItemSpriteFactory.Instance.CreateMap();
-            Items[13] = ItemSpriteFactory.Instance.CreatePotion();
+            Items[13] = ItemSpriteFactory.Instance.CreateSecondPotion();
             Items[14] = ItemSpriteFactory.Instance.CreateSword();
             Items[15] = ItemSpriteFactory.Instance.CreateShield();
             Items[16] = ItemSpriteFactory.Instance.CreateCandle();
             Items[17] = ItemSpriteFactory.Instance.CreateRing();
             Items[18] = ItemSpriteFactory.Instance.CreateStaff();
             Items[19] = ItemSpriteFactory.Instance.CreateBook();
-            Items[20] = ItemSpriteFactory.Instance.CreateLionKey();
-            Items[21] = ItemSpriteFactory.Instance.CreateBlueBoomerang();
+            Items[20] = ItemSpriteFactory.Instance.CreateMagicalKey();
+            Items[21] = ItemSpriteFactory.Instance.CreateMagicalBoomerang();
             Items[22] = ItemSpriteFactory.Instance.CreateFullHealthHeart();
             Items[23] = ItemSpriteFactory.Instance.CreateHalfHealthHeart();
             Items[24] = ItemSpriteFactory.Instance.CreateNoHealthHeart();
             Items[25] = ItemSpriteFactory.Instance.CreateGoldRupee();
             Items[26] = ItemSpriteFactory.Instance.CreateBlueRupee();
-            Items[27] = ItemSpriteFactory.Instance.CreateBlueArrow();
+            Items[27] = ItemSpriteFactory.Instance.CreateSilverArrow();
+            Items[28] = ItemSpriteFactory.Instance.CreateLetter();
+            Items[29] = ItemSpriteFactory.Instance.CreateLifePotion();
             CurrItem = Items[0];
         }
 

@@ -37,7 +37,7 @@ namespace LegendOfZeldaClone
             return new NonAnimatedItem(itemTexture, 130, 17, 8, 16, 8, 16);
         }
 
-        public ISprite CreateLionKey()
+        public ISprite CreateMagicalKey()
         {
             return new NonAnimatedItem(itemTexture, 129, 36, 8, 16, 8, 16);
         }
@@ -47,7 +47,7 @@ namespace LegendOfZeldaClone
             return new NonAnimatedItem(itemTexture, 0, 36, 6, 8, 8, 8);
         }
 
-        public ISprite CreateBlueBoomerang()
+        public ISprite CreateMagicalBoomerang()
         {
             return new NonAnimatedItem(itemTexture, 0, 46, 6, 8, 8, 8);
         }
@@ -97,44 +97,53 @@ namespace LegendOfZeldaClone
             return new NonAnimatedItem(itemTexture, 78, 0, 6, 15, 8, 16);
         }
 
-        public ISprite CreateBlueArrow()
+        public ISprite CreateSilverArrow()
         {
             return new NonAnimatedItem(itemTexture, 78, 17, 6, 15, 8, 16);
         }
 
-        public ItemInterface CreateBomb()
+        public ISprite CreateBomb()
         {
-            return new Bomb(itemTexture);
+            return new NonAnimatedItem(itemTexture, 14, 83, 9, 14, 12, 16);
         }
 
-        public ItemInterface CreateFairy()
+        public ISprite CreateFairy()
         {
-            return new Fairy(itemTexture);
+            return new AnimatedItem(itemTexture, 25, 0, 9, 15, 12, 16);
         }
 
-        public ItemInterface CreateClock()
+        public ISprite CreateClock()
         {
-            return new Clock(itemTexture);
+            return new NonAnimatedItem(itemTexture, 10, 15, 12, 16, 12, 16);
         }
 
-        public ItemInterface CreateTriforcePiece()
+        public ISprite CreateTriforcePiece()
         {
-            return new TriforcePiece(itemTexture);
+            return new AnimatedItem(itemTexture, 141, 13, 12, 10, 12, 12);
         }
 
-        public ItemInterface CreateHeartContainer()
+        public ISprite CreateHeartContainer()
         {
-            return new HeartContainer(itemTexture);
+            return new NonAnimatedItem(itemTexture, 9, 0, 14, 14, 16, 16);
         }
 
-        public ItemInterface CreateMap()
+        public ISprite CreateMap()
         {
-            return new Map(itemTexture);
+            return new NonAnimatedItem(itemTexture, 58, 0, 9, 15, 12, 16);
+        }
+        public ISprite CreateLetter()
+        {
+            return new NonAnimatedItem(itemTexture, 58, 17, 9, 15, 12, 16);
         }
 
-        public ItemInterface CreatePotion()
+        public ISprite CreateSecondPotion()
         {
-            return new Potion(itemTexture);
+            return new NonAnimatedItem(itemTexture, 48, 0, 8, 15, 8, 16);
+        }
+
+        public ISprite CreateLifePotion()
+        {
+            return new NonAnimatedItem(itemTexture, 48, 17, 8, 15, 8, 16);
         }
 
         public ItemInterface CreateSword()
