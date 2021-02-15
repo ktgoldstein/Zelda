@@ -299,13 +299,7 @@ namespace LegendOfZeldaClone
 
         public void Damage(int amount)
         {
-            // Link is within his 24 invulnerability frames
-
-
-            //Health -= amount;
-            //if (Health < 0)
-                //Health = 0;
-            // TODO: Handle the grief of Link dying
+            // Link is within his 24 invulnerability frames, no damage possible
         }
 
         public void Heal(int amount) => decoratedLink.Heal(amount);
@@ -314,10 +308,6 @@ namespace LegendOfZeldaClone
         {
             //Sword.Draw(spriteBatch);
             //HeldItem.Draw(spriteBatch);
-
-
-
-
             linkState.Draw(spriteBatch);
         }
 
@@ -326,7 +316,6 @@ namespace LegendOfZeldaClone
             //Sword.Update();
             //HeldItem.Update();
             int damageFrameType = timer % 4;
-
             switch (damageFrameType)
             {
                 case 0:
@@ -338,25 +327,19 @@ namespace LegendOfZeldaClone
                 case 2:
                     SkinType = LinkSkinType.DamagedThreeDungeonOne;
                     break;
-                case 3:
-                    SkinType = decoratedLink.SkinType;
-                    break;
                 default:
-                    SkinType = decoratedLink.SkinType; 
+                    SkinType = decoratedLink.SkinType; //AKA case 3
                     break;
 
         }
-
             timer--;
+
+            if (timer == 0)
+                game.Link = decoratedLink; //removes decorator
+
             linkState.Update();
         }
 
-
-        //*********************************
-        public void RemoveDecorator()
-        {
-
-        }
 
         public void SetState(ILinkState linkState) => this.linkState = linkState;
         public ILinkState GetStateStandingDown() => new LinkStandingDown(this);
