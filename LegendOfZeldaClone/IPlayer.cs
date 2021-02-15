@@ -235,7 +235,7 @@ namespace LegendOfZeldaClone
 
 
 
-    //***NOTE: most of the below has not been implemented properly yet!!***
+    //******NOTE: most of the below has not been implemented properly yet!!******
     class DamagedLinkPlayer : ILinkPlayer
     {
         public int MaxHealth
@@ -268,7 +268,7 @@ namespace LegendOfZeldaClone
         private LegendOfZeldaDungeon game;
         private ILinkPlayer decoratedLink;
         private ILinkState linkState;
-        private int timer; //??
+        private int timer = 24; //link stays damaged for 24 frames
 
         public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLink)
         {
@@ -279,6 +279,7 @@ namespace LegendOfZeldaClone
             linkState = new LinkStandingDown(this);
         }
 
+        //he can still move while damaged
         public void MoveUp() => linkState.MoveUp();
         public void MoveDown() => linkState.MoveDown();
         public void MoveLeft() => linkState.MoveLeft();
@@ -298,9 +299,12 @@ namespace LegendOfZeldaClone
 
         public void Damage(int amount)
         {
-            Health -= amount;
-            if (Health < 0)
-                Health = 0;
+            // Link is within his 24 invulnerability frames
+
+
+            //Health -= amount;
+            //if (Health < 0)
+                //Health = 0;
             // TODO: Handle the grief of Link dying
         }
 
@@ -310,6 +314,10 @@ namespace LegendOfZeldaClone
         {
             //Sword.Draw(spriteBatch);
             //HeldItem.Draw(spriteBatch);
+
+
+
+
             linkState.Draw(spriteBatch);
         }
 
@@ -317,8 +325,37 @@ namespace LegendOfZeldaClone
         {
             //Sword.Update();
             //HeldItem.Update();
+            int damageFrameType = timer % 4;
+
+            switch (damageFrameType)
+            {
+                case 0:
+                    SkinType = LinkSkinType.DamagedOne;
+                    break;
+                case 1:
+                    SkinType = LinkSkinType.DamagedTwo;
+                    break;
+                case 2:
+                    SkinType = LinkSkinType.DamagedThreeDungeonOne;
+                    break;
+                case 3:
+                    SkinType = decoratedLink.SkinType;
+                    break;
+                default:
+                    SkinType = decoratedLink.SkinType; 
+                    break;
+
+        }
+
             timer--;
             linkState.Update();
+        }
+
+
+        //*********************************
+        public void RemoveDecorator()
+        {
+
         }
 
         public void SetState(ILinkState linkState) => this.linkState = linkState;
