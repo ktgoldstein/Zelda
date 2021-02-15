@@ -232,4 +232,110 @@ namespace LegendOfZeldaClone
         public ILinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
         public ILinkState GetStatePickingUpItem() => new LinkPickingUpItem(this);
     }
+
+
+
+    //***NOTE: most of the below has not been implemented properly yet!!***
+    class DamagedLinkPlayer : ILinkPlayer
+    {
+        public int MaxHealth
+        {
+            get { return decoratedLink.MaxHealth; }
+            set { decoratedLink.MaxHealth = value; }
+        }
+        public int Health
+        {
+            get { return decoratedLink.Health; }
+            set { decoratedLink.Health = value; }
+        }
+        public Vector2 Location
+        {
+            get { return decoratedLink.Location; }
+            set { decoratedLink.Location = value; }
+        }
+        public IUsableItem Sword
+        {
+            get { return decoratedLink.Sword; }
+            set { decoratedLink.Sword = value; }
+        }
+        public IUsableItem HeldItem
+        {
+            get { return decoratedLink.HeldItem; }
+            set { decoratedLink.HeldItem = value; }
+        }
+        public LinkSkinType SkinType { get; set; }
+
+        private LegendOfZeldaDungeon game;
+        private ILinkPlayer decoratedLink;
+        private ILinkState linkState;
+        private int timer; //??
+
+        public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLink)
+        {
+            SkinType = LinkSkinType.DamagedOne;
+
+            this.game = game;
+            this.decoratedLink = decoratedLink;
+            linkState = new LinkStandingDown(this);
+        }
+
+        public void MoveUp() => linkState.MoveUp();
+        public void MoveDown() => linkState.MoveDown();
+        public void MoveLeft() => linkState.MoveLeft();
+        public void MoveRight() => linkState.MoveRight();
+
+        public void ActionA()
+        {
+            linkState.Action();
+
+        }
+
+        public void ActionB()
+        {
+            linkState.Action();
+
+        }
+
+        public void Damage(int amount)
+        {
+            Health -= amount;
+            if (Health < 0)
+                Health = 0;
+            // TODO: Handle the grief of Link dying
+        }
+
+        public void Heal(int amount) => decoratedLink.Heal(amount);
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            //Sword.Draw(spriteBatch);
+            //HeldItem.Draw(spriteBatch);
+            linkState.Draw(spriteBatch);
+        }
+
+        public void Update()
+        {
+            //Sword.Update();
+            //HeldItem.Update();
+            timer--;
+            linkState.Update();
+        }
+
+        public void SetState(ILinkState linkState) => this.linkState = linkState;
+        public ILinkState GetStateStandingDown() => new LinkStandingDown(this);
+        public ILinkState GetStateStandingUp() => new LinkStandingUp(this);
+        public ILinkState GetStateStandingLeft() => new LinkStandingLeft(this);
+        public ILinkState GetStateStandingRight() => new LinkStandingRight(this);
+        public ILinkState GetStateWalkingingDown() => new LinkWalkingDown(this);
+        public ILinkState GetStateWalkingingUp() => new LinkWalkingUp(this);
+        public ILinkState GetStateWalkingingLeft() => new LinkWalkingLeft(this);
+        public ILinkState GetStateWalkingingRight() => new LinkWalkingRight(this);
+        public ILinkState GetStateUsingItemDown() => new LinkUsingItemDown(this);
+        public ILinkState GetStateUsingItemUp() => new LinkUsingItemUp(this);
+        public ILinkState GetStateUsingItemLeft() => new LinkUsingItemLeft(this);
+        public ILinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
+        public ILinkState GetStatePickingUpItem() => new LinkPickingUpItem(this);
+    }
+
+
 }
