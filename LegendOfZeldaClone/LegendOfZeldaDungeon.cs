@@ -52,6 +52,7 @@ namespace LegendOfZeldaClone
             ICommand moveRight = new MoveRight(this);
             ICommand actionA = new ActionA(this);
             ICommand actionB = new ActionB(this);
+            ICommand damageLink = new DamageLink(this);
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
             ICommand resetLink = new ResetLink(this);
             
@@ -73,6 +74,7 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.Right, moveRight);
             keyboardController.RegisterCommand(Keys.Z, actionA);
             keyboardController.RegisterCommand(Keys.N, actionA);
+            keyboardController.RegisterCommand(Keys.E, damageLink);
             keyboardController.RegisterCommand(Keys.D6, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.NumPad6, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.R, resetLink);

@@ -101,7 +101,7 @@ namespace LegendOfZeldaClone
                 default:
                     sourceRectangle = new Rectangle(0, 0, width, height);
                     break;
-            };
+            }
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
@@ -203,7 +203,7 @@ namespace LegendOfZeldaClone
                 default:
                     sourceRectangle = new Rectangle(0, 0, width, height);
                     break;
-            };
+            }
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }

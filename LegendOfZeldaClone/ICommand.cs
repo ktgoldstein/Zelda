@@ -128,6 +128,21 @@ namespace LegendOfZeldaClone
         }
     }
 
+    public class DamageLink : ICommand
+    {
+        private LegendOfZeldaDungeon game;
+
+        public DamageLink(LegendOfZeldaDungeon game)
+        {
+            this.game = game;
+        }
+
+        public void Execute()
+        {
+            game.Link.Damage(2);
+        }
+    }
+
     public class ResetLink : ICommand
     {
         private LegendOfZeldaDungeon game;

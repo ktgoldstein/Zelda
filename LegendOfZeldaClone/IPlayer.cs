@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace LegendOfZeldaClone
 {
@@ -89,10 +90,11 @@ namespace LegendOfZeldaClone
 
         public void Damage(int amount)
         {
-            //linkState.Damage();
             Health -= amount;
             if (Health < 0)
                 Health = 0;
+            Tuple<LinkStateType, int> currentState = linkState.GetState();
+            game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1);
         }
 
         public void Heal(int amount)
@@ -194,11 +196,11 @@ namespace LegendOfZeldaClone
 
         public void Damage(int amount)
         {
-            //linkState.Damage();
             Health -= amount / 2;
             if (Health < 0)
                 Health = 0;
-            // TODO: Handle the grief of Link dying
+            Tuple<LinkStateType, int> currentState = linkState.GetState();
+            game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1);
         }
 
         public void Heal(int amount) => decoratedLink.Heal(amount);
@@ -279,7 +281,7 @@ namespace LegendOfZeldaClone
             this.game = game;
             this.decoratedLink = decoratedLink;
 
-            skinTypes = new LinkSkinType[] { LinkSkinType.DamagedOne, LinkSkinType.DamagedTwo, LinkSkinType.DamagedThreeDungeonOne, decoratedLink.SkinType };
+            skinTypes = new LinkSkinType[] { LinkSkinType.DamagedOne, LinkSkinType.DamagedTwo, LinkSkinType.DamagedThreeDungeonOne, this.decoratedLink.SkinType };
             skinTypesIndex = 0;
             linkStates = new ILinkState[skinTypes.Length];
 
@@ -289,7 +291,7 @@ namespace LegendOfZeldaClone
                 NextSkinIndex();
             }
 
-            timer = 24;
+            timer = LoZHelpers.LinkInvincibilityFrames;
         }
 
         public void MoveUp()
@@ -313,7 +315,7 @@ namespace LegendOfZeldaClone
         public void MoveRight()
         {
             foreach (ILinkState linkState in linkStates)
-                linkState.MoveDown();
+                linkState.MoveRight();
         }
 
         public void ActionA()
@@ -351,16 +353,16 @@ namespace LegendOfZeldaClone
             //HeldItem.Update();
             
             timer--;
+            foreach (ILinkState linkState in linkStates) { linkState.Update(); }
             if (timer == 0)
                 game.Link = decoratedLink; //removes decorator
-
-            foreach (ILinkState linkState in linkStates)
-                linkState.Update();
         }
 
         public void SetState(ILinkState linkState)
         {
             linkStates[skinTypesIndex] = linkState;
+            if (skinTypesIndex == linkStates.Length - 1)
+                decoratedLink.SetState(linkState);
             NextSkinIndex();
         }
 
