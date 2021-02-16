@@ -35,7 +35,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    class AnimatedItem : ISprite
+    public class AnimatedItem : ISprite
     {
         private Texture2D texture;
         private int leftCornerX;
