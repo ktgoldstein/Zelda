@@ -20,10 +20,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkStandingDown(ILinkPlayer link)
+        public LinkStandingDown(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkStandingDownSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkStandingDownSprite(link.SkinType, frame);
         }
         
         public void MoveUp() => link.SetState(link.GetStateWalkingingUp());
@@ -47,10 +47,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkStandingUp(ILinkPlayer link)
+        public LinkStandingUp(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkStandingUpSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkStandingUpSprite(link.SkinType, frame);
         }
 
         public void MoveUp() => link.SetState(link.GetStateWalkingingUp());
@@ -74,10 +74,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkStandingLeft(ILinkPlayer link)
+        public LinkStandingLeft(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkStandingLeftSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkStandingLeftSprite(link.SkinType, frame);
         }
 
         public void MoveUp() => link.SetState(link.GetStateWalkingingUp());
@@ -101,10 +101,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkStandingRight(ILinkPlayer link)
+        public LinkStandingRight(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkStandingRightSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkStandingRightSprite(link.SkinType, frame);
         }
 
         public void MoveUp() => link.SetState(link.GetStateWalkingingUp());
@@ -128,10 +128,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkWalkingDown(ILinkPlayer link)
+        public LinkWalkingDown(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingDownSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingDownSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -162,10 +162,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkWalkingUp(ILinkPlayer link)
+        public LinkWalkingUp(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingUpSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingUpSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -196,10 +196,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkWalkingLeft(ILinkPlayer link)
+        public LinkWalkingLeft(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingLeftSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingLeftSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -230,10 +230,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkWalkingRight(ILinkPlayer link)
+        public LinkWalkingRight(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingRightSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingRightSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -264,10 +264,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkUsingItemDown(ILinkPlayer link)
+        public LinkUsingItemDown(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemDownSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemDownSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -291,10 +291,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkUsingItemUp(ILinkPlayer link)
+        public LinkUsingItemUp(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemUpSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemUpSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -318,10 +318,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkUsingItemLeft(ILinkPlayer link)
+        public LinkUsingItemLeft(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemLeftSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemLeftSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -345,10 +345,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkUsingItemRight(ILinkPlayer link)
+        public LinkUsingItemRight(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemRightSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemRightSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -372,10 +372,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkPickingUpItem(ILinkPlayer link)
+        public LinkPickingUpItem(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkPickingUpItemSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkPickingUpItemSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }

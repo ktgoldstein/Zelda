@@ -233,8 +233,6 @@ namespace LegendOfZeldaClone
         public ILinkState GetStatePickingUpItem() => new LinkPickingUpItem(this);
     }
 
-
-
     //******NOTE: most of the below has not been implemented properly yet!!******
     class DamagedLinkPlayer : ILinkPlayer
     {
@@ -263,44 +261,79 @@ namespace LegendOfZeldaClone
             get { return decoratedLink.HeldItem; }
             set { decoratedLink.HeldItem = value; }
         }
-        public LinkSkinType SkinType { get; set; }
+        public LinkSkinType SkinType 
+        {
+            get { return skinTypes[skinTypesIndex]; }
+            set { }
+        }
 
         private LegendOfZeldaDungeon game;
         private ILinkPlayer decoratedLink;
-        private ILinkState linkState;
-        private int timer = 24; //link stays damaged for 24 frames
+        private ILinkState[] linkStates;
+        private int timer; //link stays damaged for 24 frames
+        private LinkSkinType[] skinTypes;
+        private int skinTypesIndex;
 
-        public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLink)
+        public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLink, int currentFrame, System.Func<ILinkPlayer, int, ILinkState> stateConstructor)
         {
-            SkinType = LinkSkinType.DamagedOne;
-
             this.game = game;
             this.decoratedLink = decoratedLink;
-            linkState = new LinkStandingDown(this);
+
+            skinTypes = new LinkSkinType[] { LinkSkinType.DamagedOne, LinkSkinType.DamagedTwo, LinkSkinType.DamagedThreeDungeonOne, decoratedLink.SkinType };
+            skinTypesIndex = 0;
+
+            for (int i = 0; i < skinTypes.Length; i++)
+            {
+                linkStates[i] = stateConstructor(this, currentFrame);
+                nextSkinIndex();
+            }
+
+            timer = 24;
         }
 
-        //he can still move while damaged
-        public void MoveUp() => linkState.MoveUp();
-        public void MoveDown() => linkState.MoveDown();
-        public void MoveLeft() => linkState.MoveLeft();
-        public void MoveRight() => linkState.MoveRight();
+        public void MoveUp()
+        {
+            foreach (ILinkState linkState in linkStates)
+                linkState.MoveUp();
+        }
+
+        public void MoveDown()
+        {
+            foreach (ILinkState linkState in linkStates)
+                linkState.MoveDown();
+        }
+
+        public void MoveLeft()
+        {
+            foreach (ILinkState linkState in linkStates)
+                linkState.MoveLeft();
+        }
+
+        public void MoveRight()
+        {
+            foreach (ILinkState linkState in linkStates)
+                linkState.MoveDown();
+        }
 
         public void ActionA()
         {
-            linkState.Action();
-
+            bool success = true;
+            foreach (ILinkState linkState in linkStates) 
+                /*success &= */linkState.Action();
+            /*if (success)
+                Sword.Use();*/
         }
 
         public void ActionB()
         {
-            linkState.Action();
-
+            bool success = true;
+            foreach (ILinkState linkState in linkStates)
+                /*success &= */linkState.Action();
+            /*if (success)
+                HeldItem.Use();*/
         }
 
-        public void Damage(int amount)
-        {
-            // Link is within his 24 invulnerability frames, no damage possible
-        }
+        public void Damage(int amount) { /* Invinvibility Frames */ }
 
         public void Heal(int amount) => decoratedLink.Heal(amount);
 
@@ -308,40 +341,29 @@ namespace LegendOfZeldaClone
         {
             //Sword.Draw(spriteBatch);
             //HeldItem.Draw(spriteBatch);
-            linkState.Draw(spriteBatch);
+            int damageFrameType = timer % linkStates.Length;
+            linkStates[damageFrameType].Draw(spriteBatch);
         }
 
         public void Update()
         {
             //Sword.Update();
             //HeldItem.Update();
-            int damageFrameType = timer % 4;
-            switch (damageFrameType)
-            {
-                case 0:
-                    SkinType = LinkSkinType.DamagedOne;
-                    break;
-                case 1:
-                    SkinType = LinkSkinType.DamagedTwo;
-                    break;
-                case 2:
-                    SkinType = LinkSkinType.DamagedThreeDungeonOne;
-                    break;
-                default:
-                    SkinType = decoratedLink.SkinType; //AKA case 3
-                    break;
-
-        }
+            
             timer--;
-
             if (timer == 0)
                 game.Link = decoratedLink; //removes decorator
 
-            linkState.Update();
+            foreach (ILinkState linkState in linkStates)
+                linkState.Update();
         }
 
+        public void SetState(ILinkState linkState)
+        {
+            linkStates[skinTypesIndex] = linkState;
+            nextSkinIndex();
+        }
 
-        public void SetState(ILinkState linkState) => this.linkState = linkState;
         public ILinkState GetStateStandingDown() => new LinkStandingDown(this);
         public ILinkState GetStateStandingUp() => new LinkStandingUp(this);
         public ILinkState GetStateStandingLeft() => new LinkStandingLeft(this);
@@ -355,6 +377,8 @@ namespace LegendOfZeldaClone
         public ILinkState GetStateUsingItemLeft() => new LinkUsingItemLeft(this);
         public ILinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
         public ILinkState GetStatePickingUpItem() => new LinkPickingUpItem(this);
+
+        private void nextSkinIndex() => skinTypesIndex = (skinTypesIndex + 1) % skinTypes.Length;
     }
 
 
