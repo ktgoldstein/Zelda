@@ -2,6 +2,23 @@
 
 namespace LegendOfZeldaClone
 {
+    public enum LinkStateType
+    {
+        StandingDown,
+        StandingUp,
+        StandingLeft,
+        StandingRight,
+        WalkingDown,
+        WalkingUp,
+        WalkingLeft,
+        WalkingRight,
+        UsingItemDown,
+        UsingItemUp,
+        UsingItemLeft,
+        UsingItemRight,
+        PickingUpItem
+    }
+
     public enum LinkSkinType
     {
         Normal = 0,

@@ -274,18 +274,19 @@ namespace LegendOfZeldaClone
         private LinkSkinType[] skinTypes;
         private int skinTypesIndex;
 
-        public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLink, int currentFrame, System.Func<ILinkPlayer, int, ILinkState> stateConstructor)
+        public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLink, int currentFrame, LinkStateType linkState)
         {
             this.game = game;
             this.decoratedLink = decoratedLink;
 
             skinTypes = new LinkSkinType[] { LinkSkinType.DamagedOne, LinkSkinType.DamagedTwo, LinkSkinType.DamagedThreeDungeonOne, decoratedLink.SkinType };
             skinTypesIndex = 0;
+            linkStates = new ILinkState[skinTypes.Length];
 
             for (int i = 0; i < skinTypes.Length; i++)
             {
-                linkStates[i] = stateConstructor(this, currentFrame);
-                nextSkinIndex();
+                linkStates[i] = GetState(linkState, currentFrame);
+                NextSkinIndex();
             }
 
             timer = 24;
@@ -334,7 +335,6 @@ namespace LegendOfZeldaClone
         }
 
         public void Damage(int amount) { /* Invinvibility Frames */ }
-
         public void Heal(int amount) => decoratedLink.Heal(amount);
 
         public void Draw(SpriteBatch spriteBatch)
@@ -361,7 +361,7 @@ namespace LegendOfZeldaClone
         public void SetState(ILinkState linkState)
         {
             linkStates[skinTypesIndex] = linkState;
-            nextSkinIndex();
+            NextSkinIndex();
         }
 
         public ILinkState GetStateStandingDown() => new LinkStandingDown(this);
@@ -378,7 +378,27 @@ namespace LegendOfZeldaClone
         public ILinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
         public ILinkState GetStatePickingUpItem() => new LinkPickingUpItem(this);
 
-        private void nextSkinIndex() => skinTypesIndex = (skinTypesIndex + 1) % skinTypes.Length;
+        private void NextSkinIndex() => skinTypesIndex = (skinTypesIndex + 1) % skinTypes.Length;
+        private ILinkState GetState(LinkStateType linkState, int currentFrame)
+        {
+            return linkState switch
+            {
+                LinkStateType.StandingDown => new LinkStandingDown(this, currentFrame),
+                LinkStateType.StandingUp => new LinkStandingUp(this, currentFrame),
+                LinkStateType.StandingLeft => new LinkStandingLeft(this, currentFrame),
+                LinkStateType.StandingRight => new LinkStandingRight(this, currentFrame),
+                LinkStateType.WalkingDown => new LinkWalkingDown(this, currentFrame),
+                LinkStateType.WalkingUp => new LinkWalkingUp(this, currentFrame),
+                LinkStateType.WalkingLeft => new LinkWalkingLeft(this, currentFrame),
+                LinkStateType.WalkingRight => new LinkWalkingRight(this, currentFrame),
+                LinkStateType.UsingItemDown => new LinkUsingItemDown(this, currentFrame),
+                LinkStateType.UsingItemUp => new LinkUsingItemUp(this, currentFrame),
+                LinkStateType.UsingItemLeft => new LinkUsingItemLeft(this, currentFrame),
+                LinkStateType.UsingItemRight => new LinkUsingItemRight(this, currentFrame),
+                LinkStateType.PickingUpItem => new LinkPickingUpItem(this, currentFrame),
+                _ => new LinkStandingDown(this)
+            };
+        }
     }
 
 
