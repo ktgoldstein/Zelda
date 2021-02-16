@@ -34,27 +34,22 @@ namespace LegendOfZeldaClone
 
         public ISprite CreateKey()
         {
-            return new NonAnimatedItem(itemTexture, 130, 17, 8, 16, 8, 16);
+            return new NonAnimatedItem(itemTexture, 130, 17, 8, 17, 8, 16);
         }
 
         public ISprite CreateMagicalKey()
         {
-            return new NonAnimatedItem(itemTexture, 129, 36, 8, 16, 8, 16);
+            return new NonAnimatedItem(itemTexture, 129, 36, 8, 17, 8, 16);
         }
 
         public ISprite CreateBoomerang()
         {
-            return new NonAnimatedItem(itemTexture, 0, 36, 6, 8, 8, 8);
-        }
-
-        public ISprite CreateMagicalBoomerang()
-        {
-            return new NonAnimatedItem(itemTexture, 0, 46, 6, 8, 8, 8);
+            return new NonAnimatedItem(itemTexture, 0, 39, 7, 8, 12, 12);
         }
 
         public ISprite CreateBow()
         {
-            return new NonAnimatedItem(itemTexture, 12, 98, 12, 17, 12, 16);
+            return new NonAnimatedItem(itemTexture, 12, 98, 13, 17, 12, 16);
         }
 
         public ISprite CreateHeart()
@@ -79,17 +74,17 @@ namespace LegendOfZeldaClone
 
         public ISprite CreateFlashingRupee()
         {
-            return new AnimatedItem(itemTexture, 36, 0, 9, 15, 8, 16);
+            return new AnimatedItem(itemTexture, 36, 0, 10, 16, 12, 16);
         }
 
         public ISprite CreateGoldRupee()
         {
-            return new NonAnimatedItem(itemTexture, 36, 0, 9, 15, 8, 16);
+            return new NonAnimatedItem(itemTexture, 36, 0, 10, 16, 12, 16);
         }
 
         public ISprite CreateBlueRupee()
         {
-            return new NonAnimatedItem(itemTexture, 36, 17, 9, 15, 8, 16);
+            return new NonAnimatedItem(itemTexture, 36, 18, 10, 16, 12, 16);
         }
 
         public ISprite CreateArrow()
@@ -129,16 +124,7 @@ namespace LegendOfZeldaClone
 
         public ISprite CreateMap()
         {
-            return new NonAnimatedItem(itemTexture, 58, 0, 9, 15, 12, 16);
-        }
-        public ISprite CreateLetter()
-        {
-            return new NonAnimatedItem(itemTexture, 58, 17, 9, 15, 12, 16);
-        }
-
-        public ISprite CreateSecondPotion()
-        {
-            return new NonAnimatedItem(itemTexture, 48, 0, 8, 15, 8, 16);
+            return new NonAnimatedItem(itemTexture, 58, 0, 9, 16, 12, 16);
         }
 
         public ISprite CreateLifePotion()
@@ -146,34 +132,19 @@ namespace LegendOfZeldaClone
             return new NonAnimatedItem(itemTexture, 48, 17, 8, 15, 8, 16);
         }
 
-        public ItemInterface CreateSword()
+        public ISprite CreateSword()
         {
-            return new Sword(itemTexture);
+            return new NonAnimatedItem(itemTexture, 69, 0, 7, 16, 8, 16);
         }
 
-        public ItemInterface CreateShield()
+        public ISprite CreateBlueCandle()
         {
-            return new Shield(itemTexture);
+            return new NonAnimatedItem(itemTexture, 87, 17, 9, 16, 12, 16);
         }
 
-        public ItemInterface CreateCandle()
+        public ISprite CreateBlueRing()
         {
-            return new Candle(itemTexture);
-        }
-
-        public ItemInterface CreateRing()
-        {
-            return new Ring(itemTexture);
-        }
-
-        public ItemInterface CreateStaff()
-        {
-            return new Staff(itemTexture);
-        }
-
-        public ItemInterface CreateBook()
-        {
-            return new Book(itemTexture);
+            return new NonAnimatedItem(itemTexture, 0, 70, 8, 9, 8, 8);
         }
     }
 }
