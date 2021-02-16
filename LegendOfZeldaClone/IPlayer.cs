@@ -287,7 +287,7 @@ namespace LegendOfZeldaClone
 
             for (int i = 0; i < skinTypes.Length; i++)
             {
-                linkStates[i] = GetState(linkState, currentFrame);
+                linkStates[i] = GetSpecificState(this, linkState, currentFrame);
                 NextSkinIndex();
             }
 
@@ -353,16 +353,19 @@ namespace LegendOfZeldaClone
             //HeldItem.Update();
             
             timer--;
-            foreach (ILinkState linkState in linkStates) { linkState.Update(); }
+            foreach (ILinkState linkState in linkStates)
+                linkState.Update();
             if (timer == 0)
-                game.Link = decoratedLink; //removes decorator
+            {
+                Tuple<LinkStateType, int> currentState = linkStates[0].GetState();
+                decoratedLink.SetState(GetSpecificState(decoratedLink, currentState.Item1, currentState.Item2));
+                game.Link = decoratedLink;
+            }
         }
 
         public void SetState(ILinkState linkState)
         {
             linkStates[skinTypesIndex] = linkState;
-            if (skinTypesIndex == linkStates.Length - 1)
-                decoratedLink.SetState(linkState);
             NextSkinIndex();
         }
 
@@ -381,24 +384,24 @@ namespace LegendOfZeldaClone
         public ILinkState GetStatePickingUpItem() => new LinkPickingUpItem(this);
 
         private void NextSkinIndex() => skinTypesIndex = (skinTypesIndex + 1) % skinTypes.Length;
-        private ILinkState GetState(LinkStateType linkState, int currentFrame)
+        private ILinkState GetSpecificState(ILinkPlayer player, LinkStateType linkState, int currentFrame)
         {
             return linkState switch
             {
-                LinkStateType.StandingDown => new LinkStandingDown(this, currentFrame),
-                LinkStateType.StandingUp => new LinkStandingUp(this, currentFrame),
-                LinkStateType.StandingLeft => new LinkStandingLeft(this, currentFrame),
-                LinkStateType.StandingRight => new LinkStandingRight(this, currentFrame),
-                LinkStateType.WalkingDown => new LinkWalkingDown(this, currentFrame),
-                LinkStateType.WalkingUp => new LinkWalkingUp(this, currentFrame),
-                LinkStateType.WalkingLeft => new LinkWalkingLeft(this, currentFrame),
-                LinkStateType.WalkingRight => new LinkWalkingRight(this, currentFrame),
-                LinkStateType.UsingItemDown => new LinkUsingItemDown(this, currentFrame),
-                LinkStateType.UsingItemUp => new LinkUsingItemUp(this, currentFrame),
-                LinkStateType.UsingItemLeft => new LinkUsingItemLeft(this, currentFrame),
-                LinkStateType.UsingItemRight => new LinkUsingItemRight(this, currentFrame),
-                LinkStateType.PickingUpItem => new LinkPickingUpItem(this, currentFrame),
-                _ => new LinkStandingDown(this)
+                LinkStateType.StandingDown => new LinkStandingDown(player, currentFrame),
+                LinkStateType.StandingUp => new LinkStandingUp(player, currentFrame),
+                LinkStateType.StandingLeft => new LinkStandingLeft(player, currentFrame),
+                LinkStateType.StandingRight => new LinkStandingRight(player, currentFrame),
+                LinkStateType.WalkingDown => new LinkWalkingDown(player, currentFrame),
+                LinkStateType.WalkingUp => new LinkWalkingUp(player, currentFrame),
+                LinkStateType.WalkingLeft => new LinkWalkingLeft(player, currentFrame),
+                LinkStateType.WalkingRight => new LinkWalkingRight(player, currentFrame),
+                LinkStateType.UsingItemDown => new LinkUsingItemDown(player, currentFrame),
+                LinkStateType.UsingItemUp => new LinkUsingItemUp(player, currentFrame),
+                LinkStateType.UsingItemLeft => new LinkUsingItemLeft(player, currentFrame),
+                LinkStateType.UsingItemRight => new LinkUsingItemRight(player, currentFrame),
+                LinkStateType.PickingUpItem => new LinkPickingUpItem(player, currentFrame),
+                _ => new LinkStandingDown(player)
             };
         }
     }
