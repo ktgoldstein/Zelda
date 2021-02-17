@@ -65,6 +65,8 @@ namespace LegendOfZeldaClone
             ICommand nextObject = new NextObject(this);
             ICommand previousObject = new PreviousObject(this);
 
+            ICommand resetItem = new ResetItems(this);
+
             KeyboardController keyboardController = new KeyboardController();
             keyboardController.RegisterCommand(Keys.Q, quitGame);
             keyboardController.RegisterCommand(Keys.S, moveDown);

@@ -299,5 +299,21 @@ namespace LegendOfZeldaClone
             }
         }
     }
+
+    public class ResetItems : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+        
+        public ResetItems(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            myGame.itemIndex = 0;
+            myGame.CurrItem = myGame.Items[0];
+        }
+    }
 }
 
