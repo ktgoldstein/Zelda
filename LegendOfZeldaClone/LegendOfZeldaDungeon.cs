@@ -90,8 +90,6 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.Y, nextObject);
             keyboardController.RegisterCommand(Keys.T, previousObject);
 
-            keyboardController.RegisterCommand(Keys.R, resetItem);
-
             controller = keyboardController;
 
             switchEnemyNum = 0;
