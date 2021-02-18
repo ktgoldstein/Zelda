@@ -30,7 +30,7 @@ namespace LegendOfZeldaClone
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
     }
-    public class RotatingProjectileSprite : ISprite
+    public class CyclingProjectileSprite : ISprite
     {
         private Texture2D texture;
         private int xOffset;
@@ -40,7 +40,7 @@ namespace LegendOfZeldaClone
         private int currentFrame;
         private Point[] frameLocations;
 
-        public RotatingProjectileSprite(Texture2D texture, int spriteWidth, int spriteHeight, Point[] frameLocations)
+        public CyclingProjectileSprite(Texture2D texture, int spriteWidth, int spriteHeight, Point[] frameLocations)
         {
             this.texture = texture;
             width = spriteWidth;

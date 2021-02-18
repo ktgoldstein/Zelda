@@ -152,7 +152,7 @@ namespace LegendOfZeldaClone
                 new Point(xOffset + spriteWidth * 6 + atlasGap, yOffset),
                 new Point(xOffset + spriteWidth * 7 + atlasGap, yOffset)
             };
-            return new RotatingProjectileSprite(playerProjectileSpriteSheet, spriteWidth, spriteHeight, frameLocations);
+            return new CyclingProjectileSprite(playerProjectileSpriteSheet, spriteWidth, spriteHeight, frameLocations);
         }
     }
 }
