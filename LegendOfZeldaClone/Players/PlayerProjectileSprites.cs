@@ -33,8 +33,6 @@ namespace LegendOfZeldaClone
     public class CyclingProjectileSprite : ISprite
     {
         private Texture2D texture;
-        private int xOffset;
-        private int yOffset;
         private int height;
         private int width;
         private int currentFrame;

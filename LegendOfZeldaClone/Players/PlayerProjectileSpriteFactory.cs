@@ -154,5 +154,20 @@ namespace LegendOfZeldaClone
             };
             return new CyclingProjectileSprite(playerProjectileSpriteSheet, spriteWidth, spriteHeight, frameLocations);
         }
+
+        public ISprite CreateFireProjectileSprite()
+        {
+            int spriteWidth = 16;
+            int spriteHeight = 16;
+            int xOffset = 0;
+            int yOffset = (spriteSectionHeight + atlasGap) * 7;
+            Point[] frameLocations =
+            {
+                new Point(xOffset, yOffset),
+                new Point(xOffset + spriteWidth, yOffset),
+            };
+            return new CyclingProjectileSprite(playerProjectileSpriteSheet, spriteWidth, spriteHeight, frameLocations);
+        }
+
     }
 }
