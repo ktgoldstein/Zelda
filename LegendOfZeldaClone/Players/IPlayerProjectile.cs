@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace LegendOfZeldaClone
 {
@@ -11,15 +12,17 @@ namespace LegendOfZeldaClone
 
     public class SwordProjectile : IPlayerProjectile
     {
+        private LegendOfZeldaDungeon game;
         private SwordSkinType skinType;
         private ISprite sprite;
         private Direction direction;
         private Vector2 location;
         private int lifeSpan;
 
-        public SwordProjectile(Vector2 startingLocation, SwordSkinType skinType, Direction direction)
+        public SwordProjectile(Vector2 startingLocation, SwordSkinType skinType, Direction direction, LegendOfZeldaDungeon game)
         {
-            this.direction = direction; 
+            this.game = game;
+            this.direction = direction;
             location = startingLocation;
             this.skinType = skinType;
             lifeSpan = 8;
@@ -43,6 +46,7 @@ namespace LegendOfZeldaClone
                     break;
                 case 4:
                     location -= DirectedMovement() * LoZHelpers.Scale(4);
+                    SpawnSwordBeam();
                     break;
                 case 3:
                     break;
@@ -59,8 +63,8 @@ namespace LegendOfZeldaClone
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);
 
         private void DirectionBasedSetUp(Direction direction)
-        {            
-            switch(direction)
+        {
+            switch (direction)
             {
                 case Direction.Down:
                     sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordDownSprite(skinType);
@@ -78,7 +82,7 @@ namespace LegendOfZeldaClone
                     sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordRightSprite(skinType);
                     location += new Vector2(0, LoZHelpers.Scale(7));
                     break;
-            };
+            }
         }
 
         private Vector2 DirectedMovement()
@@ -92,5 +96,72 @@ namespace LegendOfZeldaClone
                 _ => new Vector2(0, 0)
             };
         }
+
+        private void SpawnSwordBeam() => game.LinkProjectilesQueue.Add(new SwordBeamProjectile(location, direction, game));
     }
+
+    public class SwordBeamProjectile : IPlayerProjectile
+    {
+        private LegendOfZeldaDungeon game;
+        private ISprite[] sprites;
+        private Vector2 velocity;
+        private Vector2 location;
+        private int lifeSpan;
+
+        public SwordBeamProjectile(Vector2 startingLocation, Direction direction, LegendOfZeldaDungeon game)
+        {
+            this.game = game;
+            location = startingLocation;
+            lifeSpan = 20;
+            sprites = new ISprite[2];
+            Random rnd = new Random();
+            DirectionBasedSetUp(direction, rnd.Next(2));
+        }
+
+        public bool Update()
+        {
+            if (lifeSpan == 0)
+                return true;
+            location += velocity;
+            lifeSpan--;
+            return false;
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            // Make skins flash every OTHER frame
+            int spriteIndex = lifeSpan % sprites.Length * 2;
+            spriteIndex = (int)(spriteIndex / 2.0);
+            sprites[spriteIndex].Draw(spriteBatch, location);
+        }
+
+        private void DirectionBasedSetUp(Direction direction, int skinSeed)
+        {
+            int speed = 6;
+            switch (direction)
+            {
+                case Direction.Down:
+                    sprites[0] = PlayerProjectileSpriteFactory.Instance.CreateSwordDownSprite((SwordSkinType)skinSeed);
+                    sprites[1] = PlayerProjectileSpriteFactory.Instance.CreateSwordDownSprite((SwordSkinType)(skinSeed + 2));
+                    velocity = new Vector2(0, LoZHelpers.Scale(speed));
+                    break;
+                case Direction.Up:
+                    sprites[0] = PlayerProjectileSpriteFactory.Instance.CreateSwordUpSprite((SwordSkinType)skinSeed);
+                    sprites[1] = PlayerProjectileSpriteFactory.Instance.CreateSwordUpSprite((SwordSkinType)(skinSeed + 2));
+                    velocity = new Vector2(0, -LoZHelpers.Scale(speed));
+                    break;
+                case Direction.Left:
+                    sprites[0] = PlayerProjectileSpriteFactory.Instance.CreateSwordLeftSprite((SwordSkinType)skinSeed);
+                    sprites[1] = PlayerProjectileSpriteFactory.Instance.CreateSwordLeftSprite((SwordSkinType)(skinSeed + 2));
+                    velocity = new Vector2(-LoZHelpers.Scale(speed), 0);
+                    break;
+                case Direction.Right:
+                    sprites[0] = PlayerProjectileSpriteFactory.Instance.CreateSwordRightSprite((SwordSkinType)skinSeed);
+                    sprites[1] = PlayerProjectileSpriteFactory.Instance.CreateSwordRightSprite((SwordSkinType)(skinSeed + 2));
+                    velocity = new Vector2(LoZHelpers.Scale(speed), 0);
+                    break;
+            }
+        }
+    }
+
 }

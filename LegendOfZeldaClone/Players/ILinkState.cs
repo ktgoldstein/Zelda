@@ -151,7 +151,7 @@ namespace LegendOfZeldaClone
 
         public void Update()
         {
-            link.Location += new Vector2(0, LoZHelpers.LinkSpeed);
+            link.Location += new Vector2(0, link.Speed);
             sprite.Update();
             if (sprite.AnimationDone())
                 link.SetState(link.GetStateStandingDown());
@@ -185,7 +185,7 @@ namespace LegendOfZeldaClone
 
         public void Update()
         {
-            link.Location -= new Vector2(0, LoZHelpers.LinkSpeed);
+            link.Location -= new Vector2(0, link.Speed);
             sprite.Update();
             if (sprite.AnimationDone())
                 link.SetState(link.GetStateStandingUp());
@@ -219,7 +219,7 @@ namespace LegendOfZeldaClone
 
         public void Update()
         {
-            link.Location -= new Vector2(LoZHelpers.LinkSpeed, 0);
+            link.Location -= new Vector2(link.Speed, 0);
             sprite.Update();
             if (sprite.AnimationDone())
                 link.SetState(link.GetStateStandingLeft());
@@ -253,7 +253,7 @@ namespace LegendOfZeldaClone
 
         public void Update()
         {
-            link.Location += new Vector2(LoZHelpers.LinkSpeed, 0);
+            link.Location += new Vector2(link.Speed, 0);
             sprite.Update();
             if (sprite.AnimationDone())
                 link.SetState(link.GetStateStandingRight());

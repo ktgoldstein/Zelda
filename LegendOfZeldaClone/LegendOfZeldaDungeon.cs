@@ -19,7 +19,8 @@ namespace LegendOfZeldaClone
         public IEnemy SpriteEnemy;
 
         public IPlayer Link;
-        public List<IPlayerProjectile> LinkProjectiles;
+        public List<IPlayerProjectile> LinkProjectilesQueue;
+        private List<IPlayerProjectile> LinkProjectiles;
 
         public List<ISprite> objList;
         public ISprite currentObject;
@@ -116,6 +117,7 @@ namespace LegendOfZeldaClone
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
             PlayerProjectileSpriteFactory.Instance.LoadAllTextures(Content);
 
+            LinkProjectilesQueue = new List<IPlayerProjectile>();
             LinkProjectiles = new List<IPlayerProjectile>();
             IUsableItem woodenSword = new WoodenSword(this);
             Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
@@ -179,6 +181,8 @@ namespace LegendOfZeldaClone
             Link.Update();
 
             List<IPlayerProjectile> deadProjectiles = new List<IPlayerProjectile>();
+            LinkProjectiles.AddRange(LinkProjectilesQueue);
+            LinkProjectilesQueue = new List<IPlayerProjectile>();
             foreach (IPlayerProjectile projectile in LinkProjectiles)
             {
                 if (projectile.Update())

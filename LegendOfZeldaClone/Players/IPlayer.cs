@@ -6,6 +6,7 @@ namespace LegendOfZeldaClone
 {
     public interface IPlayer
     {
+        public int Speed { get; set; }
         public int MaxHealth { get; set; }
         public int Health { get; set; }
         public Vector2 Location { get; set; }
@@ -45,6 +46,7 @@ namespace LegendOfZeldaClone
 
     public class LinkPlayer : ILinkPlayer
     {
+        public int Speed { get; set; }
         public int MaxHealth { get; set; }
         public int Health { get; set; }
         public Vector2 Location { get; set; }
@@ -63,7 +65,8 @@ namespace LegendOfZeldaClone
             SkinType = LinkSkinType.Normal;
             Location = location;
 
-            this.game = game;          
+            this.game = game;
+            Speed = LoZHelpers.Scale(3);
             MaxHealth = 6;
             Health = MaxHealth;
             linkState = new LinkStandingDown(this);
@@ -132,6 +135,10 @@ namespace LegendOfZeldaClone
 
     class BlueRingLinkPlayer : ILinkPlayer
     {
+        public int Speed {
+            get { return decoratedLink.Speed; }
+            set { decoratedLink.Speed = value; }
+        }
         public int MaxHealth
         {
             get { return decoratedLink.MaxHealth; }
@@ -229,6 +236,11 @@ namespace LegendOfZeldaClone
 
     class DamagedLinkPlayer : ILinkPlayer
     {
+        public int Speed
+        {
+            get { return decoratedLink.Speed / linkStates.Length; }
+            set { decoratedLink.Speed = value; }
+        }
         public int MaxHealth
         {
             get { return decoratedLink.MaxHealth; }
