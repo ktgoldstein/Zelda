@@ -58,6 +58,7 @@ namespace LegendOfZeldaClone
             ICommand useSilverBow = new UseBow(this, ArrowSkinType.Silver);
             ICommand useBoomerang = new UseBoomerang(this, BoomerangSkinType.Normal);
             ICommand useMagicalBoomerang = new UseBoomerang(this, BoomerangSkinType.Magical);
+            ICommand useBlueCandle = new UseBlueCandle(this);
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
             ICommand resetLink = new ResetLink(this);
             
@@ -84,11 +85,13 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.D2, useSilverBow);
             keyboardController.RegisterCommand(Keys.D3, useBoomerang);
             keyboardController.RegisterCommand(Keys.D4, useMagicalBoomerang);
+            keyboardController.RegisterCommand(Keys.D6, useBlueCandle);
             keyboardController.RegisterCommand(Keys.D7, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.NumPad1, useBow);
             keyboardController.RegisterCommand(Keys.NumPad2, useSilverBow);
             keyboardController.RegisterCommand(Keys.NumPad3, useBoomerang);
             keyboardController.RegisterCommand(Keys.NumPad4, useMagicalBoomerang);
+            keyboardController.RegisterCommand(Keys.NumPad6, useBlueCandle);
             keyboardController.RegisterCommand(Keys.NumPad7, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.R, resetLink);
             

@@ -149,6 +149,24 @@ namespace LegendOfZeldaClone
         }
     }
 
+    public class UseBlueCandle : ICommand
+    {
+        private IUsableItem blueCandle;
+        private LegendOfZeldaDungeon game;
+
+        public UseBlueCandle(LegendOfZeldaDungeon game)
+        {
+            this.game = game;
+            blueCandle = new UsableBlueCandle(game);
+        }
+
+        public void Execute()
+        {
+            ((ILinkPlayer)game.Link).HeldItem = blueCandle;
+            game.Link.ActionB();
+        }
+    }
+
     public class PickUpBlueRing : ICommand
     {
         private IUsableItem blueRing;
