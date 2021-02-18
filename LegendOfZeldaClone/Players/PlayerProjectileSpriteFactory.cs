@@ -169,7 +169,8 @@ namespace LegendOfZeldaClone
             return new CyclingProjectileSprite(playerProjectileSpriteSheet, spriteWidth, spriteHeight, frameLocations);
         }
 
-        public ISprite CreateBombExplosionSprite()
+        public ISprite CreateBombExplosionSprite() //separate from CreateBombSprite 
+            //bc this sprite will be repeated 4 times
         {
             int spriteWidth = 16;
             int spriteHeight = 16;
@@ -184,6 +185,15 @@ namespace LegendOfZeldaClone
             return new CyclingProjectileSprite(playerProjectileSpriteSheet, spriteWidth, spriteHeight, frameLocations);
 
 
+        }
+
+        public ISprite CreateBombSprite()
+        {
+            int spriteWidth = 8;
+            int spriteHeight = 16;
+            int xOffset = 0;
+            int yOffset = (spriteSectionHeight + atlasGap) * 6;
+            return new StaticProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight);
         }
 
     }
