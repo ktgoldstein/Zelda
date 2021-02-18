@@ -149,6 +149,24 @@ namespace LegendOfZeldaClone
         }
     }
 
+    public class UseBomb : ICommand
+    {
+        private IUsableItem bomb;
+        private LegendOfZeldaDungeon game;
+
+        public UseBomb(LegendOfZeldaDungeon game)
+        {
+            this.game = game;
+            bomb = new UsableBomb(game);
+        }
+
+        public void Execute()
+        {
+            ((ILinkPlayer)game.Link).HeldItem = bomb;
+            game.Link.ActionB();
+        }
+    }
+
     public class UseBlueCandle : ICommand
     {
         private IUsableItem blueCandle;
