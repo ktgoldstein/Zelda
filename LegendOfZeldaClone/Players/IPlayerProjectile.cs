@@ -12,6 +12,7 @@ namespace LegendOfZeldaClone
     public class SwordProjectile : IPlayerProjectile
     {
         private SwordSkinType skinType;
+        private ISprite sprite;
         private Direction direction;
         private Vector2 location;
         private int lifeSpan;
@@ -21,6 +22,7 @@ namespace LegendOfZeldaClone
             this.direction = direction; 
             location = startingLocation;
             this.skinType = skinType;
+            sprite = ;
             lifeSpan = 8;
         }
 
@@ -53,6 +55,8 @@ namespace LegendOfZeldaClone
             lifeSpan--;
             return false;
         }
+
+        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);
 
         private Vector2 DirectedMovement()
         {
