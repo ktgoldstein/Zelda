@@ -20,8 +20,8 @@ namespace LegendOfZeldaClone
         public IEnemy SpriteEnemy;
         public IPlayer Link;
 
-        public List<ISprite> objList;
-        public ISprite currentObject;
+        public List<ISprite> Objects;
+        public ISprite CurrentObject;
 
         public Texture2D ItemTextures;
         public ISprite[] Items;
@@ -58,7 +58,7 @@ namespace LegendOfZeldaClone
             ICommand actionB = new ActionB(this);
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
             ICommand resetLink = new ResetLink(this);
-            
+
             ICommand setSpriteEnemy = new SetSpriteEnemy(this);
             ICommand nextItem = new NextItem(this);
             ICommand prevItem = new PreviousItem(this);
@@ -82,7 +82,7 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.D6, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.NumPad6, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.R, resetLink);
-            
+
             keyboardController.RegisterCommand(Keys.I, nextItem);
             keyboardController.RegisterCommand(Keys.U, prevItem);
             keyboardController.RegisterCommand(Keys.P, setSpriteEnemy);
@@ -110,7 +110,8 @@ namespace LegendOfZeldaClone
             xDirection = 1;
             yDirection = 1;
 
-            objList = new List<ISprite>();
+            ObjectIndex = 0;
+            Objects = new List<ISprite>();
 
             base.Initialize();
         }
@@ -127,29 +128,34 @@ namespace LegendOfZeldaClone
             SpriteEnemy = new Stalfos();
 
             ObjectSpriteFactory.Instance.LoadAllTextures(Content);
-            currentObject = ObjectSpriteFactory.Instance.CreatedefaultFlatBlock();
-            objList.Add(ObjectSpriteFactory.Instance.CreateflatBlock());
-            objList.Add(ObjectSpriteFactory.Instance.CreateraisedBlock());
-            objList.Add(ObjectSpriteFactory.Instance.CreateraisedBlock());
-            objList.Add(ObjectSpriteFactory.Instance.Createstatue());
-            objList.Add(ObjectSpriteFactory.Instance.Createstatue2());
-            objList.Add(ObjectSpriteFactory.Instance.CreateblueStatue());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreateblueStatue2());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.Createsand());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.Createstairs());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.Createwater());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatekeyDoorUp());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatekeyDoorDown());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatekeyDoorLeft());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatekeyDoorRight());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatelockedDoorUp());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatelockedDoorDown());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatelockedDoorLeft());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreatelockedDoorRight());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreateopenDoorUp());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreateopenDoorDown());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreateopenDoorLeft());
-            //spriteObject.Add(ObjectSpriteFactory.Instance.CreateopenDoorRight());
+
+            Objects.Add(ObjectSpriteFactory.Instance.CreateFlatBlock());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateRaisedBlock());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateRaisedBlock());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateDragonStatue());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateGargoyleStatue());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateDragonStatueBlue());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateGargoyleStatueBlue());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateDottedBlock());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateStairs());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateDarkBlock());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateWater());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateTunnelOpeningUp());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateTunnelOpeningDown());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateKeyDoorUp());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateKeyDoorDown());
+            Objects.Add(ObjectSpriteFactory.Instance.CreatekeyDoorRight());
+            Objects.Add(ObjectSpriteFactory.Instance.CreatekeyDoorLeft());
+            Objects.Add(ObjectSpriteFactory.Instance.CreatelockedDoorUp());
+            Objects.Add(ObjectSpriteFactory.Instance.CreatelockedDoorDown());
+            Objects.Add(ObjectSpriteFactory.Instance.CreatelockedDoorRight());
+            Objects.Add(ObjectSpriteFactory.Instance.CreatelockedDoorLeft());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateOpenDoorUp());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateOpenDoorDown());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateOpenDoorRight());
+            Objects.Add(ObjectSpriteFactory.Instance.CreateOpenDoorLeft());
+
+            CurrentObject = Objects[0];
 
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
             Items[0] = ItemSpriteFactory.Instance.CreateCompass();
@@ -183,9 +189,9 @@ namespace LegendOfZeldaClone
         protected override void Update(GameTime gameTime)
         {
             controller.Update();
-            
+
             Link.Update();
-            
+
             SpriteEnemy.Update();
 
             if (CurrItem == fairy)
@@ -224,7 +230,7 @@ namespace LegendOfZeldaClone
             SpriteEnemy.Draw(_spriteBatch);
             CurrItem.Draw(_spriteBatch, itemVector);
 
-            currentObject.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6));
+            CurrentObject.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6));
 
             _spriteBatch.End();
 

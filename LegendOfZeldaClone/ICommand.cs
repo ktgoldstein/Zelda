@@ -262,22 +262,19 @@ namespace LegendOfZeldaClone
     public class NextObject : ICommand
     {
         private LegendOfZeldaDungeon myGame;
-        public static int index { get; set; }
+        
         public NextObject(LegendOfZeldaDungeon game)
         {
             myGame = game;
-            index = 1;
+            
         }
 
         public void Execute()
         {
-
-            if (index < myGame.objList.Count - 1)
-            {
-                index++;
-                myGame.currentObject = myGame.objList[index];
-            }
-
+            myGame.ObjectIndex++;
+            if (myGame.ObjectIndex > myGame.Objects.Count - 1)
+                myGame.ObjectIndex = 0;
+            myGame.CurrentObject = myGame.Objects[myGame.ObjectIndex];
         }
     }
     public class PreviousObject : ICommand
@@ -291,19 +288,30 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-
-            if (NextObject.index > 0)
-            {
-                NextObject.index--;
-                myGame.currentObject = myGame.objList[NextObject.index];
-            }
+            myGame.ObjectIndex--;
+            if (myGame.ObjectIndex < 0)
+                myGame.ObjectIndex = myGame.Objects.Count - 1;
+            myGame.CurrentObject = myGame.Objects[myGame.ObjectIndex];
         }
     }
+    public class ResetObject : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
 
+        public ResetObject(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            myGame.CurrentObject = myGame.Objects[0];
+        }
+    }
     public class ResetItems : ICommand
     {
         private LegendOfZeldaDungeon myGame;
-        
+
         public ResetItems(LegendOfZeldaDungeon game)
         {
             myGame = game;
@@ -315,5 +323,6 @@ namespace LegendOfZeldaClone
             myGame.CurrItem = myGame.Items[0];
         }
     }
+
 }
 
