@@ -128,21 +128,6 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class ResetLink : ICommand
-    {
-        private LegendOfZeldaDungeon game;
-
-        public ResetLink(LegendOfZeldaDungeon game)
-        {
-            this.game = game;
-        }
-
-        public void Execute()
-        {
-            game.Link = new LinkPlayer(game, LoZHelpers.LinkStartingLocation);
-        }
-    }
-
     public class SetSpriteEnemy : ICommand
     {
         private LegendOfZeldaDungeon myGame;
@@ -266,7 +251,6 @@ namespace LegendOfZeldaClone
         public NextObject(LegendOfZeldaDungeon game)
         {
             myGame = game;
-            
         }
 
         public void Execute()
@@ -283,7 +267,6 @@ namespace LegendOfZeldaClone
         public PreviousObject(LegendOfZeldaDungeon game)
         {
             myGame = game;
-
         }
 
         public void Execute()
@@ -294,35 +277,26 @@ namespace LegendOfZeldaClone
             myGame.CurrentObject = myGame.Objects[myGame.ObjectIndex];
         }
     }
-    public class ResetObject : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
 
-        public ResetObject(LegendOfZeldaDungeon game)
+    public class ResetGame : ICommand
+    {
+        private LegendOfZeldaDungeon game;
+
+        public ResetGame(LegendOfZeldaDungeon game)
         {
-            myGame = game;
+            this.game = game;
         }
 
         public void Execute()
         {
-            myGame.CurrentObject = myGame.Objects[0];
+            game.itemIndex = 0;
+            game.CurrItem = game.Items[game.itemIndex];
+
+            game.ObjectIndex = 0;
+            game.CurrentObject = game.Objects[game.ObjectIndex];
+
+            game.Link = new LinkPlayer(game, LoZHelpers.LinkStartingLocation);
         }
     }
-    public class ResetItems : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
-
-        public ResetItems(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            myGame.itemIndex = 0;
-            myGame.CurrItem = myGame.Items[0];
-        }
-    }
-
 }
 
