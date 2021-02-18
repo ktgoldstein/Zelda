@@ -33,18 +33,18 @@ namespace LegendOfZeldaClone
                 case 8:
                     break;
                 case 7:
-                    location = location + DirectedMovement() * 11;
+                    location += DirectedMovement() * 11;
                     break;
                 case 6:
                 case 5:
                     break;
                 case 4:
-                    location = location - DirectedMovement() * 4;
+                    location -= DirectedMovement() * 4;
                     break;
                 case 3:
                     break;
                 case 2:
-                    location = location - DirectedMovement() * 4;
+                    location -= DirectedMovement() * 4;
                     break;
                 case 1:
                     break;
@@ -53,8 +53,6 @@ namespace LegendOfZeldaClone
             lifeSpan--;
             return false;
         }
-
-
 
         private Vector2 DirectedMovement()
         {
