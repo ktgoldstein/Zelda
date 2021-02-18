@@ -12,13 +12,13 @@ namespace LegendOfZeldaClone
         private SpriteBatch _spriteBatch;
 
         private IController controller;
+
         public List<IEnemy> enemyList;
-
-        public Texture2D LinkTextures;
-
         public int switchEnemyNum;
         public IEnemy SpriteEnemy;
+
         public IPlayer Link;
+        public IPlayerProjectile[] LinkProjectiles;
 
         public List<ISprite> objList;
         public ISprite currentObject;

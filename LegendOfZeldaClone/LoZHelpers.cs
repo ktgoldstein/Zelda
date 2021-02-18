@@ -2,6 +2,15 @@
 
 namespace LegendOfZeldaClone
 {
+
+    public enum Direction
+    {
+        Down,
+        Up,
+        Left,
+        Right
+    }
+
     public enum LinkStateType
     {
         StandingDown,
@@ -17,6 +26,14 @@ namespace LegendOfZeldaClone
         UsingItemLeft,
         UsingItemRight,
         PickingUpItem
+    }
+
+    public enum SwordSkinType
+    {
+        WoodenSword = 0,
+        WhiteSword = 1,
+        MagicSword = 2,
+        DemonSword = 3
     }
 
     public enum LinkSkinType

@@ -106,15 +106,11 @@ namespace LegendOfZeldaClone
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //Sword.Draw(spriteBatch);
-            //HeldItem.Draw(spriteBatch);
             linkState.Draw(spriteBatch);
         }
 
         public void Update()
         {
-            //Sword.Update();
-            //HeldItem.Update();
             linkState.Update();
         }
 
@@ -341,17 +337,12 @@ namespace LegendOfZeldaClone
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //Sword.Draw(spriteBatch);
-            //HeldItem.Draw(spriteBatch);
             int damageFrameType = timer % linkStates.Length;
             linkStates[damageFrameType].Draw(spriteBatch);
         }
 
         public void Update()
-        {
-            //Sword.Update();
-            //HeldItem.Update();
-            
+        {            
             timer--;
             foreach (ILinkState linkState in linkStates)
                 linkState.Update();
