@@ -47,11 +47,10 @@ namespace LegendOfZeldaClone
                 case 3:
                     break;
                 case 2:
-                    location -= DirectedMovement() * LoZHelpers.Scale(2);
+                    location -= DirectedMovement() * LoZHelpers.Scale(4);
                     break;
                 case 1:
                     break;
-
             }
             lifeSpan--;
             return false;
@@ -73,14 +72,13 @@ namespace LegendOfZeldaClone
                     break;
                 case Direction.Left:
                     sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordLeftSprite(skinType);
-                    location += new Vector2(0, LoZHelpers.Scale(6));
+                    location += new Vector2(0, LoZHelpers.Scale(7));
                     break;
                 case Direction.Right:
                     sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordRightSprite(skinType);
-                    location += new Vector2(0, LoZHelpers.Scale(6));
+                    location += new Vector2(0, LoZHelpers.Scale(7));
                     break;
             };
-
         }
 
         private Vector2 DirectedMovement()
