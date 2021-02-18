@@ -6,7 +6,7 @@ namespace LegendOfZeldaClone
 {
     public interface IPlayer
     {
-        public int Speed { get; set; }
+        public float Speed { get; set; }
         public int MaxHealth { get; set; }
         public int Health { get; set; }
         public Vector2 Location { get; set; }
@@ -46,7 +46,7 @@ namespace LegendOfZeldaClone
 
     public class LinkPlayer : ILinkPlayer
     {
-        public int Speed { get; set; }
+        public float Speed { get; set; }
         public int MaxHealth { get; set; }
         public int Health { get; set; }
         public Vector2 Location { get; set; }
@@ -57,11 +57,10 @@ namespace LegendOfZeldaClone
         private LegendOfZeldaDungeon game;
         private ILinkState linkState;
 
-        //IUsableItem heldItem
-        public LinkPlayer(LegendOfZeldaDungeon game, Vector2 location, IUsableItem sword)
+        public LinkPlayer(LegendOfZeldaDungeon game, Vector2 location, IUsableItem sword, IUsableItem heldItem = null)
         {
             Sword = sword;
-            //HeldItem = heldItem;
+            HeldItem = heldItem;
             SkinType = LinkSkinType.Normal;
             Location = location;
 
@@ -86,9 +85,9 @@ namespace LegendOfZeldaClone
 
         public void ActionB()
         {
-            linkState.Action();
-            /*if (linkState.Action())
-                HeldItem.Use();*/
+            Direction direction = linkState.Action();
+            if (direction != Direction.None)
+                HeldItem.Use(Location, direction);
         }
 
         public void Damage(int amount)
@@ -135,7 +134,7 @@ namespace LegendOfZeldaClone
 
     class BlueRingLinkPlayer : ILinkPlayer
     {
-        public int Speed {
+        public float Speed {
             get { return decoratedLink.Speed; }
             set { decoratedLink.Speed = value; }
         }
@@ -191,10 +190,11 @@ namespace LegendOfZeldaClone
                 Sword.Use(Location, direction);
         }
 
-        public void ActionB() {
-            linkState.Action();
-            /*if (linkState.Action())
-                HeldItem.Use();*/
+        public void ActionB()
+        {
+            Direction direction = linkState.Action();
+            if (direction != Direction.None)
+                HeldItem.Use(Location, direction);
         }
 
         public void Damage(int amount)
@@ -236,7 +236,7 @@ namespace LegendOfZeldaClone
 
     class DamagedLinkPlayer : ILinkPlayer
     {
-        public int Speed
+        public float Speed
         {
             get { return decoratedLink.Speed / linkStates.Length; }
             set { decoratedLink.Speed = value; }
@@ -332,11 +332,11 @@ namespace LegendOfZeldaClone
 
         public void ActionB()
         {
-            bool success = true;
+            Direction direction = Direction.None;
             foreach (ILinkState linkState in linkStates)
-                /*success &= */linkState.Action();
-            /*if (success)
-                HeldItem.Use();*/
+                direction = linkState.Action();
+            if (direction != Direction.None)
+                HeldItem.Use(Location, direction);
         }
 
         public void Damage(int amount) { /* Invinvibility Frames */ }

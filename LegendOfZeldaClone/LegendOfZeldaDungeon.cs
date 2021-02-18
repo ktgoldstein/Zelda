@@ -53,8 +53,8 @@ namespace LegendOfZeldaClone
             ICommand moveLeft = new MoveLeft(this);
             ICommand moveRight = new MoveRight(this);
             ICommand actionA = new ActionA(this);
-            ICommand actionB = new ActionB(this);
             ICommand damageLink = new DamageLink(this);
+            ICommand useBow = new UseBow(this);
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
             ICommand resetLink = new ResetLink(this);
             
@@ -77,7 +77,9 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.Z, actionA);
             keyboardController.RegisterCommand(Keys.N, actionA);
             keyboardController.RegisterCommand(Keys.E, damageLink);
+            keyboardController.RegisterCommand(Keys.D1, useBow);
             keyboardController.RegisterCommand(Keys.D6, pickUpBlueRing);
+            keyboardController.RegisterCommand(Keys.NumPad1, useBow);
             keyboardController.RegisterCommand(Keys.NumPad6, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.R, resetLink);
             
@@ -119,7 +121,7 @@ namespace LegendOfZeldaClone
 
             LinkProjectilesQueue = new List<IPlayerProjectile>();
             LinkProjectiles = new List<IPlayerProjectile>();
-            IUsableItem woodenSword = new WoodenSword(this);
+            IUsableItem woodenSword = new UsableWoodenSword(this);
             Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
 
             EnemySpriteFactory.Instance.LoadAllTextures(Content);

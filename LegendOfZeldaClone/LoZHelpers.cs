@@ -9,6 +9,10 @@ namespace LegendOfZeldaClone
         Up,
         Left,
         Right,
+        UpLeft,
+        UpRight,
+        DownLeft,
+        DownRight,
         None
     }
 
@@ -35,6 +39,12 @@ namespace LegendOfZeldaClone
         WhiteSword = 1,
         MagicSword = 2,
         DemonSword = 3
+    }
+
+    public enum ArrowSkinType
+    {
+        WoodenArrow = 0,
+        SilverArrow = 1
     }
 
     public enum LinkSkinType

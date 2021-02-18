@@ -113,6 +113,24 @@ namespace LegendOfZeldaClone
         }
     }
 
+    public class UseBow : ICommand
+    {
+        private IUsableItem normalBow;
+        private LegendOfZeldaDungeon game;
+
+        public UseBow(LegendOfZeldaDungeon game)
+        {
+            this.game = game;
+            normalBow = new UsableBow(game, ArrowSkinType.WoodenArrow);
+        }
+
+        public void Execute()
+        {
+            ((ILinkPlayer)game.Link).HeldItem = normalBow;
+            game.Link.ActionB();
+        }
+    }
+
     public class PickUpBlueRing : ICommand
     {
         private IUsableItem blueRing;
@@ -154,7 +172,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            IUsableItem woodenSword = new WoodenSword(game);
+            IUsableItem woodenSword = new UsableWoodenSword(game);
             game.Link = new LinkPlayer(game, LoZHelpers.LinkStartingLocation, woodenSword);
         }
     }

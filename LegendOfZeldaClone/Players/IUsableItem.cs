@@ -9,14 +9,11 @@ namespace LegendOfZeldaClone
         public void Use(Vector2 location, Direction direction);
     }
 
-    public class WoodenSword : IUsableItem
+    public class UsableWoodenSword : IUsableItem
     {
         private LegendOfZeldaDungeon game;
 
-        public WoodenSword(LegendOfZeldaDungeon game)
-        {
-            this.game = game;
-        }
+        public UsableWoodenSword(LegendOfZeldaDungeon game) => this.game = game;
 
         public void Use(Vector2 location, Direction direction)
         {
@@ -24,14 +21,28 @@ namespace LegendOfZeldaClone
         }
     }
 
+    public class UsableBow : IUsableItem
+    {
+        private LegendOfZeldaDungeon game;
+        private ArrowSkinType skinType;
+
+        public UsableBow(LegendOfZeldaDungeon game, ArrowSkinType skinType)
+        {
+            this.game = game;
+            this.skinType = skinType;
+        }
+
+        public void Use(Vector2 location, Direction direction)
+        {
+            game.LinkProjectilesQueue.Add(new ArrowProjectile(location, direction, skinType));
+        }
+    }
+
     public class BlueRing : IUsableItem
     {
         private LegendOfZeldaDungeon game;
 
-        public BlueRing(LegendOfZeldaDungeon game) 
-        {
-            this.game = game;
-        }
+        public BlueRing(LegendOfZeldaDungeon game) => this.game = game;
 
         public void Use(Vector2 location, Direction direction)
         {
