@@ -55,10 +55,10 @@ namespace LegendOfZeldaClone
         private LegendOfZeldaDungeon game;
         private ILinkState linkState;
 
-        //public LinkPlayer(LegendOfZeldaDungeon game, IUsableItem sword, IUsableItem heldItem, Vector2 location)
-        public LinkPlayer(LegendOfZeldaDungeon game, Vector2 location)
+        //IUsableItem heldItem
+        public LinkPlayer(LegendOfZeldaDungeon game, Vector2 location, IUsableItem sword)
         {
-            //Sword = sword;
+            Sword = sword;
             //HeldItem = heldItem;
             SkinType = LinkSkinType.Normal;
             Location = location;
@@ -76,9 +76,9 @@ namespace LegendOfZeldaClone
 
         public void ActionA()
         {
-            linkState.Action();
-            /*if (linkState.Action())
-                Sword.Use();*/
+            Direction direction = linkState.Action();
+            if (direction != Direction.None)
+                Sword.Use(Location, direction);
         }
 
         public void ActionB()
@@ -179,9 +179,9 @@ namespace LegendOfZeldaClone
 
         public void ActionA()
         {
-            linkState.Action();
-            /*if (linkState.Action())
-                Sword.Use();*/
+            Direction direction = linkState.Action();
+            if (direction != Direction.None)
+                Sword.Use(Location, direction);
         }
 
         public void ActionB() {
@@ -203,15 +203,11 @@ namespace LegendOfZeldaClone
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //Sword.Draw(spriteBatch);
-            //HeldItem.Draw(spriteBatch);
             linkState.Draw(spriteBatch);
         }
 
         public void Update()
         {
-            //Sword.Update();
-            //HeldItem.Update();
             linkState.Update();
         }
 
@@ -231,7 +227,6 @@ namespace LegendOfZeldaClone
         public ILinkState GetStatePickingUpItem() => new LinkPickingUpItem(this);
     }
 
-    //******NOTE: most of the below has not been implemented properly yet!!******
     class DamagedLinkPlayer : ILinkPlayer
     {
         public int MaxHealth
@@ -316,11 +311,11 @@ namespace LegendOfZeldaClone
 
         public void ActionA()
         {
-            bool success = true;
+            Direction direction = Direction.None;
             foreach (ILinkState linkState in linkStates) 
-                /*success &= */linkState.Action();
-            /*if (success)
-                Sword.Use();*/
+                direction = linkState.Action();
+            if (direction != Direction.None)
+                Sword.Use(Location, direction);
         }
 
         public void ActionB()

@@ -6,7 +6,7 @@ namespace LegendOfZeldaClone
 
     public interface IUsableItem
     {
-        public void Use(Direction direction);
+        public void Use(Vector2 location, Direction direction);
     }
 
     public class WoodenSword : IUsableItem
@@ -18,9 +18,9 @@ namespace LegendOfZeldaClone
             this.game = game;
         }
 
-        public void Use(Direction direction)
+        public void Use(Vector2 location, Direction direction)
         {
-            
+            game.LinkProjectiles.Add(new SwordProjectile(location, SwordSkinType.WoodenSword, direction));
         }
     }
 
@@ -33,7 +33,7 @@ namespace LegendOfZeldaClone
             this.game = game;
         }
 
-        public void Use(Direction direction)
+        public void Use(Vector2 location, Direction direction)
         {
             IPlayer link = game.Link;
             if (link is LinkPlayer player)

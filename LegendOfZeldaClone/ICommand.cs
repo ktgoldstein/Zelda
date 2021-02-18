@@ -124,7 +124,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            blueRing.Use();
+            blueRing.Use(new Vector2(), Direction.None);
         }
     }
 
@@ -154,7 +154,8 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            game.Link = new LinkPlayer(game, LoZHelpers.LinkStartingLocation);
+            IUsableItem woodenSword = new WoodenSword(game);
+            game.Link = new LinkPlayer(game, LoZHelpers.LinkStartingLocation, woodenSword);
         }
     }
 

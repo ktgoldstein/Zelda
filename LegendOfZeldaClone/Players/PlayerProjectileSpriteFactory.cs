@@ -15,8 +15,8 @@ namespace LegendOfZeldaClone
 
         private static readonly PlayerProjectileSpriteFactory instance = new PlayerProjectileSpriteFactory();
         private Texture2D playerProjectileSpriteSheet;
-        private readonly int verticalSwordWidth, horizontalSwordHeight = 8;
-        private readonly int verticalSwordHeight, horizontalSwordWidth = 16;
+        private readonly int spriteSectionHeight = 16;
+        private readonly int spriteSectionWidth = 32;
         private readonly int atlasGap = 2;
 
         private PlayerProjectileSpriteFactory() { }
@@ -26,41 +26,40 @@ namespace LegendOfZeldaClone
             playerProjectileSpriteSheet = content.Load<Texture2D>("playerProjectileSpriteSheet");
         }
 
-        public IPlayerProjectile CreateSwordDownSprite(SwordSkinType WoodenSword, )
+        public ISprite CreateSwordUpSprite(SwordSkinType skinType)
         {
-            int spriteWidth = verticalSwordWidth;
-            int spriteHeight = verticalSwordHeight;
-            if (direction == Direction.Left || direction == Direction.Right)
-            {
-                spriteWidth = horizontalSwordWidth;
-                spriteHeight = horizontalSwordHeight;
-            }
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingDown;
-            return new SwordProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
+            int spriteWidth = 7;
+            int spriteHeight = 16;
+            int yOffset = 0;
+            int xOffset = (spriteSectionWidth + atlasGap) * (int)skinType;
+            return new StaticProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight);
         }
 
-        public IPlayerProjectile CreateSwordUpSprite(LinkSkinType skinOffset, int frame)
+        public ISprite CreateSwordDownSprite(SwordSkinType skinType)
         {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingUp;
-            return new LinkStandingSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
+            int spriteWidth = 7;
+            int spriteHeight = 16;
+            int yOffset = 0;
+            int xOffset = (spriteSectionWidth + atlasGap) * (int)skinType + 8;
+            return new StaticProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight);
         }
 
-        public IPlayerProjectile CreateSwordLeftSprite(LinkSkinType skinOffset, int frame)
+        public ISprite CreateSwordRightSprite(SwordSkinType skinType)
         {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingLeft;
-            return new LinkStandingSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
+            int spriteWidth = 16;
+            int spriteHeight = 7;
+            int yOffset = 0;
+            int xOffset = (spriteSectionWidth + atlasGap) * (int)skinType + 16;
+            return new StaticProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight);
         }
 
-        public IPlayerProjectile CreateSwordRightSprite(LinkSkinType skinOffset, int frame)
+        public ISprite CreateSwordLeftSprite(SwordSkinType skinType)
         {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingRight;
-            return new LinkStandingSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
+            int spriteWidth = 16;
+            int spriteHeight = 7;
+            int yOffset = 8;
+            int xOffset = (spriteSectionWidth + atlasGap) * (int)skinType + 16;
+            return new StaticProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight);
         }
-
-
     }
 }

@@ -22,8 +22,8 @@ namespace LegendOfZeldaClone
             this.direction = direction; 
             location = startingLocation;
             this.skinType = skinType;
-            sprite = ;
             lifeSpan = 8;
+            DirectionBasedSetUp(direction);
         }
 
         public bool Update()
@@ -33,20 +33,21 @@ namespace LegendOfZeldaClone
             switch (lifeSpan)
             {
                 case 8:
+                    location += DirectedMovement() * LoZHelpers.Scale(2);
                     break;
                 case 7:
-                    location += DirectedMovement() * 11;
+                    location += DirectedMovement() * LoZHelpers.Scale(9);
                     break;
                 case 6:
                 case 5:
                     break;
                 case 4:
-                    location -= DirectedMovement() * 4;
+                    location -= DirectedMovement() * LoZHelpers.Scale(4);
                     break;
                 case 3:
                     break;
                 case 2:
-                    location -= DirectedMovement() * 4;
+                    location -= DirectedMovement() * LoZHelpers.Scale(2);
                     break;
                 case 1:
                     break;
@@ -57,6 +58,30 @@ namespace LegendOfZeldaClone
         }
 
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);
+
+        private void DirectionBasedSetUp(Direction direction)
+        {            
+            switch(direction)
+            {
+                case Direction.Down:
+                    sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordDownSprite(skinType);
+                    location += new Vector2(LoZHelpers.Scale(5), 0);
+                    break;
+                case Direction.Up:
+                    sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordUpSprite(skinType);
+                    location += new Vector2(LoZHelpers.Scale(3), -LoZHelpers.Scale(1));
+                    break;
+                case Direction.Left:
+                    sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordLeftSprite(skinType);
+                    location += new Vector2(0, LoZHelpers.Scale(6));
+                    break;
+                case Direction.Right:
+                    sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordRightSprite(skinType);
+                    location += new Vector2(0, LoZHelpers.Scale(6));
+                    break;
+            };
+
+        }
 
         private Vector2 DirectedMovement()
         {

@@ -8,7 +8,8 @@ namespace LegendOfZeldaClone
         Down,
         Up,
         Left,
-        Right
+        Right,
+        None
     }
 
     public enum LinkStateType

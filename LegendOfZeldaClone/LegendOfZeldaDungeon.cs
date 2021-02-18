@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LegendOfZeldaClone
 {
@@ -18,7 +19,7 @@ namespace LegendOfZeldaClone
         public IEnemy SpriteEnemy;
 
         public IPlayer Link;
-        public IPlayerProjectile[] LinkProjectiles;
+        public List<IPlayerProjectile> LinkProjectiles;
 
         public List<ISprite> objList;
         public ISprite currentObject;
@@ -113,8 +114,11 @@ namespace LegendOfZeldaClone
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
+            PlayerProjectileSpriteFactory.Instance.LoadAllTextures(Content);
 
-            Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation);
+            LinkProjectiles = new List<IPlayerProjectile>();
+            IUsableItem woodenSword = new WoodenSword(this);
+            Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
 
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             SpriteEnemy = new Stalfos();
@@ -173,6 +177,14 @@ namespace LegendOfZeldaClone
             controller.Update();
             
             Link.Update();
+
+            List<IPlayerProjectile> deadProjectiles = new List<IPlayerProjectile>();
+            foreach (IPlayerProjectile projectile in LinkProjectiles)
+            {
+                if (projectile.Update())
+                    deadProjectiles.Add(projectile);
+            }
+            LinkProjectiles = LinkProjectiles.Except(deadProjectiles).ToList();
             
             SpriteEnemy.Update();
 
@@ -187,7 +199,11 @@ namespace LegendOfZeldaClone
 
             _spriteBatch.Begin();
 
+            foreach (IPlayerProjectile projectile in LinkProjectiles)
+                projectile.Draw(_spriteBatch);
+
             Link.Draw(_spriteBatch);
+
             SpriteEnemy.Draw(_spriteBatch);
             CurrItem.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 32, LoZHelpers.GameHeight / 2));
 

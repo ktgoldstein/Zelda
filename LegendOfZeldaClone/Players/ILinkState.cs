@@ -10,7 +10,7 @@ namespace LegendOfZeldaClone
         public void MoveDown();
         public void MoveLeft();
         public void MoveRight();
-        public bool Action();
+        public Direction Action();
         public Tuple<LinkStateType, int> GetState();
         public void Draw(SpriteBatch spriteBatch);
         public void Update();
@@ -32,10 +32,10 @@ namespace LegendOfZeldaClone
         public void MoveLeft() => link.SetState(link.GetStateWalkingingLeft());
         public void MoveRight() => link.SetState(link.GetStateWalkingingRight());
         
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemDown());
-            return true;
+            return Direction.Down;
         }
 
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingDown, sprite.CurrentFrame);
@@ -59,10 +59,10 @@ namespace LegendOfZeldaClone
         public void MoveLeft() => link.SetState(link.GetStateWalkingingLeft());
         public void MoveRight() => link.SetState(link.GetStateWalkingingRight());
         
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemUp());
-            return true;
+            return Direction.Up;
         }
 
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingUp, sprite.CurrentFrame);
@@ -86,10 +86,10 @@ namespace LegendOfZeldaClone
         public void MoveLeft() => link.SetState(link.GetStateWalkingingLeft());
         public void MoveRight() => link.SetState(link.GetStateWalkingingRight());
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemLeft());
-            return true;
+            return Direction.Left;
         }
 
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingLeft, sprite.CurrentFrame);
@@ -113,10 +113,10 @@ namespace LegendOfZeldaClone
         public void MoveLeft() => link.SetState(link.GetStateWalkingingLeft());
         public void MoveRight() => link.SetState(link.GetStateWalkingingRight());
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemRight());
-            return true;
+            return Direction.Right;
         }
 
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingRight, sprite.CurrentFrame);
@@ -140,10 +140,10 @@ namespace LegendOfZeldaClone
         public void MoveLeft() { }
         public void MoveRight() { }
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemDown());
-            return true;
+            return Direction.Down;
         }
 
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.WalkingDown, sprite.CurrentFrame);
@@ -174,10 +174,10 @@ namespace LegendOfZeldaClone
         public void MoveLeft() { }
         public void MoveRight() { }
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemUp());
-            return true;
+            return Direction.Up;
         }
 
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.WalkingUp, sprite.CurrentFrame);
@@ -208,10 +208,10 @@ namespace LegendOfZeldaClone
         public void MoveLeft() { }
         public void MoveRight() { }
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemLeft());
-            return true;
+            return Direction.Left;
         }
 
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.WalkingLeft, sprite.CurrentFrame);
@@ -242,10 +242,10 @@ namespace LegendOfZeldaClone
         public void MoveLeft() { }
         public void MoveRight() { }
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemRight());
-            return true;
+            return Direction.Right;
         }
 
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.WalkingRight, sprite.CurrentFrame);
@@ -275,7 +275,7 @@ namespace LegendOfZeldaClone
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
-        public bool Action() => false;
+        public Direction Action() => Direction.None;
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.UsingItemDown, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
@@ -302,7 +302,7 @@ namespace LegendOfZeldaClone
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
-        public bool Action() => false;
+        public Direction Action() => Direction.None;
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.UsingItemUp, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
@@ -329,7 +329,7 @@ namespace LegendOfZeldaClone
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
-        public bool Action() => false;
+        public Direction Action() => Direction.None;
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.UsingItemLeft, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
@@ -356,7 +356,7 @@ namespace LegendOfZeldaClone
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
-        public bool Action() => false;
+        public Direction Action() => Direction.None;
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.UsingItemRight, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
@@ -383,7 +383,7 @@ namespace LegendOfZeldaClone
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
-        public bool Action() => false;
+        public Direction Action() => Direction.None;
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.PickingUpItem, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
