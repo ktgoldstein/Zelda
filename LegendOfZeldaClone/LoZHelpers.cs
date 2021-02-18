@@ -43,8 +43,14 @@ namespace LegendOfZeldaClone
 
     public enum ArrowSkinType
     {
-        WoodenArrow = 0,
-        SilverArrow = 1
+        Wooden = 0,
+        Silver = 1
+    }
+
+    public enum BoomerangSkinType
+    {
+        Normal = 0,
+        Magical = 1
     }
 
     public enum LinkSkinType

@@ -54,7 +54,10 @@ namespace LegendOfZeldaClone
             ICommand moveRight = new MoveRight(this);
             ICommand actionA = new ActionA(this);
             ICommand damageLink = new DamageLink(this);
-            ICommand useBow = new UseBow(this);
+            ICommand useBow = new UseBow(this, ArrowSkinType.Wooden);
+            ICommand useSilverBow = new UseBow(this, ArrowSkinType.Silver);
+            ICommand useBoomerang = new UseBoomerang(this, BoomerangSkinType.Normal);
+            ICommand useMagicalBoomerang = new UseBoomerang(this, BoomerangSkingType.Magical);
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
             ICommand resetLink = new ResetLink(this);
             
@@ -78,9 +81,15 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.N, actionA);
             keyboardController.RegisterCommand(Keys.E, damageLink);
             keyboardController.RegisterCommand(Keys.D1, useBow);
-            keyboardController.RegisterCommand(Keys.D6, pickUpBlueRing);
+            keyboardController.RegisterCommand(Keys.D2, useSilverBow);
+            keyboardController.RegisterCommand(Keys.D3, useBoomerang);
+            keyboardController.RegisterCommand(Keys.D4, useMagicalBoomerang);
+            keyboardController.RegisterCommand(Keys.D7, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.NumPad1, useBow);
-            keyboardController.RegisterCommand(Keys.NumPad6, pickUpBlueRing);
+            keyboardController.RegisterCommand(Keys.NumPad2, useSilverBow);
+            keyboardController.RegisterCommand(Keys.NumPad3, useBoomerang);
+            keyboardController.RegisterCommand(Keys.NumPad4, useMagicalBoomerang);
+            keyboardController.RegisterCommand(Keys.NumPad7, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.R, resetLink);
             
             keyboardController.RegisterCommand(Keys.I, nextItem);

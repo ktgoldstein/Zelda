@@ -115,18 +115,18 @@ namespace LegendOfZeldaClone
 
     public class UseBow : ICommand
     {
-        private IUsableItem normalBow;
+        private IUsableItem bow;
         private LegendOfZeldaDungeon game;
 
-        public UseBow(LegendOfZeldaDungeon game)
+        public UseBow(LegendOfZeldaDungeon game, ArrowSkinType skinType)
         {
             this.game = game;
-            normalBow = new UsableBow(game, ArrowSkinType.WoodenArrow);
+            bow = new UsableBow(game, skinType);
         }
 
         public void Execute()
         {
-            ((ILinkPlayer)game.Link).HeldItem = normalBow;
+            ((ILinkPlayer)game.Link).HeldItem = bow;
             game.Link.ActionB();
         }
     }
