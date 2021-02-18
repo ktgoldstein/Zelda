@@ -367,8 +367,8 @@ namespace LegendOfZeldaClone
         {
             this.game = game;
             location = startingLocation;
-            speed = 2;
-            lifeSpan = 10;
+            speed = 1;
+            lifeSpan = 20;
             sprite = PlayerProjectileSpriteFactory.Instance.CreateFireProjectileSprite();
             DirectionBasedSetUp(direction);
         }
