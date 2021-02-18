@@ -295,5 +295,20 @@ namespace LegendOfZeldaClone
             myGame.CurrentObject = myGame.Objects[myGame.ObjectIndex];
         }
     }
+    public class ResetObject : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public ResetObject(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            myGame.CurrentObject = myGame.Objects[0];
+        }
+    }
+
 }
 

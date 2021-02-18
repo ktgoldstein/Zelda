@@ -24,8 +24,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(242, 148, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(242, 148, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -47,8 +47,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(260, 128, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(260, 129, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -70,8 +70,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(318, 129, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(318, 129, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -93,8 +93,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(299, 129, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(299, 129, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -117,8 +117,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(337, 129, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(337, 129, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -141,8 +141,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(280, 129, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(280, 129, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -150,7 +150,7 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class DottedBlock: ISprite
+    public class DottedBlock : ISprite
     {
         private Texture2D texture;
         private int height;
@@ -165,8 +165,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(356, 148, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(356, 148, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -189,8 +189,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(299, 148, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(299, 148, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -212,8 +212,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(280, 148, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(280, 148, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -235,8 +235,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(261, 148, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(261, 148, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -259,8 +259,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(242, 110, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(242, 110, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -283,8 +283,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(261, 110, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(261, 110, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -307,8 +307,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(243, 86, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(243, 86, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -331,8 +331,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(279, 86, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(279, 86, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -355,8 +355,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(314, 74, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(314, 74, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -379,8 +379,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(337, 74, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(337, 74, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -403,8 +403,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(243, 49, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(243, 49, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -427,8 +427,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(279, 49, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(279, 49, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -451,8 +451,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(314, 37, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(314, 37, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -475,8 +475,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(337, 37, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(337, 37, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -499,8 +499,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(243, 12, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(243, 12, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -522,8 +522,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(279, 12, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(279, 12, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -545,8 +545,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(314, 0, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(314, 0, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -568,8 +568,8 @@ namespace LegendOfZeldaClone
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(337, 0, height, width);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, height, width);
+            Rectangle sourceRectangle = new Rectangle(337, 0, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);

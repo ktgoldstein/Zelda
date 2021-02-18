@@ -73,52 +73,52 @@ namespace LegendOfZeldaClone
         }
         public ISprite CreateKeyDoorUp()
         {
-            return new KeyDoorUp(objectSpriteSheet, 32, 16);
+            return new KeyDoorUp(objectSpriteSheet, 16, 32);
         }
         public ISprite CreateKeyDoorDown()
         {
-            return new KeyDoorDown(objectSpriteSheet, 32, 16);
+            return new KeyDoorDown(objectSpriteSheet, 16, 32);
         }
         public ISprite CreatekeyDoorRight()
         {
-            return new KeyDoorRight(objectSpriteSheet, 16, 32);
+            return new KeyDoorRight(objectSpriteSheet, 32, 16);
         }
         public ISprite CreatekeyDoorLeft()
         {
-            return new KeyDoorLeft(objectSpriteSheet, 16, 32);
+            return new KeyDoorLeft(objectSpriteSheet, 32, 16);
         }
         public ISprite CreatelockedDoorUp()
         {
-            return new LockedDoorUp(objectSpriteSheet, 32, 16);
+            return new LockedDoorUp(objectSpriteSheet, 16, 32);
         }
         public ISprite CreatelockedDoorDown()
         {
-            return new LockedDoorDown(objectSpriteSheet, 32, 16);
+            return new LockedDoorDown(objectSpriteSheet, 16, 32);
         }
         public ISprite CreatelockedDoorRight()
         {
-           return new LockedDoorRight(objectSpriteSheet, 16, 32);
+            return new LockedDoorRight(objectSpriteSheet, 32, 16);
         }
         public ISprite CreatelockedDoorLeft()
         {
-            return new LockedDoorLeft(objectSpriteSheet, 16, 32);
+            return new LockedDoorLeft(objectSpriteSheet, 32, 16);
         }
         public ISprite CreateOpenDoorUp()
         {
-            return new OpenDoorUp(objectSpriteSheet, 32, 16);
+            return new OpenDoorUp(objectSpriteSheet, 16, 32);
         }
         public ISprite CreateOpenDoorDown()
         {
-            return new OpenDoorDown(objectSpriteSheet, 32, 16);
+            return new OpenDoorDown(objectSpriteSheet, 16, 32);
         }
         public ISprite CreateOpenDoorRight()
         {
-            return new OpenDoorRight(objectSpriteSheet, 16, 32);
+            return new OpenDoorRight(objectSpriteSheet, 32, 16);
         }
         public ISprite CreateOpenDoorLeft()
         {
-            return new OpenDoorLeft(objectSpriteSheet, 16, 32);
+            return new OpenDoorLeft(objectSpriteSheet, 32, 16);
         }
-        
+
     }
 }

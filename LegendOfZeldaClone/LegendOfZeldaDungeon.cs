@@ -55,7 +55,7 @@ namespace LegendOfZeldaClone
             ICommand actionB = new ActionB(this);
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
             ICommand resetLink = new ResetLink(this);
-            
+
             ICommand setSpriteEnemy = new SetSpriteEnemy(this);
             ICommand nextItem = new NextItem(this);
             ICommand prevItem = new PreviousItem(this);
@@ -77,7 +77,7 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.D6, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.NumPad6, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.R, resetLink);
-            
+
             keyboardController.RegisterCommand(Keys.I, nextItem);
             keyboardController.RegisterCommand(Keys.U, prevItem);
             keyboardController.RegisterCommand(Keys.P, setSpriteEnemy);
@@ -120,7 +120,7 @@ namespace LegendOfZeldaClone
             SpriteEnemy = new Stalfos();
 
             ObjectSpriteFactory.Instance.LoadAllTextures(Content);
-            
+
             Objects.Add(ObjectSpriteFactory.Instance.CreateFlatBlock());
             Objects.Add(ObjectSpriteFactory.Instance.CreateRaisedBlock());
             Objects.Add(ObjectSpriteFactory.Instance.CreateRaisedBlock());
@@ -176,9 +176,9 @@ namespace LegendOfZeldaClone
         protected override void Update(GameTime gameTime)
         {
             controller.Update();
-            
+
             Link.Update();
-            
+
             SpriteEnemy.Update();
 
             CurrItem.Update();
