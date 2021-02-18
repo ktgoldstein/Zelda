@@ -143,6 +143,22 @@ namespace LegendOfZeldaClone
         }
     }
 
+    public class ResetEnemy : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public ResetEnemy(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos();
+        }
+
+    }
+
     public class SetSpriteEnemy : ICommand
     {
         private LegendOfZeldaDungeon myGame;

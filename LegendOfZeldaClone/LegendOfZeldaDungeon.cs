@@ -56,6 +56,7 @@ namespace LegendOfZeldaClone
             ICommand resetLink = new ResetLink(this);
             
             ICommand setSpriteEnemy = new SetSpriteEnemy(this);
+            ICommand resetEnemy = new ResetEnemy(this);
             ICommand nextItem = new NextItem(this);
             ICommand prevItem = new PreviousItem(this);
             ICommand nextObject = new NextObject(this);
@@ -75,8 +76,9 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.N, actionA);
             keyboardController.RegisterCommand(Keys.D6, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.NumPad6, pickUpBlueRing);
-            keyboardController.RegisterCommand(Keys.R, resetLink);
-            
+            //keyboardController.RegisterCommand(Keys.R, resetLink);
+            keyboardController.RegisterCommand(Keys.R, resetEnemy);
+
             keyboardController.RegisterCommand(Keys.I, nextItem);
             keyboardController.RegisterCommand(Keys.U, prevItem);
             keyboardController.RegisterCommand(Keys.P, setSpriteEnemy);
