@@ -22,6 +22,7 @@ namespace LegendOfZeldaClone
 
         public List<ISprite> Objects;
         public ISprite CurrentObject;
+        public int ObjectIndex;
 
         public Texture2D ItemTextures;
         public ISprite[] Items;
