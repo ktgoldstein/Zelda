@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone
@@ -132,6 +133,26 @@ namespace LegendOfZeldaClone
             int xOffset = (spriteSectionWidth + atlasGap) * (int)skinType + 16;
             int yOffset = (spriteSectionHeight + atlasGap) * 2 + 8;
             return new StaticProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight);
+        }
+
+        public ISprite CreateBoomerangSprite(BoomerangSkinType skinType)
+        {
+            int spriteWidth = 8;
+            int spriteHeight = 8;
+            int xOffset = (spriteSectionWidth + atlasGap) * 2 * (int)skinType;
+            int yOffset = (spriteSectionHeight + atlasGap) * 5 + 4;
+            Point[] frameLocations =
+            {
+                new Point(xOffset, yOffset),
+                new Point(xOffset + spriteWidth, yOffset),
+                new Point(xOffset + spriteWidth * 2, yOffset),
+                new Point(xOffset + spriteWidth * 3, yOffset),
+                new Point(xOffset + spriteWidth * 4 + atlasGap, yOffset),
+                new Point(xOffset + spriteWidth * 5 + atlasGap, yOffset),
+                new Point(xOffset + spriteWidth * 6 + atlasGap, yOffset),
+                new Point(xOffset + spriteWidth * 7 + atlasGap, yOffset)
+            };
+            return new RotatingProjectileSprite(playerProjectileSpriteSheet, spriteWidth, spriteHeight, frameLocations);
         }
     }
 }

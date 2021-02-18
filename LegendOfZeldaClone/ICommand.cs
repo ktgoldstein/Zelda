@@ -131,6 +131,24 @@ namespace LegendOfZeldaClone
         }
     }
 
+    public class UseBoomerang : ICommand
+    {
+        private IUsableItem boomerang;
+        private LegendOfZeldaDungeon game;
+
+        public UseBoomerang(LegendOfZeldaDungeon game, BoomerangSkinType skinType)
+        {
+            this.game = game;
+            boomerang = new UsableBoomerang(game, skinType);
+        }
+
+        public void Execute()
+        {
+            ((ILinkPlayer)game.Link).HeldItem = boomerang;
+            game.Link.ActionB();
+        }
+    }
+
     public class PickUpBlueRing : ICommand
     {
         private IUsableItem blueRing;

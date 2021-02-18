@@ -57,7 +57,7 @@ namespace LegendOfZeldaClone
             ICommand useBow = new UseBow(this, ArrowSkinType.Wooden);
             ICommand useSilverBow = new UseBow(this, ArrowSkinType.Silver);
             ICommand useBoomerang = new UseBoomerang(this, BoomerangSkinType.Normal);
-            ICommand useMagicalBoomerang = new UseBoomerang(this, BoomerangSkingType.Magical);
+            ICommand useMagicalBoomerang = new UseBoomerang(this, BoomerangSkinType.Magical);
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
             ICommand resetLink = new ResetLink(this);
             

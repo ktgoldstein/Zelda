@@ -38,6 +38,23 @@ namespace LegendOfZeldaClone
         }
     }
 
+    public class UsableBoomerang : IUsableItem
+    {
+        private LegendOfZeldaDungeon game;
+        private BoomerangSkinType skinType;
+
+        public UsableBoomerang(LegendOfZeldaDungeon game, BoomerangSkinType skinType)
+        {
+            this.game = game;
+            this.skinType = skinType;
+        }
+
+        public void Use(Vector2 location, Direction direction)
+        {
+            game.LinkProjectilesQueue.Add(new BoomerangProjectile(location, direction, skinType, game));
+        }
+    }
+
     public class BlueRing : IUsableItem
     {
         private LegendOfZeldaDungeon game;
