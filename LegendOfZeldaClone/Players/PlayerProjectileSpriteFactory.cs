@@ -15,8 +15,8 @@ namespace LegendOfZeldaClone
 
         private static readonly PlayerProjectileSpriteFactory instance = new PlayerProjectileSpriteFactory();
         private Texture2D playerProjectileSpriteSheet;
-        private readonly int spriteWidth = 16;
-        private readonly int spriteHeight = 16;
+        private readonly int verticalSwordWidth, horizontalSwordHeight = 8;
+        private readonly int verticalSwordHeight, horizontalSwordWidth = 16;
         private readonly int atlasGap = 2;
 
         private PlayerProjectileSpriteFactory() { }
@@ -26,95 +26,41 @@ namespace LegendOfZeldaClone
             playerProjectileSpriteSheet = content.Load<Texture2D>("playerProjectileSpriteSheet");
         }
 
-        public IPlayerProjectile CreateWoodenSwordDownSprite(LinkSkinType skinOffset, int frame)
+        public IPlayerProjectile CreateSwordDownSprite(SwordSkinType WoodenSword, )
         {
+            int spriteWidth = verticalSwordWidth;
+            int spriteHeight = verticalSwordHeight;
+            if (direction == Direction.Left || direction == Direction.Right)
+            {
+                spriteWidth = horizontalSwordWidth;
+                spriteHeight = horizontalSwordHeight;
+            }
             int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
             int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingDown;
-            return new LinkStandingSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
+            return new SwordProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap);
         }
 
-        public IPlayerProjectile CreateWoodenSwordDownSprite(LinkSkinType skinOffset, int frame)
+        public IPlayerProjectile CreateSwordUpSprite(LinkSkinType skinOffset, int frame)
         {
             int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
             int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingUp;
             return new LinkStandingSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
         }
 
-        public IPlayerProjectile CreateWoodenSwordDownSprite(LinkSkinType skinOffset, int frame)
+        public IPlayerProjectile CreateSwordLeftSprite(LinkSkinType skinOffset, int frame)
         {
             int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
             int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingLeft;
             return new LinkStandingSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
         }
 
-        public IPlayerProjectile CreateWoodenSwordDownSprite(LinkSkinType skinOffset, int frame)
+        public IPlayerProjectile CreateSwordRightSprite(LinkSkinType skinOffset, int frame)
         {
             int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
             int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingRight;
             return new LinkStandingSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
         }
 
-        public IPlayerProjectile CreateLinkWalkingDownSprite(LinkSkinType skinOffset, int frame)
-        {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingDown;
-            return new LinkWalkingSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
-        }
 
-        public IPlayerProjectile CreateLinkWalkingUpSprite(LinkSkinType skinOffset, int frame)
-        {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingUp;
-            return new LinkWalkingSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
-        }
-
-        public IPlayerProjectile CreateLinkWalkingLeftSprite(LinkSkinType skinOffset, int frame)
-        {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingLeft;
-            return new LinkWalkingSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
-        }
-
-        public IPlayerProjectile CreateLinkWalkingRightSprite(LinkSkinType skinOffset, int frame)
-        {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.FacingRight;
-            return new LinkWalkingSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
-        }
-
-        public IPlayerProjectile CreateLinkUsingItemDownSprite(LinkSkinType skinOffset, int frame)
-        {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.UsingItemDown;
-            return new LinkUsingItemSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
-        }
-
-        public IPlayerProjectile CreateLinkUsingItemUpSprite(LinkSkinType skinOffset, int frame)
-        {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.UsingItemUp;
-            return new LinkUsingItemSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
-        }
-
-        public IPlayerProjectile CreateLinkUsingItemLeftSprite(LinkSkinType skinOffset, int frame)
-        {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.UsingItemLeft;
-            return new LinkUsingItemSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
-        }
-
-        public IPlayerProjectile CreateLinkUsingItemRightSprite(LinkSkinType skinOffset, int frame)
-        {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.UsingItemRight;
-            return new LinkUsingItemSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
-        }
-
-        public IPlayerProjectile CreateLinkPickingUpItemSprite(LinkSkinType skinOffset, int frame)
-        {
-            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.UsingItemDown;
-            return new LinkPickingUpItemSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
-        }
     }
 }
