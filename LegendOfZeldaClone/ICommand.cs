@@ -296,6 +296,8 @@ namespace LegendOfZeldaClone
             game.CurrentObject = game.Objects[game.ObjectIndex];
 
             game.Link = new LinkPlayer(game, LoZHelpers.LinkStartingLocation);
+
+            game.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos();
         }
     }
 }
