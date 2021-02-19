@@ -75,7 +75,7 @@ namespace LegendOfZeldaClone
 
         public void Use(Vector2 location, Direction direction)
         {
-            game.LinkProjectilesQueue.Add(new FireProjectile(game, location, direction));
+            game.LinkProjectilesQueue.Add(new FireProjectile(location, direction));
         }
     }
 

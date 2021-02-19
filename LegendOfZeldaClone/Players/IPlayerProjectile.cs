@@ -408,12 +408,26 @@ namespace LegendOfZeldaClone
 
         private void SpawnExplosions(int seed)
         {
-
+            int explosionWidth = 16;
+            int explosionHeight = 16;
+            game.LinkProjectilesQueue.Add(new BombExplosionProjectile(location));
+            Vector2 topLeft = location + new Vector2(-LoZHelpers.Scale(explosionWidth / 2), -LoZHelpers.Scale(explosionHeight));
+            Vector2 topRight = location + new Vector2(LoZHelpers.Scale(explosionWidth / 2), -LoZHelpers.Scale(explosionHeight));
+            Vector2 middleLeft = location + new Vector2(-LoZHelpers.Scale(explosionWidth), 0);
+            Vector2 middleRight = location + new Vector2(LoZHelpers.Scale(explosionWidth), 0);
+            Vector2 bottomLeft = location + new Vector2(-LoZHelpers.Scale(explosionWidth / 2), LoZHelpers.Scale(explosionHeight));
+            Vector2 bottomRight = location + new Vector2(LoZHelpers.Scale(explosionWidth / 2), LoZHelpers.Scale(explosionHeight));
             switch (seed)
             {
-                case 1:
+                case 0:
+                    game.LinkProjectilesQueue.Add(new BombExplosionProjectile(topLeft));
+                    game.LinkProjectilesQueue.Add(new BombExplosionProjectile(middleRight));
+                    game.LinkProjectilesQueue.Add(new BombExplosionProjectile(bottomRight));
                     break;
-                case 2:
+                case 1:
+                    game.LinkProjectilesQueue.Add(new BombExplosionProjectile(topRight));
+                    game.LinkProjectilesQueue.Add(new BombExplosionProjectile(middleLeft));
+                    game.LinkProjectilesQueue.Add(new BombExplosionProjectile(bottomLeft));
                     break;
             }
         }
@@ -442,6 +456,7 @@ namespace LegendOfZeldaClone
                 sprite.Update();
             else if (lifeSpan == (int)(maxLifeSpan / 4.0))
                 sprite.Update();
+            lifeSpan--;
             return false;
         }
 

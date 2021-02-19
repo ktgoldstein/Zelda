@@ -164,7 +164,7 @@ namespace LegendOfZeldaClone
             return new StaticProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight);
         }
 
-        public ISprite CreateBombExplosionSprite() //separate from CreateBombSprite bc this sprite will be repeated 4 times
+        public ISprite CreateBombExplosionSprite()
         {
             int spriteWidth = 16;
             int spriteHeight = 16;
@@ -173,25 +173,10 @@ namespace LegendOfZeldaClone
             Point[] frameLocations =
             {
                 new Point(xOffset, yOffset),
-                new Point(xOffset + spriteWidth, yOffset),
-                new Point(xOffset + spriteWidth * 2, yOffset),
+                new Point(xOffset + spriteWidth + atlasGap, yOffset),
+                new Point(xOffset + spriteWidth * 2 + atlasGap, yOffset)
             };
             return new CyclingProjectileSprite(playerProjectileSpriteSheet, spriteWidth, spriteHeight, frameLocations);
-        }
-
-        public ISprite CreateFullBombExplosionSprite() //repeat code from CreateBombExplosionSprite
-        {
-            int spriteWidth = 16;
-            int spriteHeight = 16;
-            int xOffset = spriteWidth;
-            int yOffset = (spriteSectionHeight + atlasGap) * 6;
-            Point[] frameLocations =
-            {
-                new Point(xOffset, yOffset),
-                new Point(xOffset + spriteWidth, yOffset),
-                new Point(xOffset + spriteWidth * 2, yOffset),
-            };
-            return new MultipleCyclingProjectileSprite(playerProjectileSpriteSheet, spriteWidth, spriteHeight, frameLocations);
         }
 
         public ISprite CreateFireSprite()
