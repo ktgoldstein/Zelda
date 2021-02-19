@@ -354,22 +354,114 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class FireProjectile : IPlayerProjectile
+    public class BombProjectile : IPlayerProjectile
     {
         private LegendOfZeldaDungeon game;
+        private ISprite sprite;
+        private Vector2 location;
+        private int lifeSpan;
+
+        public BombProjectile(LegendOfZeldaDungeon game, Vector2 startingLocation, Direction direction)
+        {
+            this.game = game;
+            location = startingLocation;
+            lifeSpan = 40;
+            sprite = PlayerProjectileSpriteFactory.Instance.CreateBombSprite();
+            DirectionBasedSetUp(direction);
+        }
+
+        public bool Update()
+        {
+            if (lifeSpan == 0)
+            {
+                location -= new Vector2(LoZHelpers.Scale(4), 0);
+                Random rnd = new Random();
+                int explosionSeed = rnd.Next(2);
+                SpawnExplosions(explosionSeed);
+                return true;
+            }
+
+            lifeSpan--;
+            return false;
+        }
+
+        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);
+
+        private void DirectionBasedSetUp(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Down:
+                    location += new Vector2(LoZHelpers.Scale(4), LoZHelpers.Scale(16));
+                    break;
+                case Direction.Up:
+                    location += new Vector2(LoZHelpers.Scale(4), -LoZHelpers.Scale(16));
+                    break;
+                case Direction.Left:
+                    location += new Vector2(-LoZHelpers.Scale(8), 0);
+                    break;
+                case Direction.Right:
+                    location += new Vector2(LoZHelpers.Scale(16), 0);
+                    break;
+            }
+        }
+
+        private void SpawnExplosions(int seed)
+        {
+
+            switch (seed)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
+        }
+    }
+
+    public class BombExplosionProjectile : IPlayerProjectile
+    {
+        private ISprite sprite;
+        private Vector2 location;
+        private int maxLifeSpan;
+        private int lifeSpan;
+
+        public BombExplosionProjectile(Vector2 startingLocation)
+        {
+            location = startingLocation;
+            maxLifeSpan = 16;
+            lifeSpan = maxLifeSpan;
+            sprite = PlayerProjectileSpriteFactory.Instance.CreateBombExplosionSprite();
+        }
+
+        public bool Update()
+        {
+            if (lifeSpan == 0)
+                return true;
+            else if (lifeSpan == (int)(maxLifeSpan / 2.0))
+                sprite.Update();
+            else if (lifeSpan == (int)(maxLifeSpan / 4.0))
+                sprite.Update();
+            return false;
+        }
+
+        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);
+    }
+
+    public class FireProjectile : IPlayerProjectile
+    {
         private ISprite sprite;
         private Vector2 velocity;
         private Vector2 location;
         private int speed;
         private int lifeSpan;
 
-        public FireProjectile(LegendOfZeldaDungeon game, Vector2 startingLocation, Direction direction)
+        public FireProjectile(Vector2 startingLocation, Direction direction)
         {
-            this.game = game;
             location = startingLocation;
             speed = 1;
             lifeSpan = 20;
-            sprite = PlayerProjectileSpriteFactory.Instance.CreateFireProjectileSprite();
+            sprite = PlayerProjectileSpriteFactory.Instance.CreateFireSprite();
             DirectionBasedSetUp(direction);
         }
 

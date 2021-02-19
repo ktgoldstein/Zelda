@@ -55,6 +55,18 @@ namespace LegendOfZeldaClone
         }
     }
 
+    public class UsableBomb : IUsableItem
+    {
+        private LegendOfZeldaDungeon game;
+
+        public UsableBomb(LegendOfZeldaDungeon game) => this.game = game;
+
+        public void Use(Vector2 location, Direction direction)
+        {
+            game.LinkProjectilesQueue.Add(new BombProjectile(game, location, direction));
+        }
+    }
+
     public class UsableBlueCandle : IUsableItem
     {
         private LegendOfZeldaDungeon game;
