@@ -384,6 +384,7 @@ namespace LegendOfZeldaClone
 
             IUsableItem woodenSword = new UsableWoodenSword(game);
             game.Link = new LinkPlayer(game, LoZHelpers.LinkStartingLocation, woodenSword);
+            game.LinkProjectiles.Clear();
 
             game.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos();
         }

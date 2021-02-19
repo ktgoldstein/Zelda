@@ -20,7 +20,7 @@ namespace LegendOfZeldaClone
 
         public IPlayer Link;
         public List<IPlayerProjectile> LinkProjectilesQueue;
-        private List<IPlayerProjectile> LinkProjectiles;
+        public List<IPlayerProjectile> LinkProjectiles;
 
         public List<ISprite> Objects;
         public ISprite CurrentObject;
@@ -220,7 +220,7 @@ namespace LegendOfZeldaClone
 
             List<IPlayerProjectile> deadProjectiles = new List<IPlayerProjectile>();
             LinkProjectiles.AddRange(LinkProjectilesQueue);
-            LinkProjectilesQueue = new List<IPlayerProjectile>();
+            LinkProjectilesQueue.Clear();
             foreach (IPlayerProjectile projectile in LinkProjectiles)
             {
                 if (projectile.Update())
