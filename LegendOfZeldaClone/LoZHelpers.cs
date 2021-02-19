@@ -2,6 +2,57 @@
 
 namespace LegendOfZeldaClone
 {
+
+    public enum Direction
+    {
+        Down,
+        Up,
+        Left,
+        Right,
+        UpLeft,
+        UpRight,
+        DownLeft,
+        DownRight,
+        None
+    }
+
+    public enum LinkStateType
+    {
+        StandingDown,
+        StandingUp,
+        StandingLeft,
+        StandingRight,
+        WalkingDown,
+        WalkingUp,
+        WalkingLeft,
+        WalkingRight,
+        UsingItemDown,
+        UsingItemUp,
+        UsingItemLeft,
+        UsingItemRight,
+        PickingUpItem
+    }
+
+    public enum SwordSkinType
+    {
+        WoodenSword = 0,
+        WhiteSword = 1,
+        MagicSword = 2,
+        DemonSword = 3
+    }
+
+    public enum ArrowSkinType
+    {
+        Wooden = 0,
+        Silver = 1
+    }
+
+    public enum BoomerangSkinType
+    {
+        Normal = 0,
+        Magical = 1
+    }
+
     public enum LinkSkinType
     {
         Normal = 0,
@@ -27,9 +78,9 @@ namespace LegendOfZeldaClone
     public static class LoZHelpers
     {
         public static Vector2 LinkStartingLocation => new Vector2(GameWidth / 2 - 16, GameHeight / 2 - 16);
-        public static int GameHeight => 256;
-        public static int GameWidth => 512;
-        public static int LinkSpeed => 2;
+        public static int GameHeight => Scale(256);
+        public static int GameWidth => Scale(512);
+        public static int LinkInvincibilityFrames => 24;
         public static int SpriteSizeMultiplier => 2;
         public static int Scale(int original) => original * SpriteSizeMultiplier;
     }

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LegendOfZeldaClone
 {
@@ -12,13 +13,14 @@ namespace LegendOfZeldaClone
         private SpriteBatch _spriteBatch;
 
         private IController controller;
+
         public List<IEnemy> enemyList;
-
-        public Texture2D LinkTextures;
-
         public int switchEnemyNum;
         public IEnemy SpriteEnemy;
+
         public IPlayer Link;
+        public List<IPlayerProjectile> LinkProjectilesQueue;
+        private List<IPlayerProjectile> LinkProjectiles;
 
         public List<ISprite> Objects;
         public ISprite CurrentObject;
@@ -56,7 +58,13 @@ namespace LegendOfZeldaClone
             ICommand moveLeft = new MoveLeft(this);
             ICommand moveRight = new MoveRight(this);
             ICommand actionA = new ActionA(this);
-            ICommand actionB = new ActionB(this);
+            ICommand damageLink = new DamageLink(this);
+            ICommand useBow = new UseBow(this, ArrowSkinType.Wooden);
+            ICommand useSilverBow = new UseBow(this, ArrowSkinType.Silver);
+            ICommand useBoomerang = new UseBoomerang(this, BoomerangSkinType.Normal);
+            ICommand useMagicalBoomerang = new UseBoomerang(this, BoomerangSkinType.Magical);
+            ICommand useBomb = new UseBomb(this);
+            ICommand useBlueCandle = new UseBlueCandle(this);
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
             
             ICommand resetGame = new ResetGame(this);
@@ -79,8 +87,21 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.Right, moveRight);
             keyboardController.RegisterCommand(Keys.Z, actionA);
             keyboardController.RegisterCommand(Keys.N, actionA);
-            keyboardController.RegisterCommand(Keys.D6, pickUpBlueRing);
-            keyboardController.RegisterCommand(Keys.NumPad6, pickUpBlueRing);
+            keyboardController.RegisterCommand(Keys.E, damageLink);
+            keyboardController.RegisterCommand(Keys.D1, useBow);
+            keyboardController.RegisterCommand(Keys.D2, useSilverBow);
+            keyboardController.RegisterCommand(Keys.D3, useBoomerang);
+            keyboardController.RegisterCommand(Keys.D4, useMagicalBoomerang);
+            keyboardController.RegisterCommand(Keys.D5, useBomb);
+            keyboardController.RegisterCommand(Keys.D6, useBlueCandle);
+            keyboardController.RegisterCommand(Keys.D7, pickUpBlueRing);
+            keyboardController.RegisterCommand(Keys.NumPad1, useBow);
+            keyboardController.RegisterCommand(Keys.NumPad2, useSilverBow);
+            keyboardController.RegisterCommand(Keys.NumPad3, useBoomerang);
+            keyboardController.RegisterCommand(Keys.NumPad4, useMagicalBoomerang);
+            keyboardController.RegisterCommand(Keys.NumPad5, useBomb);
+            keyboardController.RegisterCommand(Keys.NumPad6, useBlueCandle);
+            keyboardController.RegisterCommand(Keys.NumPad7, pickUpBlueRing);
 
             keyboardController.RegisterCommand(Keys.R, resetGame);
 
@@ -122,8 +143,12 @@ namespace LegendOfZeldaClone
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
+            PlayerProjectileSpriteFactory.Instance.LoadAllTextures(Content);
 
-            Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation);
+            LinkProjectilesQueue = new List<IPlayerProjectile>();
+            LinkProjectiles = new List<IPlayerProjectile>();
+            IUsableItem woodenSword = new UsableWoodenSword(this);
+            Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
 
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             SpriteEnemy = new Stalfos();
@@ -193,6 +218,16 @@ namespace LegendOfZeldaClone
 
             Link.Update();
 
+            List<IPlayerProjectile> deadProjectiles = new List<IPlayerProjectile>();
+            LinkProjectiles.AddRange(LinkProjectilesQueue);
+            LinkProjectilesQueue = new List<IPlayerProjectile>();
+            foreach (IPlayerProjectile projectile in LinkProjectiles)
+            {
+                if (projectile.Update())
+                    deadProjectiles.Add(projectile);
+            }
+            LinkProjectiles = LinkProjectiles.Except(deadProjectiles).ToList();
+            
             SpriteEnemy.Update();
 
             if (CurrItem == fairy)
@@ -227,7 +262,11 @@ namespace LegendOfZeldaClone
 
             _spriteBatch.Begin();
 
+            foreach (IPlayerProjectile projectile in LinkProjectiles)
+                projectile.Draw(_spriteBatch);
+
             Link.Draw(_spriteBatch);
+
             SpriteEnemy.Draw(_spriteBatch);
             CurrItem.Draw(_spriteBatch, itemVector);
 

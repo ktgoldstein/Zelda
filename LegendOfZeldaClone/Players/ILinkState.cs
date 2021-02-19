@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace LegendOfZeldaClone
 {
@@ -9,8 +10,8 @@ namespace LegendOfZeldaClone
         public void MoveDown();
         public void MoveLeft();
         public void MoveRight();
-        public bool Action();
-        //public void Damage();
+        public Direction Action();
+        public Tuple<LinkStateType, int> GetState();
         public void Draw(SpriteBatch spriteBatch);
         public void Update();
     }
@@ -20,10 +21,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkStandingDown(ILinkPlayer link)
+        public LinkStandingDown(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkStandingDownSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkStandingDownSprite(link.SkinType, frame);
         }
         
         public void MoveUp() => link.SetState(link.GetStateWalkingingUp());
@@ -31,13 +32,13 @@ namespace LegendOfZeldaClone
         public void MoveLeft() => link.SetState(link.GetStateWalkingingLeft());
         public void MoveRight() => link.SetState(link.GetStateWalkingingRight());
         
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemDown());
-            return true;
+            return Direction.Down;
         }
 
-        //public void Damage();
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingDown, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
         public void Update() => sprite.Update();
     }
@@ -47,10 +48,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkStandingUp(ILinkPlayer link)
+        public LinkStandingUp(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkStandingUpSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkStandingUpSprite(link.SkinType, frame);
         }
 
         public void MoveUp() => link.SetState(link.GetStateWalkingingUp());
@@ -58,13 +59,13 @@ namespace LegendOfZeldaClone
         public void MoveLeft() => link.SetState(link.GetStateWalkingingLeft());
         public void MoveRight() => link.SetState(link.GetStateWalkingingRight());
         
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemUp());
-            return true;
+            return Direction.Up;
         }
 
-        //public void Damage();
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingUp, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
         public void Update() => sprite.Update();
     }
@@ -74,10 +75,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkStandingLeft(ILinkPlayer link)
+        public LinkStandingLeft(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkStandingLeftSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkStandingLeftSprite(link.SkinType, frame);
         }
 
         public void MoveUp() => link.SetState(link.GetStateWalkingingUp());
@@ -85,13 +86,13 @@ namespace LegendOfZeldaClone
         public void MoveLeft() => link.SetState(link.GetStateWalkingingLeft());
         public void MoveRight() => link.SetState(link.GetStateWalkingingRight());
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemLeft());
-            return true;
+            return Direction.Left;
         }
 
-        //public void Damage();
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingLeft, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
         public void Update() => sprite.Update();
     }
@@ -101,10 +102,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkStandingRight(ILinkPlayer link)
+        public LinkStandingRight(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkStandingRightSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkStandingRightSprite(link.SkinType, frame);
         }
 
         public void MoveUp() => link.SetState(link.GetStateWalkingingUp());
@@ -112,13 +113,13 @@ namespace LegendOfZeldaClone
         public void MoveLeft() => link.SetState(link.GetStateWalkingingLeft());
         public void MoveRight() => link.SetState(link.GetStateWalkingingRight());
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemRight());
-            return true;
+            return Direction.Right;
         }
 
-        //public void Damage();
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingRight, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
         public void Update() => sprite.Update();
     }
@@ -128,10 +129,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkWalkingDown(ILinkPlayer link)
+        public LinkWalkingDown(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingDownSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingDownSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -139,18 +140,18 @@ namespace LegendOfZeldaClone
         public void MoveLeft() { }
         public void MoveRight() { }
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemDown());
-            return true;
+            return Direction.Down;
         }
 
-        //public void Damage();
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.WalkingDown, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
         public void Update()
         {
-            link.Location += new Vector2(0, LoZHelpers.LinkSpeed);
+            link.Location += new Vector2(0, link.Speed);
             sprite.Update();
             if (sprite.AnimationDone())
                 link.SetState(link.GetStateStandingDown());
@@ -162,10 +163,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkWalkingUp(ILinkPlayer link)
+        public LinkWalkingUp(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingUpSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingUpSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -173,18 +174,18 @@ namespace LegendOfZeldaClone
         public void MoveLeft() { }
         public void MoveRight() { }
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemUp());
-            return true;
+            return Direction.Up;
         }
 
-        //public void Damage();
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.WalkingUp, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
         public void Update()
         {
-            link.Location -= new Vector2(0, LoZHelpers.LinkSpeed);
+            link.Location -= new Vector2(0, link.Speed);
             sprite.Update();
             if (sprite.AnimationDone())
                 link.SetState(link.GetStateStandingUp());
@@ -196,10 +197,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkWalkingLeft(ILinkPlayer link)
+        public LinkWalkingLeft(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingLeftSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingLeftSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -207,18 +208,18 @@ namespace LegendOfZeldaClone
         public void MoveLeft() { }
         public void MoveRight() { }
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemLeft());
-            return true;
+            return Direction.Left;
         }
 
-        //public void Damage();
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.WalkingLeft, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
         public void Update()
         {
-            link.Location -= new Vector2(LoZHelpers.LinkSpeed, 0);
+            link.Location -= new Vector2(link.Speed, 0);
             sprite.Update();
             if (sprite.AnimationDone())
                 link.SetState(link.GetStateStandingLeft());
@@ -230,10 +231,10 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkWalkingRight(ILinkPlayer link)
+        public LinkWalkingRight(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingRightSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingRightSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -241,18 +242,18 @@ namespace LegendOfZeldaClone
         public void MoveLeft() { }
         public void MoveRight() { }
 
-        public bool Action()
+        public Direction Action()
         {
             link.SetState(link.GetStateUsingItemRight());
-            return true;
+            return Direction.Right;
         }
 
-        //public void Damage();
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.WalkingRight, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
         public void Update()
         {
-            link.Location += new Vector2(LoZHelpers.LinkSpeed, 0);
+            link.Location += new Vector2(link.Speed, 0);
             sprite.Update();
             if (sprite.AnimationDone())
                 link.SetState(link.GetStateStandingRight());
@@ -264,18 +265,18 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkUsingItemDown(ILinkPlayer link)
+        public LinkUsingItemDown(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemDownSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemDownSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
-        public bool Action() => false;
-        //public void Damage();
+        public Direction Action() => Direction.None;
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.UsingItemDown, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
         public void Update()
@@ -291,18 +292,18 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkUsingItemUp(ILinkPlayer link)
+        public LinkUsingItemUp(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemUpSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemUpSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
-        public bool Action() => false;
-        //public void Damage();
+        public Direction Action() => Direction.None;
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.UsingItemUp, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
         public void Update()
@@ -318,18 +319,18 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkUsingItemLeft(ILinkPlayer link)
+        public LinkUsingItemLeft(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemLeftSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemLeftSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
-        public bool Action() => false;
-        //public void Damage();
+        public Direction Action() => Direction.None;
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.UsingItemLeft, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
         public void Update()
@@ -345,18 +346,18 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkUsingItemRight(ILinkPlayer link)
+        public LinkUsingItemRight(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemRightSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkUsingItemRightSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
-        public bool Action() => false;
-        //public void Damage();
+        public Direction Action() => Direction.None;
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.UsingItemRight, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
         public void Update()
@@ -372,18 +373,18 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer link;
         private readonly ILinkSprite sprite;
 
-        public LinkPickingUpItem(ILinkPlayer link)
+        public LinkPickingUpItem(ILinkPlayer link, int frame = 0)
         {
             this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkPickingUpItemSprite(link.SkinType);
+            sprite = LinkSpriteFactory.Instance.CreateLinkPickingUpItemSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
-        public bool Action() => false;
-        //public void Damage();
+        public Direction Action() => Direction.None;
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.PickingUpItem, sprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
 
         public void Update()
