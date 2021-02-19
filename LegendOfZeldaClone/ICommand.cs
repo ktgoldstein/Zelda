@@ -226,6 +226,11 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
+            if (myGame.SwitchEnemyDelay != 0)
+                return;
+            else
+                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
+
             // Cycle counter
             if (Keyboard.GetState().IsKeyDown(Keys.P))
             {
@@ -295,6 +300,11 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
+            if (myGame.SwitchItemDelay != 0)
+                return;
+            else
+                myGame.SwitchItemDelay = myGame.SwitchDelayLength;
+
             if (myGame.itemIndex == 0)
             {
                 myGame.itemIndex = myGame.Items.Length - 1;
@@ -319,6 +329,11 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
+            if (myGame.SwitchItemDelay != 0)
+                return;
+            else
+                myGame.SwitchItemDelay = myGame.SwitchDelayLength;
+
             if (myGame.itemIndex == myGame.Items.Length - 1)
             {
                 myGame.itemIndex = 0;
@@ -342,6 +357,11 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
+            if (myGame.SwitchObjectDelay != 0)
+                return;
+            else
+                myGame.SwitchObjectDelay = myGame.SwitchDelayLength;
+
             myGame.ObjectIndex++;
             if (myGame.ObjectIndex > myGame.Objects.Count - 1)
                 myGame.ObjectIndex = 0;
@@ -358,6 +378,11 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
+            if (myGame.SwitchObjectDelay != 0)
+                return;
+            else
+                myGame.SwitchObjectDelay = myGame.SwitchDelayLength;
+
             myGame.ObjectIndex--;
             if (myGame.ObjectIndex < 0)
                 myGame.ObjectIndex = myGame.Objects.Count - 1;

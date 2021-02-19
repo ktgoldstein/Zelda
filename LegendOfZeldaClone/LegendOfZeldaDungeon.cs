@@ -35,6 +35,11 @@ namespace LegendOfZeldaClone
         public int yDirection;
         public ISprite fairy;
 
+        public int SwitchEnemyDelay;
+        public int SwitchObjectDelay;
+        public int SwitchItemDelay;
+        public int SwitchDelayLength = 5;
+
         public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -135,6 +140,10 @@ namespace LegendOfZeldaClone
             ObjectIndex = 0;
             Objects = new List<ISprite>();
 
+            SwitchEnemyDelay = 0;
+            SwitchItemDelay = 0;
+            SwitchObjectDelay = 0;
+
             base.Initialize();
         }
 
@@ -214,6 +223,13 @@ namespace LegendOfZeldaClone
 
         protected override void Update(GameTime gameTime)
         {
+            if (SwitchObjectDelay > 0)
+                SwitchObjectDelay--;
+            if (SwitchItemDelay > 0)
+                SwitchItemDelay--;
+            if (SwitchEnemyDelay > 0)
+                SwitchEnemyDelay--;
+
             controller.Update();
 
             Link.Update();
