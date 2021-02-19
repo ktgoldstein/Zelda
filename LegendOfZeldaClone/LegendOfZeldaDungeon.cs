@@ -62,7 +62,6 @@ namespace LegendOfZeldaClone
             ICommand resetGame = new ResetGame(this);
 
             ICommand setSpriteEnemy = new SetSpriteEnemy(this);
-            ICommand resetEnemy = new ResetEnemy(this);
             ICommand nextItem = new NextItem(this);
             ICommand prevItem = new PreviousItem(this);
             ICommand nextObject = new NextObject(this);
