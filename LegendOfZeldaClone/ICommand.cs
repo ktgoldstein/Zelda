@@ -154,7 +154,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos();
+            myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos(LoZHelpers.EnemyStartingLocation);
         }
 
     }
@@ -191,37 +191,37 @@ namespace LegendOfZeldaClone
             {
                 case 1:
                     {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Aquamentus();
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Aquamentus(LoZHelpers.EnemyStartingLocation);
                         break;
                     }
                 case 2:
                     {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Goriya();
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Goriya(LoZHelpers.EnemyStartingLocation);
                         break;
                     }
                 case 3:
                     {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.BladeTrap();
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.BladeTrap(LoZHelpers.EnemyStartingLocation);
                         break;
                     }
                 case 4:
                     {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Keese();
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Keese(LoZHelpers.EnemyStartingLocation);
                         break;
                     }
                 case 5:
                     {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Gel();
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Gel(LoZHelpers.EnemyStartingLocation);
                         break;
                     }
                 case 6:
                     {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Wallmaster();
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Wallmaster(LoZHelpers.EnemyStartingLocation);
                         break;
                     }
                 default:
                     {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos();
+                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos(LoZHelpers.EnemyStartingLocation);
                         break;
                     }
             }

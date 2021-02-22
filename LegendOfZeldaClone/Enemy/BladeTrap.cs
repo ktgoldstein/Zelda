@@ -10,13 +10,14 @@ namespace LegendOfZeldaClone.Enemy
     {
 
         private ISprite bladeTrapSprite;
-        private Vector2 location = new Vector2(400, 120);
+        private Vector2 location;
         private float speed = 2;
         private int direction = 1;
 
-        public BladeTrap()
+        public BladeTrap(Vector2 location)
         {
             bladeTrapSprite = EnemySpriteFactory.Instance.CreateBladeTrapSprite();
+            this.location = location;
         }
         public void Draw(SpriteBatch spritebatch)
         {

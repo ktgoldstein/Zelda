@@ -91,13 +91,13 @@ namespace LegendOfZeldaClone
             switchEnemyNum = 0;
             enemyList = new List<IEnemy>
             {
-                new Aquamentus(),
-                new Goriya(),
-                new Stalfos(),
-                new BladeTrap(),
-                new Gel(),
-                new Keese(),
-                new Wallmaster()
+                new Aquamentus(LoZHelpers.EnemyStartingLocation),
+                new Goriya(LoZHelpers.EnemyStartingLocation),
+                new Stalfos(LoZHelpers.EnemyStartingLocation),
+                new BladeTrap(LoZHelpers.EnemyStartingLocation),
+                new Gel(LoZHelpers.EnemyStartingLocation),
+                new Keese(LoZHelpers.EnemyStartingLocation),
+                new Wallmaster(LoZHelpers.EnemyStartingLocation)
             };
 
             ItemIndex = 0;
@@ -117,7 +117,7 @@ namespace LegendOfZeldaClone
             Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation);
 
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
-            SpriteEnemy = new Stalfos();
+            SpriteEnemy = new Stalfos(LoZHelpers.EnemyStartingLocation);
 
             ObjectSpriteFactory.Instance.LoadAllTextures(Content);
             currentObject = ObjectSpriteFactory.Instance.CreatedefaultFlatBlock();

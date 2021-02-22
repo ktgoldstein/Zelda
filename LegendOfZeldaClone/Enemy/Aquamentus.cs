@@ -9,15 +9,16 @@ namespace LegendOfZeldaClone.Enemy
     class Aquamentus : IEnemy
     {
         private ISprite aquamentusSprite;
-        private Vector2 location = new Vector2(400, 120);
+        private Vector2 location;
         private float speed = 2;
         private int direction = 1;
         private int timer = 0;
         private List<Fireball> fireballs = new List<Fireball>();
     
-        public Aquamentus()
+        public Aquamentus(Vector2 location)
         {
             aquamentusSprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
+            this.location = location;
         }
 
         public void Draw(SpriteBatch spritebatch)

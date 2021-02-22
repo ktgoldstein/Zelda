@@ -13,7 +13,7 @@ namespace LegendOfZeldaClone.Enemy
         private int currentFrame = 0;
         private int totalFrames;
         private Texture2D texture;
-        private int count = 0;
+        private int frameDelay = 0;
         private float animationSpeed;
 
 
@@ -29,10 +29,10 @@ namespace LegendOfZeldaClone.Enemy
         public void Update()
         {
             
-            count++;
-            if (count == animationSpeed)
+            frameDelay++;
+            if (frameDelay == animationSpeed)
             {
-                count = 0;
+                frameDelay = 0;
                 currentFrame++;
                 if (currentFrame >= totalFrames)
                 {

@@ -33,14 +33,14 @@ namespace LegendOfZeldaClone.Enemy
             timer++;
             if(timer > 20)
             {
-                direction = goriya.getGoriyaLocation() - location;
+                direction = goriya.GetGoriyaLocation() - location;
                 direction.Normalize();
             }
             
             location += direction * speed;
-            if (Vector2.Distance(location, goriya.getGoriyaLocation()) < 5)
+            if (Vector2.Distance(location, goriya.GetGoriyaLocation()) < 5)
             {
-                goriya.catchBoomerang();
+                goriya.CatchBoomerang();
             }
             boomerangSprite.Update();
         }
