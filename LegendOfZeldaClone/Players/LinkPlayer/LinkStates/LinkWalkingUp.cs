@@ -6,13 +6,13 @@ namespace LegendOfZeldaClone
 {
     public class LinkWalkingUp : ILinkState
     {
-        private readonly ILinkPlayer link;
-        private readonly ILinkSprite sprite;
+        private readonly ILinkPlayer linkPlayer;
+        private readonly ILinkSprite linkSprite;
 
         public LinkWalkingUp(ILinkPlayer link, int frame = 0)
         {
-            this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkWalkingUpSprite(link.SkinType, frame);
+            this.linkPlayer = link;
+            linkSprite = LinkSpriteFactory.Instance.CreateLinkWalkingUpSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -22,19 +22,19 @@ namespace LegendOfZeldaClone
 
         public Direction Action()
         {
-            link.SetState(link.GetStateUsingItemUp());
+            linkPlayer.SetState(linkPlayer.GetStateUsingItemUp());
             return Direction.Up;
         }
 
-        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.WalkingUp, sprite.CurrentFrame);
-        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.WalkingUp, linkSprite.CurrentFrame);
+        public void Draw(SpriteBatch spriteBatch) => linkSprite.Draw(spriteBatch, linkPlayer.Location);
 
         public void Update()
         {
-            link.Location -= new Vector2(0, link.Speed);
-            sprite.Update();
-            if (sprite.AnimationDone())
-                link.SetState(link.GetStateStandingUp());
+            linkPlayer.Location -= new Vector2(0, linkPlayer.Speed);
+            linkSprite.Update();
+            if (linkSprite.AnimationDone())
+                linkPlayer.SetState(linkPlayer.GetStateStandingUp());
         }
     }
 }

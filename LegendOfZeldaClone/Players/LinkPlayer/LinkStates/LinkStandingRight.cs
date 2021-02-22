@@ -5,28 +5,28 @@ namespace LegendOfZeldaClone
 {
     public class LinkStandingRight : ILinkState
     {
-        private readonly ILinkPlayer link;
-        private readonly ILinkSprite sprite;
+        private readonly ILinkPlayer linkPlayer;
+        private readonly ILinkSprite linkSprite;
 
         public LinkStandingRight(ILinkPlayer link, int frame = 0)
         {
-            this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkStandingRightSprite(link.SkinType, frame);
+            this.linkPlayer = link;
+            linkSprite = LinkSpriteFactory.Instance.CreateLinkStandingRightSprite(link.SkinType, frame);
         }
 
-        public void MoveUp() => link.SetState(link.GetStateWalkingingUp());
-        public void MoveDown() => link.SetState(link.GetStateWalkingingDown());
-        public void MoveLeft() => link.SetState(link.GetStateWalkingingLeft());
-        public void MoveRight() => link.SetState(link.GetStateWalkingingRight());
+        public void MoveUp() => linkPlayer.SetState(linkPlayer.GetStateWalkingingUp());
+        public void MoveDown() => linkPlayer.SetState(linkPlayer.GetStateWalkingingDown());
+        public void MoveLeft() => linkPlayer.SetState(linkPlayer.GetStateWalkingingLeft());
+        public void MoveRight() => linkPlayer.SetState(linkPlayer.GetStateWalkingingRight());
 
         public Direction Action()
         {
-            link.SetState(link.GetStateUsingItemRight());
+            linkPlayer.SetState(linkPlayer.GetStateUsingItemRight());
             return Direction.Right;
         }
 
-        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingRight, sprite.CurrentFrame);
-        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
-        public void Update() => sprite.Update();
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingRight, linkSprite.CurrentFrame);
+        public void Draw(SpriteBatch spriteBatch) => linkSprite.Draw(spriteBatch, linkPlayer.Location);
+        public void Update() => linkSprite.Update();
     }
 }

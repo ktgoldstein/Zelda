@@ -5,13 +5,13 @@ namespace LegendOfZeldaClone
 {
     public class LinkPickingUpItem : ILinkState
     {
-        private readonly ILinkPlayer link;
-        private readonly ILinkSprite sprite;
+        private readonly ILinkPlayer linkPlayer;
+        private readonly ILinkSprite linkSprite;
 
         public LinkPickingUpItem(ILinkPlayer link, int frame = 0)
         {
-            this.link = link;
-            sprite = LinkSpriteFactory.Instance.CreateLinkPickingUpItemSprite(link.SkinType, frame);
+            this.linkPlayer = link;
+            linkSprite = LinkSpriteFactory.Instance.CreateLinkPickingUpItemSprite(link.SkinType, frame);
         }
 
         public void MoveUp() { }
@@ -19,14 +19,14 @@ namespace LegendOfZeldaClone
         public void MoveLeft() { }
         public void MoveRight() { }
         public Direction Action() => Direction.None;
-        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.PickingUpItem, sprite.CurrentFrame);
-        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, link.Location);
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.PickingUpItem, linkSprite.CurrentFrame);
+        public void Draw(SpriteBatch spriteBatch) => linkSprite.Draw(spriteBatch, linkPlayer.Location);
 
         public void Update()
         {
-            sprite.Update();
-            if (sprite.AnimationDone())
-                link.SetState(link.GetStateStandingDown());
+            linkSprite.Update();
+            if (linkSprite.AnimationDone())
+                linkPlayer.SetState(linkPlayer.GetStateStandingDown());
         }
     }
 }
