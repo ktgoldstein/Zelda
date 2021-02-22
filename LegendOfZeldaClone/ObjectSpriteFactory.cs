@@ -25,99 +25,99 @@ namespace LegendOfZeldaClone
         }
         public ISprite CreateFlatBlock()
         {
-            return new FlatBlock(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 242, 148);
         }
         public ISprite CreateRaisedBlock()
         {
-            return new RaisedBlock(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 260, 129);
         }
         public ISprite CreateDragonStatue()
         {
-            return new DragonStatue(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 318, 129);
         }
         public ISprite CreateGargoyleStatue()
         {
-            return new GargoyleStatue(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 337, 129);
         }
         public ISprite CreateDragonStatueBlue()
         {
-            return new DragonStatueBlue(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 299, 129);
         }
         public ISprite CreateGargoyleStatueBlue()
         {
-            return new GargoyleStatueBlue(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 280, 129);
         }
         public ISprite CreateDottedBlock()
         {
-            return new DottedBlock(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 356, 148);
         }
         public ISprite CreateStairs()
         {
-            return new Stairs(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 299, 148);
         }
         public ISprite CreateDarkBlock()
         {
-            return new DarkBlock(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 280, 148);
         }
         public ISprite CreateWater()
         {
-            return new Water(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 261, 148);
         }
         public ISprite CreateTunnelOpeningUp()
         {
-            return new TunnelOpeningUp(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 242, 110);
         }
         public ISprite CreateTunnelOpeningDown()
         {
-            return new TunnelOpeningDown(objectSpriteSheet, 16, 16);
+            return new Object(objectSpriteSheet, 16, 16, 261, 110);
         }
         public ISprite CreateKeyDoorUp()
         {
-            return new KeyDoorUp(objectSpriteSheet, 16, 32);
+            return new Object(objectSpriteSheet, 16, 32, 243, 86);
         }
         public ISprite CreateKeyDoorDown()
         {
-            return new KeyDoorDown(objectSpriteSheet, 16, 32);
+            return new Object(objectSpriteSheet, 16, 32, 279, 86);
         }
         public ISprite CreatekeyDoorRight()
         {
-            return new KeyDoorRight(objectSpriteSheet, 32, 16);
+            return new Object(objectSpriteSheet, 32, 16, 314, 74);
         }
         public ISprite CreatekeyDoorLeft()
         {
-            return new KeyDoorLeft(objectSpriteSheet, 32, 16);
+            return new Object(objectSpriteSheet, 32, 16, 337, 74);
         }
         public ISprite CreatelockedDoorUp()
         {
-            return new LockedDoorUp(objectSpriteSheet, 16, 32);
+            return new Object(objectSpriteSheet, 16, 32, 243, 49);
         }
         public ISprite CreatelockedDoorDown()
         {
-            return new LockedDoorDown(objectSpriteSheet, 16, 32);
+            return new Object(objectSpriteSheet, 16, 32, 279, 49);
         }
         public ISprite CreatelockedDoorRight()
         {
-            return new LockedDoorRight(objectSpriteSheet, 32, 16);
+            return new Object(objectSpriteSheet, 32, 16, 314, 37);
         }
         public ISprite CreatelockedDoorLeft()
         {
-            return new LockedDoorLeft(objectSpriteSheet, 32, 16);
+            return new Object(objectSpriteSheet, 32, 16, 337, 37);
         }
         public ISprite CreateOpenDoorUp()
         {
-            return new OpenDoorUp(objectSpriteSheet, 16, 32);
+            return new Object(objectSpriteSheet, 16, 32, 243, 12);
         }
         public ISprite CreateOpenDoorDown()
         {
-            return new OpenDoorDown(objectSpriteSheet, 16, 32);
+            return new Object(objectSpriteSheet, 16, 32, 279, 12);
         }
         public ISprite CreateOpenDoorRight()
         {
-            return new OpenDoorRight(objectSpriteSheet, 32, 16);
+            return new Object(objectSpriteSheet, 32, 16, 314, 0);
         }
         public ISprite CreateOpenDoorLeft()
         {
-            return new OpenDoorLeft(objectSpriteSheet, 32, 16);
+            return new Object(objectSpriteSheet, 32, 16, 337, 0);
         }
 
     }
