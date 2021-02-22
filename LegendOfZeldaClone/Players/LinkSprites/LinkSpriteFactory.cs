@@ -5,15 +5,8 @@ namespace LegendOfZeldaClone
 {
     public class LinkSpriteFactory
     {
-        public static LinkSpriteFactory Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static LinkSpriteFactory Instance { get; } = new LinkSpriteFactory();
 
-        private static readonly LinkSpriteFactory instance = new LinkSpriteFactory();
         private Texture2D linkSpriteSheet;
         private readonly int spriteWidth = 16;
         private readonly int spriteHeight = 16;
@@ -21,10 +14,7 @@ namespace LegendOfZeldaClone
 
         private LinkSpriteFactory() { }
 
-        public void LoadAllTextures(ContentManager content)
-        {
-            linkSpriteSheet = content.Load<Texture2D>("linkSpriteSheet");
-        }
+        public void LoadAllTextures(ContentManager content) => linkSpriteSheet = content.Load<Texture2D>("linkSpriteSheet");
 
         public ILinkSprite CreateLinkStandingDownSprite(LinkSkinType skinOffset, int frame)
         {
