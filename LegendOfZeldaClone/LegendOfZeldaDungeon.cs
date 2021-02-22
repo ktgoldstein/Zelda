@@ -126,7 +126,7 @@ namespace LegendOfZeldaClone
             Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation);
 
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
-            SpriteEnemy = new Aquamentus(LoZHelpers.EnemyStartingLocation);
+            SpriteEnemy = new Stalfos(LoZHelpers.EnemyStartingLocation);
             //SpriteEnemy = enemyList[0];
 
 
