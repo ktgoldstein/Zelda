@@ -39,15 +39,15 @@ namespace LegendOfZeldaClone
         public LinkSkinType SkinType 
         {
             get { return skinTypes[skinTypesIndex]; }
-            set { }
+            set { skinTypes[skinTypesIndex] = value; }
         }
 
-        private LegendOfZeldaDungeon game;
-        private ILinkPlayer decoratedLink;
-        private ILinkState[] linkStates;
-        private int timer; //link stays damaged for 24 frames
+        private readonly LegendOfZeldaDungeon game;
+        private readonly ILinkPlayer decoratedLink;
         private LinkSkinType[] skinTypes;
         private int skinTypesIndex;
+        private ILinkState[] linkStates;
+        private int timer;
 
         public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLink, int currentFrame, LinkStateType linkState)
         {
@@ -173,6 +173,4 @@ namespace LegendOfZeldaClone
             };
         }
     }
-
-
 }

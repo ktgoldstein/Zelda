@@ -14,7 +14,7 @@ namespace LegendOfZeldaClone
         public IUsableItem HeldItem { get; set; }
         public LinkSkinType SkinType { get; set; }
 
-        private LegendOfZeldaDungeon game;
+        private readonly LegendOfZeldaDungeon game;
         private ILinkState linkState;
 
         public LinkPlayer(LegendOfZeldaDungeon game, Vector2 location, IUsableItem sword, IUsableItem heldItem = null)
