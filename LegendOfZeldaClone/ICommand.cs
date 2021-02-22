@@ -154,7 +154,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos(LoZHelpers.EnemyStartingLocation);
+            myGame.SpriteEnemy = new Enemy.Stalfos(LoZHelpers.EnemyStartingLocation);
         }
 
     }
@@ -190,44 +190,94 @@ namespace LegendOfZeldaClone
             switch (pickSprite)
             {
                 case 1:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Aquamentus(LoZHelpers.EnemyStartingLocation);
+                    
+                        myGame.SpriteEnemy = new Enemy.Aquamentus(LoZHelpers.EnemyStartingLocation);
                         break;
-                    }
+                    
                 case 2:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Goriya(LoZHelpers.EnemyStartingLocation);
+                    
+                        myGame.SpriteEnemy = new Enemy.Goriya(LoZHelpers.EnemyStartingLocation);
                         break;
-                    }
+                    
                 case 3:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.BladeTrap(LoZHelpers.EnemyStartingLocation);
+                    
+                        myGame.SpriteEnemy = new Enemy.BladeTrap(LoZHelpers.EnemyStartingLocation);
                         break;
-                    }
+                    
                 case 4:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Keese(LoZHelpers.EnemyStartingLocation);
+                    
+                        myGame.SpriteEnemy = new Enemy.Keese(LoZHelpers.EnemyStartingLocation);
                         break;
-                    }
+                    
                 case 5:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Gel(LoZHelpers.EnemyStartingLocation);
+                    
+                       myGame.SpriteEnemy = new Enemy.Gel(LoZHelpers.EnemyStartingLocation);
                         break;
-                    }
+                    
                 case 6:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Wallmaster(LoZHelpers.EnemyStartingLocation);
+                    
+                        myGame.SpriteEnemy = new Enemy.Wallmaster(LoZHelpers.EnemyStartingLocation);
                         break;
-                    }
+                    
                 default:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos(LoZHelpers.EnemyStartingLocation);
+                    
+                        myGame.SpriteEnemy = new Enemy.Stalfos(LoZHelpers.EnemyStartingLocation);
                         break;
-                    }
+                    
             }
         }
     }
 
+    public class PreviousEnemy : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public PreviousEnemy(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            myGame.switchEnemyNum--;
+            if (myGame.switchEnemyNum < 0)
+            {
+                myGame.switchEnemyNum = myGame.enemyList.Count - 1;
+                myGame.SpriteEnemy = myGame.enemyList[myGame.switchEnemyNum];
+            }
+            else
+            {                              
+                myGame.SpriteEnemy = myGame.enemyList[myGame.switchEnemyNum];
+            }   
+        }
+    }
+
+    public class NextEnemy : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public NextEnemy(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            {
+                myGame.switchEnemyNum++;
+                if (myGame.switchEnemyNum == myGame.enemyList.Count)
+                {
+                    myGame.switchEnemyNum = 0;
+                    myGame.SpriteEnemy = myGame.enemyList[myGame.switchEnemyNum];
+                }
+                else
+                {                   
+                    myGame.SpriteEnemy = myGame.enemyList[myGame.switchEnemyNum];
+                }
+       
+            }
+        }
+    }
     public class PreviousItem : ICommand
     {
         private LegendOfZeldaDungeon myGame;
