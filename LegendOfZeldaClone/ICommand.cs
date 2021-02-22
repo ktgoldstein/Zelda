@@ -191,7 +191,7 @@ namespace LegendOfZeldaClone
 
         public PickUpBlueRing(LegendOfZeldaDungeon game)
         {
-            blueRing = new BlueRing(game);
+            blueRing = new UsableBlueRing(game);
         }
 
         public void Execute()
