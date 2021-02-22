@@ -8,33 +8,33 @@ namespace LegendOfZeldaClone
     {
         public float Speed
         {
-            get { return decoratedLink.Speed / linkStates.Length; }
-            set { decoratedLink.Speed = value; }
+            get { return decoratedLinkPlayer.Speed / linkStates.Length; }
+            set { decoratedLinkPlayer.Speed = value; }
         }
         public int MaxHealth
         {
-            get { return decoratedLink.MaxHealth; }
-            set { decoratedLink.MaxHealth = value; }
+            get { return decoratedLinkPlayer.MaxHealth; }
+            set { decoratedLinkPlayer.MaxHealth = value; }
         }
         public int Health
         {
-            get { return decoratedLink.Health; }
-            set { decoratedLink.Health = value; }
+            get { return decoratedLinkPlayer.Health; }
+            set { decoratedLinkPlayer.Health = value; }
         }
         public Vector2 Location
         {
-            get { return decoratedLink.Location; }
-            set { decoratedLink.Location = value; }
+            get { return decoratedLinkPlayer.Location; }
+            set { decoratedLinkPlayer.Location = value; }
         }
         public IUsableItem Sword
         {
-            get { return decoratedLink.Sword; }
-            set { decoratedLink.Sword = value; }
+            get { return decoratedLinkPlayer.Sword; }
+            set { decoratedLinkPlayer.Sword = value; }
         }
         public IUsableItem HeldItem
         {
-            get { return decoratedLink.HeldItem; }
-            set { decoratedLink.HeldItem = value; }
+            get { return decoratedLinkPlayer.HeldItem; }
+            set { decoratedLinkPlayer.HeldItem = value; }
         }
         public LinkSkinType SkinType 
         {
@@ -43,18 +43,18 @@ namespace LegendOfZeldaClone
         }
 
         private readonly LegendOfZeldaDungeon game;
-        private readonly ILinkPlayer decoratedLink;
+        private readonly ILinkPlayer decoratedLinkPlayer;
         private LinkSkinType[] skinTypes;
         private int skinTypesIndex;
         private ILinkState[] linkStates;
         private int timer;
 
-        public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLink, int currentFrame, LinkStateType linkState)
+        public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLinkPlayer, int currentFrame, LinkStateType linkState)
         {
             this.game = game;
-            this.decoratedLink = decoratedLink;
+            this.decoratedLinkPlayer = decoratedLinkPlayer;
 
-            skinTypes = new LinkSkinType[] { LinkSkinType.DamagedOne, LinkSkinType.DamagedTwo, LinkSkinType.DamagedThreeDungeonOne, this.decoratedLink.SkinType };
+            skinTypes = new LinkSkinType[] { LinkSkinType.DamagedOne, LinkSkinType.DamagedTwo, LinkSkinType.DamagedThreeDungeonOne, this.decoratedLinkPlayer.SkinType };
             skinTypesIndex = 0;
             linkStates = new ILinkState[skinTypes.Length];
 
@@ -110,7 +110,7 @@ namespace LegendOfZeldaClone
         }
 
         public void Damage(int amount) { /* Invinvibility Frames */ }
-        public void Heal(int amount) => decoratedLink.Heal(amount);
+        public void Heal(int amount) => decoratedLinkPlayer.Heal(amount);
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -126,8 +126,8 @@ namespace LegendOfZeldaClone
             if (timer == 0)
             {
                 Tuple<LinkStateType, int> currentState = linkStates[0].GetState();
-                decoratedLink.SetState(GetSpecificState(decoratedLink, currentState.Item1, currentState.Item2));
-                game.Link = decoratedLink;
+                decoratedLinkPlayer.SetState(GetSpecificState(decoratedLinkPlayer, currentState.Item1, currentState.Item2));
+                game.Link = decoratedLinkPlayer;
             }
         }
 

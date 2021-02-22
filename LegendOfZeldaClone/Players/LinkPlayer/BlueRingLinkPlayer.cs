@@ -7,46 +7,46 @@ namespace LegendOfZeldaClone
     class BlueRingLinkPlayer : ILinkPlayer
     {
         public float Speed {
-            get { return decoratedLink.Speed; }
-            set { decoratedLink.Speed = value; }
+            get { return decoratedLinkPlayer.Speed; }
+            set { decoratedLinkPlayer.Speed = value; }
         }
         public int MaxHealth
         {
-            get { return decoratedLink.MaxHealth; }
-            set { decoratedLink.MaxHealth = value; }
+            get { return decoratedLinkPlayer.MaxHealth; }
+            set { decoratedLinkPlayer.MaxHealth = value; }
         }
         public int Health
         {
-            get { return decoratedLink.Health; }
-            set { decoratedLink.Health = value; }
+            get { return decoratedLinkPlayer.Health; }
+            set { decoratedLinkPlayer.Health = value; }
         }
         public Vector2 Location
         {
-            get { return decoratedLink.Location; }
-            set { decoratedLink.Location = value; }
+            get { return decoratedLinkPlayer.Location; }
+            set { decoratedLinkPlayer.Location = value; }
         }
         public IUsableItem Sword 
         {
-            get { return decoratedLink.Sword; }
-            set { decoratedLink.Sword = value; } 
+            get { return decoratedLinkPlayer.Sword; }
+            set { decoratedLinkPlayer.Sword = value; } 
         }
         public IUsableItem HeldItem
         {
-            get { return decoratedLink.HeldItem; }
-            set { decoratedLink.HeldItem = value; }
+            get { return decoratedLinkPlayer.HeldItem; }
+            set { decoratedLinkPlayer.HeldItem = value; }
         }
         public LinkSkinType SkinType { get; set; }
 
         private readonly LegendOfZeldaDungeon game;
-        private readonly ILinkPlayer decoratedLink;
+        private readonly ILinkPlayer decoratedLinkPlayer;
         private ILinkState linkState;
 
-        public BlueRingLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLink)
+        public BlueRingLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLinkPlayer)
         {
             SkinType = LinkSkinType.BlueRing;
 
             this.game = game;
-            this.decoratedLink = decoratedLink;
+            this.decoratedLinkPlayer = decoratedLinkPlayer;
             linkState = new LinkStandingDown(this);
         }
 
@@ -78,7 +78,7 @@ namespace LegendOfZeldaClone
             game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1);
         }
 
-        public void Heal(int amount) => decoratedLink.Heal(amount);
+        public void Heal(int amount) => decoratedLinkPlayer.Heal(amount);
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
         public void Update() => linkState.Update();
         public void SetState(ILinkState linkState) => this.linkState = linkState;
