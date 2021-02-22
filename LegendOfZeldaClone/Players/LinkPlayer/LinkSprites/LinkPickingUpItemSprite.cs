@@ -8,13 +8,13 @@ namespace LegendOfZeldaClone
     {
         public int CurrentFrame { get; set; }
 
-        private Texture2D texture;
-        private int totalFrames;
-        private int xCoordStart;
-        private int yCoordStart;
-        private int width;
-        private int height;
-        private int atlasGap;
+        private readonly Texture2D texture;
+        private readonly int totalFrames;
+        private readonly int xCoordStart;
+        private readonly int yCoordStart;
+        private readonly int width;
+        private readonly int height;
+        private readonly int atlasGap;
 
         public LinkPickingUpItemSprite(Texture2D texture, int x, int y, int spriteWidth, int spriteHeight, int spriteAtlasGap, int currentFrame)
         {
@@ -30,14 +30,9 @@ namespace LegendOfZeldaClone
 
         }
 
-        public void Update()
-        {
-            CurrentFrame += CurrentFrame < totalFrames ? 1 : 0;
-        }
-
         public bool AnimationDone() => CurrentFrame == totalFrames;
-
         public void Reset() => CurrentFrame = 0;
+        public void Update() => CurrentFrame += CurrentFrame < totalFrames ? 1 : 0;
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
