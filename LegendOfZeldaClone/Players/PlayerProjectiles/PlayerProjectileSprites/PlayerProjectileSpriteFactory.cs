@@ -6,15 +6,8 @@ namespace LegendOfZeldaClone
 {
     public class PlayerProjectileSpriteFactory
     {
-        public static PlayerProjectileSpriteFactory Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static PlayerProjectileSpriteFactory Instance { get; } = new PlayerProjectileSpriteFactory();
 
-        private static readonly PlayerProjectileSpriteFactory instance = new PlayerProjectileSpriteFactory();
         private Texture2D playerProjectileSpriteSheet;
         private readonly int spriteSectionHeight = 16;
         private readonly int spriteSectionWidth = 32;
