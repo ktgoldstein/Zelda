@@ -18,6 +18,7 @@ namespace LegendOfZeldaClone
 
         public int currentEnemyIndex;
         public IEnemy SpriteEnemy;
+        public List<IEnemy> enemyList;
 
         public IPlayer Link;
         public List<IPlayerProjectile> LinkProjectilesQueue;

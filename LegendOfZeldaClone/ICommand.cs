@@ -226,6 +226,11 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
+            if (myGame.SwitchEnemyDelay != 0)
+                return;
+            else
+                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
+            
             myGame.currentEnemyIndex--;
             if (myGame.currentEnemyIndex < 0)
             {
@@ -250,18 +255,20 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
+            if (myGame.SwitchEnemyDelay != 0)
+                return;
+            else
+                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
+
+            myGame.currentEnemyIndex++;
+            if (myGame.currentEnemyIndex == myGame.enemyList.Count)
             {
-                myGame.currentEnemyIndex++;
-                if (myGame.currentEnemyIndex == myGame.enemyList.Count)
-                {
-                    myGame.currentEnemyIndex = 0;
-                    myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
-                }
-                else
-                {                   
-                    myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
-                }
-       
+                myGame.currentEnemyIndex = 0;
+                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
+            }
+            else
+            {                   
+                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
             }
         }
     }
@@ -387,7 +394,8 @@ namespace LegendOfZeldaClone
             game.Link = new LinkPlayer(game, LoZHelpers.LinkStartingLocation, woodenSword);
             game.LinkProjectiles.Clear();
 
-            game.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos();
+            game.currentEnemyIndex = 0;
+            game.SpriteEnemy = game.enemyList[game.currentEnemyIndex];
         }
     }
 }
