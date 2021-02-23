@@ -87,8 +87,6 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.I, nextItem);
             keyboardController.RegisterCommand(Keys.U, prevItem);
 
-            //keyboardController.RegisterCommand(Keys.P, setSpriteEnemy);
-            //keyboardController.RegisterCommand(Keys.O, setSpriteEnemy);
             keyboardController.RegisterCommand(Keys.P, nextEnemy);
             keyboardController.RegisterCommand(Keys.O, previousEnemy);
 
