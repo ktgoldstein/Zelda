@@ -275,6 +275,10 @@ namespace LegendOfZeldaClone
                     xDirection = 1;
                 }
             }
+            else
+            {
+                itemVector = new Vector2(LoZHelpers.GameWidth / 2 + 32, LoZHelpers.GameHeight / 2);
+            }
             CurrItem.Update();
 
             base.Update(gameTime);
