@@ -174,7 +174,6 @@ namespace LegendOfZeldaClone
 
             Objects.Add(ObjectSpriteFactory.Instance.CreateFlatBlock());
             Objects.Add(ObjectSpriteFactory.Instance.CreateRaisedBlock());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateRaisedBlock());
             Objects.Add(ObjectSpriteFactory.Instance.CreateDragonStatue());
             Objects.Add(ObjectSpriteFactory.Instance.CreateGargoyleStatue());
             Objects.Add(ObjectSpriteFactory.Instance.CreateDragonStatueBlue());
