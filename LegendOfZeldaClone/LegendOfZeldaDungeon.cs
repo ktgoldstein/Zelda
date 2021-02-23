@@ -57,7 +57,6 @@ namespace LegendOfZeldaClone
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
             ICommand resetLink = new ResetLink(this);
             
-            //ICommand setSpriteEnemy = new SetSpriteEnemy(this);
             ICommand resetEnemy = new ResetEnemy(this);
             ICommand nextItem = new NextItem(this);
             ICommand prevItem = new PreviousItem(this);
