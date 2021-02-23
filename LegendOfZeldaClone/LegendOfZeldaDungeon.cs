@@ -12,14 +12,12 @@ namespace LegendOfZeldaClone
         private SpriteBatch _spriteBatch;
 
         private IController controller;
-        
+        public List<IEnemy> enemyList;
 
         public Texture2D LinkTextures;
 
-        public int switchEnemyNum;
+        public int currentEnemyIndex;
         public IEnemy SpriteEnemy;
-        public List<IEnemy> enemyList;
-
         public IPlayer Link;
 
         public List<ISprite> objList;
@@ -43,6 +41,8 @@ namespace LegendOfZeldaClone
 
         protected override void Initialize()
         {
+            EnemySpriteFactory.Instance.LoadAllTextures(Content);
+
             _graphics.PreferredBackBufferWidth = LoZHelpers.GameWidth;
             _graphics.PreferredBackBufferHeight = LoZHelpers.GameHeight;
             _graphics.ApplyChanges();
@@ -56,16 +56,16 @@ namespace LegendOfZeldaClone
             ICommand actionB = new ActionB(this);
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
             ICommand resetLink = new ResetLink(this);
-
-            ICommand setEnemy = new SetSpriteEnemy(this);
-            ICommand nextEnemy = new NextEnemy(this);
-            ICommand previousEnemy = new PreviousEnemy(this);
+            
+            //ICommand setSpriteEnemy = new SetSpriteEnemy(this);
             ICommand resetEnemy = new ResetEnemy(this);
-
             ICommand nextItem = new NextItem(this);
             ICommand prevItem = new PreviousItem(this);
             ICommand nextObject = new NextObject(this);
             ICommand previousObject = new PreviousObject(this);
+
+            ICommand previousEnemy = new PreviousEnemy(this);
+            ICommand nextEnemy = new NextEnemy(this);
 
             KeyboardController keyboardController = new KeyboardController();
             keyboardController.RegisterCommand(Keys.Q, quitGame);
@@ -81,33 +81,24 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.N, actionA);
             keyboardController.RegisterCommand(Keys.D6, pickUpBlueRing);
             keyboardController.RegisterCommand(Keys.NumPad6, pickUpBlueRing);
+            //keyboardController.RegisterCommand(Keys.R, resetLink);
             keyboardController.RegisterCommand(Keys.R, resetEnemy);
 
             keyboardController.RegisterCommand(Keys.I, nextItem);
             keyboardController.RegisterCommand(Keys.U, prevItem);
 
-            keyboardController.RegisterCommand(Keys.P, setEnemy);
-            keyboardController.RegisterCommand(Keys.O, setEnemy);
-
-            //keyboardController.RegisterCommand(Keys.P, nextEnemy);
-            //keyboardController.RegisterCommand(Keys.O, previousEnemy);
+            //keyboardController.RegisterCommand(Keys.P, setSpriteEnemy);
+            //keyboardController.RegisterCommand(Keys.O, setSpriteEnemy);
+            keyboardController.RegisterCommand(Keys.P, nextEnemy);
+            keyboardController.RegisterCommand(Keys.O, previousEnemy);
 
             keyboardController.RegisterCommand(Keys.Y, nextObject);
             keyboardController.RegisterCommand(Keys.T, previousObject);
 
             controller = keyboardController;
 
-            switchEnemyNum = 0;
-            enemyList = new List<IEnemy>
-            {
-                new Aquamentus(LoZHelpers.EnemyStartingLocation),
-                new Goriya(LoZHelpers.EnemyStartingLocation),
-                new Stalfos(LoZHelpers.EnemyStartingLocation),
-                new BladeTrap(LoZHelpers.EnemyStartingLocation),
-                new Gel(LoZHelpers.EnemyStartingLocation),
-                new Keese(LoZHelpers.EnemyStartingLocation),
-                new Wallmaster(LoZHelpers.EnemyStartingLocation)
-            };
+            currentEnemyIndex = 0;
+            enemyList = new List<IEnemy>();
 
             ItemIndex = 0;
             Items = new ItemInterface[20];
@@ -126,9 +117,16 @@ namespace LegendOfZeldaClone
             Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation);
 
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
-            SpriteEnemy = new Stalfos(LoZHelpers.EnemyStartingLocation);
-            //SpriteEnemy = enemyList[0];
-
+            enemyList = new List<IEnemy>()
+            {
+               new Aquamentus(LoZHelpers.EnemyStartingLocation),
+               new Goriya(LoZHelpers.EnemyStartingLocation),
+               new Stalfos(LoZHelpers.EnemyStartingLocation),
+               new BladeTrap(LoZHelpers.EnemyStartingLocation),
+               new Gel(LoZHelpers.EnemyStartingLocation),
+               new Keese(LoZHelpers.EnemyStartingLocation),
+               new Wallmaster(LoZHelpers.EnemyStartingLocation)
+            };
 
             ObjectSpriteFactory.Instance.LoadAllTextures(Content);
             currentObject = ObjectSpriteFactory.Instance.CreatedefaultFlatBlock();
@@ -185,7 +183,7 @@ namespace LegendOfZeldaClone
             
             Link.Update();
             
-            SpriteEnemy.Update();
+            enemyList[currentEnemyIndex].Update();
 
             CurrItem.Update();
 
@@ -199,7 +197,7 @@ namespace LegendOfZeldaClone
             _spriteBatch.Begin();
 
             Link.Draw(_spriteBatch);
-            SpriteEnemy.Draw(_spriteBatch);
+            enemyList[currentEnemyIndex].Draw(_spriteBatch);
             CurrItem.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 32, LoZHelpers.GameHeight / 2));
 
             currentObject.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6));

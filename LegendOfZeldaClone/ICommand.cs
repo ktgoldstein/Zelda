@@ -173,20 +173,20 @@ namespace LegendOfZeldaClone
             // Cycle counter
             if (Keyboard.GetState().IsKeyDown(Keys.P))
             {
-                myGame.switchEnemyNum++;
-                myGame.switchEnemyNum %= 7;
+                myGame.currentEnemyIndex++;
+                myGame.currentEnemyIndex %= 7;
 
             }
             else
             {
-                this.myGame.switchEnemyNum--;
-                if (myGame.switchEnemyNum == -1)
+                this.myGame.currentEnemyIndex--;
+                if (myGame.currentEnemyIndex == -1)
                 {
-                    myGame.switchEnemyNum = 6;
+                    myGame.currentEnemyIndex = 6;
                 }
             }
 
-            int pickSprite = myGame.switchEnemyNum;
+            int pickSprite = myGame.currentEnemyIndex;
             switch (pickSprite)
             {
                 case 1:
@@ -239,15 +239,15 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            myGame.switchEnemyNum--;
-            if (myGame.switchEnemyNum < 0)
+            myGame.currentEnemyIndex--;
+            if (myGame.currentEnemyIndex < 0)
             {
-                myGame.switchEnemyNum = myGame.enemyList.Count - 1;
-                myGame.SpriteEnemy = myGame.enemyList[myGame.switchEnemyNum];
+                myGame.currentEnemyIndex = myGame.enemyList.Count - 1;
+                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
             }
             else
             {                              
-                myGame.SpriteEnemy = myGame.enemyList[myGame.switchEnemyNum];
+                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
             }   
         }
     }
@@ -264,15 +264,15 @@ namespace LegendOfZeldaClone
         public void Execute()
         {
             {
-                myGame.switchEnemyNum++;
-                if (myGame.switchEnemyNum == myGame.enemyList.Count)
+                myGame.currentEnemyIndex++;
+                if (myGame.currentEnemyIndex == myGame.enemyList.Count)
                 {
-                    myGame.switchEnemyNum = 0;
-                    myGame.SpriteEnemy = myGame.enemyList[myGame.switchEnemyNum];
+                    myGame.currentEnemyIndex = 0;
+                    myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
                 }
                 else
                 {                   
-                    myGame.SpriteEnemy = myGame.enemyList[myGame.switchEnemyNum];
+                    myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
                 }
        
             }
