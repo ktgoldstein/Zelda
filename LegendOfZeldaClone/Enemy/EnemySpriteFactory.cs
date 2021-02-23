@@ -10,7 +10,8 @@ namespace LegendOfZeldaClone.Enemy
     {
 		private Texture2D aquamentusSprite, fireballSprite;
 		private Texture2D goriyaDownSprite, goriyaUpSprite, goriyaRightSprite, goriyaLeftSprite;
-		private Texture2D boomerangSprite, stalfosSprite;
+		private Texture2D boomerangSprite;
+		private Texture2D stalfosSprite;
 		private Texture2D bladeTrapSprite;
 		private Texture2D gelSprite;
 		private Texture2D keeseSprite;

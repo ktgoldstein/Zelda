@@ -215,80 +215,56 @@ namespace LegendOfZeldaClone
         }
     }
 
-    public class SetSpriteEnemy : ICommand
+    public class PreviousEnemy : ICommand
     {
         private LegendOfZeldaDungeon myGame;
 
-        public SetSpriteEnemy(LegendOfZeldaDungeon game)
+        public PreviousEnemy(LegendOfZeldaDungeon game)
         {
             myGame = game;
         }
 
         public void Execute()
         {
-            if (myGame.SwitchEnemyDelay != 0)
-                return;
-            else
-                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
-
-            // Cycle counter
-            if (Keyboard.GetState().IsKeyDown(Keys.P))
+            myGame.currentEnemyIndex--;
+            if (myGame.currentEnemyIndex < 0)
             {
-                myGame.switchEnemyNum++;
-                myGame.switchEnemyNum %= 7;
-
+                myGame.currentEnemyIndex = myGame.enemyList.Count - 1;
+                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
             }
             else
-            {
-                this.myGame.switchEnemyNum--;
-                if (myGame.switchEnemyNum == -1)
-                {
-                    myGame.switchEnemyNum = 6;
-                }
-            }
-
-            int pickSprite = myGame.switchEnemyNum;
-            switch (pickSprite)
-            {
-                case 1:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Aquamentus();
-                        break;
-                    }
-                case 2:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Goriya();
-                        break;
-                    }
-                case 3:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.BladeTrap();
-                        break;
-                    }
-                case 4:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Keese();
-                        break;
-                    }
-                case 5:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Gel();
-                        break;
-                    }
-                case 6:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Wallmaster();
-                        break;
-                    }
-                default:
-                    {
-                        myGame.SpriteEnemy = new LegendOfZeldaClone.Enemy.Stalfos();
-                        break;
-                    }
-            }
+            {                              
+                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
+            }   
         }
     }
 
+    public class NextEnemy : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public NextEnemy(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            {
+                myGame.currentEnemyIndex++;
+                if (myGame.currentEnemyIndex == myGame.enemyList.Count)
+                {
+                    myGame.currentEnemyIndex = 0;
+                    myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
+                }
+                else
+                {                   
+                    myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
+                }
+       
+            }
+        }
+    }
     public class PreviousItem : ICommand
     {
         private LegendOfZeldaDungeon myGame;

@@ -10,13 +10,14 @@ namespace LegendOfZeldaClone.Enemy
     {
 
         private ISprite wallmasterSprite;
-        private Vector2 location = new Vector2(400, 120);
+        private Vector2 location;
         private float speed = 2;
         private int direction = 1;
 
-        public Wallmaster()
+        public Wallmaster(Vector2 location)
         {
             wallmasterSprite = EnemySpriteFactory.Instance.CreateWallmasterSprite();
+            this.location = location;
         }
         public void Draw(SpriteBatch spritebatch)
         {

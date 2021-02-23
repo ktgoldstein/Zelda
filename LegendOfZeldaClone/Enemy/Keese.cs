@@ -10,13 +10,14 @@ namespace LegendOfZeldaClone.Enemy
     {
 
         private ISprite keeseSprite;
-        private Vector2 location = new Vector2(400, 120);
+        private Vector2 location;
         private float speed = 2;
         private int direction = 1;
 
-        public Keese()
+        public Keese(Vector2 location)
         {
             keeseSprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
+            this.location = location;
         }
         public void Draw(SpriteBatch spritebatch)
         {

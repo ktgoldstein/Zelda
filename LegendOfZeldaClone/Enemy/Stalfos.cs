@@ -9,13 +9,14 @@ namespace LegendOfZeldaClone.Enemy
     class Stalfos : IEnemy
     {
         private ISprite stalfosSprite;
-        private Vector2 location = new Vector2(400, 120);
+        private Vector2 location;
         private float speed = 2;
         private int direction = 1;
 
-        public Stalfos()
+        public Stalfos(Vector2 location)
         {
             stalfosSprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
+            this.location = location;
         }
         public void Draw(SpriteBatch spritebatch)
         {
