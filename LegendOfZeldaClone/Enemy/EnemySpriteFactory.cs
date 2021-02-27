@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LegendOfZeldaClone.Enemy
 {
@@ -45,10 +42,6 @@ namespace LegendOfZeldaClone.Enemy
 			gelSprite = content.Load<Texture2D>("EnemySprites\\Gel");
 			keeseSprite = content.Load<Texture2D>("EnemySprites\\Keese");
 			wallmasterSprite = content.Load<Texture2D>("EnemySprites\\Wallmaster");
-
-
-
-
 		}
 
 		public ISprite CreateAquamentusSprite()
@@ -91,8 +84,6 @@ namespace LegendOfZeldaClone.Enemy
 			return new EnemySprite(stalfosSprite, 2, 1, 2);
         }
 
-
-		// Sunday
 		public ISprite CreateBladeTrapSprite()
 		{
 			return new EnemySprite(bladeTrapSprite, 1, 1, 1);
