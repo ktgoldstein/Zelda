@@ -29,8 +29,8 @@ namespace LegendOfZeldaClone
         public int ObjectIndex;
 
         public Texture2D ItemTextures;
-        public ISprite[] Items;
-        public ISprite CurrItem;
+        public IItem[] Items;
+        public IItem CurrItem;
         public int itemIndex;
         public Vector2 itemVector;
         public int xDirection;
@@ -131,7 +131,7 @@ namespace LegendOfZeldaClone
             enemyList = new List<IEnemy>();
 
             itemIndex = 0;
-            Items = new ISprite[24];
+            Items = new IItem[24];
             itemVector = new Vector2(LoZHelpers.GameWidth / 2 + 32, LoZHelpers.GameHeight / 2);
             xDirection = 1;
             yDirection = 1;
@@ -200,32 +200,32 @@ namespace LegendOfZeldaClone
             CurrentObject = Objects[0];
 
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
-            Items[0] = ItemSpriteFactory.Instance.CreateCompass();
-            Items[1] = ItemSpriteFactory.Instance.CreateKey();
-            Items[2] = ItemSpriteFactory.Instance.CreateBoomerang();
-            Items[3] = ItemSpriteFactory.Instance.CreateBow();
-            Items[4] = ItemSpriteFactory.Instance.CreateHeart();
-            Items[5] = ItemSpriteFactory.Instance.CreateFlashingRupee();
-            Items[6] = ItemSpriteFactory.Instance.CreateArrow();
-            Items[7] = ItemSpriteFactory.Instance.CreateBomb();
-            Items[8] = ItemSpriteFactory.Instance.CreateFairy();
-            Items[9] = ItemSpriteFactory.Instance.CreateClock();
-            Items[10] = ItemSpriteFactory.Instance.CreateTriforcePiece();
-            Items[11] = ItemSpriteFactory.Instance.CreateHeartContainer();
-            Items[12] = ItemSpriteFactory.Instance.CreateMap();
-            Items[13] = ItemSpriteFactory.Instance.CreateSword();
-            Items[14] = ItemSpriteFactory.Instance.CreateMagicalKey();
-            Items[15] = ItemSpriteFactory.Instance.CreateFullHealthHeart();
-            Items[16] = ItemSpriteFactory.Instance.CreateHalfHealthHeart();
-            Items[17] = ItemSpriteFactory.Instance.CreateNoHealthHeart();
-            Items[18] = ItemSpriteFactory.Instance.CreateGoldRupee();
-            Items[19] = ItemSpriteFactory.Instance.CreateBlueRupee();
-            Items[20] = ItemSpriteFactory.Instance.CreateSilverArrow();
-            Items[21] = ItemSpriteFactory.Instance.CreateLifePotion();
-            Items[22] = ItemSpriteFactory.Instance.CreateBlueCandle();
-            Items[23] = ItemSpriteFactory.Instance.CreateBlueRing();
+            Items[0] = new Compass(itemVector);
+            Items[1] = new Key(itemVector);
+            Items[2] = new Boomerang(itemVector);
+            Items[3] = new Bow(itemVector);
+            Items[4] = new Heart(itemVector);
+            Items[5] = new FlashingRupee(itemVector);
+            Items[6] = new Arrow(itemVector);
+            Items[7] = new Bomb(itemVector);
+            Items[8] = new Fairy(itemVector);
+            Items[9] = new Clock(itemVector);
+            Items[10] = new TriForcePiece(itemVector);
+            Items[11] = new HeartContainer(itemVector);
+            Items[12] = new Map(itemVector);
+            Items[13] = new Sword(itemVector);
+            Items[14] = new MagicalKey(itemVector);
+            Items[15] = new FullHealthHeart(itemVector);
+            Items[16] = new HalfHealthHeart(itemVector);
+            Items[17] = new NoHealthHeart(itemVector);
+            Items[18] = new GoldRupee(itemVector);
+            Items[19] = new BlueRupee(itemVector);
+            Items[20] = new SilverArrow(itemVector);
+            Items[21] = new LifePotion(itemVector);
+            Items[22] = new BlueCandle(itemVector);
+            Items[23] = new BlueRing(itemVector);
             CurrItem = Items[0];
-            fairy = Items[8];
+            //fairy = Items[8];
         }
 
         protected override void Update(GameTime gameTime)
@@ -278,7 +278,7 @@ namespace LegendOfZeldaClone
             {
                 itemVector = new Vector2(LoZHelpers.GameWidth / 2 + 32, LoZHelpers.GameHeight / 2);
             }
-            CurrItem.Update();
+            //CurrItem.Update();
 
             base.Update(gameTime);
         }
@@ -295,7 +295,7 @@ namespace LegendOfZeldaClone
             Link.Draw(_spriteBatch);
 
             enemyList[currentEnemyIndex].Draw(_spriteBatch);
-            CurrItem.Draw(_spriteBatch, itemVector);
+            //CurrItem.Draw(_spriteBatch, itemVector);
 
             CurrentObject.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6));
 
