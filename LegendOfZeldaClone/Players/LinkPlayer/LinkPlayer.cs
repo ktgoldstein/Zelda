@@ -10,12 +10,16 @@ namespace LegendOfZeldaClone
         public int MaxHealth { get; set; }
         public int Health { get; set; }
         public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
         public IUsableItem Sword { get; set; }
         public IUsableItem HeldItem { get; set; }
         public LinkSkinType SkinType { get; set; }
 
         private readonly LegendOfZeldaDungeon game;
         private ILinkState linkState;
+        private readonly int width;
+        private readonly int height;
 
         public LinkPlayer(LegendOfZeldaDungeon game, Vector2 location, IUsableItem sword, IUsableItem heldItem = null)
         {
@@ -23,6 +27,8 @@ namespace LegendOfZeldaClone
             HeldItem = heldItem;
             SkinType = LinkSkinType.Normal;
             Location = location;
+            width = 16;
+            height = 16;
 
             this.game = game;
             Speed = LoZHelpers.Scale(3);
