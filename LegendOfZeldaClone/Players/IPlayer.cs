@@ -9,6 +9,8 @@ namespace LegendOfZeldaClone
         public int MaxHealth { get; set; }
         public int Health { get; set; }
         public Vector2 Location { get; set; }
+        public int Width { get; }
+        public int Height { get; }
         public void MoveUp();
         public void MoveDown();
         public void MoveLeft();
