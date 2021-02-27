@@ -1,38 +1,43 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LegendOfZeldaClone.Enemy
 {
     class Stalfos : IEnemy
     {
+        public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
+
         private ISprite stalfosSprite;
-        private Vector2 location;
         private float speed = 2;
         private int direction = 1;
+        private readonly int width;
+        private readonly int height;
 
         public Stalfos(Vector2 location)
         {
             stalfosSprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
-            this.location = location;
+            width = 16;
+            height = 16;
+
+            Location = location;
         }
         public void Draw(SpriteBatch spritebatch)
         {
-            stalfosSprite.Draw(spritebatch, location);
+            stalfosSprite.Draw(spritebatch, Location);
         }
 
         public void Update()
         {
             stalfosSprite.Update();
 
-            location.Y += speed * direction;
-            if (location.Y > 192)
+            Location += speed * direction * Vector2.UnitY;
+            if (Location.Y > 192)
             {
                 direction = -1;
             }
-            if (location.Y < 64)
+            if (Location.Y < 64)
             {
                 direction = 1;
             }

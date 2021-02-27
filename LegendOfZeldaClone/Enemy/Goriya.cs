@@ -1,29 +1,33 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LegendOfZeldaClone.Enemy
 {
     public class Goriya : IEnemy
     {
-      
+        public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
+
         private ISprite goriyaSprite;
-        private Vector2 location;
         private float speed = 6;
         private Vector2 direction = new Vector2(0, 1);
         private int timer = 0;
         private Boomerang boomerang;
+        private readonly int width;
+        private readonly int height;
 
         public Goriya(Vector2 location)
         {
             goriyaSprite = EnemySpriteFactory.Instance.CreateGoriyaDownSprite();
-            this.location = location;
+            width = 13;
+            height = 16;
+
+            Location = location;
         }
         public void Draw(SpriteBatch spritebatch)
         {
-            goriyaSprite.Draw(spritebatch, location);
+            goriyaSprite.Draw(spritebatch, Location);
             if (boomerang != null)
             {
                 boomerang.Draw(spritebatch);
@@ -38,8 +42,7 @@ namespace LegendOfZeldaClone.Enemy
                 boomerang.Update();
             }
 
-            location.Y += speed * direction.Y;
-            location.X += speed * direction.X;
+            Location += speed * direction;
             if(timer % 20 == 0)
             {
                 ThrowBoomerang(direction);
@@ -76,13 +79,13 @@ namespace LegendOfZeldaClone.Enemy
         {
             if(boomerang == null)
             {
-                boomerang = new Boomerang(this.location, direction, this);
+                boomerang = new Boomerang(Location, direction, this);
             }
         }
 
         public Vector2 GetGoriyaLocation()
         {
-            return location;
+            return Location;
         }
 
         public void CatchBoomerang()
