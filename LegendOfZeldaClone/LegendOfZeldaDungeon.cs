@@ -33,9 +33,6 @@ namespace LegendOfZeldaClone
         public IItem CurrItem;
         public int itemIndex;
         public Vector2 itemVector;
-        public int xDirection;
-        public int yDirection;
-        public ISprite fairy;
 
         public int SwitchEnemyDelay;
         public int SwitchObjectDelay;
@@ -133,8 +130,6 @@ namespace LegendOfZeldaClone
             itemIndex = 0;
             Items = new IItem[24];
             itemVector = new Vector2(LoZHelpers.GameWidth / 2 + 32, LoZHelpers.GameHeight / 2);
-            xDirection = 1;
-            yDirection = 1;
 
             ObjectIndex = 0;
             Objects = new List<ISprite>();
@@ -225,7 +220,6 @@ namespace LegendOfZeldaClone
             Items[22] = new BlueCandle(itemVector);
             Items[23] = new BlueRing(itemVector);
             CurrItem = Items[0];
-            //fairy = Items[8];
         }
 
         protected override void Update(GameTime gameTime)
@@ -253,32 +247,8 @@ namespace LegendOfZeldaClone
 
             enemyList[currentEnemyIndex].Update();
 
-            if (CurrItem == fairy)
-            {
-                itemVector.Y += 2 * yDirection;
-                itemVector.X += 2 * xDirection;
-                if (itemVector.Y > (LoZHelpers.GameHeight / 2 + 30))
-                {
-                    yDirection = -1;
-                }
-                if (itemVector.Y < (LoZHelpers.GameHeight / 2 - 30))
-                {
-                    yDirection = 1;
-                }
-                if (itemVector.X > (LoZHelpers.GameWidth / 2 + 50))
-                {
-                    xDirection = -1;
-                }
-                if (itemVector.X < (LoZHelpers.GameWidth / 2 - 50))
-                {
-                    xDirection = 1;
-                }
-            }
-            else
-            {
-                itemVector = new Vector2(LoZHelpers.GameWidth / 2 + 32, LoZHelpers.GameHeight / 2);
-            }
-            //CurrItem.Update();
+            
+            CurrItem.Update();
 
             base.Update(gameTime);
         }
@@ -295,7 +265,7 @@ namespace LegendOfZeldaClone
             Link.Draw(_spriteBatch);
 
             enemyList[currentEnemyIndex].Draw(_spriteBatch);
-            //CurrItem.Draw(_spriteBatch, itemVector);
+            CurrItem.Draw(_spriteBatch);
 
             CurrentObject.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6));
 

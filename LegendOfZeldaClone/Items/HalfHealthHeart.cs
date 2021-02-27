@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone
 {
@@ -11,6 +12,13 @@ namespace LegendOfZeldaClone
         {
             halfHealthHeart = ItemSpriteFactory.Instance.CreateHalfHealthHeart();
             this.location = location;
+        }
+        public void Update()
+        {
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            halfHealthHeart.Draw(spriteBatch, location);
         }
     }
 }
