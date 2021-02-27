@@ -5,27 +5,31 @@ namespace LegendOfZeldaClone.Enemy
 {
     public class EnemySprite : ISprite
     {
-        private int columns;
-        private int rows;
-        private int currentFrame = 0;
-        private int totalFrames;
         private Texture2D texture;
-        private int frameDelay = 0;
-        private float animationSpeed;
+        private readonly int columns;
+        private readonly int rows;
+        private readonly int atlasGap;
+        private readonly int totalFrames;
+        private int currentFrame;
+        private int frameDelay;
+        private readonly int animationSpeed;
 
 
-        public EnemySprite(Texture2D texture, int columns, int rows, int totalFrames, float animationSpeed = 5)
+        public EnemySprite(Texture2D texture, int columns, int rows, int atlasGap, int totalFrames, int animationSpeed = 5)
         {
             this.texture = texture;
             this.columns = columns;
             this.rows = rows;
+            this.atlasGap = atlasGap;
             this.totalFrames = totalFrames;
             this.animationSpeed = animationSpeed;
 
+            currentFrame = 0;
+            frameDelay = 0;
         }
+
         public void Update()
         {
-            
             frameDelay++;
             if (frameDelay == animationSpeed)
             {
@@ -39,12 +43,12 @@ namespace LegendOfZeldaClone.Enemy
         }
         public void Draw(SpriteBatch spritebatch, Vector2 location)
         {
-            int width = texture.Width / columns;
-            int height = texture.Height / rows;
-            int row = (int)((float)currentFrame / (float)columns);
+            int width = texture.Width / columns - atlasGap;
+            int height = texture.Height / rows - atlasGap;
+            int row = currentFrame / columns;
             int column = currentFrame % columns;
 
-            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
+            Rectangle sourceRectangle = new Rectangle((width + atlasGap) * column, (height + atlasGap) * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
 
             spritebatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
