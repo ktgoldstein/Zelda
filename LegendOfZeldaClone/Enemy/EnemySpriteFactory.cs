@@ -34,17 +34,17 @@ namespace LegendOfZeldaClone.Enemy
 			wallmasterSprite = content.Load<Texture2D>("EnemySprites\\Wallmaster");
 		}
 
-		public ISprite CreateAquamentusSprite() => new EnemySprite(aquamentusSprite, 4, 1, 4);
-		public ISprite CreateFireballSprite() => new EnemySprite(fireballSprite, 4, 1, 4);
-		public ISprite CreateGoriyaDownSprite() => new EnemySprite(goriyaDownSprite, 2, 1, 2);
-		public ISprite CreateGoriyaUpSprite() => new EnemySprite(goriyaUpSprite, 2, 1, 2);
-		public ISprite CreateGoriyaRightSprite() => new EnemySprite(goriyaRightSprite, 2, 1, 2);
-		public ISprite CreateGoriyaLeftSprite() => new EnemySprite(goriyaLeftSprite, 2, 1, 2);
-		public ISprite createBoomerangSprite() => new EnemySprite(boomerangSprite, 8, 1, 8, 1);
-		public ISprite CreateStalfosSprite() => new EnemySprite(stalfosSprite, 2, 1, 2);
-		public ISprite CreateBladeTrapSprite() => new EnemySprite(bladeTrapSprite, 1, 1, 1);
-		public ISprite CreateGelSprite() => new EnemySprite(gelSprite, 2, 1, 2);
-		public ISprite CreateKeeseSprite() => new EnemySprite(keeseSprite, 2, 1, 2);
-		public ISprite CreateWallmasterSprite() => new EnemySprite(wallmasterSprite, 2, 1, 2);
+		public ISprite CreateAquamentusSprite() => new EnemySprite(aquamentusSprite, 4, 1, 2, 4);
+		public ISprite CreateFireballSprite() => new EnemySprite(fireballSprite, 4, 1, 2, 4);
+		public ISprite CreateGoriyaDownSprite() => new EnemySprite(goriyaDownSprite, 2, 1, 2, 2);
+		public ISprite CreateGoriyaUpSprite() => new EnemySprite(goriyaUpSprite, 2, 1, 2, 2);
+		public ISprite CreateGoriyaRightSprite() => new EnemySprite(goriyaRightSprite, 2, 1, 2, 2);
+		public ISprite CreateGoriyaLeftSprite() => new EnemySprite(goriyaLeftSprite, 2, 1, 2, 2);
+		public ISprite CreateBoomerangSprite() => new EnemySprite(boomerangSprite, 8, 1, 2, 8, 1);
+		public ISprite CreateStalfosSprite() => new EnemySprite(stalfosSprite, 2, 1, 2, 2);
+		public ISprite CreateBladeTrapSprite() => new EnemySprite(bladeTrapSprite, 1, 1, 0, 1);
+		public ISprite CreateGelSprite() => new EnemySprite(gelSprite, 2, 1, 2, 2);
+		public ISprite CreateKeeseSprite() => new EnemySprite(keeseSprite, 2, 1, 2, 2);
+		public ISprite CreateWallmasterSprite() => new EnemySprite(wallmasterSprite, 2, 1, 2, 2);
 	}
 }
