@@ -18,7 +18,7 @@ namespace LegendOfZeldaClone.Enemy
         public Stalfos(Vector2 location)
         {
             stalfosSprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
-            width = 16;
+            width = 15;
             height = 16;
 
             Location = location;

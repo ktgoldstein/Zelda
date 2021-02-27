@@ -19,7 +19,7 @@ namespace LegendOfZeldaClone.Enemy
 
         public Boomerang(Vector2 location, Vector2 direction, Goriya goriya)
         {
-            boomerangSprite = EnemySpriteFactory.Instance.createBoomerangSprite();
+            boomerangSprite = EnemySpriteFactory.Instance.CreateBoomerangSprite();
             width = 8;
             height = 8;
 
