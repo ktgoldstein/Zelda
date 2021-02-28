@@ -1,4 +1,5 @@
 ﻿using LegendOfZeldaClone.Enemy;
+using LegendOfZeldaClone.LevelLoading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -42,6 +43,9 @@ namespace LegendOfZeldaClone
         public int SwitchItemDelay;
         public int SwitchDelayLength = 5;
 
+        public List<Room> roomList;
+        public int RoomListIndex = 0;
+
         public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -56,6 +60,8 @@ namespace LegendOfZeldaClone
         protected override void Initialize()
         {
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
+
+
 
             _graphics.PreferredBackBufferWidth = LoZHelpers.GameWidth;
             _graphics.PreferredBackBufferHeight = LoZHelpers.GameHeight;
@@ -75,7 +81,7 @@ namespace LegendOfZeldaClone
             ICommand useBomb = new UseBomb(this);
             ICommand useBlueCandle = new UseBlueCandle(this);
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
-            
+
             ICommand resetGame = new ResetGame(this);
 
             ICommand nextItem = new NextItem(this);
@@ -85,6 +91,9 @@ namespace LegendOfZeldaClone
 
             ICommand previousEnemy = new PreviousEnemy(this);
             ICommand nextEnemy = new NextEnemy(this);
+
+            ICommand previousRoom = new PreviousRoom(this);
+            ICommand nextRoom = new NextRoom(this);
 
             KeyboardController keyboardController = new KeyboardController();
             keyboardController.RegisterCommand(Keys.Q, quitGame);
@@ -125,6 +134,9 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.Y, nextObject);
             keyboardController.RegisterCommand(Keys.T, previousObject);
 
+            keyboardController.RegisterCommand(Keys.V, previousRoom);
+            keyboardController.RegisterCommand(Keys.B, nextRoom);
+
             controller = keyboardController;
 
             currentEnemyIndex = 0;
@@ -143,6 +155,8 @@ namespace LegendOfZeldaClone
             SwitchItemDelay = 0;
             SwitchObjectDelay = 0;
 
+            roomList = new List<Room>();
+
             base.Initialize();
         }
 
@@ -157,6 +171,32 @@ namespace LegendOfZeldaClone
             LinkProjectiles = new List<IPlayerProjectile>();
             IUsableItem woodenSword = new UsableWoodenSword(this);
             Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
+
+            RoomTextureFactory.Instance.LoadAllTextures(Content);
+            roomList = new List<Room>()
+            {
+                new Room("Content\\LevelLoading\\room.csv"),
+                new Room("Content\\LevelLoading\\room1.csv"),
+                new Room("Content\\LevelLoading\\room2.csv"),
+                new Room("Content\\LevelLoading\\room3.csv"),
+                new Room("Content\\LevelLoading\\room4.csv"),
+                new Room("Content\\LevelLoading\\room5.csv"),
+                new Room("Content\\LevelLoading\\room7.csv"),
+                new Room("Content\\LevelLoading\\room8.csv"),
+                new Room("Content\\LevelLoading\\room9.csv"),
+                new Room("Content\\LevelLoading\\room10.csv"),
+                new Room("Content\\LevelLoading\\room11.csv"),
+                new Room("Content\\LevelLoading\\room12.csv"),
+                new Room("Content\\LevelLoading\\room13.csv"),
+                new Room("Content\\LevelLoading\\room14.csv"),
+                new Room("Content\\LevelLoading\\room15.csv"),
+                new Room("Content\\LevelLoading\\SecretRoom.csv")
+            };
+
+            foreach (var room in roomList)
+            {
+                room.LoadRoom();
+            }
 
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             enemyList = new List<IEnemy>()
@@ -289,15 +329,17 @@ namespace LegendOfZeldaClone
 
             _spriteBatch.Begin();
 
-            foreach (IPlayerProjectile projectile in LinkProjectiles)
-                projectile.Draw(_spriteBatch);
+            roomList[RoomListIndex].RenderRoom(_spriteBatch);
 
-            Link.Draw(_spriteBatch);
+            //foreach (IPlayerProjectile projectile in LinkProjectiles)
+            //    projectile.Draw(_spriteBatch);
 
-            enemyList[currentEnemyIndex].Draw(_spriteBatch);
-            CurrItem.Draw(_spriteBatch, itemVector);
+            //Link.Draw(_spriteBatch);
 
-            CurrentObject.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6));
+            //enemyList[currentEnemyIndex].Draw(_spriteBatch);
+            //CurrItem.Draw(_spriteBatch, itemVector);
+
+            //CurrentObject.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6));
 
             _spriteBatch.End();
 

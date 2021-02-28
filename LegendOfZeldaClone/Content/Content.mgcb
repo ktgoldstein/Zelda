@@ -181,6 +181,78 @@
 /processorParam:TextureFormat=Color
 /build:EnemySprites/Wallmaster.png
 
+#begin LevelLoading/room.csv
+/copy:LevelLoading/room.csv
+
+#begin LevelLoading/room1.csv
+/copy:LevelLoading/room1.csv
+
+#begin LevelLoading/room10.csv
+/copy:LevelLoading/room10.csv
+
+#begin LevelLoading/room11.csv
+/copy:LevelLoading/room11.csv
+
+#begin LevelLoading/room12.csv
+/copy:LevelLoading/room12.csv
+
+#begin LevelLoading/room13.csv
+/copy:LevelLoading/room13.csv
+
+#begin LevelLoading/room14.csv
+/copy:LevelLoading/room14.csv
+
+#begin LevelLoading/room15.csv
+/copy:LevelLoading/room15.csv
+
+#begin LevelLoading/room2.csv
+/copy:LevelLoading/room2.csv
+
+#begin LevelLoading/room3.csv
+/copy:LevelLoading/room3.csv
+
+#begin LevelLoading/room4.csv
+/copy:LevelLoading/room4.csv
+
+#begin LevelLoading/room5.csv
+/copy:LevelLoading/room5.csv
+
+#begin LevelLoading/room7.csv
+/copy:LevelLoading/room7.csv
+
+#begin LevelLoading/room8.csv
+/copy:LevelLoading/room8.csv
+
+#begin LevelLoading/room9.csv
+/copy:LevelLoading/room9.csv
+
+#begin LevelLoading/RoomExterior.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:LevelLoading/RoomExterior.png
+
+#begin LevelLoading/SecretRoom.csv
+/copy:LevelLoading/SecretRoom.csv
+
+#begin LevelLoading/Tiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:LevelLoading/Tiles.png
+
 #begin linkSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor

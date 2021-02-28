@@ -16,7 +16,7 @@ namespace LegendOfZeldaClone.Enemy
 		private Texture2D gelSprite;
 		private Texture2D keeseSprite;
 		private Texture2D wallmasterSprite;
-
+		
 		private static EnemySpriteFactory instance = new EnemySpriteFactory();
 
 		public static EnemySpriteFactory Instance
@@ -45,6 +45,7 @@ namespace LegendOfZeldaClone.Enemy
 			gelSprite = content.Load<Texture2D>("EnemySprites\\Gel");
 			keeseSprite = content.Load<Texture2D>("EnemySprites\\Keese");
 			wallmasterSprite = content.Load<Texture2D>("EnemySprites\\Wallmaster");
+	
 
 
 

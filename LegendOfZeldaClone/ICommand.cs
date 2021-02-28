@@ -230,7 +230,7 @@ namespace LegendOfZeldaClone
                 return;
             else
                 myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
-            
+
             myGame.currentEnemyIndex--;
             if (myGame.currentEnemyIndex < 0)
             {
@@ -238,9 +238,9 @@ namespace LegendOfZeldaClone
                 myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
             }
             else
-            {                              
+            {
                 myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
-            }   
+            }
         }
     }
 
@@ -267,7 +267,7 @@ namespace LegendOfZeldaClone
                 myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
             }
             else
-            {                   
+            {
                 myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
             }
         }
@@ -332,7 +332,7 @@ namespace LegendOfZeldaClone
     public class NextObject : ICommand
     {
         private LegendOfZeldaDungeon myGame;
-        
+
         public NextObject(LegendOfZeldaDungeon game)
         {
             myGame = game;
@@ -398,5 +398,58 @@ namespace LegendOfZeldaClone
             game.SpriteEnemy = game.enemyList[game.currentEnemyIndex];
         }
     }
+    public class PreviousRoom : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public PreviousRoom(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            if (myGame.SwitchEnemyDelay != 0)
+                return;
+            else
+                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
+            myGame.RoomListIndex--;
+            if (myGame.RoomListIndex < 0)
+            {
+                myGame.RoomListIndex = myGame.roomList.Count - 1;
+            }
+            else
+            {
+            }
+        }
+    }
+
+    public class NextRoom : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public NextRoom(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            if (myGame.SwitchEnemyDelay != 0)
+                return;
+            else
+                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
+
+            myGame.RoomListIndex++;
+            if (myGame.RoomListIndex == myGame.roomList.Count)
+            {
+                myGame.RoomListIndex = 0;
+            }
+            else
+            {
+            }
+        }
+    }
+
 }
 
