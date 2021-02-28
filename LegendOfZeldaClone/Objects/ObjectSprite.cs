@@ -3,14 +3,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone
 {
-    public class Object : ISprite
+    public class ObjectSprite : ISprite
     {
         private Texture2D texture;
         private int height;
         private int width;
         private int sourcePosX;
         private int sourcePosY;
-        public Object(Texture2D texture, int height, int width, int sourcePosX, int sourcePosY)
+        public ObjectSprite(Texture2D texture, int height, int width, int sourcePosX, int sourcePosY)
         {
             this.texture = texture;
             this.height = height;

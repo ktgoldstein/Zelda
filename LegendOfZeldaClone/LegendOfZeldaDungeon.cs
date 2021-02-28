@@ -1,4 +1,5 @@
 ﻿using LegendOfZeldaClone.Enemy;
+using LegendOfZeldaClone.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -24,8 +25,8 @@ namespace LegendOfZeldaClone
         public List<IPlayerProjectile> LinkProjectilesQueue;
         public List<IPlayerProjectile> LinkProjectiles;
 
-        public List<ISprite> Objects;
-        public ISprite CurrentObject;
+        public List<IObject> Objects;
+        public IObject CurrentObject;
         public int ObjectIndex;
 
         public Texture2D ItemTextures;
@@ -137,7 +138,7 @@ namespace LegendOfZeldaClone
             yDirection = 1;
 
             ObjectIndex = 0;
-            Objects = new List<ISprite>();
+            Objects = new List<IObject>();
 
             SwitchEnemyDelay = 0;
             SwitchItemDelay = 0;
@@ -172,30 +173,30 @@ namespace LegendOfZeldaClone
 
             ObjectSpriteFactory.Instance.LoadAllTextures(Content);
 
-            Objects.Add(ObjectSpriteFactory.Instance.CreateFlatBlock());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateRaisedBlock());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateDragonStatue());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateGargoyleStatue());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateDragonStatueBlue());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateGargoyleStatueBlue());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateDottedBlock());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateStairs());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateDarkBlock());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateWater());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateTunnelOpeningUp());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateTunnelOpeningDown());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateKeyDoorUp());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateKeyDoorDown());
-            Objects.Add(ObjectSpriteFactory.Instance.CreatekeyDoorRight());
-            Objects.Add(ObjectSpriteFactory.Instance.CreatekeyDoorLeft());
-            Objects.Add(ObjectSpriteFactory.Instance.CreatelockedDoorUp());
-            Objects.Add(ObjectSpriteFactory.Instance.CreatelockedDoorDown());
-            Objects.Add(ObjectSpriteFactory.Instance.CreatelockedDoorRight());
-            Objects.Add(ObjectSpriteFactory.Instance.CreatelockedDoorLeft());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateOpenDoorUp());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateOpenDoorDown());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateOpenDoorRight());
-            Objects.Add(ObjectSpriteFactory.Instance.CreateOpenDoorLeft());
+            Objects.Add(new FlatBlock(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new RaisedBlock(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new DragonStatue(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new GargoyleStatue(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new BlueDragonStatue(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new BlueGargoyleStatue(LoZHelpers.ObjectStartingLocation)); 
+            Objects.Add(new DottedBlock(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new Stairs(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new DarkBlock(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new Water(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new TunnelFaceUp(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new TunnelFaceDown(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new KeyDoorUp(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new KeyDoorDown(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new KeyDoorRight(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new KeyDoorLeft(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new LockedDoorUp(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new LockedDoorDown(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new LockedDoorRight(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new LockedDoorLeft(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new OpenDoorUp(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new OpenDoorDown(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new OpenDoorRight(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new OpenDoorLeft(LoZHelpers.ObjectStartingLocation));
 
             CurrentObject = Objects[0];
 
@@ -297,7 +298,7 @@ namespace LegendOfZeldaClone
             enemyList[currentEnemyIndex].Draw(_spriteBatch);
             CurrItem.Draw(_spriteBatch, itemVector);
 
-            CurrentObject.Draw(_spriteBatch, new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6));
+            CurrentObject.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
