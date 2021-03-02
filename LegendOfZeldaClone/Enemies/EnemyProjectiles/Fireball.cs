@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    class Fireball : IEnemy
+    class Fireball : IEnemyProjectile
     {
         public Vector2 Location { get; set; }
         public int Width { get { return LoZHelpers.Scale(width); } }

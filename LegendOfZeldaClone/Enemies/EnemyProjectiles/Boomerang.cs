@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    class Boomerang : IEnemy
+    class Boomerang : IEnemyProjectile
     {
         public Vector2 Location { get; set; }
         public int Width { get { return LoZHelpers.Scale(width); } }
