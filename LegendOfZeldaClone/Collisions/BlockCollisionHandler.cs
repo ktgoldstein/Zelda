@@ -1,10 +1,14 @@
-﻿namespace LegendOfZeldaClone
-{
-    public class PlayerCollisionHandler : ICollisionHandler
-    {
-        public static PlayerCollisionHandler Instance { get; } = new PlayerCollisionHandler();
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-        private PlayerCollisionHandler() { }
+namespace LegendOfZeldaClone.Collisions
+{
+    class BlockCollisionHandler : ICollisionHandler
+    {
+        public static BlockCollisionHandler Instance { get; } = new BlockCollisionHandler();
+
+        private BlockCollisionHandler() { }
 
         public void HandlePlayerCollision(IPlayer player)
         {
@@ -22,7 +26,7 @@
         {
 
         }
-        public void HandleItemCollision(IItem item) 
+        public void HandleItemCollision(IItem item)
         {
 
         }
@@ -35,8 +39,5 @@
         {
 
         }
-
-
     }
 }
-
