@@ -30,7 +30,7 @@ namespace LegendOfZeldaClone
         public int ObjectIndex;
 
         public Texture2D ItemTextures;
-        public IItem[] Items;
+        public List<IItem> Items;
         public IItem CurrItem;
         public int itemIndex;
         public Vector2 itemVector;
@@ -129,7 +129,7 @@ namespace LegendOfZeldaClone
             enemyList = new List<IEnemy>();
 
             itemIndex = 0;
-            Items = new IItem[24];
+            Items = new List<IItem>();
             itemVector = new Vector2(LoZHelpers.GameWidth / 2 + 32, LoZHelpers.GameHeight / 2);
 
             ObjectIndex = 0;
@@ -196,30 +196,30 @@ namespace LegendOfZeldaClone
             CurrentObject = Objects[0];
 
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
-            Items[0] = new Compass(itemVector);
-            Items[1] = new Key(itemVector);
-            Items[2] = new Boomerang(itemVector);
-            Items[3] = new Bow(itemVector);
-            Items[4] = new Heart(itemVector);
-            Items[5] = new FlashingRupee(itemVector);
-            Items[6] = new Arrow(itemVector);
-            Items[7] = new Bomb(itemVector);
-            Items[8] = new Fairy(itemVector);
-            Items[9] = new Clock(itemVector);
-            Items[10] = new TriForcePiece(itemVector);
-            Items[11] = new HeartContainer(itemVector);
-            Items[12] = new Map(itemVector);
-            Items[13] = new Sword(itemVector);
-            Items[14] = new MagicalKey(itemVector);
-            Items[15] = new FullHealthHeart(itemVector);
-            Items[16] = new HalfHealthHeart(itemVector);
-            Items[17] = new NoHealthHeart(itemVector);
-            Items[18] = new GoldRupee(itemVector);
-            Items[19] = new BlueRupee(itemVector);
-            Items[20] = new SilverArrow(itemVector);
-            Items[21] = new LifePotion(itemVector);
-            Items[22] = new BlueCandle(itemVector);
-            Items[23] = new BlueRing(itemVector);
+            Items.Add(new Compass(itemVector));
+            Items.Add(new Key(itemVector));
+            Items.Add(new Boomerang(itemVector));
+            Items.Add(new Bow(itemVector));
+            Items.Add(new Heart(itemVector));
+            Items.Add(new FlashingRupee(itemVector));
+            Items.Add(new Arrow(itemVector));
+            Items.Add(new Bomb(itemVector));
+            Items.Add(new Fairy(itemVector));
+            Items.Add(new Clock(itemVector));
+            Items.Add(new TriForcePiece(itemVector));
+            Items.Add(new HeartContainer(itemVector));
+            Items.Add(new Map(itemVector));
+            Items.Add(new Sword(itemVector));
+            Items.Add(new MagicalKey(itemVector));
+            Items.Add(new FullHealthHeart(itemVector));
+            Items.Add(new HalfHealthHeart(itemVector));
+            Items.Add(new NoHealthHeart(itemVector));
+            Items.Add(new GoldRupee(itemVector));
+            Items.Add(new BlueRupee(itemVector));
+            Items.Add(new SilverArrow(itemVector));
+            Items.Add(new LifePotion(itemVector));
+            Items.Add(new BlueCandle(itemVector));
+            Items.Add(new BlueRing(itemVector));
             CurrItem = Items[0];
         }
 

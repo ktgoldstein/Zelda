@@ -13,7 +13,6 @@
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile)
         {
             //boomerang should disappear (only one that should collide and do something upon collision)
-            //not sure if bombs deal damage yet
         }
         public void HandleEnemyCollision(IEnemy enemy)
         {

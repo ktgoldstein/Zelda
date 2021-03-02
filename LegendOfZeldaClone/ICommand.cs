@@ -290,7 +290,7 @@ namespace LegendOfZeldaClone
 
             if (myGame.itemIndex == 0)
             {
-                myGame.itemIndex = myGame.Items.Length - 1;
+                myGame.itemIndex = myGame.Items.Count - 1;
                 myGame.CurrItem = myGame.Items[myGame.itemIndex];
             }
             else
@@ -317,7 +317,7 @@ namespace LegendOfZeldaClone
             else
                 myGame.SwitchItemDelay = myGame.SwitchDelayLength;
 
-            if (myGame.itemIndex == myGame.Items.Length - 1)
+            if (myGame.itemIndex == myGame.Items.Count - 1)
             {
                 myGame.itemIndex = 0;
                 myGame.CurrItem = myGame.Items[0];
