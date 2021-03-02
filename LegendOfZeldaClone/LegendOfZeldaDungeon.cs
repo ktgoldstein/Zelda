@@ -45,8 +45,8 @@ namespace LegendOfZeldaClone
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            this.IsFixedTimeStep = true;
-            this.TargetElapsedTime = System.TimeSpan.FromSeconds(1d / 20d);
+            IsFixedTimeStep = true;
+            TargetElapsedTime = System.TimeSpan.FromSeconds(1d / 20d);
 
             IsMouseVisible = true;
         }
@@ -247,9 +247,19 @@ namespace LegendOfZeldaClone
             LinkProjectiles = LinkProjectiles.Except(deadProjectiles).ToList();
 
             enemyList[currentEnemyIndex].Update();
-
             
             CurrItem.Update();
+
+            Direction collisionDirection = Collisions.CollisionDetection.DetectCollisionDirection(Link.HurtBoxLocation, Link.Width, Link.Height, 
+                enemyList[currentEnemyIndex].Location, enemyList[currentEnemyIndex].Width, enemyList[currentEnemyIndex].Height);
+            Link.Location += collisionDirection switch
+            {
+                Direction.Down => new Vector2(0, -Link.Speed * 20),
+                Direction.Up => new Vector2(0, Link.Speed * 20),
+                Direction.Left => new Vector2(Link.Speed * 20, 0),
+                Direction.Right => new Vector2(-Link.Speed * 20, 0),
+                _ => new Vector2()
+            };
 
             base.Update(gameTime);
         }

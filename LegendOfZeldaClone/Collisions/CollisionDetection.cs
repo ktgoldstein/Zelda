@@ -13,13 +13,9 @@ namespace LegendOfZeldaClone.Collisions
             if (xOverlap > 0 && yOverlap > 0)
             {
                 if (xOverlap > yOverlap)
-                {
-                    result = (location1.X < location2.X) ? Direction.Left : Direction.Right;
-                }
-                else
-                {
                     result = (location1.Y < location2.Y) ? Direction.Down : Direction.Up;
-                }
+                else
+                    result = (location1.X < location2.X) ? Direction.Right : Direction.Left;
             }
 
             return result;
