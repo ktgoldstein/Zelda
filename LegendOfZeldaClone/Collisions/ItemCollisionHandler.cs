@@ -31,7 +31,7 @@ namespace LegendOfZeldaClone.Collisions
             //nothing will happen (they can overlap)
         }
 
-        public void HandleBlockCollision(ISprite block) //tentative; IBlock interface?
+        public void HandleBlockCollision(IObject block)
         {
             //nothing will happen (handled in player projectile collision with block)
         }

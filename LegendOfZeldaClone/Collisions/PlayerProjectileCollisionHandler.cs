@@ -31,7 +31,7 @@ namespace LegendOfZeldaClone.Collisions
             //item should disappear and be added to player inventory
         }
 
-        public void HandleBlockCollision(ISprite block) //tentative; IBlock interface?
+        public void HandleBlockCollision(IObject block)
         {
             //not sure yet if projectiles can go through objects or not
         }

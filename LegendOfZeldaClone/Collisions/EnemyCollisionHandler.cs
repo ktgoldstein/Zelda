@@ -31,7 +31,7 @@ namespace LegendOfZeldaClone.Collisions
             //nothing will happen
         }
 
-        public void HandleBlockCollision(ISprite block) //tentative; IBlock interface?
+        public void HandleBlockCollision(IObject block)
         {
             //they should stop and have to move around it
         }

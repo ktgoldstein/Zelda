@@ -28,7 +28,7 @@
             //item should disappear and be added to player inventory
         }
 
-        public void HandleBlockCollision(ISprite block) //tentative; IBlock interface?
+        public void HandleBlockCollision(IObject block)
         {
             //player should stop and have to move around the block
         }
