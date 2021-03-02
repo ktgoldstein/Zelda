@@ -25,6 +25,7 @@ namespace LegendOfZeldaClone
             get { return decoratedLinkPlayer.Location; }
             set { decoratedLinkPlayer.Location = value; }
         }
+        public Vector2 HurtBoxLocation { get { return decoratedLinkPlayer.HurtBoxLocation; } }
         public int Width { get { return decoratedLinkPlayer.Width; } }
         public int Height { get { return decoratedLinkPlayer.Height; } }
         public IUsableItem Sword 
