@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace LegendOfZeldaClone.Objects
+namespace LegendOfZeldaClone
 {
     public interface IObject
     {
