@@ -18,7 +18,6 @@ namespace LegendOfZeldaClone
         public Texture2D LinkTextures;
 
         public int currentEnemyIndex;
-        public IEnemy SpriteEnemy;
         public List<IEnemy> enemyList;
 
         public IPlayer Link;

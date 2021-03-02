@@ -233,14 +233,7 @@ namespace LegendOfZeldaClone
             
             myGame.currentEnemyIndex--;
             if (myGame.currentEnemyIndex < 0)
-            {
                 myGame.currentEnemyIndex = myGame.enemyList.Count - 1;
-                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
-            }
-            else
-            {                              
-                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
-            }   
         }
     }
 
@@ -262,14 +255,7 @@ namespace LegendOfZeldaClone
 
             myGame.currentEnemyIndex++;
             if (myGame.currentEnemyIndex == myGame.enemyList.Count)
-            {
                 myGame.currentEnemyIndex = 0;
-                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
-            }
-            else
-            {                   
-                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
-            }
         }
     }
     public class PreviousItem : ICommand
@@ -395,7 +381,6 @@ namespace LegendOfZeldaClone
             game.LinkProjectiles.Clear();
 
             game.currentEnemyIndex = 0;
-            game.SpriteEnemy = game.enemyList[game.currentEnemyIndex];
         }
     }
 }
