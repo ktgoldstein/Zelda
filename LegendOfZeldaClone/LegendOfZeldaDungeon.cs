@@ -171,22 +171,22 @@ namespace LegendOfZeldaClone
             RoomTextureFactory.Instance.LoadAllTextures(Content);
             roomList = new List<Room>()
             {
-                new Room("Content\\LevelLoading\\room.csv"),
-                new Room("Content\\LevelLoading\\room1.csv"),
-                new Room("Content\\LevelLoading\\room2.csv"),
-                new Room("Content\\LevelLoading\\room3.csv"),
-                new Room("Content\\LevelLoading\\room4.csv"),
-                new Room("Content\\LevelLoading\\room5.csv"),
-                new Room("Content\\LevelLoading\\room7.csv"),
-                new Room("Content\\LevelLoading\\room8.csv"),
-                new Room("Content\\LevelLoading\\room9.csv"),
-                new Room("Content\\LevelLoading\\room10.csv"),
-                new Room("Content\\LevelLoading\\room11.csv"),
-                new Room("Content\\LevelLoading\\room12.csv"),
-                new Room("Content\\LevelLoading\\room13.csv"),
-                new Room("Content\\LevelLoading\\room14.csv"),
-                new Room("Content\\LevelLoading\\room15.csv"),
-                new Room("Content\\LevelLoading\\SecretRoom.csv")
+                new Room("Content\\LevelLoading\\room.csv", this),
+                //new Room("Content\\LevelLoading\\room1.csv"),
+                //new Room("Content\\LevelLoading\\room2.csv"),
+                //new Room("Content\\LevelLoading\\room3.csv"),
+                //new Room("Content\\LevelLoading\\room4.csv"),
+                //new Room("Content\\LevelLoading\\room5.csv"),
+                //new Room("Content\\LevelLoading\\room7.csv"),
+                //new Room("Content\\LevelLoading\\room8.csv"),
+                //new Room("Content\\LevelLoading\\room9.csv"),
+                //new Room("Content\\LevelLoading\\room10.csv"),
+                //new Room("Content\\LevelLoading\\room11.csv"),
+                //new Room("Content\\LevelLoading\\room12.csv"),
+                //new Room("Content\\LevelLoading\\room13.csv"),
+                //new Room("Content\\LevelLoading\\room14.csv"),
+                //new Room("Content\\LevelLoading\\room15.csv"),
+                //new Room("Content\\LevelLoading\\SecretRoom.csv")
             };
 
             foreach (var room in roomList)

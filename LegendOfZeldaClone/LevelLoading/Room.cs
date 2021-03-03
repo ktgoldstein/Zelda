@@ -15,12 +15,14 @@ namespace LegendOfZeldaClone.LevelLoading
         public Texture2D exterior;
         private List<List<int>> data;
         String fileLocation;
-
-        public Room(String fileLocation)
+        private LegendOfZeldaDungeon game;
+        public Room(String fileLocation, LegendOfZeldaDungeon game)
         {
+            this.game = game;
             this.fileLocation = fileLocation;
             tiles = RoomTextureFactory.Instance.tiles;
             exterior = RoomTextureFactory.Instance.roomExterior;
+            
         }
         public void LoadRoom()
         {
@@ -41,7 +43,9 @@ namespace LegendOfZeldaClone.LevelLoading
             Rectangle destinationRectangle = new Rectangle(0, 0, 240*3, 160*3);
            
             spritebatch.Draw(exterior, destinationRectangle, sourceRectangle, Color.White);
-            for(int row = 0; row < data.Count; row++)
+            
+
+            for (int row = 0; row < data.Count; row++)
             {
                 for (int column = 0; column < data[row].Count; column++)
                 {
@@ -57,10 +61,19 @@ namespace LegendOfZeldaClone.LevelLoading
                     }
                     else
                     {
-                        destinationRectangle = new Rectangle((width * column + 24) * 3, (height * row + 24) * 3, width * 3, height * 3);
+                        destinationRectangle = new Rectangle((width * column + 8) * 3, (height * row + 8) * 3, width * 3, height * 3);
                     }
 
+                    if(sourceRow != 2 && sourceRow != 5)
                     spritebatch.Draw(tiles, destinationRectangle, sourceRectangle, Color.White);
+
+                    if (sourceRow == 5)
+                       game.Objects[22].Draw(spritebatch, new Vector2((width * column + 8) * 3, (height * row + 8) * 3));
+
+                    //if(sourceRow == 0 && sourceCol == 0)
+                    //game.Objects[1].Draw(spritebatch, new Vector2((width * column + 24) * 3, (height * row + 24) * 3));
+                    //if(sourceCol == 20 && sourceCol == 20)
+                    //game.Objects[20].Draw(spritebatch, new Vector2((width * column + 24) * 3, (height * row + 24) * 3));
                 }
             }
         }

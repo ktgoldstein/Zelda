@@ -22,7 +22,7 @@ namespace LegendOfZeldaClone
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle sourceRectangle = new Rectangle(sourcePosX, sourcePosY, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 3, height * 3);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
