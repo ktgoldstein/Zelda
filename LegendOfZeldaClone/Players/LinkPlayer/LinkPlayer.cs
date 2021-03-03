@@ -32,7 +32,7 @@ namespace LegendOfZeldaClone
             height = 14;
 
             this.game = game;
-            Speed = LoZHelpers.Scale(3);
+            Speed = LoZHelpers.Scale(2);
             MaxHealth = 6;
             Health = MaxHealth;
             linkState = new LinkStandingDown(this);
