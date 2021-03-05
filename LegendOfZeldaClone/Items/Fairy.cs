@@ -28,11 +28,6 @@ namespace LegendOfZeldaClone
         }
         public void Update()
         {
-            if ((location - game.Link.Location).Length() < 5)
-            {
-                Alive = false;
-            }
-
             location.Y += speed * yDirection;
             location.X += speed * xDirection;
             if (location.Y > (LoZHelpers.GameHeight / 2 + 30))

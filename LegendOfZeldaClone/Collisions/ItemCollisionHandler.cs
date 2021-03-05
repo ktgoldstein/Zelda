@@ -10,17 +10,21 @@ namespace LegendOfZeldaClone.Collisions
 
         private ItemCollisionHandler() { }
 
+        public IItem CurrItem { get; set; }
+
         public void HandlePlayerCollision(IPlayer player)
         {
-            //make item disappear upon collision (and add to player inventory)
+            //item should be added to player inventory (done in player collision?)
+            CurrItem.Alive = false;
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile)
         {
-            //make item disappear upon collision (and add to player inventory)
+            //item should be added to player inventory (done in player collision?)
+            CurrItem.Alive = false;
         }
         public void HandleEnemyCollision(IEnemy enemy)
         {
-            //only bombs or weapons will cause damage (do boomerangs cause damage?)
+            CurrItem.Alive = false;
         }
         public void HandleEnemyProjectileCollision(IEnemy enemyProjectile)
         {
@@ -33,7 +37,7 @@ namespace LegendOfZeldaClone.Collisions
 
         public void HandleBlockCollision(IObject block)
         {
-            //nothing will happen (handled in player projectile collision with block)
+            //nothing will happen (fairies fly over blocks like keese do)
         }
         public void HandleBoundaryCollision()
         {

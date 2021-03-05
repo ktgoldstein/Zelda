@@ -22,10 +22,6 @@ namespace LegendOfZeldaClone
         }
         public void Update()
         {
-            if ((location - game.Link.Location).Length() < 5)
-            {
-                Alive = false;
-            }
             heart.Update();
         }
         public void Draw(SpriteBatch spriteBatch)

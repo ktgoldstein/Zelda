@@ -22,10 +22,6 @@ namespace LegendOfZeldaClone
         }
         public void Update()
         {
-            if ((location - game.Link.Location).Length() < 5)
-            {
-                Alive = false;
-            }
             rupee.Update();
         }
         public void Draw(SpriteBatch spriteBatch)

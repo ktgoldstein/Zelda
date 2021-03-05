@@ -21,13 +21,7 @@ namespace LegendOfZeldaClone
             Alive = true;
         }
 
-        public void Update()
-        {
-            if ((location - game.Link.Location).Length() < 5)
-            {
-                Alive = false;
-            }
-        }
+        public void Update() {}
 
         public void Draw(SpriteBatch spriteBatch)
         {
