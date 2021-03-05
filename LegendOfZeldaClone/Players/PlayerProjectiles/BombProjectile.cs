@@ -6,6 +6,8 @@ namespace LegendOfZeldaClone
 {
     public class BombProjectile : IPlayerProjectile
     {
+        public bool Alive { get; set; }
+
         private readonly LegendOfZeldaDungeon game;
         private readonly ISprite sprite;
         private Vector2 location;
@@ -13,6 +15,8 @@ namespace LegendOfZeldaClone
 
         public BombProjectile(LegendOfZeldaDungeon game, Vector2 startingLocation, Direction direction)
         {
+            Alive = true;
+
             this.game = game;
             location = startingLocation;
             lifeSpan = 40;
@@ -20,7 +24,7 @@ namespace LegendOfZeldaClone
             DirectionBasedSetUp(direction);
         }
 
-        public bool Update()
+        public void Update()
         {
             if (lifeSpan == 0)
             {
@@ -28,11 +32,10 @@ namespace LegendOfZeldaClone
                 Random rnd = new Random();
                 int explosionSeed = rnd.Next(2);
                 SpawnExplosions(explosionSeed);
-                return true;
+                Alive = false;
             }
 
             lifeSpan--;
-            return false;
         }
 
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);

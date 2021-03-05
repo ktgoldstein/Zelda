@@ -19,6 +19,8 @@ namespace LegendOfZeldaClone
 
         public int currentEnemyIndex;
         public List<IEnemy> enemyList;
+        public List<IEnemyProjectile> EnemyProjectilesQueue;
+        public List<IEnemyProjectile> EnemyProjectiles;
 
         public IPlayer Link;
         public List<IPlayerProjectile> LinkProjectilesQueue;
@@ -240,7 +242,8 @@ namespace LegendOfZeldaClone
             LinkProjectilesQueue.Clear();
             foreach (IPlayerProjectile projectile in LinkProjectiles)
             {
-                if (projectile.Update())
+                projectile.Update();
+                if (!projectile.Alive)
                     deadProjectiles.Add(projectile);
             }
             LinkProjectiles = LinkProjectiles.Except(deadProjectiles).ToList();

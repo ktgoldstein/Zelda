@@ -5,6 +5,8 @@ namespace LegendOfZeldaClone
 {
     public class SwordProjectile : IPlayerProjectile
     {
+        public bool Alive { get; set; }
+
         private readonly LegendOfZeldaDungeon game;
         private readonly SwordSkinType skinType;
         private readonly Direction direction;
@@ -14,6 +16,8 @@ namespace LegendOfZeldaClone
 
         public SwordProjectile(Vector2 startingLocation, SwordSkinType skinType, Direction direction, LegendOfZeldaDungeon game)
         {
+            Alive = true;
+
             this.game = game;
             this.direction = direction;
             location = startingLocation;
@@ -22,10 +26,10 @@ namespace LegendOfZeldaClone
             DirectionBasedSetUp(direction);
         }
 
-        public bool Update()
+        public void Update()
         {
             if (lifeSpan == 0)
-                return true;
+                Alive = false;
             switch (lifeSpan)
             {
                 case 8:
@@ -50,7 +54,6 @@ namespace LegendOfZeldaClone
                     break;
             }
             lifeSpan--;
-            return false;
         }
 
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);

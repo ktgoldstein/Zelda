@@ -5,6 +5,8 @@ namespace LegendOfZeldaClone
 {
     public class ArrowProjectile : IPlayerProjectile
     {
+        public bool Alive { get; set; }
+
         private readonly ArrowSkinType skinType;
         private ISprite sprite;
         private Vector2 velocity;
@@ -13,19 +15,20 @@ namespace LegendOfZeldaClone
 
         public ArrowProjectile(Vector2 startingLocation, Direction direction, ArrowSkinType skinType)
         {
+            Alive = true;
+
             this.skinType = skinType;
             location = startingLocation;
             lifeSpan = 20;
             DirectionBasedSetUp(direction);
         }
 
-        public bool Update()
+        public void Update()
         {
             if (lifeSpan == 0)
-                return true;
+                Alive = false;
             location += velocity;
             lifeSpan--;
-            return false;
         }
 
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);

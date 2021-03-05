@@ -6,6 +6,8 @@ namespace LegendOfZeldaClone
 {
     public class SwordBeamProjectile : IPlayerProjectile
     {
+        public bool Alive { get; set; }
+
         private readonly LegendOfZeldaDungeon game;
         private readonly int skinSeed;
         private ISprite[] sprites;
@@ -15,6 +17,8 @@ namespace LegendOfZeldaClone
 
         public SwordBeamProjectile(Vector2 startingLocation, Direction direction, LegendOfZeldaDungeon game)
         {
+            Alive = true;
+
             this.game = game;
             location = startingLocation;
             lifeSpan = 20;
@@ -24,7 +28,7 @@ namespace LegendOfZeldaClone
             DirectionBasedSetUp(direction);
         }
 
-        public bool Update()
+        public void Update()
         {
             if (lifeSpan == 0)
             {
@@ -32,11 +36,10 @@ namespace LegendOfZeldaClone
                 game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(location, Direction.UpRight, skinSeed));
                 game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(location, Direction.DownLeft, skinSeed));
                 game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(location, Direction.DownRight, skinSeed));
-                return true;
+                Alive = false;
             }
             location += velocity;
             lifeSpan--;
-            return false;
         }
 
         public void Draw(SpriteBatch spriteBatch)

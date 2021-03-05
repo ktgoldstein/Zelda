@@ -5,6 +5,8 @@ namespace LegendOfZeldaClone
 {
     public class FireProjectile : IPlayerProjectile
     {
+        public bool Alive { get; set; }
+
         private readonly ISprite sprite;
         private readonly int speed;
         private Vector2 velocity;
@@ -13,6 +15,8 @@ namespace LegendOfZeldaClone
 
         public FireProjectile(Vector2 startingLocation, Direction direction)
         {
+            Alive = true;
+
             location = startingLocation;
             speed = 1;
             lifeSpan = 20;
@@ -20,15 +24,14 @@ namespace LegendOfZeldaClone
             DirectionBasedSetUp(direction);
         }
 
-        public bool Update()
+        public void Update()
         {
             sprite.Update();
             if (lifeSpan == 0)
-                return true;
+                Alive = false;
 
             lifeSpan--;
             location += velocity;
-            return false;
         }
 
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);

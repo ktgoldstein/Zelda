@@ -5,6 +5,8 @@ namespace LegendOfZeldaClone
 {
     public class SwordBeamExplosionProjectile : IPlayerProjectile
     {
+        public bool Alive { get; set; }
+
         private ISprite[] sprites;
         private Vector2 velocity;
         private Vector2 location;
@@ -12,19 +14,20 @@ namespace LegendOfZeldaClone
 
         public SwordBeamExplosionProjectile(Vector2 startingLocation, Direction direction, int skinSeed)
         {
+            Alive = true;
+
             location = startingLocation;
             lifeSpan = 10;
             sprites = new ISprite[2];
             DirectionBasedSetUp(direction, skinSeed);
         }
 
-        public bool Update()
+        public void Update()
         {
             if (lifeSpan == 0)
-                return true;
+                Alive = false;
             location += velocity;
             lifeSpan--;
-            return false;
         }
 
         public void Draw(SpriteBatch spriteBatch)

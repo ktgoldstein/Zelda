@@ -5,6 +5,8 @@ namespace LegendOfZeldaClone
 {
     public class BoomerangProjectile : IPlayerProjectile
     {
+        public bool Alive { get; set; }
+
         private readonly LegendOfZeldaDungeon game;
         private readonly ISprite sprite;
         private readonly int speed;
@@ -14,6 +16,8 @@ namespace LegendOfZeldaClone
 
         public BoomerangProjectile(Vector2 startingLocation, Direction direction, BoomerangSkinType skinType, LegendOfZeldaDungeon game)
         {
+            Alive = true;
+
             this.game = game;
             location = startingLocation;
             speed = 8;
@@ -22,24 +26,22 @@ namespace LegendOfZeldaClone
             DirectionBasedSetUp(direction);
         }
 
-        public bool Update()
+        public void Update()
         {
             sprite.Update();
             if (lifeSpan == 0)
             {
                 if ((location - game.Link.Location).Length() < 5)
-                    return true;
+                    Alive = false;
 
                 velocity = game.Link.Location - location;
                 velocity.Normalize();
                 velocity *= speed;
             }
             else
-            {
                 lifeSpan--;
-            }
+
             location += velocity;
-            return false;
         }
 
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);
