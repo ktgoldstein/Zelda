@@ -9,16 +9,23 @@ namespace LegendOfZeldaClone
         private Vector2 location;
         private int height;
         private int width;
+        private readonly LegendOfZeldaDungeon game;
+        public bool Alive { get; set; }
 
         public Heart(Vector2 location)
         {
             heart = ItemSpriteFactory.Instance.CreateHeart();
             this.location = location;
-            this.width = 8;
+            this.width = 7;
             this.height = 8;
+            Alive = true;
         }
         public void Update()
         {
+            if ((location - game.Link.Location).Length() < 5)
+            {
+                Alive = false;
+            }
             heart.Update();
         }
         public void Draw(SpriteBatch spriteBatch)

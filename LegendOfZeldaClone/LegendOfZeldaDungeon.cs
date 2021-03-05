@@ -32,7 +32,6 @@ namespace LegendOfZeldaClone
 
         public Texture2D ItemTextures;
         public List<IItem> Items;
-        public IItem CurrItem;
         public int itemIndex;
         public Vector2 itemVector;
 
@@ -224,7 +223,6 @@ namespace LegendOfZeldaClone
             Items.Add(new LifePotion(itemVector));
             Items.Add(new BlueCandle(itemVector));
             Items.Add(new BlueRing(itemVector));
-            CurrItem = Items[0];
         }
 
         protected override void Update(GameTime gameTime)
@@ -264,7 +262,16 @@ namespace LegendOfZeldaClone
             }
             EnemyProjectiles = EnemyProjectiles.Except(deadEnemyProjectiles).ToList();
 
-            CurrItem.Update();
+            List<IItem> deadItems = new List<IItem>();
+            foreach(IItem item in Items)
+            {
+                item.Update();
+                if (!item.Alive)
+                {
+                    deadItems.Add(item);
+                }
+            }
+            Items = Items.Except(deadItems).ToList();
 
             Direction collisionDirection = Collisions.CollisionDetection.DetectCollisionDirection(Link.HurtBoxLocation, Link.Width, Link.Height, 
                 enemyList[currentEnemyIndex].Location, enemyList[currentEnemyIndex].Width, enemyList[currentEnemyIndex].Height);
@@ -296,7 +303,10 @@ namespace LegendOfZeldaClone
             foreach (IEnemyProjectile projectile in EnemyProjectiles)
                 projectile.Draw(_spriteBatch);
 
-            CurrItem.Draw(_spriteBatch);
+            foreach (IItem item in Items)
+            {
+                item.Draw(_spriteBatch);
+            }
 
             CurrentObject.Draw(_spriteBatch);
 

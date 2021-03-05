@@ -9,6 +9,8 @@ namespace LegendOfZeldaClone
         private Vector2 location;
         private int height;
         private int width;
+        private readonly LegendOfZeldaDungeon game;
+        public bool Alive { get; set; }
 
         public Key(Vector2 location)
         {
@@ -16,9 +18,14 @@ namespace LegendOfZeldaClone
             this.location = location;
             this.width = 8;
             this.height = 16;
+            Alive = true;
         }
         public void Update()
         {
+            if ((location - game.Link.Location).Length() < 5)
+            {
+                Alive = false;
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {

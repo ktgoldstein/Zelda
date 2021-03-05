@@ -9,16 +9,23 @@ namespace LegendOfZeldaClone
         private Vector2 location;
         private int height;
         private int width;
+        private readonly LegendOfZeldaDungeon game;
+        public bool Alive { get; set; }
 
         public SilverArrow(Vector2 location)
         {
             silverArrow = ItemSpriteFactory.Instance.CreateSilverArrow();
             this.location = location;
-            this.width = 8;
+            this.width = 5;
             this.height = 16;
+            Alive = true;
         }
         public void Update()
         {
+            if ((location - game.Link.Location).Length() < 5)
+            {
+                Alive = false;
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {

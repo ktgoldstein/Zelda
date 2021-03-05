@@ -9,16 +9,23 @@ namespace LegendOfZeldaClone
         private Vector2 location;
         private int height;
         private int width;
+        private readonly LegendOfZeldaDungeon game;
+        public bool Alive { get; set; }
 
         public TriForcePiece(Vector2 location)
         {
             triforcePiece = ItemSpriteFactory.Instance.CreateTriforcePiece();
             this.location = location;
-            this.width = 12;
-            this.height = 12;
+            this.width = 10;
+            this.height = 10;
+            Alive = true;
         }
         public void Update()
         {
+            if ((location - game.Link.Location).Length() < 5)
+            {
+                Alive = false;
+            }
             triforcePiece.Update();
         }
         public void Draw(SpriteBatch spriteBatch)
