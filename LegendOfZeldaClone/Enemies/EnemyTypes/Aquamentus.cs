@@ -10,39 +10,29 @@ namespace LegendOfZeldaClone.Enemy
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
+        private LegendOfZeldaDungeon game;
         private ISprite aquamentusSprite;
         private float speed = 2;
         private int direction = 1;
         private int timer = 0;
-        private List<Fireball> fireballs = new List<Fireball>();
         private readonly int width;
         private readonly int height;
 
-        public Aquamentus(Vector2 location)
+        public Aquamentus(LegendOfZeldaDungeon game, Vector2 location)
         {
             aquamentusSprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
             width = 24;
             height = 32;
 
+            this.game = game;
             Location = location;
         }
 
-        public void Draw(SpriteBatch spritebatch)
-        {
-            aquamentusSprite.Draw(spritebatch, Location);
-            foreach (Fireball fireball in fireballs)
-            {
-                fireball.Draw(spritebatch);
-            }
-        }
+        public void Draw(SpriteBatch spritebatch) => aquamentusSprite.Draw(spritebatch, Location);
+
         public void Update()
         {
             aquamentusSprite.Update();
-            
-            foreach (Fireball fireball in fireballs)
-            {
-                fireball.Update();
-            }
 
             Location += speed * direction * Vector2.UnitY;
             if (Location.Y > 192)
@@ -64,9 +54,9 @@ namespace LegendOfZeldaClone.Enemy
 
         private void SpitFireballs()
         {
-            fireballs.Add(new Fireball(Location, new Vector2(-2, -1)));
-            fireballs.Add(new Fireball(Location, new Vector2(-1, 0)));
-            fireballs.Add(new Fireball(Location, new Vector2(-2, 1)));
+            game.EnemyProjectilesQueue.Add(new Fireball(Location, new Vector2(-2, -1)));
+            game.EnemyProjectilesQueue.Add(new Fireball(Location, new Vector2(-1, 0)));
+            game.EnemyProjectilesQueue.Add(new Fireball(Location, new Vector2(-2, 1)));
         }
     }
 }

@@ -156,10 +156,13 @@ namespace LegendOfZeldaClone
             Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
 
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
+
+            EnemyProjectilesQueue = new List<IEnemyProjectile>();
+            EnemyProjectiles = new List<IEnemyProjectile>();
             enemyList = new List<IEnemy>()
             {
-               new Aquamentus(LoZHelpers.EnemyStartingLocation),
-               new Goriya(LoZHelpers.EnemyStartingLocation),
+               new Aquamentus(this, LoZHelpers.EnemyStartingLocation),
+               new Goriya(this, LoZHelpers.EnemyStartingLocation),
                new Stalfos(LoZHelpers.EnemyStartingLocation),
                new BladeTrap(LoZHelpers.EnemyStartingLocation),
                new Gel(LoZHelpers.EnemyStartingLocation),
@@ -237,19 +240,30 @@ namespace LegendOfZeldaClone
 
             Link.Update();
 
-            List<IPlayerProjectile> deadProjectiles = new List<IPlayerProjectile>();
+            List<IPlayerProjectile> deadLinkProjectiles = new List<IPlayerProjectile>();
             LinkProjectiles.AddRange(LinkProjectilesQueue);
             LinkProjectilesQueue.Clear();
             foreach (IPlayerProjectile projectile in LinkProjectiles)
             {
                 projectile.Update();
                 if (!projectile.Alive)
-                    deadProjectiles.Add(projectile);
+                    deadLinkProjectiles.Add(projectile);
             }
-            LinkProjectiles = LinkProjectiles.Except(deadProjectiles).ToList();
+            LinkProjectiles = LinkProjectiles.Except(deadLinkProjectiles).ToList();
 
             enemyList[currentEnemyIndex].Update();
-            
+
+            List<IEnemyProjectile> deadEnemyProjectiles = new List<IEnemyProjectile>();
+            EnemyProjectiles.AddRange(EnemyProjectilesQueue);
+            EnemyProjectilesQueue.Clear();
+            foreach (IEnemyProjectile projectile in EnemyProjectiles)
+            {
+                projectile.Update();
+                if (!projectile.Alive)
+                    deadEnemyProjectiles.Add(projectile);
+            }
+            EnemyProjectiles = EnemyProjectiles.Except(deadEnemyProjectiles).ToList();
+
             CurrItem.Update();
 
             Direction collisionDirection = Collisions.CollisionDetection.DetectCollisionDirection(Link.HurtBoxLocation, Link.Width, Link.Height, 
@@ -278,6 +292,10 @@ namespace LegendOfZeldaClone
             Link.Draw(_spriteBatch);
 
             enemyList[currentEnemyIndex].Draw(_spriteBatch);
+
+            foreach (IEnemyProjectile projectile in EnemyProjectiles)
+                projectile.Draw(_spriteBatch);
+
             CurrItem.Draw(_spriteBatch);
 
             CurrentObject.Draw(_spriteBatch);

@@ -5,6 +5,7 @@ namespace LegendOfZeldaClone
 {
     public interface IEnemyProjectile
     {
+        public bool Alive { get; set; }
         public Vector2 Location { get; set; }
         public int Width { get; }
         public int Height { get; }

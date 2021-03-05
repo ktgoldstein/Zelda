@@ -5,6 +5,7 @@ namespace LegendOfZeldaClone.Enemy
 {
     class Fireball : IEnemyProjectile
     {
+        public bool Alive { get; set; }
         public Vector2 Location { get; set; }
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
@@ -14,6 +15,7 @@ namespace LegendOfZeldaClone.Enemy
         private float speed = 5;
         private readonly int width;
         private readonly int height;
+        private int lifeSpan;
 
         public Fireball(Vector2 location, Vector2 direction)
         {
@@ -21,9 +23,11 @@ namespace LegendOfZeldaClone.Enemy
             width = 8;
             height = 10;
 
+            Alive = true;
             Location = location;
             this.direction = direction;
             this.direction.Normalize();
+            lifeSpan = 20;
         }
         public void Draw(SpriteBatch spritebatch)
         {
@@ -32,6 +36,10 @@ namespace LegendOfZeldaClone.Enemy
 
         public void Update()
         {
+            lifeSpan--;
+            if (lifeSpan == 0)
+                Alive = false;
+
             fireballSprite.Update();
             Location += direction * speed;
         }

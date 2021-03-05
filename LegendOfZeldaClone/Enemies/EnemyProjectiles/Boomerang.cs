@@ -5,13 +5,14 @@ namespace LegendOfZeldaClone.Enemy
 {
     class Boomerang : IEnemyProjectile
     {
+        public bool Alive { get; set; }
         public Vector2 Location { get; set; }
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
         private ISprite boomerangSprite;
         private Vector2 direction;
-        private float speed = 10;
+        private int speed = LoZHelpers.Scale(4);
         private int timer = 0;
         private Goriya goriya;
         private readonly int width;
@@ -23,6 +24,7 @@ namespace LegendOfZeldaClone.Enemy
             width = 8;
             height = 8;
 
+            Alive = true;
             Location = location;
             this.direction = direction;
             this.direction.Normalize();
@@ -38,15 +40,16 @@ namespace LegendOfZeldaClone.Enemy
             timer++;
             if(timer > 20)
             {
-                direction = goriya.GetGoriyaLocation() - Location;
+                direction = goriya.Location - Location;
                 direction.Normalize();
+                if (Vector2.Distance(Location, goriya.Location) < LoZHelpers.Scale(4))
+                {
+                    Alive = false;
+                    goriya.HasBoomerang = false;
+                }
             }
 
             Location += direction * speed;
-            if (Vector2.Distance(Location, goriya.GetGoriyaLocation()) < 5)
-            {
-                goriya.CatchBoomerang();
-            }
             boomerangSprite.Update();
         }
     }
