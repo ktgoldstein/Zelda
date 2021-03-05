@@ -213,13 +213,11 @@ namespace LegendOfZeldaClone
             Items.Add(new HeartContainer(itemVector));
             Items.Add(new Map(itemVector));
             Items.Add(new Sword(itemVector));
-            Items.Add(new MagicalKey(itemVector));
             Items.Add(new FullHealthHeart(itemVector));
             Items.Add(new HalfHealthHeart(itemVector));
             Items.Add(new NoHealthHeart(itemVector));
             Items.Add(new GoldRupee(itemVector));
             Items.Add(new BlueRupee(itemVector));
-            Items.Add(new SilverArrow(itemVector));
             Items.Add(new LifePotion(itemVector));
             Items.Add(new BlueCandle(itemVector));
             Items.Add(new BlueRing(itemVector));

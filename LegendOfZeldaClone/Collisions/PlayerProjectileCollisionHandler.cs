@@ -10,9 +10,11 @@ namespace LegendOfZeldaClone.Collisions
 
         private PlayerProjectileCollisionHandler() { }
 
+        public IPlayerProjectile CurrPlayerProjectile { get; set; }
+
         public void HandlePlayerCollision(IPlayer player)
         {
-            //should disappear
+            CurrPlayerProjectile.Alive = false;
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile)
         {
@@ -20,7 +22,7 @@ namespace LegendOfZeldaClone.Collisions
         }
         public void HandleEnemyCollision(IEnemy enemy)
         {
-            //should deal damage to enemy (unsure if boomerangs are included)
+            CurrPlayerProjectile.Alive = false;
         }
         public void HandleEnemyProjectileCollision(IEnemy enemyProjectile)
         {
@@ -28,16 +30,17 @@ namespace LegendOfZeldaClone.Collisions
         }
         public void HandleItemCollision(IItem item)
         {
-            //item should disappear and be added to player inventory
+            //projectile should return to player (only boomerangs can interact with items)
         }
 
         public void HandleBlockCollision(IObject block)
         {
-            //not sure yet if projectiles can go through objects or not
+            //nothing will happen if it is a boomerang
+            CurrPlayerProjectile.Alive = false;
         }
         public void HandleBoundaryCollision()
         {
-            //should disappear on contact
+            CurrPlayerProjectile.Alive = false;
         }
     }
 }

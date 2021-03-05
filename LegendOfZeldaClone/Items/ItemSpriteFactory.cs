@@ -34,11 +34,6 @@ namespace LegendOfZeldaClone
             return new NonAnimatedItem(itemTexture, 130, 18, 8, 16);
         }
 
-        public ISprite CreateMagicalKey()
-        {
-            return new NonAnimatedItem(itemTexture, 129, 36, 8, 16);
-        }
-
         public ISprite CreateBoomerang()
         {
             return new NonAnimatedItem(itemTexture, 1, 39, 5, 8);
@@ -87,11 +82,6 @@ namespace LegendOfZeldaClone
         public ISprite CreateArrow()
         {
             return new NonAnimatedItem(itemTexture, 79, 0, 5, 16);
-        }
-
-        public ISprite CreateSilverArrow()
-        {
-            return new NonAnimatedItem(itemTexture, 79, 17, 5, 16);
         }
 
         public ISprite CreateBomb()
