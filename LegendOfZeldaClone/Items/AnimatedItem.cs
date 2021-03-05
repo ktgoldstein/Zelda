@@ -10,20 +10,16 @@ namespace LegendOfZeldaClone
         private int leftCornerY;
         private int itemWidth;
         private int itemHeight;
-        private int destWidth;
-        private int destHeight;
         private int secondFrameLeftCornerY;
         private int currentFrame;
         private int totalFrames;
-        public AnimatedItem(Texture2D texture, int leftCornerX, int leftCornerY, int itemWidth, int itemHeight, int destWidth, int destHeight)
+        public AnimatedItem(Texture2D texture, int leftCornerX, int leftCornerY, int itemWidth, int itemHeight)
         {
             this.texture = texture;
             this.leftCornerX = leftCornerX;
             this.leftCornerY = leftCornerY;
             this.itemWidth = itemWidth;
             this.itemHeight = itemHeight;
-            this.destWidth = destWidth;
-            this.destHeight = destHeight;
             this.secondFrameLeftCornerY = this.leftCornerY + this.itemHeight + 2;
             currentFrame = 0;
             totalFrames = 2;
@@ -44,7 +40,7 @@ namespace LegendOfZeldaClone
             {
                 sourceRectangle = new Rectangle(leftCornerX, leftCornerY, itemWidth, itemHeight);
             }
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, destWidth, destHeight);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, itemWidth, itemHeight);
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
