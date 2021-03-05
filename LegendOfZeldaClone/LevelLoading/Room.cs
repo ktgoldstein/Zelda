@@ -5,6 +5,7 @@ using System.IO;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using LegendOfZeldaClone.Objects;
 
 namespace LegendOfZeldaClone.LevelLoading
 {
@@ -13,6 +14,9 @@ namespace LegendOfZeldaClone.LevelLoading
     {
         public Texture2D tiles;
         public Texture2D exterior;
+        //Why public -Yonace
+        private Texture2D background;
+        
         private List<List<int>> data;
         String fileLocation;
         private LegendOfZeldaDungeon game;
@@ -22,6 +26,8 @@ namespace LegendOfZeldaClone.LevelLoading
             this.fileLocation = fileLocation;
             tiles = RoomTextureFactory.Instance.tiles;
             exterior = RoomTextureFactory.Instance.roomExterior;
+            background = RoomTextureFactory.Instance.background;
+            
             
         }
         public void LoadRoom()
@@ -38,42 +44,76 @@ namespace LegendOfZeldaClone.LevelLoading
 
         public void RenderRoom(SpriteBatch spritebatch)
         {
-            
-            Rectangle sourceRectangle = new Rectangle(0, 0, 240, 160);
-            Rectangle destinationRectangle = new Rectangle(0, 0, 240*3, 160*3);
-           
-            spritebatch.Draw(exterior, destinationRectangle, sourceRectangle, Color.White);
+
+            //Rectangle sourceRectangle = new Rectangle(0, 0, 240, 160);
+            //Rectangle destinationRectangle = new Rectangle(0, 0, 240*3, 160*3);
+            Rectangle sourceRectangle = new Rectangle(522, 11, 256, 176);
+            Rectangle destinationRectangle = new Rectangle(0, 192, 256 *3, 176 * 3);
+
+            spritebatch.Draw(background, destinationRectangle, sourceRectangle, Color.White);
+
+            sourceRectangle = new Rectangle(1, 192, 192, 112);
+            destinationRectangle = new Rectangle(96, 288, 192 * 3, 112 * 3);
+
+            //spritebatch.Draw(exterior, destinationRectangle, sourceRectangle, Color.White);
+            spritebatch.Draw(tiles, destinationRectangle, sourceRectangle, Color.White);
+
             
 
             for (int row = 0; row < data.Count; row++)
             {
                 for (int column = 0; column < data[row].Count; column++)
                 {
+                    
                     int width = 16;
                     int height = 16;
-                    int sourceRow = data[row][column] / 4;
-                    int sourceCol = data[row][column] % 4;
-                    sourceRectangle = new Rectangle(width * sourceCol, height * sourceRow, width, height);
-                   
-                    if (fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv"))
+                    Vector2 tileLocation = new Vector2((width * column + 16) * 3 , (height * row + 80) * 3);
+                    
+                    Vector2 doorLocationUp = new Vector2((width * column + 16) * 3, (height * row + 64) * 3);
+                    Vector2 doorLocationDown = new Vector2((width * column + 16) * 3, (height * row + 80) * 3);
+                    Vector2 doorLocationRight = new Vector2((width * column + 16) * 3, (height * row + 88) * 3);
+                    Vector2 doorLocationLeft = new Vector2((width * column) * 3, 408);
+                    
+                    //int sourceRow = data[row][column] / 4;
+                    //int sourceCol = data[row][column] % 4;
+                    //sourceRectangle = new Rectangle(width * sourceCol, height * sourceRow, width, height);
+
+                    int source = data[row][column];
+
+                    switch (source)
                     {
-                        destinationRectangle = new Rectangle((width * column) * 3, (height * row) * 3, width * 3, height * 3);
+                        case 2:
+                            IObject blueGargoyle = new BlueGargoyleStatue(tileLocation);
+                            blueGargoyle.Draw(spritebatch);
+                            break;
+                        case 3:
+                            IObject blueDragon = new BlueDragonStatue(tileLocation);
+                            blueDragon.Draw(spritebatch);
+                            break;
+                        case 5:
+                            IObject db = new DottedBlock(tileLocation);
+                            db.Draw(spritebatch);
+                            break;
+                        case 20:
+                            IObject odr = new OpenDoorRight(doorLocationRight);
+                            odr.Draw(spritebatch);
+                            break;
+                        case 21:
+                            IObject ldu = new LockedDoorUp(doorLocationUp);
+                            ldu.Draw(spritebatch);
+                            break;
+                        case 22:
+                            IObject odd = new OpenDoorDown(doorLocationDown);
+                            odd.Draw(spritebatch);
+                            break;
+                        case 23:
+                            IObject odl = new OpenDoorLeft(doorLocationLeft);
+                            odl.Draw(spritebatch);
+                            break;
+                        default:
+                            break;
                     }
-                    else
-                    {
-                        destinationRectangle = new Rectangle((width * column + 8) * 3, (height * row + 8) * 3, width * 3, height * 3);
-                    }
-
-                    if(sourceRow != 2 && sourceRow != 5)
-                    spritebatch.Draw(tiles, destinationRectangle, sourceRectangle, Color.White);
-
-                    if (sourceRow == 5)
-                       game.Objects[22].Draw(spritebatch, new Vector2((width * column + 8) * 3, (height * row + 8) * 3));
-
-                    //if(sourceRow == 0 && sourceCol == 0)
-                    //game.Objects[1].Draw(spritebatch, new Vector2((width * column + 24) * 3, (height * row + 24) * 3));
-                    //if(sourceCol == 20 && sourceCol == 20)
-                    //game.Objects[20].Draw(spritebatch, new Vector2((width * column + 24) * 3, (height * row + 24) * 3));
+                  
                 }
             }
         }

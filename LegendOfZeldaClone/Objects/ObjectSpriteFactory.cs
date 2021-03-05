@@ -6,6 +6,7 @@ namespace LegendOfZeldaClone
     class ObjectSpriteFactory
     {
         private Texture2D objectSpriteSheet;
+        private Texture2D doorSpriteSheet;
 
         private static ObjectSpriteFactory instance = new ObjectSpriteFactory();
 
@@ -22,6 +23,7 @@ namespace LegendOfZeldaClone
         public void LoadAllTextures(ContentManager content)
         {
             objectSpriteSheet = content.Load<Texture2D>("ZeldaObjects");
+            doorSpriteSheet = content.Load<Texture2D>("WallsDoorBackground");
         }
         public ISprite CreateFlatBlock()
         {
@@ -65,11 +67,27 @@ namespace LegendOfZeldaClone
         }
         public ISprite CreateTunnelFaceUp()
         {
-            return new ObjectSprite(objectSpriteSheet, 16, 16, 242, 110);
+            return new ObjectSprite(doorSpriteSheet, 32, 32, 947, 11);
         }
         public ISprite CreateTunnelFaceDown()
         {
-            return new ObjectSprite(objectSpriteSheet, 16, 16, 261, 110);
+            return new ObjectSprite(doorSpriteSheet, 32, 32, 947, 110);
+        }
+        public ISprite CreateWallFaceUp()
+        {
+            return new ObjectSprite(doorSpriteSheet, 32, 32, 815, 11);
+        }
+        public ISprite CreateWallFaceDown()
+        {
+            return new ObjectSprite(doorSpriteSheet, 32, 32, 815, 110);
+        }
+        public ISprite CreateWallFaceRight()
+        {
+            return new ObjectSprite(doorSpriteSheet, 32, 32, 815, 77);
+        }
+        public ISprite CreateWallFaceLeft()
+        {
+            return new ObjectSprite(doorSpriteSheet, 32, 32, 815, 44);
         }
         public ISprite CreateKeyDoorUp()
         {
@@ -89,7 +107,7 @@ namespace LegendOfZeldaClone
         }
         public ISprite CreateLockedDoorUp()
         {
-            return new ObjectSprite(objectSpriteSheet, 16, 32, 243, 49);
+            return new ObjectSprite(doorSpriteSheet, 32, 32, 881, 11);
         }
         public ISprite CreateLockedDoorDown()
         {
@@ -105,19 +123,19 @@ namespace LegendOfZeldaClone
         }
         public ISprite CreateOpenDoorUp()
         {
-            return new ObjectSprite(objectSpriteSheet, 16, 32, 243, 12);
+            return new ObjectSprite(doorSpriteSheet, 32, 32, 848, 11);
         }
         public ISprite CreateOpenDoorDown()
         {
-            return new ObjectSprite(objectSpriteSheet, 16, 32, 279, 12);
+            return new ObjectSprite(doorSpriteSheet, 32, 32, 848, 110);
         }
         public ISprite CreateOpenDoorRight()
         {
-            return new ObjectSprite(objectSpriteSheet, 32, 16, 314, 0);
+            return new ObjectSprite(doorSpriteSheet, 32, 32, 848, 77);
         }
         public ISprite CreateOpenDoorLeft()
         {
-            return new ObjectSprite(objectSpriteSheet, 32, 16, 337, 0);
+            return new ObjectSprite(doorSpriteSheet, 32, 32, 848, 44);
         }
 
     }

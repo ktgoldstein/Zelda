@@ -18,7 +18,7 @@ namespace LegendOfZeldaClone.Objects
         {
             lockedDoorUp = ObjectSpriteFactory.Instance.CreateLockedDoorUp();
             Location = location;
-            height = 16;
+            height = 32;
             width = 32;
         }
         public void Update() { }

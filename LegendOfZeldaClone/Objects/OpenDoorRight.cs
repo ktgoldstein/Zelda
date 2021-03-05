@@ -19,7 +19,7 @@ namespace LegendOfZeldaClone.Objects
             openDoorRight = ObjectSpriteFactory.Instance.CreateOpenDoorRight();
             Location = location;
             height = 32;
-            width = 16;
+            width = 32;
         }
         public void Update() { }
 

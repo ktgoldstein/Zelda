@@ -168,6 +168,7 @@ namespace LegendOfZeldaClone
             IUsableItem woodenSword = new UsableWoodenSword(this);
             Link = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
 
+            ObjectSpriteFactory.Instance.LoadAllTextures(Content);
             RoomTextureFactory.Instance.LoadAllTextures(Content);
             roomList = new List<Room>()
             {
@@ -206,7 +207,7 @@ namespace LegendOfZeldaClone
                new Wallmaster(LoZHelpers.EnemyStartingLocation)
             };
 
-            ObjectSpriteFactory.Instance.LoadAllTextures(Content);
+            
 
             Objects.Add(new FlatBlock(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new RaisedBlock(LoZHelpers.ObjectStartingLocation));
