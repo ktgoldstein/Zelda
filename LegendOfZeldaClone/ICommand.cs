@@ -277,12 +277,12 @@ namespace LegendOfZeldaClone
             if (myGame.itemIndex == 0)
             {
                 myGame.itemIndex = myGame.Items.Count - 1;
-                myGame.CurrItem = myGame.Items[myGame.itemIndex];
+                //myGame.CurrItem = myGame.Items[myGame.itemIndex];
             }
             else
             {
                 myGame.itemIndex -= 1;
-                myGame.CurrItem = myGame.Items[myGame.itemIndex];
+                //myGame.CurrItem = myGame.Items[myGame.itemIndex];
             }
         }
     }
@@ -306,12 +306,12 @@ namespace LegendOfZeldaClone
             if (myGame.itemIndex == myGame.Items.Count - 1)
             {
                 myGame.itemIndex = 0;
-                myGame.CurrItem = myGame.Items[0];
+                //myGame.CurrItem = myGame.Items[0];
             }
             else
             {
                 myGame.itemIndex += 1;
-                myGame.CurrItem = myGame.Items[myGame.itemIndex];
+                //myGame.CurrItem = myGame.Items[myGame.itemIndex];
             }
         }
     }
@@ -371,7 +371,7 @@ namespace LegendOfZeldaClone
         public void Execute()
         {
             game.itemIndex = 0;
-            game.CurrItem = game.Items[game.itemIndex];
+            //game.CurrItem = game.Items[game.itemIndex];
 
             game.ObjectIndex = 0;
             game.CurrentObject = game.Objects[game.ObjectIndex];
