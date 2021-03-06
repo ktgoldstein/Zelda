@@ -12,19 +12,19 @@
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile)
         {
-            //boomerang should disappear (only one that should collide and do something upon collision)
+            //nothing will happen
         }
         public void HandleEnemyCollision(IEnemy enemy)
         {
-            //link should take damage and move backwards (I think this is already handled in the damage state)
+            //link should take damage and move backwards
         }
         public void HandleEnemyProjectileCollision(IEnemy enemyProjectile)
         {
-            //link should take damage (unsure if he should move back or not)
+            //link should take damage and move backwards
         }
         public void HandleItemCollision(IItem item) 
         {
-            //item should disappear and be added to player inventory
+            //item should be added to player inventory
         }
 
         public void HandleBlockCollision(IObject block)

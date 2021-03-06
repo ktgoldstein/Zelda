@@ -14,6 +14,7 @@ namespace LegendOfZeldaClone.Collisions
 
         public void HandlePlayerCollision(IPlayer player)
         {
+            //should only be for boomerangs (don't want bombs to disappear if walked across)
             CurrPlayerProjectile.Alive = false;
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile)
@@ -22,6 +23,7 @@ namespace LegendOfZeldaClone.Collisions
         }
         public void HandleEnemyCollision(IEnemy enemy)
         {
+            //boomerangs don't disappear
             CurrPlayerProjectile.Alive = false;
         }
         public void HandleEnemyProjectileCollision(IEnemy enemyProjectile)
@@ -40,6 +42,7 @@ namespace LegendOfZeldaClone.Collisions
         }
         public void HandleBoundaryCollision()
         {
+            //boomerangs do not disappear (they seem to clip through walls too)
             CurrPlayerProjectile.Alive = false;
         }
     }

@@ -14,12 +14,11 @@ namespace LegendOfZeldaClone.Collisions
 
         public void HandlePlayerCollision(IPlayer player)
         {
-            //item should be added to player inventory (done in player collision?)
             CurrItem.Alive = false;
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile)
         {
-            //item should be added to player inventory (done in player collision?)
+            //only rupees, clocks, or bombs. Everything else does nothing
             CurrItem.Alive = false;
         }
         public void HandleEnemyCollision(IEnemy enemy)

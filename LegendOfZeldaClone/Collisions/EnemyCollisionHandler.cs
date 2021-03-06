@@ -12,11 +12,11 @@ namespace LegendOfZeldaClone.Collisions
 
         public void HandlePlayerCollision(IPlayer player)
         {
-            //player should take damage and move backward
+            //nothing will happen
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile)
         {
-            //enemy should take damage (unsure if this includes boomerangs)
+            //enemy should take damage depending on the projectile
         }
         public void HandleEnemyCollision(IEnemy enemy)
         {
@@ -33,7 +33,7 @@ namespace LegendOfZeldaClone.Collisions
 
         public void HandleBlockCollision(IObject block)
         {
-            //they should stop and have to move around it
+            //they should stop and have to move around it (except keese)
         }
         public void HandleBoundaryCollision()
         {
