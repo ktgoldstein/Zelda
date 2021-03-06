@@ -3,14 +3,14 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfZeldaClone
 {
-    public class NonAnimatedItem : ISprite
+    public class StaticItemSprite : ISprite
     {
         private Texture2D texture;
         private int leftCornerX;
         private int leftCornerY;
         private int itemWidth;
         private int itemHeight;
-        public NonAnimatedItem(Texture2D texture, int leftCornerX, int leftCornerY, int itemWidth, int itemHeight)
+        public StaticItemSprite(Texture2D texture, int leftCornerX, int leftCornerY, int itemWidth, int itemHeight)
         {
             this.texture = texture;
             this.leftCornerX = leftCornerX;

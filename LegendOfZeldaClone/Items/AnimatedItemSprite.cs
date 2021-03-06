@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfZeldaClone
 {
-    public class AnimatedItem : ISprite
+    public class AnimatedItemSprite : ISprite
     {
         private Texture2D texture;
         private int leftCornerX;
@@ -13,7 +13,7 @@ namespace LegendOfZeldaClone
         private int secondFrameLeftCornerY;
         private int currentFrame;
         private int totalFrames;
-        public AnimatedItem(Texture2D texture, int leftCornerX, int leftCornerY, int itemWidth, int itemHeight)
+        public AnimatedItemSprite(Texture2D texture, int leftCornerX, int leftCornerY, int itemWidth, int itemHeight)
         {
             this.texture = texture;
             this.leftCornerX = leftCornerX;

@@ -5,20 +5,14 @@ namespace LegendOfZeldaClone
 {
     class ObjectSpriteFactory
     {
-        private Texture2D objectSpriteSheet;
+        public static ObjectSpriteFactory Instance { get { return instance; } }
+
 
         private static ObjectSpriteFactory instance = new ObjectSpriteFactory();
+        private Texture2D objectSpriteSheet;
 
-        public static ObjectSpriteFactory Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-        private ObjectSpriteFactory()
-        {
-        }
+        private ObjectSpriteFactory() { }
+
         public void LoadAllTextures(ContentManager content)
         {
             objectSpriteSheet = content.Load<Texture2D>("ZeldaObjects");
