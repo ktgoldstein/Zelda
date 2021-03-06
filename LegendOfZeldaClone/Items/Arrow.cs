@@ -5,19 +5,21 @@ namespace LegendOfZeldaClone
 {
     public class Arrow : IItem
     {
-        private ISprite arrow;
-        private Vector2 location;
-        private int height;
-        private int width;
-        private readonly LegendOfZeldaDungeon game;
         public bool Alive { get; set; }
+        public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
+
+        private ISprite arrow;
+        private readonly int height;
+        private readonly int width;
 
         public Arrow(Vector2 location)
         {
             arrow = ItemSpriteFactory.Instance.CreateArrow();
-            this.height = 16;
-            this.width = 5;
-            this.location = location;
+            height = 16;
+            width = 5;
+            Location = location;
             Alive = true;
         }
 
@@ -25,7 +27,7 @@ namespace LegendOfZeldaClone
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            arrow.Draw(spriteBatch, location);
+            arrow.Draw(spriteBatch, Location);
         }
     }
 }
