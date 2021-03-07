@@ -10,6 +10,7 @@ namespace LegendOfZeldaClone
         private int width;
         private int sourcePosX;
         private int sourcePosY;
+
         public ObjectSprite(Texture2D texture, int height, int width, int sourcePosX, int sourcePosY)
         {
             this.texture = texture;
@@ -18,16 +19,14 @@ namespace LegendOfZeldaClone
             this.sourcePosX = sourcePosX;
             this.sourcePosY = sourcePosY;
         }
+
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle sourceRectangle = new Rectangle(sourcePosX, sourcePosY, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
-
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-
         }
-    }
-    
+    }    
 }

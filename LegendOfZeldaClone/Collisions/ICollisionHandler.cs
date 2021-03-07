@@ -5,13 +5,13 @@ namespace LegendOfZeldaClone
 {
     public interface ICollisionHandler
     {
-        public void HandlePlayerCollision(IPlayer player);
-        public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile);
-        public void HandleEnemyCollision(IEnemy enemy);
-        public void HandleEnemyProjectileCollision(IEnemy enemyProjectile);
-        public void HandleItemCollision(IItem item);
-        public void HandleBlockCollision(IObject block);
-        public void HandleBoundaryCollision();
+        public void HandlePlayerCollision(IPlayer player, Direction direction);
+        public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction);
+        public void HandleEnemyCollision(IEnemy enemy, Direction direction);
+        public void HandleEnemyProjectileCollision(IEnemy enemyProjectile, Direction direction);
+        public void HandleItemCollision(IItem item, Direction direction);
+        public void HandleBlockCollision(IObject block, Direction direction);
+        public void HandleBoundaryCollision(Boundary boundary, Direction direction);
     }
 }
 
