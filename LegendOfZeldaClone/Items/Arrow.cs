@@ -24,10 +24,6 @@ namespace LegendOfZeldaClone
         }
 
         public void Update() {}
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            arrow.Draw(spriteBatch, Location);
-        }
+        public void Draw(SpriteBatch spriteBatch) => arrow.Draw(spriteBatch, Location);
     }
 }

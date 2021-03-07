@@ -5,25 +5,25 @@ namespace LegendOfZeldaClone
 {
     public class BlueRing : IItem
     {
-        private ISprite blueRing;
-        private Vector2 location;
-        private int height;
-        private int width;
-        private readonly LegendOfZeldaDungeon game;
         public bool Alive { get; set; }
+        public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
+
+        private ISprite blueRing;
+        private readonly int height;
+        private readonly int width;
 
         public BlueRing(Vector2 location)
         {
             blueRing = ItemSpriteFactory.Instance.CreateBlueRing();
-            this.location = location;
-            this.width = 7;
-            this.height = 9;
+            Location = location;
+            width = 7;
+            height = 9;
             Alive = true;
         }
+
         public void Update() {}
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            blueRing.Draw(spriteBatch, location);
-        }
+        public void Draw(SpriteBatch spriteBatch) => blueRing.Draw(spriteBatch, Location);
     }
 }

@@ -22,10 +22,8 @@ namespace LegendOfZeldaClone
             width = 8;
             Alive = true;
         }
+
         public void Update() {}
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            blueCandle.Draw(spriteBatch, Location);
-        }
+        public void Draw(SpriteBatch spriteBatch) => blueCandle.Draw(spriteBatch, Location);
     }
 }
