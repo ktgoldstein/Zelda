@@ -5,25 +5,25 @@ namespace LegendOfZeldaClone
 {
     public class Map : IItem
     {
-        private ISprite map;
-        private Vector2 location;
-        private int height;
-        private int width;
-        private readonly LegendOfZeldaDungeon game;
         public bool Alive { get; set; }
+        public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
+
+        private ISprite map;
+        private readonly int height;
+        private readonly int width;
 
         public Map(Vector2 location)
         {
             map = ItemSpriteFactory.Instance.CreateMap();
-            this.location = location;
-            this.width = 8;
-            this.height = 16;
+            Location = location;
+            width = 8;
+            height = 16;
             Alive = true;
         }
-        public void Update() {}
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            map.Draw(spriteBatch, location);
-        }
+
+        public void Update() { }
+        public void Draw(SpriteBatch spriteBatch) => map.Draw(spriteBatch, Location);
     }
 }

@@ -5,25 +5,25 @@ namespace LegendOfZeldaClone
 {
     public class Compass : IItem
     {
-        private ISprite compass;
-        private Vector2 location;
-        private int height;
-        private int width;
-        private readonly LegendOfZeldaDungeon game;
         public bool Alive { get; set; }
+        public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
+
+        private ISprite compass;
+        private readonly int height;
+        private readonly int width;
 
         public Compass(Vector2 location)
         {
             compass = ItemSpriteFactory.Instance.CreateCompass();
-            this.location = location;
-            this.width = 11;
-            this.height = 12;
+            Location = location;
+            width = 11;
+            height = 12;
             Alive = true;
         }
-        public void Update() {}
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            compass.Draw(spriteBatch, location);
-        }
+
+        public void Update() { }
+        public void Draw(SpriteBatch spriteBatch) => compass.Draw(spriteBatch, Location);
     }
 }

@@ -5,25 +5,25 @@ namespace LegendOfZeldaClone
 {
     public class HeartContainer : IItem
     {
-        private ISprite heartContainer;
-        private Vector2 location;
-        private int height;
-        private int width;
-        private readonly LegendOfZeldaDungeon game;
         public bool Alive { get; set; }
+        public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
+
+        private ISprite heartContainer;
+        private readonly int height;
+        private readonly int width;
 
         public HeartContainer(Vector2 location)
         {
             heartContainer = ItemSpriteFactory.Instance.CreateHeartContainer();
-            this.location = location;
-            this.width = 13;
-            this.height = 13;
+            Location = location;
+            width = 13;
+            height = 13;
             Alive = true;
         }
-        public void Update() {}
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            heartContainer.Draw(spriteBatch, location);
-        }
+
+        public void Update() { }
+        public void Draw(SpriteBatch spriteBatch) => heartContainer.Draw(spriteBatch, Location);
     }
 }

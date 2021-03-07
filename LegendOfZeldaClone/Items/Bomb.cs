@@ -5,25 +5,25 @@ namespace LegendOfZeldaClone
 {
     public class Bomb : IItem
     {
-        private ISprite bomb;
-        private Vector2 location;
-        private int height;
-        private int width;
-        private readonly LegendOfZeldaDungeon game;
         public bool Alive { get; set; }
+        public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
+
+        private ISprite bomb;
+        private readonly int height;
+        private readonly int width;
 
         public Bomb(Vector2 location)
         {
             bomb = ItemSpriteFactory.Instance.CreateBomb();
-            this.location = location;
-            this.width = 8;
-            this.height = 14;
+            Location = location;
+            width = 8;
+            height = 14;
             Alive = true;
         }
-        public void Update() {}
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            bomb.Draw(spriteBatch, location);
-        }
+
+        public void Update() { }
+        public void Draw(SpriteBatch spriteBatch) => bomb.Draw(spriteBatch, Location);
     }
 }

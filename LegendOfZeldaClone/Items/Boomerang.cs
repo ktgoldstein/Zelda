@@ -5,25 +5,25 @@ namespace LegendOfZeldaClone
 {
     public class Boomerang : IItem
     {
-        private ISprite boomerang;
-        private Vector2 location;
-        private int height;
-        private int width;
-        private readonly LegendOfZeldaDungeon game;
         public bool Alive { get; set; }
+        public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
+
+        private ISprite boomerang;
+        private readonly int height;
+        private readonly int width;
 
         public Boomerang(Vector2 location)
         {
             boomerang = ItemSpriteFactory.Instance.CreateBoomerang();
-            this.location = location;
-            this.width = 5;
-            this.height = 8;
+            Location = location;
+            width = 5;
+            height = 8;
             Alive = true;
         }
-        public void Update() {}
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            boomerang.Draw(spriteBatch, location);
-        }
+
+        public void Update() { }
+        public void Draw(SpriteBatch spriteBatch) => boomerang.Draw(spriteBatch, Location);
     }
 }
