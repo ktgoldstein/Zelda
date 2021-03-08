@@ -33,16 +33,16 @@ namespace LegendOfZeldaClone
             switch (direction)
             {
                 case Direction.Down:
-                    CurrentPlayer.Location = new Vector2(CurrentPlayer.Location.X, block.HurtBoxLocation.Y - CurrentPlayer.Height);
+                    CurrentPlayer.HurtBoxLocation = new Vector2(CurrentPlayer.HurtBoxLocation.X, block.HurtBoxLocation.Y - CurrentPlayer.Height);
                     break;
                 case Direction.Up:
-                    CurrentPlayer.Location = new Vector2(CurrentPlayer.Location.X, block.HurtBoxLocation.Y + block.Height);
+                    CurrentPlayer.HurtBoxLocation = new Vector2(CurrentPlayer.HurtBoxLocation.X, block.HurtBoxLocation.Y + block.Height);
                     break;
                 case Direction.Left:
-                    CurrentPlayer.Location = new Vector2(block.HurtBoxLocation.X + block.Width, CurrentPlayer.Location.Y);
+                    CurrentPlayer.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X + block.Width, CurrentPlayer.HurtBoxLocation.Y);
                     break;
                 case Direction.Right:
-                    CurrentPlayer.Location = new Vector2(block.HurtBoxLocation.X - CurrentPlayer.Width, CurrentPlayer.Location.Y);
+                    CurrentPlayer.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X - CurrentPlayer.Width, CurrentPlayer.HurtBoxLocation.Y);
                     break;
             }
         }
@@ -52,16 +52,16 @@ namespace LegendOfZeldaClone
             switch (direction)
             {
                 case Direction.Down:
-                    CurrentPlayer.Location = new Vector2(CurrentPlayer.Location.X, boundary.Location.Y + boundary.Height - CurrentPlayer.Height);
+                    CurrentPlayer.HurtBoxLocation = new Vector2(CurrentPlayer.HurtBoxLocation.X, boundary.Location.Y + boundary.Height - CurrentPlayer.Height);
                     break;
                 case Direction.Up:
-                    CurrentPlayer.Location = new Vector2(CurrentPlayer.Location.X, boundary.Location.Y);
+                    CurrentPlayer.HurtBoxLocation = new Vector2(CurrentPlayer.HurtBoxLocation.X, boundary.Location.Y);
                     break;
                 case Direction.Left:
-                    CurrentPlayer.Location = new Vector2(boundary.Location.X, CurrentPlayer.Location.Y);
+                    CurrentPlayer.HurtBoxLocation = new Vector2(boundary.Location.X, CurrentPlayer.HurtBoxLocation.Y);
                     break;
                 case Direction.Right:
-                    CurrentPlayer.Location = new Vector2(boundary.Location.X + boundary.Width - CurrentPlayer.Width, CurrentPlayer.Location.Y);
+                    CurrentPlayer.HurtBoxLocation = new Vector2(boundary.Location.X + boundary.Width - CurrentPlayer.Width, CurrentPlayer.HurtBoxLocation.Y);
                     break;
             }
         }

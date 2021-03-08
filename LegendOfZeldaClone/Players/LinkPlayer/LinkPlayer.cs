@@ -10,7 +10,11 @@ namespace LegendOfZeldaClone
         public int MaxHealth { get; set; }
         public int Health { get; set; }
         public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation { get { return Location + new Vector2(1, 2); } }
+        public Vector2 HurtBoxLocation 
+        { 
+            get { return Location + new Vector2(1, 2); }
+            set { Location = value - new Vector2(1, 2); }
+        }
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
         public IUsableItem Sword { get; set; }

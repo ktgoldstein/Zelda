@@ -9,7 +9,11 @@ namespace LegendOfZeldaClone.Objects
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
         public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation { get { return Location; } }
+        public Vector2 HurtBoxLocation
+        {
+            get { return Location; }
+            set { Location = value; }
+        }
 
         private ISprite dottedBlock;
         private readonly int height;
