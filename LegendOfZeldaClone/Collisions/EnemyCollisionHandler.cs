@@ -6,8 +6,9 @@ namespace LegendOfZeldaClone.Collisions
 {
     class EnemyCollisionHandler : ICollisionHandler
     {
-        public static EnemyCollisionHandler Instance { get; } = new EnemyCollisionHandler();
+        public IEnemy CurrentEnemy { get; set; }
 
+        public static EnemyCollisionHandler Instance { get; } = new EnemyCollisionHandler();
         private EnemyCollisionHandler() { }
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)

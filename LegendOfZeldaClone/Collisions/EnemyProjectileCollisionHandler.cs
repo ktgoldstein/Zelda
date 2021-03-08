@@ -2,16 +2,15 @@
 {
     class EnemyProjectileCollisionHandler : ICollisionHandler
     {
+        public IEnemyProjectile CurrentEnemyProjectile { get; set; }
+
         public static EnemyProjectileCollisionHandler Instance { get; } = new EnemyProjectileCollisionHandler();
-
         private EnemyProjectileCollisionHandler() { }
-
-        public IEnemyProjectile CurrEnemyProjectile { get; set; }
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
             //boomerangs don't disappear (they just keep moving)
-            CurrEnemyProjectile.Alive = false;
+            CurrentEnemyProjectile.Alive = false;
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
@@ -20,7 +19,7 @@
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
             //check for what enemy it is (does it matter if it's the one who threw it or not?)
-            CurrEnemyProjectile.Alive = false;
+            CurrentEnemyProjectile.Alive = false;
         }
         public void HandleEnemyProjectileCollision(IEnemy enemyProjectile, Direction direction)
         {
@@ -38,7 +37,7 @@
         public void HandleBoundaryCollision(Boundary boundary, Direction direction)
         {
             //boomerangs don't disappear (clip through walls)
-            CurrEnemyProjectile.Alive = false;
+            CurrentEnemyProjectile.Alive = false;
         }
     }
 }

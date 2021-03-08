@@ -2,24 +2,23 @@
 {
     class ItemCollisionHandler : ICollisionHandler
     {
+        public IItem CurrentItem { get; set; }
+
         public static ItemCollisionHandler Instance { get; } = new ItemCollisionHandler();
-
         private ItemCollisionHandler() { }
-
-        public IItem CurrItem { get; set; }
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
-            CurrItem.Alive = false;
+            CurrentItem.Alive = false;
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             //only rupees, clocks, or bombs. Everything else does nothing
-            CurrItem.Alive = false;
+            CurrentItem.Alive = false;
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            CurrItem.Alive = false;
+            CurrentItem.Alive = false;
         }
         public void HandleEnemyProjectileCollision(IEnemy enemyProjectile, Direction direction)
         {

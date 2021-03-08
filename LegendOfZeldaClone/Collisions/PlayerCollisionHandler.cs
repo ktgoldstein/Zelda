@@ -34,8 +34,7 @@
 
         public void HandleObjectCollision(IObject block, Direction direction)
         {
-            int xHalfway = (int)block.Location.X + block.Width / 2;
-            int yHalfway = (int)block.Location.Y + block.Height / 2;
+            
         }
 
         public void HandleBoundaryCollision(Boundary boundary, Direction direction)

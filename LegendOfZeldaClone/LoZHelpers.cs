@@ -85,5 +85,21 @@ namespace LegendOfZeldaClone
         public static int LinkInvincibilityFrames => 24;
         public static int SpriteSizeMultiplier => 2;
         public static int Scale(int original) => original * SpriteSizeMultiplier;
+        public static Direction FlipDirection(Direction original)
+        {
+            return (original) switch
+            {
+                Direction.Down => Direction.Up,
+                Direction.Up => Direction.Down,
+                Direction.Left => Direction.Right,
+                Direction.Right => Direction.Left,
+                Direction.UpLeft => Direction.DownRight,
+                Direction.UpRight => Direction.DownLeft,
+                Direction.DownLeft => Direction.UpRight,
+                Direction.DownRight => Direction.UpLeft,
+                Direction.None => Direction.None,
+                _ => Direction.None
+            };
+        }
     }
 }

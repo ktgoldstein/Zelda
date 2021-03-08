@@ -271,16 +271,7 @@ namespace LegendOfZeldaClone
             }
             Items = Items.Except(deadItems).ToList();
 
-            Direction collisionDirection = Collisions.CollisionDetection.DetectCollisionDirection(Link.HurtBoxLocation, Link.Width, Link.Height, 
-                enemyList[currentEnemyIndex].Location, enemyList[currentEnemyIndex].Width, enemyList[currentEnemyIndex].Height);
-            Link.Location += collisionDirection switch
-            {
-                Direction.Down => new Vector2(0, -Link.Speed * 20),
-                Direction.Up => new Vector2(0, Link.Speed * 20),
-                Direction.Left => new Vector2(Link.Speed * 20, 0),
-                Direction.Right => new Vector2(-Link.Speed * 20, 0),
-                _ => new Vector2()
-            };
+            Collisions.CollisionHandling.HandleCollisions(this);
 
             base.Update(gameTime);
         }
