@@ -6,6 +6,7 @@ namespace LegendOfZeldaClone.Enemy
     public class Keese : IEnemy
     {
         public Vector2 Location { get; set; }
+        public Vector2 HurtBoxLocation { get { return Location; } }
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
