@@ -20,10 +20,13 @@
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            Enemy.Boomerang boomerang = CurrentEnemyProjectile as Enemy.Boomerang;
-            if (enemy == boomerang.goriya)
+            if (CurrentEnemyProjectile is Enemy.Boomerang)
             {
-                CurrentEnemyProjectile.Alive = false;
+                Enemy.Boomerang boomerang = CurrentEnemyProjectile as Enemy.Boomerang;
+                if (enemy == boomerang.goriya)
+                {
+                    CurrentEnemyProjectile.Alive = false;
+                }
             }
         }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
