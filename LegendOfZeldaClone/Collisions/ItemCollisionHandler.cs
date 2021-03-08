@@ -1,4 +1,6 @@
-﻿namespace LegendOfZeldaClone.Collisions
+﻿using Microsoft.Xna.Framework;
+
+namespace LegendOfZeldaClone.Collisions
 {
     class ItemCollisionHandler : ICollisionHandler
     {
@@ -14,11 +16,15 @@
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             //only rupees, clocks, or bombs. Everything else does nothing
-            CurrentItem.Alive = false;
+            if (CurrentItem is FlashingRupee || CurrentItem is BlueRupee || CurrentItem is GoldRupee || CurrentItem is Clock || CurrentItem is Bomb)
+            {
+                CurrentItem.Alive = false;
+            }
+            
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            CurrentItem.Alive = false;
+            //nothing will happen
         }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
@@ -35,7 +41,36 @@
         }
         public void HandleBoundaryCollision(Boundary boundary, Direction direction)
         {
-            //fairy should bounce off boundary (only item that moves)
+            if (CurrentItem is Fairy)
+            {
+                Fairy fairy = CurrentItem as Fairy;
+                switch (direction) {
+                    case Direction.Up:
+                        fairy.FairyDirection = new Vector2(1, 1);
+                        break;
+                    case Direction.Down:
+                        fairy.FairyDirection = new Vector2(1, -1);
+                        break;
+                    case Direction.Left:
+                        fairy.FairyDirection = new Vector2(1, 1);
+                        break;
+                    case Direction.Right:
+                        fairy.FairyDirection = new Vector2(-1, 1);
+                        break;
+                    case Direction.UpLeft:
+                        fairy.FairyDirection = new Vector2(1, 1);
+                        break;
+                    case Direction.UpRight:
+                        fairy.FairyDirection = new Vector2(-1, 1);
+                        break;
+                    case Direction.DownLeft:
+                        fairy.FairyDirection = new Vector2(1, -1);
+                        break;
+                    case Direction.DownRight:
+                        fairy.FairyDirection = new Vector2(-1, -1);
+                        break;
+                }
+            }
         }
     }
 }

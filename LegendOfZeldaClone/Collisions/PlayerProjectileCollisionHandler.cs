@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LegendOfZeldaClone.Collisions
+﻿namespace LegendOfZeldaClone.Collisions
 {
     class PlayerProjectileCollisionHandler : ICollisionHandler
     {

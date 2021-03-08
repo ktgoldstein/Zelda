@@ -11,7 +11,7 @@ namespace LegendOfZeldaClone
         public int Height { get { return LoZHelpers.Scale(height); } }
 
         private ISprite fairy;
-        private Vector2 Direction;
+        public Vector2 FairyDirection { get; set; }
         private readonly int height;
         private readonly int width;
         private readonly int speed;
@@ -22,31 +22,31 @@ namespace LegendOfZeldaClone
             Location = location;
             width = 8;
             height = 16;
-            Direction = new Vector2(1, 1);
+            FairyDirection = new Vector2(1, 1);
             speed = 2;
             Alive = true;
         }
 
         public void Update()
         {
-            Location += speed * Direction;
+            Location += speed * FairyDirection;
 
-            if (Location.Y > (LoZHelpers.GameHeight / 2 + 30))
+            if (Location.Y > LoZHelpers.GameHeight)
             {
-                Direction.Y = -1;
+                FairyDirection.Y = -1;
             }
-            else if (Location.Y < (LoZHelpers.GameHeight / 2 - 30))
+            else if (Location.Y < LoZHelpers.Scale(0))
             {
-                Direction.Y = 1;
+                FairyDirection.Y = 1;
             }
 
-            if (Location.X > (LoZHelpers.GameWidth / 2 + 50))
+            if (Location.X > LoZHelpers.GameWidth)
             {
-                Direction.X = -1;
+                FairyDirection.X = -1;
             }
-            else if (Location.X < (LoZHelpers.GameWidth / 2 - 50))
+            else if (Location.X < LoZHelpers.Scale(0))
             {
-                Direction.X = 1;
+                FairyDirection.X = 1;
             }
 
             fairy.Update();
