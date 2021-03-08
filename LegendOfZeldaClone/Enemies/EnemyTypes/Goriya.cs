@@ -9,6 +9,8 @@ namespace LegendOfZeldaClone.Enemy
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
         public bool HasBoomerang { get; set; }
+        private int health;
+        public int Health { get { return LoZHelpers.GelHP; } set { health = value; } }
 
         private LegendOfZeldaDungeon game;
         private ISprite goriyaSprite;
@@ -17,7 +19,6 @@ namespace LegendOfZeldaClone.Enemy
         private int timer = 0;
         private readonly int width;
         private readonly int height;
-        private int health = 3;
 
         public Goriya(LegendOfZeldaDungeon game, Vector2 location)
         {

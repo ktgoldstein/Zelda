@@ -106,5 +106,6 @@ namespace LegendOfZeldaClone
         public static int GoriyaHP = 3;
         public static int KeeseHP = 1;
         public static int StalfosHP = 2;
+        public static int WallmasterHP = 2;
     }
 }

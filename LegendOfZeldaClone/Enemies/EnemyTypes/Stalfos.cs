@@ -8,13 +8,14 @@ namespace LegendOfZeldaClone.Enemy
         public Vector2 Location { get; set; }
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
+        private int health;
+        public int Health { get { return LoZHelpers.StalfosHP; } set { health = value; } }
 
         private ISprite stalfosSprite;
         private float speed = 2;
         private int direction = 1;
         private readonly int width;
         private readonly int height;
-        private int health = 2;
 
         public Stalfos(Vector2 location)
         {

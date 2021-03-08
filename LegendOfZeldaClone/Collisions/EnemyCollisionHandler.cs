@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using LegendOfZeldaClone.Enemy;
 
 namespace LegendOfZeldaClone.Collisions
 {
@@ -18,7 +19,10 @@ namespace LegendOfZeldaClone.Collisions
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             //enemy should take damage depending on the projectile
-            CurrentEnemy.Health -= 1;
+            if( !( CurrentEnemy is Wallmaster ))
+            {
+                CurrentEnemy.Health -= 1;
+            }
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
@@ -27,6 +31,7 @@ namespace LegendOfZeldaClone.Collisions
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
             //projectile should disappear (assuming this is the enemy that threw it otherwise nothing will happen)
+            //if(  )
         }
         public void HandleItemCollision(IItem item, Direction direction)
         {
@@ -36,6 +41,9 @@ namespace LegendOfZeldaClone.Collisions
         public void HandleObjectCollision(IObject block, Direction direction)
         {
             //they should stop and have to move around it (except keese)
+            if( !( CurrentEnemy is Keese ) ){
+
+            }
         }
         public void HandleBoundaryCollision(Boundary boundary, Direction direction)
         {

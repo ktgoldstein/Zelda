@@ -9,6 +9,9 @@ namespace LegendOfZeldaClone.Enemy
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
+        private int health;
+        public int Health { get { return LoZHelpers.KeeseHP; } set { health = value; } }
+
         private ISprite keeseSprite;
         private float speed = 2;
         private int direction = 1;

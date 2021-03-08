@@ -9,8 +9,8 @@ namespace LegendOfZeldaClone.Enemy
         public Vector2 Location { get; set; }
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
-
-        public int Health { get { return LoZHelpers.AquamentusHP; } }
+        private int health;
+        public int Health { get { return LoZHelpers.AquamentusHP; } set { health = value; } }
 
         private LegendOfZeldaDungeon game;
         private ISprite aquamentusSprite;
