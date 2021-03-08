@@ -4,11 +4,11 @@ using System.Text;
 
 namespace LegendOfZeldaClone.Collisions
 {
-    class BlockCollisionHandler : ICollisionHandler
+    class ObjectCollisionHandler : ICollisionHandler
     {
-        public static BlockCollisionHandler Instance { get; } = new BlockCollisionHandler();
+        public static ObjectCollisionHandler Instance { get; } = new ObjectCollisionHandler();
 
-        private BlockCollisionHandler() { }
+        private ObjectCollisionHandler() { }
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
