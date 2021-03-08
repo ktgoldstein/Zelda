@@ -14,6 +14,7 @@ namespace LegendOfZeldaClone.Enemy
         private int direction = 1;
         private readonly int width;
         private readonly int height;
+        private int health = 2;
 
         public Stalfos(Vector2 location)
         {

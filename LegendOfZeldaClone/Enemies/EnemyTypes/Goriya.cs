@@ -17,6 +17,7 @@ namespace LegendOfZeldaClone.Enemy
         private int timer = 0;
         private readonly int width;
         private readonly int height;
+        private int health = 3;
 
         public Goriya(LegendOfZeldaDungeon game, Vector2 location)
         {

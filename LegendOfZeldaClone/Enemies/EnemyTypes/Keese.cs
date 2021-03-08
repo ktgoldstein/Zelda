@@ -14,7 +14,7 @@ namespace LegendOfZeldaClone.Enemy
         private int direction = 1;
         private readonly int width;
         private readonly int height;
-
+        private int hp = 1;
         public Keese(Vector2 location)
         {
             keeseSprite = EnemySpriteFactory.Instance.CreateKeeseSprite();

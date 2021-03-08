@@ -101,5 +101,10 @@ namespace LegendOfZeldaClone
                 _ => Direction.None
             };
         }
+        public static int AquamentusHP = 6;
+        public static int GelHP = 1;
+        public static int GoriyaHP = 3;
+        public static int KeeseHP = 1;
+        public static int StalfosHP = 2;
     }
 }

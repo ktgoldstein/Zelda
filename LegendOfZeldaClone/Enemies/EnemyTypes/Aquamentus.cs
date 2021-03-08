@@ -10,6 +10,8 @@ namespace LegendOfZeldaClone.Enemy
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
+        public int Health { get { return LoZHelpers.AquamentusHP; } }
+
         private LegendOfZeldaDungeon game;
         private ISprite aquamentusSprite;
         private float speed = 2;

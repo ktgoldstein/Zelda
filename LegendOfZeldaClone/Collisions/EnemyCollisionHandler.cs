@@ -18,6 +18,7 @@ namespace LegendOfZeldaClone.Collisions
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             //enemy should take damage depending on the projectile
+            CurrentEnemy.Health -= 1;
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
