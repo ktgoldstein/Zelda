@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Collisions
         {
             //nothing will happen
         }
-        public void HandleEnemyProjectileCollision(IEnemy enemyProjectile, Direction direction)
+        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
             //nothing will happen
         }

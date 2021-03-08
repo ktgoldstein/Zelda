@@ -21,7 +21,7 @@
             //check for what enemy it is (does it matter if it's the one who threw it or not?)
             CurrentEnemyProjectile.Alive = false;
         }
-        public void HandleEnemyProjectileCollision(IEnemy enemyProjectile, Direction direction)
+        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
             //nothing will happen
         }

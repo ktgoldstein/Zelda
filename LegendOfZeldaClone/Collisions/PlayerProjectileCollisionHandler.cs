@@ -26,7 +26,7 @@ namespace LegendOfZeldaClone.Collisions
             //boomerangs don't disappear
             CurrentPlayerProjectile.Alive = false;
         }
-        public void HandleEnemyProjectileCollision(IEnemy enemyProjectile, Direction direction)
+        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
             //nothing will happen?
         }

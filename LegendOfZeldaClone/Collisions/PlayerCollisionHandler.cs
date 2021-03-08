@@ -22,7 +22,7 @@
             //link should take damage and move backwards
         }
 
-        public void HandleEnemyProjectileCollision(IEnemy enemyProjectile, Direction direction)
+        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
             //link should take damage and move backwards
         }

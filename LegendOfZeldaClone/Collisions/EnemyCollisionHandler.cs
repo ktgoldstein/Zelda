@@ -23,7 +23,7 @@ namespace LegendOfZeldaClone.Collisions
         {
             //nothing will happen (they can walk through each other)
         }
-        public void HandleEnemyProjectileCollision(IEnemy enemyProjectile, Direction direction)
+        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
             //projectile should disappear (assuming this is the enemy that threw it otherwise nothing will happen)
         }
