@@ -6,17 +6,23 @@ namespace LegendOfZeldaClone
     public class BombExplosionProjectile : IPlayerProjectile
     {
         public bool Alive { get; set; }
+        public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
 
         private readonly ISprite sprite;
-        private readonly Vector2 location;
+        private readonly int width;
+        private readonly int height;
         private readonly int maxLifeSpan;
         private int lifeSpan;
 
         public BombExplosionProjectile(Vector2 startingLocation)
         {
             Alive = true;
+            width = 16;
+            height = 16;
 
-            location = startingLocation;
+            Location = startingLocation;
             maxLifeSpan = 16;
             lifeSpan = maxLifeSpan;
             sprite = PlayerProjectileSpriteFactory.Instance.CreateBombExplosionSprite();
@@ -33,6 +39,6 @@ namespace LegendOfZeldaClone
             lifeSpan--;
         }
 
-        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);
+        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
     }
 }

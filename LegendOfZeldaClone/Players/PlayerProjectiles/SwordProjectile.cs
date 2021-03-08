@@ -6,12 +6,16 @@ namespace LegendOfZeldaClone
     public class SwordProjectile : IPlayerProjectile
     {
         public bool Alive { get; set; }
+        public Vector2 Location { get; set; }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
 
         private readonly LegendOfZeldaDungeon game;
         private readonly SwordSkinType skinType;
         private readonly Direction direction;
         private ISprite sprite;
-        private Vector2 location;
+        private int width;
+        private int height;
         private int lifeSpan;
 
         public SwordProjectile(Vector2 startingLocation, SwordSkinType skinType, Direction direction, LegendOfZeldaDungeon game)
@@ -20,7 +24,7 @@ namespace LegendOfZeldaClone
 
             this.game = game;
             this.direction = direction;
-            location = startingLocation;
+            Location = startingLocation;
             this.skinType = skinType;
             lifeSpan = 8;
             DirectionBasedSetUp(direction);
@@ -33,22 +37,22 @@ namespace LegendOfZeldaClone
             switch (lifeSpan)
             {
                 case 8:
-                    location += DirectedMovement() * LoZHelpers.Scale(2);
+                    Location += DirectedMovement() * LoZHelpers.Scale(2);
                     break;
                 case 7:
-                    location += DirectedMovement() * LoZHelpers.Scale(9);
+                    Location += DirectedMovement() * LoZHelpers.Scale(9);
                     break;
                 case 6:
                 case 5:
                     break;
                 case 4:
-                    location -= DirectedMovement() * LoZHelpers.Scale(4);
+                    Location -= DirectedMovement() * LoZHelpers.Scale(4);
                     SpawnSwordBeam();
                     break;
                 case 3:
                     break;
                 case 2:
-                    location -= DirectedMovement() * LoZHelpers.Scale(4);
+                    Location -= DirectedMovement() * LoZHelpers.Scale(4);
                     break;
                 case 1:
                     break;
@@ -56,7 +60,7 @@ namespace LegendOfZeldaClone
             lifeSpan--;
         }
 
-        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, location);
+        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
 
         private void DirectionBasedSetUp(Direction direction)
         {
@@ -64,19 +68,27 @@ namespace LegendOfZeldaClone
             {
                 case Direction.Down:
                     sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordDownSprite(skinType);
-                    location += new Vector2(LoZHelpers.Scale(5), 0);
+                    Location += new Vector2(LoZHelpers.Scale(5), 0);
+                    width = 7;
+                    height = 16;
                     break;
                 case Direction.Up:
                     sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordUpSprite(skinType);
-                    location += new Vector2(LoZHelpers.Scale(3), -LoZHelpers.Scale(1));
+                    Location += new Vector2(LoZHelpers.Scale(3), -LoZHelpers.Scale(1));
+                    width = 7;
+                    height = 16;
                     break;
                 case Direction.Left:
                     sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordLeftSprite(skinType);
-                    location += new Vector2(0, LoZHelpers.Scale(7));
+                    Location += new Vector2(0, LoZHelpers.Scale(7));
+                    width = 16;
+                    height = 7;
                     break;
                 case Direction.Right:
                     sprite = PlayerProjectileSpriteFactory.Instance.CreateSwordRightSprite(skinType);
-                    location += new Vector2(0, LoZHelpers.Scale(7));
+                    Location += new Vector2(0, LoZHelpers.Scale(7));
+                    width = 16;
+                    height = 7;
                     break;
             }
         }
@@ -93,6 +105,6 @@ namespace LegendOfZeldaClone
             };
         }
 
-        private void SpawnSwordBeam() => game.LinkProjectilesQueue.Add(new SwordBeamProjectile(location, direction, game));
+        private void SpawnSwordBeam() => game.LinkProjectilesQueue.Add(new SwordBeamProjectile(Location, direction, game));
     }
 }
