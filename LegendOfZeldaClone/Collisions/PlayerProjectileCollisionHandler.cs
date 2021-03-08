@@ -35,7 +35,7 @@ namespace LegendOfZeldaClone.Collisions
             //projectile should return to player (only boomerangs can interact with items)
         }
 
-        public void HandleBlockCollision(IObject block, Direction direction)
+        public void HandleObjectCollision(IObject block, Direction direction)
         {
             //nothing will happen if it is a boomerang
             CurrPlayerProjectile.Alive = false;

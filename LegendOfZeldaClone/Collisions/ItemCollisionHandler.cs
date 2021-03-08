@@ -30,7 +30,7 @@
             //nothing will happen (they can overlap)
         }
 
-        public void HandleBlockCollision(IObject block, Direction direction)
+        public void HandleObjectCollision(IObject block, Direction direction)
         {
             //nothing will happen (fairies fly over blocks like keese do)
         }

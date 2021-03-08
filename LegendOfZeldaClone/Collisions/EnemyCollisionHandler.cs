@@ -31,7 +31,7 @@ namespace LegendOfZeldaClone.Collisions
             //nothing will happen
         }
 
-        public void HandleBlockCollision(IObject block, Direction direction)
+        public void HandleObjectCollision(IObject block, Direction direction)
         {
             //they should stop and have to move around it (except keese)
         }
