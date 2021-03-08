@@ -14,7 +14,7 @@ namespace LegendOfZeldaClone.Enemy
         private Vector2 direction;
         private int speed = LoZHelpers.Scale(4);
         private int timer = 0;
-        private Goriya goriya;
+        public Goriya goriya;
         private readonly int width;
         private readonly int height;
 

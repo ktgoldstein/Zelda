@@ -11,7 +11,10 @@
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
             //should only be for boomerangs (don't want bombs to disappear if walked across)
-            CurrentPlayerProjectile.Alive = false;
+            if (CurrentPlayerProjectile is BoomerangProjectile)
+            {
+                CurrentPlayerProjectile.Alive = false;
+            }
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
@@ -20,7 +23,10 @@
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
             //boomerangs don't disappear
-            CurrentPlayerProjectile.Alive = false;
+            if (!(CurrentPlayerProjectile is BoomerangProjectile))
+            {
+                CurrentPlayerProjectile.Alive = false;
+            }
         }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
@@ -28,18 +34,23 @@
         }
         public void HandleItemCollision(IItem item, Direction direction)
         {
-            //projectile should return to player (only boomerangs can interact with items)
+            //nothing will happen (until inventory is implemented)
         }
 
         public void HandleObjectCollision(IObject block, Direction direction)
         {
             //nothing will happen if it is a boomerang
-            CurrentPlayerProjectile.Alive = false;
+            if (!(CurrentPlayerProjectile is BoomerangProjectile))
+            {
+                CurrentPlayerProjectile.Alive = false;
+            }
         }
         public void HandleBoundaryCollision(Boundary boundary, Direction direction)
         {
-            //boomerangs do not disappear (they seem to clip through walls too)
-            CurrentPlayerProjectile.Alive = false;
+            if (!(CurrentPlayerProjectile is BoomerangProjectile))
+            {
+                CurrentPlayerProjectile.Alive = false;
+            }
         }
     }
 }

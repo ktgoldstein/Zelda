@@ -9,8 +9,10 @@
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
-            //boomerangs don't disappear (they just keep moving)
-            CurrentEnemyProjectile.Alive = false;
+            if (CurrentEnemyProjectile is Enemy.Boomerang)
+            {
+                CurrentEnemyProjectile.Alive = false;
+            }
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
@@ -18,8 +20,11 @@
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            //check for what enemy it is (does it matter if it's the one who threw it or not?)
-            CurrentEnemyProjectile.Alive = false;
+            Enemy.Boomerang boomerang = CurrentEnemyProjectile as Enemy.Boomerang;
+            if (enemy == boomerang.goriya)
+            {
+                CurrentEnemyProjectile.Alive = false;
+            }
         }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
@@ -36,8 +41,10 @@
         }
         public void HandleBoundaryCollision(Boundary boundary, Direction direction)
         {
-            //boomerangs don't disappear (clip through walls)
-            CurrentEnemyProjectile.Alive = false;
+            if (!(CurrentEnemyProjectile is Enemy.Boomerang))
+            {
+                CurrentEnemyProjectile.Alive = false;
+            }
         }
     }
 }
