@@ -33,20 +33,20 @@ namespace LegendOfZeldaClone
 
             if (Location.Y > LoZHelpers.GameHeight)
             {
-                FairyDirection.Y = -1;
+                FairyDirection = new Vector2(1, -1);
             }
             else if (Location.Y < LoZHelpers.Scale(0))
             {
-                FairyDirection.Y = 1;
+                FairyDirection = new Vector2(1, 1);
             }
 
             if (Location.X > LoZHelpers.GameWidth)
             {
-                FairyDirection.X = -1;
+                FairyDirection = new Vector2(-1, 1);
             }
             else if (Location.X < LoZHelpers.Scale(0))
             {
-                FairyDirection.X = 1;
+                FairyDirection = new Vector2(1, 1);
             }
 
             fairy.Update();
