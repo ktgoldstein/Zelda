@@ -57,13 +57,13 @@ namespace LegendOfZeldaClone
                 HeldItem.Use(Location, direction);
         }
 
-        public void Damage(int amount)
+        public void Damage(int amount, Direction knockbackDirection)
         {
             Health -= amount;
             if (Health < 0)
                 Health = 0;
             Tuple<LinkStateType, int> currentState = linkState.GetState();
-            game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1);
+            game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
         }
 
         public void Heal(int amount)
