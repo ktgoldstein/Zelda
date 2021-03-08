@@ -12,8 +12,8 @@ namespace LegendOfZeldaClone
         public Vector2 Location { get; set; }
         public Vector2 HurtBoxLocation 
         { 
-            get { return Location + new Vector2(1, 2); }
-            set { Location = value - new Vector2(1, 2); }
+            get { return Location + hurtBoxOffset; }
+            set { Location = value - hurtBoxOffset; }
         }
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
@@ -25,6 +25,7 @@ namespace LegendOfZeldaClone
         private ILinkState linkState;
         private readonly int width;
         private readonly int height;
+        private readonly Vector2 hurtBoxOffset;
 
         public LinkPlayer(LegendOfZeldaDungeon game, Vector2 location, IUsableItem sword, IUsableItem heldItem = null)
         {
@@ -34,6 +35,7 @@ namespace LegendOfZeldaClone
             Location = location;
             width = 14;
             height = 14;
+            hurtBoxOffset = new Vector2(LoZHelpers.Scale(1), LoZHelpers.Scale(2));
 
             this.game = game;
             Speed = LoZHelpers.Scale(2);
