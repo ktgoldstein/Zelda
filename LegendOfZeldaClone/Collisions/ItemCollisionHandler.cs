@@ -46,16 +46,16 @@ namespace LegendOfZeldaClone.Collisions
                 Fairy fairy = CurrentItem as Fairy;
                 switch (direction) {
                     case Direction.Up:
-                        fairy.FairyDirection = new Vector2(1, 1);
+                        fairy.FairyDirection = new Vector2(fairy.FairyDirection.X, 1);
                         break;
                     case Direction.Down:
-                        fairy.FairyDirection = new Vector2(1, -1);
+                        fairy.FairyDirection = new Vector2(fairy.FairyDirection.X, -1);
                         break;
                     case Direction.Left:
-                        fairy.FairyDirection = new Vector2(1, 1);
+                        fairy.FairyDirection = new Vector2(1, fairy.FairyDirection.Y);
                         break;
                     case Direction.Right:
-                        fairy.FairyDirection = new Vector2(-1, 1);
+                        fairy.FairyDirection = new Vector2(-1, fairy.FairyDirection.Y);
                         break;
                     case Direction.UpLeft:
                         fairy.FairyDirection = new Vector2(1, 1);

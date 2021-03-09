@@ -26,7 +26,11 @@ namespace LegendOfZeldaClone
             get { return decoratedLinkPlayer.Location; }
             set { decoratedLinkPlayer.Location = value; }
         }
-        public Vector2 HurtBoxLocation { get { return decoratedLinkPlayer.HurtBoxLocation; } }
+        public Vector2 HurtBoxLocation
+        { 
+            get { return decoratedLinkPlayer.HurtBoxLocation; }
+            set { decoratedLinkPlayer.HurtBoxLocation = value; }
+        }
         public int Width { get { return decoratedLinkPlayer.Width; } }
         public int Height { get { return decoratedLinkPlayer.Height; } }
         public IUsableItem Sword
@@ -51,11 +55,13 @@ namespace LegendOfZeldaClone
         private int skinTypesIndex;
         private ILinkState[] linkStates;
         private int timer;
+        private Direction knockbackDirection;
 
-        public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLinkPlayer, int currentFrame, LinkStateType linkState)
+        public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLinkPlayer, int currentFrame, LinkStateType linkState, Direction knockbackDirection)
         {
             this.game = game;
             this.decoratedLinkPlayer = decoratedLinkPlayer;
+            this.knockbackDirection = knockbackDirection;
 
             skinTypes = new LinkSkinType[] { LinkSkinType.DamagedOne, LinkSkinType.DamagedTwo, LinkSkinType.DamagedThreeDungeonOne, this.decoratedLinkPlayer.SkinType };
             skinTypesIndex = 0;
@@ -112,7 +118,7 @@ namespace LegendOfZeldaClone
                 HeldItem.Use(Location, direction);
         }
 
-        public void Damage(int amount) { /* Invinvibility Frames */ }
+        public void Damage(int amount, Direction knockbackDirection) { /* Invinvibility Frames */ }
         public void Heal(int amount) => decoratedLinkPlayer.Heal(amount);
 
         public void Draw(SpriteBatch spriteBatch)
@@ -124,6 +130,9 @@ namespace LegendOfZeldaClone
         public void Update()
         {            
             timer--;
+            if (timer + LoZHelpers.LinkKnockbackFrames < LoZHelpers.LinkInvincibilityFrames)
+                knockbackDirection = Direction.None;
+
             foreach (ILinkState linkState in linkStates)
                 linkState.Update();
             if (timer == 0)
@@ -131,6 +140,17 @@ namespace LegendOfZeldaClone
                 Tuple<LinkStateType, int> currentState = linkStates[0].GetState();
                 decoratedLinkPlayer.SetState(GetSpecificState(decoratedLinkPlayer, currentState.Item1, currentState.Item2));
                 game.Link = decoratedLinkPlayer;
+            } 
+            else if (knockbackDirection != Direction.None)
+            {
+                Location += knockbackDirection switch
+                {
+                    Direction.Down => new Vector2(0, -Speed * linkStates.Length * 2),
+                    Direction.Up => new Vector2(0, Speed * linkStates.Length * 2),
+                    Direction.Left => new Vector2(Speed * linkStates.Length * 2, 0),
+                    Direction.Right => new Vector2(-Speed * linkStates.Length * 2, 0),
+                    _ => new Vector2()
+                };
             }
         }
 

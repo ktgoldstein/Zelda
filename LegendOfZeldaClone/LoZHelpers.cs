@@ -116,6 +116,7 @@ namespace LegendOfZeldaClone
         public static int GameHeight => Scale(256);
         public static int GameWidth => Scale(512);
         public static int LinkInvincibilityFrames => 24;
+        public static int LinkKnockbackFrames => 8;
         public static int SpriteSizeMultiplier => 2;
         public static int Scale(int original) => original * SpriteSizeMultiplier;
         public static Direction FlipDirection(Direction original)
