@@ -13,7 +13,7 @@ namespace LegendOfZeldaClone.Enemy
         }
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
-
+        public int AttackStat { get; }
         public int Health { get; set;}
         private Vector2 direction;
         public Vector2 Direction { get { return direction;} set { direction = value;} }
@@ -33,7 +33,9 @@ namespace LegendOfZeldaClone.Enemy
             height = 16;
 
             Location = location;
+            AttackStat = 1;
         }
+
         public void Draw(SpriteBatch spritebatch)
         {
             bladeTrapSprite.Draw(spritebatch, Location);

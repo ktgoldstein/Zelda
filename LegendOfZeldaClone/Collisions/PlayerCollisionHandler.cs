@@ -15,12 +15,12 @@ namespace LegendOfZeldaClone
 
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            CurrentPlayer.Damage(1, direction);
+            CurrentPlayer.Damage(enemy.AttackStat, direction);
         }
 
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
-            CurrentPlayer.Damage(1, direction);
+            CurrentPlayer.Damage(enemyProjectile.AttackStat, direction);
         }
 
         public void HandleItemCollision(IItem item, Direction direction) 

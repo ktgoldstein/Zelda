@@ -6,6 +6,7 @@ namespace LegendOfZeldaClone.Enemy
     class EnemyBoomerang : IEnemyProjectile
     {
         public bool Alive { get; set; }
+        public int AttackStat { get; }
         public Vector2 Location { get; set; }
         public Vector2 HurtBoxLocation 
         { 
@@ -30,6 +31,7 @@ namespace LegendOfZeldaClone.Enemy
             height = 8;
 
             Alive = true;
+            AttackStat = 2;
             Location = location;
             this.direction = direction;
             this.direction.Normalize();

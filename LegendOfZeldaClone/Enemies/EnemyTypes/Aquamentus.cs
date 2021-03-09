@@ -15,7 +15,7 @@ namespace LegendOfZeldaClone.Enemy
         }
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
-        private int health;
+        public int AttackStat { get; }
         public int Health { get; set; } = LoZHelpers.AquamentusHP;
         private Vector2 direction;
         public Vector2 Direction { get { return direction;} set { direction = value;} }
@@ -58,6 +58,7 @@ namespace LegendOfZeldaClone.Enemy
             Direction = new Vector2(0,1);
             Invincible = false;
             Alive = true;
+            AttackStat = 2;
         }
 
         public void Draw(SpriteBatch spritebatch) => aquamentusSprite.Draw(spritebatch, Location);

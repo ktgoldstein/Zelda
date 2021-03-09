@@ -13,7 +13,7 @@ namespace LegendOfZeldaClone.Enemy
         }
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
-        private int health;
+        public int AttackStat { get; }
         public int Health { get; set; } = LoZHelpers.GelHP;
         private Vector2 direction;
         public Vector2 Direction { get { return direction;} set { direction = value;} }
@@ -36,6 +36,7 @@ namespace LegendOfZeldaClone.Enemy
             Location = location;
             Direction = Vector2.UnitY;
             Alive = true;
+            AttackStat = 1;
         }
         public void Draw(SpriteBatch spritebatch)
         {

@@ -14,7 +14,7 @@ namespace LegendOfZeldaClone.Enemy
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
         public bool HasBoomerang { get; set; }
-        private int health;
+        public int AttackStat { get; }
         public int Health { get; set; } = LoZHelpers.GoriyaHP;
         public Vector2 Direction { get { return direction;} set { direction = value;} }
         private int invincibleFrames = 0;
@@ -41,7 +41,9 @@ namespace LegendOfZeldaClone.Enemy
             Location = location;
             Invincible = false;
             Alive = true;
+            AttackStat = 1;
         }
+
         public void Draw(SpriteBatch spritebatch)
         {
             goriyaSprite.Draw(spritebatch, Location);

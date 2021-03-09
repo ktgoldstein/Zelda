@@ -6,6 +6,7 @@ namespace LegendOfZeldaClone.Enemy
     class Fireball : IEnemyProjectile
     {
         public bool Alive { get; set; }
+        public int AttackStat { get; }
         public Vector2 Location { get; set; }
         public Vector2 HurtBoxLocation
         {
@@ -29,6 +30,7 @@ namespace LegendOfZeldaClone.Enemy
             height = 10;
 
             Alive = true;
+            AttackStat = 1;
             Location = location;
             this.direction = direction;
             this.direction.Normalize();
