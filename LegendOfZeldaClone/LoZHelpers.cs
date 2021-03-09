@@ -33,6 +33,16 @@ namespace LegendOfZeldaClone
         PickingUpItem
     }
 
+    public enum UsableItemTypes
+    {
+        BlueCandle,
+        BlueRing,
+        Bomb,
+        Boomerang,
+        Bow,
+        WoodenSword
+    }
+
     public enum SwordSkinType
     {
         WoodenSword = 0,

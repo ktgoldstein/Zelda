@@ -9,6 +9,7 @@ namespace LegendOfZeldaClone
         public float Speed { get; set; }
         public int MaxHealth { get; set; }
         public int Health { get; set; }
+        public PlayerInventory Inventory { get; }
         public Vector2 Location { get; set; }
         public Vector2 HurtBoxLocation 
         { 
@@ -41,6 +42,7 @@ namespace LegendOfZeldaClone
             Speed = LoZHelpers.Scale(2);
             MaxHealth = 6;
             Health = MaxHealth;
+            Inventory = new PlayerInventory(0, 0, 0);
             linkState = new LinkStandingDown(this);
         }
 

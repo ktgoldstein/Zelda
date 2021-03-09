@@ -21,6 +21,7 @@ namespace LegendOfZeldaClone
             get { return decoratedLinkPlayer.Health; }
             set { decoratedLinkPlayer.Health = value; }
         }
+        public PlayerInventory Inventory { get { return decoratedLinkPlayer.Inventory; } }
         public Vector2 Location
         {
             get { return decoratedLinkPlayer.Location; }

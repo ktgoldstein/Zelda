@@ -25,7 +25,24 @@ namespace LegendOfZeldaClone
 
         public void HandleItemCollision(IItem item, Direction direction) 
         {
-            //item should be added to player inventory
+            if (item is FlashingRupee)
+                CurrentPlayer.Inventory.RupeesHeld += 1;
+            else if (item is BlueRupee)
+                CurrentPlayer.Inventory.RupeesHeld += 5;
+            else if (item is GoldRupee)
+                CurrentPlayer.Inventory.RupeesHeld += 10;
+            else if (item is Bomb)
+                CurrentPlayer.Inventory.BombsHeld++;
+            else if (item is Key)
+                CurrentPlayer.Inventory.KeysHeld++;
+            else if (item is BlueCandle)
+                CurrentPlayer.PickUpUsableItem(UsableItemTypes.BlueCandle);
+            else if (item is BlueRing)
+                CurrentPlayer.PickUpUsableItem(UsableItemTypes.BlueRing);
+            else if (item is Boomerang)
+                CurrentPlayer.PickUpUsableItem(UsableItemTypes.Boomerang);
+            else if (item is Bow)
+                CurrentPlayer.PickUpUsableItem(UsableItemTypes.Bow);
         }
 
         public void HandleObjectCollision(IObject block, Direction direction)
