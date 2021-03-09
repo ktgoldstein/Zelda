@@ -77,6 +77,39 @@ namespace LegendOfZeldaClone
 
     public static class LoZHelpers
     {
+        public static Vector2 DirectionToVector(Direction direction)
+        {
+            Vector2 vector = Vector2.Zero;
+            switch(direction)
+            {
+                case Direction.Down:
+                    vector = Vector2.UnitY;
+                    break;
+                case Direction.Up:
+                    vector = -Vector2.UnitY;
+                    break;
+                case Direction.Right:
+                    vector = Vector2.UnitX;
+                    break;
+                case Direction.Left:
+                    vector = -Vector2.UnitX;
+                    break;
+                case Direction.UpLeft:
+                    vector = new Vector2(-1, -1);
+                    break;
+                case Direction.UpRight:
+                    vector = new Vector2(1, -1);
+                    break;
+                case Direction.DownLeft:
+                    vector = new Vector2(-1, 1);
+                    break;
+                case Direction.DownRight:
+                    vector = new Vector2(1, 1);
+                    break;
+            }
+            vector.Normalize();
+            return vector;
+        }
         public static Vector2 LinkStartingLocation => new Vector2(GameWidth / 2 - 16, GameHeight / 2 - 16);
         public static Vector2 EnemyStartingLocation => new Vector2(400, 120);
         public static Vector2 ObjectStartingLocation => new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6);

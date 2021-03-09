@@ -9,13 +9,17 @@ namespace LegendOfZeldaClone.Enemy
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
         private int health;
-        public int Health { get { return LoZHelpers.WallmasterHP; } set { health = value; } }
-
+        public int Health { get; set; } = LoZHelpers.WallmasterHP;
+        private Vector2 direction;
+        public Vector2 Direction { get { return direction;} set { direction = value;} }
         private ISprite wallmasterSprite;
         private float speed = 2;
-        private int direction = 1;
         private readonly int width;
         private readonly int height;
+        private Vector2 knockbackForce = Vector2.Zero;
+        public bool Invincible { get; set; }
+        public bool Alive { get; set; }
+        private int invincibleFrames = 0;
 
         public Wallmaster(Vector2 location)
         {
@@ -24,6 +28,8 @@ namespace LegendOfZeldaClone.Enemy
             height = 16;
 
             Location = location;
+            Direction = Vector2.UnitY;
+            Alive = true;
         }
         public void Draw(SpriteBatch spritebatch)
         {
@@ -34,15 +40,29 @@ namespace LegendOfZeldaClone.Enemy
         {
             wallmasterSprite.Update();
 
-            Location += speed * direction * Vector2.UnitY;
+            Location += speed * direction + knockbackForce;
+            knockbackForce *= .8f;
             if (Location.Y > 192)
             {
-                direction = -1;
+                direction = new Vector2(0, -1);
             }
             if (Location.Y < 64)
             {
-                direction = 1;
+                direction = new Vector2(0, 1);
             }
+            if(Invincible)
+            {
+                invincibleFrames++;
+                if(invincibleFrames > 10)
+                {
+                    Invincible = false;
+                    invincibleFrames = 0;
+                }
+            }
+        }
+        public void Knockback(Vector2 direction)
+        {
+            knockbackForce = direction * 10;
         }
     }
 }
