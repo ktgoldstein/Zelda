@@ -8,7 +8,6 @@ namespace LegendOfZeldaClone.Collisions
     class ObjectCollisionHandler : ICollisionHandler
     {
         public IObject CurrentObject { get; set; }
-        public LegendOfZeldaDungeon game; 
 
         public static ObjectCollisionHandler Instance { get; } = new ObjectCollisionHandler();
         private ObjectCollisionHandler() { }
@@ -16,35 +15,39 @@ namespace LegendOfZeldaClone.Collisions
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
             //locked doors should open if the player has a key
-            //movable blocks should move
-            switch (direction)
+            //add condition here: if block is (moveable)
+            if (true)
             {
-                case Direction.Down:
-                    CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y - 1);
-                    break;
-                case Direction.Up:
-                    CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y + 1);
-                    break;
-                case Direction.Left:
-                    CurrentObject.Location = new Vector2(CurrentObject.Location.X + 1, CurrentObject.Location.Y);
-                    break;
-                case Direction.Right:
-                    CurrentObject.Location = new Vector2(CurrentObject.Location.X - 1, CurrentObject.Location.Y);
-                    break;
+                switch (direction)
+                {
+                    case Direction.Down:
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y - 10);
+                        break;
+                    case Direction.Up:
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y + 10);
+                        break;
+                    case Direction.Left:
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X + 10, CurrentObject.Location.Y);
+                        break;
+                    case Direction.Right:
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X - 10, CurrentObject.Location.Y);
+                        break;
+                }
             }
+            
 
 
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             //bombs should blow up walls with hidden rooms
-            if (playerProjectile is BombProjectile)
+            if (playerProjectile is BombExplosionProjectile)
             {
 
-                //bombable wall will be the object type that ends up going here
+                //bombable wall will be the object type that ends up going here; this is a placeholder
                 if(CurrentObject is Objects.DarkBlock)
                 {
-                    //change object type to doorway; how?
+                    //get rid of object on top of base object
                 }
 
             }
@@ -65,10 +68,30 @@ namespace LegendOfZeldaClone.Collisions
         public void HandleObjectCollision(IObject block, Direction direction)
         {
             //movable blocks should stop when they hit other blocks
+
+
+            if (direction == Direction.Down || direction == Direction.Up)
+            {
+                CurrentObject.Location = new Vector2(CurrentObject.Location.X, block.Location.Y);
+            }
+            else if (direction == Direction.Right || direction == Direction.Left)
+            {
+                CurrentObject.Location = new Vector2(block.Location.X, CurrentObject.Location.Y);
+            }
+
+
         }
         public void HandleBoundaryCollision(Boundary boundary, Direction direction)
         {
-            //movable blocks should stop
+
+            if (direction == Direction.Down || direction == Direction.Up)
+            {
+                CurrentObject.Location = new Vector2(CurrentObject.Location.X, boundary.Location.Y);
+            }
+            else if (direction == Direction.Right || direction == Direction.Left)
+            {
+                CurrentObject.Location = new Vector2(boundary.Location.X, CurrentObject.Location.Y);
+            }
         }
     }
 }
