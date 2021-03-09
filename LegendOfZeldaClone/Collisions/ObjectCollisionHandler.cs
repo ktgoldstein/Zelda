@@ -15,22 +15,34 @@ namespace LegendOfZeldaClone.Collisions
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
             //locked doors should open if the player has a key
+
+
+
+            if (CurrentObject is Objects.LockedDoorUp || CurrentObject is Objects.LockedDoorDown ||
+                CurrentObject is Objects.LockedDoorLeft || CurrentObject is Objects.LockedDoorRight)
+            {
+                //add condition here: if player has key in their inventory
+                if (true)
+                {
+                    //delete the LockedDoor object to reveal the unlocked version underneath
+                }
+            }
             //add condition here: if block is (moveable)
-            if (true)
+            else if (true)
             {
                 switch (direction)
                 {
                     case Direction.Down:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y - 10);
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y - 1);
                         break;
                     case Direction.Up:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y + 10);
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y + 1);
                         break;
                     case Direction.Left:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X + 10, CurrentObject.Location.Y);
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X + 1, CurrentObject.Location.Y);
                         break;
                     case Direction.Right:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X - 10, CurrentObject.Location.Y);
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X - 1, CurrentObject.Location.Y);
                         break;
                 }
             }
