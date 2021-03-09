@@ -23,9 +23,14 @@
             if (CurrentEnemyProjectile is Enemy.Boomerang)
             {
                 Enemy.Boomerang boomerang = CurrentEnemyProjectile as Enemy.Boomerang;
-                if (enemy == boomerang.goriya)
+                if (enemy is Enemy.Goriya)
                 {
-                    CurrentEnemyProjectile.Alive = false;
+                    if (enemy == boomerang.goriya)
+                    {
+                        CurrentEnemyProjectile.Alive = false;
+                        Enemy.Goriya goriya = boomerang.goriya as Enemy.Goriya;
+                        goriya.HasBoomerang = false;
+                    }
                 }
             }
         }
