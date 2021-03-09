@@ -29,7 +29,7 @@
                     {
                         CurrentEnemyProjectile.Alive = false;
                         Enemy.Goriya goriya = boomerang.goriya as Enemy.Goriya;
-                        goriya.HasBoomerang = true;
+                        goriya.HasBoomerang = false;
                     }
                 }
             }
