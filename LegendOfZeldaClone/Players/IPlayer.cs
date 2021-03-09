@@ -11,7 +11,7 @@
         public void MoveRight();
         public void ActionA();
         public void ActionB();
-        public void Damage(int amount);
+        public void Damage(int amount, Direction direction);
         public void Heal(int amount);
         //TODO: requires collision detection
         //public void PickUpItem(IUsableItem item);

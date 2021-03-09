@@ -10,7 +10,11 @@ namespace LegendOfZeldaClone
         public int MaxHealth { get; set; }
         public int Health { get; set; }
         public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation { get { return Location + new Vector2(1, 2); } }
+        public Vector2 HurtBoxLocation 
+        { 
+            get { return Location + hurtBoxOffset; }
+            set { Location = value - hurtBoxOffset; }
+        }
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
         public IUsableItem Sword { get; set; }
@@ -21,6 +25,7 @@ namespace LegendOfZeldaClone
         private ILinkState linkState;
         private readonly int width;
         private readonly int height;
+        private readonly Vector2 hurtBoxOffset;
 
         public LinkPlayer(LegendOfZeldaDungeon game, Vector2 location, IUsableItem sword, IUsableItem heldItem = null)
         {
@@ -30,6 +35,7 @@ namespace LegendOfZeldaClone
             Location = location;
             width = 14;
             height = 14;
+            hurtBoxOffset = new Vector2(LoZHelpers.Scale(1), LoZHelpers.Scale(2));
 
             this.game = game;
             Speed = LoZHelpers.Scale(2);
@@ -57,13 +63,13 @@ namespace LegendOfZeldaClone
                 HeldItem.Use(Location, direction);
         }
 
-        public void Damage(int amount)
+        public void Damage(int amount, Direction knockbackDirection)
         {
             Health -= amount;
             if (Health < 0)
                 Health = 0;
             Tuple<LinkStateType, int> currentState = linkState.GetState();
-            game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1);
+            game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
         }
 
         public void Heal(int amount)

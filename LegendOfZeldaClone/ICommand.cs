@@ -211,7 +211,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            game.Link.Damage(2);
+            game.Link.Damage(2, Direction.None);
         }
     }
 

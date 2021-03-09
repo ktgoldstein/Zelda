@@ -1,9 +1,10 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    public class EnemySpriteFactory 
+    public class EnemySpriteFactory
     {
 		public static EnemySpriteFactory Instance { get; } = new EnemySpriteFactory();
 
@@ -35,6 +36,7 @@ namespace LegendOfZeldaClone.Enemy
 		}
 
 		public ISprite CreateAquamentusSprite() => new EnemySprite(aquamentusSprite, 4, 1, 2, 4);
+		public ISprite CreateDamagedAquamentusSprite() => new EnemySprite(aquamentusSprite, 4, 1, 2, 4, color: Color.OrangeRed);
 		public ISprite CreateFireballSprite() => new EnemySprite(fireballSprite, 4, 1, 2, 4);
 		public ISprite CreateGoriyaDownSprite() => new EnemySprite(goriyaDownSprite, 2, 1, 2, 2);
 		public ISprite CreateGoriyaUpSprite() => new EnemySprite(goriyaUpSprite, 2, 1, 2, 2);

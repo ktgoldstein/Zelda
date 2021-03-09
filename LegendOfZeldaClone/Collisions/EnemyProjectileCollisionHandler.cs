@@ -9,7 +9,7 @@
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
-            if (CurrentEnemyProjectile is Enemy.Boomerang)
+            if (CurrentEnemyProjectile is Enemy.EnemyBoomerang)
             {
                 CurrentEnemyProjectile.Alive = false;
             }
@@ -20,16 +20,16 @@
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            if (CurrentEnemyProjectile is Enemy.Boomerang)
+            if (CurrentEnemyProjectile is Enemy.EnemyBoomerang)
             {
-                Enemy.Boomerang boomerang = CurrentEnemyProjectile as Enemy.Boomerang;
+                Enemy.EnemyBoomerang boomerang = CurrentEnemyProjectile as Enemy.EnemyBoomerang;
                 if (enemy is Enemy.Goriya)
                 {
                     if (enemy == boomerang.goriya)
                     {
                         CurrentEnemyProjectile.Alive = false;
                         Enemy.Goriya goriya = boomerang.goriya as Enemy.Goriya;
-                        goriya.HasBoomerang = false;
+                        goriya.HasBoomerang = true;
                     }
                 }
             }
@@ -49,7 +49,7 @@
         }
         public void HandleBoundaryCollision(Boundary boundary, Direction direction)
         {
-            if (!(CurrentEnemyProjectile is Enemy.Boomerang))
+            if (!(CurrentEnemyProjectile is Enemy.EnemyBoomerang))
             {
                 CurrentEnemyProjectile.Alive = false;
             }
