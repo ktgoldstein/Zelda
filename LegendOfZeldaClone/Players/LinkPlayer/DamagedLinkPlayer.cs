@@ -122,6 +122,15 @@ namespace LegendOfZeldaClone
         public void Damage(int amount, Direction knockbackDirection) { /* Invinvibility Frames */ }
         public void Heal(int amount) => decoratedLinkPlayer.Heal(amount);
 
+        public void PickUpUsableItem(UsableItemTypes itemType, IItem item)
+        {
+            Inventory.AddItem(itemType, game);
+            foreach (ILinkState linkState in linkStates)
+                linkState.PickUpItem(item);
+        }
+
+        public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);
+
         public void Draw(SpriteBatch spriteBatch)
         {
             int damageFrameType = timer % linkStates.Length;
@@ -173,7 +182,7 @@ namespace LegendOfZeldaClone
         public ILinkState GetStateUsingItemUp() => new LinkUsingItemUp(this);
         public ILinkState GetStateUsingItemLeft() => new LinkUsingItemLeft(this);
         public ILinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
-        public ILinkState GetStatePickingUpItem() => new LinkPickingUpItem(this);
+        public ILinkState GetStatePickingUpItem(IItem item) => new LinkPickingUpItem(this, item);
 
         private void NextSkinIndex() => skinTypesIndex = (skinTypesIndex + 1) % skinTypes.Length;
         private ILinkState GetSpecificState(ILinkPlayer player, LinkStateType linkState, int currentFrame)
@@ -192,7 +201,6 @@ namespace LegendOfZeldaClone
                 LinkStateType.UsingItemUp => new LinkUsingItemUp(player, currentFrame),
                 LinkStateType.UsingItemLeft => new LinkUsingItemLeft(player, currentFrame),
                 LinkStateType.UsingItemRight => new LinkUsingItemRight(player, currentFrame),
-                LinkStateType.PickingUpItem => new LinkPickingUpItem(player, currentFrame),
                 _ => new LinkStandingDown(player)
             };
         }

@@ -38,8 +38,10 @@ namespace LegendOfZeldaClone
         BlueCandle,
         BlueRing,
         Bomb,
-        Boomerang,
-        Bow,
+        BoomerangNormal,
+        BoomerangMagic,
+        BowWooden,
+        BowSilver,
         WoodenSword
     }
 

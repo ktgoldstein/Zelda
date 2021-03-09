@@ -71,7 +71,8 @@ namespace LegendOfZeldaClone
             if (Health < 0)
                 Health = 0;
             Tuple<LinkStateType, int> currentState = linkState.GetState();
-            game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
+            if (currentState.Item1 != LinkStateType.PickingUpItem)
+                game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
         }
 
         public void Heal(int amount)
@@ -81,6 +82,13 @@ namespace LegendOfZeldaClone
                 Health = MaxHealth;
         }
 
+        public void PickUpUsableItem(UsableItemTypes itemType, IItem item)
+        {
+            Inventory.AddItem(itemType, game);
+            linkState.PickUpItem(item);
+        }
+
+        public void Equip(UsableItemTypes itemType) => HeldItem = Inventory.GetItem(itemType);
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
         public void Update() => linkState.Update();
         public void SetState(ILinkState linkState) => this.linkState = linkState;
@@ -96,6 +104,6 @@ namespace LegendOfZeldaClone
         public ILinkState GetStateUsingItemUp() => new LinkUsingItemUp(this);
         public ILinkState GetStateUsingItemLeft() => new LinkUsingItemLeft(this);
         public ILinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
-        public ILinkState GetStatePickingUpItem() => new LinkPickingUpItem(this);
+        public ILinkState GetStatePickingUpItem(IItem item) => new LinkPickingUpItem(this, item);
     }
 }

@@ -36,13 +36,13 @@ namespace LegendOfZeldaClone
             else if (item is Key)
                 CurrentPlayer.Inventory.KeysHeld++;
             else if (item is BlueCandle)
-                CurrentPlayer.PickUpUsableItem(UsableItemTypes.BlueCandle);
+                CurrentPlayer.PickUpUsableItem(UsableItemTypes.BlueCandle, item);
             else if (item is BlueRing)
-                CurrentPlayer.PickUpUsableItem(UsableItemTypes.BlueRing);
+                CurrentPlayer.PickUpUsableItem(UsableItemTypes.BlueRing, item);
             else if (item is Boomerang)
-                CurrentPlayer.PickUpUsableItem(UsableItemTypes.Boomerang);
+                CurrentPlayer.PickUpUsableItem(UsableItemTypes.BoomerangNormal, item);
             else if (item is Bow)
-                CurrentPlayer.PickUpUsableItem(UsableItemTypes.Bow);
+                CurrentPlayer.PickUpUsableItem(UsableItemTypes.BowWooden, item);
         }
 
         public void HandleObjectCollision(IObject block, Direction direction)

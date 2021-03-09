@@ -10,6 +10,7 @@ namespace LegendOfZeldaClone
         public void MoveLeft();
         public void MoveRight();
         public Direction Action();
+        public void PickUpItem(IItem item);
         public Tuple<LinkStateType, int> GetState();
         public void Draw(SpriteBatch spriteBatch);
         public void Update();

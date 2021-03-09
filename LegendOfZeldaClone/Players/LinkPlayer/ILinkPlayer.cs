@@ -18,6 +18,6 @@
         public ILinkState GetStateUsingItemUp();
         public ILinkState GetStateUsingItemLeft();
         public ILinkState GetStateUsingItemRight();
-        public ILinkState GetStatePickingUpItem();
+        public ILinkState GetStatePickingUpItem(IItem item);
     }
 }
