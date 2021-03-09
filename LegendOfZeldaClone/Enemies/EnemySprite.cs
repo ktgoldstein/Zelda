@@ -13,9 +13,9 @@ namespace LegendOfZeldaClone.Enemy
         private int currentFrame;
         private int frameDelay;
         private readonly int animationSpeed;
+        private Color color;
 
-
-        public EnemySprite(Texture2D texture, int columns, int rows, int atlasGap, int totalFrames, int animationSpeed = 5)
+        public EnemySprite(Texture2D texture, int columns, int rows, int atlasGap, int totalFrames, int animationSpeed = 5, Color? color = null)
         {
             this.texture = texture;
             this.columns = columns;
@@ -23,6 +23,7 @@ namespace LegendOfZeldaClone.Enemy
             this.atlasGap = atlasGap;
             this.totalFrames = totalFrames;
             this.animationSpeed = animationSpeed;
+            this.color = color ?? Color.White;
 
             currentFrame = 0;
             frameDelay = 0;
@@ -51,7 +52,7 @@ namespace LegendOfZeldaClone.Enemy
             Rectangle sourceRectangle = new Rectangle((width + atlasGap) * column, (height + atlasGap) * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
 
-            spritebatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
+            spritebatch.Draw(texture, destinationRectangle, sourceRectangle, color);
         }
     }
 }

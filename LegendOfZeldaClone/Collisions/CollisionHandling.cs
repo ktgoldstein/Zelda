@@ -2,7 +2,7 @@
 
 namespace LegendOfZeldaClone.Collisions
 {
-    public static class CollisionHandling 
+    public static class CollisionHandling
     {
         public static void HandleCollisions(LegendOfZeldaDungeon game)
         {

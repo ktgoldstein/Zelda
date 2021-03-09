@@ -14,6 +14,10 @@ namespace LegendOfZeldaClone.Enemy
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
         public bool HasBoomerang { get; set; }
+        private int health;
+        public int Health { get; set; } = LoZHelpers.GoriyaHP;
+        public Vector2 Direction { get { return direction;} set { direction = value;} }
+        private int invincibleFrames = 0;
 
         private LegendOfZeldaDungeon game;
         private ISprite goriyaSprite;
@@ -22,6 +26,9 @@ namespace LegendOfZeldaClone.Enemy
         private int timer = 0;
         private readonly int width;
         private readonly int height;
+        private Vector2 knockbackForce = Vector2.Zero;
+        public bool Invincible { get; set; }
+        public bool Alive { get; set; }
 
         public Goriya(LegendOfZeldaDungeon game, Vector2 location)
         {
@@ -32,6 +39,8 @@ namespace LegendOfZeldaClone.Enemy
 
             this.game = game;
             Location = location;
+            Invincible = false;
+            Alive = true;
         }
         public void Draw(SpriteBatch spritebatch)
         {
@@ -42,7 +51,8 @@ namespace LegendOfZeldaClone.Enemy
         {
             goriyaSprite.Update();
 
-            Location += speed * direction;
+            Location += speed * direction + knockbackForce;
+            knockbackForce *= .8f;
             if(timer % 20 == 0)
                 ThrowBoomerang(direction);
 
@@ -72,15 +82,28 @@ namespace LegendOfZeldaClone.Enemy
             {
                 timer = 0;
             }
+            if(Invincible)
+            {
+                invincibleFrames++;
+                if(invincibleFrames > 10)
+                {
+                    Invincible = false;
+                    invincibleFrames = 0;
+                }
+            }
         }
 
         private void ThrowBoomerang(Vector2 direction)
         {
             if (!HasBoomerang)
             {
-                game.EnemyProjectilesQueue.Add(new Boomerang(Location, direction, this));
+                game.EnemyProjectilesQueue.Add(new EnemyBoomerang(Location + direction * Width, direction, this));
                 HasBoomerang = true;
             }
+        }
+        public void Knockback(Vector2 direction)
+        {
+            knockbackForce = direction * 10;
         }
     }
 }

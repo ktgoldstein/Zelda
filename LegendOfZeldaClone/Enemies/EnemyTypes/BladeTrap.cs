@@ -14,11 +14,17 @@ namespace LegendOfZeldaClone.Enemy
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
+        public int Health { get; set;}
+        private Vector2 direction;
+        public Vector2 Direction { get { return direction;} set { direction = value;} }
+
         private ISprite bladeTrapSprite;
         private float speed = 2;
-        private int direction = 1;
         private readonly int width;
         private readonly int height;
+        private Vector2 knockbackForce = Vector2.Zero;
+        public bool Invincible { get; set; }
+        public bool Alive { get; set; }
 
         public BladeTrap(Vector2 location)
         {
@@ -40,12 +46,16 @@ namespace LegendOfZeldaClone.Enemy
             Location += speed * direction * Vector2.UnitY;
             if (Location.Y > 192)
             {
-                direction = -1;
+                direction = new Vector2(0, -1);
             }
             if (Location.Y < 64)
             {
-                direction = 1;
+                direction = new Vector2(0, 1);
             }
+        }
+        public void Knockback(Vector2 direction)
+        {
+            knockbackForce = direction * 100;
         }
     }
 }

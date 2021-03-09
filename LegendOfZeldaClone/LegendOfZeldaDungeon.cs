@@ -3,6 +3,7 @@ using LegendOfZeldaClone.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -73,7 +74,7 @@ namespace LegendOfZeldaClone
             ICommand useBomb = new UseBomb(this);
             ICommand useBlueCandle = new UseBlueCandle(this);
             ICommand pickUpBlueRing = new PickUpBlueRing(this);
-            
+
             ICommand resetGame = new ResetGame(this);
 
             ICommand nextItem = new NextItem(this);
@@ -161,7 +162,7 @@ namespace LegendOfZeldaClone
             enemyList = new List<IEnemy>()
             {
                new Aquamentus(this, LoZHelpers.EnemyStartingLocation),
-               new Goriya(this, LoZHelpers.EnemyStartingLocation),
+               new Goriya(this, LoZHelpers.EnemyStartingLocation+ new Vector2(5,5)),
                new Stalfos(LoZHelpers.EnemyStartingLocation),
                new BladeTrap(LoZHelpers.EnemyStartingLocation),
                new Gel(LoZHelpers.EnemyStartingLocation),
@@ -171,12 +172,12 @@ namespace LegendOfZeldaClone
 
             ObjectSpriteFactory.Instance.LoadAllTextures(Content);
 
-            Objects.Add(new FlatBlock(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new FlatBlock(LoZHelpers.EnemyStartingLocation + new Vector2(100,100)));
             Objects.Add(new RaisedBlock(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new DragonStatue(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new GargoyleStatue(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new BlueDragonStatue(LoZHelpers.ObjectStartingLocation));
-            Objects.Add(new BlueGargoyleStatue(LoZHelpers.ObjectStartingLocation)); 
+            Objects.Add(new BlueGargoyleStatue(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new DottedBlock(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new Stairs(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new DarkBlock(LoZHelpers.ObjectStartingLocation));
@@ -247,6 +248,10 @@ namespace LegendOfZeldaClone
             }
             LinkProjectiles = LinkProjectiles.Except(deadLinkProjectiles).ToList();
 
+            if( enemyList[currentEnemyIndex].Health <= 0)
+            {
+                enemyList.RemoveAt(currentEnemyIndex);
+            }
             enemyList[currentEnemyIndex].Update();
 
             List<IEnemyProjectile> deadEnemyProjectiles = new List<IEnemyProjectile>();

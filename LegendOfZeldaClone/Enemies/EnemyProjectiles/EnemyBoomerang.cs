@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    class Boomerang : IEnemyProjectile
+    class EnemyBoomerang : IEnemyProjectile
     {
         public bool Alive { get; set; }
         public Vector2 Location { get; set; }
@@ -23,7 +23,7 @@ namespace LegendOfZeldaClone.Enemy
         private readonly int width;
         private readonly int height;
 
-        public Boomerang(Vector2 location, Vector2 direction, Goriya goriya)
+        public EnemyBoomerang(Vector2 location, Vector2 direction, Goriya goriya)
         {
             boomerangSprite = EnemySpriteFactory.Instance.CreateBoomerangSprite();
             width = 8;
@@ -47,11 +47,6 @@ namespace LegendOfZeldaClone.Enemy
             {
                 direction = goriya.Location - Location;
                 direction.Normalize();
-                if (Vector2.Distance(Location, goriya.Location) < LoZHelpers.Scale(4))
-                {
-                    Alive = false;
-                    goriya.HasBoomerang = false;
-                }
             }
 
             Location += direction * speed;
