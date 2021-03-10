@@ -40,6 +40,14 @@ namespace LegendOfZeldaClone
         public void Update()
         {
             Location += velocity;
+            if (lifeSpan > 0)
+            {
+                lifeSpan--;
+            }
+            else
+            {
+                lifeSpan++;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
