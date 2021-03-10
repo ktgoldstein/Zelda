@@ -81,8 +81,8 @@ namespace LegendOfZeldaClone
         public static Vector2 EnemyStartingLocation => new Vector2(400, 120);
         public static Vector2 ObjectStartingLocation => new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6);
         public static Vector2 MiniMapLocation => new Vector2(LoZHelpers.GameWidth / 24, 192 / 4);
-        public static int GameHeight => Scale(720);
-        public static int GameWidth => Scale(768);
+        public static int GameHeight => Scale(240);
+        public static int GameWidth => Scale(256);
         public static int LinkInvincibilityFrames => 24;
         public static int SpriteSizeMultiplier => 3;
         public static int Scale(int original) => original * SpriteSizeMultiplier;
