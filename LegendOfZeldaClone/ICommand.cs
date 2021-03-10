@@ -435,6 +435,55 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
+            System.Diagnostics.Debug.WriteLine("LC");
+            if (myGame.SwitchEnemyDelay != 0)
+                return;
+            else
+                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
+
+            myGame.RoomListIndex++;
+            if (myGame.RoomListIndex == myGame.roomList.Count)
+            {
+                myGame.RoomListIndex = 0;
+            }
+            else
+            {
+            }
+        }
+    }
+    // Using map location
+    public class FastChangeRoom : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public FastChangeRoom(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            
+            if (myGame.SwitchEnemyDelay != 0)
+                return;
+            else
+                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
+
+            //if (Mouse.GetState().X > ()) { }
+        }
+    }
+    public class MapChangeRoom : ICommand
+    {
+        private LegendOfZeldaDungeon myGame;
+
+        public MapChangeRoom(LegendOfZeldaDungeon game)
+        {
+            myGame = game;
+        }
+
+        public void Execute()
+        {
+            System.Diagnostics.Debug.WriteLine("LC Command");
             if (myGame.SwitchEnemyDelay != 0)
                 return;
             else

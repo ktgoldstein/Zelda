@@ -14,7 +14,9 @@ namespace LegendOfZeldaClone
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private IController controller;
+        private IController controllerK;
+        private IController controllerM;
+
 
         public Texture2D LinkTextures;
 
@@ -44,6 +46,7 @@ namespace LegendOfZeldaClone
 
         public List<Room> roomList;
         public int RoomListIndex = 0;
+        public Map1 MiniMap;
 
         public LegendOfZeldaDungeon()
         {
@@ -93,8 +96,12 @@ namespace LegendOfZeldaClone
 
             ICommand previousRoom = new PreviousRoom(this);
             ICommand nextRoom = new NextRoom(this);
+            ICommand mapChangeRoom = new MapChangeRoom(this);
+            ButtonState leftClick = Mouse.GetState().LeftButton;
 
             KeyboardController keyboardController = new KeyboardController();
+            MouseController mouseController = new MouseController();
+
             keyboardController.RegisterCommand(Keys.Q, quitGame);
             keyboardController.RegisterCommand(Keys.S, moveDown);
             keyboardController.RegisterCommand(Keys.W, moveUp);
@@ -136,7 +143,11 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.V, previousRoom);
             keyboardController.RegisterCommand(Keys.B, nextRoom);
 
-            controller = keyboardController;
+            mouseController.RegisterCommand(leftClick, mapChangeRoom);
+
+
+            controllerK = keyboardController;
+            controllerM = mouseController;
 
             currentEnemyIndex = 0;
             enemyList = new List<IEnemy>();
@@ -201,6 +212,8 @@ namespace LegendOfZeldaClone
                 room.LoadRoom();
             }
 
+            MiniMap = new Map1(LoZHelpers.MiniMapLocation);
+            
             enemyList = new List<IEnemy>()
             {
                new Aquamentus(LoZHelpers.EnemyStartingLocation),
@@ -278,8 +291,8 @@ namespace LegendOfZeldaClone
             if (SwitchEnemyDelay > 0)
                 SwitchEnemyDelay--;
 
-            controller.Update();
-   
+            controllerK.Update();
+            controllerM.Update();
             Link.Update();
 
             List<IPlayerProjectile> deadProjectiles = new List<IPlayerProjectile>();
@@ -316,7 +329,9 @@ namespace LegendOfZeldaClone
             _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
+            
             roomList[RoomListIndex].Draw(_spriteBatch);
+            MiniMap.Draw(_spriteBatch, LoZHelpers.MiniMapLocation);
 
             foreach (IEnemy enemy in enemyCollisionTest)
             {

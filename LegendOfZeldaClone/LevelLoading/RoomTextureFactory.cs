@@ -12,6 +12,7 @@ namespace LegendOfZeldaClone.LevelLoading
         public Texture2D tiles;
         public Texture2D background;
         public Texture2D backgroundFix;
+        public Texture2D miniMap;
         private static RoomTextureFactory instance = new RoomTextureFactory();
         
         public static RoomTextureFactory Instance
@@ -29,6 +30,12 @@ namespace LegendOfZeldaClone.LevelLoading
             tiles = content.Load<Texture2D>("Background");
             background = content.Load<Texture2D>("Background");
             backgroundFix = content.Load<Texture2D>("BackgroundFix");
+            miniMap = content.Load<Texture2D>("LevelLoading/Level 1");
+        }
+
+        public ISprite createMiniMap()
+        {
+            return new MapSprite(miniMap, 1, 1, 1);
         }
     }
 }
