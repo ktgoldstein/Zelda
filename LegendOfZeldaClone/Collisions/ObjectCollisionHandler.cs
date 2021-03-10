@@ -53,14 +53,12 @@ namespace LegendOfZeldaClone.Collisions
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             //bombs should blow up walls with hidden rooms
-            if (playerProjectile is BombExplosionProjectile)
+            //bombable wall will be the 2nd object type that ends up going here; this is a placeholder
+            if (playerProjectile is BombExplosionProjectile && CurrentObject is Objects.DarkBlock)
             {
-
-                //bombable wall will be the object type that ends up going here; this is a placeholder
-                if(CurrentObject is Objects.DarkBlock)
-                {
+               
                     //get rid of object on top of base object
-                }
+                
 
             }
         }
