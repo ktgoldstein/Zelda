@@ -1,25 +1,20 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace LegendOfZeldaClone
+﻿namespace LegendOfZeldaClone
 {
-    public interface IPlayer
+    public interface IPlayer : IGameObject
     {
         public float Speed { get; set; }
         public int MaxHealth { get; set; }
         public int Health { get; set; }
-        public Vector2 Location { get; set; }
+        public PlayerInventory Inventory { get; }
         public void MoveUp();
         public void MoveDown();
         public void MoveLeft();
         public void MoveRight();
         public void ActionA();
         public void ActionB();
-        public void Damage(int amount);
+        public void Damage(int amount, Direction direction);
         public void Heal(int amount);
-        //TODO: requires collision detection
-        //public void PickUpItem(IUsableItem item);
-        public void Draw(SpriteBatch spriteBatch);
-        public void Update();
+        public void PickUpUsableItem(UsableItemTypes itemType, IItem item);
+        public void Equip(UsableItemTypes itemType);
     }
 }

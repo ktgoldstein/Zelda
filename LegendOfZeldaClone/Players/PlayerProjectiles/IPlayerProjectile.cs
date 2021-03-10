@@ -1,10 +1,7 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-
-namespace LegendOfZeldaClone
+﻿namespace LegendOfZeldaClone
 {
-    public interface IPlayerProjectile
+    public interface IPlayerProjectile : IGameObject
     {
-        public bool Update();
-        public void Draw(SpriteBatch spriteBatch);
+        public bool Alive { get; set; }
     }
 }

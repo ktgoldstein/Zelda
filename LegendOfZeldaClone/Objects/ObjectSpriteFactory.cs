@@ -8,18 +8,13 @@ namespace LegendOfZeldaClone
         private Texture2D objectSpriteSheet;
         private Texture2D doorSpriteSheet;
 
+        public static ObjectSpriteFactory Instance { get { return instance; } }
+
+
         private static ObjectSpriteFactory instance = new ObjectSpriteFactory();
 
-        public static ObjectSpriteFactory Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-        private ObjectSpriteFactory()
-        {
-        }
+        private ObjectSpriteFactory() { }
+
         public void LoadAllTextures(ContentManager content)
         {
             objectSpriteSheet = content.Load<Texture2D>("ZeldaObjects");

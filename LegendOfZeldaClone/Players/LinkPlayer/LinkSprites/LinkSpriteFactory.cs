@@ -103,7 +103,7 @@ namespace LegendOfZeldaClone
         public ILinkSprite CreateLinkPickingUpItemSprite(LinkSkinType skinOffset, int frame)
         {
             int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.UsingItemDown;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.PickingUpItem;
             return new LinkPickingUpItemSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
         }
     }

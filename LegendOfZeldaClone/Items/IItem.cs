@@ -1,11 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace LegendOfZeldaClone
+﻿namespace LegendOfZeldaClone
 {
-    public interface IItem
+    public interface IItem : IGameObject
     {
-        public void Update();
-        public void Draw(SpriteBatch spriteBatch);
+        public bool Alive { get; set; }
     }
 }

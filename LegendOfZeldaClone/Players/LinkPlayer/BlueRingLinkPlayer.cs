@@ -20,11 +20,19 @@ namespace LegendOfZeldaClone
             get { return decoratedLinkPlayer.Health; }
             set { decoratedLinkPlayer.Health = value; }
         }
+        public PlayerInventory Inventory { get { return decoratedLinkPlayer.Inventory; } }
         public Vector2 Location
         {
             get { return decoratedLinkPlayer.Location; }
             set { decoratedLinkPlayer.Location = value; }
         }
+        public Vector2 HurtBoxLocation
+        {
+            get { return decoratedLinkPlayer.HurtBoxLocation; }
+            set { decoratedLinkPlayer.HurtBoxLocation = value; }
+        }
+        public int Width { get { return decoratedLinkPlayer.Width; } }
+        public int Height { get { return decoratedLinkPlayer.Height; } }
         public IUsableItem Sword 
         {
             get { return decoratedLinkPlayer.Sword; }
@@ -69,16 +77,25 @@ namespace LegendOfZeldaClone
                 HeldItem.Use(Location, direction);
         }
 
-        public void Damage(int amount)
+        public void Damage(int amount, Direction knockbackDirection)
         {
             Health -= amount / 2;
             if (Health < 0)
                 Health = 0;
             Tuple<LinkStateType, int> currentState = linkState.GetState();
-            game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1);
+            if (currentState.Item1 != LinkStateType.PickingUpItem)
+                game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
         }
 
         public void Heal(int amount) => decoratedLinkPlayer.Heal(amount);
+
+        public void PickUpUsableItem(UsableItemTypes itemType, IItem item)
+        {
+            Inventory.AddItem(itemType, game);
+            linkState.PickUpItem(item);
+        }
+
+        public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
         public void Update() => linkState.Update();
         public void SetState(ILinkState linkState) => this.linkState = linkState;
@@ -94,6 +111,6 @@ namespace LegendOfZeldaClone
         public ILinkState GetStateUsingItemUp() => new LinkUsingItemUp(this);
         public ILinkState GetStateUsingItemLeft() => new LinkUsingItemLeft(this);
         public ILinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
-        public ILinkState GetStatePickingUpItem() => new LinkPickingUpItem(this);
+        public ILinkState GetStatePickingUpItem(IItem item) => new LinkPickingUpItem(this, item);
     }
 }

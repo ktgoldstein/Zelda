@@ -85,7 +85,7 @@
 /processorParam:TextureFormat=Color
 /build:EnemySprites/BladeTrap.png
 
-#begin EnemySprites/Boomerang2.png
+#begin EnemySprites/Boomerang.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -95,9 +95,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:EnemySprites/Boomerang2.png
+/build:EnemySprites/Boomerang.png
 
-#begin EnemySprites/fireball.png
+#begin EnemySprites/Fireball.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -107,7 +107,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:EnemySprites/fireball.png
+/build:EnemySprites/Fireball.png
 
 #begin EnemySprites/Gel.png
 /importer:TextureImporter

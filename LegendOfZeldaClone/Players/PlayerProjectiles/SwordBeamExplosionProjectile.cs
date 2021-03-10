@@ -5,26 +5,40 @@ namespace LegendOfZeldaClone
 {
     public class SwordBeamExplosionProjectile : IPlayerProjectile
     {
+        public bool Alive { get; set; }
+        public Vector2 Location { get; set; }
+        public Vector2 HurtBoxLocation
+        {
+            get { return Location; }
+            set { Location = value; }
+        }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
+
         private ISprite[] sprites;
         private Vector2 velocity;
-        private Vector2 location;
+        private readonly int width;
+        private readonly int height;
         private int lifeSpan;
 
         public SwordBeamExplosionProjectile(Vector2 startingLocation, Direction direction, int skinSeed)
         {
-            location = startingLocation;
+            Alive = true;
+            width = 8;
+            height = 16;
+
+            Location = startingLocation;
             lifeSpan = 10;
             sprites = new ISprite[2];
             DirectionBasedSetUp(direction, skinSeed);
         }
 
-        public bool Update()
+        public void Update()
         {
             if (lifeSpan == 0)
-                return true;
-            location += velocity;
+                Alive = false;
+            Location += velocity;
             lifeSpan--;
-            return false;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -32,7 +46,7 @@ namespace LegendOfZeldaClone
             // Make skins flash every OTHER frame
             int spriteIndex = lifeSpan % sprites.Length * 2;
             spriteIndex = (int)(spriteIndex / 2.0);
-            sprites[spriteIndex].Draw(spriteBatch, location);
+            sprites[spriteIndex].Draw(spriteBatch, Location);
         }
 
         private void DirectionBasedSetUp(Direction direction, int skinSeed)

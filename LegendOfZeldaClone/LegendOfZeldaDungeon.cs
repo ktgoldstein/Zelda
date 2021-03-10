@@ -4,6 +4,7 @@ using LegendOfZeldaClone.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,9 +22,9 @@ namespace LegendOfZeldaClone
         public Texture2D LinkTextures;
 
         public int currentEnemyIndex;
-        public IEnemy SpriteEnemy;
         public List<IEnemy> enemyList;
-        public List<IEnemy> enemyCollisionTest;
+        public List<IEnemyProjectile> EnemyProjectilesQueue;
+        public List<IEnemyProjectile> EnemyProjectiles;
 
         public IPlayer Link;
         public List<IPlayerProjectile> LinkProjectilesQueue;
@@ -34,8 +35,7 @@ namespace LegendOfZeldaClone
         public int ObjectIndex;
 
         public Texture2D ItemTextures;
-        public IItem[] Items;
-        public IItem CurrItem;
+        public List<IItem> Items;
         public int itemIndex;
         public Vector2 itemVector;
 
@@ -53,8 +53,8 @@ namespace LegendOfZeldaClone
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            this.IsFixedTimeStep = true;
-            this.TargetElapsedTime = System.TimeSpan.FromSeconds(1d / 20d);
+            IsFixedTimeStep = true;
+            TargetElapsedTime = System.TimeSpan.FromSeconds(1d / 20d);
 
             IsMouseVisible = true;
         }
@@ -154,7 +154,7 @@ namespace LegendOfZeldaClone
             enemyCollisionTest = new List<IEnemy>();
 
             itemIndex = 0;
-            Items = new IItem[24];
+            Items = new List<IItem>();
             itemVector = new Vector2(LoZHelpers.GameWidth / 2 + 32, LoZHelpers.GameHeight / 2);
 
             ObjectIndex = 0;
@@ -213,11 +213,14 @@ namespace LegendOfZeldaClone
             }
 
             MiniMap = new Map1(LoZHelpers.MiniMapLocation);
-            
+
+            EnemyProjectilesQueue = new List<IEnemyProjectile>();
+            EnemyProjectiles = new List<IEnemyProjectile>();
+
             enemyList = new List<IEnemy>()
             {
-               new Aquamentus(LoZHelpers.EnemyStartingLocation),
-               new Goriya(LoZHelpers.EnemyStartingLocation),
+               new Aquamentus(this, LoZHelpers.EnemyStartingLocation),
+               new Goriya(this, LoZHelpers.EnemyStartingLocation+ new Vector2(5,5)),
                new Stalfos(LoZHelpers.EnemyStartingLocation),
                new BladeTrap(LoZHelpers.EnemyStartingLocation),
                new Gel(LoZHelpers.EnemyStartingLocation),
@@ -227,12 +230,12 @@ namespace LegendOfZeldaClone
 
             
 
-            Objects.Add(new FlatBlock(LoZHelpers.ObjectStartingLocation));
+            Objects.Add(new FlatBlock(LoZHelpers.EnemyStartingLocation + new Vector2(100,100)));
             Objects.Add(new RaisedBlock(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new DragonStatue(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new GargoyleStatue(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new BlueDragonStatue(LoZHelpers.ObjectStartingLocation));
-            Objects.Add(new BlueGargoyleStatue(LoZHelpers.ObjectStartingLocation)); 
+            Objects.Add(new BlueGargoyleStatue(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new DottedBlock(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new Stairs(LoZHelpers.ObjectStartingLocation));
             Objects.Add(new DarkBlock(LoZHelpers.ObjectStartingLocation));
@@ -255,31 +258,28 @@ namespace LegendOfZeldaClone
             CurrentObject = Objects[0];
 
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
-            Items[0] = new Compass(itemVector);
-            Items[1] = new Key(itemVector);
-            Items[2] = new Boomerang(itemVector);
-            Items[3] = new Bow(itemVector);
-            Items[4] = new Heart(itemVector);
-            Items[5] = new FlashingRupee(itemVector);
-            Items[6] = new Arrow(itemVector);
-            Items[7] = new Bomb(itemVector);
-            Items[8] = new Fairy(itemVector);
-            Items[9] = new Clock(itemVector);
-            Items[10] = new TriForcePiece(itemVector);
-            Items[11] = new HeartContainer(itemVector);
-            Items[12] = new Map(itemVector);
-            Items[13] = new Sword(itemVector);
-            Items[14] = new MagicalKey(itemVector);
-            Items[15] = new FullHealthHeart(itemVector);
-            Items[16] = new HalfHealthHeart(itemVector);
-            Items[17] = new NoHealthHeart(itemVector);
-            Items[18] = new GoldRupee(itemVector);
-            Items[19] = new BlueRupee(itemVector);
-            Items[20] = new SilverArrow(itemVector);
-            Items[21] = new LifePotion(itemVector);
-            Items[22] = new BlueCandle(itemVector);
-            Items[23] = new BlueRing(itemVector);
-            CurrItem = Items[0];
+            Items.Add(new Compass(itemVector));
+            Items.Add(new Key(itemVector));
+            Items.Add(new Boomerang(itemVector));
+            Items.Add(new Bow(itemVector));
+            Items.Add(new Heart(itemVector));
+            Items.Add(new FlashingRupee(itemVector));
+            Items.Add(new Arrow(itemVector));
+            Items.Add(new Bomb(itemVector));
+            Items.Add(new Fairy(itemVector));
+            Items.Add(new Clock(itemVector));
+            Items.Add(new TriForcePiece(itemVector));
+            Items.Add(new HeartContainer(itemVector));
+            Items.Add(new Map(itemVector));
+            Items.Add(new Sword(itemVector));
+            Items.Add(new FullHealthHeart(itemVector));
+            Items.Add(new HalfHealthHeart(itemVector));
+            Items.Add(new NoHealthHeart(itemVector));
+            Items.Add(new GoldRupee(itemVector));
+            Items.Add(new BlueRupee(itemVector));
+            Items.Add(new LifePotion(itemVector));
+            Items.Add(new BlueCandle(itemVector));
+            Items.Add(new BlueRing(itemVector));
         }
 
         protected override void Update(GameTime gameTime)
@@ -295,15 +295,16 @@ namespace LegendOfZeldaClone
             controllerM.Update();
             Link.Update();
 
-            List<IPlayerProjectile> deadProjectiles = new List<IPlayerProjectile>();
+            List<IPlayerProjectile> deadLinkProjectiles = new List<IPlayerProjectile>();
             LinkProjectiles.AddRange(LinkProjectilesQueue);
             LinkProjectilesQueue.Clear();
             foreach (IPlayerProjectile projectile in LinkProjectiles)
             {
-                if (projectile.Update())
-                    deadProjectiles.Add(projectile);
+                projectile.Update();
+                if (!projectile.Alive)
+                    deadLinkProjectiles.Add(projectile);
             }
-            LinkProjectiles = LinkProjectiles.Except(deadProjectiles).ToList();
+            LinkProjectiles = LinkProjectiles.Except(deadLinkProjectiles).ToList();
 
             enemyCollisionTest = roomList[RoomListIndex].GetEnemiesList();
             foreach (IEnemy enemy in enemyCollisionTest)
@@ -312,10 +313,29 @@ namespace LegendOfZeldaClone
             }
             
 
-            //enemyList[currentEnemyIndex].Update();
+            List<IEnemyProjectile> deadEnemyProjectiles = new List<IEnemyProjectile>();
+            EnemyProjectiles.AddRange(EnemyProjectilesQueue);
+            EnemyProjectilesQueue.Clear();
+            foreach (IEnemyProjectile projectile in EnemyProjectiles)
+            {
+                projectile.Update();
+                if (!projectile.Alive)
+                    deadEnemyProjectiles.Add(projectile);
+            }
+            EnemyProjectiles = EnemyProjectiles.Except(deadEnemyProjectiles).ToList();
 
+            List<IItem> deadItems = new List<IItem>();
+            foreach(IItem item in Items)
+            {
+                item.Update();
+                if (!item.Alive)
+                {
+                    deadItems.Add(item);
+                }
+            }
+            Items = Items.Except(deadItems).ToList();
 
-            CurrItem.Update();
+            Collisions.CollisionHandling.HandleCollisions(this);
 
             base.Update(gameTime);
         }
@@ -342,8 +362,15 @@ namespace LegendOfZeldaClone
 
             //Link.Draw(_spriteBatch);
 
-            //enemyList[currentEnemyIndex].Draw(_spriteBatch);
-            //CurrItem.Draw(_spriteBatch);
+            enemyList[currentEnemyIndex].Draw(_spriteBatch);
+
+            foreach (IEnemyProjectile projectile in EnemyProjectiles)
+                projectile.Draw(_spriteBatch);
+
+            foreach (IItem item in Items)
+            {
+                item.Draw(_spriteBatch);
+            }
 
             //CurrentObject.Draw(_spriteBatch);
 

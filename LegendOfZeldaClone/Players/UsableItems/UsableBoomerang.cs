@@ -15,7 +15,7 @@ namespace LegendOfZeldaClone
 
         public void Use(Vector2 location, Direction direction)
         {
-            game.LinkProjectilesQueue.Add(new BoomerangProjectile(location, direction, skinType, game));
+            game.LinkProjectilesQueue.Add(new BoomerangProjectile(location, direction, skinType, game, game.Link));
         }
     }
 }

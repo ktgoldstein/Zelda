@@ -211,168 +211,11 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            game.Link.Damage(2);
+            game.Link.Damage(2, Direction.None);
         }
     }
 
-    public class PreviousEnemy : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
-
-        public PreviousEnemy(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            if (myGame.SwitchEnemyDelay != 0)
-                return;
-            else
-                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
-
-            myGame.currentEnemyIndex--;
-            if (myGame.currentEnemyIndex < 0)
-            {
-                myGame.currentEnemyIndex = myGame.enemyList.Count - 1;
-                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
-            }
-            else
-            {
-                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
-            }
-        }
-    }
-
-    public class NextEnemy : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
-
-        public NextEnemy(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            if (myGame.SwitchEnemyDelay != 0)
-                return;
-            else
-                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
-
-            myGame.currentEnemyIndex++;
-            if (myGame.currentEnemyIndex == myGame.enemyList.Count)
-            {
-                myGame.currentEnemyIndex = 0;
-                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
-            }
-            else
-            {
-                myGame.SpriteEnemy = myGame.enemyList[myGame.currentEnemyIndex];
-            }
-        }
-    }
-    public class PreviousItem : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
-
-        public PreviousItem(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            if (myGame.SwitchItemDelay != 0)
-                return;
-            else
-                myGame.SwitchItemDelay = myGame.SwitchDelayLength;
-
-            if (myGame.itemIndex == 0)
-            {
-                myGame.itemIndex = myGame.Items.Length - 1;
-                myGame.CurrItem = myGame.Items[myGame.itemIndex];
-            }
-            else
-            {
-                myGame.itemIndex -= 1;
-                myGame.CurrItem = myGame.Items[myGame.itemIndex];
-            }
-        }
-    }
-
-    public class NextItem : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
-
-        public NextItem(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            if (myGame.SwitchItemDelay != 0)
-                return;
-            else
-                myGame.SwitchItemDelay = myGame.SwitchDelayLength;
-
-            if (myGame.itemIndex == myGame.Items.Length - 1)
-            {
-                myGame.itemIndex = 0;
-                myGame.CurrItem = myGame.Items[0];
-            }
-            else
-            {
-                myGame.itemIndex += 1;
-                myGame.CurrItem = myGame.Items[myGame.itemIndex];
-            }
-        }
-    }
-    public class NextObject : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
-
-        public NextObject(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            if (myGame.SwitchObjectDelay != 0)
-                return;
-            else
-                myGame.SwitchObjectDelay = myGame.SwitchDelayLength;
-
-            myGame.ObjectIndex++;
-            if (myGame.ObjectIndex > myGame.Objects.Count - 1)
-                myGame.ObjectIndex = 0;
-            myGame.CurrentObject = myGame.Objects[myGame.ObjectIndex];
-        }
-    }
-    public class PreviousObject : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
-        public PreviousObject(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            if (myGame.SwitchObjectDelay != 0)
-                return;
-            else
-                myGame.SwitchObjectDelay = myGame.SwitchDelayLength;
-
-            myGame.ObjectIndex--;
-            if (myGame.ObjectIndex < 0)
-                myGame.ObjectIndex = myGame.Objects.Count - 1;
-            myGame.CurrentObject = myGame.Objects[myGame.ObjectIndex];
-        }
-    }
-
+    
     public class ResetGame : ICommand
     {
         private LegendOfZeldaDungeon game;
@@ -385,7 +228,7 @@ namespace LegendOfZeldaClone
         public void Execute()
         {
             game.itemIndex = 0;
-            game.CurrItem = game.Items[game.itemIndex];
+            //game.CurrItem = game.Items[game.itemIndex];
 
             game.ObjectIndex = 0;
             game.CurrentObject = game.Objects[game.ObjectIndex];
@@ -395,7 +238,6 @@ namespace LegendOfZeldaClone
             game.LinkProjectiles.Clear();
 
             game.currentEnemyIndex = 0;
-            game.SpriteEnemy = game.enemyList[game.currentEnemyIndex];
         }
     }
     public class PreviousRoom : ICommand
@@ -501,4 +343,3 @@ namespace LegendOfZeldaClone
     }
 
 }
-

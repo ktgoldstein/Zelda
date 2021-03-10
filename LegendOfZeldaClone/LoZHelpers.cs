@@ -33,6 +33,18 @@ namespace LegendOfZeldaClone
         PickingUpItem
     }
 
+    public enum UsableItemTypes
+    {
+        BlueCandle,
+        BlueRing,
+        Bomb,
+        BoomerangNormal,
+        BoomerangMagic,
+        BowWooden,
+        BowSilver,
+        WoodenSword
+    }
+
     public enum SwordSkinType
     {
         WoodenSword = 0,
@@ -77,6 +89,39 @@ namespace LegendOfZeldaClone
 
     public static class LoZHelpers
     {
+        public static Vector2 DirectionToVector(Direction direction)
+        {
+            Vector2 vector = Vector2.Zero;
+            switch(direction)
+            {
+                case Direction.Down:
+                    vector = Vector2.UnitY;
+                    break;
+                case Direction.Up:
+                    vector = -Vector2.UnitY;
+                    break;
+                case Direction.Right:
+                    vector = Vector2.UnitX;
+                    break;
+                case Direction.Left:
+                    vector = -Vector2.UnitX;
+                    break;
+                case Direction.UpLeft:
+                    vector = new Vector2(-1, -1);
+                    break;
+                case Direction.UpRight:
+                    vector = new Vector2(1, -1);
+                    break;
+                case Direction.DownLeft:
+                    vector = new Vector2(-1, 1);
+                    break;
+                case Direction.DownRight:
+                    vector = new Vector2(1, 1);
+                    break;
+            }
+            vector.Normalize();
+            return vector;
+        }
         public static Vector2 LinkStartingLocation => new Vector2(GameWidth / 2 - 16, GameHeight / 2 - 16);
         public static Vector2 EnemyStartingLocation => new Vector2(400, 120);
         public static Vector2 ObjectStartingLocation => new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6);
@@ -84,7 +129,30 @@ namespace LegendOfZeldaClone
         public static int GameHeight => Scale(240);
         public static int GameWidth => Scale(256);
         public static int LinkInvincibilityFrames => 24;
+        public static int LinkKnockbackFrames => 8;
         public static int SpriteSizeMultiplier => 3;
         public static int Scale(int original) => original * SpriteSizeMultiplier;
+        public static Direction FlipDirection(Direction original)
+        {
+            return (original) switch
+            {
+                Direction.Down => Direction.Up,
+                Direction.Up => Direction.Down,
+                Direction.Left => Direction.Right,
+                Direction.Right => Direction.Left,
+                Direction.UpLeft => Direction.DownRight,
+                Direction.UpRight => Direction.DownLeft,
+                Direction.DownLeft => Direction.UpRight,
+                Direction.DownRight => Direction.UpLeft,
+                Direction.None => Direction.None,
+                _ => Direction.None
+            };
+        }
+        public static int AquamentusHP = 6;
+        public static int GelHP = 1;
+        public static int GoriyaHP = 3;
+        public static int KeeseHP = 1;
+        public static int StalfosHP = 2;
+        public static int WallmasterHP = 2;
     }
 }

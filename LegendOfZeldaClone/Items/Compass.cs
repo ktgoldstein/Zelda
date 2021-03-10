@@ -5,24 +5,30 @@ namespace LegendOfZeldaClone
 {
     public class Compass : IItem
     {
+        public bool Alive { get; set; }
+        public Vector2 Location { get; set; }
+        public Vector2 HurtBoxLocation
+        {
+            get { return Location; }
+            set { Location = value; }
+        }
+        public int Width { get { return LoZHelpers.Scale(width); } }
+        public int Height { get { return LoZHelpers.Scale(height); } }
+
         private ISprite compass;
-        private Vector2 location;
-        private int height;
-        private int width;
+        private readonly int height;
+        private readonly int width;
 
         public Compass(Vector2 location)
         {
             compass = ItemSpriteFactory.Instance.CreateCompass();
-            this.location = location;
-            this.width = 12;
-            this.height = 12;
+            Location = location;
+            width = 11;
+            height = 12;
+            Alive = true;
         }
-        public void Update()
-        {
-        }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            compass.Draw(spriteBatch, location);
-        }
+
+        public void Update() { }
+        public void Draw(SpriteBatch spriteBatch) => compass.Draw(spriteBatch, Location);
     }
 }
