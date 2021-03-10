@@ -7,12 +7,12 @@ namespace LegendOfZeldaClone.Collisions
         public static void HandleCollisions(LegendOfZeldaDungeon game)
         {
             List<IGameObject> gameObjects = new List<IGameObject>();
-            gameObjects.Add(game.Link);
-            gameObjects.AddRange(game.LinkProjectiles);
-            gameObjects.Add(game.enemyList[game.currentEnemyIndex]);
+            gameObjects.Add(game.Player);
+            gameObjects.AddRange(game.PlayerProjectiles);
+            gameObjects.AddRange(game.Enemies);
             gameObjects.AddRange(game.EnemyProjectiles);
             gameObjects.AddRange(game.Items);
-            gameObjects.Add(game.CurrentObject);
+            gameObjects.AddRange(game.Objects);
 
             for (int firstIndex = 0; firstIndex < gameObjects.Count; firstIndex++)
             {

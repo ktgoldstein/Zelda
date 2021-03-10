@@ -149,7 +149,7 @@ namespace LegendOfZeldaClone
             {
                 Tuple<LinkStateType, int> currentState = linkStates[0].GetState();
                 decoratedLinkPlayer.SetState(GetSpecificState(decoratedLinkPlayer, currentState.Item1, currentState.Item2));
-                game.Link = decoratedLinkPlayer;
+                game.Player = decoratedLinkPlayer;
             } 
             else if (knockbackDirection != Direction.None)
             {

@@ -10,9 +10,9 @@ namespace LegendOfZeldaClone
 
         public void Use(Vector2 location, Direction direction)
         {
-            IPlayer link = game.Link;
+            IPlayer link = game.Player;
             if (link is LinkPlayer player)
-                game.Link = new BlueRingLinkPlayer(game, player);
+                game.Player = new BlueRingLinkPlayer(game, player);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace LegendOfZeldaClone
 {
@@ -34,7 +35,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            myGame.Link.MoveDown();
+            myGame.Player.MoveDown();
         }
     }
 
@@ -49,7 +50,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            myGame.Link.MoveUp();
+            myGame.Player.MoveUp();
         }
     }
 
@@ -64,7 +65,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            myGame.Link.MoveLeft();
+            myGame.Player.MoveLeft();
         }
     }
 
@@ -79,7 +80,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            myGame.Link.MoveRight();
+            myGame.Player.MoveRight();
         }
     }
 
@@ -94,7 +95,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            myGame.Link.ActionA();
+            myGame.Player.ActionA();
         }
     }
 
@@ -109,7 +110,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            myGame.Link.ActionB();
+            myGame.Player.ActionB();
         }
     }
 
@@ -126,8 +127,8 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            ((ILinkPlayer)game.Link).HeldItem = bow;
-            game.Link.ActionB();
+            ((ILinkPlayer)game.Player).HeldItem = bow;
+            game.Player.ActionB();
         }
     }
 
@@ -144,8 +145,8 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            ((ILinkPlayer)game.Link).HeldItem = boomerang;
-            game.Link.ActionB();
+            ((ILinkPlayer)game.Player).HeldItem = boomerang;
+            game.Player.ActionB();
         }
     }
 
@@ -162,8 +163,8 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            ((ILinkPlayer)game.Link).HeldItem = bomb;
-            game.Link.ActionB();
+            ((ILinkPlayer)game.Player).HeldItem = bomb;
+            game.Player.ActionB();
         }
     }
 
@@ -180,8 +181,8 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            ((ILinkPlayer)game.Link).HeldItem = blueCandle;
-            game.Link.ActionB();
+            ((ILinkPlayer)game.Player).HeldItem = blueCandle;
+            game.Player.ActionB();
         }
     }
 
@@ -211,7 +212,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            game.Link.Damage(2, Direction.None);
+            game.Player.Damage(2, Direction.None);
         }
     }
 
@@ -227,17 +228,9 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            game.itemIndex = 0;
-            //game.CurrItem = game.Items[game.itemIndex];
-
-            game.ObjectIndex = 0;
-            game.CurrentObject = game.Objects[game.ObjectIndex];
-
             IUsableItem woodenSword = new UsableWoodenSword(game);
-            game.Link = new LinkPlayer(game, LoZHelpers.LinkStartingLocation, woodenSword);
-            game.LinkProjectiles.Clear();
-
-            game.currentEnemyIndex = 0;
+            game.Player = new LinkPlayer(game, LoZHelpers.LinkStartingLocation, woodenSword);
+            game.PlayerProjectiles.Clear();
         }
     }
     public class PreviousRoom : ICommand
@@ -251,18 +244,15 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            if (myGame.SwitchEnemyDelay != 0)
+            if (myGame.SwitchRoomDelay != 0)
                 return;
             else
-                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
+                myGame.SwitchRoomDelay = myGame.SwitchDelayLength;
             myGame.RoomListIndex--;
             if (myGame.RoomListIndex < 0)
-            {
                 myGame.RoomListIndex = myGame.roomList.Count - 1;
-            }
-            else
-            {
-            }
+
+            myGame.roomList[myGame.RoomListIndex].LoadRoom();
         }
     }
 
@@ -277,43 +267,19 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            System.Diagnostics.Debug.WriteLine("LC");
-            if (myGame.SwitchEnemyDelay != 0)
+            if (myGame.SwitchRoomDelay != 0)
                 return;
             else
-                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
+                myGame.SwitchRoomDelay = myGame.SwitchDelayLength;
 
             myGame.RoomListIndex++;
-            if (myGame.RoomListIndex == myGame.roomList.Count)
-            {
+            if (myGame.RoomListIndex >= myGame.roomList.Count)
                 myGame.RoomListIndex = 0;
-            }
-            else
-            {
-            }
+
+            myGame.roomList[myGame.RoomListIndex].LoadRoom();
         }
     }
-    // Using map location
-    public class FastChangeRoom : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
 
-        public FastChangeRoom(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            
-            if (myGame.SwitchEnemyDelay != 0)
-                return;
-            else
-                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
-
-            //if (Mouse.GetState().X > ()) { }
-        }
-    }
     public class MapChangeRoom : ICommand
     {
         private LegendOfZeldaDungeon myGame;
@@ -325,20 +291,16 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            System.Diagnostics.Debug.WriteLine("LC Command");
-            if (myGame.SwitchEnemyDelay != 0)
+            if (myGame.SwitchRoomDelay != 0)
                 return;
             else
-                myGame.SwitchEnemyDelay = myGame.SwitchDelayLength;
+                myGame.SwitchRoomDelay = myGame.SwitchDelayLength;
 
             myGame.RoomListIndex++;
             if (myGame.RoomListIndex == myGame.roomList.Count)
-            {
                 myGame.RoomListIndex = 0;
-            }
-            else
-            {
-            }
+
+            myGame.roomList[myGame.RoomListIndex].LoadRoom();
         }
     }
 

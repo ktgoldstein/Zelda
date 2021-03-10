@@ -47,7 +47,7 @@ namespace LegendOfZeldaClone
             if (lifeSpan == 0)
             {
 
-                velocity = game.Link.Location - Location;
+                velocity = game.Player.Location - Location;
                 velocity.Normalize();
                 velocity *= speed;
             }

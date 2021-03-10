@@ -15,24 +15,23 @@ namespace LegendOfZeldaClone.LevelLoading
         private Texture2D background;
         //private Texture2D backgroundFix;
 
+        private LegendOfZeldaDungeon game;
         private List<List<int>> data;
         private String fileLocation;
-        private List<IObject> objects;
-        private List<IEnemy> enemies;
-        public Room(String fileLocation)
+
+        public Room(String fileLocation, LegendOfZeldaDungeon game)
         {
-            
+            this.game = game;
             this.fileLocation = fileLocation;
             tiles = RoomTextureFactory.Instance.tiles;
             background = RoomTextureFactory.Instance.background;
-            objects = new List<IObject>(); 
-            enemies = new List<IEnemy>();
             //backgroundFix = RoomTextureFactory.Instance.backgroundFix;
-
-
         }
+
         public void LoadRoom()
         {
+            game.ResetLists();
+
             data = new List<List<int>>();
             var lines = File.ReadLines(fileLocation);
             foreach (var line in lines)
@@ -41,7 +40,7 @@ namespace LegendOfZeldaClone.LevelLoading
                 var row = Array.ConvertAll(splitLine, s => int.Parse(s));
                 data.Add(new List<int>((row)));
             }
-            
+
             for (int row = 0; row < data.Count; row++)
             {
                 for (int column = 0; column < data[row].Count; column++)
@@ -50,10 +49,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     int height = 16;
                     Vector2 tileLocation = new Vector2((width * column + 16) * 3, (height * row + 80) * 3);
                     if (fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv"))
-                    {
                         tileLocation = new Vector2((width * column) * 3, (height * row + 80) * 3);
-
-                    }
 
                     Vector2 smallItemLocation = new Vector2((width * column + 20) * 3, (height * row + 80) * 3);
                     Vector2 doorLocationUp = new Vector2((width * column + 16) * 3, (height * row + 64) * 3);
@@ -65,152 +61,118 @@ namespace LegendOfZeldaClone.LevelLoading
                     switch (source)
                     {
                         case 1:
-                            IObject raisedBlock = new RaisedBlock(tileLocation);
-                            objects.Add(raisedBlock);
+                            AddIObject(new RaisedBlock(tileLocation));
                             break;
                         case 2:
-                            IObject blueGargoyle = new BlueGargoyleStatue(tileLocation);
-                            objects.Add(blueGargoyle);
+                            AddIObject(new BlueGargoyleStatue(tileLocation));
                             break;
                         case 3:
-                            IObject blueDragon = new BlueDragonStatue(tileLocation);
-                            objects.Add(blueDragon);
+                            AddIObject(new BlueDragonStatue(tileLocation));
                             break;
                         case 4:
-                            IObject blackTile = new DarkBlock(tileLocation);
-                            objects.Add(blackTile);
+                            AddIObject(new DarkBlock(tileLocation));
                             break;
                         case 5:
-                            IObject dottedBlock = new DottedBlock(tileLocation);
-                            objects.Add(dottedBlock);
+                            AddIObject(new DottedBlock(tileLocation));
                             break;
                         case 6:
-                            IObject water = new Water(tileLocation);
-                            objects.Add(water);
+                            AddIObject(new Water(tileLocation));
                             break;
                         case 7:
-                            IObject gargoyle = new GargoyleStatue(tileLocation);
-                            objects.Add(gargoyle);
+                            AddIObject(new GargoyleStatue(tileLocation));
                             break;
                         case 8:
-                            IObject stone = new StoneWall(tileLocation);
-                            objects.Add(stone);
+                            AddIObject(new StoneWall(tileLocation));
                             break;
                         case 9:
-                            IObject ladder = new Ladder(tileLocation);
-                            objects.Add(ladder);
+                            AddIObject(new Ladder(tileLocation));
                             break;
                         case 10:
-                            IObject keyDoorUp = new KeyDoorUp(doorLocationUp);
-                            objects.Add(keyDoorUp);
+                            AddIObject(new KeyDoorUp(doorLocationUp));
                             break;
                         case 11:
-                            IObject keyDoorDown = new KeyDoorDown(doorLocationDown);
-                            objects.Add(keyDoorDown);
+                            AddIObject(new KeyDoorDown(doorLocationDown));
                             break;
                         case 13:
-                            IObject keyDoorRight = new KeyDoorRight(doorLocationRight);
-                            objects.Add(keyDoorRight);
+                            AddIObject(new KeyDoorRight(doorLocationRight));
                             break;
                         case 14:
-                            IObject keyDoorLeft = new KeyDoorLeft(doorLocationLeft);
-                            objects.Add(keyDoorLeft);
+                            AddIObject(new KeyDoorLeft(doorLocationLeft));
                             break;
                         case 15:
-                            IObject openDoorUp = new OpenDoorUp(doorLocationUp);
-                            objects.Add(openDoorUp);
+                            AddIObject(new OpenDoorUp(doorLocationUp));
                             break;
                         case 16:
-                            IObject openDoorDown = new OpenDoorDown(doorLocationDown);
-                            objects.Add(openDoorDown);
+                            AddIObject(new OpenDoorDown(doorLocationDown));
                             break;
                         case 17:
-                            IObject openDoorRight = new OpenDoorRight(doorLocationRight);
-                            objects.Add(openDoorRight);
+                            AddIObject(new OpenDoorRight(doorLocationRight));
                             break;
                         case 18:
-                            IObject openDoorLeft = new OpenDoorLeft(doorLocationLeft);
-                            objects.Add(openDoorLeft);
+                            AddIObject(new OpenDoorLeft(doorLocationLeft));
                             break;
                         case 20:
-                            IObject lockedDoorLeft = new LockedDoorLeft(doorLocationLeft);
-                            objects.Add(lockedDoorLeft);
+                            AddIObject(new LockedDoorLeft(doorLocationLeft));
                             break;
                         case 21:
-                            IObject lockedDoorRight = new LockedDoorRight(doorLocationRight);
-                            objects.Add(lockedDoorRight);
+                            AddIObject(new LockedDoorRight(doorLocationRight));
                             break;
                         case 23:
-                            IObject wallFaceUp = new WallUp(doorLocationUp);
-                            objects.Add(wallFaceUp);
+                            AddIObject(new WallUp(doorLocationUp));
                             break;
                         case 24:
-                            IObject wallFaceDown = new WallDown(doorLocationDown);
-                            objects.Add(wallFaceDown);
+                            AddIObject(new WallDown(doorLocationDown));
                             break;
                         case 25:
-                            IObject wallFaceLeft = new WallLeft(doorLocationLeft);
-                            objects.Add(wallFaceLeft);
+                            AddIObject(new WallLeft(doorLocationLeft));
                             break;
                         case 26:
-                            IObject wallFaceRight = new WallRight(doorLocationRight);
-                            objects.Add(wallFaceRight);
+                            AddIObject(new WallRight(doorLocationRight));
                             break;
                         case 27:
-                            IObject tunnelFaceUp = new TunnelFaceUp(doorLocationUp);
-                            objects.Add(tunnelFaceUp);
+                            AddIObject(new TunnelFaceUp(doorLocationUp));
                             break;
                         case 28:
-                            IObject tunnelFaceDown = new TunnelFaceDown(doorLocationDown);
-                            objects.Add(tunnelFaceDown);
+                            AddIObject(new TunnelFaceDown(doorLocationDown));
                             break;
                         case 29:
-                            IEnemy keese = new Keese(tileLocation);
-                            enemies.Add(keese);
+                            AddIEnemy(new Keese(tileLocation));
                             break;
                         case 30:
-                            IEnemy stalfos = new Stalfos(tileLocation);
-                            enemies.Add(stalfos);
+                            AddIEnemy(new Stalfos(tileLocation));
                             break;
                         case 31:
-                            IEnemy wallMaster = new Wallmaster(tileLocation);
-                            enemies.Add(wallMaster);
+                            AddIEnemy(new Wallmaster(tileLocation));
                             break;
                         case 32:
-                            IEnemy goriya = new Goriya(tileLocation);
-                            enemies.Add(goriya);
+                            AddIEnemy(new Goriya(game, tileLocation));
                             break;
                         case 33:
-                            IEnemy gel = new Gel(tileLocation);
-                            enemies.Add(gel);
+                            AddIEnemy(new Gel(tileLocation));
                             break;
                         case 34:
-                            IEnemy aquamentus = new Aquamentus(tileLocation);
-                            enemies.Add(aquamentus);
+                            AddIEnemy(new Aquamentus(game, tileLocation));
                             break;
                         case 35:
-                            IEnemy bladeTrap = new BladeTrap(tileLocation);
-                            enemies.Add(bladeTrap);
+                            AddIEnemy(new BladeTrap(tileLocation));
                             break;
-                        //case 39:
-                        //    IItem key = new Key(smallItemLocation);
-                        //    break;
-                        //case 40:
-                        //    IItem compass = new Compass(smallItemLocation);
-                        //    break;
-                        //case 41:
-                        //    IItem boomerang = new Boomerang(smallItemLocation);
-                        //    break;
-                        //case 42:
-                        //    IItem map = new Map(smallItemLocation);
-                        //    break;
+                        case 39:
+                            AddIItem(new Key(smallItemLocation));
+                            break;
+                        case 40:
+                            AddIItem(new Compass(smallItemLocation));
+                            break;
+                        case 41:
+                            AddIItem(new Boomerang(smallItemLocation));
+                            break;
+                        case 42:
+                            AddIItem(new Map(smallItemLocation));
+                            break;
                         case 43:
-                            IObject dragon = new DragonStatue(tileLocation);
-                            objects.Add(dragon);
+                            AddIObject(new DragonStatue(tileLocation));
                             break;
                         case 44:
-                            IObject stairs = new Stairs(tileLocation);
-                            objects.Add(stairs);
+                            AddIObject(new Stairs(tileLocation));
                             break;
                         default:
                             break;
@@ -218,14 +180,7 @@ namespace LegendOfZeldaClone.LevelLoading
                 }
             }
         }
-        public List<IObject> GetObjectList()
-        {
-            return objects;
-        }
-        public List<IEnemy> GetEnemiesList()
-        {
-            return enemies;
-        }
+
         public void Draw(SpriteBatch spritebatch)
         {
 
@@ -233,26 +188,16 @@ namespace LegendOfZeldaClone.LevelLoading
             Rectangle destinationRectangle = new Rectangle(0, 192, 256 *3, 176 * 3);
 
             if (!fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv"))
-            {
-                //spritebatch.Draw(backgroundFix, destinationRectangle, sourceRectangle, Color.White);
                 spritebatch.Draw(background, destinationRectangle, sourceRectangle, Color.White);
-            }
+
             sourceRectangle = new Rectangle(2, 192, 192, 112);
-            destinationRectangle = new Rectangle(96, 288, 192 * 3, 112 * 3);
+            destinationRectangle = new Rectangle(96, 288, LoZHelpers.Scale(192), LoZHelpers.Scale(112));
 
             spritebatch.Draw(tiles, destinationRectangle, sourceRectangle, Color.White);
-
-            foreach(IObject obj in objects)
-            {
-                obj.Draw(spritebatch);
-            }
-
-            foreach (IEnemy enemy in enemies)
-            {
-                enemy.Draw(spritebatch);
-            }
-
-
         }
+
+        private void AddIEnemy(IEnemy enemy) => game.Enemies.Add(enemy);
+        private void AddIItem(IItem item) => game.Items.Add(item);
+        private void AddIObject(IObject block) => game.Objects.Add(block);
     }
 }

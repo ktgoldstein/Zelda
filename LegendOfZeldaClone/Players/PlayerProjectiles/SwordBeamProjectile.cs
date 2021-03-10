@@ -95,10 +95,10 @@ namespace LegendOfZeldaClone
         }
         public void SpawnSwordExplosion()
         {
-            game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpLeft, skinSeed));
-            game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpRight, skinSeed));
-            game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownLeft, skinSeed));
-            game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownRight, skinSeed));
+            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpLeft, skinSeed));
+            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpRight, skinSeed));
+            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownLeft, skinSeed));
+            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownRight, skinSeed));
             Alive = false;
         }
     }

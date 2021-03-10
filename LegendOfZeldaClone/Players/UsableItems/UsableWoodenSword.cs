@@ -10,7 +10,7 @@ namespace LegendOfZeldaClone
 
         public void Use(Vector2 location, Direction direction)
         {
-            game.LinkProjectilesQueue.Add(new SwordProjectile(location, SwordSkinType.WoodenSword, direction, game));
+            game.PlayerProjectilesQueue.Add(new SwordProjectile(location, SwordSkinType.WoodenSword, direction, game));
         }
     }
 }

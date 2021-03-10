@@ -72,7 +72,7 @@ namespace LegendOfZeldaClone
                 Health = 0;
             Tuple<LinkStateType, int> currentState = linkState.GetState();
             if (currentState.Item1 != LinkStateType.PickingUpItem)
-                game.Link = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
+                game.Player = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
         }
 
         public void Heal(int amount)
