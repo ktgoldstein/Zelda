@@ -48,7 +48,7 @@ namespace LegendOfZeldaClone.Enemy
             int column = currentFrame % columns;
 
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 4, height * 4);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 3, height * 3);
 
             spritebatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }

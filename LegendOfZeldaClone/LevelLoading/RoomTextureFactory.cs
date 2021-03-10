@@ -8,10 +8,10 @@ namespace LegendOfZeldaClone.LevelLoading
 {
     class RoomTextureFactory
     {
-        // Public problem
+        
         public Texture2D tiles;
-        public Texture2D roomExterior;
         public Texture2D background;
+        public Texture2D backgroundFix;
         private static RoomTextureFactory instance = new RoomTextureFactory();
         
         public static RoomTextureFactory Instance
@@ -26,9 +26,9 @@ namespace LegendOfZeldaClone.LevelLoading
 
         public void LoadAllTextures(ContentManager content)
         {
-            tiles = content.Load<Texture2D>("WallsDoorBackground");
-            roomExterior = content.Load<Texture2D>("LevelLoading\\RoomExterior");
+            tiles = content.Load<Texture2D>("Background");
             background = content.Load<Texture2D>("Background");
+            backgroundFix = content.Load<Texture2D>("BackgroundFix");
         }
     }
 }

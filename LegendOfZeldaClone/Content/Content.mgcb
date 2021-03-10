@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:Background.png
 
+#begin BackgroundFix.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BackgroundFix.png
+
 #begin Bosses.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -217,6 +229,9 @@
 #begin LevelLoading/room15.csv
 /copy:LevelLoading/room15.csv
 
+#begin LevelLoading/room16.csv
+/copy:LevelLoading/room16.csv
+
 #begin LevelLoading/room2.csv
 /copy:LevelLoading/room2.csv
 
@@ -229,6 +244,9 @@
 #begin LevelLoading/room5.csv
 /copy:LevelLoading/room5.csv
 
+#begin LevelLoading/room6.csv
+/copy:LevelLoading/room6.csv
+
 #begin LevelLoading/room7.csv
 /copy:LevelLoading/room7.csv
 
@@ -238,32 +256,8 @@
 #begin LevelLoading/room9.csv
 /copy:LevelLoading/room9.csv
 
-#begin LevelLoading/RoomExterior.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:LevelLoading/RoomExterior.png
-
 #begin LevelLoading/SecretRoom.csv
 /copy:LevelLoading/SecretRoom.csv
-
-#begin LevelLoading/Tiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:LevelLoading/Tiles.png
 
 #begin linkSpriteSheet.png
 /importer:TextureImporter
@@ -300,18 +294,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:playerProjectileSpriteSheet.png
-
-#begin WallsDoorBackground.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:WallsDoorBackground.png
 
 #begin ZeldaObjects.png
 /importer:TextureImporter
