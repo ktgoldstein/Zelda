@@ -11,7 +11,13 @@ namespace LegendOfZeldaClone
 
         public void HandlePlayerCollision(IPlayer player, Direction direction) { } // Nothing will happen for now (only one player)
 
-        public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) { } // No collision
+        public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
+        {
+            if (playerProjectile is FireProjectile)
+            {
+                CurrentPlayer.Damage(1, direction);
+            }
+        }
 
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
