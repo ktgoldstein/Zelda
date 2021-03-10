@@ -22,7 +22,7 @@ namespace LegendOfZeldaClone.Collisions
                 CurrentObject is Objects.LockedDoorLeft || CurrentObject is Objects.LockedDoorRight)
             {
                 //add condition here: if player has key in their inventory
-                if (true)
+                if (player.Inventory.KeysHeld > 0)
                 {
                     //delete the LockedDoor object to reveal the unlocked version underneath
                 }
