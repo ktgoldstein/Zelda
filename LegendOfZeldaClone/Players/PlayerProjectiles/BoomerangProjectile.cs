@@ -23,7 +23,9 @@ namespace LegendOfZeldaClone
         private readonly int height;
         private int lifeSpan;
 
-        public BoomerangProjectile(Vector2 startingLocation, Direction direction, BoomerangSkinType skinType, LegendOfZeldaDungeon game)
+        public IPlayer link;
+
+        public BoomerangProjectile(Vector2 startingLocation, Direction direction, BoomerangSkinType skinType, LegendOfZeldaDungeon game, IPlayer link)
         {
             Alive = true;
             width = 8;
@@ -35,6 +37,8 @@ namespace LegendOfZeldaClone
             lifeSpan = 10;
             sprite = PlayerProjectileSpriteFactory.Instance.CreateBoomerangSprite(skinType);
             DirectionBasedSetUp(direction);
+
+            this.link = link;
         }
 
         public void Update()
@@ -42,8 +46,6 @@ namespace LegendOfZeldaClone
             sprite.Update();
             if (lifeSpan == 0)
             {
-                if ((Location - game.Link.Location).Length() < 5)
-                    Alive = false;
 
                 velocity = game.Link.Location - Location;
                 velocity.Normalize();

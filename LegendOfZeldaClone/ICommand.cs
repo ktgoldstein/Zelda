@@ -277,12 +277,10 @@ namespace LegendOfZeldaClone
             if (myGame.itemIndex == 0)
             {
                 myGame.itemIndex = myGame.Items.Count - 1;
-                //myGame.CurrItem = myGame.Items[myGame.itemIndex];
             }
             else
             {
                 myGame.itemIndex -= 1;
-                //myGame.CurrItem = myGame.Items[myGame.itemIndex];
             }
         }
     }
@@ -306,12 +304,10 @@ namespace LegendOfZeldaClone
             if (myGame.itemIndex == myGame.Items.Count - 1)
             {
                 myGame.itemIndex = 0;
-                //myGame.CurrItem = myGame.Items[0];
             }
             else
             {
                 myGame.itemIndex += 1;
-                //myGame.CurrItem = myGame.Items[myGame.itemIndex];
             }
         }
     }

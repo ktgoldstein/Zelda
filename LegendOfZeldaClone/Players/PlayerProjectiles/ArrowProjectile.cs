@@ -20,7 +20,6 @@ namespace LegendOfZeldaClone
         private Vector2 velocity;
         private int width;
         private int height;
-        private int lifeSpan;
 
         public ArrowProjectile(Vector2 startingLocation, Direction direction, ArrowSkinType skinType)
         {
@@ -28,16 +27,12 @@ namespace LegendOfZeldaClone
 
             this.skinType = skinType;
             Location = startingLocation;
-            lifeSpan = 20;
             DirectionBasedSetUp(direction);
         }
 
         public void Update()
         {
-            if (lifeSpan == 0)
-                Alive = false;
             Location += velocity;
-            lifeSpan--;
         }
 
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);

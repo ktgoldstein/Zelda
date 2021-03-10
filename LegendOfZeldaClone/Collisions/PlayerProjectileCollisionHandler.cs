@@ -25,7 +25,15 @@
             //boomerangs don't disappear
             if (!(CurrentPlayerProjectile is BoomerangProjectile))
             {
-                CurrentPlayerProjectile.Alive = false;
+                if (CurrentPlayerProjectile is SwordBeamProjectile)
+                {
+                    SwordBeamProjectile swordBeam = CurrentPlayerProjectile as SwordBeamProjectile;
+                    swordBeam.SpawnSwordExplosion();
+                }
+                else
+                {
+                    CurrentPlayerProjectile.Alive = false;
+                }
             }
         }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
@@ -34,7 +42,18 @@
         }
         public void HandleItemCollision(IItem item, Direction direction)
         {
-            //nothing will happen (until inventory is implemented)
+            if (CurrentPlayerProjectile is BoomerangProjectile)
+            {
+                BoomerangProjectile boomerang = CurrentPlayerProjectile as BoomerangProjectile;
+                IPlayer player = boomerang.link;
+                if (item is FlashingRupee || item is BlueRupee || item is GoldRupee)
+                    player.Inventory.RupeesHeld++;
+                else if (item is Bomb)
+                    player.Inventory.BombsHeld++;
+                else if (item is Key)
+                    player.Inventory.KeysHeld++;
+                
+            }
         }
 
         public void HandleObjectCollision(IObject block, Direction direction)
@@ -42,7 +61,15 @@
             //nothing will happen if it is a boomerang
             if (!(CurrentPlayerProjectile is BoomerangProjectile))
             {
-                CurrentPlayerProjectile.Alive = false;
+                if (CurrentPlayerProjectile is SwordBeamProjectile)
+                {
+                    SwordBeamProjectile swordBeam = CurrentPlayerProjectile as SwordBeamProjectile;
+                    swordBeam.SpawnSwordExplosion();
+                }
+                else
+                {
+                    CurrentPlayerProjectile.Alive = false;
+                }
             }
         }
         public void HandleBoundaryCollision(Boundary boundary, Direction direction)

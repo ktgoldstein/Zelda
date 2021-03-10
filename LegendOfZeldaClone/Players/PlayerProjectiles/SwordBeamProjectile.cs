@@ -39,16 +39,7 @@ namespace LegendOfZeldaClone
 
         public void Update()
         {
-            if (lifeSpan == 0)
-            {
-                game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpLeft, skinSeed));
-                game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpRight, skinSeed));
-                game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownLeft, skinSeed));
-                game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownRight, skinSeed));
-                Alive = false;
-            }
             Location += velocity;
-            lifeSpan--;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -93,6 +84,14 @@ namespace LegendOfZeldaClone
                     height = 7;
                     break;
             }
+        }
+        public void SpawnSwordExplosion()
+        {
+            game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpLeft, skinSeed));
+            game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpRight, skinSeed));
+            game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownLeft, skinSeed));
+            game.LinkProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownRight, skinSeed));
+            Alive = false;
         }
     }
 }
