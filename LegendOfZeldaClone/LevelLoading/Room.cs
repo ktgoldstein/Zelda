@@ -268,14 +268,16 @@ namespace LegendOfZeldaClone.LevelLoading
                         //    IItem map = new Map(smallItemLocation);
                         //    map.Draw(spritebatch);
                         //    break;
-                        //case 43:
-                        //    IObject dragon = new DragonStatue(tileLocation);
-                        //    dragon.Draw(spritebatch);
-                        //    break;
-                        //case 44:
-                        //    IObject stairs = new Stairs(tileLocation);
-                        //    stairs.Draw(spritebatch);
-                        //    break;
+                        case 43:
+                            IObject dragon = new DragonStatue(tileLocation);
+                            dragon.Draw(spritebatch);
+                            objects.Add(dragon);
+                            break;
+                        case 44:
+                            IObject stairs = new Stairs(tileLocation);
+                            stairs.Draw(spritebatch);
+                            objects.Add(stairs);
+                            break;
                         default:
                             break;
                     }
