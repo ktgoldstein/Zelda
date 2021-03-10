@@ -25,12 +25,8 @@ namespace LegendOfZeldaClone
 
         public void HandleItemCollision(IItem item, Direction direction) 
         {
-            if (item is FlashingRupee)
-                CurrentPlayer.Inventory.RupeesHeld += 1;
-            else if (item is BlueRupee)
-                CurrentPlayer.Inventory.RupeesHeld += 5;
-            else if (item is GoldRupee)
-                CurrentPlayer.Inventory.RupeesHeld += 10;
+            if (item is FlashingRupee || item is BlueRupee || item is GoldRupee)
+                CurrentPlayer.Inventory.RupeesHeld++;
             else if (item is Bomb)
                 CurrentPlayer.Inventory.BombsHeld++;
             else if (item is Key)
