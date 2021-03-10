@@ -21,6 +21,7 @@ namespace LegendOfZeldaClone
         public int currentEnemyIndex;
         public IEnemy SpriteEnemy;
         public List<IEnemy> enemyList;
+        public List<IEnemy> enemyCollisionTest;
 
         public IPlayer Link;
         public List<IPlayerProjectile> LinkProjectilesQueue;
@@ -139,6 +140,7 @@ namespace LegendOfZeldaClone
 
             currentEnemyIndex = 0;
             enemyList = new List<IEnemy>();
+            enemyCollisionTest = new List<IEnemy>();
 
             itemIndex = 0;
             Items = new IItem[24];
@@ -170,6 +172,8 @@ namespace LegendOfZeldaClone
 
             ObjectSpriteFactory.Instance.LoadAllTextures(Content);
             RoomTextureFactory.Instance.LoadAllTextures(Content);
+            EnemySpriteFactory.Instance.LoadAllTextures(Content);
+
             roomList = new List<Room>()
             {
                 new Room("Content\\LevelLoading\\room.csv"),
@@ -197,7 +201,6 @@ namespace LegendOfZeldaClone
                 room.LoadRoom();
             }
 
-            EnemySpriteFactory.Instance.LoadAllTextures(Content);
             enemyList = new List<IEnemy>()
             {
                new Aquamentus(LoZHelpers.EnemyStartingLocation),
@@ -276,7 +279,7 @@ namespace LegendOfZeldaClone
                 SwitchEnemyDelay--;
 
             controller.Update();
-
+   
             Link.Update();
 
             List<IPlayerProjectile> deadProjectiles = new List<IPlayerProjectile>();
@@ -289,9 +292,16 @@ namespace LegendOfZeldaClone
             }
             LinkProjectiles = LinkProjectiles.Except(deadProjectiles).ToList();
 
-            enemyList[currentEnemyIndex].Update();
-
+            enemyCollisionTest = roomList[RoomListIndex].GetEnemiesList();
+            foreach (IEnemy enemy in enemyCollisionTest)
+            {
+                enemy.Update();
+            }
             
+
+            //enemyList[currentEnemyIndex].Update();
+
+
             CurrItem.Update();
 
             base.Update(gameTime);
@@ -306,9 +316,12 @@ namespace LegendOfZeldaClone
             _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
-            roomList[RoomListIndex].RenderRoom(_spriteBatch);
-            
+            roomList[RoomListIndex].Draw(_spriteBatch);
 
+            foreach (IEnemy enemy in enemyCollisionTest)
+            {
+              enemy.Draw(_spriteBatch);
+            }
             //foreach (IPlayerProjectile projectile in LinkProjectiles)
             //    projectile.Draw(_spriteBatch);
 
