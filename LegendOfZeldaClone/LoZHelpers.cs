@@ -89,9 +89,9 @@ namespace LegendOfZeldaClone
 
     public enum ObjectHeight
     {
-        CanWalkOver = 0, //or: Low
-        CanFlyOver = 1, //or: Medium
-        Impassable = 2, //or: Tall
+        CanWalkOver, //or: Low
+        CanFlyOver, //or: Medium
+        Impassable, //or: Tall
     }
 
     public static class LoZHelpers
