@@ -49,21 +49,25 @@ namespace LegendOfZeldaClone
 
         public void HandleObjectCollision(IObject block, Direction direction)
         {
-            switch (direction)
+            if (block.BlockHeight != ObjectHeight.CanWalkOver)
             {
-                case Direction.Down:
-                    CurrentPlayer.HurtBoxLocation = new Vector2(CurrentPlayer.HurtBoxLocation.X, block.HurtBoxLocation.Y - CurrentPlayer.Height);
-                    break;
-                case Direction.Up:
-                    CurrentPlayer.HurtBoxLocation = new Vector2(CurrentPlayer.HurtBoxLocation.X, block.HurtBoxLocation.Y + block.Height);
-                    break;
-                case Direction.Left:
-                    CurrentPlayer.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X + block.Width, CurrentPlayer.HurtBoxLocation.Y);
-                    break;
-                case Direction.Right:
-                    CurrentPlayer.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X - CurrentPlayer.Width, CurrentPlayer.HurtBoxLocation.Y);
-                    break;
+                switch (direction)
+                {
+                    case Direction.Down:
+                        CurrentPlayer.HurtBoxLocation = new Vector2(CurrentPlayer.HurtBoxLocation.X, block.HurtBoxLocation.Y - CurrentPlayer.Height);
+                        break;
+                    case Direction.Up:
+                        CurrentPlayer.HurtBoxLocation = new Vector2(CurrentPlayer.HurtBoxLocation.X, block.HurtBoxLocation.Y + block.Height);
+                        break;
+                    case Direction.Left:
+                        CurrentPlayer.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X + block.Width, CurrentPlayer.HurtBoxLocation.Y);
+                        break;
+                    case Direction.Right:
+                        CurrentPlayer.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X - CurrentPlayer.Width, CurrentPlayer.HurtBoxLocation.Y);
+                        break;
+                }
             }
+
         }
 
         public void HandleBoundaryCollision(Boundary boundary, Direction direction)
