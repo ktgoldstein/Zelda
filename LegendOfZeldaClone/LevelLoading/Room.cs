@@ -11,13 +11,13 @@ namespace LegendOfZeldaClone.LevelLoading
 
     public class Room
     {
-        private Texture2D tiles;
-        private Texture2D background;
+        private readonly Texture2D tiles;
+        private readonly Texture2D background;
         //private Texture2D backgroundFix;
 
-        private LegendOfZeldaDungeon game;
+        private readonly LegendOfZeldaDungeon game;
         private List<List<int>> data;
-        private String fileLocation;
+        private readonly string fileLocation;
 
         public Room(String fileLocation, LegendOfZeldaDungeon game)
         {

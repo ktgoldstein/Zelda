@@ -11,107 +11,58 @@ namespace LegendOfZeldaClone
 
     public class QuitGame : ICommand
     {
-        private LegendOfZeldaDungeon myGame;
+        private LegendOfZeldaDungeon game;
 
-        public QuitGame(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            myGame.Exit();
-        }
+        public QuitGame(LegendOfZeldaDungeon game) => this.game = game;
+        public void Execute() => game.Exit();
     }
 
     public class MoveDown : ICommand
     {
-        private LegendOfZeldaDungeon myGame;
+        private LegendOfZeldaDungeon game;
 
-        public MoveDown(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            myGame.Player.MoveDown();
-        }
+        public MoveDown(LegendOfZeldaDungeon game) => this.game = game;
+        public void Execute() => game.Player.MoveDown();
     }
 
     public class MoveUp : ICommand
     {
-        private LegendOfZeldaDungeon myGame;
+        private LegendOfZeldaDungeon game;
 
-        public MoveUp(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            myGame.Player.MoveUp();
-        }
+        public MoveUp(LegendOfZeldaDungeon game) => this.game = game;
+        public void Execute() => game.Player.MoveUp();
     }
 
     public class MoveLeft : ICommand
     {
-        private LegendOfZeldaDungeon myGame;
+        private LegendOfZeldaDungeon game;
 
-        public MoveLeft(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            myGame.Player.MoveLeft();
-        }
+        public MoveLeft(LegendOfZeldaDungeon game) => this.game = game;
+        public void Execute() => game.Player.MoveLeft();
     }
 
     public class MoveRight : ICommand
     {
-        private LegendOfZeldaDungeon myGame;
+        private LegendOfZeldaDungeon game;
 
-        public MoveRight(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            myGame.Player.MoveRight();
-        }
+        public MoveRight(LegendOfZeldaDungeon game) => this.game = game;
+        public void Execute() => game.Player.MoveRight();
     }
 
     public class ActionA : ICommand
     {
-        private LegendOfZeldaDungeon myGame;
+        private LegendOfZeldaDungeon game;
 
-        public ActionA(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            myGame.Player.ActionA();
-        }
+        public ActionA(LegendOfZeldaDungeon game) => this.game = game;
+        public void Execute() => game.Player.ActionA();
     }
 
     public class ActionB : ICommand
     {
-        private LegendOfZeldaDungeon myGame;
+        private LegendOfZeldaDungeon game;
 
-        public ActionB(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            myGame.Player.ActionB();
-        }
+        public ActionB(LegendOfZeldaDungeon game) => this.game = game;
+        public void Execute() => game.Player.ActionB();
     }
 
     public class UseBow : ICommand
