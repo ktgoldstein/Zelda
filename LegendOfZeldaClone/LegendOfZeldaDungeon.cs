@@ -74,11 +74,9 @@ namespace LegendOfZeldaClone
 
             ICommand previousRoom = new PreviousRoom(this);
             ICommand nextRoom = new NextRoom(this);
-            ICommand mapChangeRoom = new MapChangeRoom(this);
-            ButtonState leftClick = Mouse.GetState().LeftButton;
 
             KeyboardController keyboardController = new KeyboardController();
-            MouseController mouseController = new MouseController();
+            MouseController mouseController = new MouseController(this);
 
             keyboardController.RegisterCommand(Keys.Q, quitGame);
             keyboardController.RegisterCommand(Keys.S, moveDown);
@@ -112,7 +110,10 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.V, previousRoom);
             keyboardController.RegisterCommand(Keys.B, nextRoom);
 
-            mouseController.RegisterCommand(leftClick, mapChangeRoom);
+            mouseController.RegisterCommand("leftClick", previousRoom);
+            mouseController.RegisterCommand("rightClick", nextRoom);
+
+            //mouseController.RegisterCommand(leftClick, mapChangeRoom);
 
             controllerK = keyboardController;
             controllerM = mouseController;

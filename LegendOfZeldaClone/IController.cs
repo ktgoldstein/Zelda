@@ -38,42 +38,29 @@ namespace LegendOfZeldaClone
     }
     public class MouseController : IController
     {
+        private Dictionary<string, ICommand> controllerMappings;
+        private LegendOfZeldaDungeon myGame;
 
-        private MouseState oldMouseState;
-        private MouseState newMouseState;
-
-
-        private Dictionary<ButtonState, ICommand> mouseMappings;
-
-        public MouseController()
+        public MouseController(LegendOfZeldaDungeon game)
         {
-            oldMouseState = Mouse.GetState();
-            mouseMappings = new Dictionary<ButtonState, ICommand>();
+            controllerMappings = new Dictionary<string, ICommand>();
+            myGame = game;
         }
 
-        public void RegisterCommand(ButtonState button, ICommand command)
+        public void RegisterCommand(string key, ICommand command)
         {
-            mouseMappings.Add(ButtonState.Pressed, command);
+            controllerMappings.Add(key, command);
         }
+
         public void Update()
         {
-            newMouseState = Mouse.GetState();
-            List<ButtonState> buttons = new List<ButtonState>();
-            buttons.Add(newMouseState.LeftButton);
+            MouseState mouseState = Mouse.GetState();
 
-            if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released)
-            {
-                foreach (ButtonState buttonState in buttons)
-                {
-                    if (mouseMappings.ContainsKey(buttonState))
-                    {
-                        mouseMappings[buttonState].Execute();
-                    }
-                }
-            }
+            if (mouseState.RightButton == ButtonState.Pressed)
+                controllerMappings["rightClick"].Execute();
 
-            oldMouseState = newMouseState;
-
+            else if (mouseState.LeftButton == ButtonState.Pressed)
+                controllerMappings["leftClick"].Execute();
         }
 
     }
