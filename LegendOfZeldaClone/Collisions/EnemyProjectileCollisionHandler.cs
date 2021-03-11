@@ -45,7 +45,11 @@
 
         public void HandleObjectCollision(IObject block, Direction direction)
         {
-            //nothing will happen (enemy projectiles go through blocks)
+            if (block.BlockHeight == ObjectHeight.Impassable)
+            {
+                CurrentEnemyProjectile.Alive = false;
+            }
+
         }
         public void HandleBoundaryCollision(Boundary boundary, Direction direction)
         {
