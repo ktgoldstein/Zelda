@@ -14,6 +14,9 @@ namespace LegendOfZeldaClone.Objects
             get { return Location; }
             set { Location = value; }
         }
+        public ObjectHeight BlockHeight { get; }
+        public bool IsMovable { get; }
+        public bool IsBombable { get; }
 
         private ISprite dottedBlock;
         private readonly int height;
@@ -25,6 +28,9 @@ namespace LegendOfZeldaClone.Objects
             Location = location;
             height = 16;
             width = 16;
+            BlockHeight = ObjectHeight.CanWalkOver;
+            IsMovable = false;
+            IsBombable = false;
         }
         public void Update() { }
 

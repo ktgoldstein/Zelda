@@ -87,6 +87,13 @@ namespace LegendOfZeldaClone
         PickingUpItem = 18
     }
 
+    public enum ObjectHeight
+    {
+        CanWalkOver = 0, //or: Low
+        CanFlyOver = 1, //or: Medium
+        Impassable = 2, //or: Tall
+    }
+
     public static class LoZHelpers
     {
         public static Vector2 DirectionToVector(Direction direction)
