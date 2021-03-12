@@ -57,7 +57,7 @@ namespace LegendOfZeldaClone.Collisions
         public void HandleObjectCollision(IObject block, Direction direction)
         {
             //they should stop and have to move around it (except keese)
-            if( CurrentEnemy is Keese) return;
+            if (CurrentEnemy is Keese && block.BlockHeight != ObjectHeight.Impassable) return;
             CurrentEnemy.Direction = -LoZHelpers.DirectionToVector(direction);
             Rectangle enemyRectangle = new Rectangle((int) CurrentEnemy.Location.X, (int) CurrentEnemy.Location.Y, CurrentEnemy.Width, CurrentEnemy.Height);
             Rectangle blockRectangle = new Rectangle((int) block.Location.X, (int) block.Location.Y, block.Width, block.Height);
@@ -76,7 +76,7 @@ namespace LegendOfZeldaClone.Collisions
         {
             //all enemies except wallmaster are stopped
             //wallmaster spawns from the boundary and phases through the outer walls
-            if( CurrentEnemy is Wallmaster) return;
+            if (CurrentEnemy is Wallmaster) return;
             Rectangle enemyRectangle = new Rectangle((int) CurrentEnemy.Location.X, (int) CurrentEnemy.Location.Y, CurrentEnemy.Width, CurrentEnemy.Height);
             Rectangle boundaryRectangle = new Rectangle((int) boundary.Location.X, (int) boundary.Location.Y, boundary.Width, boundary.Height);
             Rectangle overlap = Rectangle.Intersect(enemyRectangle, boundaryRectangle);
