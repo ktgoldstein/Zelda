@@ -174,6 +174,12 @@ namespace LegendOfZeldaClone.LevelLoading
                         case 44:
                             AddIObject(new Stairs(tileLocation));
                             break;
+                        case 45:
+                            AddIObject(new MovableRaisedBlock(tileLocation));
+                            break;
+                        case 46:
+                            AddIObject(new BombableWallUp(tileLocation));
+                            break;
                         default:
                             break;
                     }
