@@ -23,12 +23,17 @@
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
             //boomerangs don't disappear
-            if (!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile))
+            if (!(CurrentPlayerProjectile is BoomerangProjectile))
             {
                 if (CurrentPlayerProjectile is SwordBeamProjectile)
                 {
                     SwordBeamProjectile swordBeam = CurrentPlayerProjectile as SwordBeamProjectile;
                     swordBeam.SpawnSwordExplosion();
+                }
+                else if (CurrentPlayerProjectile is ArrowProjectile)
+                {
+                    ArrowProjectile arrow = CurrentPlayerProjectile as ArrowProjectile;
+                    arrow.SpawnArrowExplosion();
                 }
                 else
                 {
@@ -59,12 +64,17 @@
         public void HandleObjectCollision(IObject block, Direction direction)
         {
             //nothing will happen if it is a boomerang or sword beam explosion
-            if (!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile) && block.BlockHeight == ObjectHeight.Impassable)
+            if (!(CurrentPlayerProjectile is BoomerangProjectile) && block.BlockHeight == ObjectHeight.Impassable)
             {
                 if (CurrentPlayerProjectile is SwordBeamProjectile)
                 {
                     SwordBeamProjectile swordBeam = CurrentPlayerProjectile as SwordBeamProjectile;
                     swordBeam.SpawnSwordExplosion();
+                }
+                else if (CurrentPlayerProjectile is ArrowProjectile)
+                {
+                    ArrowProjectile arrow = CurrentPlayerProjectile as ArrowProjectile;
+                    arrow.SpawnArrowExplosion();
                 }
                 else
                 {
@@ -76,7 +86,20 @@
         {
             if (!(CurrentPlayerProjectile is BoomerangProjectile))
             {
-                CurrentPlayerProjectile.Alive = false;
+                if (CurrentPlayerProjectile is SwordBeamProjectile)
+                {
+                    SwordBeamProjectile swordBeam = CurrentPlayerProjectile as SwordBeamProjectile;
+                    swordBeam.SpawnSwordExplosion();
+                }
+                else if (CurrentPlayerProjectile is ArrowProjectile)
+                {
+                    ArrowProjectile arrow = CurrentPlayerProjectile as ArrowProjectile;
+                    arrow.SpawnArrowExplosion();
+                }
+                else
+                {
+                    CurrentPlayerProjectile.Alive = false;
+                }
             }
         }
     }

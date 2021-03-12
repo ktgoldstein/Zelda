@@ -15,19 +15,21 @@ namespace LegendOfZeldaClone
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
+        private readonly LegendOfZeldaDungeon game;
         private readonly ArrowSkinType skinType;
         private ISprite sprite;
         private Vector2 velocity;
         private int width;
         private int height;
 
-        public ArrowProjectile(Vector2 startingLocation, Direction direction, ArrowSkinType skinType)
+        public ArrowProjectile(Vector2 startingLocation, Direction direction, ArrowSkinType skinType, LegendOfZeldaDungeon game)
         {
             Alive = true;
 
             this.skinType = skinType;
             Location = startingLocation;
             DirectionBasedSetUp(direction);
+            this.game = game;
         }
 
         public void Update()
@@ -71,6 +73,11 @@ namespace LegendOfZeldaClone
                     height = 16;
                     break;
             }
+        }
+        public void SpawnArrowExplosion()
+        {
+            game.PlayerProjectilesQueue.Add(new ArrowImpactProjectile(Location, skinType));
+            Alive = false;
         }
     }
 }
