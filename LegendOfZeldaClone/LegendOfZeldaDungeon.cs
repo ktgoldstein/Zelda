@@ -225,8 +225,15 @@ namespace LegendOfZeldaClone
             }
             Items = Items.Except(deadItems).ToList();
 
+            List<IObject> deadObjects = new List<IObject>();
             foreach (IObject block in Objects)
+            {
                 block.Update();
+                if (!block.IsAlive)
+                    deadObjects.Add(block);
+            }
+            Objects = Objects.Except(deadObjects).ToList();
+
 
             Collisions.CollisionHandling.HandleCollisions(this);
 
