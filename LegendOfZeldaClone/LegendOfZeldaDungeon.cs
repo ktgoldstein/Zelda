@@ -15,8 +15,8 @@ namespace LegendOfZeldaClone
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private IController controllerK;
-        private IController controllerM;
+        private IController controllerKeyboard;
+        private IController controllerMouse;
 
         public IPlayer Player;
         public List<IEnemy> Enemies;
@@ -76,7 +76,7 @@ namespace LegendOfZeldaClone
             ICommand nextRoom = new NextRoom(this);
 
             KeyboardController keyboardController = new KeyboardController();
-            MouseController mouseController = new MouseController(this);
+            MouseController mouseController = new MouseController(this, nextRoom, previousRoom);
 
             keyboardController.RegisterCommand(Keys.Q, quitGame);
             keyboardController.RegisterCommand(Keys.S, moveDown);
@@ -110,13 +110,8 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.V, previousRoom);
             keyboardController.RegisterCommand(Keys.B, nextRoom);
 
-            mouseController.RegisterCommand("leftClick", previousRoom);
-            mouseController.RegisterCommand("rightClick", nextRoom);
-
-            //mouseController.RegisterCommand(leftClick, mapChangeRoom);
-
-            controllerK = keyboardController;
-            controllerM = mouseController;
+            controllerKeyboard = keyboardController;
+            controllerMouse = mouseController;
 
             Enemies = new List<IEnemy>();
             Items = new List<IItem>();

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LegendOfZeldaClone
 {
-    public interface IController
+    public interface IController 
     {
         void Update();
     }
@@ -38,18 +38,20 @@ namespace LegendOfZeldaClone
     }
     public class MouseController : IController
     {
-        private Dictionary<string, ICommand> controllerMappings;
         private LegendOfZeldaDungeon myGame;
+        private ICommand leftClick;
+        private ICommand rightClick;
 
-        public MouseController(LegendOfZeldaDungeon game)
+        public MouseController(LegendOfZeldaDungeon game, ICommand leftClickInput, ICommand rightClickInput)
         {
-            controllerMappings = new Dictionary<string, ICommand>();
+            leftClick = leftClickInput;
+            rightClick = rightClickInput;
             myGame = game;
         }
 
         public void RegisterCommand(string key, ICommand command)
         {
-            controllerMappings.Add(key, command);
+            // Don't use RegisterCommand for this Controller
         }
 
         public void Update()
@@ -57,11 +59,9 @@ namespace LegendOfZeldaClone
             MouseState mouseState = Mouse.GetState();
 
             if (mouseState.RightButton == ButtonState.Pressed)
-                controllerMappings["rightClick"].Execute();
-
+                leftClick.Execute();
             else if (mouseState.LeftButton == ButtonState.Pressed)
-                controllerMappings["leftClick"].Execute();
+                rightClick.Execute();
         }
-
     }
 }

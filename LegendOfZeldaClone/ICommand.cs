@@ -230,29 +230,4 @@ namespace LegendOfZeldaClone
             myGame.roomList[myGame.RoomListIndex].LoadRoom();
         }
     }
-
-    public class MapChangeRoom : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
-
-        public MapChangeRoom(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            if (myGame.SwitchRoomDelay != 0)
-                return;
-            else
-                myGame.SwitchRoomDelay = myGame.SwitchDelayLength;
-
-            myGame.RoomListIndex++;
-            if (myGame.RoomListIndex == myGame.roomList.Count)
-                myGame.RoomListIndex = 0;
-
-            myGame.roomList[myGame.RoomListIndex].LoadRoom();
-        }
-    }
-
 }
