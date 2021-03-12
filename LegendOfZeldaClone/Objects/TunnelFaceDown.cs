@@ -17,6 +17,7 @@ namespace LegendOfZeldaClone.Objects
         public ObjectHeight BlockHeight { get; }
         public bool IsMovable { get; }
         public bool IsBombable { get; }
+        public bool IsAlive { get; set; }
 
         private ISprite tunnel;
         private readonly int height;
@@ -31,6 +32,7 @@ namespace LegendOfZeldaClone.Objects
             BlockHeight = ObjectHeight.CanWalkOver;
             IsMovable = false;
             IsBombable = false;
+            IsAlive = true;
         }
         public void Update() { }
 
