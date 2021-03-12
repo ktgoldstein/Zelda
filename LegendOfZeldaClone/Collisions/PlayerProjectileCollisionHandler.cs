@@ -23,7 +23,7 @@
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
             //boomerangs don't disappear
-            if (!(CurrentPlayerProjectile is BoomerangProjectile))
+            if (!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile))
             {
                 if (CurrentPlayerProjectile is SwordBeamProjectile)
                 {
@@ -59,7 +59,7 @@
         public void HandleObjectCollision(IObject block, Direction direction)
         {
             //nothing will happen if it is a boomerang
-            if (!(CurrentPlayerProjectile is BoomerangProjectile))
+            if (!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile))
             {
                 if (CurrentPlayerProjectile is SwordBeamProjectile)
                 {
