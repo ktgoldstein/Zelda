@@ -56,7 +56,7 @@ namespace LegendOfZeldaClone.Collisions
 
         public void HandleObjectCollision(IObject block, Direction direction)
         {
-            //they should stop and have to move around it (except keese)
+            //they should stop and have to move around it (except keese if the object is not impassable)
             if (CurrentEnemy is Keese && block.BlockHeight != ObjectHeight.Impassable) return;
             CurrentEnemy.Direction = -LoZHelpers.DirectionToVector(direction);
             Rectangle enemyRectangle = new Rectangle((int) CurrentEnemy.Location.X, (int) CurrentEnemy.Location.Y, CurrentEnemy.Width, CurrentEnemy.Height);

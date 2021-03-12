@@ -27,16 +27,16 @@ namespace LegendOfZeldaClone.Collisions
                 switch (direction)
                 {
                     case Direction.Down:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y - 1);
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y - 2);
                         break;
                     case Direction.Up:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y + 1);
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y + 2);
                         break;
                     case Direction.Left:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X + 1, CurrentObject.Location.Y);
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X + 2, CurrentObject.Location.Y);
                         break;
                     case Direction.Right:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X - 1, CurrentObject.Location.Y);
+                        CurrentObject.Location = new Vector2(CurrentObject.Location.X - 2, CurrentObject.Location.Y);
                         break;
                 }
             }
