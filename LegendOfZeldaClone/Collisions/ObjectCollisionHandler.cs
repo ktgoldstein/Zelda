@@ -19,7 +19,7 @@ namespace LegendOfZeldaClone.Collisions
                 CurrentObject is Objects.LockedDoorLeft || CurrentObject is Objects.LockedDoorRight) &&
                 player.Inventory.KeysHeld > 0 )
             {
-                    //delete the LockedDoor object to reveal the unlocked version underneath
+                CurrentObject.IsAlive = false; //reveals the unlocked version underneath
             }
 
             else if (CurrentObject.IsMovable)
@@ -46,7 +46,7 @@ namespace LegendOfZeldaClone.Collisions
         {
             if (playerProjectile is BombExplosionProjectile && CurrentObject.IsBombable)
             {
-                    //get rid of object on top of base object
+                CurrentObject.IsAlive = false;
             }
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
