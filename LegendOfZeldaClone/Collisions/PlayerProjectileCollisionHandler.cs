@@ -82,25 +82,5 @@
                 }
             }
         }
-        public void HandleBoundaryCollision(Boundary boundary, Direction direction)
-        {
-            if (!(CurrentPlayerProjectile is BoomerangProjectile))
-            {
-                if (CurrentPlayerProjectile is SwordBeamProjectile)
-                {
-                    SwordBeamProjectile swordBeam = CurrentPlayerProjectile as SwordBeamProjectile;
-                    swordBeam.SpawnSwordExplosion();
-                }
-                else if (CurrentPlayerProjectile is ArrowProjectile)
-                {
-                    ArrowProjectile arrow = CurrentPlayerProjectile as ArrowProjectile;
-                    arrow.SpawnArrowExplosion();
-                }
-                else
-                {
-                    CurrentPlayerProjectile.Alive = false;
-                }
-            }
-        }
     }
 }

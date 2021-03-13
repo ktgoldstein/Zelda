@@ -72,23 +72,5 @@ namespace LegendOfZeldaClone.Collisions
                 CurrentEnemy.Location += vector * overlap.Width;
             }
         }
-        public void HandleBoundaryCollision(Boundary boundary, Direction direction)
-        {
-            //all enemies except wallmaster are stopped
-            //wallmaster spawns from the boundary and phases through the outer walls
-            if (CurrentEnemy is Wallmaster) return;
-            Rectangle enemyRectangle = new Rectangle((int) CurrentEnemy.Location.X, (int) CurrentEnemy.Location.Y, CurrentEnemy.Width, CurrentEnemy.Height);
-            Rectangle boundaryRectangle = new Rectangle((int) boundary.Location.X, (int) boundary.Location.Y, boundary.Width, boundary.Height);
-            Rectangle overlap = Rectangle.Intersect(enemyRectangle, boundaryRectangle);
-            Vector2 vector = -LoZHelpers.DirectionToVector(direction);
-            if( vector.X == 0)
-            {
-                CurrentEnemy.Location += vector * overlap.Height;
-            }
-            else
-            {
-                CurrentEnemy.Location += vector * overlap.Width;
-            }
-        }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone.Objects
 {
-    public class LockedDoorUp : IObject
+    public class LockedDoorUp: IObject
     {
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
@@ -19,13 +19,13 @@ namespace LegendOfZeldaClone.Objects
         public bool IsBombable { get; }
         public bool IsAlive { get; set; }
 
-        private ISprite lockedDoorUp;
+        private ISprite sprite;
         private readonly int height;
         private readonly int width;
 
         public LockedDoorUp(Vector2 location)
         {
-            lockedDoorUp = ObjectSpriteFactory.Instance.CreateLockedDoorUp();
+            sprite = ObjectSpriteFactory.Instance.CreateKeyDoorUp();
             Location = location;
             height = 32;
             width = 32;
@@ -38,7 +38,7 @@ namespace LegendOfZeldaClone.Objects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            lockedDoorUp.Draw(spriteBatch, Location);
+            sprite.Draw(spriteBatch, Location);
         }
     }
 }

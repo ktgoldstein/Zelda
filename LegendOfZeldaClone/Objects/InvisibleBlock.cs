@@ -1,10 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-
 namespace LegendOfZeldaClone.Objects
 {
-    public class LockedDoorDown : IObject
+    public class InvisibleBlock : IObject
     {
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
@@ -19,26 +18,39 @@ namespace LegendOfZeldaClone.Objects
         public bool IsBombable { get; }
         public bool IsAlive { get; set; }
 
-        private ISprite sprite;
-        private readonly int height;
-        private readonly int width;
+        private int height;
+        private int width;
 
-        public LockedDoorDown(Vector2 location)
+        public InvisibleBlock(Vector2 location, Direction direction)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateKeyDoorDown();
             Location = location;
-            height = 32;
-            width = 32;
+            height = 16;
+            width = 16;
             BlockHeight = ObjectHeight.Impassable;
             IsMovable = false;
             IsBombable = false;
             IsAlive = true;
-        }
-        public void Update() { }
 
-        public void Draw(SpriteBatch spriteBatch)
+            DirectionBasedSetUp(direction);
+        }
+
+        public void Update() { }
+        public void Draw(SpriteBatch spriteBatch) { }
+
+        private void DirectionBasedSetUp(Direction direction)
         {
-            sprite.Draw(spriteBatch, Location);
+            switch (direction)
+            {
+                case Direction.Left:
+                    width += 8;
+                    Location -= new Vector2(LoZHelpers.Scale(8), 0);
+                    break;
+                case Direction.Right:
+                    width += 8;
+                    break;
+                case Direction.None:
+                    break;
+            }
         }
     }
 }

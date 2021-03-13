@@ -19,16 +19,16 @@ namespace LegendOfZeldaClone.Objects
         public bool IsBombable { get; }
         public bool IsAlive { get; set; }
 
-        private ISprite lockedDoorLeft;
+        private ISprite sprite;
         private readonly int height;
         private readonly int width;
 
         public LockedDoorLeft(Vector2 location)
         {
-            lockedDoorLeft = ObjectSpriteFactory.Instance.CreateLockedDoorLeft();
+            sprite = ObjectSpriteFactory.Instance.CreateKeyDoorLeft();
             Location = location;
             height = 32;
-            width = 16;
+            width = 32;
             BlockHeight = ObjectHeight.Impassable;
             IsMovable = false;
             IsBombable = false;
@@ -38,7 +38,7 @@ namespace LegendOfZeldaClone.Objects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            lockedDoorLeft.Draw(spriteBatch, Location);
+            sprite.Draw(spriteBatch, Location);
         }
     }
 }

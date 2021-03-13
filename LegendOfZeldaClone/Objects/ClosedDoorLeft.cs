@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone.Objects
 {
-    public class LockedDoorDown : IObject
+    public class ClosedDoorLeft : IObject
     {
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
@@ -23,9 +23,9 @@ namespace LegendOfZeldaClone.Objects
         private readonly int height;
         private readonly int width;
 
-        public LockedDoorDown(Vector2 location)
+        public ClosedDoorLeft(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateKeyDoorDown();
+            sprite = ObjectSpriteFactory.Instance.CreateLockedDoorLeft();
             Location = location;
             height = 32;
             width = 32;
