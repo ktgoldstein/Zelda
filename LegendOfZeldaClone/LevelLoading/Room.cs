@@ -258,6 +258,57 @@ namespace LegendOfZeldaClone.LevelLoading
                 case 46:
                     AddIEnemy(new Wizard(game, tileLocation));
                     break;
+                case 47:
+                    AddIItem(new BlueRing(smallItemLocation));
+                    break;
+                case 48:
+                    AddIItem(new Bomb(smallItemLocation));
+                    break;
+                case 49:
+                    AddIItem(new Bow(smallItemLocation));
+                    break;
+                case 50:
+                    AddIItem(new Clock(smallItemLocation));
+                    break;
+                case 51:
+                    AddIItem(new Fairy(smallItemLocation));
+                    break;
+                case 52:
+                    AddIItem(new Heart(smallItemLocation));
+                    break;
+                case 53:
+                    AddIItem(new HeartContainer(smallItemLocation));
+                    break;
+                case 54:
+                    AddIItem(new LifePotion(smallItemLocation));
+                    break;
+                case 55:
+                    AddIItem(new NoHealthHeart(smallItemLocation));
+                    break;
+                case 56:
+                    AddIItem(new Sword(smallItemLocation));
+                    break;
+                case 57:
+                    AddIItem(new TriForcePiece(smallItemLocation));
+                    break;
+                case 58:
+                    AddIItem(new BlueCandle(smallItemLocation));
+                    break;
+                case 59:
+                    AddIItem(new BlueRupee(smallItemLocation));
+                    break;
+                case 60:
+                    AddIItem(new FlashingRupee(smallItemLocation));
+                    break;
+                case 61:
+                    AddIItem(new HalfHealthHeart(smallItemLocation));
+                    break;
+                case 62:
+                    AddIItem(new HalfHealthHeart(smallItemLocation));
+                    break;
+                case 63:
+                    AddIItem(new LifePotion(smallItemLocation));
+                    break;
                 default:
                     break;
             }
