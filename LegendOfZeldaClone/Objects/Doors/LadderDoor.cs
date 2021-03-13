@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone.Objects
 {
-    public class Stairs : IDoor
+    public class LadderDoor : IDoor
     {
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
@@ -21,18 +21,18 @@ namespace LegendOfZeldaClone.Objects
         public Vector2 SpawnLocation { get; }
 
         private readonly LegendOfZeldaDungeon game;
-        private ISprite stairs;
+        private ISprite sprite;
         private readonly int height;
         private readonly int width;
 
-        public Stairs(LegendOfZeldaDungeon game, Vector2 location)
+        public LadderDoor(LegendOfZeldaDungeon game, Vector2 location)
         {
             this.game = game;
-            stairs = ObjectSpriteFactory.Instance.CreateStairs();
+            sprite = ObjectSpriteFactory.Instance.CreateLadder();
             Location = location;
             height = 16;
             width = 16;
-            SpawnLocation = LoZHelpers.SecretRoomSpawnLocationIn;
+            SpawnLocation = LoZHelpers.SecretRoomSpawnLocationOut;
             BlockHeight = ObjectHeight.CanWalkOver;
             IsMovable = false;
             IsBombable = false;
@@ -40,11 +40,11 @@ namespace LegendOfZeldaClone.Objects
         }
 
         public void Update() { }
-        public void Draw(SpriteBatch spriteBatch) => stairs.Draw(spriteBatch, Location);
+        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
 
         public void ChangeRoom()
         {
-            game.CurrentRoom = game.CurrentRoom.RoomDown;
+            game.CurrentRoom = game.CurrentRoom.RoomUp;
             game.CurrentRoom.LoadRoom();
         }
     }

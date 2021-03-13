@@ -250,7 +250,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new DragonStatue(tileLocation));
                     break;
                 case 44:
-                    AddIObject(new Stairs(tileLocation));
+                    AddIObject(new Stairs(game, tileLocation));
                     break;
                 case 45:
                     AddIObject(new MovableRaisedBlock(tileLocation));
@@ -308,6 +308,9 @@ namespace LegendOfZeldaClone.LevelLoading
                     break;
                 case 63:
                     AddIItem(new LifePotion(smallItemLocation));
+                    break;
+                case 64:
+                    AddIObject(new LadderDoor(game, tileLocation));
                     break;
                 default:
                     break;
