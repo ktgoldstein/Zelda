@@ -72,9 +72,9 @@ namespace LegendOfZeldaClone.LevelLoading
         {
             int width = 16;
             int height = 16;
-            Vector2 tileLocation = new Vector2((width * column + 16) * 3, (height * row + 80) * 3);
+            Vector2 tileLocation = new Vector2(LoZHelpers.Scale(width * column + 16), LoZHelpers.Scale(height * row + 80));
             if (fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv"))
-                tileLocation = new Vector2((width * column) * 3, (height * row + 80) * 3);
+                tileLocation = new Vector2(LoZHelpers.Scale(width * column), LoZHelpers.Scale(height * row + 80));
 
             Vector2 smallItemLocation = new Vector2(LoZHelpers.Scale(width * column + 20), LoZHelpers.Scale(height * row + 80));
             Vector2 doorLocationUp = new Vector2(LoZHelpers.Scale(width * column + 16), LoZHelpers.Scale(height * row + 64));
