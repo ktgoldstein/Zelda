@@ -28,11 +28,12 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes
         public int Height { get { return LoZHelpers.Scale(height); } }
         private LegendOfZeldaDungeon game;
         private ISprite wizardFireSprite;
-        private int invincibleFrames = 0;
         private readonly int width;
         private readonly int height;
         private Vector2 knockbackForce = Vector2.Zero;
-        public WizardFire(LegendOfZeldaDungeon game, Vector2 location)
+        public Wizard Wizard;
+        private int wizardHealth;
+        public WizardFire(LegendOfZeldaDungeon game, Vector2 location, Wizard wizard)
         {
             wizardFireSprite = EnemySpriteFactory.Instance.CreateWizardFireSprite();
             width = 16;
@@ -44,6 +45,9 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes
             Invincible = true;
             Alive = true;
             AttackStat = 1;
+            Health = 1;
+            Wizard = wizard;
+            wizardHealth = Wizard.Health;
         }
 
         public void Draw(SpriteBatch spriteBatch) => wizardFireSprite.Draw(spriteBatch, Location);
@@ -56,6 +60,15 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes
         public void Update()
         {
             wizardFireSprite.Update();
+            if(Wizard.Health < wizardHealth)
+            {
+                SpitFireballs();
+                wizardHealth = Wizard.Health;
+            }
+        }
+        private void SpitFireballs()
+        {
+            game.EnemyProjectilesQueue.Add(new Fireball(Location, game.Player.Location - Location));
         }
     }
 }

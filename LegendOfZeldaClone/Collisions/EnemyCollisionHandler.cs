@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Enemy;
+using LegendOfZeldaClone.Enemies.EnemyTypes;
 
 namespace LegendOfZeldaClone.Collisions
 {
@@ -25,7 +26,7 @@ namespace LegendOfZeldaClone.Collisions
             if( !CurrentEnemy.Invincible)
             {
                 CurrentEnemy.Invincible = true;
-                if( !( CurrentEnemy is BladeTrap ))
+                if( !( CurrentEnemy is BladeTrap || CurrentEnemy is WizardFire ))
                 {
                     CurrentEnemy.Health -= 1;
                     if( CurrentEnemy.Health <= 0)

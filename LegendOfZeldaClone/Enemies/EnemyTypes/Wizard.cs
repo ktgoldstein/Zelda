@@ -11,6 +11,7 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes
     {
         public int AttackStat { get; }
         public int Health { get; set; } = LoZHelpers.WizardHP;
+        public int MaxHealth { get; } = LoZHelpers.WizardHP;
         public Vector2 direction;
         public Vector2 Direction { get { return direction;} set { direction = value;} }
         public bool Invincible { get; set; }
@@ -23,7 +24,6 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes
         }
 
         public int Width { get { return LoZHelpers.Scale(width); } }
-
         public int Height { get { return LoZHelpers.Scale(height); } }
         private LegendOfZeldaDungeon game;
         private ISprite wizardSprite;
@@ -31,9 +31,15 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes
         private readonly int width;
         private readonly int height;
         private Vector2 knockbackForce = Vector2.Zero;
+        private SpriteFont font;
+        private String target = "Hit me, I dare you.\n You won't.";
+        private int current = 0;
+        private int timer = 7;
+
         public Wizard(LegendOfZeldaDungeon game, Vector2 location)
         {
             wizardSprite = EnemySpriteFactory.Instance.CreateWizardSprite();
+            font = EnemySpriteFactory.Instance.CreateFont();
             width = 16;
             height = 16;
 
@@ -45,7 +51,12 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes
             AttackStat = 0;
         }
 
-        public void Draw(SpriteBatch spriteBatch) => wizardSprite.Draw(spriteBatch, Location);
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            wizardSprite.Draw(spriteBatch, Location);
+
+            spriteBatch.DrawString(font, target.Substring(0,current), Location + new Vector2(-192, -96), Color.White);
+        }
 
         public void Knockback(Vector2 direction)
         {
@@ -55,6 +66,22 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes
         public void Update()
         {
             wizardSprite.Update();
+            if(Invincible)
+            {
+                invincibleFrames++;
+                if(invincibleFrames > 20)
+                {
+                    Invincible = false;
+                    invincibleFrames = 0;
+                }
+            }
+            timer--;
+            if(timer == 0)
+            {
+                timer =  7;
+                if(current < target.Length)
+                    current++;
+            }
         }
     }
 }

@@ -31,6 +31,8 @@ namespace LegendOfZeldaClone.LevelLoading
 
         public void LoadRoom()
         {
+            Wizard wizard = new Wizard(game, Vector2.Zero);
+            List<Vector2> fireLocations = new List<Vector2>();
             this.ResetLists();
 
             data = new List<List<int>>();
@@ -176,15 +178,19 @@ namespace LegendOfZeldaClone.LevelLoading
                             AddIObject(new Stairs(tileLocation));
                             break;
                         case 45:
-                            AddIEnemy(new Wizard(game, tileLocation));
+                            AddIEnemy(wizard = new Wizard(game, tileLocation));
                             break;
                         case 46:
-                            AddIEnemy(new WizardFire(game, tileLocation));
+                            fireLocations.Add(tileLocation);
                             break;
                         default:
                             break;
                     }
                 }
+            }
+            for( int i = 0; i < fireLocations.Count; i++)
+            {
+                AddIEnemy(new WizardFire(game, fireLocations[i], wizard));
             }
         }
 

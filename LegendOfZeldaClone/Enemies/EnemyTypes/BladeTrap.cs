@@ -33,7 +33,9 @@ namespace LegendOfZeldaClone.Enemy
             height = 16;
 
             Location = location;
+            Invincible = true;
             AttackStat = 1;
+            Health = 1;
         }
 
         public void Draw(SpriteBatch spritebatch)

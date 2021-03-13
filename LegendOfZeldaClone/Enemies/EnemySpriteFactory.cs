@@ -17,6 +17,7 @@ namespace LegendOfZeldaClone.Enemy
 		private Texture2D keeseSprite;
 		private Texture2D wallmasterSprite;
 		private Texture2D wizardSprite, wizardFireSprite;
+		private SpriteFont font;
 
         private EnemySpriteFactory() { }
 
@@ -36,6 +37,7 @@ namespace LegendOfZeldaClone.Enemy
 			wallmasterSprite = content.Load<Texture2D>("EnemySprites\\Wallmaster");
 			wizardSprite = content.Load<Texture2D>("EnemySprites\\Wizard");
 			wizardFireSprite = content.Load<Texture2D>("EnemySprites\\WizardFire");
+			font = content.Load<SpriteFont>("Font");
 		}
 
 		public ISprite CreateAquamentusSprite() => new EnemySprite(aquamentusSprite, 4, 1, 2, 4);
@@ -53,5 +55,6 @@ namespace LegendOfZeldaClone.Enemy
 		public ISprite CreateWallmasterSprite() => new EnemySprite(wallmasterSprite, 2, 1, 2, 2);
 		public ISprite CreateWizardSprite() => new EnemySprite(wizardSprite, 1, 1, 0, 1);
 		public ISprite CreateWizardFireSprite() => new EnemySprite(wizardFireSprite, 2, 1, 2, 2);
+		public SpriteFont CreateFont() => font;
 	}
 }
