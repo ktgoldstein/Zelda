@@ -95,16 +95,20 @@ namespace LegendOfZeldaClone.LevelLoading
                             AddIObject(new Ladder(tileLocation));
                             break;
                         case 10:
-                            AddIObject(new KeyDoorUp(doorLocationUp));
+                            AddIObject(new OpenDoorUp(doorLocationUp));
+                            AddIObject(new LockedDoorUp(doorLocationUp));
                             break;
                         case 11:
-                            AddIObject(new KeyDoorDown(doorLocationDown));
+                            AddIObject(new OpenDoorDown(doorLocationDown));
+                            AddIObject(new LockedDoorDown(doorLocationDown));
                             break;
                         case 13:
-                            AddIObject(new KeyDoorRight(doorLocationRight));
+                            AddIObject(new OpenDoorRight(doorLocationRight));
+                            AddIObject(new LockedDoorRight(doorLocationRight));
                             break;
                         case 14:
-                            AddIObject(new KeyDoorLeft(doorLocationLeft));
+                            AddIObject(new OpenDoorLeft(doorLocationLeft));
+                            AddIObject(new LockedDoorLeft(doorLocationLeft));
                             break;
                         case 15:
                             AddIObject(new OpenDoorUp(doorLocationUp));
@@ -119,10 +123,12 @@ namespace LegendOfZeldaClone.LevelLoading
                             AddIObject(new OpenDoorLeft(doorLocationLeft));
                             break;
                         case 20:
-                            AddIObject(new LockedDoorLeft(doorLocationLeft));
+                            AddIObject(new OpenDoorLeft(doorLocationLeft));
+                            AddIObject(new ClosedDoorLeft(doorLocationLeft));
                             break;
                         case 21:
-                            AddIObject(new LockedDoorRight(doorLocationRight));
+                            AddIObject(new OpenDoorRight(doorLocationRight));
+                            AddIObject(new ClosedDoorRight(doorLocationRight));
                             break;
                         case 23:
                             AddIObject(new WallUp(doorLocationUp));
@@ -138,9 +144,11 @@ namespace LegendOfZeldaClone.LevelLoading
                             break;
                         case 27:
                             AddIObject(new TunnelFaceUp(doorLocationUp));
+                            AddIObject(new BombableWallUp(tileLocation));
                             break;
                         case 28:
                             AddIObject(new TunnelFaceDown(doorLocationDown));
+                            AddIObject(new BombableWallDown(tileLocation));
                             break;
                         case 29:
                             AddIEnemy(new Keese(tileLocation));
@@ -183,9 +191,6 @@ namespace LegendOfZeldaClone.LevelLoading
                             break;
                         case 45:
                             AddIObject(new MovableRaisedBlock(tileLocation));
-                            break;
-                        case 46:
-                            AddIObject(new BombableWallUp(tileLocation));
                             break;
                         default:
                             break;

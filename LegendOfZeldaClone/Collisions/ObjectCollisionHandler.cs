@@ -1,7 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LegendOfZeldaClone.Collisions
 {
@@ -20,6 +17,7 @@ namespace LegendOfZeldaClone.Collisions
                 player.Inventory.KeysHeld > 0 )
             {
                 CurrentObject.IsAlive = false; //reveals the unlocked version underneath
+                player.Inventory.KeysHeld--;
             }
 
             else if (CurrentObject.IsMovable)

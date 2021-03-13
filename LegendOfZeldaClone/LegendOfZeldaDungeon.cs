@@ -146,7 +146,7 @@ namespace LegendOfZeldaClone
             EnemyProjectiles = new List<IEnemyProjectile>();
 
             IUsableItem woodenSword = new UsableWoodenSword(this);
-            Player = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);            
+            Player = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
 
             roomList = new List<Room>()
             {
@@ -233,7 +233,6 @@ namespace LegendOfZeldaClone
                     deadObjects.Add(block);
             }
             Objects = Objects.Except(deadObjects).ToList();
-
 
             Collisions.CollisionHandling.HandleCollisions(this);
 
