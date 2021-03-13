@@ -182,6 +182,8 @@ namespace LegendOfZeldaClone
             IUsableItem woodenSword = new UsableWoodenSword(game);
             game.Player = new LinkPlayer(game, LoZHelpers.LinkStartingLocation, woodenSword);
             game.PlayerProjectiles.Clear();
+            game.roomList[0].LoadRoom();
+            game.RoomListIndex = 0;
         }
     }
     public class PreviousRoom : ICommand

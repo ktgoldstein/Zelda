@@ -176,8 +176,8 @@ namespace LegendOfZeldaClone
             if (SwitchRoomDelay > 0)
                 SwitchRoomDelay--;
 
-            controllerK.Update();
-            controllerM.Update();
+            controllerKeyboard.Update();
+            controllerMouse.Update();
 
             Player.Update();
 
@@ -258,18 +258,6 @@ namespace LegendOfZeldaClone
             _spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        public void ResetLists()
-        {
-            Enemies.Clear();
-            Items.Clear();
-            Objects.Clear();
-
-            PlayerProjectiles.Clear();
-            PlayerProjectilesQueue.Clear();
-            EnemyProjectiles.Clear();
-            EnemyProjectilesQueue.Clear();
         }
     }
 }

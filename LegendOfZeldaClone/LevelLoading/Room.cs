@@ -30,7 +30,7 @@ namespace LegendOfZeldaClone.LevelLoading
 
         public void LoadRoom()
         {
-            game.ResetLists();
+            this.ResetLists();
 
             data = new List<List<int>>();
             var lines = File.ReadLines(fileLocation);
@@ -181,6 +181,8 @@ namespace LegendOfZeldaClone.LevelLoading
             }
         }
 
+       
+
         public void Draw(SpriteBatch spritebatch)
         {
 
@@ -196,8 +198,21 @@ namespace LegendOfZeldaClone.LevelLoading
             spritebatch.Draw(tiles, destinationRectangle, sourceRectangle, Color.White);
         }
 
+        public void ResetLists()
+        {
+            game.Enemies.Clear();
+            game.Items.Clear();
+            game.Objects.Clear();
+
+            game.PlayerProjectiles.Clear();
+            game.PlayerProjectilesQueue.Clear();
+            game.EnemyProjectiles.Clear();
+            game.EnemyProjectilesQueue.Clear();
+        }
         private void AddIEnemy(IEnemy enemy) => game.Enemies.Add(enemy);
         private void AddIItem(IItem item) => game.Items.Add(item);
         private void AddIObject(IObject block) => game.Objects.Add(block);
+
+
     }
 }
