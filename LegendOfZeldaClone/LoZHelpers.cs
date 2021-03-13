@@ -155,6 +155,10 @@ namespace LegendOfZeldaClone
                 _ => Direction.None
             };
         }
+        public static Vector2 TopSpawnLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(16 + 80));
+        public static Vector2 BottomSpawnLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(7 * 16 + 80));
+        public static Vector2 LeftSpawnLocation => new Vector2(Scale(16 + 16), Scale(4 * 16 + 80));
+        public static Vector2 RightSpawnLocation => new Vector2(Scale(12 * 16 + 16), Scale(4 * 16 + 80));
         public static int AquamentusHP = 6;
         public static int GelHP = 1;
         public static int GoriyaHP = 3;

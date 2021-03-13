@@ -53,7 +53,7 @@ namespace LegendOfZeldaClone.LevelLoading
         {
 
             Rectangle sourceRectangle = new Rectangle(522, 11, 256, 176);
-            Rectangle destinationRectangle = new Rectangle(0, 192, 256 *3, 176 * 3);
+            Rectangle destinationRectangle = new Rectangle(0, 192, LoZHelpers.Scale(256), LoZHelpers.Scale(176));
 
             if(wallType == 1)
                 spritebatch.Draw(background, destinationRectangle, sourceRectangle, Color.White);
@@ -158,11 +158,11 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new Ladder(tileLocation));
                     break;
                 case 10:
-                    AddIObject(new OpenDoorUp(doorLocationUp));
+                    AddIObject(new OpenDoorUp(game, doorLocationUp));
                     AddIObject(new LockedDoorUp(doorLocationUp));
                     break;
                 case 11:
-                    AddIObject(new OpenDoorDown(doorLocationDown));
+                    AddIObject(new OpenDoorDown(game, doorLocationDown));
                     AddIObject(new LockedDoorDown(doorLocationDown));
                     break;
                 case 13:
@@ -174,10 +174,10 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new LockedDoorLeft(doorLocationLeft));
                     break;
                 case 15:
-                    AddIObject(new OpenDoorUp(doorLocationUp));
+                    AddIObject(new OpenDoorUp(game, doorLocationUp));
                     break;
                 case 16:
-                    AddIObject(new OpenDoorDown(doorLocationDown));
+                    AddIObject(new OpenDoorDown(game, doorLocationDown));
                     break;
                 case 17:
                     AddIObject(new OpenDoorRight(doorLocationRight));

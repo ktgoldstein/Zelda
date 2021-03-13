@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using LegendOfZeldaClone.Objects;
 
 namespace LegendOfZeldaClone.Collisions
 {
@@ -12,14 +13,13 @@ namespace LegendOfZeldaClone.Collisions
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
             //locked doors should open if the player has a key
-            if ((CurrentObject is Objects.LockedDoorUp || CurrentObject is Objects.LockedDoorDown ||
-                CurrentObject is Objects.LockedDoorLeft || CurrentObject is Objects.LockedDoorRight) &&
+            if ((CurrentObject is LockedDoorUp || CurrentObject is LockedDoorDown ||
+                CurrentObject is LockedDoorLeft || CurrentObject is LockedDoorRight) &&
                 player.Inventory.KeysHeld > 0 )
             {
                 CurrentObject.IsAlive = false; //reveals the unlocked version underneath
                 player.Inventory.KeysHeld--;
             }
-
             else if (CurrentObject.IsMovable)
             {
                 int blockPushingSpeedConstant = 2;
@@ -38,6 +38,10 @@ namespace LegendOfZeldaClone.Collisions
                         CurrentObject.Location = new Vector2(CurrentObject.Location.X - blockPushingSpeedConstant, CurrentObject.Location.Y);
                         break;
                 }
+            }
+            else if (CurrentObject is IDoor)
+            {
+                (CurrentObject as IDoor).ChangeRoom();
             }
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)

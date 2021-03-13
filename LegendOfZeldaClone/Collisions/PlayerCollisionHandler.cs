@@ -49,7 +49,11 @@ namespace LegendOfZeldaClone
 
         public void HandleObjectCollision(IObject block, Direction direction)
         {
-            if (block.BlockHeight != ObjectHeight.CanWalkOver)
+            if (block is IDoor)
+            {
+                CurrentPlayer.Location = (block as IDoor).SpawnLocation;
+            }
+            else if (block.BlockHeight != ObjectHeight.CanWalkOver)
             {
                 switch (direction)
                 {

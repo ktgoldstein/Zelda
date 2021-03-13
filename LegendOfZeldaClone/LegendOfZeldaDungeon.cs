@@ -31,6 +31,7 @@ namespace LegendOfZeldaClone
                 
         public List<Room> roomList;
         public int RoomListIndex = 0;
+        public Room CurrentRoom;
         public Map1 MiniMap;
 
         public int SwitchRoomDelay;
@@ -148,7 +149,8 @@ namespace LegendOfZeldaClone
 
 
             InitializeRooms();
-            roomList[RoomListIndex].LoadRoom();
+            CurrentRoom = roomList[RoomListIndex];
+            CurrentRoom.LoadRoom();
 
             MiniMap = new Map1(LoZHelpers.MiniMapLocation);
         }
@@ -223,7 +225,7 @@ namespace LegendOfZeldaClone
             _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
             
-            roomList[RoomListIndex].Draw(_spriteBatch);
+            CurrentRoom.Draw(_spriteBatch);
             MiniMap.Draw(_spriteBatch, LoZHelpers.MiniMapLocation);
 
             foreach (IObject block in Objects)
@@ -284,7 +286,7 @@ namespace LegendOfZeldaClone
                 new Room("Content\\LevelLoading\\SecretRoom.csv", this)
             };
 
-            roomList[0].AddNeighbors(roomList[3], null, roomList[1], roomList[2]);
+            roomList[0].AddNeighbors(roomList[3], roomList[0], roomList[1], roomList[2]);
             roomList[1].AddNeighbors(null, null, null, roomList[0]);
             roomList[2].AddNeighbors(null, null, roomList[0], null);
             roomList[3].AddNeighbors(roomList[4], roomList[0], null, null);

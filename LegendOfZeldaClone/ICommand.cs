@@ -201,7 +201,8 @@ namespace LegendOfZeldaClone
             if (myGame.RoomListIndex < 0)
                 myGame.RoomListIndex = myGame.roomList.Count - 1;
 
-            myGame.roomList[myGame.RoomListIndex].LoadRoom();
+            myGame.CurrentRoom = myGame.roomList[myGame.RoomListIndex];
+            myGame.CurrentRoom.LoadRoom();
         }
     }
 
@@ -225,7 +226,8 @@ namespace LegendOfZeldaClone
             if (myGame.RoomListIndex >= myGame.roomList.Count)
                 myGame.RoomListIndex = 0;
 
-            myGame.roomList[myGame.RoomListIndex].LoadRoom();
+            myGame.CurrentRoom = myGame.roomList[myGame.RoomListIndex];
+            myGame.CurrentRoom.LoadRoom();
         }
     }
 
@@ -249,7 +251,8 @@ namespace LegendOfZeldaClone
             if (myGame.RoomListIndex == myGame.roomList.Count)
                 myGame.RoomListIndex = 0;
 
-            myGame.roomList[myGame.RoomListIndex].LoadRoom();
+            myGame.CurrentRoom = myGame.roomList[myGame.RoomListIndex];
+            myGame.CurrentRoom.LoadRoom();
         }
     }
 
