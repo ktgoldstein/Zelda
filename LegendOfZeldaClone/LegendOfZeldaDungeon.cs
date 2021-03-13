@@ -121,8 +121,6 @@ namespace LegendOfZeldaClone
             Items = new List<IItem>();
             Objects = new List<IObject>();
 
-            roomList = InitializeRooms();
-
             base.Initialize();
         }
 
@@ -148,6 +146,8 @@ namespace LegendOfZeldaClone
             IUsableItem woodenSword = new UsableWoodenSword(this);
             Player = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
 
+
+            InitializeRooms();
             roomList[RoomListIndex].LoadRoom();
 
             MiniMap = new Map1(LoZHelpers.MiniMapLocation);
@@ -260,9 +260,9 @@ namespace LegendOfZeldaClone
             EnemyProjectilesQueue.Clear();
         }
 
-        private List<Room> InitializeRooms()
+        private void InitializeRooms()
         {
-            List<Room> roomList = new List<Room>()
+            roomList = new List<Room>()
             {
                 new Room("Content\\LevelLoading\\room00.csv", this),
                 new Room("Content\\LevelLoading\\room01.csv", this),
@@ -302,8 +302,6 @@ namespace LegendOfZeldaClone
             roomList[15].AddNeighbors(null, roomList[12], roomList[16], null);
             roomList[16].AddNeighbors(null, roomList[^1], null, roomList[15]);
             roomList[17].AddNeighbors(roomList[16], null, null, null);
-
-            return roomList;
         }
     }
 }
