@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Objects;
 using LegendOfZeldaClone.Enemy;
+using System.Collections;
+using System.Linq;
 
 namespace LegendOfZeldaClone.LevelLoading
 {
@@ -13,7 +15,8 @@ namespace LegendOfZeldaClone.LevelLoading
     {
         private readonly Texture2D tiles;
         private readonly Texture2D background;
-
+        private int backgroundType;
+        private int wallType;
         private readonly LegendOfZeldaDungeon game;
         private readonly string fileLocation;
 
@@ -23,6 +26,8 @@ namespace LegendOfZeldaClone.LevelLoading
             this.fileLocation = fileLocation;
             tiles = RoomTextureFactory.Instance.tiles;
             background = RoomTextureFactory.Instance.background;
+            backgroundType = -1;
+            wallType = -1;
         }
 
         public void LoadRoom()
@@ -46,24 +51,44 @@ namespace LegendOfZeldaClone.LevelLoading
             Rectangle sourceRectangle = new Rectangle(522, 11, 256, 176);
             Rectangle destinationRectangle = new Rectangle(0, 192, 256 *3, 176 * 3);
 
-            if (!fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv"))
+            if(wallType == 1)
                 spritebatch.Draw(background, destinationRectangle, sourceRectangle, Color.White);
 
             sourceRectangle = new Rectangle(2, 192, 192, 112);
             destinationRectangle = new Rectangle(96, 288, LoZHelpers.Scale(192), LoZHelpers.Scale(112));
 
-            spritebatch.Draw(tiles, destinationRectangle, sourceRectangle, Color.White);
+            if (backgroundType == 1)
+                spritebatch.Draw(tiles, destinationRectangle, sourceRectangle, Color.White);
         }
 
         private List<List<int>> ProcessCSV()
         {
             List<List<int>> data = new List<List<int>>();
             var lines = File.ReadLines(fileLocation);
+            bool readBackgroundType = false;
+            bool readWallType = false;
             foreach (var line in lines)
             {
-                var splitLine = line.Split(",");
-                var row = Array.ConvertAll(splitLine, s => int.Parse(s));
-                data.Add(new List<int>((row)));
+                
+                if(!readBackgroundType)
+                {
+
+                    backgroundType = int.Parse(line);
+                    readBackgroundType = true;
+                }
+                else if (!readWallType)
+                {
+                    wallType = int.Parse(line);
+                    readWallType = true;
+                }
+                else
+                {
+                    var splitLine = line.Split(",");
+                    var row = Array.ConvertAll(splitLine, s => int.Parse(s));
+                    data.Add(new List<int>((row)));
+                }
+                
+
             }
             return data;
         }
