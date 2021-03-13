@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Enemy;
-using LegendOfZeldaClone.Enemies.EnemyTypes;
 
 namespace LegendOfZeldaClone.Collisions
 {
@@ -20,7 +16,7 @@ namespace LegendOfZeldaClone.Collisions
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
-            //enemy should take damage depending on the projectile
+            //enemy should take damage depending on the projectiles
             Vector2 projectileDirection = CurrentEnemy.Location - playerProjectile.Location;
             projectileDirection.Normalize();
             if( !CurrentEnemy.Invincible)
@@ -59,12 +55,13 @@ namespace LegendOfZeldaClone.Collisions
         {
             //they should stop and have to move around it (except keese if the object is not impassable)
             if (CurrentEnemy is Keese && block.BlockHeight != ObjectHeight.Impassable) return;
+
             CurrentEnemy.Direction = -LoZHelpers.DirectionToVector(direction);
             Rectangle enemyRectangle = new Rectangle((int) CurrentEnemy.Location.X, (int) CurrentEnemy.Location.Y, CurrentEnemy.Width, CurrentEnemy.Height);
             Rectangle blockRectangle = new Rectangle((int) block.Location.X, (int) block.Location.Y, block.Width, block.Height);
             Rectangle overlap = Rectangle.Intersect(enemyRectangle, blockRectangle);
             Vector2 vector = -LoZHelpers.DirectionToVector(direction);
-            if( vector.X == 0)
+            if (vector.X == 0)
             {
                 CurrentEnemy.Location += vector * overlap.Height;
             }
