@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone.Objects
 {
-    public class OpenDoorLeft : IObject
+    public class OpenDoorLeft : IDoor
     {
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
@@ -18,14 +18,18 @@ namespace LegendOfZeldaClone.Objects
         public bool IsMovable { get; }
         public bool IsBombable { get; }
         public bool IsAlive { get; set; }
+        public Vector2 SpawnLocation { get; }
 
-        private ISprite openDoorLeft;
+        private readonly LegendOfZeldaDungeon game;
+        private ISprite sprite;
         private readonly int height;
         private readonly int width;
 
-        public OpenDoorLeft(Vector2 location)
+        public OpenDoorLeft(LegendOfZeldaDungeon game, Vector2 location)
         {
-            openDoorLeft = ObjectSpriteFactory.Instance.CreateOpenDoorLeft();
+            this.game = game;
+            SpawnLocation = LoZHelpers.RightSpawnLocation;
+            sprite = ObjectSpriteFactory.Instance.CreateOpenDoorLeft();
             Location = location;
             height = 32;
             width = 16;
@@ -34,11 +38,14 @@ namespace LegendOfZeldaClone.Objects
             IsBombable = false;
             IsAlive = true;
         }
-        public void Update() { }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Update() { }
+        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
+
+        public void ChangeRoom()
         {
-            openDoorLeft.Draw(spriteBatch, Location);
+            game.CurrentRoom = game.CurrentRoom.RoomLeft;
+            game.CurrentRoom.LoadRoom();
         }
     }
 }

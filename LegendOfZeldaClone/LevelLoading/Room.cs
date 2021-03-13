@@ -166,11 +166,11 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new LockedDoorDown(doorLocationDown));
                     break;
                 case 13:
-                    AddIObject(new OpenDoorRight(doorLocationRight));
+                    AddIObject(new OpenDoorRight(game, doorLocationRight));
                     AddIObject(new LockedDoorRight(doorLocationRight));
                     break;
                 case 14:
-                    AddIObject(new OpenDoorLeft(doorLocationLeft));
+                    AddIObject(new OpenDoorLeft(game, doorLocationLeft));
                     AddIObject(new LockedDoorLeft(doorLocationLeft));
                     break;
                 case 15:
@@ -180,17 +180,17 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new OpenDoorDown(game, doorLocationDown));
                     break;
                 case 17:
-                    AddIObject(new OpenDoorRight(doorLocationRight));
+                    AddIObject(new OpenDoorRight(game, doorLocationRight));
                     break;
                 case 18:
-                    AddIObject(new OpenDoorLeft(doorLocationLeft));
+                    AddIObject(new OpenDoorLeft(game, doorLocationLeft));
                     break;
                 case 20:
-                    AddIObject(new OpenDoorLeft(doorLocationLeft));
+                    AddIObject(new OpenDoorLeft(game, doorLocationLeft));
                     AddIObject(new ClosedDoorLeft(doorLocationLeft));
                     break;
                 case 21:
-                    AddIObject(new OpenDoorRight(doorLocationRight));
+                    AddIObject(new OpenDoorRight(game, doorLocationRight));
                     AddIObject(new ClosedDoorRight(doorLocationRight));
                     break;
                 case 23:
@@ -206,11 +206,11 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new WallRight(doorLocationRight));
                     break;
                 case 27:
-                    AddIObject(new TunnelFaceUp(doorLocationUp));
+                    AddIObject(new TunnelFaceUp(game, doorLocationUp));
                     AddIObject(new BombableWallUp(doorLocationUp));
                     break;
                 case 28:
-                    AddIObject(new TunnelFaceDown(doorLocationDown));
+                    AddIObject(new TunnelFaceDown(game, doorLocationDown));
                     AddIObject(new BombableWallDown(doorLocationDown));
                     break;
                 case 29:
