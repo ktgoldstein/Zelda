@@ -180,6 +180,8 @@ namespace LegendOfZeldaClone
             IUsableItem woodenSword = new UsableWoodenSword(game);
             game.Player = new LinkPlayer(game, LoZHelpers.LinkStartingLocation, woodenSword);
             game.PlayerProjectiles.Clear();
+            game.roomList[0].LoadRoom();
+            game.RoomListIndex = 0;
         }
     }
     public class PreviousRoom : ICommand
@@ -230,30 +232,4 @@ namespace LegendOfZeldaClone
             myGame.CurrentRoom.LoadRoom();
         }
     }
-
-    public class MapChangeRoom : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
-
-        public MapChangeRoom(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
-
-        public void Execute()
-        {
-            if (myGame.SwitchRoomDelay != 0)
-                return;
-            else
-                myGame.SwitchRoomDelay = myGame.SwitchDelayLength;
-
-            myGame.RoomListIndex++;
-            if (myGame.RoomListIndex == myGame.roomList.Count)
-                myGame.RoomListIndex = 0;
-
-            myGame.CurrentRoom = myGame.roomList[myGame.RoomListIndex];
-            myGame.CurrentRoom.LoadRoom();
-        }
-    }
-
 }

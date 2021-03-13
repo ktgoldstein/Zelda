@@ -15,8 +15,8 @@ namespace LegendOfZeldaClone
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private IController controllerK;
-        private IController controllerM;
+        private IController controllerKeyboard;
+        private IController controllerMouse;
 
         public IPlayer Player;
         public List<IEnemy> Enemies;
@@ -75,11 +75,9 @@ namespace LegendOfZeldaClone
 
             ICommand previousRoom = new PreviousRoom(this);
             ICommand nextRoom = new NextRoom(this);
-            ICommand mapChangeRoom = new MapChangeRoom(this);
-            ButtonState leftClick = Mouse.GetState().LeftButton;
 
             KeyboardController keyboardController = new KeyboardController();
-            MouseController mouseController = new MouseController();
+            MouseController mouseController = new MouseController(this, nextRoom, previousRoom);
 
             keyboardController.RegisterCommand(Keys.Q, quitGame);
             keyboardController.RegisterCommand(Keys.S, moveDown);
@@ -113,10 +111,8 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.V, previousRoom);
             keyboardController.RegisterCommand(Keys.B, nextRoom);
 
-            mouseController.RegisterCommand(leftClick, mapChangeRoom);
-
-            controllerK = keyboardController;
-            controllerM = mouseController;
+            controllerKeyboard = keyboardController;
+            controllerMouse = mouseController;
 
             Enemies = new List<IEnemy>();
             Items = new List<IItem>();
@@ -160,8 +156,8 @@ namespace LegendOfZeldaClone
             if (SwitchRoomDelay > 0)
                 SwitchRoomDelay--;
 
-            controllerK.Update();
-            controllerM.Update();
+            controllerKeyboard.Update();
+            controllerMouse.Update();
 
             Player.Update();
 

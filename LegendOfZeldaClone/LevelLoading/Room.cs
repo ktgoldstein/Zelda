@@ -36,7 +36,9 @@ namespace LegendOfZeldaClone.LevelLoading
 
         public void LoadRoom()
         {
-            game.ResetLists();
+            Wizard wizard = new Wizard(game, Vector2.Zero);
+            List<Vector2> fireLocations = new List<Vector2>();
+            this.ResetLists();
 
             List<List<int>> data = ProcessCSV();
 
@@ -255,13 +257,29 @@ namespace LegendOfZeldaClone.LevelLoading
                 case 45:
                     AddIObject(new MovableRaisedBlock(tileLocation));
                     break;
+                case 46:
+                    AddIEnemy(new Wizard(game, tileLocation));
+                    break;
                 default:
                     break;
             }
         }
 
+        public void ResetLists()
+        {
+            game.Enemies.Clear();
+            game.Items.Clear();
+            game.Objects.Clear();
+
+            game.PlayerProjectiles.Clear();
+            game.PlayerProjectilesQueue.Clear();
+            game.EnemyProjectiles.Clear();
+            game.EnemyProjectilesQueue.Clear();
+        }
         private void AddIEnemy(IEnemy enemy) => game.Enemies.Add(enemy);
         private void AddIItem(IItem item) => game.Items.Add(item);
         private void AddIObject(IObject block) => game.Objects.Add(block);
+
+
     }
 }
