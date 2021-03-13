@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Objects;
 using LegendOfZeldaClone.Enemy;
+using LegendOfZeldaClone.Enemies.EnemyTypes;
 
 namespace LegendOfZeldaClone.LevelLoading
 {
@@ -174,6 +175,12 @@ namespace LegendOfZeldaClone.LevelLoading
                         case 44:
                             AddIObject(new Stairs(tileLocation));
                             break;
+                        case 45:
+                            AddIEnemy(new Wizard(game, tileLocation));
+                            break;
+                        case 46:
+                            AddIEnemy(new WizardFire(game, tileLocation));
+                            break;
                         default:
                             break;
                     }
@@ -181,7 +188,7 @@ namespace LegendOfZeldaClone.LevelLoading
             }
         }
 
-       
+
 
         public void Draw(SpriteBatch spritebatch)
         {
