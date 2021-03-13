@@ -19,13 +19,13 @@ namespace LegendOfZeldaClone.Objects
         public bool IsBombable { get; }
         public bool IsAlive { get; set; }
 
-        private ISprite stairs;
+        private ISprite sprite;
         private readonly int height;
         private readonly int width;
 
         public StoneWall(Vector2 location)
         {
-            stairs = ObjectSpriteFactory.Instance.CreateStoneWall();
+            sprite = ObjectSpriteFactory.Instance.CreateStoneWall();
             Location = location;
             height = 16;
             width = 16;
@@ -38,7 +38,7 @@ namespace LegendOfZeldaClone.Objects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            stairs.Draw(spriteBatch, Location);
+            sprite.Draw(spriteBatch, Location);
         }
     }
 }

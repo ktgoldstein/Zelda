@@ -10,9 +10,13 @@ using System.Linq;
 
 namespace LegendOfZeldaClone.LevelLoading
 {
-
     public class Room
     {
+        public Room RoomUp;
+        public Room RoomDown;
+        public Room RoomLeft;
+        public Room RoomRight;
+
         private readonly Texture2D tiles;
         private readonly Texture2D background;
         private int backgroundType;
@@ -59,6 +63,14 @@ namespace LegendOfZeldaClone.LevelLoading
 
             if (backgroundType == 1)
                 spritebatch.Draw(tiles, destinationRectangle, sourceRectangle, Color.White);
+        }
+
+        public void AddNeighbors(Room roomUp, Room roomDown, Room roomLeft, Room roomRight)
+        {
+            RoomUp = roomUp;
+            RoomDown = roomDown;
+            RoomLeft = roomLeft;
+            RoomRight = roomRight;
         }
 
         private List<List<int>> ProcessCSV()
