@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LegendOfZeldaClone.Enemies.EnemyTypes
+namespace LegendOfZeldaClone.Enemy
 {
     class WizardFire : IEnemy
     {
