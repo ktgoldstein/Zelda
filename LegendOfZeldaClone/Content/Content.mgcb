@@ -217,11 +217,11 @@
 /processorParam:TextureFormat=Color
 /build:LevelLoading/Level 1.png
 
-#begin LevelLoading/room.csv
-/copy:LevelLoading/room.csv
+#begin LevelLoading/room00.csv
+/copy:LevelLoading/room00.csv
 
-#begin LevelLoading/room1.csv
-/copy:LevelLoading/room1.csv
+#begin LevelLoading/room01.csv
+/copy:LevelLoading/room01.csv
 
 #begin LevelLoading/room10.csv
 /copy:LevelLoading/room10.csv
@@ -244,29 +244,29 @@
 #begin LevelLoading/room16.csv
 /copy:LevelLoading/room16.csv
 
-#begin LevelLoading/room2.csv
-/copy:LevelLoading/room2.csv
+#begin LevelLoading/room02.csv
+/copy:LevelLoading/room02.csv
 
-#begin LevelLoading/room3.csv
-/copy:LevelLoading/room3.csv
+#begin LevelLoading/room03.csv
+/copy:LevelLoading/room03.csv
 
-#begin LevelLoading/room4.csv
-/copy:LevelLoading/room4.csv
+#begin LevelLoading/room04.csv
+/copy:LevelLoading/room04.csv
 
-#begin LevelLoading/room5.csv
-/copy:LevelLoading/room5.csv
+#begin LevelLoading/room05.csv
+/copy:LevelLoading/room05.csv
 
-#begin LevelLoading/room6.csv
-/copy:LevelLoading/room6.csv
+#begin LevelLoading/room06.csv
+/copy:LevelLoading/room06.csv
 
-#begin LevelLoading/room7.csv
-/copy:LevelLoading/room7.csv
+#begin LevelLoading/room07.csv
+/copy:LevelLoading/room07.csv
 
-#begin LevelLoading/room8.csv
-/copy:LevelLoading/room8.csv
+#begin LevelLoading/room08.csv
+/copy:LevelLoading/room08.csv
 
-#begin LevelLoading/room9.csv
-/copy:LevelLoading/room9.csv
+#begin LevelLoading/room09.csv
+/copy:LevelLoading/room09.csv
 
 #begin LevelLoading/SecretRoom.csv
 /copy:LevelLoading/SecretRoom.csv

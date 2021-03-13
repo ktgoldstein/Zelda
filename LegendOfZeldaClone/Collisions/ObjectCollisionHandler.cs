@@ -84,17 +84,5 @@ namespace LegendOfZeldaClone.Collisions
                 }
             }
         }
-
-        public void HandleBoundaryCollision(Boundary boundary, Direction direction)
-        {
-            if (direction == Direction.Down || direction == Direction.Up)
-            {
-                CurrentObject.Location = new Vector2(CurrentObject.Location.X, boundary.Location.Y);
-            }
-            else if (direction == Direction.Right || direction == Direction.Left)
-            {
-                CurrentObject.Location = new Vector2(boundary.Location.X, CurrentObject.Location.Y);
-            }
-        }
     }
 }

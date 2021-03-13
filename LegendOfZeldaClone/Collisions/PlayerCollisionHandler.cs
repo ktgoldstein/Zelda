@@ -69,25 +69,6 @@ namespace LegendOfZeldaClone
             }
 
         }
-
-        public void HandleBoundaryCollision(Boundary boundary, Direction direction)
-        {
-            switch (direction)
-            {
-                case Direction.Down:
-                    CurrentPlayer.HurtBoxLocation = new Vector2(CurrentPlayer.HurtBoxLocation.X, boundary.Location.Y + boundary.Height - CurrentPlayer.Height);
-                    break;
-                case Direction.Up:
-                    CurrentPlayer.HurtBoxLocation = new Vector2(CurrentPlayer.HurtBoxLocation.X, boundary.Location.Y);
-                    break;
-                case Direction.Left:
-                    CurrentPlayer.HurtBoxLocation = new Vector2(boundary.Location.X, CurrentPlayer.HurtBoxLocation.Y);
-                    break;
-                case Direction.Right:
-                    CurrentPlayer.HurtBoxLocation = new Vector2(boundary.Location.X + boundary.Width - CurrentPlayer.Width, CurrentPlayer.HurtBoxLocation.Y);
-                    break;
-            }
-        }
     }
 }
 

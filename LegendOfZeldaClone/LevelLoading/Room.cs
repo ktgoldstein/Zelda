@@ -13,7 +13,6 @@ namespace LegendOfZeldaClone.LevelLoading
     {
         private readonly Texture2D tiles;
         private readonly Texture2D background;
-        //private Texture2D backgroundFix;
 
         private readonly LegendOfZeldaDungeon game;
         private List<List<int>> data;
@@ -25,7 +24,6 @@ namespace LegendOfZeldaClone.LevelLoading
             this.fileLocation = fileLocation;
             tiles = RoomTextureFactory.Instance.tiles;
             background = RoomTextureFactory.Instance.background;
-            //backgroundFix = RoomTextureFactory.Instance.backgroundFix;
         }
 
         public void LoadRoom()
@@ -51,15 +49,24 @@ namespace LegendOfZeldaClone.LevelLoading
                     if (fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv"))
                         tileLocation = new Vector2((width * column) * 3, (height * row + 80) * 3);
 
-                    Vector2 smallItemLocation = new Vector2((width * column + 20) * 3, (height * row + 80) * 3);
-                    Vector2 doorLocationUp = new Vector2((width * column + 16) * 3, (height * row + 64) * 3);
-                    Vector2 doorLocationDown = new Vector2((width * column + 16) * 3, (height * row + 80) * 3);
-                    Vector2 doorLocationRight = new Vector2((width * column + 16) * 3, (height * row + 88) * 3);
-                    Vector2 doorLocationLeft = new Vector2((width * column) * 3, 408);
+                    Vector2 smallItemLocation = new Vector2(LoZHelpers.Scale(width * column + 20), LoZHelpers.Scale(height * row + 80));
+                    Vector2 doorLocationUp = new Vector2(LoZHelpers.Scale(width * column + 16), LoZHelpers.Scale(height * row + 64));
+                    Vector2 doorLocationDown = new Vector2(LoZHelpers.Scale(width * column + 16), LoZHelpers.Scale(height * row + 80));
+                    Vector2 doorLocationRight = new Vector2(LoZHelpers.Scale(width * column + 16), LoZHelpers.Scale(height * (row - 1) + 88));
+                    Vector2 doorLocationLeft = new Vector2(LoZHelpers.Scale(width * column), LoZHelpers.Scale(height * (row - 1) + 88));
 
                     int source = data[row][column];
                     switch (source)
                     {
+                        case -3:
+                            AddIObject(new InvisibleBlock(tileLocation, Direction.Left));
+                            break;
+                        case -2:
+                            AddIObject(new InvisibleBlock(tileLocation, Direction.Right));
+                            break;
+                        case -1:
+                            AddIObject(new InvisibleBlock(tileLocation, Direction.None));
+                            break;
                         case 1:
                             AddIObject(new RaisedBlock(tileLocation));
                             break;

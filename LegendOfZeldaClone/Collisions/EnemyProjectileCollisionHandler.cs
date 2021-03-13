@@ -51,12 +51,5 @@
             }
 
         }
-        public void HandleBoundaryCollision(Boundary boundary, Direction direction)
-        {
-            if (!(CurrentEnemyProjectile is Enemy.EnemyBoomerang))
-            {
-                CurrentEnemyProjectile.Alive = false;
-            }
-        }
     }
 }
