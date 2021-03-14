@@ -9,12 +9,12 @@ using Microsoft.Xna.Framework;
 namespace LegendOfZeldaClone.LevelLoading
 {
 
-    public class Map1 : ISprite
+    public class MiniMap : ISprite
     {
         ISprite miniMap;
         Vector2 location;
 
-        public Map1(Vector2 location)
+        public MiniMap(Vector2 location)
         {
             miniMap = RoomTextureFactory.Instance.createMiniMap();
             this.location = location;

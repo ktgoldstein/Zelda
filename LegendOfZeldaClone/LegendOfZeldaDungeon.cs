@@ -31,7 +31,7 @@ namespace LegendOfZeldaClone
                 
         public List<Room> roomList;
         public int RoomListIndex = 0;
-        public Map1 MiniMap;
+        public MiniMap MiniMap;
 
         public int SwitchRoomDelay;
         public int SwitchDelayLength = 5;
@@ -168,7 +168,7 @@ namespace LegendOfZeldaClone
 
             roomList[RoomListIndex].LoadRoom();
 
-            MiniMap = new Map1(LoZHelpers.MiniMapLocation);
+            MiniMap = new MiniMap(LoZHelpers.MiniMapLocation);
         }
 
         protected override void Update(GameTime gameTime)
