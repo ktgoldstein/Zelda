@@ -16,7 +16,9 @@ namespace LegendOfZeldaClone.Collisions
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
-            bool projectileDealsEnemyDamage = !(playerProjectile is BombProjectile || playerProjectile is ArrowImpactProjectile || playerProjectile is SwordBeamExplosionProjectile);
+            bool projectileDealsEnemyDamage = !(playerProjectile is BombProjectile 
+                                                || playerProjectile is ArrowImpactProjectile 
+                                                || playerProjectile is SwordBeamExplosionProjectile);
             if (projectileDealsEnemyDamage)
             {
                 Vector2 projectileDirection = CurrentEnemy.Location - playerProjectile.Location;
