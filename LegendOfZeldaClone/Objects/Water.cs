@@ -19,13 +19,13 @@ namespace LegendOfZeldaClone.Objects
         public bool IsBombable { get; }
         public bool IsAlive { get; set; }
 
-        private ISprite water;
+        private ISprite sprite;
         private readonly int height;
         private readonly int width;
 
         public Water(Vector2 location)
         {
-            water = ObjectSpriteFactory.Instance.CreateWater();
+            sprite = ObjectSpriteFactory.Instance.CreateWater();
             Location = location;
             height = 16;
             width = 16;
@@ -38,7 +38,7 @@ namespace LegendOfZeldaClone.Objects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            water.Draw(spriteBatch, Location);
+            sprite.Draw(spriteBatch, Location);
         }
     }
 }

@@ -19,13 +19,13 @@ namespace LegendOfZeldaClone.Objects
         public bool IsBombable { get; }
         public bool IsAlive { get; set; }
 
-        private ISprite blueGargoyleStatue;
+        private ISprite sprite;
         private readonly int height;
         private readonly int width;
 
         public BlueGargoyleStatue(Vector2 location)
         {
-            blueGargoyleStatue = ObjectSpriteFactory.Instance.CreateBlueGargoyleStatue();
+            sprite = ObjectSpriteFactory.Instance.CreateBlueGargoyleStatue();
             Location = location;
             height = 16;
             width = 16;
@@ -38,7 +38,7 @@ namespace LegendOfZeldaClone.Objects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            blueGargoyleStatue.Draw(spriteBatch, Location);
+            sprite.Draw(spriteBatch, Location);
         }
     }
 }

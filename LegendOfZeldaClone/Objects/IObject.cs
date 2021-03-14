@@ -9,6 +9,5 @@
         public bool IsBombable { get; }
 
         public bool IsAlive { get; set; }
-
     }
 }
