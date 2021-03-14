@@ -16,21 +16,24 @@ namespace LegendOfZeldaClone.Collisions
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
-            //enemy should take damage depending on the projectiles
-            Vector2 projectileDirection = CurrentEnemy.Location - playerProjectile.Location;
-            projectileDirection.Normalize();
-            if( !CurrentEnemy.Invincible)
+            //enemy should take damage depending on the projectiles, but not if it's a sword explosion projectile
+            if (!(playerProjectile is SwordBeamExplosionProjectile))
             {
-                CurrentEnemy.Invincible = true;
-                if( !( CurrentEnemy is BladeTrap || CurrentEnemy is WizardFire ))
+                Vector2 projectileDirection = CurrentEnemy.Location - playerProjectile.Location;
+                projectileDirection.Normalize();
+                if (!CurrentEnemy.Invincible)
                 {
-                    CurrentEnemy.Health -= 1;
-                    if( CurrentEnemy.Health <= 0)
+                    CurrentEnemy.Invincible = true;
+                    if (!(CurrentEnemy is BladeTrap || CurrentEnemy is WizardFire))
                     {
-                        CurrentEnemy.Alive = false;
+                        CurrentEnemy.Health -= 1;
+                        if (CurrentEnemy.Health <= 0)
+                        {
+                            CurrentEnemy.Alive = false;
+                        }
                     }
+                    CurrentEnemy.Knockback(projectileDirection);
                 }
-                CurrentEnemy.Knockback(projectileDirection);
             }
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
