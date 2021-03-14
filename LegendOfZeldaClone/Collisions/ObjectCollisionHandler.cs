@@ -12,17 +12,16 @@ namespace LegendOfZeldaClone.Collisions
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
-            //locked doors should open if the player has a key
             if ((CurrentObject is LockedDoorUp || CurrentObject is LockedDoorDown ||
                 CurrentObject is LockedDoorLeft || CurrentObject is LockedDoorRight) &&
                 player.Inventory.KeysHeld > 0 )
             {
-                CurrentObject.IsAlive = false; //reveals the unlocked version underneath
+                CurrentObject.IsAlive = false;
                 player.Inventory.KeysHeld--;
             }
             else if (CurrentObject.IsMovable)
             {
-                int blockPushingSpeedConstant = 2;
+                int blockPushingSpeedConstant = LoZHelpers.Scale(1);
                 switch (direction)
                 {
                     case Direction.Down:
@@ -47,26 +46,13 @@ namespace LegendOfZeldaClone.Collisions
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             if (playerProjectile is BombExplosionProjectile && CurrentObject.IsBombable)
-            {
                 CurrentObject.IsAlive = false;
-            }
         }
-        public void HandleEnemyCollision(IEnemy enemy, Direction direction)
-        {
-            //nothing will happen
-        }
-        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
-        {
-            //nothing will happen
-        }
-        public void HandleItemCollision(IItem item, Direction direction)
-        {
-            //nothing will happen
-        }
-
+        public void HandleEnemyCollision(IEnemy enemy, Direction direction) { }
+        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) { }
+        public void HandleItemCollision(IItem item, Direction direction) { }
         public void HandleObjectCollision(IObject block, Direction direction)
         {
-            //movable blocks should stop when they hit other blocks
             if (CurrentObject.IsMovable)
             {
                 switch (direction)
