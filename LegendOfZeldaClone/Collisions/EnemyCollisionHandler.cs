@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Enemy;
 
 namespace LegendOfZeldaClone.Collisions
@@ -27,7 +24,7 @@ namespace LegendOfZeldaClone.Collisions
                 if (!CurrentEnemy.Invincible)
                 {
                     CurrentEnemy.Invincible = true;
-                    if (!(CurrentEnemy is BladeTrap))
+                    if (!(CurrentEnemy is BladeTrap || CurrentEnemy is WizardFire))
                     {
                         CurrentEnemy.Health -= 1;
                         if (CurrentEnemy.Health <= 0)
@@ -61,12 +58,13 @@ namespace LegendOfZeldaClone.Collisions
         {
             //they should stop and have to move around it (except keese if the object is not impassable)
             if (CurrentEnemy is Keese && block.BlockHeight != ObjectHeight.Impassable) return;
+
             CurrentEnemy.Direction = -LoZHelpers.DirectionToVector(direction);
             Rectangle enemyRectangle = new Rectangle((int) CurrentEnemy.Location.X, (int) CurrentEnemy.Location.Y, CurrentEnemy.Width, CurrentEnemy.Height);
             Rectangle blockRectangle = new Rectangle((int) block.Location.X, (int) block.Location.Y, block.Width, block.Height);
             Rectangle overlap = Rectangle.Intersect(enemyRectangle, blockRectangle);
             Vector2 vector = -LoZHelpers.DirectionToVector(direction);
-            if( vector.X == 0)
+            if (vector.X == 0)
             {
                 CurrentEnemy.Location += vector * overlap.Height;
             }

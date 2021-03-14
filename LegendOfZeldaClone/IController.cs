@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LegendOfZeldaClone
 {
-    public interface IController
+    public interface IController 
     {
         void Update();
     }
@@ -38,43 +38,30 @@ namespace LegendOfZeldaClone
     }
     public class MouseController : IController
     {
+        private LegendOfZeldaDungeon myGame;
+        private ICommand leftClick;
+        private ICommand rightClick;
 
-        private MouseState oldMouseState;
-        private MouseState newMouseState;
-
-
-        private Dictionary<ButtonState, ICommand> mouseMappings;
-
-        public MouseController()
+        public MouseController(LegendOfZeldaDungeon game, ICommand leftClickInput, ICommand rightClickInput)
         {
-            oldMouseState = Mouse.GetState();
-            mouseMappings = new Dictionary<ButtonState, ICommand>();
+            leftClick = leftClickInput;
+            rightClick = rightClickInput;
+            myGame = game;
         }
 
-        public void RegisterCommand(ButtonState button, ICommand command)
+        public void RegisterCommand(string key, ICommand command)
         {
-            mouseMappings.Add(ButtonState.Pressed, command);
+            // Don't use RegisterCommand for this Controller
         }
+
         public void Update()
         {
-            newMouseState = Mouse.GetState();
-            List<ButtonState> buttons = new List<ButtonState>();
-            buttons.Add(newMouseState.LeftButton);
+            MouseState mouseState = Mouse.GetState();
 
-            if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released)
-            {
-                foreach (ButtonState buttonState in buttons)
-                {
-                    if (mouseMappings.ContainsKey(buttonState))
-                    {
-                        mouseMappings[buttonState].Execute();
-                    }
-                }
-            }
-
-            oldMouseState = newMouseState;
-
+            if (mouseState.RightButton == ButtonState.Pressed)
+                leftClick.Execute();
+            else if (mouseState.LeftButton == ButtonState.Pressed)
+                rightClick.Execute();
         }
-
     }
 }

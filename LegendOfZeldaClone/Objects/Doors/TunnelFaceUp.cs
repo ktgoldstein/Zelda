@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone.Objects
 {
-    public class TunnelFaceUp : IObject
+    public class TunnelFaceUp : IDoor
     {
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
@@ -18,27 +18,34 @@ namespace LegendOfZeldaClone.Objects
         public bool IsMovable { get; }
         public bool IsBombable { get; }
         public bool IsAlive { get; set; }
+        public Vector2 SpawnLocation { get; }
 
-        private ISprite tunnelUp;
+        private readonly LegendOfZeldaDungeon game;
+        private ISprite sprite;
         private readonly int height;
         private readonly int width;
 
-        public TunnelFaceUp(Vector2 location)
+        public TunnelFaceUp(LegendOfZeldaDungeon game, Vector2 location)
         {
-            tunnelUp = ObjectSpriteFactory.Instance.CreateTunnelFaceUp();
+            this.game = game;
+            sprite = ObjectSpriteFactory.Instance.CreateTunnelFaceUp();
             Location = location;
             height = 16;
-            width = 16;
+            width = 32;
+            SpawnLocation = LoZHelpers.BottomSpawnLocation;
             BlockHeight = ObjectHeight.CanWalkOver;
             IsMovable = false;
             IsBombable = false;
             IsAlive = true;
         }
-        public void Update() { }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Update() { }
+        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
+
+        public void ChangeRoom()
         {
-            tunnelUp.Draw(spriteBatch, Location);
+            game.CurrentRoom = game.CurrentRoom.RoomUp;
+            game.CurrentRoom.LoadRoom();
         }
     }
 }

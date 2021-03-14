@@ -64,8 +64,9 @@
         public void HandleObjectCollision(IObject block, Direction direction)
         {
 
-            bool collidesWithImpassableBlocks = !((CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile));
-            collidesWithImpassableBlocks &= !(CurrentPlayerProjectile is BombProjectile);
+            bool collidesWithImpassableBlocks = !(CurrentPlayerProjectile is BoomerangProjectile
+                                                  || CurrentPlayerProjectile is SwordBeamExplosionProjectile
+                                                  || CurrentPlayerProjectile is BombProjectile);
             bool blockIsImpassable = block.BlockHeight == ObjectHeight.Impassable;
 
             if ((collidesWithImpassableBlocks && blockIsImpassable))

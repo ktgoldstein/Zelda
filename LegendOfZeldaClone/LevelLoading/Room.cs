@@ -166,11 +166,11 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new LockedDoorDown(doorLocationDown));
                     break;
                 case 13:
-                    AddIObject(new OpenDoorRight(doorLocationRight));
+                    AddIObject(new OpenDoorRight(game, doorLocationRight));
                     AddIObject(new LockedDoorRight(doorLocationRight));
                     break;
                 case 14:
-                    AddIObject(new OpenDoorLeft(doorLocationLeft));
+                    AddIObject(new OpenDoorLeft(game, doorLocationLeft));
                     AddIObject(new LockedDoorLeft(doorLocationLeft));
                     break;
                 case 15:
@@ -180,17 +180,17 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new OpenDoorDown(game, doorLocationDown));
                     break;
                 case 17:
-                    AddIObject(new OpenDoorRight(doorLocationRight));
+                    AddIObject(new OpenDoorRight(game, doorLocationRight));
                     break;
                 case 18:
-                    AddIObject(new OpenDoorLeft(doorLocationLeft));
+                    AddIObject(new OpenDoorLeft(game, doorLocationLeft));
                     break;
                 case 20:
-                    AddIObject(new OpenDoorLeft(doorLocationLeft));
+                    AddIObject(new OpenDoorLeft(game, doorLocationLeft));
                     AddIObject(new ClosedDoorLeft(doorLocationLeft));
                     break;
                 case 21:
-                    AddIObject(new OpenDoorRight(doorLocationRight));
+                    AddIObject(new OpenDoorRight(game, doorLocationRight));
                     AddIObject(new ClosedDoorRight(doorLocationRight));
                     break;
                 case 23:
@@ -206,11 +206,11 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new WallRight(doorLocationRight));
                     break;
                 case 27:
-                    AddIObject(new TunnelFaceUp(doorLocationUp));
+                    AddIObject(new TunnelFaceUp(game, doorLocationUp));
                     AddIObject(new BombableWallUp(doorLocationUp));
                     break;
                 case 28:
-                    AddIObject(new TunnelFaceDown(doorLocationDown));
+                    AddIObject(new TunnelFaceDown(game, doorLocationDown));
                     AddIObject(new BombableWallDown(doorLocationDown));
                     break;
                 case 29:
@@ -250,10 +250,67 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new DragonStatue(tileLocation));
                     break;
                 case 44:
-                    AddIObject(new Stairs(tileLocation));
+                    AddIObject(new Stairs(game, tileLocation));
                     break;
                 case 45:
                     AddIObject(new MovableRaisedBlock(tileLocation));
+                    break;
+                case 46:
+                    AddIEnemy(new Wizard(game, tileLocation));
+                    break;
+                case 47:
+                    AddIItem(new BlueRing(smallItemLocation));
+                    break;
+                case 48:
+                    AddIItem(new Bomb(smallItemLocation));
+                    break;
+                case 49:
+                    AddIItem(new Bow(smallItemLocation));
+                    break;
+                case 50:
+                    AddIItem(new Clock(smallItemLocation));
+                    break;
+                case 51:
+                    AddIItem(new Fairy(smallItemLocation));
+                    break;
+                case 52:
+                    AddIItem(new Heart(smallItemLocation));
+                    break;
+                case 53:
+                    AddIItem(new HeartContainer(smallItemLocation));
+                    break;
+                case 54:
+                    AddIItem(new LifePotion(smallItemLocation));
+                    break;
+                case 55:
+                    AddIItem(new NoHealthHeart(smallItemLocation));
+                    break;
+                case 56:
+                    AddIItem(new Sword(smallItemLocation));
+                    break;
+                case 57:
+                    AddIItem(new TriForcePiece(smallItemLocation));
+                    break;
+                case 58:
+                    AddIItem(new BlueCandle(smallItemLocation));
+                    break;
+                case 59:
+                    AddIItem(new BlueRupee(smallItemLocation));
+                    break;
+                case 60:
+                    AddIItem(new FlashingRupee(smallItemLocation));
+                    break;
+                case 61:
+                    AddIItem(new HalfHealthHeart(smallItemLocation));
+                    break;
+                case 62:
+                    AddIItem(new HalfHealthHeart(smallItemLocation));
+                    break;
+                case 63:
+                    AddIItem(new LifePotion(smallItemLocation));
+                    break;
+                case 64:
+                    AddIObject(new LadderDoor(game, tileLocation));
                     break;
                 default:
                     break;

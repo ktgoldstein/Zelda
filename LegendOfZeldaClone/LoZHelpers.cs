@@ -129,10 +129,8 @@ namespace LegendOfZeldaClone
             vector.Normalize();
             return vector;
         }
-        public static Vector2 LinkStartingLocation => new Vector2(GameWidth / 2 - 16, GameHeight / 2 - 16);
-        public static Vector2 EnemyStartingLocation => new Vector2(400, 120);
-        public static Vector2 ObjectStartingLocation => new Vector2(LoZHelpers.GameWidth / 2 + 50, LoZHelpers.GameHeight * 2 / 6);
-        public static Vector2 MiniMapLocation => new Vector2(LoZHelpers.GameWidth / 24, 192 / 4);
+        public static Vector2 LinkStartingLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(4 * 16 + 80));
+        public static Vector2 MiniMapLocation => new Vector2(GameWidth / 24, 192 / 4);
         public static int GameHeight => Scale(240);
         public static int GameWidth => Scale(256);
         public static int LinkInvincibilityFrames => 24;
@@ -159,11 +157,14 @@ namespace LegendOfZeldaClone
         public static Vector2 BottomSpawnLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(7 * 16 + 80));
         public static Vector2 LeftSpawnLocation => new Vector2(Scale(16 + 16), Scale(4 * 16 + 80));
         public static Vector2 RightSpawnLocation => new Vector2(Scale(12 * 16 + 16), Scale(4 * 16 + 80));
+        public static Vector2 SecretRoomSpawnLocationIn => new Vector2(Scale(4 * 16), Scale(16 + 80));
+        public static Vector2 SecretRoomSpawnLocationOut => new Vector2(Scale(6 * 16 + 16), Scale(4 * 16 + 80));
         public static int AquamentusHP = 6;
         public static int GelHP = 1;
         public static int GoriyaHP = 3;
         public static int KeeseHP = 1;
         public static int StalfosHP = 2;
         public static int WallmasterHP = 2;
+        public static int WizardHP = 1000;
     }
 }
