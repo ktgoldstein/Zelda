@@ -22,8 +22,8 @@
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            //boomerangs don't disappear
-            if (!(CurrentPlayerProjectile is BoomerangProjectile))
+            bool projectileDisappearsUponEnemyCollision = !(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile || CurrentPlayerProjectile is ArrowImpactProjectile);
+            if (projectileDisappearsUponEnemyCollision)
             {
                 if (CurrentPlayerProjectile is SwordBeamProjectile)
                 {
