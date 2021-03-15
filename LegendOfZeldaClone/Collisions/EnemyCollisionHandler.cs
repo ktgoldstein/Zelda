@@ -57,20 +57,23 @@ namespace LegendOfZeldaClone.Collisions
         public void HandleObjectCollision(IObject block, Direction direction)
         {
             //they should stop and have to move around it (except keese if the object is not impassable)
-            if (CurrentEnemy is Keese && block.BlockHeight != ObjectHeight.Impassable) return;
+            if (!(CurrentEnemy is Wallmaster && block is Objects.InvisibleBlock))
+            {
+                if (CurrentEnemy is Keese && block.BlockHeight != ObjectHeight.Impassable) return;
 
-            CurrentEnemy.Direction = -LoZHelpers.DirectionToVector(direction);
-            Rectangle enemyRectangle = new Rectangle((int) CurrentEnemy.Location.X, (int) CurrentEnemy.Location.Y, CurrentEnemy.Width, CurrentEnemy.Height);
-            Rectangle blockRectangle = new Rectangle((int) block.Location.X, (int) block.Location.Y, block.Width, block.Height);
-            Rectangle overlap = Rectangle.Intersect(enemyRectangle, blockRectangle);
-            Vector2 vector = -LoZHelpers.DirectionToVector(direction);
-            if (vector.X == 0)
-            {
-                CurrentEnemy.Location += vector * overlap.Height;
-            }
-            else
-            {
-                CurrentEnemy.Location += vector * overlap.Width;
+                CurrentEnemy.Direction = -LoZHelpers.DirectionToVector(direction);
+                Rectangle enemyRectangle = new Rectangle((int)CurrentEnemy.Location.X, (int)CurrentEnemy.Location.Y, CurrentEnemy.Width, CurrentEnemy.Height);
+                Rectangle blockRectangle = new Rectangle((int)block.Location.X, (int)block.Location.Y, block.Width, block.Height);
+                Rectangle overlap = Rectangle.Intersect(enemyRectangle, blockRectangle);
+                Vector2 vector = -LoZHelpers.DirectionToVector(direction);
+                if (vector.X == 0)
+                {
+                    CurrentEnemy.Location += vector * overlap.Height;
+                }
+                else
+                {
+                    CurrentEnemy.Location += vector * overlap.Width;
+                }
             }
         }
     }
