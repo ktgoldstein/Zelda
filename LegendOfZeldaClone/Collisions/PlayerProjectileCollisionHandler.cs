@@ -10,20 +10,15 @@
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
-            //should only be for boomerangs (don't want bombs to disappear if walked across)
             if (CurrentPlayerProjectile is BoomerangProjectile)
             {
                 CurrentPlayerProjectile.Alive = false;
             }
         }
-        public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
-        {
-            //nothing will happen
-        }
+        public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) {}
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            bool projectileDisappearsUponEnemyCollision = !(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile || CurrentPlayerProjectile is ArrowImpactProjectile);
-            if (projectileDisappearsUponEnemyCollision)
+            if (!(CurrentPlayerProjectile is BoomerangProjectile))
             {
                 if (CurrentPlayerProjectile is SwordBeamProjectile)
                 {
@@ -35,16 +30,13 @@
                     ArrowProjectile arrow = CurrentPlayerProjectile as ArrowProjectile;
                     arrow.SpawnArrowExplosion();
                 }
-                else
+                else if (!(CurrentPlayerProjectile is SwordBeamExplosionProjectile || CurrentPlayerProjectile is ArrowImpactProjectile))
                 {
                     CurrentPlayerProjectile.Alive = false;
                 }
             }
         }
-        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
-        {
-            //nothing will happen?
-        }
+        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) {}
         public void HandleItemCollision(IItem item, Direction direction)
         {
             if (CurrentPlayerProjectile is BoomerangProjectile)
@@ -63,13 +55,9 @@
 
         public void HandleObjectCollision(IObject block, Direction direction)
         {
-
-            bool collidesWithImpassableBlocks = !(CurrentPlayerProjectile is BoomerangProjectile
-                                                  || CurrentPlayerProjectile is SwordBeamExplosionProjectile
-                                                  || CurrentPlayerProjectile is BombProjectile);
             bool blockIsImpassable = block.BlockHeight == ObjectHeight.Impassable;
 
-            if ((collidesWithImpassableBlocks && blockIsImpassable))
+            if (!(CurrentPlayerProjectile is BoomerangProjectile) && blockIsImpassable)
             {
                 if (CurrentPlayerProjectile is SwordBeamProjectile)
                 {
@@ -81,9 +69,9 @@
                     ArrowProjectile arrow = CurrentPlayerProjectile as ArrowProjectile;
                     arrow.SpawnArrowExplosion();
                 }
-                else
+                else if (!(CurrentPlayerProjectile is SwordBeamExplosionProjectile || CurrentPlayerProjectile is BombProjectile))
                 {
-                    CurrentPlayerProjectile.Alive = false;
+                        CurrentPlayerProjectile.Alive = false;
                 }
             }
         }
