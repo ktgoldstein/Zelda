@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
-using LegendOfZeldaClone.Enemy;
+﻿using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Enemy;
 
 namespace LegendOfZeldaClone.Collisions
@@ -20,21 +16,24 @@ namespace LegendOfZeldaClone.Collisions
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
-            //enemy should take damage depending on the projectile
-            Vector2 projectileDirection = CurrentEnemy.Location - playerProjectile.Location;
-            projectileDirection.Normalize();
-            if( !CurrentEnemy.Invincible)
+            //enemy should take damage depending on the projectiles, but not if it's a sword explosion projectile
+            if (!(playerProjectile is SwordBeamExplosionProjectile))
             {
-                CurrentEnemy.Invincible = true;
-                if( !( CurrentEnemy is BladeTrap || CurrentEnemy is WizardFire ))
+                Vector2 projectileDirection = CurrentEnemy.Location - playerProjectile.Location;
+                projectileDirection.Normalize();
+                if (!CurrentEnemy.Invincible)
                 {
-                    CurrentEnemy.Health -= 1;
-                    if( CurrentEnemy.Health <= 0)
+                    CurrentEnemy.Invincible = true;
+                    if (!(CurrentEnemy is BladeTrap || CurrentEnemy is WizardFire))
                     {
-                        CurrentEnemy.Alive = false;
+                        CurrentEnemy.Health -= 1;
+                        if (CurrentEnemy.Health <= 0)
+                        {
+                            CurrentEnemy.Alive = false;
+                        }
                     }
+                    CurrentEnemy.Knockback(projectileDirection);
                 }
-                CurrentEnemy.Knockback(projectileDirection);
             }
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
@@ -59,12 +58,13 @@ namespace LegendOfZeldaClone.Collisions
         {
             //they should stop and have to move around it (except keese if the object is not impassable)
             if (CurrentEnemy is Keese && block.BlockHeight != ObjectHeight.Impassable) return;
+
             CurrentEnemy.Direction = -LoZHelpers.DirectionToVector(direction);
             Rectangle enemyRectangle = new Rectangle((int) CurrentEnemy.Location.X, (int) CurrentEnemy.Location.Y, CurrentEnemy.Width, CurrentEnemy.Height);
             Rectangle blockRectangle = new Rectangle((int) block.Location.X, (int) block.Location.Y, block.Width, block.Height);
             Rectangle overlap = Rectangle.Intersect(enemyRectangle, blockRectangle);
             Vector2 vector = -LoZHelpers.DirectionToVector(direction);
-            if( vector.X == 0)
+            if (vector.X == 0)
             {
                 CurrentEnemy.Location += vector * overlap.Height;
             }

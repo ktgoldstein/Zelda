@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone.Objects
 {
-    public class OpenDoorLeft : IDoor
+    public class LadderDoor : IDoor
     {
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
@@ -25,14 +25,14 @@ namespace LegendOfZeldaClone.Objects
         private readonly int height;
         private readonly int width;
 
-        public OpenDoorLeft(LegendOfZeldaDungeon game, Vector2 location)
+        public LadderDoor(LegendOfZeldaDungeon game, Vector2 location)
         {
             this.game = game;
-            SpawnLocation = LoZHelpers.RightSpawnLocation;
-            sprite = ObjectSpriteFactory.Instance.CreateOpenDoorLeft();
+            sprite = ObjectSpriteFactory.Instance.CreateLadder();
             Location = location;
-            height = 32;
+            height = 16;
             width = 16;
+            SpawnLocation = LoZHelpers.SecretRoomSpawnLocationOut;
             BlockHeight = ObjectHeight.CanWalkOver;
             IsMovable = false;
             IsBombable = false;
@@ -44,7 +44,7 @@ namespace LegendOfZeldaClone.Objects
 
         public void ChangeRoom()
         {
-            game.CurrentRoom = game.CurrentRoom.RoomLeft;
+            game.CurrentRoom = game.CurrentRoom.RoomUp;
             game.CurrentRoom.LoadRoom();
         }
     }

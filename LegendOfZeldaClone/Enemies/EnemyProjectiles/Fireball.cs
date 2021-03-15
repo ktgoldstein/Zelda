@@ -21,7 +21,6 @@ namespace LegendOfZeldaClone.Enemy
         private float speed = 5;
         private readonly int width;
         private readonly int height;
-        private int lifeSpan;
 
         public Fireball(Vector2 location, Vector2 direction)
         {
@@ -34,8 +33,8 @@ namespace LegendOfZeldaClone.Enemy
             Location = location;
             this.direction = direction;
             this.direction.Normalize();
-            lifeSpan = 20;
         }
+
         public void Draw(SpriteBatch spritebatch)
         {
             fireballSprite.Draw(spritebatch, Location);
@@ -43,10 +42,6 @@ namespace LegendOfZeldaClone.Enemy
 
         public void Update()
         {
-            lifeSpan--;
-            if (lifeSpan == 0)
-                Alive = false;
-
             fireballSprite.Update();
             Location += direction * speed;
         }
