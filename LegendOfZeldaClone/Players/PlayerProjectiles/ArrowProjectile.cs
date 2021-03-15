@@ -76,7 +76,7 @@ namespace LegendOfZeldaClone
         }
         public void SpawnArrowExplosion()
         {
-            game.PlayerProjectilesQueue.Add(new ArrowImpactProjectile(Location, skinType));
+            game.PlayerProjectilesQueue.Add(new ArrowImpactProjectile(Location));
             Alive = false;
         }
     }

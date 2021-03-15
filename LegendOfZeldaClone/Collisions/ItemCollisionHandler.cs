@@ -44,6 +44,7 @@ namespace LegendOfZeldaClone.Collisions
                             fairy.FairyDirection = new Vector2(-1, fairy.FairyDirection.Y);
                             break;
                     }
+                    fairy.FairyDirection.Normalize();
                 }
             }
         }

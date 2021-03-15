@@ -15,20 +15,19 @@ namespace LegendOfZeldaClone
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
-        private readonly ArrowSkinType skinType;
-        private ISprite sprite;
-        private int width;
-        private int height;
+        private readonly ISprite sprite;
+        private readonly int width;
+        private readonly int height;
         private int lifeSpan;
 
-        public ArrowImpactProjectile(Vector2 startingLocation, ArrowSkinType skinType)
+        public ArrowImpactProjectile(Vector2 startingLocation)
         {
             Alive = true;
-
-            this.skinType = skinType;
+            sprite = PlayerProjectileSpriteFactory.Instance.CreateArrowDeathSprite();
+            width = 8;
+            height = 8;
             Location = startingLocation;
             lifeSpan = 3;
-            sprite = PlayerProjectileSpriteFactory.Instance.CreateArrowDeathSprite(skinType);
         }
 
         public void Update()

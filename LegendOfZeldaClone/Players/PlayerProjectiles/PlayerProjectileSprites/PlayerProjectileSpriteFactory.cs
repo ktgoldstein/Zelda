@@ -128,12 +128,12 @@ namespace LegendOfZeldaClone
             return new StaticProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight);
         }
 
-        public ISprite CreateArrowDeathSprite(ArrowSkinType skinType)
+        public ISprite CreateArrowDeathSprite()
         {
             int spriteWidth = 8;
             int spriteHeight = 8;
-            int xOffset = 68;
-            int yOffset = 40;
+            int xOffset = (spriteSectionWidth + atlasGap) * 2;
+            int yOffset = (spriteSectionHeight + atlasGap) * 2 + 4;
             return new StaticProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight);
         }
 
