@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Enemy;
-using LegendOfZeldaClone.Enemies.EnemyTypes;
+using LegendOfZeldaClone.Enemy;
 
 namespace LegendOfZeldaClone.Collisions
 {
