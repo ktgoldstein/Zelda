@@ -76,7 +76,7 @@ namespace LegendOfZeldaClone
             ICommand nextRoom = new NextRoom(this);
 
             KeyboardController keyboardController = new KeyboardController();
-            MouseController mouseController = new MouseController(this, nextRoom, previousRoom);
+            MouseController mouseController = new MouseController(nextRoom, previousRoom);
 
             keyboardController.RegisterCommand(Keys.Q, quitGame);
             keyboardController.RegisterCommand(Keys.S, moveDown);
