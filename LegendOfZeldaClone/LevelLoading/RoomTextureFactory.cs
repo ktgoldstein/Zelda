@@ -30,7 +30,7 @@ namespace LegendOfZeldaClone.LevelLoading
             tiles = content.Load<Texture2D>("Background");
             background = content.Load<Texture2D>("Background");
             backgroundFix = content.Load<Texture2D>("BackgroundFix");
-            miniMap = content.Load<Texture2D>("LevelLoading/Level 1");
+            miniMap = content.Load<Texture2D>("LevelLoading\\Level 1");
         }
 
         public ISprite createMiniMap()

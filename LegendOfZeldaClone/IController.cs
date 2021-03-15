@@ -38,21 +38,16 @@ namespace LegendOfZeldaClone
     }
     public class MouseController : IController
     {
-        private LegendOfZeldaDungeon myGame;
         private ICommand leftClick;
         private ICommand rightClick;
 
-        public MouseController(LegendOfZeldaDungeon game, ICommand leftClickInput, ICommand rightClickInput)
+        public MouseController(ICommand leftClickInput, ICommand rightClickInput)
         {
             leftClick = leftClickInput;
             rightClick = rightClickInput;
-            myGame = game;
         }
 
-        public void RegisterCommand(string key, ICommand command)
-        {
-            // Don't use RegisterCommand for this Controller
-        }
+        public void RegisterCommand() { }
 
         public void Update()
         {
