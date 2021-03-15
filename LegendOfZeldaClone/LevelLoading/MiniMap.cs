@@ -11,20 +11,16 @@ namespace LegendOfZeldaClone.LevelLoading
 
     public class MiniMap : ISprite
     {
-        private ISprite miniMap;
-        private Vector2 mapLocation;
+        private ISprite sprite;
+        private Vector2 location;
 
         public MiniMap(Vector2 location)
         {
-            miniMap = RoomTextureFactory.Instance.CreateMiniMap();
+            sprite = RoomTextureFactory.Instance.CreateMiniMap();
             this.location = location;
         }
+
         public void Update() { }
-
-        public void Draw(SpriteBatch spriteBatch, Vector2 vector)
-        {
-            miniMap.Draw(spriteBatch, mapLocation);
-        }
-
+        public void Draw(SpriteBatch spriteBatch, Vector2 vector) => sprite.Draw(spriteBatch, location);
     }
 }

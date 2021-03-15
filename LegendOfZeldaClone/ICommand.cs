@@ -180,7 +180,7 @@ namespace LegendOfZeldaClone
             IUsableItem woodenSword = new UsableWoodenSword(game);
             game.Player = new LinkPlayer(game, LoZHelpers.LinkStartingLocation, woodenSword);
             game.RoomListIndex = 0;
-            game.CurrentRoom = game.roomList[0];
+            game.CurrentRoom = game.RoomList[0];
             game.CurrentRoom.LoadRoom();
         }
     }
@@ -201,9 +201,9 @@ namespace LegendOfZeldaClone
                 myGame.SwitchRoomDelay = myGame.SwitchDelayLength;
             myGame.RoomListIndex--;
             if (myGame.RoomListIndex < 0)
-                myGame.RoomListIndex = myGame.roomList.Count - 1;
+                myGame.RoomListIndex = myGame.RoomList.Count - 1;
 
-            myGame.CurrentRoom = myGame.roomList[myGame.RoomListIndex];
+            myGame.CurrentRoom = myGame.RoomList[myGame.RoomListIndex];
             myGame.CurrentRoom.LoadRoom();
         }
     }
@@ -225,10 +225,10 @@ namespace LegendOfZeldaClone
                 myGame.SwitchRoomDelay = myGame.SwitchDelayLength;
 
             myGame.RoomListIndex++;
-            if (myGame.RoomListIndex >= myGame.roomList.Count)
+            if (myGame.RoomListIndex >= myGame.RoomList.Count)
                 myGame.RoomListIndex = 0;
 
-            myGame.CurrentRoom = myGame.roomList[myGame.RoomListIndex];
+            myGame.CurrentRoom = myGame.RoomList[myGame.RoomListIndex];
             myGame.CurrentRoom.LoadRoom();
         }
     }
