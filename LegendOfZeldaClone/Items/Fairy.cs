@@ -23,7 +23,6 @@ namespace LegendOfZeldaClone
         private readonly int speed;
         private int timer;
         private readonly Random rnd;
-        private int switchDirection;
 
         public Fairy(Vector2 location)
         {
@@ -43,27 +42,9 @@ namespace LegendOfZeldaClone
             Location += speed * FairyDirection;
             timer++;
 
-            if (Location.Y > LoZHelpers.GameHeight)
-            {
-                FairyDirection = new Vector2(FairyDirection.X, -1);
-            }
-            else if (Location.Y < LoZHelpers.Scale(0))
-            {
-                FairyDirection = new Vector2(FairyDirection.X, 1);
-            }
-
-            if (Location.X > LoZHelpers.GameWidth)
-            {
-                FairyDirection = new Vector2(-1, FairyDirection.Y);
-            }
-            else if (Location.X < LoZHelpers.Scale(0))
-            {
-                FairyDirection = new Vector2(1, FairyDirection.Y);
-            }
-
             if (timer == 20)
             {
-                switchDirection = rnd.Next(1, 8);
+                int switchDirection = rnd.Next(1, 8);
                 switch (switchDirection)
                 {
                     case 1:
@@ -93,6 +74,7 @@ namespace LegendOfZeldaClone
                     default:
                         break;
                 }
+                FairyDirection.Normalize();
                 timer = 0;
             }
 

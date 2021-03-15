@@ -19,13 +19,13 @@ namespace LegendOfZeldaClone.Objects
         public bool IsBombable { get; }
         public bool IsAlive { get; set; }
 
-        private ISprite dragonStatue;
+        private ISprite sprite;
         private readonly int height;
         private readonly int width;
 
         public DragonStatue(Vector2 location)
         {
-            dragonStatue = ObjectSpriteFactory.Instance.CreateDragonStatue();
+            sprite = ObjectSpriteFactory.Instance.CreateDragonStatue();
             Location = location;
             height = 16;
             width = 16;
@@ -38,7 +38,7 @@ namespace LegendOfZeldaClone.Objects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            dragonStatue.Draw(spriteBatch, Location);
+            sprite.Draw(spriteBatch, Location);
         }
     }
 }

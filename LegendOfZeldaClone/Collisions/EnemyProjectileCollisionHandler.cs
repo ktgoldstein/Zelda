@@ -14,34 +14,22 @@
                 CurrentEnemyProjectile.Alive = false;
             }
         }
-        public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
-        {
-            //nothing will happen
-        }
+        public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) {}
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
             if (CurrentEnemyProjectile is Enemy.EnemyBoomerang)
             {
                 Enemy.EnemyBoomerang boomerang = CurrentEnemyProjectile as Enemy.EnemyBoomerang;
-                if (enemy is Enemy.Goriya)
+                if (enemy is Enemy.Goriya && enemy == boomerang.goriya)
                 {
-                    if (enemy == boomerang.goriya)
-                    {
                         CurrentEnemyProjectile.Alive = false;
                         Enemy.Goriya goriya = boomerang.goriya as Enemy.Goriya;
                         goriya.HasBoomerang = false;
-                    }
                 }
             }
         }
-        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
-        {
-            //nothing will happen
-        }
-        public void HandleItemCollision(IItem item, Direction direction)
-        {
-            //nothing will happen
-        }
+        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) {}
+        public void HandleItemCollision(IItem item, Direction direction) {}
 
         public void HandleObjectCollision(IObject block, Direction direction)
         {

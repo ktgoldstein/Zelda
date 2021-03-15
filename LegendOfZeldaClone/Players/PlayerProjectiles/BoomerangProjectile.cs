@@ -32,13 +32,13 @@ namespace LegendOfZeldaClone
             height = 8;
 
             this.game = game;
+            this.link = link;
             Location = startingLocation;
             speed = 8;
             lifeSpan = 10;
             sprite = PlayerProjectileSpriteFactory.Instance.CreateBoomerangSprite(skinType);
-            DirectionBasedSetUp(direction);
 
-            this.link = link;
+            DirectionBasedSetUp(direction);
         }
 
         public void Update()
@@ -65,7 +65,7 @@ namespace LegendOfZeldaClone
             {
                 case Direction.Down:
                     velocity = new Vector2(0, LoZHelpers.Scale(speed));
-                    Location += new Vector2(LoZHelpers.Scale(5), 0);
+                    Location += new Vector2(LoZHelpers.Scale(5), link.Height);
                     break;
                 case Direction.Up:
                     velocity = new Vector2(0, -LoZHelpers.Scale(speed));
@@ -77,7 +77,7 @@ namespace LegendOfZeldaClone
                     break;
                 case Direction.Right:
                     velocity = new Vector2(LoZHelpers.Scale(speed), 0);
-                    Location += new Vector2(0, LoZHelpers.Scale(7));
+                    Location += new Vector2(link.Width, LoZHelpers.Scale(7));
                     break;
             }
         }

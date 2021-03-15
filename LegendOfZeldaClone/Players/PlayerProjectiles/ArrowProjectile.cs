@@ -62,21 +62,21 @@ namespace LegendOfZeldaClone
                     sprite = PlayerProjectileSpriteFactory.Instance.CreateArrowLeftSprite(skinType);
                     velocity = new Vector2(-LoZHelpers.Scale(speed), 0);
                     Location += new Vector2(0, LoZHelpers.Scale(7));
-                    width = 8;
-                    height = 16;
+                    width = 16;
+                    height = 8;
                     break;
                 case Direction.Right:
                     sprite = PlayerProjectileSpriteFactory.Instance.CreateArrowRightSprite(skinType);
                     velocity = new Vector2(LoZHelpers.Scale(speed), 0);
                     Location += new Vector2(0, LoZHelpers.Scale(7));
-                    width = 8;
-                    height = 16;
+                    width = 16;
+                    height = 8;
                     break;
             }
         }
         public void SpawnArrowExplosion()
         {
-            game.PlayerProjectilesQueue.Add(new ArrowImpactProjectile(Location, skinType));
+            game.PlayerProjectilesQueue.Add(new ArrowImpactProjectile(Location));
             Alive = false;
         }
     }

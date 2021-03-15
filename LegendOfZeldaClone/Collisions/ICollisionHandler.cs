@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-
-namespace LegendOfZeldaClone
+﻿namespace LegendOfZeldaClone
 {
     public interface ICollisionHandler
     {
