@@ -30,7 +30,6 @@ namespace LegendOfZeldaClone.Enemy
         private int invincibleFrames = 0;
         private readonly int width;
         private readonly int height;
-        private Vector2 knockbackForce = Vector2.Zero;
         private SpriteFont font;
         private String target = "Hit me, I dare you.\n You won't.";
         private int current = 0;
@@ -61,10 +60,7 @@ namespace LegendOfZeldaClone.Enemy
             spriteBatch.DrawString(font, target.Substring(0,current), Location + new Vector2(-192, -96), Color.White);
         }
 
-        public void Knockback(Vector2 direction)
-        {
-            knockbackForce = direction*0;
-        }
+        public void Knockback(Vector2 direction) { }
 
         public void Update()
         {

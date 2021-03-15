@@ -11,7 +11,6 @@ namespace LegendOfZeldaClone.Enemy
     {
         public int AttackStat { get; }
         public int Health { get; set; }
-        private int maxHealth = LoZHelpers.WizardHP;
         public Vector2 direction;
         public Vector2 Direction { get { return direction;} set { direction = value;} }
         public bool Invincible { get; set; }
@@ -30,7 +29,6 @@ namespace LegendOfZeldaClone.Enemy
         private ISprite wizardFireSprite;
         private readonly int width;
         private readonly int height;
-        private Vector2 knockbackForce = Vector2.Zero;
         public Wizard Wizard;
         private int wizardHealth;
         public WizardFire(LegendOfZeldaDungeon game, Vector2 location, Wizard wizard)
@@ -52,10 +50,7 @@ namespace LegendOfZeldaClone.Enemy
 
         public void Draw(SpriteBatch spriteBatch) => wizardFireSprite.Draw(spriteBatch, Location);
 
-        public void Knockback(Vector2 direction)
-        {
-            knockbackForce = direction*0;
-        }
+        public void Knockback(Vector2 direction) { }
 
         public void Update()
         {
