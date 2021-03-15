@@ -16,7 +16,7 @@ namespace LegendOfZeldaClone.LevelLoading
 
         public MiniMap(Vector2 location)
         {
-            miniMap = RoomTextureFactory.Instance.createMiniMap();
+            miniMap = RoomTextureFactory.Instance.CreateMiniMap();
             this.location = location;
         }
         public void Update() { }
