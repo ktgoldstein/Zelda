@@ -236,6 +236,198 @@
 /processorParam:TextureFormat=Compressed
 /build:Font.spritefont
 
+#begin GameSounds/LOZArrowAndBoomerangLoopSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZArrowAndBoomerangLoopSound.wav
+
+#begin GameSounds/LOZBlueCandleUsingSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZBlueCandleUsingSound.wav
+
+#begin GameSounds/LOZBombExplodingSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZBombExplodingSound.wav
+
+#begin GameSounds/LOZBombPlacingSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZBombPlacingSound.wav
+
+#begin GameSounds/LOZBossScreamAquamentusSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZBossScreamAquamentusSound.wav
+
+#begin GameSounds/LOZBossTakeDamageSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZBossTakeDamageSound.wav
+
+#begin GameSounds/LOZDoorUnlockSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZDoorUnlockSound.wav
+
+#begin GameSounds/LOZDungeonThemeLoopMusic.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZDungeonThemeLoopMusic.wav
+
+#begin GameSounds/LOZEnemyDyingSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZEnemyDyingSound.wav
+
+#begin GameSounds/LOZEnemyTakeDamageSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZEnemyTakeDamageSound.wav
+
+#begin GameSounds/LOZGameOverThemeLoopMusic.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZGameOverThemeLoopMusic.wav
+
+#begin GameSounds/LOZGetInventoryItemOrFairyOrClockSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZGetInventoryItemOrFairyOrClockSound.wav
+
+#begin GameSounds/LOZHeartPickupSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZHeartPickupSound.wav
+
+#begin GameSounds/LOZKeyAppearSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZKeyAppearSound.wav
+
+#begin GameSounds/LOZLinkDyingSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZLinkDyingSound.wav
+
+#begin GameSounds/LOZLinkLowHealthLoopSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZLinkLowHealthLoopSound.wav
+
+#begin GameSounds/LOZLinkTakeDamageSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZLinkTakeDamageSound.wav
+
+#begin GameSounds/LOZMagicalRodUsingSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZMagicalRodUsingSound.wav
+
+#begin GameSounds/LOZNewItemAcquiredFanfareSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZNewItemAcquiredFanfareSound.wav
+
+#begin GameSounds/LOZRecorderPlayingSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZRecorderPlayingSound.wav
+
+#begin GameSounds/LOZRefillRupeesOrHeartsLoopSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZRefillRupeesOrHeartsLoopSound.wav
+
+#begin GameSounds/LOZRupeePickupSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZRupeePickupSound.wav
+
+#begin GameSounds/LOZSecretDiscoveredSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZSecretDiscoveredSound.wav
+
+#begin GameSounds/LOZShieldDeflectingSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZShieldDeflectingSound.wav
+
+#begin GameSounds/LOZSwordBeamShootingSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZSwordBeamShootingSound.wav
+
+#begin GameSounds/LOZSwordCombinedSlashWithBeamShootingSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZSwordCombinedSlashWithBeamShootingSound.wav
+
+#begin GameSounds/LOZSwordSlashSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZSwordSlashSound.wav
+
+#begin GameSounds/LOZTextAndHeartRefillAndRupeeCountChangeLoopSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZTextAndHeartRefillAndRupeeCountChangeLoopSound.wav
+
+#begin GameSounds/LOZTextSlowLoopSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZTextSlowLoopSound.wav
+
+#begin GameSounds/LOZTriforceAcquiredFanfareMusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZTriforceAcquiredFanfareMusic.mp3
+
+#begin GameSounds/LOZTriforceAcquiredFanfareMusic.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZTriforceAcquiredFanfareMusic.wav
+
+#begin GameSounds/LOZWalkingOnStairsSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZWalkingOnStairsSound.wav
+
 #begin LevelLoading/Level 1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -253,27 +445,6 @@
 
 #begin LevelLoading/room01.csv
 /copy:LevelLoading/room01.csv
-
-#begin LevelLoading/room10.csv
-/copy:LevelLoading/room10.csv
-
-#begin LevelLoading/room11.csv
-/copy:LevelLoading/room11.csv
-
-#begin LevelLoading/room12.csv
-/copy:LevelLoading/room12.csv
-
-#begin LevelLoading/room13.csv
-/copy:LevelLoading/room13.csv
-
-#begin LevelLoading/room14.csv
-/copy:LevelLoading/room14.csv
-
-#begin LevelLoading/room15.csv
-/copy:LevelLoading/room15.csv
-
-#begin LevelLoading/room16.csv
-/copy:LevelLoading/room16.csv
 
 #begin LevelLoading/room02.csv
 /copy:LevelLoading/room02.csv
@@ -298,6 +469,27 @@
 
 #begin LevelLoading/room09.csv
 /copy:LevelLoading/room09.csv
+
+#begin LevelLoading/room10.csv
+/copy:LevelLoading/room10.csv
+
+#begin LevelLoading/room11.csv
+/copy:LevelLoading/room11.csv
+
+#begin LevelLoading/room12.csv
+/copy:LevelLoading/room12.csv
+
+#begin LevelLoading/room13.csv
+/copy:LevelLoading/room13.csv
+
+#begin LevelLoading/room14.csv
+/copy:LevelLoading/room14.csv
+
+#begin LevelLoading/room15.csv
+/copy:LevelLoading/room15.csv
+
+#begin LevelLoading/room16.csv
+/copy:LevelLoading/room16.csv
 
 #begin LevelLoading/SecretRoom.csv
 /copy:LevelLoading/SecretRoom.csv
