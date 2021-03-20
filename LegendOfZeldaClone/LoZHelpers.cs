@@ -130,9 +130,11 @@ namespace LegendOfZeldaClone
             return vector;
         }
         public static Vector2 LinkStartingLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(4 * 16 + 80));
-        public static Vector2 MiniMapLocation => new Vector2(GameWidth / 24, 192 / 4);
+        public static Vector2 MiniMapLocation => new Vector2(GameWidth / 24, HUDHeight / 4);
         public static int GameHeight => Scale(240);
         public static int GameWidth => Scale(256);
+        public static int HUDHeight => Scale(64);
+        public static int TileSize => Scale(16);
         public static int LinkInvincibilityFrames => 24;
         public static int LinkKnockbackFrames => 8;
         public static int SpriteSizeMultiplier => 3;
