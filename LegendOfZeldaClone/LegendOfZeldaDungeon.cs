@@ -33,6 +33,7 @@ namespace LegendOfZeldaClone
         public int RoomListIndex = 0;
         public Room CurrentRoom;
         public MiniMap DungeonMiniMap;
+        public LevelName DungeonLevelName;
 
         public int SwitchRoomDelay;
         public int SwitchDelayLength = 5;
@@ -149,6 +150,7 @@ namespace LegendOfZeldaClone
             CurrentRoom.LoadRoom();
 
             DungeonMiniMap = new MiniMap(LoZHelpers.MiniMapLocation);
+            DungeonLevelName = new LevelName(LoZHelpers.LevelLocation);
         }
 
         protected override void Update(GameTime gameTime)
@@ -223,6 +225,7 @@ namespace LegendOfZeldaClone
             
             CurrentRoom.Draw(_spriteBatch);
             DungeonMiniMap.Draw(_spriteBatch, LoZHelpers.MiniMapLocation);
+            DungeonLevelName.Draw(_spriteBatch, LoZHelpers.LevelLocation);
 
             foreach (IObject block in Objects)
                 block.Draw(_spriteBatch);
