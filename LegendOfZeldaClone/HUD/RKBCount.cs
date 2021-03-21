@@ -23,9 +23,9 @@ namespace LegendOfZeldaClone
 
         public RKBCount()
         {
-            rupeeCountSprite = LevelLoading.RoomTextureFactory.Instance.CreateRupeeCount();
-            keyCountSprite = LevelLoading.RoomTextureFactory.Instance.CreateKeyCount();
-            bombCountSprite = LevelLoading.RoomTextureFactory.Instance.CreateBombCount();
+            rupeeCountSprite = LevelLoading.HUDTextureFactory.Instance.CreateRupeeCount();
+
+            bombCountSprite = LevelLoading.HUDTextureFactory.Instance.CreateBombCount();
             xSprite = LevelLoading.RoomTextureFactory.Instance.CreateX();
             zeroSprite = LevelLoading.RoomTextureFactory.Instance.Create0();
             oneSprite = LevelLoading.RoomTextureFactory.Instance.Create1();
