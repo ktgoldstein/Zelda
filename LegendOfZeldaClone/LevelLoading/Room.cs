@@ -26,8 +26,8 @@ namespace LegendOfZeldaClone.LevelLoading
         {
             this.game = game;
             this.fileLocation = fileLocation;
-            tiles = RoomTextureFactory.Instance.CreateTiles();
-            walls = RoomTextureFactory.Instance.CreateWalls();
+            tiles = HUDTextureFactory.Instance.CreateTiles();
+            walls = HUDTextureFactory.Instance.CreateWalls();
             backgroundType = -1;
             wallType = -1;
         }
