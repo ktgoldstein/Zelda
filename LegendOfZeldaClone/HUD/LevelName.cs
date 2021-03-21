@@ -16,20 +16,20 @@ namespace LegendOfZeldaClone
 
         public LevelName()
         {
-<<<<<<< Updated upstream:LegendOfZeldaClone/HUD/LevelName.cs
-            LSprite = LevelLoading.RoomTextureFactory.Instance.CreateL();
-            ESprite = LevelLoading.RoomTextureFactory.Instance.CreateE();
-            VSprite = LevelLoading.RoomTextureFactory.Instance.CreateV();
-            DashSprite = LevelLoading.RoomTextureFactory.Instance.CreateDash();
-            OneSprite = LevelLoading.RoomTextureFactory.Instance.Create1();
-=======
+
             LSprite = LevelLoading.HUDTextureFactory.Instance.CreateL();
             ESprite = LevelLoading.HUDTextureFactory.Instance.CreateE();
             VSprite = LevelLoading.HUDTextureFactory.Instance.CreateV();
             DashSprite = LevelLoading.HUDTextureFactory.Instance.CreateDash();
-            OneSprite = LevelLoading.HUDTextureFactory.Instance.CreateOne();
+            OneSprite = LevelLoading.HUDTextureFactory.Instance.Create1();
+
+            LSprite = LevelLoading.HUDTextureFactory.Instance.CreateL();
+            ESprite = LevelLoading.HUDTextureFactory.Instance.CreateE();
+            VSprite = LevelLoading.HUDTextureFactory.Instance.CreateV();
+            DashSprite = LevelLoading.HUDTextureFactory.Instance.CreateDash();
+            OneSprite = LevelLoading.HUDTextureFactory.Instance.Create1();
             this.vector = location;
->>>>>>> Stashed changes:LegendOfZeldaClone/LevelLoading/LevelName.cs
+
         }
 
         public void Update() { }
