@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Diagnostics;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
 namespace LegendOfZeldaClone.LevelLoading
@@ -11,13 +6,13 @@ namespace LegendOfZeldaClone.LevelLoading
 
     public class MapSprite : ISprite
     {
-        private int columns;
-        private int rows;
+        private readonly int columns;
+        private readonly int rows;
         private int currentFrame = 0;
-        private int totalFrames;
-        private Texture2D texture;
+        private readonly int totalFrames;
+        private readonly Texture2D texture;
         private int frameDelay = 0;
-        private float animationSpeed;
+        private readonly float animationSpeed;
 
 
         public MapSprite(Texture2D texture, int columns, int rows, int totalFrames, float animationSpeed = 5)
