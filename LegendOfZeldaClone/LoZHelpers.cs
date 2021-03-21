@@ -94,11 +94,6 @@ namespace LegendOfZeldaClone
         Impassable = 2,
     }
 
-    public enum SoundEffects
-    {
-
-    }
-
     public static class LoZHelpers
     {
         public static Vector2 DirectionToVector(Direction direction)
