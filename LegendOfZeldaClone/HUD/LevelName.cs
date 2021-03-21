@@ -10,19 +10,17 @@ namespace LegendOfZeldaClone
         private readonly ISprite VSprite;
         private readonly ISprite DashSprite;
         private readonly ISprite OneSprite;
-        private Vector2 vector;
         private readonly int space1 = 7;
         private readonly int space2 = 8;
         private readonly int dashHeight = 4;
 
-        public LevelName(Vector2 location)
+        public LevelName()
         {
             LSprite = LevelLoading.RoomTextureFactory.Instance.CreateL();
             ESprite = LevelLoading.RoomTextureFactory.Instance.CreateE();
             VSprite = LevelLoading.RoomTextureFactory.Instance.CreateV();
             DashSprite = LevelLoading.RoomTextureFactory.Instance.CreateDash();
-            OneSprite = LevelLoading.RoomTextureFactory.Instance.CreateOne();
-            this.vector = location;
+            OneSprite = LevelLoading.RoomTextureFactory.Instance.Create1();
         }
 
         public void Update() { }

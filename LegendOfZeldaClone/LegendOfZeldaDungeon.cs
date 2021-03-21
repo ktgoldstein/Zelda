@@ -150,7 +150,7 @@ namespace LegendOfZeldaClone
             CurrentRoom.LoadRoom();
 
             DungeonMiniMap = new MiniMap(LoZHelpers.MiniMapLocation);
-            DungeonLevelName = new LevelName(LoZHelpers.LevelLocation);
+            DungeonLevelName = new LevelName();
         }
 
         protected override void Update(GameTime gameTime)
