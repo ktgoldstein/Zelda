@@ -16,20 +16,11 @@ namespace LegendOfZeldaClone
 
         public LevelName()
         {
-
-            LSprite = LevelLoading.HUDTextureFactory.Instance.CreateL();
-            ESprite = LevelLoading.HUDTextureFactory.Instance.CreateE();
-            VSprite = LevelLoading.HUDTextureFactory.Instance.CreateV();
-            DashSprite = LevelLoading.HUDTextureFactory.Instance.CreateDash();
-            OneSprite = LevelLoading.HUDTextureFactory.Instance.Create1();
-
-            LSprite = LevelLoading.HUDTextureFactory.Instance.CreateL();
-            ESprite = LevelLoading.HUDTextureFactory.Instance.CreateE();
-            VSprite = LevelLoading.HUDTextureFactory.Instance.CreateV();
-            DashSprite = LevelLoading.HUDTextureFactory.Instance.CreateDash();
-            OneSprite = LevelLoading.HUDTextureFactory.Instance.Create1();
-            this.vector = location;
-
+            LSprite = HUDTextureFactory.Instance.CreateL();
+            ESprite = HUDTextureFactory.Instance.CreateE();
+            VSprite = HUDTextureFactory.Instance.CreateV();
+            DashSprite = HUDTextureFactory.Instance.CreateDash();
+            OneSprite = HUDTextureFactory.Instance.Create1();
         }
 
         public void Update() { }

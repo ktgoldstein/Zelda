@@ -23,20 +23,20 @@ namespace LegendOfZeldaClone
 
         public RKBCount()
         {
-            rupeeCountSprite = LevelLoading.HUDTextureFactory.Instance.CreateRupeeCount();
-
-            bombCountSprite = LevelLoading.HUDTextureFactory.Instance.CreateBombCount();
-            xSprite = LevelLoading.RoomTextureFactory.Instance.CreateX();
-            zeroSprite = LevelLoading.RoomTextureFactory.Instance.Create0();
-            oneSprite = LevelLoading.RoomTextureFactory.Instance.Create1();
-            twoSprite = LevelLoading.RoomTextureFactory.Instance.Create2();
-            threeSprite = LevelLoading.RoomTextureFactory.Instance.Create3();
-            fourSprite = LevelLoading.RoomTextureFactory.Instance.Create4();
-            fiveSprite = LevelLoading.RoomTextureFactory.Instance.Create5();
-            sixSprite = LevelLoading.RoomTextureFactory.Instance.Create6();
-            sevenSprite = LevelLoading.RoomTextureFactory.Instance.Create7();
-            eightSprite = LevelLoading.RoomTextureFactory.Instance.Create8();
-            nineSprite = LevelLoading.RoomTextureFactory.Instance.Create9();
+            rupeeCountSprite = HUDTextureFactory.Instance.CreateRupeeCount();
+            keyCountSprite = HUDTextureFactory.Instance.CreateBombCount();
+            bombCountSprite = HUDTextureFactory.Instance.CreateBombCount();
+            xSprite = HUDTextureFactory.Instance.CreateX();
+            zeroSprite = HUDTextureFactory.Instance.Create0();
+            oneSprite = HUDTextureFactory.Instance.Create1();
+            twoSprite = HUDTextureFactory.Instance.Create2();
+            threeSprite = HUDTextureFactory.Instance.Create3();
+            fourSprite = HUDTextureFactory.Instance.Create4();
+            fiveSprite = HUDTextureFactory.Instance.Create5();
+            sixSprite = HUDTextureFactory.Instance.Create6();
+            sevenSprite = HUDTextureFactory.Instance.Create7();
+            eightSprite = HUDTextureFactory.Instance.Create8();
+            nineSprite = HUDTextureFactory.Instance.Create9();
         }
 
         public void Update() { }
