@@ -37,6 +37,8 @@ namespace LegendOfZeldaClone
         public RupeeCount PlayerRupeeCount;
         public KeyCount PlayerKeyCount;
         public BombCount PlayerBombCount;
+        public BBox InventoryBoxB;
+        public ABox InventoryBoxA;
 
         public int SwitchRoomDelay;
         public int SwitchDelayLength = 5;
@@ -158,6 +160,8 @@ namespace LegendOfZeldaClone
             PlayerRupeeCount = new RupeeCount();
             PlayerKeyCount = new KeyCount();
             PlayerBombCount = new BombCount();
+            InventoryBoxB = new BBox();
+            InventoryBoxA = new ABox();
         }
 
         protected override void Update(GameTime gameTime)
@@ -236,6 +240,8 @@ namespace LegendOfZeldaClone
             PlayerRupeeCount.Draw(_spriteBatch, LoZHelpers.RupeeCountLocation);
             PlayerKeyCount.Draw(_spriteBatch, LoZHelpers.KeyCountLocation);
             PlayerBombCount.Draw(_spriteBatch, LoZHelpers.BombCountLocation);
+            InventoryBoxB.Draw(_spriteBatch, LoZHelpers.BBoxLocation);
+            InventoryBoxA.Draw(_spriteBatch, LoZHelpers.ABoxLocation);
 
             foreach (IObject block in Objects)
                 block.Draw(_spriteBatch);

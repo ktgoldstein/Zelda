@@ -1,16 +1,16 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone
 {
-    public class BBox : ISprite
+    public class ABox : ISprite
     {
         private readonly ISprite bBoxSprite;
         public ISprite CurrItem { get; set; }
 
-        public BBox()
+        public ABox()
         {
-            bBoxSprite = HUDTextureFactory.Instance.CreateBBox();
+            bBoxSprite = HUDTextureFactory.Instance.CreateABox();
         }
 
         public void Update() { }

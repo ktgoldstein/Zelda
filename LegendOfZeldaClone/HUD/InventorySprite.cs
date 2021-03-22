@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone
 {
-    public class TextSprite : ISprite
+    public class InventorySprite : ISprite
     {
         private readonly Texture2D texture;
         private readonly int xOffset;
@@ -11,7 +11,7 @@ namespace LegendOfZeldaClone
         private readonly int width;
         private readonly int height;
 
-        public TextSprite(Texture2D texture, int xOffset, int yOffset, int width, int height)
+        public InventorySprite(Texture2D texture, int xOffset, int yOffset, int width, int height)
         {
             this.texture = texture;
             this.xOffset = xOffset;

@@ -132,10 +132,13 @@ namespace LegendOfZeldaClone
         public static Vector2 LinkStartingLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(4 * 16 + 80));
         public static Vector2 MiniMapLocation => new Vector2(GameWidth / 24, HUDHeight / 4);
         public static Vector2 LevelNameLocation => new Vector2(MiniMapLocation.X, MiniMapLocation.Y - Scale(9));
-        public static Vector2 RupeeCountLocation => new Vector2(MiniMapLocation.X + Scale(73), MiniMapLocation.Y + Scale(4));
+        public static Vector2 RupeeCountLocation => new Vector2(MiniMapLocation.X + Scale(77), MiniMapLocation.Y + Scale(4));
         public static Vector2 KeyCountLocation => new Vector2(RupeeCountLocation.X, RupeeCountLocation.Y + Scale(17));
         public static Vector2 BombCountLocation => new Vector2(KeyCountLocation.X, KeyCountLocation.Y + Scale(8));
         public static Vector2 BBoxLocation => new Vector2(RupeeCountLocation.X + Scale(36), RupeeCountLocation.Y);
+        public static Vector2 BBoxItemLocation => new Vector2(BBoxLocation.X + Scale(5), BBoxLocation.Y + Scale(8));
+        public static Vector2 ABoxLocation => new Vector2(BBoxLocation.X + Scale(25), BBoxLocation.Y);
+        public static Vector2 ABoxItemLocation => new Vector2(ABoxLocation.X + Scale(5), ABoxLocation.Y + Scale(8));
         public static int GameHeight => Scale(240);
         public static int GameWidth => Scale(256);
         public static int HUDHeight => Scale(64);
