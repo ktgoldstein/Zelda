@@ -133,6 +133,7 @@ namespace LegendOfZeldaClone
 
             PlayerProjectileSpriteFactory.Instance.LoadAllTextures(Content);
 
+            RoomTextureFactory.Instance.LoadAllTextures(Content);
             HUDTextureFactory.Instance.LoadAllTextures(Content);
 
             PlayerProjectilesQueue = new List<IPlayerProjectile>();
