@@ -41,5 +41,6 @@ namespace LegendOfZeldaClone
         public ISprite Create7() => new TextSprite(inventory, 591, 117, 8, 8);
         public ISprite Create8() => new TextSprite(inventory, 600, 117, 8, 8);
         public ISprite Create9() => new TextSprite(inventory, 609, 117, 8, 8);
+        public ISprite CreateBBox() => new TextSprite(inventory, 381, 27, 18, 29);
     }
 }

@@ -34,6 +34,9 @@ namespace LegendOfZeldaClone
         public Room CurrentRoom;
         public MiniMap DungeonMiniMap;
         public LevelName DungeonLevelName;
+        public RupeeCount PlayerRupeeCount;
+        public KeyCount PlayerKeyCount;
+        public BombCount PlayerBombCount;
 
         public int SwitchRoomDelay;
         public int SwitchDelayLength = 5;
@@ -152,6 +155,9 @@ namespace LegendOfZeldaClone
 
             DungeonMiniMap = new MiniMap(LoZHelpers.MiniMapLocation);
             DungeonLevelName = new LevelName();
+            PlayerRupeeCount = new RupeeCount();
+            PlayerKeyCount = new KeyCount();
+            PlayerBombCount = new BombCount();
         }
 
         protected override void Update(GameTime gameTime)
@@ -227,6 +233,9 @@ namespace LegendOfZeldaClone
             CurrentRoom.Draw(_spriteBatch);
             DungeonMiniMap.Draw(_spriteBatch, LoZHelpers.MiniMapLocation);
             DungeonLevelName.Draw(_spriteBatch, LoZHelpers.LevelNameLocation);
+            PlayerRupeeCount.Draw(_spriteBatch, LoZHelpers.RupeeCountLocation);
+            PlayerKeyCount.Draw(_spriteBatch, LoZHelpers.KeyCountLocation);
+            PlayerBombCount.Draw(_spriteBatch, LoZHelpers.BombCountLocation);
 
             foreach (IObject block in Objects)
                 block.Draw(_spriteBatch);
