@@ -13,7 +13,7 @@ namespace LegendOfZeldaClone
         {
             bombCountSprite = HUDTextureFactory.Instance.CreateBombCount();
             xSprite = HUDTextureFactory.Instance.CreateX();
-            numberSprite = HUDTextureFactory.Instance.Create0();
+            numberSprite = HUDTextureFactory.Instance.CreateNumber(0);
         }
 
         public void Update() { }

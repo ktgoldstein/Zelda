@@ -51,7 +51,10 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.Health += 2;
             }
             else if (item is Heart)
-                CurrentPlayer.Health++;
+                if (CurrentPlayer.Health != CurrentPlayer.MaxHealth)
+                {
+                    CurrentPlayer.Health++;
+                }
             else if (item is Fairy)
                 CurrentPlayer.Health = CurrentPlayer.MaxHealth;
         }

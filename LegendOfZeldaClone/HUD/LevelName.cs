@@ -11,7 +11,7 @@ namespace LegendOfZeldaClone
         public LevelName()
         {
             levelNameSprite = HUDTextureFactory.Instance.CreateLevelName();
-            oneSprite = HUDTextureFactory.Instance.Create1();
+            oneSprite = HUDTextureFactory.Instance.CreateNumber(1);
         }
 
         public void Update() { }
