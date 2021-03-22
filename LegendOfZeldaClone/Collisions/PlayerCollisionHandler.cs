@@ -50,6 +50,10 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.MaxHealth += 2;
                 CurrentPlayer.Health += 2;
             }
+            else if (item is Heart)
+                CurrentPlayer.Health++;
+            else if (item is Fairy)
+                CurrentPlayer.Health = CurrentPlayer.MaxHealth;
         }
 
         public void HandleObjectCollision(IObject block, Direction direction)
