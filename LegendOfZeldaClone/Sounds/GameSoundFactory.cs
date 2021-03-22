@@ -29,7 +29,7 @@ namespace LegendOfZeldaClone
             allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZEnemyDyingSound.wav"));
             allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZEnemyTakeDamageSound.wav"));
             allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZGetInventoryItemOrFairyOrClockSound.wav"));
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZHeartPickupSound.wav"));
+            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZHeartOrKeyPickupSound.wav"));
             allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZKeyAppearSound.wav"));
             allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZLinkDyingSound.wav"));
             allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZLinkLowHealthLoopSound.wav"));
@@ -55,28 +55,55 @@ namespace LegendOfZeldaClone
         }
 
         //Below: get methods--STILL UNFINISHED--also needs to be organized
+        //Organizational note: Pickups & Items
         public SoundEffect GetHeartPickupSoundEffect() => allSoundEffects[0];
         public SoundEffect GetRupeePickupSoundEffect() => allSoundEffects[0];
         public SoundEffect GetClockPickupSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetKeyPickupSoundEffect() => allSoundEffects[0];
+        
         public SoundEffect GetImportantItemPickupSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetRupeeAddedToInventorySoundEffect() => allSoundEffects[0];
+        public SoundEffect GetItemAppearingSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetNewImportantItemFanfareSoundEffect() => allSoundEffects[0];
+
+        //Organizational note: Using Items
         public SoundEffect GetArrowShootingSoundEffect() => allSoundEffects[0];
         public SoundEffect GetSwordSlashSoundEffect() => allSoundEffects[0];
         public SoundEffect GetSwordBeamSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetSwordCombinedBeamAndSlashSoundEffect() => allSoundEffects[0];
         public SoundEffect GetBombPlacingSoundEffect() => allSoundEffects[0];
         public SoundEffect GetBombExplodingSoundEffect() => allSoundEffects[0];
         public SoundEffect GetArrowSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetShieldDeflectingSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetBoomerangFlyingSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetBlueCandleSoundEffect() => allSoundEffects[0];
+
+
+
+        //Organizational note: Link/enemy/boss sound effects
         public SoundEffect GetLinkTakingDamageSoundEffect() => allSoundEffects[0];
         public SoundEffect GetEnemyTakingDamageSoundEffect() => allSoundEffects[0];
         public SoundEffect GetBossTakingDamageSoundEffect() => allSoundEffects[0]; 
-        //^note to self: should this be GetAquamentusTakingDamageSoundEffect()?
-        public SoundEffect GetLowHealthBeepingSoundEffect() => allSoundEffects[0];
-        public SoundEffect GetRupeeAddedToInventorySoundEffect() => allSoundEffects[0];
-        public SoundEffect GetSecretRevealedSoundEffect() => allSoundEffects[0];
-        public SoundEffect GetItemAppearingSoundEffect() => allSoundEffects[0];
-        public SoundEffect GetWalkingOnStairsSoundEffect() => allSoundEffects[0];
         public SoundEffect GetAquamentusScreamingSoundEffect() => allSoundEffects[0];
-        //^similar note as before: should this be GetBossScreamingSoundEffect()?
         public SoundEffect GetLinkDyingSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetEnemyDyingSoundEffect() => allSoundEffects[0];
 
+
+
+
+        //Organizational note: Misc sounds
+        public SoundEffect GetSecretRevealedSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetLowHealthBeepingSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetWalkingOnStairsSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetDoorUnlockingSoundEffect() => allSoundEffects[0];
+
+
+
+        public SoundEffect GetSoundEffect() => allSoundEffects[0];
+
+
+        public Song GetDungeonThemeMusic() => allGameMusic[0];
+        public Song GetGameOverThemeMusic() => allGameMusic[1];
+        public Song GetTriforceAcquiredFanfareMusic() => allGameMusic[2];
     }
 }
