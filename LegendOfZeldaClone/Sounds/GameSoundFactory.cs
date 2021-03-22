@@ -54,7 +54,6 @@ namespace LegendOfZeldaClone
             allGameMusic.Add(content.Load<Song>("Content/GameSounds/LOZTriforceAcquiredFanfareMusic.wav")); //2
         }
 
-        //Below: get methods--STILL UNFINISHED--also needs to be organized
         //Organizational note: Item Pickups & Inventory & Related Effects
         public SoundEffect GetHeartPickupSoundEffect() => allSoundEffects[10];
         public SoundEffect GetRupeePickupSoundEffect() => allSoundEffects[19];
@@ -80,12 +79,12 @@ namespace LegendOfZeldaClone
         public SoundEffect GetSwordSlashSoundEffect() => allSoundEffects[24];
 
         //Organizational note: Link/enemy/boss sound effects
-        public SoundEffect GetLinkTakingDamageSoundEffect() => allSoundEffects[0];
-        public SoundEffect GetEnemyTakingDamageSoundEffect() => allSoundEffects[0];
-        public SoundEffect GetBossTakingDamageSoundEffect() => allSoundEffects[0]; //used for all bosses in the game
-        public SoundEffect GetAquamentusScreamingSoundEffect() => allSoundEffects[0]; //unique to Aquamentus and a few other bosses
-        public SoundEffect GetLinkDyingSoundEffect() => allSoundEffects[0];
-        public SoundEffect GetEnemyDyingSoundEffect() => allSoundEffects[0];
+        public SoundEffect GetLinkTakingDamageSoundEffect() => allSoundEffects[14];
+        public SoundEffect GetEnemyTakingDamageSoundEffect() => allSoundEffects[8];
+        public SoundEffect GetBossTakingDamageSoundEffect() => allSoundEffects[5]; //used for all bosses in the game
+        public SoundEffect GetAquamentusScreamingSoundEffect() => allSoundEffects[4]; //unique to Aquamentus and a few other bosses
+        public SoundEffect GetLinkDyingSoundEffect() => allSoundEffects[12];
+        public SoundEffect GetEnemyDyingSoundEffect() => allSoundEffects[7];
 
         //Organizational note: Environment & Other Misc sound effects
         public SoundEffect GetSecretRevealedSoundEffect() => allSoundEffects[20];
