@@ -236,6 +236,18 @@
 /processorParam:TextureFormat=Compressed
 /build:Font.spritefont
 
+#begin HUD & Pause Screen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:HUD & Pause Screen.png
+
 #begin LevelLoading/Level 1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -337,6 +349,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:LoZItemsSpreadsheet.png
+
+#begin Map & Compass.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map & Compass.png
+
+#begin Map Rooms Locations Numbers Hearts.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map Rooms Locations Numbers Hearts.png
 
 #begin playerProjectileSpriteSheet.png
 /importer:TextureImporter
