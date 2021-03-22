@@ -19,7 +19,6 @@ namespace LegendOfZeldaClone
         private readonly ISprite sevenSprite;
         private readonly ISprite eightSprite;
         private readonly ISprite nineSprite;
-        private readonly int space1 = 8;
 
         public RKBCount()
         {

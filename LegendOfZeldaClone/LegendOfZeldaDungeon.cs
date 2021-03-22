@@ -225,7 +225,7 @@ namespace LegendOfZeldaClone
             
             CurrentRoom.Draw(_spriteBatch);
             DungeonMiniMap.Draw(_spriteBatch, LoZHelpers.MiniMapLocation);
-            DungeonLevelName.Draw(_spriteBatch, LoZHelpers.LevelLocation);
+            DungeonLevelName.Draw(_spriteBatch, LoZHelpers.LevelNameLocation);
 
             foreach (IObject block in Objects)
                 block.Draw(_spriteBatch);
