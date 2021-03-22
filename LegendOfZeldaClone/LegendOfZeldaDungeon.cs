@@ -160,8 +160,8 @@ namespace LegendOfZeldaClone
             DungeonMiniMap = new MiniMap(LoZHelpers.MiniMapLocation);
             DungeonLevelName = new LevelName();
             PlayerRupeeCount = new RupeeCount(this);
-            PlayerKeyCount = new KeyCount();
-            PlayerBombCount = new BombCount();
+            PlayerKeyCount = new KeyCount(this);
+            PlayerBombCount = new BombCount(this);
             InventoryBoxB = new BBox();
             InventoryBoxA = new ABox();
             HUDLifeText = new LifeText();
@@ -231,6 +231,8 @@ namespace LegendOfZeldaClone
 
             HUDHealthBar.Update();
             PlayerRupeeCount.Update();
+            PlayerBombCount.Update();
+            PlayerKeyCount.Update();
 
             base.Update(gameTime);
         }
