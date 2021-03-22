@@ -39,6 +39,8 @@ namespace LegendOfZeldaClone
         public BombCount PlayerBombCount;
         public BBox InventoryBoxB;
         public ABox InventoryBoxA;
+        public LifeText HUDLifeText;
+        public HealthBar HUDHealthBar;
 
         public int SwitchRoomDelay;
         public int SwitchDelayLength = 5;
@@ -162,6 +164,8 @@ namespace LegendOfZeldaClone
             PlayerBombCount = new BombCount();
             InventoryBoxB = new BBox();
             InventoryBoxA = new ABox();
+            HUDLifeText = new LifeText();
+            HUDHealthBar = new HealthBar(this);
         }
 
         protected override void Update(GameTime gameTime)
@@ -225,6 +229,8 @@ namespace LegendOfZeldaClone
 
             Collisions.CollisionHandling.HandleCollisions(this);
 
+            HUDHealthBar.Update();
+
             base.Update(gameTime);
         }
 
@@ -242,6 +248,8 @@ namespace LegendOfZeldaClone
             PlayerBombCount.Draw(_spriteBatch, LoZHelpers.BombCountLocation);
             InventoryBoxB.Draw(_spriteBatch, LoZHelpers.BBoxLocation);
             InventoryBoxA.Draw(_spriteBatch, LoZHelpers.ABoxLocation);
+            HUDLifeText.Draw(_spriteBatch, LoZHelpers.LifeTextLocation);
+            HUDHealthBar.Draw(_spriteBatch, LoZHelpers.HealthLocation);
 
             foreach (IObject block in Objects)
                 block.Draw(_spriteBatch);

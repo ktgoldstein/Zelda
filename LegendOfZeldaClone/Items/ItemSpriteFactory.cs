@@ -35,27 +35,10 @@ namespace LegendOfZeldaClone
         {
             return new StaticItemSprite(itemTexture, 15, 99, 8, 16);
         }
-
         public ISprite CreateHeart()
         {
             return new AnimatedItemSprite(itemTexture, 0, 0, 7, 8);
         }
-
-        public ISprite CreateFullHealthHeart()
-        {
-            return new StaticItemSprite(itemTexture, 0, 0, 7, 8);
-        }
-
-        public ISprite CreateHalfHealthHeart()
-        {
-            return new StaticItemSprite(itemTexture, 0, 19, 7, 8);
-        }
-
-        public ISprite CreateNoHealthHeart()
-        {
-            return new StaticItemSprite(itemTexture, 0, 29, 7, 8);
-        }
-
         public ISprite CreateFlashingRupee()
         {
             return new AnimatedItemSprite(itemTexture, 37, 0, 8, 16);

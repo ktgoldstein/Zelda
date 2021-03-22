@@ -45,6 +45,11 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BoomerangNormal, item);
             else if (item is Bow)
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BowWooden, item);
+            else if (item is HeartContainer)
+            {
+                CurrentPlayer.MaxHealth += 2;
+                CurrentPlayer.Health += 2;
+            }
         }
 
         public void HandleObjectCollision(IObject block, Direction direction)
