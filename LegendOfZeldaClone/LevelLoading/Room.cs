@@ -21,10 +21,10 @@ namespace LegendOfZeldaClone.LevelLoading
         private readonly Texture2D background;
         private int backgroundType;
         private int wallType;
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private readonly string fileLocation;
 
-        public Room(string fileLocation, LegendOfZeldaDungeon game)
+        public Room(string fileLocation, GameStateMachine game)
         {
             this.game = game;
             this.fileLocation = fileLocation;

@@ -4,9 +4,9 @@ namespace LegendOfZeldaClone
 {
     public class UsableWoodenSword : IUsableItem
     {
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public UsableWoodenSword(LegendOfZeldaDungeon game) => this.game = game;
+        public UsableWoodenSword(GameStateMachine game) => this.game = game;
 
         public void Use(Vector2 location, Direction direction)
         {
