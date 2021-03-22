@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Objects;
 
+
+
 namespace LegendOfZeldaClone.Collisions
 {
     class ObjectCollisionHandler : ICollisionHandler
@@ -15,7 +17,7 @@ namespace LegendOfZeldaClone.Collisions
             if ((CurrentObject is LockedDoorUp || CurrentObject is LockedDoorDown ||
                 CurrentObject is LockedDoorLeft || CurrentObject is LockedDoorRight) &&
                 player.Inventory.KeysHeld > 0 )
-            {
+            { 
                 CurrentObject.IsAlive = false;
                 player.Inventory.KeysHeld--;
             }
@@ -40,7 +42,8 @@ namespace LegendOfZeldaClone.Collisions
             }
             else if (CurrentObject is IDoor)
             {
-                (CurrentObject as IDoor).ChangeRoom();
+                (CurrentObject as IDoor).ActiveCamera = true;
+                //(CurrentObject as IDoor).ChangeRoom();
             }
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)

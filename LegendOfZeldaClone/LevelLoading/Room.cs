@@ -28,8 +28,6 @@ namespace LegendOfZeldaClone.LevelLoading
             this.fileLocation = fileLocation;
             tiles = RoomTextureFactory.Instance.CreateTiles();
             walls = RoomTextureFactory.Instance.CreateWalls();
-            backgroundType = -1;
-            wallType = -1;
         }
 
         public void LoadRoom()
@@ -66,26 +64,21 @@ namespace LegendOfZeldaClone.LevelLoading
 
         private List<List<int>> ProcessCSV()
         {
+
             List<List<int>> data = new List<List<int>>();
-            var lines = File.ReadLines(fileLocation);
-            bool readBackgroundType = false;
-            bool readWallType = false;
-            foreach (var line in lines)
-            {                
-                if(!readBackgroundType)
+
+            using (StreamReader roomFile = new StreamReader(fileLocation))
+            {
+                string roomInfo = roomFile.ReadLine();
+                var splitLine = roomInfo.Split(",");
+                var row = Array.ConvertAll(splitLine, s => int.Parse(s));
+                backgroundType = row[0];
+                wallType = row[1];
+
+                while ((roomInfo = roomFile.ReadLine()) != null)
                 {
-                    backgroundType = int.Parse(line);
-                    readBackgroundType = true;
-                }
-                else if (!readWallType)
-                {
-                    wallType = int.Parse(line);
-                    readWallType = true;
-                }
-                else
-                {
-                    var splitLine = line.Split(",");
-                    var row = Array.ConvertAll(splitLine, s => int.Parse(s));
+                    splitLine = roomInfo.Split(",");
+                    row = Array.ConvertAll(splitLine, s => int.Parse(s));
                     data.Add(new List<int>((row)));
                 }
             }

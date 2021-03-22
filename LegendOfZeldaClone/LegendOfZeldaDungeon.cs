@@ -1,6 +1,6 @@
 ﻿using LegendOfZeldaClone.Enemy;
 using LegendOfZeldaClone.LevelLoading;
-using LegendOfZeldaClone.Objects;
+using LegendOfZeldaClone.Display;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -37,6 +37,8 @@ namespace LegendOfZeldaClone
         public int SwitchRoomDelay;
         public int SwitchDelayLength = 5;
 
+        public Camera Camera;
+        public Viewport view;
         public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -51,9 +53,11 @@ namespace LegendOfZeldaClone
         protected override void Initialize()
         {
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
+            
 
             _graphics.PreferredBackBufferWidth = LoZHelpers.GameWidth;
             _graphics.PreferredBackBufferHeight = LoZHelpers.GameHeight;
+            
             _graphics.ApplyChanges();
 
             ICommand quitGame = new QuitGame(this);
@@ -117,13 +121,15 @@ namespace LegendOfZeldaClone
             Enemies = new List<IEnemy>();
             Items = new List<IItem>();
             Objects = new List<IObject>();
-
+            
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            
+            _spriteBatch = new SpriteBatch(_graphics.GraphicsDevice);
+            view = _graphics.GraphicsDevice.Viewport;
 
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
@@ -142,13 +148,15 @@ namespace LegendOfZeldaClone
 
             IUsableItem woodenSword = new UsableWoodenSword(this);
             Player = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
-
+            
 
             InitializeRooms();
             CurrentRoom = RoomList[RoomListIndex];
             CurrentRoom.LoadRoom();
 
             DungeonMiniMap = new MiniMap(LoZHelpers.MiniMapLocation);
+            Camera = new Camera(view);
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -217,10 +225,18 @@ namespace LegendOfZeldaClone
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);            
-            _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            GraphicsDevice.Clear(Color.Black);
+
+            foreach (IObject block in Objects)
+            {
+                if ((block is IDoor) && (block as IDoor).ActiveCamera)
+                    Camera.CameraTransition((block as IDoor).DoorDirection);
+            }
+
+            _spriteBatch.Begin(SpriteSortMode.Immediate, 
+                BlendState.AlphaBlend,null,null,null,null, Matrix.CreateTranslation(768,0,0));
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-            
+
             CurrentRoom.Draw(_spriteBatch);
             DungeonMiniMap.Draw(_spriteBatch, LoZHelpers.MiniMapLocation);
 
@@ -239,13 +255,12 @@ namespace LegendOfZeldaClone
             foreach (IPlayerProjectile projectile in PlayerProjectiles)
                 projectile.Draw(_spriteBatch);
 
-            Player.Draw(_spriteBatch);                       
+            Player.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
         }
-
         public void ResetLists()
         {
             Enemies.Clear();
@@ -264,42 +279,42 @@ namespace LegendOfZeldaClone
             {
                 new Room("Content\\LevelLoading\\room00.csv", this),
                 new Room("Content\\LevelLoading\\room01.csv", this),
-                new Room("Content\\LevelLoading\\room02.csv", this),
-                new Room("Content\\LevelLoading\\room03.csv", this),
-                new Room("Content\\LevelLoading\\room04.csv", this),
-                new Room("Content\\LevelLoading\\room05.csv", this),
-                new Room("Content\\LevelLoading\\room06.csv", this),
-                new Room("Content\\LevelLoading\\room07.csv", this),
-                new Room("Content\\LevelLoading\\room08.csv", this),
-                new Room("Content\\LevelLoading\\room09.csv", this),
-                new Room("Content\\LevelLoading\\room10.csv", this),
-                new Room("Content\\LevelLoading\\room11.csv", this),
-                new Room("Content\\LevelLoading\\room12.csv", this),
-                new Room("Content\\LevelLoading\\room13.csv", this),
-                new Room("Content\\LevelLoading\\room14.csv", this),
-                new Room("Content\\LevelLoading\\room15.csv", this),
-                new Room("Content\\LevelLoading\\room16.csv", this),
-                new Room("Content\\LevelLoading\\SecretRoom.csv", this)
+                //new Room("Content\\LevelLoading\\room02.csv", this),
+                //new Room("Content\\LevelLoading\\room03.csv", this),
+                //new Room("Content\\LevelLoading\\room04.csv", this),
+                //new Room("Content\\LevelLoading\\room05.csv", this),
+                //new Room("Content\\LevelLoading\\room06.csv", this),
+                //new Room("Content\\LevelLoading\\room07.csv", this),
+                //new Room("Content\\LevelLoading\\room08.csv", this),
+                //new Room("Content\\LevelLoading\\room09.csv", this),
+                //new Room("Content\\LevelLoading\\room10.csv", this),
+                //new Room("Content\\LevelLoading\\room11.csv", this),
+                //new Room("Content\\LevelLoading\\room12.csv", this),
+                //new Room("Content\\LevelLoading\\room13.csv", this),
+                //new Room("Content\\LevelLoading\\room14.csv", this),
+                //new Room("Content\\LevelLoading\\room15.csv", this),
+                //new Room("Content\\LevelLoading\\room16.csv", this),
+                //new Room("Content\\LevelLoading\\SecretRoom.csv", this)
             };
 
-            RoomList[0].AddNeighbors(RoomList[3], RoomList[0], RoomList[1], RoomList[2]);
-            RoomList[1].AddNeighbors(null, null, null, RoomList[0]);
-            RoomList[2].AddNeighbors(null, null, RoomList[0], null);
-            RoomList[3].AddNeighbors(RoomList[4], RoomList[0], null, null);
-            RoomList[4].AddNeighbors(RoomList[9], RoomList[3], RoomList[6], RoomList[5]);
-            RoomList[5].AddNeighbors(RoomList[8], null, RoomList[4], null);
-            RoomList[6].AddNeighbors(RoomList[6], null, null, RoomList[4]);
-            RoomList[7].AddNeighbors(RoomList[13], null, RoomList[8], null);
-            RoomList[8].AddNeighbors(null, RoomList[5], RoomList[9], RoomList[7]);
-            RoomList[9].AddNeighbors(RoomList[12], RoomList[4], RoomList[10], RoomList[8]);
-            RoomList[10].AddNeighbors(null, RoomList[6], RoomList[11], RoomList[9]);
-            RoomList[11].AddNeighbors(null, null, null, RoomList[10]);
-            RoomList[12].AddNeighbors(RoomList[15], RoomList[9], null, null);
-            RoomList[13].AddNeighbors(null, RoomList[7], null, RoomList[14]);
-            RoomList[14].AddNeighbors(null, null, RoomList[13], null);
-            RoomList[15].AddNeighbors(null, RoomList[12], RoomList[16], null);
-            RoomList[16].AddNeighbors(null, RoomList[^1], null, RoomList[15]);
-            RoomList[17].AddNeighbors(RoomList[16], null, null, null);
+            //RoomList[0].AddNeighbors(RoomList[3], RoomList[0], RoomList[1], RoomList[2]);
+            //RoomList[1].AddNeighbors(null, null, null, RoomList[0]);
+            //RoomList[2].AddNeighbors(null, null, RoomList[0], null);
+            //RoomList[3].AddNeighbors(RoomList[4], RoomList[0], null, null);
+            //RoomList[4].AddNeighbors(RoomList[9], RoomList[3], RoomList[6], RoomList[5]);
+            //RoomList[5].AddNeighbors(RoomList[8], null, RoomList[4], null);
+            //RoomList[6].AddNeighbors(RoomList[6], null, null, RoomList[4]);
+            //RoomList[7].AddNeighbors(RoomList[13], null, RoomList[8], null);
+            //RoomList[8].AddNeighbors(null, RoomList[5], RoomList[9], RoomList[7]);
+            //RoomList[9].AddNeighbors(RoomList[12], RoomList[4], RoomList[10], RoomList[8]);
+            //RoomList[10].AddNeighbors(null, RoomList[6], RoomList[11], RoomList[9]);
+            //RoomList[11].AddNeighbors(null, null, null, RoomList[10]);
+            //RoomList[12].AddNeighbors(RoomList[15], RoomList[9], null, null);
+            //RoomList[13].AddNeighbors(null, RoomList[7], null, RoomList[14]);
+            //RoomList[14].AddNeighbors(null, null, RoomList[13], null);
+            //RoomList[15].AddNeighbors(null, RoomList[12], RoomList[16], null);
+            //RoomList[16].AddNeighbors(null, RoomList[^1], null, RoomList[15]);
+            //RoomList[17].AddNeighbors(RoomList[16], null, null, null);
         }
     }
 }

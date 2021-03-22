@@ -19,6 +19,8 @@ namespace LegendOfZeldaClone.Objects
         public bool IsBombable { get; }
         public bool IsAlive { get; set; }
         public Vector2 SpawnLocation { get; }
+        public Direction DoorDirection { get; }
+        public bool ActiveCamera { get; set; }
 
         private readonly LegendOfZeldaDungeon game;
         private ISprite sprite;
@@ -37,6 +39,8 @@ namespace LegendOfZeldaClone.Objects
             IsMovable = false;
             IsBombable = false;
             IsAlive = true;
+            DoorDirection = Direction.Left;
+            ActiveCamera = false;
         }
 
         public void Update() { }
