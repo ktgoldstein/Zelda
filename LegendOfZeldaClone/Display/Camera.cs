@@ -6,15 +6,14 @@ namespace LegendOfZeldaClone.Display
 {
     public class Camera
     {
-        private Vector2 Location;
+        private Vector2 position;
 
         private Viewport viewport;
-        private int x;
         public Camera(Viewport viewport) 
         {
             this.viewport = viewport;
-            Location.X = 768;
-            Location.Y = 720;
+            position.X = 0;
+            position.Y = 0;
         }
         public void CameraTransition(Direction direction)
         {
@@ -33,13 +32,8 @@ namespace LegendOfZeldaClone.Display
                 //        viewport.X += 8;
                 //    break;
                 case Direction.Left:
-                    while (x!= -768)
-                    {
-                        Location.X = -8;
-                        Console.WriteLine("HERE 2");
-                        x -= 8;
-                        
-                    }
+                    viewport.X -= 8;
+                    Console.WriteLine("HERE 2");
                     break;
                 default:
                     break;
@@ -48,7 +42,7 @@ namespace LegendOfZeldaClone.Display
         }
         public Matrix Translation()
         {
-            return Matrix.CreateTranslation(Location.X, Location.Y, 0);
+            return Matrix.CreateTranslation(position.X, position.Y, 0);
         } 
             
 

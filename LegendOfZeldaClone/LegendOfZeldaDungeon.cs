@@ -152,7 +152,9 @@ namespace LegendOfZeldaClone
 
             InitializeRooms();
             CurrentRoom = RoomList[RoomListIndex];
-            CurrentRoom.LoadRoom();
+            foreach (Room room in RoomList)
+                room.LoadRoom();
+            
 
             DungeonMiniMap = new MiniMap(LoZHelpers.MiniMapLocation);
             Camera = new Camera(view);
@@ -217,7 +219,7 @@ namespace LegendOfZeldaClone
                     deadObjects.Add(block);
             }
             Objects = Objects.Except(deadObjects).ToList();
-
+            
             Collisions.CollisionHandling.HandleCollisions(this);
 
             base.Update(gameTime);
@@ -234,14 +236,16 @@ namespace LegendOfZeldaClone
             }
 
             _spriteBatch.Begin(SpriteSortMode.Immediate, 
-                BlendState.AlphaBlend,null,null,null,null, Matrix.CreateTranslation(768,0,0));
+                BlendState.AlphaBlend, null, null, null, null, Matrix.CreateTranslation(0, 0, 0));
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
-            CurrentRoom.Draw(_spriteBatch);
             DungeonMiniMap.Draw(_spriteBatch, LoZHelpers.MiniMapLocation);
-
-            foreach (IObject block in Objects)
-                block.Draw(_spriteBatch);
+            foreach (Room room in RoomList)
+            { 
+                room.Draw(_spriteBatch);
+                foreach (IObject block in Objects)
+                    block.Draw(_spriteBatch);
+            }
 
             foreach (IItem item in Items)
                 item.Draw(_spriteBatch);
@@ -265,7 +269,6 @@ namespace LegendOfZeldaClone
         {
             Enemies.Clear();
             Items.Clear();
-            Objects.Clear();
 
             PlayerProjectiles.Clear();
             PlayerProjectilesQueue.Clear();
@@ -279,7 +282,7 @@ namespace LegendOfZeldaClone
             {
                 new Room("Content\\LevelLoading\\room00.csv", this),
                 new Room("Content\\LevelLoading\\room01.csv", this),
-                //new Room("Content\\LevelLoading\\room02.csv", this),
+                new Room("Content\\LevelLoading\\room02.csv", this),
                 //new Room("Content\\LevelLoading\\room03.csv", this),
                 //new Room("Content\\LevelLoading\\room04.csv", this),
                 //new Room("Content\\LevelLoading\\room05.csv", this),
