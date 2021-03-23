@@ -7,11 +7,11 @@ namespace LegendOfZeldaClone.Display
     public class Camera
     {
         private Vector2 position;
+        private Vector2 targetPosition;
+        private int speed = LoZHelpers.Scale(8);
 
-        private Viewport viewport;
         public Camera(Viewport viewport) 
         {
-            this.viewport = viewport;
             position.X = 0;
             position.Y = 0;
         }
@@ -32,20 +32,27 @@ namespace LegendOfZeldaClone.Display
                 //        viewport.X += 8;
                 //    break;
                 case Direction.Left:
-                    viewport.X -= 8;
-                    Console.WriteLine("HERE 2");
+                    targetPosition = position + new Vector2(-LoZHelpers.GameWidth, 0);
                     break;
                 default:
                     break;
             }
             
         }
+
+        public void Update()
+        {
+            if (targetPosition != position)
+            {
+                Vector2 direction = targetPosition - position;
+                direction.Normalize();
+                position += direction * speed;
+            }
+        }
+
         public Matrix Translation()
         {
             return Matrix.CreateTranslation(position.X, position.Y, 0);
-        } 
-            
-
-    }
-    
+        }     
+    }    
 }
