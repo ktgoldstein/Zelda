@@ -18,9 +18,6 @@ namespace LegendOfZeldaClone.Objects
         public bool IsMovable { get; }
         public bool IsBombable { get; }
         public bool IsAlive { get; set; }
-        public Vector2 SpawnLocation { get; }
-        public Direction DoorDirection { get; }
-        public bool ActiveCamera { get; set; }
 
         private readonly LegendOfZeldaDungeon game;
         private ISprite sprite;
@@ -30,8 +27,6 @@ namespace LegendOfZeldaClone.Objects
         public OpenDoorUp(LegendOfZeldaDungeon game, Vector2 location)
         {
             this.game = game;
-            SpawnLocation = LoZHelpers.BottomSpawnLocation;
-
             sprite = ObjectSpriteFactory.Instance.CreateOpenDoorUp();
             Location = location;
             height = 16;
@@ -40,8 +35,6 @@ namespace LegendOfZeldaClone.Objects
             IsMovable = false;
             IsBombable = false;
             IsAlive = true;
-            DoorDirection = Direction.Up;
-            ActiveCamera = false;
         }
         public void Update() { }
 
@@ -49,8 +42,8 @@ namespace LegendOfZeldaClone.Objects
 
         public void ChangeRoom()
         {
-            game.CurrentRoom = game.CurrentRoom.RoomUp;
-            game.CurrentRoom.LoadRoom();
+            game.Camera.CameraTransition(Direction.Up);
+            //game.CurrentRoom = game.CurrentRoom.RoomUp;
         }
     }
 }

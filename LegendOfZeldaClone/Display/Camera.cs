@@ -19,19 +19,16 @@ namespace LegendOfZeldaClone.Display
         {
             switch (direction)
             {
-                //case Direction.Up:
-                //    while (posY != 720)
-                //        viewport.X += 8;
-                //    break;
-                //case Direction.Down:
-                //    while (posY != -720)
-                //        viewport.X -= 8;
-                //    break;
-                //case Direction.Right:
-                //    while (posX != 768)
-                //        viewport.X += 8;
-                //    break;
+                case Direction.Up:
+                    targetPosition = position + new Vector2(-LoZHelpers.GameHeight, 0);
+                    break;
+                case Direction.Down:
+                    targetPosition = position + new Vector2(LoZHelpers.GameHeight, 0);
+                    break;
                 case Direction.Left:
+                    targetPosition = position + new Vector2(LoZHelpers.GameWidth, 0);
+                    break;
+                case Direction.Right: 
                     targetPosition = position + new Vector2(-LoZHelpers.GameWidth, 0);
                     break;
                 default:

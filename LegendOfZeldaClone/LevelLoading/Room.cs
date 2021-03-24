@@ -34,7 +34,7 @@ namespace LegendOfZeldaClone.LevelLoading
 
         public void LoadRoom()
         {
-            game.ResetLists();
+            game.ResetEnemyItemLists();
 
             List<List<int>> data = ProcessCSV();
 

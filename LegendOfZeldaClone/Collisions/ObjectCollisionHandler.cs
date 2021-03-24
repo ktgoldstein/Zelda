@@ -42,8 +42,7 @@ namespace LegendOfZeldaClone.Collisions
             }
             else if (CurrentObject is IDoor)
             {
-                (CurrentObject as IDoor).ActiveCamera = true;
-                //(CurrentObject as IDoor).ChangeRoom();
+                (CurrentObject as IDoor).ChangeRoom();
             }
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)

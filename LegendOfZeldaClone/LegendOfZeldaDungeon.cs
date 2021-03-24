@@ -231,22 +231,13 @@ namespace LegendOfZeldaClone
         {
             GraphicsDevice.Clear(Color.Black);
 
-            foreach (IObject block in Objects)
-            {
-                if ((block is IDoor) && (block as IDoor).ActiveCamera)
-                    Camera.CameraTransition((block as IDoor).DoorDirection);
-            }
-
             _spriteBatch.Begin(SpriteSortMode.Immediate, 
                 BlendState.AlphaBlend, null, null, null, null, Camera.Translation());
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
             DungeonMiniMap.Draw(_spriteBatch, LoZHelpers.MiniMapLocation);
             foreach (Room room in RoomList)
-            { 
                 room.Draw(_spriteBatch);
-            }
-
 
             foreach (IObject block in Objects)
                 block.Draw(_spriteBatch);
@@ -269,7 +260,7 @@ namespace LegendOfZeldaClone
 
             base.Draw(gameTime);
         }
-        public void ResetLists()
+        public void ResetEnemyItemLists()
         {
             Enemies.Clear();
             Items.Clear();
@@ -305,9 +296,9 @@ namespace LegendOfZeldaClone
             };
 
             //RoomList[0].AddNeighbors(RoomList[3], RoomList[0], RoomList[1], RoomList[2]);
-            RoomList[0].AddNeighbors(null, RoomList[0], RoomList[1], RoomList[2]);
-            RoomList[1].AddNeighbors(null, null, null, RoomList[0]);
-            RoomList[2].AddNeighbors(null, null, RoomList[0], null);
+            //RoomList[0].AddNeighbors(null, RoomList[0], RoomList[1], RoomList[2]);
+            //RoomList[1].AddNeighbors(null, null, null, RoomList[0]);
+            //RoomList[2].AddNeighbors(null, null, RoomList[0], null);
             //RoomList[3].AddNeighbors(RoomList[4], RoomList[0], null, null);
             //RoomList[4].AddNeighbors(RoomList[9], RoomList[3], RoomList[6], RoomList[5]);
             //RoomList[5].AddNeighbors(RoomList[8], null, RoomList[4], null);
