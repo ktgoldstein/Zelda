@@ -49,8 +49,13 @@ namespace LegendOfZeldaClone
             get { return skinTypes[skinTypesIndex]; }
             set { skinTypes[skinTypesIndex] = value; }
         }
+        public bool Alive
+        {
+            get { return decoratedLinkPlayer.Alive; }
+            set { decoratedLinkPlayer.Alive = value; }
+        }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private readonly ILinkPlayer decoratedLinkPlayer;
         private LinkSkinType[] skinTypes;
         private int skinTypesIndex;
@@ -58,7 +63,7 @@ namespace LegendOfZeldaClone
         private int timer;
         private Direction knockbackDirection;
 
-        public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLinkPlayer, int currentFrame, LinkStateType linkState, Direction knockbackDirection)
+        public DamagedLinkPlayer(GameStateMachine game, ILinkPlayer decoratedLinkPlayer, int currentFrame, LinkStateType linkState, Direction knockbackDirection)
         {
             this.game = game;
             this.decoratedLinkPlayer = decoratedLinkPlayer;
@@ -106,7 +111,7 @@ namespace LegendOfZeldaClone
             Direction direction = Direction.None;
             foreach (ILinkState linkState in linkStates) 
                 direction = linkState.Action();
-            if (direction != Direction.None)
+            if (direction != Direction.None && Sword != null)
                 Sword.Use(Location, direction);
         }
 
@@ -115,7 +120,7 @@ namespace LegendOfZeldaClone
             Direction direction = Direction.None;
             foreach (ILinkState linkState in linkStates)
                 direction = linkState.Action();
-            if (direction != Direction.None)
+            if (direction != Direction.None && HeldItem != null)
                 HeldItem.Use(Location, direction);
         }
 
@@ -127,6 +132,7 @@ namespace LegendOfZeldaClone
             Inventory.AddItem(itemType, game);
             foreach (ILinkState linkState in linkStates)
                 linkState.PickUpItem(item);
+            Equip(itemType);
         }
 
         public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);

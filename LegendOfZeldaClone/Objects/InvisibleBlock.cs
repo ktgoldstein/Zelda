@@ -16,9 +16,9 @@ namespace LegendOfZeldaClone.Objects
         public ObjectHeight BlockHeight { get; }
         public bool IsMovable { get; }
         public bool IsBombable { get; }
-        public bool IsAlive { get; set; }
+        public bool Alive { get; set; }
 
-        private int height;
+        private readonly int height;
         private int width;
 
         public InvisibleBlock(Vector2 location, Direction direction)
@@ -29,7 +29,7 @@ namespace LegendOfZeldaClone.Objects
             BlockHeight = ObjectHeight.Impassable;
             IsMovable = false;
             IsBombable = false;
-            IsAlive = true;
+            Alive = true;
 
             DirectionBasedSetUp(direction);
         }

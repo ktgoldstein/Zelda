@@ -88,7 +88,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            if (game.SwitchRoomDelay != 0 && game.CurrentRoom.RoomDown != null)
+            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomDown == null)
                 return;
             else
                 game.SwitchRoomDelay = game.SwitchDelayLength;
@@ -106,7 +106,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            if (game.SwitchRoomDelay != 0 && game.CurrentRoom.RoomUp != null)
+            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomUp == null)
                 return;
             else
                 game.SwitchRoomDelay = game.SwitchDelayLength;
@@ -124,7 +124,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            if (game.SwitchRoomDelay != 0 && game.CurrentRoom.RoomLeft != null)
+            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomLeft == null)
                 return;
             else
                 game.SwitchRoomDelay = game.SwitchDelayLength;
@@ -142,7 +142,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            if (game.SwitchRoomDelay != 0 && game.CurrentRoom.RoomRight != null)
+            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomRight == null)
                 return;
             else
                 game.SwitchRoomDelay = game.SwitchDelayLength;

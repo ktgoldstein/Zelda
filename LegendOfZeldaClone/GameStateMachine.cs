@@ -95,7 +95,7 @@ namespace LegendOfZeldaClone
             RoomList[3].AddNeighbors(RoomList[4], RoomList[0], null, null);
             RoomList[4].AddNeighbors(RoomList[9], RoomList[3], RoomList[6], RoomList[5]);
             RoomList[5].AddNeighbors(RoomList[8], null, RoomList[4], null);
-            RoomList[6].AddNeighbors(RoomList[6], null, null, RoomList[4]);
+            RoomList[6].AddNeighbors(RoomList[10], null, null, RoomList[4]);
             RoomList[7].AddNeighbors(RoomList[13], null, RoomList[8], null);
             RoomList[8].AddNeighbors(null, RoomList[5], RoomList[9], RoomList[7]);
             RoomList[9].AddNeighbors(RoomList[12], RoomList[4], RoomList[10], RoomList[8]);
@@ -126,17 +126,17 @@ namespace LegendOfZeldaClone
 
             PlayerProjectiles.AddRange(PlayerProjectilesQueue);
             PlayerProjectilesQueue.Clear();
-            PlayerProjectiles.Except(UpdateGameObjectEnumerable(PlayerProjectiles)).ToList();
+            PlayerProjectiles = PlayerProjectiles.Except(UpdateGameObjectEnumerable(PlayerProjectiles)).ToList();
 
-            Enemies.Except(UpdateGameObjectEnumerable(Enemies)).ToList();
+            Enemies = Enemies.Except(UpdateGameObjectEnumerable(Enemies)).ToList();
 
             EnemyProjectiles.AddRange(EnemyProjectilesQueue);
             EnemyProjectilesQueue.Clear();
-            EnemyProjectiles.Except(UpdateGameObjectEnumerable(EnemyProjectiles)).ToList();
+            EnemyProjectiles = EnemyProjectiles.Except(UpdateGameObjectEnumerable(EnemyProjectiles)).ToList();
 
-            Items.Except(UpdateGameObjectEnumerable(Items)).ToList();
+            Items = Items.Except(UpdateGameObjectEnumerable(Items)).ToList();
 
-            Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
+            Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
 
             Collisions.CollisionHandling.HandleCollisions(this);
         }

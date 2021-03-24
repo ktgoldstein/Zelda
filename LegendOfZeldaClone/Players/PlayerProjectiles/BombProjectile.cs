@@ -16,13 +16,13 @@ namespace LegendOfZeldaClone
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private readonly ISprite sprite;
         private readonly int width;
         private readonly int height;
         private int lifeSpan;
 
-        public BombProjectile(LegendOfZeldaDungeon game, Vector2 startingLocation, Direction direction)
+        public BombProjectile(GameStateMachine game, Vector2 startingLocation, Direction direction)
         {
             Alive = true;
             width = 8;
