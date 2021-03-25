@@ -34,7 +34,7 @@ namespace LegendOfZeldaClone
             heldItems = new Dictionary<UsableItemTypes, IUsableItem>();
         }
 
-        public void AddItem(UsableItemTypes itemType, LegendOfZeldaDungeon game)
+        public void AddItem(UsableItemTypes itemType, GameStateMachine game)
         {
             if (!heldItems.ContainsKey(itemType))
             {

@@ -4,10 +4,10 @@ namespace LegendOfZeldaClone
 {
     public class UsableBoomerang : IUsableItem
     {
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private readonly BoomerangSkinType skinType;
 
-        public UsableBoomerang(LegendOfZeldaDungeon game, BoomerangSkinType skinType)
+        public UsableBoomerang(GameStateMachine game, BoomerangSkinType skinType)
         {
             this.game = game;
             this.skinType = skinType;

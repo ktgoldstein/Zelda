@@ -19,7 +19,7 @@ namespace LegendOfZeldaClone.Enemy
         public Vector2 Direction { get { return direction;} set { direction = value;} }
         private int invincibleFrames = 0;
 
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
         private ISprite goriyaSprite;
         private int speed = LoZHelpers.Scale(2);
         private Vector2 direction = new Vector2(0, 1);
@@ -30,7 +30,7 @@ namespace LegendOfZeldaClone.Enemy
         public bool Invincible { get; set; }
         public bool Alive { get; set; }
 
-        public Goriya(LegendOfZeldaDungeon game, Vector2 location)
+        public Goriya(GameStateMachine game, Vector2 location)
         {
             HasBoomerang = false;
             goriyaSprite = EnemySpriteFactory.Instance.CreateGoriyaDownSprite();

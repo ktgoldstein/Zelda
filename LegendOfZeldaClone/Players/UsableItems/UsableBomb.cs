@@ -4,9 +4,9 @@ namespace LegendOfZeldaClone
 {
     public class UsableBomb : IUsableItem
     {
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public UsableBomb(LegendOfZeldaDungeon game) => this.game = game;
+        public UsableBomb(GameStateMachine game) => this.game = game;
 
         public void Use(Vector2 location, Direction direction)
         {

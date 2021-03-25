@@ -44,12 +44,17 @@ namespace LegendOfZeldaClone
             set { decoratedLinkPlayer.HeldItem = value; }
         }
         public LinkSkinType SkinType { get; set; }
+        public bool Alive
+        {
+            get { return decoratedLinkPlayer.Alive; }
+            set { decoratedLinkPlayer.Alive = value; }
+        }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private readonly ILinkPlayer decoratedLinkPlayer;
         private ILinkState linkState;
 
-        public BlueRingLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLinkPlayer)
+        public BlueRingLinkPlayer(GameStateMachine game, ILinkPlayer decoratedLinkPlayer)
         {
             SkinType = LinkSkinType.BlueRing;
 
@@ -66,14 +71,14 @@ namespace LegendOfZeldaClone
         public void ActionA()
         {
             Direction direction = linkState.Action();
-            if (direction != Direction.None)
+            if (direction != Direction.None && Sword != null)
                 Sword.Use(Location, direction);
         }
 
         public void ActionB()
         {
             Direction direction = linkState.Action();
-            if (direction != Direction.None)
+            if (direction != Direction.None && HeldItem != null)
                 HeldItem.Use(Location, direction);
         }
 
@@ -93,6 +98,7 @@ namespace LegendOfZeldaClone
         {
             Inventory.AddItem(itemType, game);
             linkState.PickUpItem(item);
+            Equip(itemType);
         }
 
         public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);
