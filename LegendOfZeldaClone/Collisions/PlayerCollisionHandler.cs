@@ -34,7 +34,11 @@ namespace LegendOfZeldaClone
             if (item is FlashingRupee || item is BlueRupee || item is GoldRupee)
                 CurrentPlayer.Inventory.RupeesHeld++;
             else if (item is Bomb)
+            {
+                if (!CurrentPlayer.Inventory.HasItem(UsableItemTypes.Bomb))
+                    CurrentPlayer.PickUpUsableItem(UsableItemTypes.Bomb, item);
                 CurrentPlayer.Inventory.BombsHeld++;
+            }
             else if (item is Key)
                 CurrentPlayer.Inventory.KeysHeld++;
             else if (item is BlueCandle)

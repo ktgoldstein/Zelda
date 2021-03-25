@@ -13,7 +13,7 @@ namespace LegendOfZeldaClone
             this.skinType = skinType;
         }
 
-        public void Use(Vector2 location, Direction direction)
+        public void Use(Vector2 location, Direction direction, PlayerInventory playerInventory)
         {
             game.PlayerProjectilesQueue.Add(new BoomerangProjectile(location, direction, skinType, game, game.Player));
         }

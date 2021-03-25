@@ -8,9 +8,13 @@ namespace LegendOfZeldaClone
 
         public UsableBomb(GameStateMachine game) => this.game = game;
 
-        public void Use(Vector2 location, Direction direction)
+        public void Use(Vector2 location, Direction direction, PlayerInventory playerInventory)
         {
-            game.PlayerProjectilesQueue.Add(new BombProjectile(game, location, direction));
+            if (playerInventory.BombsHeld > 0)
+            {
+                playerInventory.BombsHeld--;
+                game.PlayerProjectilesQueue.Add(new BombProjectile(game, location, direction));
+            }
         }
     }
 }
