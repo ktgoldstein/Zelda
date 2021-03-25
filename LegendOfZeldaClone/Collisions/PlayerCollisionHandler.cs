@@ -26,7 +26,10 @@ namespace LegendOfZeldaClone
 
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
-            CurrentPlayer.Damage(enemyProjectile.AttackStat, direction);
+            if (CurrentPlayer.BlockingDirection != direction)
+                CurrentPlayer.Damage(enemyProjectile.AttackStat, direction);
+            else
+                enemyProjectile.Alive = false;
         }
 
         public void HandleItemCollision(IItem item, Direction direction) 
