@@ -40,29 +40,51 @@ namespace LegendOfZeldaClone
             SwitchDelayLength = 5;
         }
 
-        public void Reset()
+        public void Update()
         {
-            ResetPlayer();
-            ResetLists();
-            InitializeRooms();
-        }
+            if (SwitchRoomDelay > 0)
+                SwitchRoomDelay--;
 
-        public void ResetPlayer()
-        {
-            IUsableItem woodenSword = new UsableWoodenSword(this);
-            Player = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
-        }
+            Player.Update();
 
-        public void ResetLists()
-        {
-            Enemies.Clear();
-            Items.Clear();
-            Objects.Clear();
-
-            PlayerProjectiles.Clear();
+            PlayerProjectiles.AddRange(PlayerProjectilesQueue);
             PlayerProjectilesQueue.Clear();
-            EnemyProjectiles.Clear();
+            PlayerProjectiles = PlayerProjectiles.Except(UpdateGameObjectEnumerable(PlayerProjectiles)).ToList();
+
+            Enemies = Enemies.Except(UpdateGameObjectEnumerable(Enemies)).ToList();
+
+            EnemyProjectiles.AddRange(EnemyProjectilesQueue);
             EnemyProjectilesQueue.Clear();
+            EnemyProjectiles = EnemyProjectiles.Except(UpdateGameObjectEnumerable(EnemyProjectiles)).ToList();
+
+            Items = Items.Except(UpdateGameObjectEnumerable(Items)).ToList();
+
+            Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
+
+            Collisions.CollisionHandling.HandleCollisions(this);
+        }
+
+        public void Draw(SpriteBatch sprintBatch) 
+        {
+            CurrentRoom.Draw(sprintBatch);
+            DungeonMiniMap.Draw(sprintBatch, LoZHelpers.MiniMapLocation);
+
+            foreach (IObject block in Objects)
+                block.Draw(sprintBatch);
+
+            foreach (IItem item in Items)
+                item.Draw(sprintBatch);
+
+            foreach (IEnemyProjectile projectile in EnemyProjectiles)
+                projectile.Draw(sprintBatch);
+
+            foreach (IEnemy enemy in Enemies)
+                enemy.Draw(sprintBatch);
+
+            foreach (IPlayerProjectile projectile in PlayerProjectiles)
+                projectile.Draw(sprintBatch);
+
+            Player.Draw(sprintBatch);
         }
 
         public void InitializeRooms()
@@ -117,34 +139,10 @@ namespace LegendOfZeldaClone
             DungeonMiniMap = new MiniMap(LoZHelpers.MiniMapLocation);
         }
 
-        public void Update()
-        {
-            if (SwitchRoomDelay > 0)
-                SwitchRoomDelay--;
-
-            Player.Update();
-
-            PlayerProjectiles.AddRange(PlayerProjectilesQueue);
-            PlayerProjectilesQueue.Clear();
-            PlayerProjectiles = PlayerProjectiles.Except(UpdateGameObjectEnumerable(PlayerProjectiles)).ToList();
-
-            Enemies = Enemies.Except(UpdateGameObjectEnumerable(Enemies)).ToList();
-
-            EnemyProjectiles.AddRange(EnemyProjectilesQueue);
-            EnemyProjectilesQueue.Clear();
-            EnemyProjectiles = EnemyProjectiles.Except(UpdateGameObjectEnumerable(EnemyProjectiles)).ToList();
-
-            Items = Items.Except(UpdateGameObjectEnumerable(Items)).ToList();
-
-            Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
-
-            Collisions.CollisionHandling.HandleCollisions(this);
-        }
-
         public List<T> UpdateGameObjectEnumerable<T>(List<T> gameObjects) where T : IGameObject
         {
             List<T> deadObjects = new List<T>();
-            foreach(T gameObject in gameObjects)
+            foreach (T gameObject in gameObjects)
             {
                 gameObject.Update();
                 if (!gameObject.Alive)
@@ -153,27 +151,29 @@ namespace LegendOfZeldaClone
             return deadObjects;
         }
 
-        public void Draw(SpriteBatch sprintBatch) 
+        public void Reset()
         {
-            CurrentRoom.Draw(sprintBatch);
-            DungeonMiniMap.Draw(sprintBatch, LoZHelpers.MiniMapLocation);
+            ResetPlayer();
+            ResetLists();
+            InitializeRooms();
+        }
 
-            foreach (IObject block in Objects)
-                block.Draw(sprintBatch);
+        public void ResetPlayer()
+        {
+            IUsableItem woodenSword = new UsableWoodenSword(this);
+            Player = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
+        }
 
-            foreach (IItem item in Items)
-                item.Draw(sprintBatch);
+        public void ResetLists()
+        {
+            Enemies.Clear();
+            Items.Clear();
+            Objects.Clear();
 
-            foreach (IEnemyProjectile projectile in EnemyProjectiles)
-                projectile.Draw(sprintBatch);
-
-            foreach (IEnemy enemy in Enemies)
-                enemy.Draw(sprintBatch);
-
-            foreach (IPlayerProjectile projectile in PlayerProjectiles)
-                projectile.Draw(sprintBatch);
-
-            Player.Draw(sprintBatch);
+            PlayerProjectiles.Clear();
+            PlayerProjectilesQueue.Clear();
+            EnemyProjectiles.Clear();
+            EnemyProjectilesQueue.Clear();
         }
     }
 }
