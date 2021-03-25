@@ -5,11 +5,12 @@ namespace LegendOfZeldaClone
 {
     public interface ILinkState
     {
+        public Direction CurrentBlockingDirection { get; }
         public void MoveUp();
         public void MoveDown();
         public void MoveLeft();
         public void MoveRight();
-        public Direction Action();
+        public void Action();
         public void PickUpItem(IItem item);
         public Tuple<LinkStateType, int> GetState();
         public void Draw(SpriteBatch spriteBatch);

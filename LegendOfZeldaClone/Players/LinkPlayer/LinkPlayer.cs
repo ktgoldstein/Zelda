@@ -58,16 +58,18 @@ namespace LegendOfZeldaClone
 
         public void ActionA()
         {
-            Direction direction = linkState.Action();
+            Direction direction = linkState.CurrentBlockingDirection;
+            linkState.Action();
             if (direction != Direction.None && Sword != null)
-                Sword.Use(Location, direction);
+                Sword.Use(Location, direction, Inventory);
         }
 
         public void ActionB()
         {
-            Direction direction = linkState.Action();
+            Direction direction = linkState.CurrentBlockingDirection;
+            linkState.Action();
             if (direction != Direction.None && HeldItem != null)
-                HeldItem.Use(Location, direction);
+                HeldItem.Use(Location, direction, Inventory);
         }
 
         public void Damage(int amount, Direction knockbackDirection)

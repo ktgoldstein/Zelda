@@ -8,9 +8,11 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer linkPlayer;
         private readonly ILinkSprite linkSprite;
 
+        public Direction CurrentBlockingDirection { get { return Direction.Left; } }
+
         public LinkStandingLeft(ILinkPlayer link, int frame = 0)
         {
-            this.linkPlayer = link;
+            linkPlayer = link;
             linkSprite = LinkSpriteFactory.Instance.CreateLinkStandingLeftSprite(link.SkinType, frame);
         }
 
@@ -18,13 +20,7 @@ namespace LegendOfZeldaClone
         public void MoveDown() => linkPlayer.SetState(linkPlayer.GetStateWalkingingDown());
         public void MoveLeft() => linkPlayer.SetState(linkPlayer.GetStateWalkingingLeft());
         public void MoveRight() => linkPlayer.SetState(linkPlayer.GetStateWalkingingRight());
-
-        public Direction Action()
-        {
-            linkPlayer.SetState(linkPlayer.GetStateUsingItemLeft());
-            return Direction.Left;
-        }
-
+        public void Action() => linkPlayer.SetState(linkPlayer.GetStateUsingItemLeft());
         public void PickUpItem(IItem item) => linkPlayer.SetState(linkPlayer.GetStatePickingUpItem(item));
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingLeft, linkSprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => linkSprite.Draw(spriteBatch, linkPlayer.Location);
