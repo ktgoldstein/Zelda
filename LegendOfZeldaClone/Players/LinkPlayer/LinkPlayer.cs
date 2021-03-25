@@ -9,6 +9,7 @@ namespace LegendOfZeldaClone
         public float Speed { get; set; }
         public int MaxHealth { get; set; }
         public int Health { get; set; }
+        public Direction BlockingDirection { get { return linkState.BlockingDirection; } }
         public PlayerInventory Inventory { get; }
         public Vector2 Location { get; set; }
         public Vector2 HurtBoxLocation 
@@ -58,7 +59,7 @@ namespace LegendOfZeldaClone
 
         public void ActionA()
         {
-            Direction direction = linkState.CurrentBlockingDirection;
+            Direction direction = linkState.BlockingDirection;
             linkState.Action();
             if (direction != Direction.None && Sword != null)
                 Sword.Use(Location, direction, Inventory);
@@ -66,7 +67,7 @@ namespace LegendOfZeldaClone
 
         public void ActionB()
         {
-            Direction direction = linkState.CurrentBlockingDirection;
+            Direction direction = linkState.BlockingDirection;
             linkState.Action();
             if (direction != Direction.None && HeldItem != null)
                 HeldItem.Use(Location, direction, Inventory);

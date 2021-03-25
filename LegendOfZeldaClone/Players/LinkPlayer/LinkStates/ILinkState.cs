@@ -5,7 +5,7 @@ namespace LegendOfZeldaClone
 {
     public interface ILinkState
     {
-        public Direction CurrentBlockingDirection { get; }
+        public Direction BlockingDirection { get; }
         public void MoveUp();
         public void MoveDown();
         public void MoveLeft();

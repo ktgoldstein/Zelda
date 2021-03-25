@@ -20,6 +20,7 @@ namespace LegendOfZeldaClone
             get { return decoratedLinkPlayer.Health; }
             set { decoratedLinkPlayer.Health = value; }
         }
+        public Direction BlockingDirection { get { return linkState.BlockingDirection; } }
         public PlayerInventory Inventory { get { return decoratedLinkPlayer.Inventory; } }
         public Vector2 Location
         {
@@ -70,7 +71,7 @@ namespace LegendOfZeldaClone
 
         public void ActionA()
         {
-            Direction direction = linkState.CurrentBlockingDirection;
+            Direction direction = linkState.BlockingDirection;
             linkState.Action();
             if (direction != Direction.None && Sword != null)
                 Sword.Use(Location, direction, Inventory);
@@ -78,7 +79,7 @@ namespace LegendOfZeldaClone
 
         public void ActionB()
         {
-            Direction direction = linkState.CurrentBlockingDirection;
+            Direction direction = linkState.BlockingDirection;
             linkState.Action();
             if (direction != Direction.None && HeldItem != null)
                 HeldItem.Use(Location, direction, Inventory);

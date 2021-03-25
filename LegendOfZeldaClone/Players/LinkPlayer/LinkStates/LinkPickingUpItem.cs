@@ -10,7 +10,7 @@ namespace LegendOfZeldaClone
         private readonly ILinkSprite linkSprite;
         private readonly IItem heldItem;
 
-        public Direction CurrentBlockingDirection { get { return Direction.None; } }
+        public Direction BlockingDirection { get { return Direction.None; } }
 
         public LinkPickingUpItem(ILinkPlayer link, IItem item, int frame = 0)
         {

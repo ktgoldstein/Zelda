@@ -9,7 +9,7 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer linkPlayer;
         private readonly ILinkSprite linkSprite;
 
-        public Direction CurrentBlockingDirection { get { return Direction.Left; } }
+        public Direction BlockingDirection { get { return Direction.Left; } }
 
         public LinkWalkingLeft(ILinkPlayer link, int frame = 0)
         {

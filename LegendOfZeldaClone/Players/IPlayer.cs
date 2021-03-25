@@ -5,6 +5,7 @@
         public float Speed { get; set; }
         public int MaxHealth { get; set; }
         public int Health { get; set; }
+        public Direction BlockingDirection { get; }
         public PlayerInventory Inventory { get; }
         public void MoveUp();
         public void MoveDown();
