@@ -11,7 +11,7 @@ namespace LegendOfZeldaClone
         {
             Sound = GameSoundFactory.Instance.GetRupeeCountChangingSoundEffect();
             SoundInstance = Sound.CreateInstance();
-            SoundInstance.IsLooped = false;
+            SoundInstance.IsLooped = true;
         }
 
         public void Play()
