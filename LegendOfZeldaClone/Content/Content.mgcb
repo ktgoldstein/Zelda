@@ -278,6 +278,12 @@
 /processorParam:Quality=Best
 /build:GameSounds/LOZDoorUnlockSound.wav
 
+#begin GameSounds/LOZDungeonThemeLoopMusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:GameSounds/LOZDungeonThemeLoopMusic.mp3
+
 #begin GameSounds/LOZDungeonThemeLoopMusic.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -308,11 +314,11 @@
 /processorParam:Quality=Best
 /build:GameSounds/LOZGetInventoryItemOrFairyOrClockSound.wav
 
-#begin GameSounds/LOZHeartPickupSound.wav
+#begin GameSounds/LOZHeartOrKeyPickupSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:GameSounds/LOZHeartPickupSound.wav
+/build:GameSounds/LOZHeartOrKeyPickupSound.wav
 
 #begin GameSounds/LOZKeyAppearSound.wav
 /importer:WavImporter
@@ -409,12 +415,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:GameSounds/LOZTextSlowLoopSound.wav
-
-#begin GameSounds/LOZTriforceAcquiredFanfareMusic.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:GameSounds/LOZTriforceAcquiredFanfareMusic.mp3
 
 #begin GameSounds/LOZTriforceAcquiredFanfareMusic.wav
 /importer:WavImporter

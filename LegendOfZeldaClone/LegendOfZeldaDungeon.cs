@@ -2,6 +2,7 @@
 using LegendOfZeldaClone.LevelLoading;
 using LegendOfZeldaClone.Objects;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -36,6 +37,9 @@ namespace LegendOfZeldaClone
 
         public int SwitchRoomDelay;
         public int SwitchDelayLength = 5;
+
+        public IGameSound GameBackgroundMusic;
+        public int MusicTest;
 
         public LegendOfZeldaDungeon()
         {
@@ -144,6 +148,10 @@ namespace LegendOfZeldaClone
             IUsableItem woodenSword = new UsableWoodenSword(this);
             Player = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
 
+            GameBackgroundMusic = new DungeonThemeMusic();
+            GameBackgroundMusic.Play();
+            MusicTest = 0;
+            
 
             InitializeRooms();
             CurrentRoom = RoomList[RoomListIndex];
@@ -214,6 +222,16 @@ namespace LegendOfZeldaClone
             Collisions.CollisionHandling.HandleCollisions(this);
 
             base.Update(gameTime);
+
+            if (MusicTest > 120)
+            {
+                GameBackgroundMusic.StopPlaying();
+            }
+            MusicTest++;
+            if (MusicTest % 10 ==0)
+            {
+                new HeartPickupSoundEffect().Play();
+            }
         }
 
         protected override void Draw(GameTime gameTime)

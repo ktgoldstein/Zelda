@@ -15,43 +15,50 @@ namespace LegendOfZeldaClone
         public static GameSoundFactory Instance { get; } = new GameSoundFactory();
 
         public List<SoundEffect> allSoundEffects;
-        private List<Song> allGameMusic;
+        private List<SoundEffect> allGameMusic;
+
+        private GameSoundFactory()
+        {
+            allSoundEffects = new List<SoundEffect>();
+            allGameMusic = new List<SoundEffect>();
+        }
 
         public void LoadAllSounds(ContentManager content)
         {
             //DO NOT change the order of these without editing the other method returns!
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZArrowAndBoomerangLoopSound.wav")); //0
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZBlueCandleUsingSound.wav")); //1
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZBombExplodingSound.wav")); //2
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZBombPlacingSound.wav")); //3
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZBossScreamAquamentusSound.wav")); //4
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZBossTakeDamageSound.wav")); //5
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZDoorUnlockSound.wav")); //6
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZEnemyDyingSound.wav")); //7
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZEnemyTakeDamageSound.wav")); //8
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZGetInventoryItemOrFairyOrClockSound.wav")); //9
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZHeartOrKeyPickupSound.wav")); //10
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZKeyAppearSound.wav")); //11
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZLinkDyingSound.wav")); //12
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZLinkLowHealthLoopSound.wav")); //13
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZLinkTakeDamageSound.wav")); //14
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZMagicalRodUsingSound.wav")); //15
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZNewItemAcquiredFanfareSound.wav")); //16
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZRecorderPlayingSound.wav")); //17
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZRefillRupeesOrHeartsLoopSound.wav")); //18
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZRupeePickupSound.wav")); //19
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZSecretDiscoveredSound.wav")); //20
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZShieldDeflectingSound.wav")); //21
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZSwordBeamShootingSound.wav")); //22
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZSwordCombinedSlashWithBeamShootingSound.wav")); //23
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZSwordSlashSound.wav")); //24
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZTextAndHeartRefillAndRupeeCountChangeLoopSound.wav")); //25
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZTextSlowLoopSound.wav")); //26
-            allSoundEffects.Add(content.Load<SoundEffect>("Content/GameSounds/LOZWalkingOnStairsSound.wav")); //27
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZArrowAndBoomerangLoopSound")); //0
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZBlueCandleUsingSound")); //1
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZBombExplodingSound")); //2
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZBombPlacingSound")); //3
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZBossScreamAquamentusSound")); //4
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZBossTakeDamageSound")); //5
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZDoorUnlockSound")); //6
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZEnemyDyingSound")); //7
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZEnemyTakeDamageSound")); //8
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZGetInventoryItemOrFairyOrClockSound")); //9
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZHeartOrKeyPickupSound")); //10
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZKeyAppearSound")); //11
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZLinkDyingSound")); //12
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZLinkLowHealthLoopSound")); //13
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZLinkTakeDamageSound")); //14
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZMagicalRodUsingSound")); //15
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZNewItemAcquiredFanfareSound")); //16
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZRecorderPlayingSound")); //17
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZRefillRupeesOrHeartsLoopSound")); //18
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZRupeePickupSound")); //19
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZSecretDiscoveredSound")); //20
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZShieldDeflectingSound")); //21
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZSwordBeamShootingSound")); //22
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZSwordCombinedSlashWithBeamShootingSound")); //23
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZSwordSlashSound")); //24
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZTextAndHeartRefillAndRupeeCountChangeLoopSound")); //25
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZTextSlowLoopSound")); //26
+            allSoundEffects.Add(content.Load<SoundEffect>("GameSounds/LOZWalkingOnStairsSound")); //27
 
-            allGameMusic.Add(content.Load<Song>("Content/GameSounds/LOZDungeonThemeLoopMusic.wav")); //0
-            allGameMusic.Add(content.Load<Song>("Content/GameSounds/LOZGameOverThemeLoopMusic.wav")); //1
-            allGameMusic.Add(content.Load<Song>("Content/GameSounds/LOZTriforceAcquiredFanfareMusic.wav")); //2
+            //Music--previously these were of type Song and not SoundEffect, so this may be refactored out
+            allGameMusic.Add(content.Load<SoundEffect>("GameSounds/LOZDungeonThemeLoopMusic")); //0
+            allGameMusic.Add(content.Load<SoundEffect>("GameSounds/LOZGameOverThemeLoopMusic")); //1
+            allGameMusic.Add(content.Load<SoundEffect>("GameSounds/LOZTriforceAcquiredFanfareMusic")); //2
         }
 
         //Organizational note: Item Pickups & Inventory & Related Effects
@@ -82,7 +89,7 @@ namespace LegendOfZeldaClone
         public SoundEffect GetLinkTakingDamageSoundEffect() => allSoundEffects[14];
         public SoundEffect GetEnemyTakingDamageSoundEffect() => allSoundEffects[8];
         public SoundEffect GetBossTakingDamageSoundEffect() => allSoundEffects[5]; //used for all bosses in the game
-        public SoundEffect GetAquamentusScreamingSoundEffect() => allSoundEffects[4]; //unique to Aquamentus and a few other bosses
+        public SoundEffect GetAquamentusScreamingSoundEffect() => allSoundEffects[4]; //unique to Aquamentus and only a few other bosses
         public SoundEffect GetLinkDyingSoundEffect() => allSoundEffects[12];
         public SoundEffect GetEnemyDyingSoundEffect() => allSoundEffects[7];
 
@@ -94,8 +101,8 @@ namespace LegendOfZeldaClone
         public SoundEffect GetTextAppearingSlowlySoundEffect() => allSoundEffects[26];
 
         //Organizational note: Music
-        public Song GetDungeonThemeMusic() => allGameMusic[0];
-        public Song GetGameOverThemeMusic() => allGameMusic[1];
-        public Song GetTriforceAcquiredFanfareMusic() => allGameMusic[2];
+        public SoundEffect GetDungeonThemeMusic() => allGameMusic[0];
+        public SoundEffect GetGameOverThemeMusic() => allGameMusic[1];
+        public SoundEffect GetTriforceAcquiredFanfareMusic() => allGameMusic[2];
     }
 }
