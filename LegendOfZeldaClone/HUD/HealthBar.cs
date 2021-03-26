@@ -3,15 +3,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone
 {
-    public class HealthBar
+    public class HealthBar : ISprite
     {
-        private ISprite fullHealthHeartSprite;
-        private ISprite halfHealthHeartSprite;
-        private ISprite noHealthHeartSprite;
+        private readonly ISprite fullHealthHeartSprite;
+        private readonly ISprite halfHealthHeartSprite;
+        private readonly ISprite noHealthHeartSprite;
         private int maxHealth;
         private int currentHealth;
         private int heartCounter;
-        LegendOfZeldaDungeon game;
+        private readonly LegendOfZeldaDungeon game;
 
         public HealthBar(LegendOfZeldaDungeon game)
         {
