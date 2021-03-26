@@ -12,7 +12,7 @@ namespace LegendOfZeldaClone
 
         public LinkUsingItemRight(ILinkPlayer link, int frame = 0)
         {
-            this.linkPlayer = link;
+            linkPlayer = link;
             linkSprite = LinkSpriteFactory.Instance.CreateLinkUsingItemRightSprite(link.SkinType, frame);
         }
 

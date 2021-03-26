@@ -9,7 +9,16 @@ namespace LegendOfZeldaClone.Collisions
         public static ItemCollisionHandler Instance { get; } = new ItemCollisionHandler();
         private ItemCollisionHandler() { }
 
-        public void HandlePlayerCollision(IPlayer player, Direction direction) => CurrentItem.Alive = false;
+        public void HandlePlayerCollision(IPlayer player, Direction direction)
+        {
+            if (CurrentItem is BlueRing)
+            {
+                if (player is LinkPlayer) CurrentItem.Alive = false;
+            }
+            else
+                CurrentItem.Alive = false;
+        }
+
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             if (playerProjectile is SwordProjectile)
