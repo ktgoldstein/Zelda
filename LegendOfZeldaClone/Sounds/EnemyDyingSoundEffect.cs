@@ -2,14 +2,14 @@
 
 namespace LegendOfZeldaClone
 {
-    public class HeartPickupSoundEffect : IGameSound
+    public class EnemyDyingSoundEffect : IGameSound
     {
         public SoundEffect Sound { get; }
         private SoundEffectInstance SoundInstance;
 
-        public HeartPickupSoundEffect()
+        public EnemyDyingSoundEffect()
         {
-            Sound = GameSoundFactory.Instance.GetHeartPickupSoundEffect();
+            Sound = GameSoundFactory.Instance.GetEnemyDyingSoundEffect();
             SoundInstance = Sound.CreateInstance();
             SoundInstance.IsLooped = false;
         }

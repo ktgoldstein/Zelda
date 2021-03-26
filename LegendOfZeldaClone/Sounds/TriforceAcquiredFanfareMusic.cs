@@ -2,18 +2,17 @@
 
 namespace LegendOfZeldaClone
 {
-    public class HeartPickupSoundEffect : IGameSound
+    public class TriforceAcquiredFanfareMusic : IGameSound
     {
         public SoundEffect Sound { get; }
         private SoundEffectInstance SoundInstance;
 
-        public HeartPickupSoundEffect()
+        public TriforceAcquiredFanfareMusic()
         {
-            Sound = GameSoundFactory.Instance.GetHeartPickupSoundEffect();
+            Sound = GameSoundFactory.Instance.GetTriforceAcquiredFanfareMusic();
             SoundInstance = Sound.CreateInstance();
-            SoundInstance.IsLooped = false;
+            SoundInstance.IsLooped = true;
         }
-
         public void Play()
         {
             SoundInstance.Play();
