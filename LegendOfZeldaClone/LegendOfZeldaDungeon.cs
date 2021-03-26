@@ -28,10 +28,12 @@ namespace LegendOfZeldaClone
 
         public List<IEnemyProjectile> EnemyProjectilesQueue;
         public List<IEnemyProjectile> EnemyProjectiles;
-                
+
+        public int RoomListIndex;
         public List<Room> RoomList;
-        public int RoomListIndex = 0;
         public Room CurrentRoom;
+        public Room NextRoom;
+
         public MiniMap DungeonMiniMap;
 
         public int SwitchRoomDelay;
@@ -121,7 +123,8 @@ namespace LegendOfZeldaClone
             Enemies = new List<IEnemy>();
             Items = new List<IItem>();
             Objects = new List<IObject>();
-            
+            RoomListIndex = 0;
+
             base.Initialize();
         }
 
@@ -148,13 +151,11 @@ namespace LegendOfZeldaClone
 
             IUsableItem woodenSword = new UsableWoodenSword(this);
             Player = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
-            
 
             InitializeRooms();
-            CurrentRoom = RoomList[RoomListIndex];
-            foreach (Room room in RoomList)
-                room.LoadRoom();
-            
+            CurrentRoom = RoomList[0];
+            CurrentRoom.LoadRoom();
+            NextRoom = null;
 
             DungeonMiniMap = new MiniMap(LoZHelpers.MiniMapLocation);
             Camera = new Camera(view);
@@ -214,6 +215,7 @@ namespace LegendOfZeldaClone
             Items = Items.Except(deadItems).ToList();
 
             List<IObject> deadObjects = new List<IObject>();
+
             foreach (IObject block in Objects)
             {
                 block.Update();
@@ -221,7 +223,7 @@ namespace LegendOfZeldaClone
                     deadObjects.Add(block);
             }
             Objects = Objects.Except(deadObjects).ToList();
-            
+
             Collisions.CollisionHandling.HandleCollisions(this);
 
             base.Update(gameTime);
@@ -236,8 +238,11 @@ namespace LegendOfZeldaClone
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
             DungeonMiniMap.Draw(_spriteBatch, LoZHelpers.MiniMapLocation);
-            foreach (Room room in RoomList)
-                room.Draw(_spriteBatch);
+            
+            CurrentRoom.Draw(_spriteBatch);
+
+            if(NextRoom != null)
+                NextRoom.Draw(_spriteBatch);
 
             foreach (IObject block in Objects)
                 block.Draw(_spriteBatch);
@@ -296,9 +301,9 @@ namespace LegendOfZeldaClone
             };
 
             //RoomList[0].AddNeighbors(RoomList[3], RoomList[0], RoomList[1], RoomList[2]);
-            //RoomList[0].AddNeighbors(null, RoomList[0], RoomList[1], RoomList[2]);
-            //RoomList[1].AddNeighbors(null, null, null, RoomList[0]);
-            //RoomList[2].AddNeighbors(null, null, RoomList[0], null);
+            RoomList[0].AddNeighbors(null, RoomList[0], RoomList[1], RoomList[2]);
+            RoomList[1].AddNeighbors(null, null, null, RoomList[0]);
+            RoomList[2].AddNeighbors(null, null, RoomList[0], null);
             //RoomList[3].AddNeighbors(RoomList[4], RoomList[0], null, null);
             //RoomList[4].AddNeighbors(RoomList[9], RoomList[3], RoomList[6], RoomList[5]);
             //RoomList[5].AddNeighbors(RoomList[8], null, RoomList[4], null);

@@ -66,7 +66,7 @@ namespace LegendOfZeldaClone.Collisions
                         CurrentObject.HurtBoxLocation = new Vector2(CurrentObject.HurtBoxLocation.X, block.HurtBoxLocation.Y + block.Height);
                         break;
                     case Direction.Left:
-                        CurrentObject.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X + block.Width, CurrentObject.HurtBoxLocation.Y);
+                        CurrentObject.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X - CurrentObject.Width, CurrentObject.HurtBoxLocation.Y);
                         break;
                     case Direction.Right:
                         CurrentObject.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X - CurrentObject.Width, CurrentObject.HurtBoxLocation.Y);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Threading;
 
 
 namespace LegendOfZeldaClone.Objects
@@ -32,7 +33,7 @@ namespace LegendOfZeldaClone.Objects
             Location = location;
             height = 32;
             width = 16;
-            hurtBoxOffset = new Vector2(LoZHelpers.Scale(16), 0);
+            hurtBoxOffset = new Vector2(LoZHelpers.Scale(32), 0);
             BlockHeight = ObjectHeight.CanWalkOver;
             IsMovable = false;
             IsBombable = false;
@@ -44,8 +45,12 @@ namespace LegendOfZeldaClone.Objects
 
         public void ChangeRoom()
         {
-            game.Camera.CameraTransition(Direction.Right);
-            //game.CurrentRoom = game.CurrentRoom.RoomRight;
+            if (game.NextRoom == null)
+            {
+                game.NextRoom = game.CurrentRoom.RoomRight;
+                game.NextRoom.LoadRoom();
+                game.Camera.CameraTransition(Direction.Right);
+            }
         }
     }
 }

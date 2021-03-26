@@ -11,7 +11,7 @@ namespace LegendOfZeldaClone.Objects
         public Vector2 Location { get; set; }
         public Vector2 HurtBoxLocation
         {
-            get { return Location; }
+            get { return Location - hurtBoxOffset; }
             set { Location = value; }
         }
         public ObjectHeight BlockHeight { get; }
@@ -25,6 +25,7 @@ namespace LegendOfZeldaClone.Objects
         private ISprite sprite;
         private readonly int height;
         private readonly int width;
+        private readonly Vector2 hurtBoxOffset;
 
         public OpenDoorLeft(LegendOfZeldaDungeon game, Vector2 location)
         {
@@ -34,6 +35,7 @@ namespace LegendOfZeldaClone.Objects
             height = 32;
             width = 16;
             BlockHeight = ObjectHeight.CanWalkOver;
+            hurtBoxOffset = new Vector2(LoZHelpers.Scale(32), 0);
             IsMovable = false;
             IsBombable = false;
             IsAlive = true;
@@ -46,8 +48,12 @@ namespace LegendOfZeldaClone.Objects
 
         public void ChangeRoom()
         {
-            game.Camera.CameraTransition(Direction.Left);
-            //game.CurrentRoom = game.CurrentRoom.RoomLeft;
+            if (game.NextRoom == null)
+            {
+                game.NextRoom = game.CurrentRoom.RoomRight;
+                game.NextRoom.LoadRoom();
+                game.Camera.CameraTransition(Direction.Right);
+            }
         }
     }
 }

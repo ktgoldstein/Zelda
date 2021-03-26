@@ -84,7 +84,7 @@ namespace LegendOfZeldaClone.LevelLoading
                 {
                     splitLine = roomInfo.Split(",");
                     row = Array.ConvertAll(splitLine, s => int.Parse(s));
-                    data.Add(new List<int>((row)));
+                    data.Add(new List<int>(row));
                 }
             }
             return data;
