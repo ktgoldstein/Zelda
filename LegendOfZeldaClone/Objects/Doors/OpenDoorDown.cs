@@ -17,15 +17,15 @@ namespace LegendOfZeldaClone.Objects
         public ObjectHeight BlockHeight { get; }
         public bool IsMovable { get; }
         public bool IsBombable { get; }
-        public bool IsAlive { get; set; }
+        public bool Alive { get; set; }
 
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
         private ISprite openDoorDown;
         private readonly int height;
         private readonly int width;
         private readonly Vector2 hurtBoxOffset = new Vector2(0, LoZHelpers.Scale(16));
 
-        public OpenDoorDown(LegendOfZeldaDungeon game, Vector2 location)
+        public OpenDoorDown(GameStateMachine game, Vector2 location)
         {
             this.game = game;
             openDoorDown = ObjectSpriteFactory.Instance.CreateOpenDoorDown();
@@ -35,7 +35,7 @@ namespace LegendOfZeldaClone.Objects
             BlockHeight = ObjectHeight.CanWalkOver;
             IsMovable = false;
             IsBombable = false;
-            IsAlive = true;
+            Alive = true;
         }
 
         public void Update() { }

@@ -17,14 +17,14 @@ namespace LegendOfZeldaClone.Objects
         public ObjectHeight BlockHeight { get; }
         public bool IsMovable { get; }
         public bool IsBombable { get; }
-        public bool IsAlive { get; set; }
+        public bool Alive { get; set; }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private ISprite stairs;
         private readonly int height;
         private readonly int width;
 
-        public Stairs(LegendOfZeldaDungeon game, Vector2 location)
+        public Stairs(GameStateMachine game, Vector2 location)
         {
             this.game = game;
             stairs = ObjectSpriteFactory.Instance.CreateStairs();
@@ -34,7 +34,7 @@ namespace LegendOfZeldaClone.Objects
             BlockHeight = ObjectHeight.CanWalkOver;
             IsMovable = false;
             IsBombable = false;
-            IsAlive = true;
+            Alive = true;
         }
 
         public void Update() { }

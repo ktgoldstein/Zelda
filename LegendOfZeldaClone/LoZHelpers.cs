@@ -2,6 +2,11 @@
 
 namespace LegendOfZeldaClone
 {
+    public enum GameState
+    {
+        Play,
+        ScreenTransition
+    }
 
     public enum Direction
     {

@@ -17,219 +17,138 @@ namespace LegendOfZeldaClone
 
     public class MoveDown : ICommand
     {
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
 
-        public MoveDown(LegendOfZeldaDungeon game) => this.game = game;
+        public MoveDown(GameStateMachine game) => this.game = game;
         public void Execute() => game.Player.MoveDown();
     }
 
     public class MoveUp : ICommand
     {
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
 
-        public MoveUp(LegendOfZeldaDungeon game) => this.game = game;
+        public MoveUp(GameStateMachine game) => this.game = game;
         public void Execute() => game.Player.MoveUp();
     }
 
     public class MoveLeft : ICommand
     {
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
 
-        public MoveLeft(LegendOfZeldaDungeon game) => this.game = game;
+        public MoveLeft(GameStateMachine game) => this.game = game;
         public void Execute() => game.Player.MoveLeft();
     }
 
     public class MoveRight : ICommand
     {
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
 
-        public MoveRight(LegendOfZeldaDungeon game) => this.game = game;
+        public MoveRight(GameStateMachine game) => this.game = game;
         public void Execute() => game.Player.MoveRight();
     }
 
     public class ActionA : ICommand
     {
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
 
-        public ActionA(LegendOfZeldaDungeon game) => this.game = game;
+        public ActionA(GameStateMachine game) => this.game = game;
         public void Execute() => game.Player.ActionA();
     }
 
     public class ActionB : ICommand
     {
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
 
-        public ActionB(LegendOfZeldaDungeon game) => this.game = game;
+        public ActionB(GameStateMachine game) => this.game = game;
         public void Execute() => game.Player.ActionB();
-    }
-
-    public class UseBow : ICommand
-    {
-        private IUsableItem bow;
-        private LegendOfZeldaDungeon game;
-
-        public UseBow(LegendOfZeldaDungeon game, ArrowSkinType skinType)
-        {
-            this.game = game;
-            bow = new UsableBow(game, skinType);
-        }
-
-        public void Execute()
-        {
-            ((ILinkPlayer)game.Player).HeldItem = bow;
-            game.Player.ActionB();
-        }
-    }
-
-    public class UseBoomerang : ICommand
-    {
-        private IUsableItem boomerang;
-        private LegendOfZeldaDungeon game;
-
-        public UseBoomerang(LegendOfZeldaDungeon game, BoomerangSkinType skinType)
-        {
-            this.game = game;
-            boomerang = new UsableBoomerang(game, skinType);
-        }
-
-        public void Execute()
-        {
-            ((ILinkPlayer)game.Player).HeldItem = boomerang;
-            game.Player.ActionB();
-        }
-    }
-
-    public class UseBomb : ICommand
-    {
-        private IUsableItem bomb;
-        private LegendOfZeldaDungeon game;
-
-        public UseBomb(LegendOfZeldaDungeon game)
-        {
-            this.game = game;
-            bomb = new UsableBomb(game);
-        }
-
-        public void Execute()
-        {
-            ((ILinkPlayer)game.Player).HeldItem = bomb;
-            game.Player.ActionB();
-        }
-    }
-
-    public class UseBlueCandle : ICommand
-    {
-        private IUsableItem blueCandle;
-        private LegendOfZeldaDungeon game;
-
-        public UseBlueCandle(LegendOfZeldaDungeon game)
-        {
-            this.game = game;
-            blueCandle = new UsableBlueCandle(game);
-        }
-
-        public void Execute()
-        {
-            ((ILinkPlayer)game.Player).HeldItem = blueCandle;
-            game.Player.ActionB();
-        }
-    }
-
-    public class PickUpBlueRing : ICommand
-    {
-        private IUsableItem blueRing;
-
-        public PickUpBlueRing(LegendOfZeldaDungeon game)
-        {
-            blueRing = new UsableBlueRing(game);
-        }
-
-        public void Execute()
-        {
-            blueRing.Use(new Vector2(), Direction.None);
-        }
     }
 
     public class DamageLink : ICommand
     {
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
 
-        public DamageLink(LegendOfZeldaDungeon game)
-        {
-            this.game = game;
-        }
-
-        public void Execute()
-        {
-            game.Player.Damage(2, Direction.None);
-        }
+        public DamageLink(GameStateMachine game) => this.game = game;
+        public void Execute() => game.Player.Damage(1, Direction.None);
     }
-
-    
+        
     public class ResetGame : ICommand
     {
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
 
-        public ResetGame(LegendOfZeldaDungeon game)
-        {
-            this.game = game;
-        }
+        public ResetGame(GameStateMachine game) => this.game = game;
+
+        public void Execute() => game.Reset();
+    }
+
+    public class MoveRoomDown : ICommand
+    {
+        private GameStateMachine game;
+
+        public MoveRoomDown(GameStateMachine game) => this.game = game;
 
         public void Execute()
         {
-            IUsableItem woodenSword = new UsableWoodenSword(game);
-            game.Player = new LinkPlayer(game, LoZHelpers.LinkStartingLocation, woodenSword);
-            game.RoomListIndex = 0;
-            game.CurrentRoom = game.RoomList[0];
+            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomDown == null)
+                return;
+            else
+                game.SwitchRoomDelay = game.SwitchDelayLength;
+
+            game.CurrentRoom = game.CurrentRoom.RoomDown;
             game.CurrentRoom.LoadRoom();
         }
     }
-    public class PreviousRoom : ICommand
-    {
-        private LegendOfZeldaDungeon myGame;
 
-        public PreviousRoom(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
+    public class MoveRoomUp : ICommand
+    {
+        private GameStateMachine game;
+
+        public MoveRoomUp(GameStateMachine game) => this.game = game;
 
         public void Execute()
         {
-            if (myGame.SwitchRoomDelay != 0)
+            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomUp == null)
                 return;
             else
-                myGame.SwitchRoomDelay = myGame.SwitchDelayLength;
-            myGame.RoomListIndex--;
-            if (myGame.RoomListIndex < 0)
-                myGame.RoomListIndex = myGame.RoomList.Count - 1;
+                game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            myGame.CurrentRoom = myGame.RoomList[myGame.RoomListIndex];
-            myGame.CurrentRoom.LoadRoom();
+            game.CurrentRoom = game.CurrentRoom.RoomUp;
+            game.CurrentRoom.LoadRoom();
         }
     }
 
-    public class NextRoom : ICommand
+    public class MoveRoomLeft : ICommand
     {
-        private LegendOfZeldaDungeon myGame;
+        private GameStateMachine game;
 
-        public NextRoom(LegendOfZeldaDungeon game)
-        {
-            myGame = game;
-        }
+        public MoveRoomLeft(GameStateMachine game) => this.game = game;
 
         public void Execute()
         {
-            if (myGame.SwitchRoomDelay != 0)
+            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomLeft == null)
                 return;
             else
-                myGame.SwitchRoomDelay = myGame.SwitchDelayLength;
+                game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            myGame.RoomListIndex++;
-            if (myGame.RoomListIndex >= myGame.RoomList.Count)
-                myGame.RoomListIndex = 0;
+            game.CurrentRoom = game.CurrentRoom.RoomLeft;
+            game.CurrentRoom.LoadRoom();
+        }
+    }
 
-            myGame.CurrentRoom = myGame.RoomList[myGame.RoomListIndex];
-            myGame.CurrentRoom.LoadRoom();
+    public class MoveRoomRight : ICommand
+    {
+        private GameStateMachine game;
+
+        public MoveRoomRight(GameStateMachine game) => this.game = game;
+
+        public void Execute()
+        {
+            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomRight == null)
+                return;
+            else
+                game.SwitchRoomDelay = game.SwitchDelayLength;
+
+            game.CurrentRoom = game.CurrentRoom.RoomRight;
+            game.CurrentRoom.LoadRoom();
         }
     }
 }

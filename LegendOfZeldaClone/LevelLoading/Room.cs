@@ -17,14 +17,14 @@ namespace LegendOfZeldaClone.LevelLoading
 
         private readonly ISprite tiles;
         private readonly ISprite walls;
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private readonly string fileLocation;
         private int backgroundType;
         private int wallType;
         private int roomPosX;
         private int roomPosY;
 
-        public Room(string fileLocation, LegendOfZeldaDungeon game)
+        public Room(string fileLocation, GameStateMachine game)
         {
             this.game = game;
             this.fileLocation = fileLocation;
@@ -34,7 +34,7 @@ namespace LegendOfZeldaClone.LevelLoading
 
         public void LoadRoom()
         {
-            game.ResetEnemyItemLists();
+            game.ResetRoomSpecificLists();
 
             List<List<int>> data = ProcessCSV();
 

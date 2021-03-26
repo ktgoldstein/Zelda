@@ -4,7 +4,7 @@ namespace LegendOfZeldaClone.Collisions
 {
     public static class CollisionHandling
     {
-        public static void HandleCollisions(LegendOfZeldaDungeon game)
+        public static void HandleCollisions(GameStateMachine game)
         {
             List<IGameObject> gameObjects = new List<IGameObject>();
             gameObjects.Add(game.Player);

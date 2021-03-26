@@ -1,40 +1,42 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace LegendOfZeldaClone.Display
 {
     public class Camera
     {
-        private Vector2 position;
+        private GameStateMachine game;
+        private Vector2 position = Vector2.Zero;
         private Vector2 targetPosition;
         private int speed = LoZHelpers.Scale(8);
 
-        public Camera(Viewport viewport) 
+        public Camera(GameStateMachine game)
         {
-            position.X = 0;
-            position.Y = 0;
+            this.game = game;
         }
+
         public void CameraTransition(Direction direction)
         {
-            switch (direction)
+            if (game.CurrentGameState == GameState.Play)
             {
-                case Direction.Up:
-                    targetPosition = position + new Vector2(-LoZHelpers.GameHeight, 0);
-                    break;
-                case Direction.Down:
-                    targetPosition = position + new Vector2(LoZHelpers.GameHeight, 0);
-                    break;
-                case Direction.Left:
-                    targetPosition = position + new Vector2(LoZHelpers.GameWidth, 0);
-                    break;
-                case Direction.Right: 
-                    targetPosition = position + new Vector2(-LoZHelpers.GameWidth, 0);
-                    break;
-                default:
-                    break;
-            }
-            
+                game.CurrentGameState = GameState.ScreenTransition;
+                switch (direction)
+                {
+                    case Direction.Up:
+                        targetPosition = position + new Vector2(-LoZHelpers.GameHeight, 0);
+                        break;
+                    case Direction.Down:
+                        targetPosition = position + new Vector2(LoZHelpers.GameHeight, 0);
+                        break;
+                    case Direction.Left:
+                        targetPosition = position + new Vector2(LoZHelpers.GameWidth, 0);
+                        break;
+                    case Direction.Right:
+                        targetPosition = position + new Vector2(-LoZHelpers.GameWidth, 0);
+                        break;
+                    default:
+                        break;
+                }
+            }            
         }
 
         public void Update()
@@ -44,6 +46,12 @@ namespace LegendOfZeldaClone.Display
                 Vector2 direction = targetPosition - position;
                 direction.Normalize();
                 position += direction * speed;
+            }
+            else if (game.CurrentGameState == GameState.ScreenTransition)
+            {
+                game.CurrentGameState = GameState.Play;
+                game.CurrentRoom = game.NextRoom;
+                game.NextRoom = null;
             }
         }
 

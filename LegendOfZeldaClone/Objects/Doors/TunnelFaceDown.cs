@@ -17,15 +17,15 @@ namespace LegendOfZeldaClone.Objects
         public ObjectHeight BlockHeight { get; }
         public bool IsMovable { get; }
         public bool IsBombable { get; }
-        public bool IsAlive { get; set; }
+        public bool Alive { get; set; }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private ISprite sprite;
         private readonly int height;
         private readonly int width;
         private readonly Vector2 hurtBoxOffset;
 
-        public TunnelFaceDown(LegendOfZeldaDungeon game, Vector2 location)
+        public TunnelFaceDown(GameStateMachine game, Vector2 location)
         {
             this.game = game;
             sprite = ObjectSpriteFactory.Instance.CreateTunnelFaceDown();
@@ -36,7 +36,7 @@ namespace LegendOfZeldaClone.Objects
             BlockHeight = ObjectHeight.CanWalkOver;
             IsMovable = false;
             IsBombable = false;
-            IsAlive = true;
+            Alive = true;
         }
 
         public void Update() { }

@@ -4,10 +4,10 @@ namespace LegendOfZeldaClone
 {
     public class UsableBow : IUsableItem
     {
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private readonly ArrowSkinType skinType;
 
-        public UsableBow(LegendOfZeldaDungeon game, ArrowSkinType skinType)
+        public UsableBow(GameStateMachine game, ArrowSkinType skinType)
         {
             this.game = game;
             this.skinType = skinType;
