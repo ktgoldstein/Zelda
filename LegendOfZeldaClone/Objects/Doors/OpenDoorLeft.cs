@@ -11,7 +11,7 @@ namespace LegendOfZeldaClone.Objects
         public Vector2 Location { get; set; }
         public Vector2 HurtBoxLocation
         {
-            get { return Location - hurtBoxOffset; }
+            get { return Location + hurtBoxOffset; }
             set { Location = value; }
         }
         public ObjectHeight BlockHeight { get; }
@@ -35,7 +35,7 @@ namespace LegendOfZeldaClone.Objects
             height = 32;
             width = 16;
             BlockHeight = ObjectHeight.CanWalkOver;
-            hurtBoxOffset = new Vector2(LoZHelpers.Scale(32), 0);
+            hurtBoxOffset = new Vector2(LoZHelpers.Scale(-16), 0);
             IsMovable = false;
             IsBombable = false;
             IsAlive = true;
@@ -50,9 +50,9 @@ namespace LegendOfZeldaClone.Objects
         {
             if (game.NextRoom == null)
             {
-                game.NextRoom = game.CurrentRoom.RoomRight;
+                game.NextRoom = game.CurrentRoom.RoomLeft;
                 game.NextRoom.LoadRoom();
-                game.Camera.CameraTransition(Direction.Right);
+                game.Camera.CameraTransition(Direction.Left);
             }
         }
     }
