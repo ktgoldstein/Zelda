@@ -94,10 +94,18 @@ namespace LegendOfZeldaClone
         {
             Inventory.AddItem(itemType, game);
             linkState.PickUpItem(item);
-            Equip(itemType);
+            if (itemType != UsableItemTypes.BlueRing)
+                Equip(itemType);
         }
 
-        public void Equip(UsableItemTypes itemType) => HeldItem = Inventory.GetItem(itemType);
+        public void Equip(UsableItemTypes itemType)
+        {
+            if (itemType == UsableItemTypes.BlueRing)
+                Inventory.GetItem(itemType).Use(Location, Direction.None, Inventory);
+            else
+                HeldItem = Inventory.GetItem(itemType);
+        }
+
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
         public void Update() => linkState.Update();
         public void SetState(ILinkState linkState) => this.linkState = linkState;

@@ -46,7 +46,7 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.Inventory.KeysHeld++;
             else if (item is BlueCandle)
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BlueCandle, item);
-            else if (item is BlueRing)
+            else if (item is BlueRing && CurrentPlayer is LinkPlayer)
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BlueRing, item);
             else if (item is Boomerang)
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BoomerangNormal, item);

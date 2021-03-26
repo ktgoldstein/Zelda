@@ -38,7 +38,12 @@ namespace LegendOfZeldaClone
         {
             linkSprite.Update();
             if (linkSprite.AnimationDone())
-                linkPlayer.SetState(linkPlayer.GetStateStandingDown());
+            {
+                if (heldItem is BlueRing)
+                    linkPlayer.Equip(UsableItemTypes.BlueRing);
+                else
+                    linkPlayer.SetState(linkPlayer.GetStateStandingDown());                
+            }
         }
     }
 }
