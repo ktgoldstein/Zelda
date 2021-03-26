@@ -6,8 +6,11 @@ namespace LegendOfZeldaClone
     class HUDTextureFactory
     {
         private Texture2D miniMap;
+        private Texture2D pauseMap;
         private Texture2D inventory;
-        
+        private Texture2D locationTracker;
+        private Texture2D triForceIndicator;
+
         public static HUDTextureFactory Instance
         {
             get
@@ -21,11 +24,17 @@ namespace LegendOfZeldaClone
 
         public void LoadAllTextures(ContentManager content)
         {
-            miniMap = content.Load<Texture2D>("LevelLoading\\Level 1");
+            miniMap = content.Load<Texture2D>("HUD\\Level 1 (Blank)");
+            pauseMap = content.Load<Texture2D>("HUD\\PauseMap");
+            locationTracker = content.Load<Texture2D>("HUD\\Link Room Tracker");
+            triForceIndicator = content.Load<Texture2D>("HUD\\TriForceFlash");
             inventory = content.Load<Texture2D>("LoZInventorySpriteSheet");
         }
 
         public ISprite CreateMiniMap() => new MapSprite(miniMap, 1, 1, 1);
+        public ISprite CreatePauseMap() => new MapSprite(pauseMap, 1, 1, 1);
+        public ISprite CreateLocationTracker() => new MapSprite(locationTracker, 1, 1, 1);
+        public ISprite CreateTriForceIndicator() => new MapSprite(triForceIndicator, 2, 1, 2);
         public ISprite CreateLevelName() => new InventorySprite(inventory, 584, 1, 48, 8);
         public ISprite CreateRupeeCount() => new InventorySprite(inventory, 346, 27, 8, 8);
         public ISprite CreateKeyCount() => new InventorySprite(inventory, 346, 43, 8, 8);
