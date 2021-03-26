@@ -1,4 +1,5 @@
-﻿
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 namespace LegendOfZeldaClone
 {
     public class InventoryScreen
@@ -10,6 +11,16 @@ namespace LegendOfZeldaClone
         {
             inventoryBox = HUDTextureFactory.Instance.CreateInventoryBox();
             inventorySelectBox = HUDTextureFactory.Instance.CreateInventorySelectionBox();
+        }
+
+        public void Update()
+        {
+
+        }
+        public void Draw(SpriteBatch spritebatch)
+        {
+            inventoryBox.Draw(spritebatch, LoZHelpers.InventoryBoxLocation);
+            inventorySelectBox.Draw(spritebatch, LoZHelpers.InventorySelectionBoxLocation);
         }
     }
 }

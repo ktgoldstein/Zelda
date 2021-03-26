@@ -142,6 +142,8 @@ namespace LegendOfZeldaClone
         public static Vector2 LifeTextLocation => new Vector2(ABoxLocation.X + Scale(30), ABoxLocation.Y);
         public static Vector2 HealthLocation => new Vector2(LifeTextLocation.X, LifeTextLocation.Y + Scale(24));
         public static int InventoryScreenHeight => Scale(120);
+        public static Vector2 InventorySelectionBoxLocation => new Vector2(Scale(0), Scale(0));
+        public static Vector2 InventoryBoxLocation => new Vector2(InventorySelectionBoxLocation.X + Scale(123), Scale(0));
         public static int GameHeight => Scale(240);
         public static int GameWidth => Scale(256);
         public static int HUDHeight => Scale(64);

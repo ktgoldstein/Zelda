@@ -54,7 +54,16 @@ namespace LegendOfZeldaClone
         public ISprite CreateHalfHealthHeart() => new InventorySprite(inventory, 636, 117, 8, 8);
         public ISprite CreateNoHealthHeart() => new InventorySprite(inventory, 627, 117, 8, 8);
         public ISprite CreateInventorySword() => new InventorySprite(inventory, 555, 137, 8, 16);
-        public ISprite CreateInventoryBox() => new InventorySprite(inventory, 1, 11, 123, 88);
-        public ISprite CreateInventorySelectionBox() => new InventorySprite(inventory, 124, 11, 99, 88);
+        public ISprite CreateInventorySelectionBox() => new InventorySprite(inventory, 1, 11, 123, 88);
+        public ISprite CreateInventoryBox() => new InventorySprite(inventory, 124, 11, 99, 88);
+        public ISprite CreateInventoryRing() => new InventorySprite(inventory, 549, 156, 8, 16);
+        public ISprite CreateInventoryBoomerang() => new InventorySprite(inventory, 584, 137, 8, 16);
+        public ISprite CreateInventoryBomb() => new InventorySprite(inventory, 604, 137, 8, 16);
+        public ISprite CreateInventoryBow() => new InventorySprite(inventory, 633, 137, 8, 16);
+        public ISprite CreateInventoryArrow() => new InventorySprite(inventory, 615, 137, 8, 16);
+        public ISprite CreateInventoryCandle() => new InventorySprite(inventory, 644, 137, 8, 16);
+        public ISprite CreateInventoryPotion() => new InventorySprite(inventory, 695, 137, 8, 16);
+        public ISprite CreateInventoryMap() => new InventorySprite(inventory, 601, 156, 8, 16);
+        public ISprite CreateInventoryCompass() => new InventorySprite(inventory, 612, 156, 15, 16);
     }
 }
