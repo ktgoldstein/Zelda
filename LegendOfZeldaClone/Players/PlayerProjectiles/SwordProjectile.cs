@@ -15,8 +15,10 @@ namespace LegendOfZeldaClone
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
+
+        public readonly ILinkPlayer player;
+
         private readonly GameStateMachine game;
-        private readonly ILinkPlayer player;
         private readonly SwordSkinType skinType;
         private readonly Direction direction;
         private ISprite sprite;
