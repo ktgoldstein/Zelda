@@ -144,6 +144,13 @@ namespace LegendOfZeldaClone
         public static int InventoryScreenHeight => Scale(120);
         public static Vector2 InventorySelectionBoxLocation => new Vector2(Scale(0), Scale(0));
         public static Vector2 InventoryBoxLocation => new Vector2(InventorySelectionBoxLocation.X + Scale(123), Scale(0));
+        public static Vector2 InventoryRingLocation => new Vector2(InventoryBoxLocation.X + Scale(41), InventoryBoxLocation.Y + Scale(24));
+        public static Vector2 InventoryBoomerangLocation => new Vector2(InventoryBoxLocation.X + Scale(9), InventoryBoxLocation.Y + Scale(48));
+        public static Vector2 InventoryBombLocation => new Vector2(InventoryBoomerangLocation.X + Scale(24), InventoryBoomerangLocation.Y);
+        public static Vector2 InventoryBowLocation => new Vector2(InventoryBombLocation.X + Scale(20), InventoryBombLocation.Y);
+        public static Vector2 InventoryArrowLocation => new Vector2(InventoryBowLocation.X + Scale(8), InventoryBowLocation.Y);
+        public static Vector2 InventoryCandleLocation => new Vector2(InventoryArrowLocation.X + Scale(20), InventoryArrowLocation.Y);
+        public static Vector2 InventoryPotionLocation => new Vector2(InventoryBowLocation.X + Scale(4), InventoryBowLocation.Y + Scale(16));
         public static int GameHeight => Scale(240);
         public static int GameWidth => Scale(256);
         public static int HUDHeight => Scale(64);
