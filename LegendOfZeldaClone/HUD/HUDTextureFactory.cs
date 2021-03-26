@@ -54,5 +54,6 @@ namespace LegendOfZeldaClone
         public ISprite CreateHalfHealthHeart() => new InventorySprite(inventory, 636, 117, 8, 8);
         public ISprite CreateNoHealthHeart() => new InventorySprite(inventory, 627, 117, 8, 8);
         public ISprite CreateInventorySword() => new InventorySprite(inventory, 555, 137, 8, 16);
+        public ISprite CreateInventoryBox() => new InventorySprite(inventory, 1, 11, 123, 88);
     }
 }
