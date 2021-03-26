@@ -7,7 +7,8 @@ namespace LegendOfZeldaClone.Display
         private GameStateMachine game;
         private Vector2 position = Vector2.Zero;
         private Vector2 targetPosition;
-        private int speed = LoZHelpers.Scale(8);
+        private readonly int speed = LoZHelpers.Scale(8);
+        private Direction currentTransitionDirection;
 
         public Camera(GameStateMachine game)
         {
@@ -18,6 +19,7 @@ namespace LegendOfZeldaClone.Display
         {
             if (game.CurrentGameState == GameState.Play)
             {
+                currentTransitionDirection = direction;
                 game.CurrentGameState = GameState.ScreenTransition;
                 switch (direction)
                 {
@@ -52,6 +54,7 @@ namespace LegendOfZeldaClone.Display
                 game.CurrentGameState = GameState.Play;
                 game.CurrentRoom = game.NextRoom;
                 game.NextRoom = null;
+                game.ShiftLink(currentTransitionDirection);
             }
         }
 

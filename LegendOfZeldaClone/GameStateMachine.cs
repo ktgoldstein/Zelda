@@ -3,6 +3,7 @@ using LegendOfZeldaClone.Display;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace LegendOfZeldaClone
 {
@@ -78,9 +79,10 @@ namespace LegendOfZeldaClone
 
         public void Draw(SpriteBatch sprintBatch) 
         {
+            DungeonMiniMap.Draw(sprintBatch, LoZHelpers.MiniMapLocation);
+
             CurrentRoom.Draw(sprintBatch);
             NextRoom?.Draw(sprintBatch);
-            DungeonMiniMap.Draw(sprintBatch, LoZHelpers.MiniMapLocation);
 
             foreach (IObject block in Objects)
                 block.Draw(sprintBatch);
@@ -98,9 +100,9 @@ namespace LegendOfZeldaClone
 
                 foreach (IPlayerProjectile projectile in PlayerProjectiles)
                     projectile.Draw(sprintBatch);
-            }
 
-            Player.Draw(sprintBatch);
+                Player.Draw(sprintBatch);
+            }
         }
 
         public void InitializeRooms()
@@ -165,6 +167,28 @@ namespace LegendOfZeldaClone
                     deadObjects.Add(gameObject);
             }
             return deadObjects;
+        }
+
+        public void ShiftLink(Direction direction)
+        {
+            int displacement = LoZHelpers.Scale(16);
+            switch (direction)
+            {
+                case Direction.Down:
+                    Player.Location += new Vector2(0, displacement + Player.Height);
+                    break;
+                case Direction.Up:
+                    Player.Location -= new Vector2(0, displacement + Player.Height);
+                    break;
+                case Direction.Left:
+                    Player.Location -= new Vector2(displacement + Player.Width, 0);
+                    break;
+                case Direction.Right:
+                    Player.Location += new Vector2(displacement + Player.Width, 0);
+                    break;
+                case Direction.None:
+                    break;
+            }
         }
 
         public void Reset()
