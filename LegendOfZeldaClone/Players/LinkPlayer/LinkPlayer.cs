@@ -8,7 +8,11 @@ namespace LegendOfZeldaClone
     {
         public float Speed { get; set; }
         public int MaxHealth { get; set; }
-        public int Health { get; set; }
+        public int Health
+        {
+            get => health; 
+            set => health = value > MaxHealth ? MaxHealth : value;
+        }
         public Direction BlockingDirection { get { return linkState.BlockingDirection; } }
         public PlayerInventory Inventory { get; }
         public Vector2 Location { get; set; }
@@ -20,6 +24,7 @@ namespace LegendOfZeldaClone
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
         public IUsableItem Sword { get; set; }
+        public int SwordBeamLock { get; set; } = 0;
         public IUsableItem HeldItem { get; set; }
         public LinkSkinType SkinType { get; set; }
         public bool Alive
@@ -34,7 +39,9 @@ namespace LegendOfZeldaClone
         private readonly int height;
         private readonly Vector2 hurtBoxOffset;
 
-        public LinkPlayer(GameStateMachine game, Vector2 location, IUsableItem sword, IUsableItem heldItem = null)
+        private int health;
+
+        public LinkPlayer(GameStateMachine game, Vector2 location, IUsableItem sword = null, IUsableItem heldItem = null)
         {
             Sword = sword;
             HeldItem = heldItem;

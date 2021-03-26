@@ -34,10 +34,15 @@ namespace LegendOfZeldaClone
         }
         public int Width { get { return decoratedLinkPlayer.Width; } }
         public int Height { get { return decoratedLinkPlayer.Height; } }
-        public IUsableItem Sword 
+        public IUsableItem Sword
         {
             get { return decoratedLinkPlayer.Sword; }
-            set { decoratedLinkPlayer.Sword = value; } 
+            set { decoratedLinkPlayer.Sword = value; }
+        }
+        public int SwordBeamLock
+        {
+            get { return decoratedLinkPlayer.SwordBeamLock; }
+            set { decoratedLinkPlayer.SwordBeamLock = value; }
         }
         public IUsableItem HeldItem
         {

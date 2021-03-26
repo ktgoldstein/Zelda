@@ -3,6 +3,7 @@
     public interface ILinkPlayer : IPlayer
     {
         public IUsableItem Sword { get; set; }
+        public int SwordBeamLock { get; set; }
         public IUsableItem HeldItem { get; set; }
         public LinkSkinType SkinType { get; set; }
         public void SetState(ILinkState linkState);

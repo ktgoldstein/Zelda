@@ -16,6 +16,7 @@ namespace LegendOfZeldaClone
         public int Height { get { return LoZHelpers.Scale(height); } }
 
         private readonly GameStateMachine game;
+        private readonly ILinkPlayer player;
         private readonly SwordSkinType skinType;
         private readonly Direction direction;
         private ISprite sprite;
@@ -23,11 +24,12 @@ namespace LegendOfZeldaClone
         private int height;
         private int lifeSpan;
 
-        public SwordProjectile(Vector2 startingLocation, SwordSkinType skinType, Direction direction, GameStateMachine game)
+        public SwordProjectile(Vector2 startingLocation, SwordSkinType skinType, Direction direction, GameStateMachine game, ILinkPlayer player)
         {
             Alive = true;
 
             this.game = game;
+            this.player = player;
             this.direction = direction;
             Location = startingLocation;
             this.skinType = skinType;
@@ -110,6 +112,13 @@ namespace LegendOfZeldaClone
             };
         }
 
-        private void SpawnSwordBeam() => game.PlayerProjectilesQueue.Add(new SwordBeamProjectile(Location, direction, game));
+        private void SpawnSwordBeam()
+        {
+            if (player.Health == player.MaxHealth && player.SwordBeamLock == 0)
+            {
+                player.SwordBeamLock++;
+                game.PlayerProjectilesQueue.Add(new SwordBeamProjectile(Location, direction, game, player));                
+            }
+        }
     }
 }

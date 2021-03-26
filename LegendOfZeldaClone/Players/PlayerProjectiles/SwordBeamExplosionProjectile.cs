@@ -15,18 +15,20 @@ namespace LegendOfZeldaClone
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
+        private readonly ILinkPlayer player;
         private ISprite[] sprites;
         private Vector2 velocity;
         private readonly int width;
         private readonly int height;
         private int lifeSpan;
 
-        public SwordBeamExplosionProjectile(Vector2 startingLocation, Direction direction, int skinSeed)
+        public SwordBeamExplosionProjectile(Vector2 startingLocation, Direction direction, int skinSeed, ILinkPlayer player)
         {
             Alive = true;
             width = 8;
             height = 16;
 
+            this.player = player;
             Location = startingLocation;
             lifeSpan = 10;
             sprites = new ISprite[2];
@@ -36,7 +38,10 @@ namespace LegendOfZeldaClone
         public void Update()
         {
             if (lifeSpan == 0)
+            {
                 Alive = false;
+                player.SwordBeamLock--;
+            }
             Location += velocity;
             lifeSpan--;
         }
