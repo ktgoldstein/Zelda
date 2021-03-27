@@ -17,6 +17,7 @@ namespace LegendOfZeldaClone.Collisions
                 player.Inventory.KeysHeld > 0 )
             {
                 CurrentObject.IsAlive = false;
+                new DoorUnlockingSoundEffect().Play();
                 player.Inventory.KeysHeld--;
             }
             else if (CurrentObject.IsMovable)

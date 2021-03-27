@@ -11,6 +11,7 @@ namespace LegendOfZeldaClone
         public void Use(Vector2 location, Direction direction)
         {
             game.PlayerProjectilesQueue.Add(new BombProjectile(game, location, direction));
+            new BombPlacingSoundEffect().Play();
         }
     }
 }

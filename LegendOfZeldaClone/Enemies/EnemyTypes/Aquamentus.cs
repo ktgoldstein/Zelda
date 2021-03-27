@@ -106,5 +106,20 @@ namespace LegendOfZeldaClone.Enemy
         {
             knockbackForce = direction * 10;
         }
+        public void TakeDamage(Vector2 direction)
+        {
+            if (!Invincible)
+            {
+                Invincible = true;
+                Health -= 1;
+                new BossTakingDamageSoundEffect().Play();
+                if (Health <= 0)
+                    Die();
+                Knockback(direction);
+            }
+
+        }
+        public void Die() => Alive = false;
+
     }
 }

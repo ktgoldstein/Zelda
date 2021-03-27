@@ -65,5 +65,8 @@ namespace LegendOfZeldaClone.Enemy
         {
             game.EnemyProjectilesQueue.Add(new Fireball(Location, game.Player.Location - Location));
         }
+
+        public void TakeDamage(Vector2 direction) { }
+        public void Die() => Alive = false;
     }
 }

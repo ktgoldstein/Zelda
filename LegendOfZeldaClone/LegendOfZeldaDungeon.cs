@@ -230,7 +230,7 @@ namespace LegendOfZeldaClone
             MusicTest++;
             if (MusicTest % 10 ==0)
             {
-                new HeartPickupSoundEffect().Play();
+               // new HeartPickupSoundEffect().Play();
             }
         }
 

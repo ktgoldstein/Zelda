@@ -23,19 +23,7 @@ namespace LegendOfZeldaClone.Collisions
             {
                 Vector2 projectileDirection = CurrentEnemy.Location - playerProjectile.Location;
                 projectileDirection.Normalize();
-                if (!CurrentEnemy.Invincible)
-                {
-                    CurrentEnemy.Invincible = true;
-                    if (!(CurrentEnemy is BladeTrap || CurrentEnemy is WizardFire))
-                    {
-                        CurrentEnemy.Health -= 1;
-                        if (CurrentEnemy.Health <= 0)
-                        {
-                            CurrentEnemy.Alive = false;
-                        }
-                    }
-                    CurrentEnemy.Knockback(projectileDirection);
-                }
+                CurrentEnemy.TakeDamage(projectileDirection);
             }
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)

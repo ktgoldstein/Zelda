@@ -61,5 +61,7 @@ namespace LegendOfZeldaClone.Enemy
         {
             knockbackForce = direction * 100;
         }
+        public void TakeDamage(Vector2 direction) { }
+        public void Die() { }
     }
 }

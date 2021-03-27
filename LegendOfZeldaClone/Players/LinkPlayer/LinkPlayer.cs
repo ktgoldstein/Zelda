@@ -73,6 +73,7 @@ namespace LegendOfZeldaClone
             Tuple<LinkStateType, int> currentState = linkState.GetState();
             if (currentState.Item1 != LinkStateType.PickingUpItem)
                 game.Player = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
+            new LinkTakingDamageSoundEffect().Play();
         }
 
         public void Heal(int amount)
@@ -80,6 +81,8 @@ namespace LegendOfZeldaClone
             Health += amount;
             if (Health > MaxHealth)
                 Health = MaxHealth;
+            for (int i = 0; i < amount; i++)
+                new HeartsRefillingSoundEffect().Play();
         }
 
         public void PickUpUsableItem(UsableItemTypes itemType, IItem item)

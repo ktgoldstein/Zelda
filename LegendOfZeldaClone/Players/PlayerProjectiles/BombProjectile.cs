@@ -94,6 +94,7 @@ namespace LegendOfZeldaClone
                     game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(bottomLeft));
                     break;
             }
+            new BombExplodingSoundEffect().Play();
         }
     }
 }

@@ -15,6 +15,12 @@ namespace LegendOfZeldaClone.Collisions
             if ((CurrentItem is FlashingRupee || CurrentItem is BlueRupee || CurrentItem is GoldRupee || CurrentItem is Clock || CurrentItem is Bomb) && playerProjectile is BoomerangProjectile)
             {
                 CurrentItem.Alive = false;
+                if (CurrentItem is FlashingRupee || CurrentItem is BlueRupee || CurrentItem is GoldRupee)
+                    new RupeePickupSoundEffect().Play();
+                if (CurrentItem is Clock)
+                    new ClockPickupSoundEffect().Play();
+                if (CurrentItem is Bomb)
+                    new InventoryItemPickupSoundEffect().Play();
             }
             
         }

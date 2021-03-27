@@ -110,6 +110,11 @@ namespace LegendOfZeldaClone
             };
         }
 
-        private void SpawnSwordBeam() => game.PlayerProjectilesQueue.Add(new SwordBeamProjectile(Location, direction, game));
+        private void SpawnSwordBeam()
+        {
+            game.PlayerProjectilesQueue.Add(new SwordBeamProjectile(Location, direction, game));
+            new SwordBeamSoundEffect().Play();
+        }
+            
     }
 }
