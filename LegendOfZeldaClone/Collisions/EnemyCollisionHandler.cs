@@ -10,10 +10,7 @@ namespace LegendOfZeldaClone.Collisions
         public static EnemyCollisionHandler Instance { get; } = new EnemyCollisionHandler();
         private EnemyCollisionHandler() { }
 
-        public void HandlePlayerCollision(IPlayer player, Direction direction)
-        {
-            //nothing will happen
-        }
+        public void HandlePlayerCollision(IPlayer player, Direction direction) { }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             bool projectileDealsEnemyDamage = !(playerProjectile is BombProjectile 
@@ -26,24 +23,16 @@ namespace LegendOfZeldaClone.Collisions
                 CurrentEnemy.TakeDamage(projectileDirection);
             }
         }
-        public void HandleEnemyCollision(IEnemy enemy, Direction direction)
-        {
-            //nothing will happen (they can walk through each other)
-        }
+        public void HandleEnemyCollision(IEnemy enemy, Direction direction) { }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
-            //projectile should disappear (assuming this is the enemy that threw it otherwise nothing will happen)
             if( enemyProjectile is EnemyBoomerang && ((EnemyBoomerang) enemyProjectile).goriya == CurrentEnemy)
             {
                 enemyProjectile.Alive = false;
                 ((Goriya) CurrentEnemy).HasBoomerang = false;
             }
         }
-        public void HandleItemCollision(IItem item, Direction direction)
-        {
-            //nothing will happen
-        }
-
+        public void HandleItemCollision(IItem item, Direction direction) { }
         public void HandleObjectCollision(IObject block, Direction direction)
         {
             //they should stop and have to move around it (except keese if the object is not impassable)

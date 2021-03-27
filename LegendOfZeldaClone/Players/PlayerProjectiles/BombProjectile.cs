@@ -38,13 +38,7 @@ namespace LegendOfZeldaClone
         public void Update()
         {
             if (lifeSpan == 0)
-            {
-                Location -= new Vector2(LoZHelpers.Scale(4), 0);
-                Random rnd = new Random();
-                int explosionSeed = rnd.Next(2);
-                SpawnExplosions(explosionSeed);
-                Alive = false;
-            }
+                Die();
 
             lifeSpan--;
         }
@@ -95,6 +89,15 @@ namespace LegendOfZeldaClone
                     break;
             }
             new BombExplodingSoundEffect().Play();
+        }
+
+        public void Die()
+        {
+            Location -= new Vector2(LoZHelpers.Scale(4), 0);
+            Random rnd = new Random();
+            int explosionSeed = rnd.Next(2);
+            SpawnExplosions(explosionSeed);
+            Alive = false;
         }
     }
 }

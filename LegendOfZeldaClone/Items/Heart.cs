@@ -30,5 +30,10 @@ namespace LegendOfZeldaClone
 
         public void Update() => heart.Update();
         public void Draw(SpriteBatch spriteBatch) => heart.Draw(spriteBatch, Location);
+        public void BeCollected()
+        {
+            Alive = false;
+            new HeartPickupSoundEffect().Play();
+        }
     }
 }

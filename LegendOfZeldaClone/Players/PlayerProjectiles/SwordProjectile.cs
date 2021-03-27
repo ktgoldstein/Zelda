@@ -38,7 +38,7 @@ namespace LegendOfZeldaClone
         public void Update()
         {
             if (lifeSpan == 0)
-                Alive = false;
+                Die();
             switch (lifeSpan)
             {
                 case 8:
@@ -115,6 +115,6 @@ namespace LegendOfZeldaClone
             game.PlayerProjectilesQueue.Add(new SwordBeamProjectile(Location, direction, game));
             new SwordBeamSoundEffect().Play();
         }
-            
+        public void Die() => Alive = false;
     }
 }

@@ -81,5 +81,6 @@ namespace LegendOfZeldaClone
                     break;
             }
         }
+        public void Die() => Alive = false;
     }
 }

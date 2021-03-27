@@ -9,7 +9,7 @@ namespace LegendOfZeldaClone.Collisions
         public static ItemCollisionHandler Instance { get; } = new ItemCollisionHandler();
         private ItemCollisionHandler() { }
 
-        public void HandlePlayerCollision(IPlayer player, Direction direction) => CurrentItem.Alive = false;
+        public void HandlePlayerCollision(IPlayer player, Direction direction) => CurrentItem.BeCollected();
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             if ((CurrentItem is FlashingRupee || CurrentItem is BlueRupee || CurrentItem is GoldRupee || CurrentItem is Clock || CurrentItem is Bomb) && playerProjectile is BoomerangProjectile)

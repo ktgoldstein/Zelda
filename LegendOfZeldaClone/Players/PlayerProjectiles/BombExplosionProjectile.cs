@@ -36,7 +36,7 @@ namespace LegendOfZeldaClone
         public void Update()
         {
             if (lifeSpan == 0)
-                Alive = false;
+                Die();
             else if (lifeSpan == (int)(maxLifeSpan / 2.0))
                 sprite.Update();
             else if (lifeSpan == (int)(maxLifeSpan / 4.0))
@@ -45,5 +45,6 @@ namespace LegendOfZeldaClone
         }
 
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
+        public void Die() => Alive = false;
     }
 }

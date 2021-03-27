@@ -91,7 +91,13 @@ namespace LegendOfZeldaClone
     {
         CanWalkOver = 0,
         CanFlyOver = 1,
-        Impassable = 2,
+        Impassable = 2
+    }
+    public enum RupeeValues
+    {
+        FlashingRupeeValue = 1,
+        BlueRupeeValue = 5,
+        GoldRupeeValue = 100
     }
 
     public static class LoZHelpers

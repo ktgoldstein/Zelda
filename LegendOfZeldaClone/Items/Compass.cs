@@ -30,5 +30,10 @@ namespace LegendOfZeldaClone
 
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch) => compass.Draw(spriteBatch, Location);
+        public void BeCollected()
+        {
+            Alive = false;
+            new InventoryItemPickupSoundEffect().Play();
+        }
     }
 }

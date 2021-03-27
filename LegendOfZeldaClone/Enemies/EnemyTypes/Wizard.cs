@@ -87,7 +87,7 @@ namespace LegendOfZeldaClone.Enemy
             if (!Invincible)
             {
                 Invincible = true;
-                Health -= 1;
+                Health--;
                 new EnemyTakingDamageSoundEffect().Play();
                 if (Health <= 0)
                     Die();
@@ -99,6 +99,7 @@ namespace LegendOfZeldaClone.Enemy
         {
             new EnemyDyingSoundEffect().Play();
             Alive = false;
+            game.Exit(); //easter egg: Sprint 5 feature
         }
     }
 }

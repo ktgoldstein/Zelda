@@ -111,7 +111,7 @@ namespace LegendOfZeldaClone.Enemy
             if (!Invincible)
             {
                 Invincible = true;
-                Health -= 1;
+                Health--;
                 new BossTakingDamageSoundEffect().Play();
                 if (Health <= 0)
                     Die();

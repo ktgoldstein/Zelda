@@ -99,6 +99,11 @@ namespace LegendOfZeldaClone
             game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpRight, skinSeed));
             game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownLeft, skinSeed));
             game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownRight, skinSeed));
+        }
+
+        public void Die()
+        {
+            SpawnSwordExplosion();
             Alive = false;
         }
     }

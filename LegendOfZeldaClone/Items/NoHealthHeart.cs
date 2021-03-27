@@ -30,5 +30,6 @@ namespace LegendOfZeldaClone
 
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch) => noHealthHeart.Draw(spriteBatch, Location);
+        public void BeCollected() { }
     }
 }

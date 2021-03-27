@@ -68,7 +68,7 @@ namespace LegendOfZeldaClone
         public SoundEffect GetKeyPickupSoundEffect() => allSoundEffects[10];
         public SoundEffect GetFairyPickupSoundEffect() => allSoundEffects[9];
         public SoundEffect GetInventoryItemPickupSoundEffect() => allSoundEffects[9];
-        public SoundEffect GetNewImportantItemFanfareSoundEffect() => allSoundEffects[16];
+        public SoundEffect GetNewImportantItemAcquiredFanfareSoundEffect() => allSoundEffects[16];
         public SoundEffect GetRupeeCountChangingSoundEffect() => allSoundEffects[18];
         public SoundEffect GetHeartsRefillingSoundEffect() => allSoundEffects[18];
         public SoundEffect GetLowHealthBeepingSoundEffect() => allSoundEffects[13];

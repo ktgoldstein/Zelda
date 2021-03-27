@@ -82,5 +82,10 @@ namespace LegendOfZeldaClone
         }
 
         public void Draw(SpriteBatch spriteBatch) => fairy.Draw(spriteBatch, Location);
+        public void BeCollected()
+        {
+            Alive = false;
+            new FairyPickupSoundEffect().Play();
+        }
     }
 }
