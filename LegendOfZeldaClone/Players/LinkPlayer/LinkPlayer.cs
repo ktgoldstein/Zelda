@@ -93,7 +93,12 @@ namespace LegendOfZeldaClone
 
         public void Equip(UsableItemTypes itemType) => HeldItem = Inventory.GetItem(itemType);
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
-        public void Update() => linkState.Update();
+        public void Update()
+        {
+            linkState.Update();
+            if (Health < 3 && )
+        }
+        
         public void SetState(ILinkState linkState) => this.linkState = linkState;
         public ILinkState GetStateStandingDown() => new LinkStandingDown(this);
         public ILinkState GetStateStandingUp() => new LinkStandingUp(this);

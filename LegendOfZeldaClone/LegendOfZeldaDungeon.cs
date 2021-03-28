@@ -39,7 +39,7 @@ namespace LegendOfZeldaClone
         public int SwitchDelayLength = 5;
 
         public IGameSound GameBackgroundMusic;
-        public int MusicTest;
+        public int MusicTimingHelperInt;
 
         public LegendOfZeldaDungeon()
         {
@@ -150,7 +150,7 @@ namespace LegendOfZeldaClone
 
             GameBackgroundMusic = new DungeonThemeMusic();
             GameBackgroundMusic.Play();
-            MusicTest = 0;
+            MusicTimingHelperInt = 0;
             
 
             InitializeRooms();
@@ -181,9 +181,7 @@ namespace LegendOfZeldaClone
             }
             PlayerProjectiles = PlayerProjectiles.Except(deadLinkProjectiles).ToList();
             
-            //BoomerangProjectile sound effect
-            //if (PlayerProjectiles.OfType<BoomerangProjectile>().Any() && MusicTest % 4==0)
-              //  new BoomerangFlyingSoundEffect().Play();
+
 
             List<IEnemy> deadEnemies = new List<IEnemy>();
             foreach (IEnemy enemy in Enemies)
@@ -227,14 +225,19 @@ namespace LegendOfZeldaClone
 
             base.Update(gameTime);
 
-            if (MusicTest > 120)
+            if (MusicTimingHelperInt > 120)
             {
                 GameBackgroundMusic.StopPlaying();
             }
-            MusicTest++;
-            if (MusicTest % 10 ==0)
+            MusicTimingHelperInt++;
+            if (MusicTimingHelperInt % 10 ==0)
             {
                // new HeartPickupSoundEffect().Play();
+            }
+            if (CurrentRoom == RoomList[7] || CurrentRoom == RoomList[13])
+            {
+                if (MusicTimingHelperInt % 60 == 0)
+                    new AquamentusScreamingSoundEffect().Play();
             }
         }
 
