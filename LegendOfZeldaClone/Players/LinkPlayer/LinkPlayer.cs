@@ -82,7 +82,7 @@ namespace LegendOfZeldaClone
             if (Health > MaxHealth)
                 Health = MaxHealth;
             for (int i = 0; i < amount; i++)
-                new HeartsRefillingSoundEffect().Play();
+                new HeartsRefillingSoundEffect().Play(); //this will likely need to be changed later
         }
 
         public void PickUpUsableItem(UsableItemTypes itemType, IItem item)
@@ -96,7 +96,8 @@ namespace LegendOfZeldaClone
         public void Update()
         {
             linkState.Update();
-            if (Health < 3 && )
+            if (Health < 3 && game.MusicTimingHelperInt % 10 == 0)
+                new LowHealthBeepingSoundEffect().Play();
         }
         
         public void SetState(ILinkState linkState) => this.linkState = linkState;

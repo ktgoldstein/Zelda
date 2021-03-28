@@ -79,7 +79,11 @@ namespace LegendOfZeldaClone.Enemy
             {
                 timer =  7;
                 if(current < target.Length)
+                {
                     current++;
+                    new TextAppearingSlowlySoundEffect().Play();
+                }
+                    
             }
         }
         public void TakeDamage(Vector2 direction)
