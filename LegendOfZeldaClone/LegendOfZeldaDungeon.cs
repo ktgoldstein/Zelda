@@ -180,6 +180,10 @@ namespace LegendOfZeldaClone
                     deadLinkProjectiles.Add(projectile);
             }
             PlayerProjectiles = PlayerProjectiles.Except(deadLinkProjectiles).ToList();
+            
+            //BoomerangProjectile sound effect
+            //if (PlayerProjectiles.OfType<BoomerangProjectile>().Any() && MusicTest % 4==0)
+              //  new BoomerangFlyingSoundEffect().Play();
 
             List<IEnemy> deadEnemies = new List<IEnemy>();
             foreach (IEnemy enemy in Enemies)

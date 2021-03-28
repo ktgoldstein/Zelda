@@ -32,13 +32,13 @@
                 BoomerangProjectile boomerang = CurrentPlayerProjectile as BoomerangProjectile;
                 IPlayer player = boomerang.link;
                 if (item is FlashingRupee)
-                    player.Inventory.RupeesHeld++;
+                    player.Inventory.RupeesHeld += (int)RupeeValues.FlashingRupeeValue;
                 else if (item is BlueRupee)
-                    player.Inventory.RupeesHeld += 5;
+                    player.Inventory.RupeesHeld += (int)RupeeValues.FlashingRupeeValue;
                 else if (item is GoldRupee)
-                    player.Inventory.RupeesHeld += 100;
+                    player.Inventory.RupeesHeld += (int)RupeeValues.GoldRupeeValue;
                 else if (item is Bomb)
-                    player.Inventory.BombsHeld++;
+                    player.Inventory.BombsHeld += LoZHelpers.BombPickUpNumber;
                 else if (item is Key)
                     player.Inventory.KeysHeld++;
             }

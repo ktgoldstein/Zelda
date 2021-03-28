@@ -38,7 +38,7 @@ namespace LegendOfZeldaClone
             else if (item is GoldRupee)
                 CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.GoldRupeeValue;
             else if (item is Bomb)
-                CurrentPlayer.Inventory.BombsHeld++;
+                CurrentPlayer.Inventory.BombsHeld += LoZHelpers.BombPickUpNumber;
             else if (item is Key)
                 CurrentPlayer.Inventory.KeysHeld++;
             else if (item is BlueCandle)

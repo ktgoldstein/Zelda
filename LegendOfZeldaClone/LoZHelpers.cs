@@ -172,5 +172,6 @@ namespace LegendOfZeldaClone
         public static int StalfosHP = 2;
         public static int WallmasterHP = 2;
         public static int WizardHP = 1000;
+        public static int BombPickUpNumber = 4;
     }
 }

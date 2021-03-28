@@ -22,6 +22,7 @@ namespace LegendOfZeldaClone
         private readonly int width;
         private readonly int height;
         private int lifeSpan;
+        private int soundEffectLoopHelper;
 
         public IPlayer link;
 
@@ -37,6 +38,7 @@ namespace LegendOfZeldaClone
             speed = 8;
             lifeSpan = 10;
             sprite = PlayerProjectileSpriteFactory.Instance.CreateBoomerangSprite(skinType);
+            soundEffectLoopHelper = 1000;
 
             DirectionBasedSetUp(direction);
         }
@@ -46,14 +48,16 @@ namespace LegendOfZeldaClone
             sprite.Update();
             if (lifeSpan == 0)
             {
-
                 velocity = game.Player.Location - Location;
                 velocity.Normalize();
                 velocity *= speed;
+
             }
             else
-                lifeSpan--;
-
+                lifeSpan--; 
+            if (soundEffectLoopHelper % 4 == 0 && Alive)
+                new BoomerangFlyingSoundEffect().Play();
+            soundEffectLoopHelper--;
             Location += velocity;
         }
 
