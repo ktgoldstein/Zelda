@@ -30,7 +30,8 @@ namespace LegendOfZeldaClone
         {
             linkPlayer.Location += new Vector2(linkPlayer.Speed, 0);
             linkSprite.Update();
-            if (linkSprite.AnimationDone())
+            bool linkIsAligned = linkPlayer.Location.X % LoZHelpers.Scale(8) == 0;
+            if (linkSprite.AnimationDone() || linkIsAligned)
                 linkPlayer.SetState(linkPlayer.GetStateStandingRight());
         }
     }
