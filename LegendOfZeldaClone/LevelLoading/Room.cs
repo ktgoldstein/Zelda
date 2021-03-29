@@ -5,8 +5,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Objects;
 using LegendOfZeldaClone.Enemy;
-using System.Collections;
-using System.Linq;
 
 namespace LegendOfZeldaClone.LevelLoading
 {
@@ -17,8 +15,8 @@ namespace LegendOfZeldaClone.LevelLoading
         public Room RoomLeft;
         public Room RoomRight;
 
-        private readonly Texture2D tiles;
-        private readonly Texture2D background;
+        private readonly ISprite tiles;
+        private readonly ISprite walls;
         private int backgroundType;
         private int wallType;
         private readonly GameStateMachine game;
@@ -28,8 +26,8 @@ namespace LegendOfZeldaClone.LevelLoading
         {
             this.game = game;
             this.fileLocation = fileLocation;
-            tiles = RoomTextureFactory.Instance.tiles;
-            background = RoomTextureFactory.Instance.background;
+            tiles = RoomTextureFactory.Instance.CreateTiles();
+            walls = RoomTextureFactory.Instance.CreateWalls();
             backgroundType = -1;
             wallType = -1;
         }
@@ -51,18 +49,11 @@ namespace LegendOfZeldaClone.LevelLoading
 
         public void Draw(SpriteBatch spritebatch)
         {
-
-            Rectangle sourceRectangle = new Rectangle(522, 11, 256, 176);
-            Rectangle destinationRectangle = new Rectangle(0, 192, LoZHelpers.Scale(256), LoZHelpers.Scale(176));
-
-            if(wallType == 1)
-                spritebatch.Draw(background, destinationRectangle, sourceRectangle, Color.White);
-
-            sourceRectangle = new Rectangle(2, 192, 192, 112);
-            destinationRectangle = new Rectangle(96, 288, LoZHelpers.Scale(192), LoZHelpers.Scale(112));
+            if (wallType == 1)
+                walls.Draw(spritebatch, new Vector2(0, LoZHelpers.HUDHeight));
 
             if (backgroundType == 1)
-                spritebatch.Draw(tiles, destinationRectangle, sourceRectangle, Color.White);
+                tiles.Draw(spritebatch, new Vector2(LoZHelpers.TileSize * 2, LoZHelpers.HUDHeight + LoZHelpers.TileSize * 2));
         }
 
         public void AddNeighbors(Room roomUp, Room roomDown, Room roomLeft, Room roomRight)
@@ -80,11 +71,9 @@ namespace LegendOfZeldaClone.LevelLoading
             bool readBackgroundType = false;
             bool readWallType = false;
             foreach (var line in lines)
-            {
-                
+            {                
                 if(!readBackgroundType)
                 {
-
                     backgroundType = int.Parse(line);
                     readBackgroundType = true;
                 }
@@ -99,25 +88,21 @@ namespace LegendOfZeldaClone.LevelLoading
                     var row = Array.ConvertAll(splitLine, s => int.Parse(s));
                     data.Add(new List<int>((row)));
                 }
-                
-
             }
             return data;
         }
 
         private void ProcessEntry(int gameObjectID, int column, int row)
         {
-            int width = 16;
-            int height = 16;
-            Vector2 tileLocation = new Vector2(LoZHelpers.Scale(width * column + 16), LoZHelpers.Scale(height * row + 80));
+            Vector2 tileLocation = new Vector2(LoZHelpers.TileSize * (column + 1), LoZHelpers.TileSize * (row + 1) + LoZHelpers.HUDHeight);
             if (fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv"))
-                tileLocation = new Vector2(LoZHelpers.Scale(width * column), LoZHelpers.Scale(height * row + 80));
+                tileLocation = new Vector2(LoZHelpers.TileSize * column, LoZHelpers.TileSize * (row + 1) + LoZHelpers.HUDHeight);
 
-            Vector2 smallItemLocation = new Vector2(LoZHelpers.Scale(width * column + 20), LoZHelpers.Scale(height * row + 80));
-            Vector2 doorLocationUp = new Vector2(LoZHelpers.Scale(width * column + 16), LoZHelpers.Scale(height * row + 64));
-            Vector2 doorLocationDown = new Vector2(LoZHelpers.Scale(width * column + 16), LoZHelpers.Scale(height * row + 80));
-            Vector2 doorLocationRight = new Vector2(LoZHelpers.Scale(width * column + 16), LoZHelpers.Scale(height * (row - 1) + 88));
-            Vector2 doorLocationLeft = new Vector2(LoZHelpers.Scale(width * column), LoZHelpers.Scale(height * (row - 1) + 88));
+            Vector2 smallItemLocation = tileLocation + new Vector2(LoZHelpers.TileSize / 4, 0);
+            Vector2 doorLocationUp = tileLocation - new Vector2(0, LoZHelpers.TileSize);
+            Vector2 doorLocationDown = tileLocation;
+            Vector2 doorLocationRight = tileLocation - new Vector2(0, LoZHelpers.TileSize / 2);
+            Vector2 doorLocationLeft = tileLocation - new Vector2(LoZHelpers.TileSize, LoZHelpers.TileSize / 2);
 
             switch (gameObjectID)
             {
