@@ -24,14 +24,14 @@ namespace LegendOfZeldaClone.Display
                 switch (direction)
                 {
                     case Direction.Up:
-                        targetPosition = position + new Vector2(-LoZHelpers.GameHeight, 0);
+                        targetPosition = position + new Vector2(0, LoZHelpers.GameHeight);
                         break;
                     case Direction.Down:
                         targetPosition = position + new Vector2(LoZHelpers.GameHeight, 0);
                         break;
                     case Direction.Left:
                         targetPosition = position + new Vector2(LoZHelpers.GameWidth, 0);
-                        break;
+                        break;              
                     case Direction.Right:
                         targetPosition = position + new Vector2(-LoZHelpers.GameWidth, 0);
                         break;

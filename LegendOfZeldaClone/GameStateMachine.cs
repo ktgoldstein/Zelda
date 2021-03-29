@@ -79,7 +79,6 @@ namespace LegendOfZeldaClone
 
         public void Draw(SpriteBatch sprintBatch) 
         {
-            DungeonMiniMap.Draw(sprintBatch, LoZHelpers.MiniMapLocation);
 
             CurrentRoom.Draw(sprintBatch);
             NextRoom?.Draw(sprintBatch);
@@ -103,6 +102,9 @@ namespace LegendOfZeldaClone
 
                 Player.Draw(sprintBatch);
             }
+            sprintBatch.End();
+            sprintBatch.Begin();
+            DungeonMiniMap.Draw(sprintBatch, LoZHelpers.MiniMapLocation);
         }
 
         public void InitializeRooms()
