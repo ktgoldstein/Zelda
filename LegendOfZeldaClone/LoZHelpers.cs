@@ -130,7 +130,7 @@ namespace LegendOfZeldaClone
             return vector;
         }
         public static Vector2 LinkStartingLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(4 * 16 + 80));
-        public static Vector2 MiniMapLocation => new Vector2(GameWidth / 24, HUDHeight / 4);
+        public static Vector2 MiniMapLocation => new Vector2(GameWidth / Scale(100), HUDHeight / 4);
         public static Vector2 LinkLocationTrackerMini => new Vector2(MiniMapLocation.X + Scale(35), HUDHeight - Scale(10) + 1);
         public static Vector2 TriForceLocation => new Vector2(LinkLocationTrackerMini.X + 3 * RightRoomMapOffset + 3, LinkLocationTrackerMini.Y - 4 * (AboveRoomMapOffset) + 4);
         public static Vector2 LevelNameLocation => new Vector2(MiniMapLocation.X, MiniMapLocation.Y - Scale(9));
