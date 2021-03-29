@@ -32,7 +32,7 @@ namespace LegendOfZeldaClone
         public List<Room> RoomList;
         public int RoomListIndex = 0;
         public Room CurrentRoom;
-        public MiniMap DungeonMiniMap;
+        public HUDMap HUDMap;
         public LevelName DungeonLevelName;
         public RupeeCount PlayerRupeeCount;
         public KeyCount PlayerKeyCount;
@@ -157,7 +157,8 @@ namespace LegendOfZeldaClone
             CurrentRoom = RoomList[RoomListIndex];
             CurrentRoom.LoadRoom();
 
-            DungeonMiniMap = new MiniMap(LoZHelpers.MiniMapLocation);
+            HUDMap = new HUDMap(this);
+
             DungeonLevelName = new LevelName();
             PlayerRupeeCount = new RupeeCount(this);
             PlayerKeyCount = new KeyCount(this);
@@ -230,6 +231,7 @@ namespace LegendOfZeldaClone
             Collisions.CollisionHandling.HandleCollisions(this);
 
             HUDHealthBar.Update();
+            HUDMap.Update();
             PlayerRupeeCount.Update();
             PlayerBombCount.Update();
             PlayerKeyCount.Update();
@@ -244,7 +246,7 @@ namespace LegendOfZeldaClone
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
             
             CurrentRoom.Draw(_spriteBatch);
-            DungeonMiniMap.Draw(_spriteBatch, LoZHelpers.MiniMapLocation);
+            HUDMap.Draw(_spriteBatch);
             DungeonLevelName.Draw(_spriteBatch, LoZHelpers.LevelNameLocation);
             PlayerRupeeCount.Draw(_spriteBatch, LoZHelpers.RupeeCountLocation);
             PlayerKeyCount.Draw(_spriteBatch, LoZHelpers.KeyCountLocation);

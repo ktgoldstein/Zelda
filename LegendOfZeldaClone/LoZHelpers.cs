@@ -131,6 +131,8 @@ namespace LegendOfZeldaClone
         }
         public static Vector2 LinkStartingLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(4 * 16 + 80));
         public static Vector2 MiniMapLocation => new Vector2(GameWidth / 24, HUDHeight / 4);
+        public static Vector2 LinkLocationTrackerMini => new Vector2(MiniMapLocation.X + Scale(35), HUDHeight - Scale(10) + 1);
+        public static Vector2 TriForceLocation => new Vector2(LinkLocationTrackerMini.X + 3 * RightRoomMapOffset + 3, LinkLocationTrackerMini.Y - 4 * (AboveRoomMapOffset) + 4);
         public static Vector2 LevelNameLocation => new Vector2(MiniMapLocation.X, MiniMapLocation.Y - Scale(9));
         public static Vector2 RupeeCountLocation => new Vector2(MiniMapLocation.X + Scale(77), MiniMapLocation.Y + Scale(4));
         public static Vector2 KeyCountLocation => new Vector2(RupeeCountLocation.X, RupeeCountLocation.Y + Scale(17));
@@ -156,6 +158,9 @@ namespace LegendOfZeldaClone
         public static int GameWidth => Scale(256);
         public static int HUDHeight => Scale(64);
         public static int TileSize => Scale(16);
+        public static int RightRoomMapOffset => Scale(13);
+        public static int LeftRoomMapOffset => Scale(13);
+        public static int AboveRoomMapOffset => Scale(7);
         public static int LinkInvincibilityFrames => 24;
         public static int LinkKnockbackFrames => 8;
         public static int SpriteSizeMultiplier => 3;

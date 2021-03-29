@@ -42,7 +42,7 @@ namespace LegendOfZeldaClone
             Speed = LoZHelpers.Scale(2);
             MaxHealth = 6;
             Health = MaxHealth;
-            Inventory = new PlayerInventory(0, 0, 0);
+            Inventory = new PlayerInventory(0, 0, 0, false, false);
             linkState = new LinkStandingDown(this);
         }
 

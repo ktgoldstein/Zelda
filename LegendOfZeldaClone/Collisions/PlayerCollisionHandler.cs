@@ -60,7 +60,10 @@ namespace LegendOfZeldaClone
             else if (item is Fairy)
             {
                 CurrentPlayer.Health = CurrentPlayer.MaxHealth;
-            }        
+            else if (item is Map)
+                CurrentPlayer.Inventory.HasMap = true;
+            else if (item is Compass)
+                CurrentPlayer.Inventory.HasCompass = true;
         }
 
         public void HandleObjectCollision(IObject block, Direction direction)
