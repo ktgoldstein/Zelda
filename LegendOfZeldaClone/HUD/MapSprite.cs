@@ -46,7 +46,7 @@ namespace LegendOfZeldaClone
             int column = currentFrame % columns;
 
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 5, height * 5);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 4, height * 4);
 
             spritebatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
