@@ -11,6 +11,5 @@ namespace LegendOfZeldaClone
         public bool Alive { get; set; }
         public void Knockback(Vector2 direction);
         public void TakeDamage(Vector2 direction);
-        public void Die();
     }
 }

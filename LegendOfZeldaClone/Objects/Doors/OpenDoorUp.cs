@@ -48,5 +48,6 @@ namespace LegendOfZeldaClone.Objects
             game.CurrentRoom = game.CurrentRoom.RoomUp;
             game.CurrentRoom.LoadRoom();
         }
+        public void Die() { }
     }
 }

@@ -11,5 +11,6 @@ namespace LegendOfZeldaClone
         public int Height { get; }
         public void Draw(SpriteBatch spriteBatch);
         public void Update();
+        public void Die();
     }
 }

@@ -86,24 +86,15 @@ namespace LegendOfZeldaClone.Enemy
                     
             }
         }
-        public void TakeDamage(Vector2 direction)
+        public void TakeDamage(Vector2 direction) //Wizard cannot die
         {
             if (!Invincible)
             {
                 Invincible = true;
-                Health--;
                 new EnemyTakingDamageSoundEffect().Play();
-                if (Health <= 0)
-                    Die();
-                Knockback(direction);
             }
 
         }
-        public void Die()
-        {
-            new EnemyDyingSoundEffect().Play();
-            Alive = false;
-            game.Exit(); //easter egg: Sprint 5 feature
-        }
+        public void Die() { }
     }
 }

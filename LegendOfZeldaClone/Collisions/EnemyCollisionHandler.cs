@@ -26,11 +26,8 @@ namespace LegendOfZeldaClone.Collisions
         public void HandleEnemyCollision(IEnemy enemy, Direction direction) { }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
-            if( enemyProjectile is EnemyBoomerang && ((EnemyBoomerang) enemyProjectile).goriya == CurrentEnemy)
-            {
-                enemyProjectile.Alive = false;
+            if (enemyProjectile is EnemyBoomerang && ((EnemyBoomerang) enemyProjectile).goriya == CurrentEnemy)
                 ((Goriya) CurrentEnemy).HasBoomerang = false;
-            }
         }
         public void HandleItemCollision(IItem item, Direction direction) { }
         public void HandleObjectCollision(IObject block, Direction direction)

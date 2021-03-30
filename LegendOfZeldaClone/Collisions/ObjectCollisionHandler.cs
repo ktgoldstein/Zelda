@@ -16,7 +16,7 @@ namespace LegendOfZeldaClone.Collisions
                 CurrentObject is LockedDoorLeft || CurrentObject is LockedDoorRight) &&
                 player.Inventory.KeysHeld > 0 )
             {
-                CurrentObject.IsAlive = false;
+                CurrentObject.Die();
                 new DoorUnlockingSoundEffect().Play();
                 player.Inventory.KeysHeld--;
             }
@@ -47,7 +47,7 @@ namespace LegendOfZeldaClone.Collisions
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             if (playerProjectile is BombExplosionProjectile && CurrentObject.IsBombable)
-                CurrentObject.IsAlive = false;
+                CurrentObject.Die();
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction) { }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) { }

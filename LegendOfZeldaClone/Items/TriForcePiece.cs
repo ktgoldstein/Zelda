@@ -30,6 +30,7 @@ namespace LegendOfZeldaClone
 
         public void Update() => triforcePiece.Update();
         public void Draw(SpriteBatch spriteBatch) => triforcePiece.Draw(spriteBatch, Location);
-        public void BeCollected() => Alive = false;
+        public void BeCollected() => Die();
+        public void Die() => Alive = false;
     }
 }

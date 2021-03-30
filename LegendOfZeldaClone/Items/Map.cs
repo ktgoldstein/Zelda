@@ -32,8 +32,9 @@ namespace LegendOfZeldaClone
         public void Draw(SpriteBatch spriteBatch) => map.Draw(spriteBatch, Location);
         public void BeCollected()
         {
-            Alive = false;
+            Die();
             new InventoryItemPickupSoundEffect().Play();
         }
+        public void Die() => Alive = false;
     }
 }

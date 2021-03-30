@@ -164,6 +164,8 @@ namespace LegendOfZeldaClone
             }
         }
 
+        public void Die() { /* Cannot die in this state */ }
+
         public void SetState(ILinkState linkState)
         {
             linkStates[skinTypesIndex] = linkState;

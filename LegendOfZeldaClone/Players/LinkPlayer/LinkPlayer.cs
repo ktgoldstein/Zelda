@@ -69,7 +69,7 @@ namespace LegendOfZeldaClone
         {
             Health -= amount;
             if (Health < 0)
-                Health = 0;
+                Die();
             Tuple<LinkStateType, int> currentState = linkState.GetState();
             if (currentState.Item1 != LinkStateType.PickingUpItem)
                 game.Player = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
@@ -98,6 +98,12 @@ namespace LegendOfZeldaClone
             linkState.Update();
             if (Health < 3 && game.MusicTimingHelperInt % 10 == 0)
                 new LowHealthBeepingSoundEffect().Play();
+        }
+
+        public void Die()
+        {
+            Health = 0;
+            //add game state change to losing here
         }
         
         public void SetState(ILinkState linkState) => this.linkState = linkState;

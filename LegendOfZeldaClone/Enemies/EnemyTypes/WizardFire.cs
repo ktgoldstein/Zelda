@@ -67,6 +67,6 @@ namespace LegendOfZeldaClone.Enemy
         }
 
         public void TakeDamage(Vector2 direction) { }
-        public void Die() => Alive = false;
+        public void Die() { /* Can't die */ }
     }
 }
