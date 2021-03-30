@@ -92,6 +92,7 @@ namespace LegendOfZeldaClone.Enemy
             {
                 Invincible = true;
                 new EnemyTakingDamageSoundEffect().Play();
+                Health--;
             }
 
         }

@@ -31,6 +31,7 @@ namespace LegendOfZeldaClone.Enemy
         private readonly int height;
         public Wizard Wizard;
         private int wizardHealth;
+        private int attackInt = 0;
         public WizardFire(LegendOfZeldaDungeon game, Vector2 location, Wizard wizard)
         {
             wizardFireSprite = EnemySpriteFactory.Instance.CreateWizardFireSprite();
@@ -55,11 +56,9 @@ namespace LegendOfZeldaClone.Enemy
         public void Update()
         {
             wizardFireSprite.Update();
-            if(Wizard.Health < wizardHealth)
-            {
+            if(Wizard.Health < wizardHealth && attackInt%40==0)
                 SpitFireballs();
-                wizardHealth = Wizard.Health;
-            }
+            attackInt++;
         }
         private void SpitFireballs()
         {
