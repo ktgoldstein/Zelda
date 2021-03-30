@@ -10,9 +10,9 @@ namespace LegendOfZeldaClone
         private ISprite numberSprite;
         private int numberOfKeys;
         private int[] digitArray = new int[3];
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public KeyCount(LegendOfZeldaDungeon game)
+        public KeyCount(GameStateMachine game)
         {
             keyCountSprite = HUDTextureFactory.Instance.CreateKeyCount();
             xSprite = HUDTextureFactory.Instance.CreateX();

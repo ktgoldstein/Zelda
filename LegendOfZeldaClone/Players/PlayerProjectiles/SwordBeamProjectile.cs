@@ -16,7 +16,8 @@ namespace LegendOfZeldaClone
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
+        private readonly ILinkPlayer player;
         private readonly int skinSeed;
         private ISprite[] sprites;
         private Vector2 velocity;
@@ -24,13 +25,14 @@ namespace LegendOfZeldaClone
         private int height;
         private int lifeSpan;
 
-        public SwordBeamProjectile(Vector2 startingLocation, Direction direction, LegendOfZeldaDungeon game)
+        public SwordBeamProjectile(Vector2 startingLocation, Direction direction, GameStateMachine game, ILinkPlayer player)
         {
             Alive = true;
 
             this.game = game;
+            this.player = player;
             Location = startingLocation;
-            lifeSpan = 20;
+            lifeSpan = 100;
             sprites = new ISprite[2];
             Random rnd = new Random();
             skinSeed = rnd.Next(2);
@@ -40,14 +42,9 @@ namespace LegendOfZeldaClone
         public void Update()
         {
             Location += velocity;
-            if (lifeSpan > 0)
-            {
-                lifeSpan--;
-            }
-            else
-            {
-                lifeSpan++;
-            }
+            lifeSpan--;
+            if (lifeSpan == 0)
+                SpawnSwordExplosion();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -95,10 +92,12 @@ namespace LegendOfZeldaClone
         }
         public void SpawnSwordExplosion()
         {
-            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpLeft, skinSeed));
-            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpRight, skinSeed));
-            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownLeft, skinSeed));
-            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownRight, skinSeed));
+            player.SwordBeamLock += 4;
+            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpLeft, skinSeed, player));
+            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.UpRight, skinSeed, player));
+            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownLeft, skinSeed, player));
+            game.PlayerProjectilesQueue.Add(new SwordBeamExplosionProjectile(Location, Direction.DownRight, skinSeed, player));
+            player.SwordBeamLock--;
             Alive = false;
         }
     }

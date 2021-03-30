@@ -9,9 +9,9 @@ namespace LegendOfZeldaClone
         private readonly ISprite xSprite;
         private ISprite numberSprite;
         private int numberOfBombs;
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public BombCount(LegendOfZeldaDungeon game)
+        public BombCount(GameStateMachine game)
         {
             bombCountSprite = HUDTextureFactory.Instance.CreateBombCount();
             xSprite = HUDTextureFactory.Instance.CreateX();

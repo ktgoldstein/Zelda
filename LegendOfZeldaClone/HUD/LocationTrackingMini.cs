@@ -8,41 +8,40 @@ namespace LegendOfZeldaClone
     {
         private readonly ISprite linkMapLocation;
         private Vector2 location;
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public LocationTrackingMini(Vector2 location, LegendOfZeldaDungeon game)
+        public LocationTrackingMini(Vector2 location, GameStateMachine game)
         {
             linkMapLocation = HUDTextureFactory.Instance.CreateLocationTracker();
             this.location = location;
             this.game = game;
         }
 
-        public void Update()
-        {
-
+        public void Update() { }
+        /*{
             int trackRoom = game.RoomListIndex;
 
             switch (trackRoom)
             {
                 case 0:
-                    this.location.X = LoZHelpers.LinkLocationTrackerMini.X;
-                    this.location.Y = LoZHelpers.LinkLocationTrackerMini.Y;
+                    location.X = LoZHelpers.LinkLocationTrackerMini.X;
+                    location.Y = LoZHelpers.LinkLocationTrackerMini.Y;
                     break;
                 case 1:
-                    this.location.X = LoZHelpers.LinkLocationTrackerMini.X - LoZHelpers.LeftRoomMapOffset - 2;
-                    this.location.Y = LoZHelpers.LinkLocationTrackerMini.Y;
+                    location.X = LoZHelpers.LinkLocationTrackerMini.X - LoZHelpers.LeftRoomMapOffset - 2;
+                    location.Y = LoZHelpers.LinkLocationTrackerMini.Y;
                     break;
                 case 2:
-                    this.location.X = LoZHelpers.LinkLocationTrackerMini.X + LoZHelpers.RightRoomMapOffset + 2;
-                    this.location.Y = LoZHelpers.LinkLocationTrackerMini.Y;
+                    location.X = LoZHelpers.LinkLocationTrackerMini.X + LoZHelpers.RightRoomMapOffset + 2;
+                    location.Y = LoZHelpers.LinkLocationTrackerMini.Y;
                     break;
                 case 3:
-                    this.location.X = LoZHelpers.LinkLocationTrackerMini.X;
-                    this.location.Y = LoZHelpers.LinkLocationTrackerMini.Y - LoZHelpers.AboveRoomMapOffset + 2;
+                    location.X = LoZHelpers.LinkLocationTrackerMini.X;
+                    location.Y = LoZHelpers.LinkLocationTrackerMini.Y - LoZHelpers.AboveRoomMapOffset + 2;
                     break;
                 case 4:
-                    this.location.X = LoZHelpers.LinkLocationTrackerMini.X;
-                    this.location.Y = LoZHelpers.LinkLocationTrackerMini.Y - 2 * LoZHelpers.AboveRoomMapOffset + 4;
+                    location.X = LoZHelpers.LinkLocationTrackerMini.X;
+                    location.Y = LoZHelpers.LinkLocationTrackerMini.Y - 2 * LoZHelpers.AboveRoomMapOffset + 4;
                     break;
                 case 5:
                     this.location.X = LoZHelpers.LinkLocationTrackerMini.X + LoZHelpers.RightRoomMapOffset + 2;
@@ -98,7 +97,7 @@ namespace LegendOfZeldaClone
                     break;
 
             }
-        }
+        }*/
         public void Draw(SpriteBatch spriteBatch, Vector2 vector) => linkMapLocation.Draw(spriteBatch, location);
 
     }

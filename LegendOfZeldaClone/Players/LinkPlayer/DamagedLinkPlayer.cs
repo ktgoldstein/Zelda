@@ -21,6 +21,7 @@ namespace LegendOfZeldaClone
             get { return decoratedLinkPlayer.Health; }
             set { decoratedLinkPlayer.Health = value; }
         }
+        public Direction BlockingDirection { get { return linkStates[0].BlockingDirection; } }
         public PlayerInventory Inventory { get { return decoratedLinkPlayer.Inventory; } }
         public Vector2 Location
         {
@@ -39,6 +40,11 @@ namespace LegendOfZeldaClone
             get { return decoratedLinkPlayer.Sword; }
             set { decoratedLinkPlayer.Sword = value; }
         }
+        public int SwordBeamLock
+        {
+            get { return decoratedLinkPlayer.SwordBeamLock; }
+            set { decoratedLinkPlayer.SwordBeamLock = value; }
+        }
         public IUsableItem HeldItem
         {
             get { return decoratedLinkPlayer.HeldItem; }
@@ -49,8 +55,13 @@ namespace LegendOfZeldaClone
             get { return skinTypes[skinTypesIndex]; }
             set { skinTypes[skinTypesIndex] = value; }
         }
+        public bool Alive
+        {
+            get { return decoratedLinkPlayer.Alive; }
+            set { decoratedLinkPlayer.Alive = value; }
+        }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private readonly ILinkPlayer decoratedLinkPlayer;
         private LinkSkinType[] skinTypes;
         private int skinTypesIndex;
@@ -58,7 +69,7 @@ namespace LegendOfZeldaClone
         private int timer;
         private Direction knockbackDirection;
 
-        public DamagedLinkPlayer(LegendOfZeldaDungeon game, ILinkPlayer decoratedLinkPlayer, int currentFrame, LinkStateType linkState, Direction knockbackDirection)
+        public DamagedLinkPlayer(GameStateMachine game, ILinkPlayer decoratedLinkPlayer, int currentFrame, LinkStateType linkState, Direction knockbackDirection)
         {
             this.game = game;
             this.decoratedLinkPlayer = decoratedLinkPlayer;
@@ -103,20 +114,20 @@ namespace LegendOfZeldaClone
 
         public void ActionA()
         {
-            Direction direction = Direction.None;
-            foreach (ILinkState linkState in linkStates) 
-                direction = linkState.Action();
-            if (direction != Direction.None)
-                Sword.Use(Location, direction);
+            Direction direction = linkStates[0].BlockingDirection;
+            foreach (ILinkState linkState in linkStates)
+                linkState.Action();
+            if (direction != Direction.None && Sword != null)
+                Sword.Use(Location, direction, Inventory);
         }
 
         public void ActionB()
         {
-            Direction direction = Direction.None;
+            Direction direction = linkStates[0].BlockingDirection;
             foreach (ILinkState linkState in linkStates)
-                direction = linkState.Action();
-            if (direction != Direction.None)
-                HeldItem.Use(Location, direction);
+                linkState.Action();
+            if (direction != Direction.None && HeldItem != null)
+                HeldItem.Use(Location, direction, Inventory);
         }
 
         public void Damage(int amount, Direction knockbackDirection) { /* Invinvibility Frames */ }
@@ -127,6 +138,7 @@ namespace LegendOfZeldaClone
             Inventory.AddItem(itemType, game);
             foreach (ILinkState linkState in linkStates)
                 linkState.PickUpItem(item);
+            Equip(itemType);
         }
 
         public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);

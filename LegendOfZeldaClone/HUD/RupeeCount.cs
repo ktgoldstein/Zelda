@@ -10,9 +10,9 @@ namespace LegendOfZeldaClone
         private ISprite numberSprite;
         private int numberOfRupees;
         private int[] digitArray = new int[3];
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public RupeeCount(LegendOfZeldaDungeon game)
+        public RupeeCount(GameStateMachine game)
         {
             rupeeCountSprite = HUDTextureFactory.Instance.CreateRupeeCount();
             xSprite = HUDTextureFactory.Instance.CreateX();

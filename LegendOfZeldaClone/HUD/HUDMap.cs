@@ -13,9 +13,9 @@ namespace LegendOfZeldaClone
         private bool hasMap;
         private bool hasCompass;
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public HUDMap(LegendOfZeldaDungeon game)
+        public HUDMap(GameStateMachine game)
         {
             this.game = game;
 

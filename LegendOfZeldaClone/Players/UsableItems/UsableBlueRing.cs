@@ -4,11 +4,11 @@ namespace LegendOfZeldaClone
 {
     public class UsableBlueRing : IUsableItem
     {
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public UsableBlueRing(LegendOfZeldaDungeon game) => this.game = game;
+        public UsableBlueRing(GameStateMachine game) => this.game = game;
 
-        public void Use(Vector2 location, Direction direction)
+        public void Use(Vector2 location, Direction direction, PlayerInventory playerInventory)
         {
             IPlayer link = game.Player;
             if (link is LinkPlayer player)

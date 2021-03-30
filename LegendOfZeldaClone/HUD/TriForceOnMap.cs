@@ -8,9 +8,9 @@ namespace LegendOfZeldaClone
     {
         private readonly ISprite triForce;
         private Vector2 location;
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public TriForceOnMap(Vector2 location, LegendOfZeldaDungeon game)
+        public TriForceOnMap(Vector2 location, GameStateMachine game)
         {
             triForce = HUDTextureFactory.Instance.CreateTriForceIndicator();
             this.location = location;

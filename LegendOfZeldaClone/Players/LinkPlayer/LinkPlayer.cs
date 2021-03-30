@@ -8,7 +8,12 @@ namespace LegendOfZeldaClone
     {
         public float Speed { get; set; }
         public int MaxHealth { get; set; }
-        public int Health { get; set; }
+        public int Health
+        {
+            get => health; 
+            set => health = value > MaxHealth ? MaxHealth : value;
+        }
+        public Direction BlockingDirection { get { return linkState.BlockingDirection; } }
         public PlayerInventory Inventory { get; }
         public Vector2 Location { get; set; }
         public Vector2 HurtBoxLocation 
@@ -19,16 +24,24 @@ namespace LegendOfZeldaClone
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
         public IUsableItem Sword { get; set; }
+        public int SwordBeamLock { get; set; } = 0;
         public IUsableItem HeldItem { get; set; }
         public LinkSkinType SkinType { get; set; }
+        public bool Alive
+        {
+            get { return Health > 0; }
+            set { Health = value ? MaxHealth : 0; }
+        }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private ILinkState linkState;
         private readonly int width;
         private readonly int height;
         private readonly Vector2 hurtBoxOffset;
 
-        public LinkPlayer(LegendOfZeldaDungeon game, Vector2 location, IUsableItem sword, IUsableItem heldItem = null)
+        private int health;
+
+        public LinkPlayer(GameStateMachine game, Vector2 location, IUsableItem sword = null, IUsableItem heldItem = null)
         {
             Sword = sword;
             HeldItem = heldItem;
@@ -53,16 +66,18 @@ namespace LegendOfZeldaClone
 
         public void ActionA()
         {
-            Direction direction = linkState.Action();
-            if (direction != Direction.None)
-                Sword.Use(Location, direction);
+            Direction direction = linkState.BlockingDirection;
+            linkState.Action();
+            if (direction != Direction.None && Sword != null)
+                Sword.Use(Location, direction, Inventory);
         }
 
         public void ActionB()
         {
-            Direction direction = linkState.Action();
-            if (direction != Direction.None)
-                HeldItem.Use(Location, direction);
+            Direction direction = linkState.BlockingDirection;
+            linkState.Action();
+            if (direction != Direction.None && HeldItem != null)
+                HeldItem.Use(Location, direction, Inventory);
         }
 
         public void Damage(int amount, Direction knockbackDirection)
@@ -86,9 +101,18 @@ namespace LegendOfZeldaClone
         {
             Inventory.AddItem(itemType, game);
             linkState.PickUpItem(item);
+            if (itemType != UsableItemTypes.BlueRing)
+                Equip(itemType);
         }
 
-        public void Equip(UsableItemTypes itemType) => HeldItem = Inventory.GetItem(itemType);
+        public void Equip(UsableItemTypes itemType)
+        {
+            if (itemType == UsableItemTypes.BlueRing)
+                Inventory.GetItem(itemType).Use(Location, Direction.None, Inventory);
+            else
+                HeldItem = Inventory.GetItem(itemType);
+        }
+
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
         public void Update() => linkState.Update();
         public void SetState(ILinkState linkState) => this.linkState = linkState;

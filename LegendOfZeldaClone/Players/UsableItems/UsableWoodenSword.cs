@@ -4,13 +4,16 @@ namespace LegendOfZeldaClone
 {
     public class UsableWoodenSword : IUsableItem
     {
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public UsableWoodenSword(LegendOfZeldaDungeon game) => this.game = game;
-
-        public void Use(Vector2 location, Direction direction)
+        public UsableWoodenSword(GameStateMachine game)
         {
-            game.PlayerProjectilesQueue.Add(new SwordProjectile(location, SwordSkinType.WoodenSword, direction, game));
+            this.game = game;
+        }
+
+        public void Use(Vector2 location, Direction direction, PlayerInventory playerInventory)
+        {
+            game.PlayerProjectilesQueue.Add(new SwordProjectile(location, SwordSkinType.WoodenSword, direction, game, (game.Player as ILinkPlayer)));
         }
     }
 }

@@ -8,9 +8,9 @@ namespace LegendOfZeldaClone
     {
         private readonly ISprite map;
         private Vector2 location;
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public MiniMap(Vector2 location, LegendOfZeldaDungeon game)
+        public MiniMap(Vector2 location, GameStateMachine game)
         {
             this.game = game;
             map = HUDTextureFactory.Instance.CreateMiniMap();

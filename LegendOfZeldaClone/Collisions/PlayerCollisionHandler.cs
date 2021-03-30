@@ -26,7 +26,10 @@ namespace LegendOfZeldaClone
 
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
-            CurrentPlayer.Damage(enemyProjectile.AttackStat, direction);
+            if (CurrentPlayer.BlockingDirection != direction)
+                CurrentPlayer.Damage(enemyProjectile.AttackStat, direction);
+            else
+                enemyProjectile.Alive = false;
         }
 
         public void HandleItemCollision(IItem item, Direction direction) 
@@ -34,12 +37,16 @@ namespace LegendOfZeldaClone
             if (item is FlashingRupee || item is BlueRupee || item is GoldRupee)
                 CurrentPlayer.Inventory.RupeesHeld++;
             else if (item is Bomb)
+            {
+                if (!CurrentPlayer.Inventory.HasItem(UsableItemTypes.Bomb))
+                    CurrentPlayer.PickUpUsableItem(UsableItemTypes.Bomb, item);
                 CurrentPlayer.Inventory.BombsHeld++;
+            }
             else if (item is Key)
                 CurrentPlayer.Inventory.KeysHeld++;
             else if (item is BlueCandle)
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BlueCandle, item);
-            else if (item is BlueRing)
+            else if (item is BlueRing && CurrentPlayer is LinkPlayer)
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BlueRing, item);
             else if (item is Boomerang)
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BoomerangNormal, item);
@@ -91,7 +98,6 @@ namespace LegendOfZeldaClone
                         break;
                 }
             }
-
         }
     }
 }

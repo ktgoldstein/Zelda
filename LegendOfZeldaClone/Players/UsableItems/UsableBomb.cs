@@ -4,13 +4,17 @@ namespace LegendOfZeldaClone
 {
     public class UsableBomb : IUsableItem
     {
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public UsableBomb(LegendOfZeldaDungeon game) => this.game = game;
+        public UsableBomb(GameStateMachine game) => this.game = game;
 
-        public void Use(Vector2 location, Direction direction)
+        public void Use(Vector2 location, Direction direction, PlayerInventory playerInventory)
         {
-            game.PlayerProjectilesQueue.Add(new BombProjectile(game, location, direction));
+            if (playerInventory.BombsHeld > 0)
+            {
+                playerInventory.BombsHeld--;
+                game.PlayerProjectilesQueue.Add(new BombProjectile(game, location, direction));
+            }
         }
     }
 }

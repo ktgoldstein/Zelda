@@ -11,9 +11,9 @@ namespace LegendOfZeldaClone
         private int maxHealth;
         private int currentHealth;
         private int heartCounter;
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
 
-        public HealthBar(LegendOfZeldaDungeon game)
+        public HealthBar(GameStateMachine game)
         {
             fullHealthHeartSprite = HUDTextureFactory.Instance.CreateFullHealthHeart();
             halfHealthHeartSprite = HUDTextureFactory.Instance.CreateHalfHealthHeart();
