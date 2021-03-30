@@ -64,7 +64,7 @@ namespace LegendOfZeldaClone
             }
         }
 
-        private void SpawnExplosions(int seed)
+        private void SpawnExplosions()
         {
             int explosionWidth = 16;
             int explosionHeight = 16;
@@ -75,29 +75,19 @@ namespace LegendOfZeldaClone
             Vector2 middleRight = Location + new Vector2(LoZHelpers.Scale(explosionWidth), 0);
             Vector2 bottomLeft = Location + new Vector2(-LoZHelpers.Scale(explosionWidth / 2), LoZHelpers.Scale(explosionHeight));
             Vector2 bottomRight = Location + new Vector2(LoZHelpers.Scale(explosionWidth / 2), LoZHelpers.Scale(explosionHeight));
-         //   switch (seed)
-          //  {
-          //      case 0:
-                    game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(topLeft));
-                    game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(middleRight));
-                    game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(bottomRight));
-                //    break;
-          //      case 1:
-                    game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(topRight));
-                    game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(middleLeft));
-                    game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(bottomLeft));
-                  //  break;
-      //      }
+            game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(topLeft));
+            game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(middleRight));
+            game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(bottomRight));
+            game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(topRight));
+            game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(middleLeft));
+            game.PlayerProjectilesQueue.Add(new BombExplosionProjectile(bottomLeft));
             new BombExplodingSoundEffect().Play();
         }
 
         public void Die()
         {
             Location -= new Vector2(LoZHelpers.Scale(4), 0);
-           // Random rnd = new Random();
-           // int explosionSeed = rnd.Next(2);
-            int explosionSeed = lifeSpan%2;
-            SpawnExplosions(explosionSeed);
+            SpawnExplosions();
             Alive = false;
         }
     }
