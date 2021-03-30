@@ -77,36 +77,39 @@ namespace LegendOfZeldaClone
             }
         }
 
-        public void Draw(SpriteBatch sprintBatch) 
+        public void RoomDraw(SpriteBatch bottomSprintBatch) 
         {
-
-            CurrentRoom.Draw(sprintBatch);
-            NextRoom?.Draw(sprintBatch);
+            
+            CurrentRoom.Draw(bottomSprintBatch);
+            NextRoom?.Draw(bottomSprintBatch);
 
             foreach (IObject block in Objects)
-                block.Draw(sprintBatch);
+                block.Draw(bottomSprintBatch);
 
             if (CurrentGameState == GameState.Play)
             {
                 foreach (IItem item in Items)
-                    item.Draw(sprintBatch);
+                    item.Draw(bottomSprintBatch);
 
                 foreach (IEnemyProjectile projectile in EnemyProjectiles)
-                    projectile.Draw(sprintBatch);
+                    projectile.Draw(bottomSprintBatch);
 
                 foreach (IEnemy enemy in Enemies)
-                    enemy.Draw(sprintBatch);
+                    enemy.Draw(bottomSprintBatch);
 
                 foreach (IPlayerProjectile projectile in PlayerProjectiles)
-                    projectile.Draw(sprintBatch);
+                    projectile.Draw(bottomSprintBatch);
 
-                Player.Draw(sprintBatch);
+                Player.Draw(bottomSprintBatch);
             }
-            sprintBatch.End();
-            sprintBatch.Begin();
-            DungeonMiniMap.Draw(sprintBatch, LoZHelpers.MiniMapLocation);
+            bottomSprintBatch.End();
         }
-
+        public void HUDDraw(SpriteBatch topSprintBatch)
+        {
+            topSprintBatch.Begin();
+            DungeonMiniMap.Draw(topSprintBatch, LoZHelpers.MiniMapLocation);
+            topSprintBatch.End();
+        }
         public void InitializeRooms()
         {
             List<Room> RoomList = new List<Room>()
@@ -173,20 +176,21 @@ namespace LegendOfZeldaClone
 
         public void ShiftLink(Direction direction)
         {
-            int displacement = LoZHelpers.Scale(16);
+            int horizontalDisplacement = LoZHelpers.Scale(16);
+            int verticalDisplacement = LoZHelpers.Scale(32);
             switch (direction)
             {
                 case Direction.Down:
-                    Player.Location += new Vector2(0, displacement + Player.Height);
+                    Player.Location += new Vector2(0, verticalDisplacement + Player.Height);
                     break;
                 case Direction.Up:
-                    Player.Location -= new Vector2(0, displacement + Player.Height);
+                    Player.Location -= new Vector2(0, verticalDisplacement + Player.Height);
                     break;
                 case Direction.Left:
-                    Player.Location -= new Vector2(displacement + Player.Width, 0);
+                    Player.Location -= new Vector2(horizontalDisplacement + Player.Width, 0);
                     break;
                 case Direction.Right:
-                    Player.Location += new Vector2(displacement + Player.Width, 0);
+                    Player.Location += new Vector2(horizontalDisplacement + Player.Width, 0);
                     break;
                 case Direction.None:
                     break;

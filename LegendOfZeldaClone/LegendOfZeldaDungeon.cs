@@ -10,12 +10,14 @@ namespace LegendOfZeldaClone
     public class LegendOfZeldaDungeon : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        private SpriteBatch _topSpriteBatch;
+        private SpriteBatch _bottomSpriteBatch;
 
         private IController controllerKeyboard;
 
         private GameStateMachine gameStateMachine;
-
+        private Viewport topView;
+        private Viewport bottomView;
         public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -82,8 +84,21 @@ namespace LegendOfZeldaClone
         }
 
         protected override void LoadContent()
-        {         
-            _spriteBatch = new SpriteBatch(_graphics.GraphicsDevice);
+        {
+            topView = _graphics.GraphicsDevice.Viewport;
+            bottomView = _graphics.GraphicsDevice.Viewport;
+
+            //topView.Height = 110;
+            //topView.Y = 0;
+            //_graphics.GraphicsDevice.Viewport = topView;
+            _topSpriteBatch = new SpriteBatch(_graphics.GraphicsDevice);
+
+            // Altering viewports before creating spritebatch has no effect
+
+            //_graphics.GraphicsDevice.Viewport = bottomView;
+            //bottomView.Height = 528;
+            //bottomView.Y = 192;
+            _bottomSpriteBatch = new SpriteBatch(_graphics.GraphicsDevice);
 
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
@@ -110,13 +125,21 @@ namespace LegendOfZeldaClone
         {
             GraphicsDevice.Clear(Color.Black);
 
-            _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
+            bottomView.Y = LoZHelpers.HUDHeight;
+            _graphics.GraphicsDevice.Viewport = bottomView;
+
+            _bottomSpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
                 null, null, null, null, gameStateMachine.Camera.Translation());
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
-            gameStateMachine.Draw(_spriteBatch);                                   
+            gameStateMachine.RoomDraw(_bottomSpriteBatch);
 
-            _spriteBatch.End();
+           
+            //topView.Height = 500;
+            topView.Y = 0;
+            _graphics.GraphicsDevice.Viewport = topView;
+
+            gameStateMachine.HUDDraw(_topSpriteBatch);
 
             base.Draw(gameTime);
         }               
