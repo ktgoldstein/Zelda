@@ -18,7 +18,7 @@
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) {}
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            if (!(CurrentPlayerProjectile is BoomerangProjectile))
+            if (!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordProjectile))
             {
                 if (CurrentPlayerProjectile is SwordBeamProjectile)
                 {
