@@ -25,14 +25,14 @@ namespace LegendOfZeldaClone.Enemy
         public int Width { get { return LoZHelpers.Scale(width); } }
 
         public int Height { get { return LoZHelpers.Scale(height); } }
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
         private ISprite wizardFireSprite;
         private readonly int width;
         private readonly int height;
         public Wizard Wizard;
         private int wizardHealth;
         private int attackInt = 0;
-        public WizardFire(LegendOfZeldaDungeon game, Vector2 location, Wizard wizard)
+        public WizardFire(GameStateMachine game, Vector2 location, Wizard wizard)
         {
             wizardFireSprite = EnemySpriteFactory.Instance.CreateWizardFireSprite();
             width = 16;

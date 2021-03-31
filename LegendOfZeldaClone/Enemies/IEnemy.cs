@@ -8,7 +8,6 @@ namespace LegendOfZeldaClone
         public int Health { get; set; }
         public Vector2 Direction { get; set; }
         public bool Invincible { get; set; }
-        public bool Alive { get; set; }
         public void Knockback(Vector2 direction);
         public void TakeDamage(Vector2 direction);
     }

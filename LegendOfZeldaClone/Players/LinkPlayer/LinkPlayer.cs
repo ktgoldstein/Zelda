@@ -21,14 +21,19 @@ namespace LegendOfZeldaClone
         public IUsableItem Sword { get; set; }
         public IUsableItem HeldItem { get; set; }
         public LinkSkinType SkinType { get; set; }
+        public bool Alive
+        {
+            get { return Health > 0; }
+            set { Health = value ? MaxHealth : 0; }
+        }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private ILinkState linkState;
         private readonly int width;
         private readonly int height;
         private readonly Vector2 hurtBoxOffset;
 
-        public LinkPlayer(LegendOfZeldaDungeon game, Vector2 location, IUsableItem sword, IUsableItem heldItem = null)
+        public LinkPlayer(GameStateMachine game, Vector2 location, IUsableItem sword, IUsableItem heldItem = null)
         {
             Sword = sword;
             HeldItem = heldItem;
@@ -54,14 +59,14 @@ namespace LegendOfZeldaClone
         public void ActionA()
         {
             Direction direction = linkState.Action();
-            if (direction != Direction.None)
+            if (direction != Direction.None && Sword != null)
                 Sword.Use(Location, direction);
         }
 
         public void ActionB()
         {
             Direction direction = linkState.Action();
-            if (direction != Direction.None)
+            if (direction != Direction.None && HeldItem != null)
                 HeldItem.Use(Location, direction);
         }
 
@@ -89,6 +94,7 @@ namespace LegendOfZeldaClone
         {
             Inventory.AddItem(itemType, game);
             linkState.PickUpItem(item);
+            Equip(itemType);
         }
 
         public void Equip(UsableItemTypes itemType) => HeldItem = Inventory.GetItem(itemType);

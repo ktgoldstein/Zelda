@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-using System;
 
 namespace LegendOfZeldaClone.Enemy
 {
@@ -38,7 +36,7 @@ namespace LegendOfZeldaClone.Enemy
 
         public bool Alive { get; set; }
 
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
         private ISprite aquamentusSprite;
         private float speed = 2;
         private int timer = 0;
@@ -47,7 +45,7 @@ namespace LegendOfZeldaClone.Enemy
         private readonly int height;
         private Vector2 knockbackForce = Vector2.Zero;
 
-        public Aquamentus(LegendOfZeldaDungeon game, Vector2 location)
+        public Aquamentus(GameStateMachine game, Vector2 location)
         {
             aquamentusSprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
             width = 24;

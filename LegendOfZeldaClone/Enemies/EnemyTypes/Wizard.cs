@@ -25,7 +25,7 @@ namespace LegendOfZeldaClone.Enemy
 
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
-        private LegendOfZeldaDungeon game;
+        private GameStateMachine game;
         private ISprite wizardSprite;
         private int invincibleFrames = 0;
         private readonly int width;
@@ -35,7 +35,7 @@ namespace LegendOfZeldaClone.Enemy
         private int current = 0;
         private int timer = 7;
 
-        public Wizard(LegendOfZeldaDungeon game, Vector2 location)
+        public Wizard(GameStateMachine game, Vector2 location)
         {
             wizardSprite = EnemySpriteFactory.Instance.CreateWizardSprite();
             font = EnemySpriteFactory.Instance.CreateFont();

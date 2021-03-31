@@ -15,7 +15,7 @@ namespace LegendOfZeldaClone
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private readonly SwordSkinType skinType;
         private readonly Direction direction;
         private ISprite sprite;
@@ -23,7 +23,7 @@ namespace LegendOfZeldaClone
         private int height;
         private int lifeSpan;
 
-        public SwordProjectile(Vector2 startingLocation, SwordSkinType skinType, Direction direction, LegendOfZeldaDungeon game)
+        public SwordProjectile(Vector2 startingLocation, SwordSkinType skinType, Direction direction, GameStateMachine game)
         {
             Alive = true;
 

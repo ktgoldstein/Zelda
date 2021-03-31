@@ -17,16 +17,16 @@ namespace LegendOfZeldaClone.Objects
         public ObjectHeight BlockHeight { get; }
         public bool IsMovable { get; }
         public bool IsBombable { get; }
-        public bool IsAlive { get; set; }
+        public bool Alive { get; set; }
         public Vector2 SpawnLocation { get; }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private ISprite openDoorRight;
         private readonly int height;
         private readonly int width;
         private readonly Vector2 hurtBoxOffset;
 
-        public OpenDoorRight(LegendOfZeldaDungeon game, Vector2 location)
+        public OpenDoorRight(GameStateMachine game, Vector2 location)
         {
             this.game = game;
             SpawnLocation = LoZHelpers.LeftSpawnLocation;
@@ -38,7 +38,7 @@ namespace LegendOfZeldaClone.Objects
             BlockHeight = ObjectHeight.CanWalkOver;
             IsMovable = false;
             IsBombable = false;
-            IsAlive = true;
+            Alive = true;
         }
         
         public void Update() { }

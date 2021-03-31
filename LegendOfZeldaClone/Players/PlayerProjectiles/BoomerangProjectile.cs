@@ -15,7 +15,7 @@ namespace LegendOfZeldaClone
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
 
-        private readonly LegendOfZeldaDungeon game;
+        private readonly GameStateMachine game;
         private readonly ISprite sprite;
         private readonly int speed;
         private Vector2 velocity;
@@ -26,7 +26,7 @@ namespace LegendOfZeldaClone
 
         public IPlayer link;
 
-        public BoomerangProjectile(Vector2 startingLocation, Direction direction, BoomerangSkinType skinType, LegendOfZeldaDungeon game, IPlayer link)
+        public BoomerangProjectile(Vector2 startingLocation, Direction direction, BoomerangSkinType skinType, GameStateMachine game, IPlayer link)
         {
             Alive = true;
             width = 8;
