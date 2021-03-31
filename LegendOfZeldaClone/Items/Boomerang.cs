@@ -30,5 +30,12 @@ namespace LegendOfZeldaClone
 
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch) => boomerang.Draw(spriteBatch, Location);
+        public void BeCollected()
+        {
+            Die();
+            new InventoryItemPickupSoundEffect().Play();
+            new NewImportantItemAcquiredFanfareSoundEffect().Play();
+        }
+        public void Die() => Alive = false;
     }
 }

@@ -34,13 +34,17 @@ namespace LegendOfZeldaClone
 
         public void HandleItemCollision(IItem item, Direction direction) 
         {
-            if (item is FlashingRupee || item is BlueRupee || item is GoldRupee)
-                CurrentPlayer.Inventory.RupeesHeld++;
+            if (item is FlashingRupee)
+                CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.FlashingRupeeValue;
+            else if (item is BlueRupee)
+                CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.BlueRupeeValue;
+            else if (item is GoldRupee)
+                CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.GoldRupeeValue;
             else if (item is Bomb)
             {
                 if (!CurrentPlayer.Inventory.HasItem(UsableItemTypes.Bomb))
                     CurrentPlayer.PickUpUsableItem(UsableItemTypes.Bomb, item);
-                CurrentPlayer.Inventory.BombsHeld++;
+                CurrentPlayer.Inventory.BombsHeld += LoZHelpers.BombPickUpNumber;
             }
             else if (item is Key)
                 CurrentPlayer.Inventory.KeysHeld++;
@@ -55,24 +59,18 @@ namespace LegendOfZeldaClone
             else if (item is HeartContainer)
             {
                 CurrentPlayer.MaxHealth += 2;
-                CurrentPlayer.Health += 2;
+                CurrentPlayer.Heal(2);
             }
             else if (item is Heart)
-            {
-                if (CurrentPlayer.Health != CurrentPlayer.MaxHealth)
-                {
-                    CurrentPlayer.Health += 2;
-                }
-            }
+                CurrentPlayer.Heal(2);
             else if (item is Fairy)
-            {
-                CurrentPlayer.Health = CurrentPlayer.MaxHealth;
-            }
+                CurrentPlayer.Heal(CurrentPlayer.MaxHealth);
             else if (item is Map)
                 CurrentPlayer.Inventory.HasMap = true;
             else if (item is Compass)
                 CurrentPlayer.Inventory.HasCompass = true;
         }
+
 
         public void HandleObjectCollision(IObject block, Direction direction)
         {

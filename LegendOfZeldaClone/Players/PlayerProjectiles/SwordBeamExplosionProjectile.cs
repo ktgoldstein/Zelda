@@ -39,7 +39,7 @@ namespace LegendOfZeldaClone
         {
             if (lifeSpan == 0)
             {
-                Alive = false;
+                Die();
                 player.SwordBeamLock--;
             }
             Location += velocity;
@@ -81,5 +81,6 @@ namespace LegendOfZeldaClone
                     break;
             }
         }
+        public void Die() => Alive = false;
     }
 }

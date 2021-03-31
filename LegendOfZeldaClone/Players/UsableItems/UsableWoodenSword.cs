@@ -14,6 +14,7 @@ namespace LegendOfZeldaClone
         public void Use(Vector2 location, Direction direction, PlayerInventory playerInventory)
         {
             game.PlayerProjectilesQueue.Add(new SwordProjectile(location, SwordSkinType.WoodenSword, direction, game, (game.Player as ILinkPlayer)));
+            new SwordSlashSoundEffect().Play();
         }
     }
 }

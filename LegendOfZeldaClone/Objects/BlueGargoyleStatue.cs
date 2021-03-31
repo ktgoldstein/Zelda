@@ -40,5 +40,6 @@ namespace LegendOfZeldaClone.Objects
         {
             sprite.Draw(spriteBatch, Location);
         }
+        public void Die() => Alive = false;
     }
 }

@@ -39,7 +39,7 @@ namespace LegendOfZeldaClone
         {
             sprite.Update();
             if (lifeSpan == 0)
-                Alive = false;
+                Die();
 
             lifeSpan--;
             Location += velocity;
@@ -69,5 +69,6 @@ namespace LegendOfZeldaClone
                     break;
             }
         }
+        public void Die() => Alive = false;
     }
 }

@@ -12,5 +12,6 @@ namespace LegendOfZeldaClone
         public bool Alive { get; set; }
         public void Draw(SpriteBatch spriteBatch);
         public void Update();
+        public void Die();
     }
 }

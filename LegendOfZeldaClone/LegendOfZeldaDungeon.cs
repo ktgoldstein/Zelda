@@ -1,6 +1,7 @@
 ﻿using LegendOfZeldaClone.Enemy;
 using LegendOfZeldaClone.LevelLoading;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -16,6 +17,8 @@ namespace LegendOfZeldaClone
 
         private GameStateMachine gameStateMachine;
 
+        public IGameSound GameBackgroundMusic;
+        public int MusicTimingHelperInt;
         public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -88,6 +91,8 @@ namespace LegendOfZeldaClone
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
             ObjectSpriteFactory.Instance.LoadAllTextures(Content);
+            GameSoundFactory.Instance.LoadAllSounds(Content);
+
             PlayerProjectileSpriteFactory.Instance.LoadAllTextures(Content);
             RoomTextureFactory.Instance.LoadAllTextures(Content);
             HUDTextureFactory.Instance.LoadAllTextures(Content);
@@ -95,6 +100,9 @@ namespace LegendOfZeldaClone
             gameStateMachine.ResetPlayer();
             gameStateMachine.InitializeRooms();
             gameStateMachine.InitializeHUD();            
+            GameBackgroundMusic = new DungeonThemeMusic();
+            GameBackgroundMusic.Play();
+            MusicTimingHelperInt = 0;
         }
 
         protected override void Update(GameTime gameTime)
@@ -104,6 +112,21 @@ namespace LegendOfZeldaClone
             gameStateMachine.Update();
 
             base.Update(gameTime);
+
+            if (MusicTimingHelperInt > 120)
+            {
+                GameBackgroundMusic.StopPlaying();
+            }
+            MusicTimingHelperInt++;
+            if (MusicTimingHelperInt % 10 ==0)
+            {
+               // new HeartPickupSoundEffect().Play();
+            }
+          //  if (CurrentRoom == RoomList[7] || CurrentRoom == RoomList[13])
+           // {
+             //   if (MusicTimingHelperInt % 60 == 0)
+              //      new AquamentusScreamingSoundEffect().Play();
+           // }
         }
 
         protected override void Draw(GameTime gameTime)

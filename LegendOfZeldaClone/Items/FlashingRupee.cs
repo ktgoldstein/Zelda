@@ -30,5 +30,11 @@ namespace LegendOfZeldaClone
 
         public void Update() => rupee.Update();
         public void Draw(SpriteBatch spriteBatch) => rupee.Draw(spriteBatch, Location);
+        public void BeCollected()
+        {
+            Die();
+            new RupeePickupSoundEffect().Play();
+        }
+        public void Die() => Alive = false;
     }
 }

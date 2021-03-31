@@ -9,26 +9,13 @@ namespace LegendOfZeldaClone.Collisions
         public static ItemCollisionHandler Instance { get; } = new ItemCollisionHandler();
         private ItemCollisionHandler() { }
 
-        public void HandlePlayerCollision(IPlayer player, Direction direction)
-        {
-            if (CurrentItem is BlueRing)
-            {
-                if (player is LinkPlayer) CurrentItem.Alive = false;
-            }
-            else
-                CurrentItem.Alive = false;
-        }
-
+        public void HandlePlayerCollision(IPlayer player, Direction direction) => CurrentItem.BeCollected();
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
-            if (playerProjectile is SwordProjectile)
-                CurrentItem.Alive = false;
-            else if (playerProjectile is BoomerangProjectile)
-            {
-                if (CurrentItem is FlashingRupee || CurrentItem is BlueRupee || CurrentItem is GoldRupee || CurrentItem is Bomb || CurrentItem is Key)
-                    CurrentItem.Alive = false;
-            }
-            
+            bool itemIsCollectableByBoomerang = (CurrentItem is FlashingRupee || CurrentItem is BlueRupee || CurrentItem is GoldRupee
+                                                 || CurrentItem is Clock || CurrentItem is Bomb);
+                if (itemIsCollectableByBoomerang && playerProjectile is BoomerangProjectile)
+                    CurrentItem.BeCollected();
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction) {}
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) {}
