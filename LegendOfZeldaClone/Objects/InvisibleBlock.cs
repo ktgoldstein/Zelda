@@ -52,6 +52,6 @@ namespace LegendOfZeldaClone.Objects
                     break;
             }
         }
-        public void Die() => IsAlive = false;
+        public void Die() => Alive = false;
     }
 }

@@ -121,11 +121,11 @@ namespace LegendOfZeldaClone
             {
                // new HeartPickupSoundEffect().Play();
             }
-            if (CurrentRoom == RoomList[7] || CurrentRoom == RoomList[13])
-            {
-                if (MusicTimingHelperInt % 60 == 0)
-                    new AquamentusScreamingSoundEffect().Play();
-            }
+          //  if (CurrentRoom == RoomList[7] || CurrentRoom == RoomList[13])
+           // {
+             //   if (MusicTimingHelperInt % 60 == 0)
+              //      new AquamentusScreamingSoundEffect().Play();
+           // }
         }
 
         protected override void Draw(GameTime gameTime)

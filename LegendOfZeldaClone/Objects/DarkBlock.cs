@@ -37,6 +37,6 @@ namespace LegendOfZeldaClone.Objects
 
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
-        public void Die() => IsAlive = false;
+        public void Die() => Alive = false;
     }
 }
