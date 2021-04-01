@@ -28,9 +28,11 @@ namespace LegendOfZeldaClone
         public ABox InventoryBoxA;
         public LifeText HUDLifeText;
         public HealthBar HUDHealthBar;
+        public InventoryScreen InventoryBox;
 
         public int SwitchRoomDelay;
         public readonly int SwitchDelayLength;
+        public GameState CurrentGameState = GameState.Play;
 
         public GameStateMachine()
         {
@@ -50,64 +52,79 @@ namespace LegendOfZeldaClone
 
         public void Update()
         {
-            if (SwitchRoomDelay > 0)
-                SwitchRoomDelay--;
+            if (CurrentGameState == GameState.Play)
+            {
+                if (SwitchRoomDelay > 0)
+                    SwitchRoomDelay--;
 
-            Player.Update();
+                Player.Update();
 
-            PlayerProjectiles.AddRange(PlayerProjectilesQueue);
-            PlayerProjectilesQueue.Clear();
-            PlayerProjectiles = PlayerProjectiles.Except(UpdateGameObjectEnumerable(PlayerProjectiles)).ToList();
+                PlayerProjectiles.AddRange(PlayerProjectilesQueue);
+                PlayerProjectilesQueue.Clear();
+                PlayerProjectiles = PlayerProjectiles.Except(UpdateGameObjectEnumerable(PlayerProjectiles)).ToList();
 
-            Enemies = Enemies.Except(UpdateGameObjectEnumerable(Enemies)).ToList();
+                Enemies = Enemies.Except(UpdateGameObjectEnumerable(Enemies)).ToList();
 
-            EnemyProjectiles.AddRange(EnemyProjectilesQueue);
-            EnemyProjectilesQueue.Clear();
-            EnemyProjectiles = EnemyProjectiles.Except(UpdateGameObjectEnumerable(EnemyProjectiles)).ToList();
+                EnemyProjectiles.AddRange(EnemyProjectilesQueue);
+                EnemyProjectilesQueue.Clear();
+                EnemyProjectiles = EnemyProjectiles.Except(UpdateGameObjectEnumerable(EnemyProjectiles)).ToList();
 
-            Items = Items.Except(UpdateGameObjectEnumerable(Items)).ToList();
+                Items = Items.Except(UpdateGameObjectEnumerable(Items)).ToList();
 
-            Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
+                Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
 
-            HUDHealthBar.Update();
-            HUDMap.Update();
-            PlayerRupeeCount.Update();
-            PlayerBombCount.Update();
-            PlayerKeyCount.Update();
+                HUDHealthBar.Update();
+                HUDMap.Update();
+                PlayerRupeeCount.Update();
+                PlayerBombCount.Update();
+                PlayerKeyCount.Update();
 
-            Collisions.CollisionHandling.HandleCollisions(this);
+                Collisions.CollisionHandling.HandleCollisions(this);
+            }
+            else if (CurrentGameState == GameState.Pause)
+            {
+                InventoryBox.Update();
+                InventoryBoxB.Update();
+            }
         }
 
         public void Draw(SpriteBatch sprintBatch) 
         {
-            CurrentRoom.Draw(sprintBatch);
+            if (CurrentGameState == GameState.Play)
+            {
+                CurrentRoom.Draw(sprintBatch);
 
-            foreach (IObject block in Objects)
-                block.Draw(sprintBatch);
+                foreach (IObject block in Objects)
+                    block.Draw(sprintBatch);
 
-            foreach (IItem item in Items)
-                item.Draw(sprintBatch);
+                foreach (IItem item in Items)
+                    item.Draw(sprintBatch);
 
-            foreach (IEnemyProjectile projectile in EnemyProjectiles)
-                projectile.Draw(sprintBatch);
+                foreach (IEnemyProjectile projectile in EnemyProjectiles)
+                    projectile.Draw(sprintBatch);
 
-            foreach (IEnemy enemy in Enemies)
-                enemy.Draw(sprintBatch);
+                foreach (IEnemy enemy in Enemies)
+                    enemy.Draw(sprintBatch);
 
-            foreach (IPlayerProjectile projectile in PlayerProjectiles)
-                projectile.Draw(sprintBatch);
+                foreach (IPlayerProjectile projectile in PlayerProjectiles)
+                    projectile.Draw(sprintBatch);
 
-            Player.Draw(sprintBatch);
+                Player.Draw(sprintBatch);
 
-            HUDMap.Draw(sprintBatch);
-            DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNameLocation);
-            PlayerRupeeCount.Draw(sprintBatch, LoZHelpers.RupeeCountLocation);
-            PlayerKeyCount.Draw(sprintBatch, LoZHelpers.KeyCountLocation);
-            PlayerBombCount.Draw(sprintBatch, LoZHelpers.BombCountLocation);
-            InventoryBoxB.Draw(sprintBatch, LoZHelpers.BBoxLocation);
-            InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxLocation);
-            HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextLocation);
-            HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthLocation);
+                HUDMap.Draw(sprintBatch);
+                DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNameLocation);
+                PlayerRupeeCount.Draw(sprintBatch, LoZHelpers.RupeeCountLocation);
+                PlayerKeyCount.Draw(sprintBatch, LoZHelpers.KeyCountLocation);
+                PlayerBombCount.Draw(sprintBatch, LoZHelpers.BombCountLocation);
+                InventoryBoxB.Draw(sprintBatch, LoZHelpers.BBoxLocation);
+                InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxLocation);
+                HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextLocation);
+                HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthLocation);
+            }
+            else if (CurrentGameState == GameState.Pause)
+            {
+                InventoryBox.Draw(sprintBatch);
+            }
         }
 
         public void InitializeRooms()
@@ -169,6 +186,7 @@ namespace LegendOfZeldaClone
             InventoryBoxA = new ABox();
             HUDLifeText = new LifeText();
             HUDHealthBar = new HealthBar(this);
+            InventoryBox = new InventoryScreen();
         }
 
         public List<T> UpdateGameObjectEnumerable<T>(List<T> gameObjects) where T : IGameObject

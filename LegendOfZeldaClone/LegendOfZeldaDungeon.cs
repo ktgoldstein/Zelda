@@ -50,6 +50,7 @@ namespace LegendOfZeldaClone
             ICommand moveRoomUp = new MoveRoomUp(gameStateMachine);
             ICommand moveRoomLeft = new MoveRoomLeft(gameStateMachine);
             ICommand moveRoomRight = new MoveRoomRight(gameStateMachine);
+            ICommand pauseGame = new PauseGame(gameStateMachine);
 
             KeyboardController keyboardController = new KeyboardController();
 
@@ -74,6 +75,7 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.I, moveRoomUp);
             keyboardController.RegisterCommand(Keys.J, moveRoomLeft);
             keyboardController.RegisterCommand(Keys.L, moveRoomRight);
+            keyboardController.RegisterCommand(Keys.P, pauseGame);
 
             controllerKeyboard = keyboardController;
 

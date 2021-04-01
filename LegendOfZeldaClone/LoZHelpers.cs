@@ -2,7 +2,11 @@
 
 namespace LegendOfZeldaClone
 {
-
+    public enum GameState
+    {
+        Play,
+        Pause
+    }
     public enum Direction
     {
         Down,
