@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using System.Xml.Serialization;
 
 namespace LegendOfZeldaClone
 {
@@ -14,6 +13,7 @@ namespace LegendOfZeldaClone
         public List<IEnemy> Enemies;
         public List<IItem> Items;
         public List<IObject> Objects;
+        private List<IObject> stashedBlocks;
 
         public List<IPlayerProjectile> PlayerProjectilesQueue;
         public List<IPlayerProjectile> PlayerProjectiles;
@@ -102,6 +102,11 @@ namespace LegendOfZeldaClone
                     projectile.Draw(sprintBatch);
                 
                 Player.Draw(sprintBatch);
+            }
+            else if (CurrentGameState == GameState.ScreenTransition)
+            {
+                foreach (IObject block in stashedBlocks)
+                    block.Draw(sprintBatch);
             }
         }
 
@@ -225,6 +230,12 @@ namespace LegendOfZeldaClone
             PlayerProjectilesQueue.Clear();
             EnemyProjectiles.Clear();
             EnemyProjectilesQueue.Clear();
+        }
+
+        public void StashBlocks()
+        {
+            stashedBlocks = Objects;
+            Objects = new List<IObject>();
         }
     }
 }

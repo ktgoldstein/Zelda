@@ -15,6 +15,10 @@ namespace LegendOfZeldaClone.LevelLoading
         public Room RoomLeft;
         public Room RoomRight;
 
+        public List<IObject> Blocks = new List<IObject>();
+        public List<IItem> Items = new List<IItem>();
+        public List<IEnemy> Enemies = new List<IEnemy>();
+
         private readonly ISprite tiles;
         private readonly ISprite walls;
         private readonly GameStateMachine game;
@@ -30,12 +34,6 @@ namespace LegendOfZeldaClone.LevelLoading
             this.fileLocation = fileLocation;
             tiles = RoomTextureFactory.Instance.CreateTiles();
             walls = RoomTextureFactory.Instance.CreateWalls();
-            
-        }
-
-        public void LoadRoom()
-        {
-            game.ResetRoomSpecificLists();
 
             List<List<int>> data = ProcessCSV();
 
@@ -46,6 +44,16 @@ namespace LegendOfZeldaClone.LevelLoading
                     ProcessEntry(data[row][column], column, row);
                 }
             }
+        }
+
+        public void LoadRoom()
+        {
+            game.ResetRoomSpecificLists();
+            game.StashBlocks();
+
+            game.Objects.AddRange(Blocks);
+            game.Enemies.AddRange(Enemies);
+            game.Items.AddRange(Items);
         }
 
         public void Draw(SpriteBatch spritebatch)
@@ -305,8 +313,8 @@ namespace LegendOfZeldaClone.LevelLoading
             }
         }
 
-        private void AddIEnemy(IEnemy enemy) => game.Enemies.Add(enemy);
-        private void AddIItem(IItem item) => game.Items.Add(item);
-        private void AddIObject(IObject block) => game.Objects.Add(block);
+        private void AddIEnemy(IEnemy enemy) => Enemies.Add(enemy);
+        private void AddIItem(IItem item) => Items.Add(item);
+        private void AddIObject(IObject block) => Blocks.Add(block);
     }
 }

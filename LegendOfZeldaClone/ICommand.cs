@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZeldaClone.Objects;
+using Microsoft.Xna.Framework;
 
 namespace LegendOfZeldaClone
 {
@@ -93,8 +94,15 @@ namespace LegendOfZeldaClone
             else
                 game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            game.CurrentRoom = game.CurrentRoom.RoomDown;
-            game.CurrentRoom.LoadRoom();
+            foreach(IObject block in game.Objects)
+            {
+                if(block is OpenDoorDown || block is TunnelFaceDown)
+                {
+                    game.Player.Location = block.Location + new Vector2(LoZHelpers.Scale(8), LoZHelpers.Scale(0));
+                    (block as IDoor).ChangeRoom();
+                    return;
+                }
+            }
         }
     }
 
@@ -111,8 +119,15 @@ namespace LegendOfZeldaClone
             else
                 game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            game.CurrentRoom = game.CurrentRoom.RoomUp;
-            game.CurrentRoom.LoadRoom();
+            foreach (IObject block in game.Objects)
+            {
+                if (block is OpenDoorUp || block is TunnelFaceUp)
+                {
+                    game.Player.Location = block.Location + new Vector2(LoZHelpers.Scale(8), LoZHelpers.Scale(14));
+                    (block as IDoor).ChangeRoom();
+                    return;
+                }
+            }
         }
     }
 
@@ -129,8 +144,15 @@ namespace LegendOfZeldaClone
             else
                 game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            game.CurrentRoom = game.CurrentRoom.RoomLeft;
-            game.CurrentRoom.LoadRoom();
+            foreach (IObject block in game.Objects)
+            {
+                if (block is OpenDoorLeft)
+                {
+                    game.Player.Location = block.Location + new Vector2(LoZHelpers.Scale(0), LoZHelpers.Scale(8));
+                    (block as IDoor).ChangeRoom();
+                    return;
+                }
+            }
         }
     }
 
@@ -147,8 +169,15 @@ namespace LegendOfZeldaClone
             else
                 game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            game.CurrentRoom = game.CurrentRoom.RoomRight;
-            game.CurrentRoom.LoadRoom();
+            foreach (IObject block in game.Objects)
+            {
+                if (block is OpenDoorRight)
+                {
+                    game.Player.Location = block.Location + new Vector2(LoZHelpers.Scale(16), LoZHelpers.Scale(8));
+                    (block as IDoor).ChangeRoom();
+                    return;
+                }
+            }
         }
     }
 }
