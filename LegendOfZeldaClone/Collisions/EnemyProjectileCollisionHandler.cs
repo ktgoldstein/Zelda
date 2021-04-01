@@ -10,9 +10,7 @@
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
             if (CurrentEnemyProjectile is Enemy.EnemyBoomerang)
-            {
-                CurrentEnemyProjectile.Alive = false;
-            }
+                CurrentEnemyProjectile.Die();
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) {}
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
@@ -22,7 +20,7 @@
                 Enemy.EnemyBoomerang boomerang = CurrentEnemyProjectile as Enemy.EnemyBoomerang;
                 if (enemy is Enemy.Goriya && enemy == boomerang.goriya)
                 {
-                        CurrentEnemyProjectile.Alive = false;
+                        CurrentEnemyProjectile.Die();
                         Enemy.Goriya goriya = boomerang.goriya as Enemy.Goriya;
                         goriya.HasBoomerang = false;
                 }
@@ -34,10 +32,7 @@
         public void HandleObjectCollision(IObject block, Direction direction)
         {
             if (block.BlockHeight == ObjectHeight.Impassable)
-            {
-                CurrentEnemyProjectile.Alive = false;
-            }
-
+                CurrentEnemyProjectile.Die();
         }
     }
 }

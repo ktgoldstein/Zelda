@@ -18,7 +18,8 @@ namespace LegendOfZeldaClone
             if (playerInventory.RupeesHeld > 0)
             {
                 playerInventory.RupeesHeld--;
-                game.PlayerProjectilesQueue.Add(new ArrowProjectile(location, direction, skinType, game));    
+                game.PlayerProjectilesQueue.Add(new ArrowProjectile(location, direction, skinType, game));
+                new ArrowShootingSoundEffect().Play();
             }
         }
     }

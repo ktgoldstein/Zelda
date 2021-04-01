@@ -38,10 +38,7 @@ namespace LegendOfZeldaClone
         public void Update()
         {
             if (lifeSpan == 0)
-            {
-                Alive = false;
-                player.SwordBeamLock--;
-            }
+                Die();
             Location += velocity;
             lifeSpan--;
         }
@@ -80,6 +77,11 @@ namespace LegendOfZeldaClone
                     velocity = Vector2.Normalize(new Vector2(1, -1)) * LoZHelpers.Scale(speed);
                     break;
             }
+        }
+        public void Die()
+        {
+            Alive = false;
+            player.SwordBeamLock--;
         }
     }
 }

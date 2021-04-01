@@ -45,5 +45,7 @@ namespace LegendOfZeldaClone.Enemy
             fireballSprite.Update();
             Location += direction * speed;
         }
+
+        public void Die() => Alive = false;
     }
 }

@@ -54,5 +54,6 @@ namespace LegendOfZeldaClone.Enemy
             Location += direction * speed;
             boomerangSprite.Update();
         }
+        public void Die() => Alive = false;
     }
 }

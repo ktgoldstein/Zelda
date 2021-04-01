@@ -13,20 +13,20 @@ namespace LegendOfZeldaClone.Collisions
         {
             if (CurrentItem is BlueRing)
             {
-                if (player is LinkPlayer) CurrentItem.Alive = false;
+                if (player is LinkPlayer) CurrentItem.BeCollected();
             }
             else
-                CurrentItem.Alive = false;
+                CurrentItem.BeCollected();
         }
 
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             if (playerProjectile is SwordProjectile)
-                CurrentItem.Alive = false;
+                CurrentItem.BeCollected();
             else if (playerProjectile is BoomerangProjectile)
             {
                 if (CurrentItem is FlashingRupee || CurrentItem is BlueRupee || CurrentItem is GoldRupee || CurrentItem is Bomb || CurrentItem is Key)
-                    CurrentItem.Alive = false;
+                    CurrentItem.BeCollected();
             }
             
         }

@@ -34,13 +34,17 @@ namespace LegendOfZeldaClone
 
         public void HandleItemCollision(IItem item, Direction direction) 
         {
-            if (item is FlashingRupee || item is BlueRupee || item is GoldRupee)
-                CurrentPlayer.Inventory.RupeesHeld++;
+            if (item is FlashingRupee)
+                CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.FlashingRupeeValue;
+            else if (item is BlueRupee)
+                CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.BlueRupeeValue;
+            else if (item is GoldRupee)
+                CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.GoldRupeeValue;
             else if (item is Bomb)
             {
                 if (!CurrentPlayer.Inventory.HasItem(UsableItemTypes.Bomb))
                     CurrentPlayer.PickUpUsableItem(UsableItemTypes.Bomb, item);
-                CurrentPlayer.Inventory.BombsHeld++;
+                CurrentPlayer.Inventory.BombsHeld += LoZHelpers.BombPickUpNumber;
             }
             else if (item is Key)
                 CurrentPlayer.Inventory.KeysHeld++;
@@ -52,6 +56,10 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BoomerangNormal, item);
             else if (item is Bow)
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BowWooden, item);
+            else if (item is Heart)
+                CurrentPlayer.Heal(1);
+            else if (item is Fairy)
+                CurrentPlayer.Heal(CurrentPlayer.MaxHealth);
         }
 
         public void HandleObjectCollision(IObject block, Direction direction)

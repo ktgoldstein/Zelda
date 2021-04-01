@@ -30,5 +30,11 @@ namespace LegendOfZeldaClone
 
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch) => clock.Draw(spriteBatch, Location);
+        public void BeCollected()
+        {
+            Die();
+            new ClockPickupSoundEffect().Play();
+        }
+        public void Die() => Alive = false;
     }
 }

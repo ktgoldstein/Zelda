@@ -33,12 +33,11 @@ namespace LegendOfZeldaClone
         public void Update()
         {
             if (lifeSpan == 0)
-            {
-                Alive = false;
-            }
+                Die();
             lifeSpan--;
         }
 
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
+        public void Die() => Alive = false;
     }
 }

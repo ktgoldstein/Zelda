@@ -49,5 +49,6 @@ namespace LegendOfZeldaClone.Objects
                 game.Camera.CameraTransition(Direction.Down);
             }
         }
+        public void Die() { }
     }
 }

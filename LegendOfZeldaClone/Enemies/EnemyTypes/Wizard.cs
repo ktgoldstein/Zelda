@@ -79,8 +79,23 @@ namespace LegendOfZeldaClone.Enemy
             {
                 timer =  7;
                 if(current < target.Length)
+                {
                     current++;
+                    new TextAppearingSlowlySoundEffect().Play();
+                }
+                    
             }
         }
+        public void TakeDamage(Vector2 direction) //Wizard cannot die
+        {
+            if (!Invincible)
+            {
+                Invincible = true;
+                new EnemyTakingDamageSoundEffect().Play();
+                Health--;
+            }
+
+        }
+        public void Die() { }
     }
 }

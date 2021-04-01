@@ -94,7 +94,7 @@ namespace LegendOfZeldaClone
         {
             Health -= amount / 2;
             if (Health < 0)
-                Health = 0;
+                Die();
             Tuple<LinkStateType, int> currentState = linkState.GetState();
             if (currentState.Item1 != LinkStateType.PickingUpItem)
                 game.Player = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
@@ -112,6 +112,11 @@ namespace LegendOfZeldaClone
         public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
         public void Update() => linkState.Update();
+        public void Die()
+        {
+            Health = 0;
+            //add gamestate change to losing
+        }
         public void SetState(ILinkState linkState) => this.linkState = linkState;
         public ILinkState GetStateStandingDown() => new LinkStandingDown(this);
         public ILinkState GetStateStandingUp() => new LinkStandingUp(this);
