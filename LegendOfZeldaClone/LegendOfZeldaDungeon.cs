@@ -15,8 +15,6 @@ namespace LegendOfZeldaClone
         private IController controllerKeyboard;
 
         private GameStateMachine gameStateMachine;
-        private Viewport topView;
-        private Viewport bottomView;
         public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -84,9 +82,6 @@ namespace LegendOfZeldaClone
 
         protected override void LoadContent()
         {
-            topView = _graphics.GraphicsDevice.Viewport;
-            bottomView = _graphics.GraphicsDevice.Viewport;
-
             _SpriteBatch = new SpriteBatch(_graphics.GraphicsDevice);
 
             // Altering viewports before creating spritebatch has no effect
@@ -115,19 +110,25 @@ namespace LegendOfZeldaClone
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+            Viewport startingViewport = _graphics.GraphicsDevice.Viewport;
+            Viewport bottomViewport = startingViewport;
 
-            bottomView.Y = LoZHelpers.HUDHeight;
-            _graphics.GraphicsDevice.Viewport = bottomView;
+            bottomViewport.Y = LoZHelpers.HUDHeight;
+            _graphics.GraphicsDevice.Viewport = bottomViewport;
 
             _SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
                 null, null, null, null, gameStateMachine.Camera.Translation());
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
             gameStateMachine.RoomDraw(_SpriteBatch);
+            _SpriteBatch.End();
 
-            _graphics.GraphicsDevice.Viewport = topView;
+            _graphics.GraphicsDevice.Viewport = startingViewport;
+
             // Camera transition here for inventory screen 
+            _SpriteBatch.Begin();
             gameStateMachine.HUDDraw(_SpriteBatch);
+            _SpriteBatch.End();
 
             base.Draw(gameTime);
         }               

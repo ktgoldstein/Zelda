@@ -103,14 +103,13 @@ namespace LegendOfZeldaClone
                 
                 Player.Draw(sprintBatch);
             }
-            sprintBatch.End();
         }
+
         public void HUDDraw(SpriteBatch sprintBatch)
         {
-            sprintBatch.Begin();
             DungeonMiniMap.Draw(sprintBatch, LoZHelpers.MiniMapLocation);
-            sprintBatch.End();
         }
+
         public void InitializeRooms()
         {
             List<Room> RoomList = new List<Room>()
@@ -203,6 +202,7 @@ namespace LegendOfZeldaClone
             ResetPlayer();
             ResetLists();
             InitializeRooms();
+            Camera = new Camera(this);
         }
 
         public void ResetPlayer()
