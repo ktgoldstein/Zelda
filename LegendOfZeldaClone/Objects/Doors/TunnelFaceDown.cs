@@ -49,6 +49,11 @@ namespace LegendOfZeldaClone.Objects
                 game.NextRoom = game.CurrentRoom.RoomDown;
                 game.NextRoom.LoadRoom();
                 game.Camera.CameraTransition(Direction.Down);
+                foreach (IObject block in game.NextRoom.Blocks)
+                {
+                    if (block is BombableWallUp)
+                        block.Alive = false;
+                }
             }
         }
         public void Die() { }
