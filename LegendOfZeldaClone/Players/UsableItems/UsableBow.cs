@@ -13,9 +13,13 @@ namespace LegendOfZeldaClone
             this.skinType = skinType;
         }
 
-        public void Use(Vector2 location, Direction direction)
+        public void Use(Vector2 location, Direction direction, PlayerInventory playerInventory)
         {
-            game.PlayerProjectilesQueue.Add(new ArrowProjectile(location, direction, skinType, game));
+            if (playerInventory.RupeesHeld > 0)
+            {
+                playerInventory.RupeesHeld--;
+                game.PlayerProjectilesQueue.Add(new ArrowProjectile(location, direction, skinType, game));    
+            }
         }
     }
 }

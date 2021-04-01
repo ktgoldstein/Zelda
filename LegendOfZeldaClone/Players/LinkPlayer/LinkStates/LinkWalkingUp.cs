@@ -9,9 +9,11 @@ namespace LegendOfZeldaClone
         private readonly ILinkPlayer linkPlayer;
         private readonly ILinkSprite linkSprite;
 
+        public Direction BlockingDirection { get { return Direction.Up; } }
+
         public LinkWalkingUp(ILinkPlayer link, int frame = 0)
         {
-            this.linkPlayer = link;
+            linkPlayer = link;
             linkSprite = LinkSpriteFactory.Instance.CreateLinkWalkingUpSprite(link.SkinType, frame);
         }
 
@@ -19,13 +21,7 @@ namespace LegendOfZeldaClone
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
-
-        public Direction Action()
-        {
-            linkPlayer.SetState(linkPlayer.GetStateUsingItemUp());
-            return Direction.Up;
-        }
-
+        public void Action() => linkPlayer.SetState(linkPlayer.GetStateUsingItemUp());
         public void PickUpItem(IItem item) => linkPlayer.SetState(linkPlayer.GetStatePickingUpItem(item));
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.WalkingUp, linkSprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => linkSprite.Draw(spriteBatch, linkPlayer.Location);
@@ -34,7 +30,8 @@ namespace LegendOfZeldaClone
         {
             linkPlayer.Location -= new Vector2(0, linkPlayer.Speed);
             linkSprite.Update();
-            if (linkSprite.AnimationDone())
+            bool linkIsAligned = (linkPlayer.Location.Y - LoZHelpers.HUDHeight) % LoZHelpers.Scale(8) == 0;
+            if (linkSprite.AnimationDone() || linkIsAligned)
                 linkPlayer.SetState(linkPlayer.GetStateStandingUp());
         }
     }

@@ -4,10 +4,25 @@ namespace LegendOfZeldaClone
 {
     public class PlayerInventory 
     {
-        public int BombsHeld { get; set; }
-        public int KeysHeld { get; set; }
-        public int RupeesHeld { get; set; }
+        public int BombsHeld
+        {
+            get { return bombsHeld; }
+            set { bombsHeld = value < 0 ? 0 : value; } 
+        }
+        public int KeysHeld
+        {
+            get { return keysHeld; }
+            set { keysHeld = value < 0 ? 0 : value; }
+        }
+        public int RupeesHeld
+        {
+            get { return rupeesHeld; }
+            set { rupeesHeld = value < 0 ? 0 : value; }
+        }
 
+        private int bombsHeld;
+        private int keysHeld;
+        private int rupeesHeld;
         private Dictionary<UsableItemTypes, IUsableItem> heldItems;
 
         public PlayerInventory(int bombs, int keys, int rupees)
@@ -51,5 +66,6 @@ namespace LegendOfZeldaClone
         }
 
         public IUsableItem GetItem(UsableItemTypes itemType) => heldItems[itemType];
+        public bool HasItem(UsableItemTypes itemTypes) => heldItems.ContainsKey(itemTypes);
     }
 }

@@ -207,8 +207,7 @@ namespace LegendOfZeldaClone
 
         public void ResetPlayer()
         {
-            IUsableItem woodenSword = new UsableWoodenSword(this);
-            Player = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, woodenSword);
+            Player = new LinkPlayer(this, LoZHelpers.LinkStartingLocation, new UsableWoodenSword(this));
         }
 
         public void ResetLists()

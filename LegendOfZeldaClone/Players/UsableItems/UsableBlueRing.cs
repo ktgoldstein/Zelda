@@ -8,7 +8,7 @@ namespace LegendOfZeldaClone
 
         public UsableBlueRing(GameStateMachine game) => this.game = game;
 
-        public void Use(Vector2 location, Direction direction)
+        public void Use(Vector2 location, Direction direction, PlayerInventory playerInventory)
         {
             IPlayer link = game.Player;
             if (link is LinkPlayer player)

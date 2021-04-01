@@ -8,7 +8,7 @@ namespace LegendOfZeldaClone
 
         public UsableBlueCandle(GameStateMachine game) => this.game = game;
 
-        public void Use(Vector2 location, Direction direction)
+        public void Use(Vector2 location, Direction direction, PlayerInventory playerInventory)
         {
             game.PlayerProjectilesQueue.Add(new FireProjectile(location, direction));
         }

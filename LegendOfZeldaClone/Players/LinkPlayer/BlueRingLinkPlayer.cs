@@ -20,6 +20,7 @@ namespace LegendOfZeldaClone
             get { return decoratedLinkPlayer.Health; }
             set { decoratedLinkPlayer.Health = value; }
         }
+        public Direction BlockingDirection { get { return linkState.BlockingDirection; } }
         public PlayerInventory Inventory { get { return decoratedLinkPlayer.Inventory; } }
         public Vector2 Location
         {
@@ -33,10 +34,15 @@ namespace LegendOfZeldaClone
         }
         public int Width { get { return decoratedLinkPlayer.Width; } }
         public int Height { get { return decoratedLinkPlayer.Height; } }
-        public IUsableItem Sword 
+        public IUsableItem Sword
         {
             get { return decoratedLinkPlayer.Sword; }
-            set { decoratedLinkPlayer.Sword = value; } 
+            set { decoratedLinkPlayer.Sword = value; }
+        }
+        public int SwordBeamLock
+        {
+            get { return decoratedLinkPlayer.SwordBeamLock; }
+            set { decoratedLinkPlayer.SwordBeamLock = value; }
         }
         public IUsableItem HeldItem
         {
@@ -70,16 +76,18 @@ namespace LegendOfZeldaClone
 
         public void ActionA()
         {
-            Direction direction = linkState.Action();
+            Direction direction = linkState.BlockingDirection;
+            linkState.Action();
             if (direction != Direction.None && Sword != null)
-                Sword.Use(Location, direction);
+                Sword.Use(Location, direction, Inventory);
         }
 
         public void ActionB()
         {
-            Direction direction = linkState.Action();
+            Direction direction = linkState.BlockingDirection;
+            linkState.Action();
             if (direction != Direction.None && HeldItem != null)
-                HeldItem.Use(Location, direction);
+                HeldItem.Use(Location, direction, Inventory);
         }
 
         public void Damage(int amount, Direction knockbackDirection)
