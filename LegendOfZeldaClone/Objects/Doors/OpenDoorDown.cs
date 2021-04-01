@@ -19,6 +19,7 @@ namespace LegendOfZeldaClone.Objects
         public bool IsBombable { get; }
         public bool Alive { get; set; }
         public Vector2 SpawnLocation { get; }
+        public bool ChangeMapRoom { get; set; }
 
         private GameStateMachine game;
         private ISprite openDoorDown;
@@ -39,6 +40,7 @@ namespace LegendOfZeldaClone.Objects
             IsMovable = false;
             IsBombable = false;
             Alive = true;
+            ChangeMapRoom = false;
         }
 
         public void Update() { }
@@ -48,6 +50,7 @@ namespace LegendOfZeldaClone.Objects
         {
             game.CurrentRoom = game.CurrentRoom.RoomDown;
             game.CurrentRoom.LoadRoom();
+            ChangeMapRoom = true;
         }
     }
 }
