@@ -29,6 +29,7 @@ namespace LegendOfZeldaClone
         public LifeText HUDLifeText;
         public HealthBar HUDHealthBar;
         public InventoryScreen InventoryBox;
+        public MapCompassHolder MapCompassHolder;
 
         public int SwitchRoomDelay;
         public readonly int SwitchDelayLength;
@@ -85,6 +86,7 @@ namespace LegendOfZeldaClone
             {
                 InventoryBox.Update();
                 InventoryBoxB.Update();
+                MapCompassHolder.Update();
             }
         }
 
@@ -124,6 +126,7 @@ namespace LegendOfZeldaClone
             else if (CurrentGameState == GameState.Pause)
             {
                 InventoryBox.Draw(sprintBatch);
+                MapCompassHolder.Draw(sprintBatch);
             }
         }
 
@@ -187,6 +190,7 @@ namespace LegendOfZeldaClone
             HUDLifeText = new LifeText();
             HUDHealthBar = new HealthBar(this);
             InventoryBox = new InventoryScreen();
+            MapCompassHolder = new MapCompassHolder(this);
         }
 
         public List<T> UpdateGameObjectEnumerable<T>(List<T> gameObjects) where T : IGameObject
