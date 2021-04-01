@@ -10,8 +10,7 @@ namespace LegendOfZeldaClone
     public class LegendOfZeldaDungeon : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _topSpriteBatch;
-        private SpriteBatch _bottomSpriteBatch;
+        private SpriteBatch _SpriteBatch;
 
         private IController controllerKeyboard;
 
@@ -88,17 +87,9 @@ namespace LegendOfZeldaClone
             topView = _graphics.GraphicsDevice.Viewport;
             bottomView = _graphics.GraphicsDevice.Viewport;
 
-            //topView.Height = 110;
-            //topView.Y = 0;
-            //_graphics.GraphicsDevice.Viewport = topView;
-            _topSpriteBatch = new SpriteBatch(_graphics.GraphicsDevice);
+            _SpriteBatch = new SpriteBatch(_graphics.GraphicsDevice);
 
             // Altering viewports before creating spritebatch has no effect
-
-            //_graphics.GraphicsDevice.Viewport = bottomView;
-            //bottomView.Height = 528;
-            //bottomView.Y = 192;
-            _bottomSpriteBatch = new SpriteBatch(_graphics.GraphicsDevice);
 
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
@@ -128,18 +119,15 @@ namespace LegendOfZeldaClone
             bottomView.Y = LoZHelpers.HUDHeight;
             _graphics.GraphicsDevice.Viewport = bottomView;
 
-            _bottomSpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
+            _SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
                 null, null, null, null, gameStateMachine.Camera.Translation());
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
-            gameStateMachine.RoomDraw(_bottomSpriteBatch);
+            gameStateMachine.RoomDraw(_SpriteBatch);
 
-           
-            //topView.Height = 500;
-            topView.Y = 0;
             _graphics.GraphicsDevice.Viewport = topView;
-
-            gameStateMachine.HUDDraw(_topSpriteBatch);
+            // Camera transition here for inventory screen 
+            gameStateMachine.HUDDraw(_SpriteBatch);
 
             base.Draw(gameTime);
         }               

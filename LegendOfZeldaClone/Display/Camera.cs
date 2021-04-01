@@ -40,7 +40,7 @@ namespace LegendOfZeldaClone.Display
                     default:
                         break;
                 }
-            }            
+            }           
         }
 
         public void Update()

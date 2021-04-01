@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using System.Xml.Serialization;
 
 namespace LegendOfZeldaClone
 {
@@ -77,38 +78,38 @@ namespace LegendOfZeldaClone
             }
         }
 
-        public void RoomDraw(SpriteBatch bottomSprintBatch) 
+        public void RoomDraw(SpriteBatch sprintBatch) 
         {
             
-            CurrentRoom.Draw(bottomSprintBatch);
-            NextRoom?.Draw(bottomSprintBatch);
+            CurrentRoom.Draw(sprintBatch);
+            NextRoom?.Draw(sprintBatch);
 
             foreach (IObject block in Objects)
-                block.Draw(bottomSprintBatch);
+                block.Draw(sprintBatch);
 
             if (CurrentGameState == GameState.Play)
             {
                 foreach (IItem item in Items)
-                    item.Draw(bottomSprintBatch);
+                    item.Draw(sprintBatch);
 
                 foreach (IEnemyProjectile projectile in EnemyProjectiles)
-                    projectile.Draw(bottomSprintBatch);
+                    projectile.Draw(sprintBatch);
 
                 foreach (IEnemy enemy in Enemies)
-                    enemy.Draw(bottomSprintBatch);
+                    enemy.Draw(sprintBatch);
 
                 foreach (IPlayerProjectile projectile in PlayerProjectiles)
-                    projectile.Draw(bottomSprintBatch);
-
-                Player.Draw(bottomSprintBatch);
+                    projectile.Draw(sprintBatch);
+                
+                Player.Draw(sprintBatch);
             }
-            bottomSprintBatch.End();
+            sprintBatch.End();
         }
-        public void HUDDraw(SpriteBatch topSprintBatch)
+        public void HUDDraw(SpriteBatch sprintBatch)
         {
-            topSprintBatch.Begin();
-            DungeonMiniMap.Draw(topSprintBatch, LoZHelpers.MiniMapLocation);
-            topSprintBatch.End();
+            sprintBatch.Begin();
+            DungeonMiniMap.Draw(sprintBatch, LoZHelpers.MiniMapLocation);
+            sprintBatch.End();
         }
         public void InitializeRooms()
         {

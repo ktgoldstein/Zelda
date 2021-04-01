@@ -21,8 +21,8 @@ namespace LegendOfZeldaClone.LevelLoading
         private readonly string fileLocation;
         private int backgroundType;
         private int wallType;
-        private int roomPosX;
-        private int roomPosY;
+        private int offsetX;
+        private int offsetY;
 
         public Room(string fileLocation, GameStateMachine game)
         {
@@ -30,6 +30,7 @@ namespace LegendOfZeldaClone.LevelLoading
             this.fileLocation = fileLocation;
             tiles = RoomTextureFactory.Instance.CreateTiles();
             walls = RoomTextureFactory.Instance.CreateWalls();
+            
         }
 
         public void LoadRoom()
@@ -50,11 +51,12 @@ namespace LegendOfZeldaClone.LevelLoading
         public void Draw(SpriteBatch spritebatch)
         {
             if (wallType == 1)
-                walls.Draw(spritebatch, new Vector2(0 + roomPosX, roomPosY));
+                walls.Draw(spritebatch, new Vector2(0 + LoZHelpers.GameWidth * offsetX, 
+                    (LoZHelpers.GameHeight - LoZHelpers.HUDHeight) * offsetY));
 
             if (backgroundType == 1)
-                tiles.Draw(spritebatch, new Vector2(LoZHelpers.TileSize * 2 + roomPosX,
-                    LoZHelpers.TileSize * 2 + roomPosY));
+                tiles.Draw(spritebatch, new Vector2(LoZHelpers.TileSize * 2 + LoZHelpers.GameWidth * offsetX,
+                    LoZHelpers.TileSize * 2 + (LoZHelpers.GameHeight - LoZHelpers.HUDHeight) * offsetY));
         }
 
         public void AddNeighbors(Room roomUp, Room roomDown, Room roomLeft, Room roomRight)
@@ -77,8 +79,8 @@ namespace LegendOfZeldaClone.LevelLoading
                 var row = Array.ConvertAll(splitLine, s => int.Parse(s));
                 backgroundType = row[0];
                 wallType = row[1];
-                roomPosX = row[2];
-                roomPosY = row[3];
+                offsetX = row[2];
+                offsetY = row[3];
 
                 while ((roomInfo = roomFile.ReadLine()) != null)
                 {
@@ -92,13 +94,14 @@ namespace LegendOfZeldaClone.LevelLoading
 
         private void ProcessEntry(int gameObjectID, int column, int row)
         {
-            Vector2 tileLocation = new Vector2(LoZHelpers.TileSize * (column + 1) + roomPosX, 
-                LoZHelpers.TileSize * (row + 1) + roomPosY);
+            Vector2 tileLocation = new Vector2(LoZHelpers.TileSize * (column + 1) + LoZHelpers.GameWidth * offsetX, 
+                LoZHelpers.TileSize * (row + 1) + (LoZHelpers.GameHeight - LoZHelpers.HUDHeight) * offsetY);
             if (fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv"))
-                tileLocation = new Vector2(LoZHelpers.TileSize * column + roomPosX, 
-                    LoZHelpers.TileSize * (row + 1) + roomPosY);
+                tileLocation = new Vector2(LoZHelpers.TileSize * column + LoZHelpers.GameWidth * offsetX, 
+                    LoZHelpers.TileSize * (row + 1) + (LoZHelpers.GameHeight - LoZHelpers.HUDHeight) * offsetY);
 
-            Vector2 smallItemLocation = tileLocation + new Vector2(LoZHelpers.TileSize / 4 + roomPosX, 0 + roomPosY);
+            Vector2 smallItemLocation = tileLocation + new Vector2(LoZHelpers.TileSize / 4 + LoZHelpers.GameWidth * offsetX, 
+                0 + LoZHelpers.GameHeight * offsetY);
             Vector2 doorLocationUp = tileLocation - new Vector2(0, LoZHelpers.TileSize);
             Vector2 doorLocationDown = tileLocation;
             Vector2 doorLocationRight = tileLocation - new Vector2(0, LoZHelpers.TileSize / 2);

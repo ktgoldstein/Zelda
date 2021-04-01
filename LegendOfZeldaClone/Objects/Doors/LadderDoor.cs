@@ -42,8 +42,12 @@ namespace LegendOfZeldaClone.Objects
 
         public void ChangeRoom()
         {
-            game.Camera.CameraTransition(Direction.Up);
-            //game.CurrentRoom = game.CurrentRoom.RoomUp;
+            if (game.NextRoom == null)
+            {
+                game.NextRoom = game.CurrentRoom.RoomUp;
+                game.NextRoom.LoadRoom();
+                game.Camera.CameraTransition(Direction.Up);
+            }
         }
     }
 }
