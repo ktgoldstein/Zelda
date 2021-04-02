@@ -115,8 +115,8 @@ namespace LegendOfZeldaClone
         public ILinkSprite CreateLinkDyingSprite(LinkSkinType skinOffset, int frame)
         {
             int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
-            int xOffset = (spriteWidth + atlasGap) * (int)LinkSpriteType.FacingRight; 
-            return new LinkDyingSprite(linkSpriteSheet, gameOverSparkleSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
+            int xOffsetStart = (spriteWidth + atlasGap) * (int)LinkSpriteType.FacingRight; 
+            return new LinkDyingSprite(linkSpriteSheet, gameOverSparkleSpriteSheet, xOffsetStart, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
         }
     }
 }
