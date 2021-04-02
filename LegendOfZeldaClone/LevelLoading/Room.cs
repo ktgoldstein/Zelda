@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Objects;
 using LegendOfZeldaClone.Enemy;
+using System.Linq;
 
 namespace LegendOfZeldaClone.LevelLoading
 {
@@ -20,7 +21,7 @@ namespace LegendOfZeldaClone.LevelLoading
         public List<IEnemy> Enemies = new List<IEnemy>();
 
         private List<IObject> closedDoors = new List<IObject>();
-        private bool doorsWereClosed = false;
+        private int doorChangeCount = 0;
 
         private readonly ISprite tiles;
         private readonly ISprite walls;
@@ -51,10 +52,19 @@ namespace LegendOfZeldaClone.LevelLoading
 
         public void CloseDoors()
         {
-            if (!doorsWereClosed)
+            if (doorChangeCount == 0)
             {
                 game.Objects.AddRange(closedDoors);
-                doorsWereClosed = true;
+                doorChangeCount++;
+            }
+        }
+
+        public void OpenDoors()
+        {
+            if (doorChangeCount == 1)
+            {
+                game.Objects = game.Objects.Except(closedDoors).ToList();
+                doorChangeCount++;
             }
         }
 
@@ -68,7 +78,7 @@ namespace LegendOfZeldaClone.LevelLoading
                 if (block is MovableRaisedBlock) (block as MovableRaisedBlock).Reset();
             }
 
-            doorsWereClosed = false;
+            doorChangeCount = 0;
             game.Objects.AddRange(Blocks);
             game.Enemies.AddRange(Enemies);
             game.Items.AddRange(Items);

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-
+using LegendOfZeldaClone.Objects;
 
 namespace LegendOfZeldaClone
 {
@@ -76,6 +76,18 @@ namespace LegendOfZeldaClone
                 Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
 
                 Collisions.CollisionHandling.HandleCollisions(this);
+
+                if (Enemies.Count == 0)
+                {
+                    bool blocksInPlace = true;
+                    foreach(IObject block in Objects)
+                    {
+                        if (block is MovableRaisedBlock)
+                            blocksInPlace &= (block as MovableRaisedBlock).Moved;
+                    }
+                    if (blocksInPlace)
+                        CurrentRoom.OpenDoors();
+                }
             }
         }
 

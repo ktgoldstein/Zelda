@@ -14,30 +14,29 @@ namespace LegendOfZeldaClone.Objects
             get { return Location; }
             set { Location = value; }
         }
-        public ObjectHeight BlockHeight { get; }
-        public bool IsBombable { get; }
-        public bool Alive { get; set; }
+        public ObjectHeight BlockHeight => ObjectHeight.CanFlyOver;
+        public bool IsBombable => false;
+        public bool Alive { get; set; } = true;
         public Direction MovedDirection { get; set; } = Direction.None;
+        public bool Moved => moved;
 
         private Vector2 startingLocation;
         private ISprite sprite;
-        private readonly int height;
-        private readonly int width;
+        private bool moved = false;
+        private readonly int height = 16;
+        private readonly int width = 16;
 
         public MovableRaisedBlock(Vector2 location)
         {
             sprite = ObjectSpriteFactory.Instance.CreateRaisedBlock();
             startingLocation = location;
             Location = startingLocation;
-            height = 16;
-            width = 16;
-            BlockHeight = ObjectHeight.CanFlyOver;
-            IsBombable = false;
-            Alive = true;
         }
 
         public void Update() 
         {
+            if (moved) return;
+
             Vector2 targetLocation = startingLocation;
             switch (MovedDirection)
             {
@@ -58,14 +57,17 @@ namespace LegendOfZeldaClone.Objects
             }
             Vector2 displacement = targetLocation - Location;
             if (displacement.Length() == 0) return;
+
             displacement.Normalize();
             Location += displacement * LoZHelpers.BlockSpeed;
+            moved = Location == targetLocation;
         }
 
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
         public void Die() => Alive = false;
         public void Reset()
         {
+            moved = false;
             MovedDirection = Direction.None;
             Location = startingLocation;
         }
