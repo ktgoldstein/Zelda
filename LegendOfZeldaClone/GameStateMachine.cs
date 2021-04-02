@@ -189,7 +189,7 @@ namespace LegendOfZeldaClone
             InventoryBoxA = new ABox();
             HUDLifeText = new LifeText();
             HUDHealthBar = new HealthBar(this);
-            InventoryBox = new InventoryScreen();
+            InventoryBox = new InventoryScreen(this);
             MapCompassHolder = new MapCompassHolder(this);
         }
 

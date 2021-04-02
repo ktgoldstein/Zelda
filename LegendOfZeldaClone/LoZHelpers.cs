@@ -46,6 +46,7 @@ namespace LegendOfZeldaClone
         BoomerangMagic,
         BowWooden,
         BowSilver,
+        LifePotion,
         WoodenSword
     }
 
