@@ -4,20 +4,20 @@ using Microsoft.Xna.Framework;
 namespace LegendOfZeldaClone
 {
 
-    public class LocationTrackingMini : ISprite
+    public class LinkLocationTracking : ISprite
     {
         private readonly ISprite linkMapLocation;
         private Vector2 location;
         private readonly GameStateMachine game;
 
-        public LocationTrackingMini(Vector2 location, GameStateMachine game)
+        public LinkLocationTracking(Vector2 location, GameStateMachine game)
         {
             linkMapLocation = HUDTextureFactory.Instance.CreateLocationTracker();
             this.location = location;
             this.game = game;
         }
 
-        public void Update() { }
+        public void Update() {}
 
         public void Draw(SpriteBatch spriteBatch, Vector2 vector) => linkMapLocation.Draw(spriteBatch, location);
 
@@ -26,22 +26,23 @@ namespace LegendOfZeldaClone
             switch (room)
             {
                 case Direction.Left:
-                    location.X -= LoZHelpers.RightLeftRoomMapOffset + 2;
+                    location.X -= LoZHelpers.RightLeftRoomMiniMapOffset + 2;
                     break;
 
                 case Direction.Right:
-                    location.X += LoZHelpers.RightLeftRoomMapOffset + 2;
+                    location.X += LoZHelpers.RightLeftRoomMiniMapOffset + 2;
                     break;
 
                 case Direction.Down:
-                    location.Y += LoZHelpers.UpDownRoomMapOffset + 2;
+                    location.Y += LoZHelpers.UpDownRoomMiniMapOffset + 2;
                     break;
                 case Direction.Up:
-                    location.Y -= LoZHelpers.UpDownRoomMapOffset + 2;
+                    location.Y -= LoZHelpers.UpDownRoomMiniMapOffset + 2;
                     break;
 
             }
         }
+        public void moveLinkOnPauseMap(Direction room) { }
         
         public void Reset()
         {
