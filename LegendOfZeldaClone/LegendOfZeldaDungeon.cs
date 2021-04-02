@@ -1,4 +1,5 @@
-﻿using LegendOfZeldaClone.Enemy;
+﻿using LegendOfZeldaClone.Enemies.EnemyTypes;
+using LegendOfZeldaClone.Enemy;
 using LegendOfZeldaClone.LevelLoading;
 using LegendOfZeldaClone.Objects;
 using Microsoft.Xna.Framework;
@@ -28,7 +29,7 @@ namespace LegendOfZeldaClone
 
         public List<IEnemyProjectile> EnemyProjectilesQueue;
         public List<IEnemyProjectile> EnemyProjectiles;
-                
+
         public List<Room> RoomList;
         public int RoomListIndex = 0;
         public Room CurrentRoom;
@@ -36,7 +37,19 @@ namespace LegendOfZeldaClone
 
         public int SwitchRoomDelay;
         public int SwitchDelayLength = 5;
-
+        private int killcounter = 0;
+        public int KillCounter
+        {
+            get { return killcounter; }
+            set
+            {
+                killcounter = value;
+                if( killcounter > 9)
+                {
+                    killcounter = 0;
+                }
+            }
+        }
         public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -177,7 +190,18 @@ namespace LegendOfZeldaClone
             {
                 enemy.Update();
                 if (enemy.Health <= 0)
+                {
                     deadEnemies.Add(enemy);
+                    KillCounter++;
+                }
+            }
+            foreach (IEnemy dead in deadEnemies)
+            {
+                if( !( dead is DeathAnimation ))
+                {
+                    DeathAnimation death = new DeathAnimation(dead.Location);
+                    Enemies.Add(death);
+                }
             }
             Enemies = Enemies.Except(deadEnemies).ToList();
 
@@ -217,10 +241,10 @@ namespace LegendOfZeldaClone
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);            
+            GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-            
+
             CurrentRoom.Draw(_spriteBatch);
             DungeonMiniMap.Draw(_spriteBatch, LoZHelpers.MiniMapLocation);
 
@@ -239,7 +263,7 @@ namespace LegendOfZeldaClone
             foreach (IPlayerProjectile projectile in PlayerProjectiles)
                 projectile.Draw(_spriteBatch);
 
-            Player.Draw(_spriteBatch);                       
+            Player.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

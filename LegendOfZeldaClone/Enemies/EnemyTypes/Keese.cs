@@ -1,30 +1,33 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using LegendOfZeldaClone.Enemies;
+using System;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    public class Keese : IEnemy
+    public class Keese : EnemyKernal
     {
-        public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation
+        public override Vector2 Location { get; set; }
+        public override Vector2 HurtBoxLocation
         {
             get { return Location; }
             set { Location = value; }
         }
-        public int Width { get { return LoZHelpers.Scale(width); } }
-        public int Height { get { return LoZHelpers.Scale(height); } }
-        public int AttackStat { get; }
-        public int Health { get; set; } = LoZHelpers.KeeseHP;
+        public override int Width { get { return LoZHelpers.Scale(width); } }
+        public override int Height { get { return LoZHelpers.Scale(height); } }
+        public override int AttackStat { get; }
+        public override int Health { get; set; } = LoZHelpers.KeeseHP;
         private Vector2 direction;
-        public Vector2 Direction { get { return direction;} set { direction = value;} }
+        public override Vector2 Direction { get { return direction;} set { direction = value;} }
         private ISprite keeseSprite;
-        private float speed = 2;
+        private float speed = 4;
         private readonly int width;
         private readonly int height;
         private Vector2 knockbackForce = Vector2.Zero;
-        public bool Alive { get; set; }
-        public bool Invincible { get; set; }
+        public override bool Alive { get; set; }
+        public override bool Invincible { get; set; }
         private int invincibleFrames = 0;
+        private int timer = 0;
         public Keese(Vector2 location)
         {
             keeseSprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
@@ -32,29 +35,29 @@ namespace LegendOfZeldaClone.Enemy
             height = 8;
 
             Location = location;
-            Direction = Vector2.UnitY;
+            direction.X = (float)LoZHelpers.random.NextDouble()*2 + -1;
+            direction.Y = (float)LoZHelpers.random.NextDouble()*2 + -1;
             Alive = true;
             AttackStat = 1;
         }
-        public void Draw(SpriteBatch spritebatch)
+        public override void Draw(SpriteBatch spritebatch)
         {
             keeseSprite.Draw(spritebatch, Location);
         }
 
-        public void Update()
+        public override void Update()
         {
             keeseSprite.Update();
+            timer++;
+            if(timer % 20 == 0)
+            {
+                direction.X = (float)LoZHelpers.random.NextDouble()*2 + -1;
+                direction.Y = (float)LoZHelpers.random.NextDouble()*2 + -1;
+                timer = 0;
+            }
 
             Location += speed * direction + knockbackForce;
             knockbackForce *= .8f;
-            if (Location.Y > 192)
-            {
-                direction = new Vector2(0, -1);
-            }
-            if (Location.Y < 64)
-            {
-                direction = new Vector2(0, 1);
-            }
             if(Invincible)
             {
                 invincibleFrames++;
@@ -65,9 +68,11 @@ namespace LegendOfZeldaClone.Enemy
                 }
             }
         }
-        public void Knockback(Vector2 direction)
+        public override void Knockback(Vector2 direction)
         {
             knockbackForce = direction * 10;
         }
+        public override void DropItem() {}
+        public override void ChangeDirection(Direction direction = LegendOfZeldaClone.Direction.None) {}
     }
 }

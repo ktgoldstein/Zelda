@@ -49,7 +49,7 @@
                     player.Inventory.BombsHeld++;
                 else if (item is Key)
                     player.Inventory.KeysHeld++;
-                
+
             }
         }
 

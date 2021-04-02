@@ -1,4 +1,6 @@
-﻿namespace LegendOfZeldaClone.Collisions
+﻿using LegendOfZeldaClone.Enemy;
+
+namespace LegendOfZeldaClone.Collisions
 {
     class EnemyProjectileCollisionHandler : ICollisionHandler
     {
@@ -11,22 +13,22 @@
         {
             if (CurrentEnemyProjectile is Enemy.EnemyBoomerang)
             {
-                CurrentEnemyProjectile.Alive = false;
+                ((EnemyBoomerang) CurrentEnemyProjectile).ComeBack();
             }
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) {}
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            if (CurrentEnemyProjectile is Enemy.EnemyBoomerang)
-            {
-                Enemy.EnemyBoomerang boomerang = CurrentEnemyProjectile as Enemy.EnemyBoomerang;
-                if (enemy is Enemy.Goriya && enemy == boomerang.goriya)
-                {
-                        CurrentEnemyProjectile.Alive = false;
-                        Enemy.Goriya goriya = boomerang.goriya as Enemy.Goriya;
-                        goriya.HasBoomerang = false;
-                }
-            }
+            // if (CurrentEnemyProjectile is Enemy.EnemyBoomerang)
+            // {
+            //     Enemy.EnemyBoomerang boomerang = CurrentEnemyProjectile as Enemy.EnemyBoomerang;
+            //     if (enemy is Enemy.Goriya && enemy == boomerang.goriya)
+            //     {
+            //             CurrentEnemyProjectile.Alive = false;
+            //             Enemy.Goriya goriya = boomerang.goriya as Enemy.Goriya;
+            //             goriya.HasBoomerang = false;
+            //     }
+            // }
         }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) {}
         public void HandleItemCollision(IItem item, Direction direction) {}
@@ -36,8 +38,12 @@
             if (block.BlockHeight == ObjectHeight.Impassable)
             {
                 CurrentEnemyProjectile.Alive = false;
+                if ( CurrentEnemyProjectile is EnemyBoomerang)
+                {
+                    CurrentEnemyProjectile.Alive = true;
+                    ((EnemyBoomerang) CurrentEnemyProjectile).ComeBack();
+                }
             }
-
         }
     }
 }

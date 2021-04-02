@@ -1,61 +1,91 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using LegendOfZeldaClone.Enemies;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    public class Wallmaster : IEnemy
+    public class Wallmaster : EnemyKernal
     {
-        public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation
+        public override Vector2 Location { get { return location; } set { location = value; } }
+        private Vector2 location;
+        public override Vector2 HurtBoxLocation
         {
             get { return Location; }
             set { Location = value; }
         }
-        public int Width { get { return LoZHelpers.Scale(width); } }
-        public int Height { get { return LoZHelpers.Scale(height); } }
-        public int AttackStat { get; }
-        public int Health { get; set; } = LoZHelpers.WallmasterHP;
+        public override int Width { get { return LoZHelpers.Scale(width); } }
+        public override int Height { get { return LoZHelpers.Scale(height); } }
+        public override int AttackStat { get; }
+        public override int Health { get; set; } = LoZHelpers.WallmasterHP;
         private Vector2 direction;
-        public Vector2 Direction { get { return direction;} set { direction = value;} }
+        public override Vector2 Direction { get { return direction;} set { direction = value;} }
         private ISprite wallmasterSprite;
-        private float speed = 2;
+        private float speed = 3;
         private readonly int width;
         private readonly int height;
         private Vector2 knockbackForce = Vector2.Zero;
-        public bool Invincible { get; set; }
-        public bool Alive { get; set; }
+        public override bool Invincible { get; set; }
+        public override bool Alive { get; set; }
         private int invincibleFrames = 0;
+        private int timer = 0;
 
-        public Wallmaster(Vector2 location)
+        public Wallmaster(LegendOfZeldaDungeon game, Vector2 location)
         {
             wallmasterSprite = EnemySpriteFactory.Instance.CreateWallmasterSprite();
             width = 16;
             height = 16;
 
+            direction = game.Player.Location - Location;
+            direction.Normalize();
             Location = location;
-            Direction = Vector2.UnitY;
             Alive = true;
             AttackStat = 1;
+            base.game = game;
         }
-        public void Draw(SpriteBatch spritebatch)
+        public override void Draw(SpriteBatch spritebatch)
         {
             wallmasterSprite.Draw(spritebatch, Location);
         }
 
-        public void Update()
+        public override void Update()
         {
+            Vector2 centerOfRoom = game.CurrentRoom.Location/2 + new Vector2(LoZHelpers.GameWidth/2, LoZHelpers.GameHeight/2);
             wallmasterSprite.Update();
-
+            if( Location.X - centerOfRoom.X > LoZHelpers.Scale(128))
+            {
+                Vector2 v = Location;
+                v.X = centerOfRoom.X - LoZHelpers.Scale(128);
+                Location = v;
+                direction = game.Player.Location - Location;
+                direction.Normalize();
+            }
+            if( Location.X - centerOfRoom.X < -LoZHelpers.Scale(128))
+            {
+                Vector2 v = Location;
+                v.X = centerOfRoom.X + LoZHelpers.Scale(128);
+                Location = v;
+                direction = game.Player.Location - Location;
+                direction.Normalize();
+            }
+            if( Location.Y - centerOfRoom.Y > LoZHelpers.Scale(90))
+            {
+                Vector2 v = Location;
+                v.Y = centerOfRoom.Y - LoZHelpers.Scale(90);
+                Location = v;
+                direction = game.Player.Location - Location;
+                direction.Normalize();
+            }
+            if( Location.Y - centerOfRoom.Y < -LoZHelpers.Scale(90))
+            {
+                Vector2 v = Location;
+                v.Y = centerOfRoom.Y + LoZHelpers.Scale(90);
+                Location = v;
+                direction = game.Player.Location - Location;
+                direction.Normalize();
+            }
             Location += speed * direction + knockbackForce;
             knockbackForce *= .8f;
-            if (Location.Y > 192)
-            {
-                direction = new Vector2(0, -1);
-            }
-            if (Location.Y < 64)
-            {
-                direction = new Vector2(0, 1);
-            }
+
             if(Invincible)
             {
                 invincibleFrames++;
@@ -66,9 +96,14 @@ namespace LegendOfZeldaClone.Enemy
                 }
             }
         }
-        public void Knockback(Vector2 direction)
+        public override void Knockback(Vector2 direction)
         {
             knockbackForce = direction * 10;
+        }
+        public void ReturnToStart()
+        {
+            game.CurrentRoom = game.RoomList[0];
+            game.CurrentRoom.LoadRoom();
         }
     }
 }

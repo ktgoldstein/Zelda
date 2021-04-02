@@ -18,17 +18,29 @@ namespace LegendOfZeldaClone
         private ISprite goldRupee;
         private readonly int height;
         private readonly int width;
+        private int lifespan;
 
-        public GoldRupee(Vector2 location)
+        public GoldRupee(Vector2 location, int lifespan = -1)
         {
             goldRupee = ItemSpriteFactory.Instance.CreateGoldRupee();
             Location = location;
             width = 8;
             height = 16;
             Alive = true;
+            this.lifespan = lifespan;
         }
 
-        public void Update() { }
+        public void Update()
+        {
+            if( lifespan > 0 && Alive)
+            {
+                lifespan--;
+                if( lifespan == 0 )
+                {
+                    Alive = false;
+                }
+            }
+        }
         public void Draw(SpriteBatch spriteBatch) => goldRupee.Draw(spriteBatch, Location);
     }
 }

@@ -10,5 +10,7 @@ namespace LegendOfZeldaClone
         public bool Invincible { get; set; }
         public bool Alive { get; set; }
         public void Knockback(Vector2 direction);
+        public void DropItem();
+        public void ChangeDirection(Direction direction = LegendOfZeldaClone.Direction.Down);
     }
 }

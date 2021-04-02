@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace LegendOfZeldaClone.Enemy
 {
@@ -14,6 +15,7 @@ namespace LegendOfZeldaClone.Enemy
         private int frameDelay;
         private readonly int animationSpeed;
         private Color color;
+        Random random = new Random();
 
         public EnemySprite(Texture2D texture, int columns, int rows, int atlasGap, int totalFrames, int animationSpeed = 5, Color? color = null)
         {
@@ -22,7 +24,7 @@ namespace LegendOfZeldaClone.Enemy
             this.rows = rows;
             this.atlasGap = atlasGap;
             this.totalFrames = totalFrames;
-            this.animationSpeed = animationSpeed;
+            this.animationSpeed = animationSpeed + random.Next() % 2;
             this.color = color ?? Color.White;
 
             currentFrame = 0;

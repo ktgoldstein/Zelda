@@ -1,23 +1,26 @@
 ﻿using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Enemy;
+using LegendOfZeldaClone.Objects;
+using System;
 
 namespace LegendOfZeldaClone.Collisions
 {
     class EnemyCollisionHandler : ICollisionHandler
     {
         public IEnemy CurrentEnemy { get; set; }
-
         public static EnemyCollisionHandler Instance { get; } = new EnemyCollisionHandler();
         private EnemyCollisionHandler() { }
-
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
-            //nothing will happen
+            if( CurrentEnemy is Wallmaster)
+            {
+               ( (Wallmaster) CurrentEnemy ).ReturnToStart();
+            }
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
-            bool projectileDealsEnemyDamage = !(playerProjectile is BombProjectile 
-                                                || playerProjectile is ArrowImpactProjectile 
+            bool projectileDealsEnemyDamage = !(playerProjectile is BombProjectile
+                                                || playerProjectile is ArrowImpactProjectile
                                                 || playerProjectile is SwordBeamExplosionProjectile);
             if (projectileDealsEnemyDamage)
             {
@@ -32,6 +35,7 @@ namespace LegendOfZeldaClone.Collisions
                         if (CurrentEnemy.Health <= 0)
                         {
                             CurrentEnemy.Alive = false;
+                            CurrentEnemy.DropItem();
                         }
                     }
                     CurrentEnemy.Knockback(projectileDirection);
@@ -59,11 +63,13 @@ namespace LegendOfZeldaClone.Collisions
         public void HandleObjectCollision(IObject block, Direction direction)
         {
             //they should stop and have to move around it (except keese if the object is not impassable)
+            if( CurrentEnemy is Wallmaster && ( (block is WallDown) || (block is WallUp) || (block is WallLeft) || (block is WallRight ) || (block.GetType().ToString().Contains("Door")) ))
+            {
+                return;
+            }
             if (!(CurrentEnemy is Wallmaster && block is Objects.InvisibleBlock))
             {
                 if (CurrentEnemy is Keese && block.BlockHeight != ObjectHeight.Impassable) return;
-
-                CurrentEnemy.Direction = -LoZHelpers.DirectionToVector(direction);
                 Rectangle enemyRectangle = new Rectangle((int)CurrentEnemy.Location.X, (int)CurrentEnemy.Location.Y, CurrentEnemy.Width, CurrentEnemy.Height);
                 Rectangle blockRectangle = new Rectangle((int)block.Location.X, (int)block.Location.Y, block.Width, block.Height);
                 Rectangle overlap = Rectangle.Intersect(enemyRectangle, blockRectangle);
@@ -75,6 +81,14 @@ namespace LegendOfZeldaClone.Collisions
                 else
                 {
                     CurrentEnemy.Location += vector * overlap.Width;
+                }
+                if ( !( CurrentEnemy is Aquamentus) && !( CurrentEnemy is BladeTrap ) && !(block is WallDown) && !(block is WallUp) && !(block is WallLeft) && !(block is WallRight))
+                {
+                    CurrentEnemy.ChangeDirection(direction);
+                }
+                else
+                {
+                    CurrentEnemy.Direction = -LoZHelpers.DirectionToVector(direction);
                 }
             }
         }

@@ -1,4 +1,4 @@
-﻿using LegendOfZeldaClone.Enemy;
+﻿using LegendOfZeldaClone.Enemies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -7,25 +7,24 @@ using System.Text;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    class Wizard : IEnemy
+    class Wizard : EnemyKernal
     {
-        public int AttackStat { get; }
-        public int Health { get; set; } = LoZHelpers.WizardHP;
-        public int MaxHealth { get; } = LoZHelpers.WizardHP;
+        public override int AttackStat { get; }
+        public override int Health { get; set; } = LoZHelpers.WizardHP;
+        public  int MaxHealth { get; } = LoZHelpers.WizardHP;
         public Vector2 direction;
-        public Vector2 Direction { get { return direction;} set { direction = value;} }
-        public bool Invincible { get; set; }
-        public bool Alive { get; set; }
-        public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation
+        public override Vector2 Direction { get { return direction;} set { direction = value;} }
+        public override bool Invincible { get; set; }
+        public override bool Alive { get; set; }
+        public override Vector2 Location { get; set; }
+        public override Vector2 HurtBoxLocation
         {
             get { return Location; }
             set { Location = value; }
         }
 
-        public int Width { get { return LoZHelpers.Scale(width); } }
-        public int Height { get { return LoZHelpers.Scale(height); } }
-        private LegendOfZeldaDungeon game;
+        public override int Width { get { return LoZHelpers.Scale(width); } }
+        public override int Height { get { return LoZHelpers.Scale(height); } }
         private ISprite wizardSprite;
         private int invincibleFrames = 0;
         private readonly int width;
@@ -42,7 +41,7 @@ namespace LegendOfZeldaClone.Enemy
             width = 16;
             height = 16;
 
-            this.game = game;
+            base.game = game;
             Location = location;
             Direction = new Vector2(0, 0);
             Invincible = false;
@@ -53,16 +52,16 @@ namespace LegendOfZeldaClone.Enemy
             this.game.Enemies.Add(new WizardFire(game, Location + new Vector2(LoZHelpers.Scale(3 * 16), 0), this));
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             wizardSprite.Draw(spriteBatch, Location);
 
             spriteBatch.DrawString(font, target.Substring(0,current), Location + new Vector2(-192, -96), Color.White);
         }
 
-        public void Knockback(Vector2 direction) { }
+        public override void Knockback(Vector2 direction) { }
 
-        public void Update()
+        public override void Update()
         {
             wizardSprite.Update();
             if(Invincible)
@@ -82,5 +81,7 @@ namespace LegendOfZeldaClone.Enemy
                     current++;
             }
         }
+        public override void DropItem() {}
+        public override void ChangeDirection(Direction direction = LegendOfZeldaClone.Direction.None) {}
     }
 }

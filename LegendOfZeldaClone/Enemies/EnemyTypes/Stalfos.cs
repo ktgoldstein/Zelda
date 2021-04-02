@@ -1,61 +1,82 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using LegendOfZeldaClone.Enemies;
+using System;
+using System.Collections.Generic;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    class Stalfos : IEnemy
+    class Stalfos : EnemyKernal
     {
-        public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation
+        public override Vector2 Location { get; set; }
+        public override Vector2 HurtBoxLocation
         {
             get { return Location; }
             set { Location = value; }
         }
-        public int Width { get { return LoZHelpers.Scale(width); } }
-        public int Height { get { return LoZHelpers.Scale(height); } }
-        public int AttackStat { get; }
-        public int Health { get; set; } = LoZHelpers.StalfosHP;
+        public override int Width { get { return LoZHelpers.Scale(width); } }
+        public override int Height { get { return LoZHelpers.Scale(height); } }
+        public override int AttackStat { get; }
+        public override int Health { get; set; } = LoZHelpers.StalfosHP;
         private Vector2 direction;
-        public Vector2 Direction { get { return direction;} set { direction = value;} }
+        public override Vector2 Direction { get { return direction;} set { direction = value;} }
         private ISprite stalfosSprite;
-        private float speed = 2;
+        private float speed = 3;
         private readonly int width;
         private readonly int height;
         private Vector2 knockbackForce = Vector2.Zero;
-        public bool Invincible { get; set; }
-        public bool Alive { get; set; }
+        public override  bool Invincible { get; set; }
+        public override  bool Alive { get; set; }
         private int invincibleFrames = 0;
+        private int timer = 0;
+        private Vector2 previousDirection;
 
-        public Stalfos(Vector2 location)
+        public Stalfos(LegendOfZeldaDungeon game, Vector2 location)
         {
             stalfosSprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
             width = 15;
             height = 16;
 
             Location = location;
-            Direction = Vector2.UnitY;
+            direction.X = (float)LoZHelpers.random.NextDouble()*2 + -1;
+            direction.Y = (float)LoZHelpers.random.NextDouble()*2 + -1;
             Alive = true;
             AttackStat = 1;
+            base.game = game;
         }
-        public void Draw(SpriteBatch spritebatch)
+        public override void Draw(SpriteBatch spritebatch)
         {
             stalfosSprite.Draw(spritebatch, Location);
         }
 
-        public void Update()
+        public override void Update()
         {
             stalfosSprite.Update();
-
+            base.Update();
+            timer++;
+            if(timer == 60)
+            {
+                double num = LoZHelpers.random.NextDouble();
+                if( num < 0.25)
+                {
+                    direction = Vector2.UnitX;
+                }
+                else if ( num >= 0.25 && num < 0.5)
+                {
+                    direction = -Vector2.UnitX;
+                }
+                else if( num >= 0.5 && num < 0.75)
+                {
+                    direction = Vector2.UnitY;
+                }
+                else
+                {
+                    direction = -Vector2.UnitY;
+                }
+                timer = 0;
+            }
             Location += speed * direction + knockbackForce;
             knockbackForce *= .8f;
-            if (Location.Y > 192)
-            {
-                direction = new Vector2(0, -1);
-            }
-            if (Location.Y < 64)
-            {
-                direction = new Vector2(0, 1);
-            }
             if(Invincible)
             {
                 invincibleFrames++;
@@ -65,8 +86,9 @@ namespace LegendOfZeldaClone.Enemy
                     invincibleFrames = 0;
                 }
             }
+            previousDirection = direction;
         }
-        public void Knockback(Vector2 direction)
+        public override void Knockback(Vector2 direction)
         {
             knockbackForce = direction * 10;
         }

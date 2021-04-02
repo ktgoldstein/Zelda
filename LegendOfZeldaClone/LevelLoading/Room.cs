@@ -23,6 +23,7 @@ namespace LegendOfZeldaClone.LevelLoading
         private int wallType;
         private readonly LegendOfZeldaDungeon game;
         private readonly string fileLocation;
+        public Vector2 Location = new Vector2(0, 192);
 
         public Room(string fileLocation, LegendOfZeldaDungeon game)
         {
@@ -53,7 +54,7 @@ namespace LegendOfZeldaClone.LevelLoading
         {
 
             Rectangle sourceRectangle = new Rectangle(522, 11, 256, 176);
-            Rectangle destinationRectangle = new Rectangle(0, 192, LoZHelpers.Scale(256), LoZHelpers.Scale(176));
+            Rectangle destinationRectangle = new Rectangle((int)Location.X, (int)Location.Y, LoZHelpers.Scale(256), LoZHelpers.Scale(176));
 
             if(wallType == 1)
                 spritebatch.Draw(background, destinationRectangle, sourceRectangle, Color.White);
@@ -81,7 +82,7 @@ namespace LegendOfZeldaClone.LevelLoading
             bool readWallType = false;
             foreach (var line in lines)
             {
-                
+
                 if(!readBackgroundType)
                 {
 
@@ -99,7 +100,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     var row = Array.ConvertAll(splitLine, s => int.Parse(s));
                     data.Add(new List<int>((row)));
                 }
-                
+
 
             }
             return data;
@@ -217,10 +218,10 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIEnemy(new Keese(tileLocation));
                     break;
                 case 30:
-                    AddIEnemy(new Stalfos(tileLocation));
+                    AddIEnemy(new Stalfos(game, tileLocation));
                     break;
                 case 31:
-                    AddIEnemy(new Wallmaster(tileLocation));
+                    AddIEnemy(new Wallmaster(game, tileLocation));
                     break;
                 case 32:
                     AddIEnemy(new Goriya(game, tileLocation));
@@ -232,7 +233,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIEnemy(new Aquamentus(game, tileLocation));
                     break;
                 case 35:
-                    AddIEnemy(new BladeTrap(tileLocation));
+                    AddIEnemy(new BladeTrap(tileLocation, game.Player));
                     break;
                 case 39:
                     AddIItem(new Key(smallItemLocation));
