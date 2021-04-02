@@ -18,6 +18,7 @@ namespace LegendOfZeldaClone
         private ISprite rupee;
         private readonly int height;
         private readonly int width;
+        private int animationSpeed;
 
         public FlashingRupee(Vector2 location)
         {
@@ -26,9 +27,15 @@ namespace LegendOfZeldaClone
             width = 8;
             height = 16;
             Alive = true;
+            animationSpeed = 0;
         }
 
-        public void Update() => rupee.Update();
+        public void Update()
+        {
+            animationSpeed++;
+            if (animationSpeed % 2 == 0)
+                rupee.Update();
+        }
         public void Draw(SpriteBatch spriteBatch) => rupee.Draw(spriteBatch, Location);
     }
 }

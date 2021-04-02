@@ -75,5 +75,6 @@ namespace LegendOfZeldaClone
         public ISprite CreateInventoryMap() => new InventorySprite(inventory, 601, 156, 8, 16);
         public ISprite CreateInventoryCompass() => new InventorySprite(inventory, 612, 156, 15, 16);
         public ISprite CreateMapCompassHolder() => new InventorySprite(inventory, 258, 112, 80, 88);
+        public ISprite CreateCursor() => new AnimatedInventorySprite(inventory, 536, 137, 16, 16);
     }
 }

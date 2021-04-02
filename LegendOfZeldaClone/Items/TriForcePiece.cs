@@ -18,6 +18,7 @@ namespace LegendOfZeldaClone
         private ISprite triforcePiece;
         private readonly int height;
         private readonly int width;
+        private int animationSpeed;
 
         public TriForcePiece(Vector2 location)
         {
@@ -26,9 +27,15 @@ namespace LegendOfZeldaClone
             width = 10;
             height = 10;
             Alive = true;
+            animationSpeed = 0;
         }
 
-        public void Update() => triforcePiece.Update();
+        public void Update()
+        {
+            animationSpeed++;
+            if (animationSpeed % 2 == 0)
+                triforcePiece.Update();
+        }
         public void Draw(SpriteBatch spriteBatch) => triforcePiece.Draw(spriteBatch, Location);
     }
 }

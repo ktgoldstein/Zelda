@@ -14,6 +14,7 @@ namespace LegendOfZeldaClone
         private readonly ISprite inventoryPotion;
         private readonly ISprite inventoryRing;
         private GameStateMachine game;
+        public Cursor inventoryCursor;
 
         public InventoryScreen(GameStateMachine game)
         {
@@ -27,13 +28,15 @@ namespace LegendOfZeldaClone
             inventoryPotion = HUDTextureFactory.Instance.CreateInventoryPotion();
             inventoryRing = HUDTextureFactory.Instance.CreateInventoryRing();
             this.game = game;
+            inventoryCursor = new Cursor(game);
         }
 
-        public void Update() {}
+        public void Update() => inventoryCursor.Update();
         public void Draw(SpriteBatch spritebatch)
         {
             inventoryBox.Draw(spritebatch, LoZHelpers.InventoryBoxLocation);
             inventorySelectBox.Draw(spritebatch, LoZHelpers.InventorySelectionBoxLocation);
+            inventoryCursor.Draw(spritebatch, LoZHelpers.CursorLocation);
             if (game.Player.Inventory.HasItem(UsableItemTypes.Bomb))
                 inventoryBomb.Draw(spritebatch, LoZHelpers.InventoryBombLocation);
             if (game.Player.Inventory.HasItem(UsableItemTypes.BowWooden))
