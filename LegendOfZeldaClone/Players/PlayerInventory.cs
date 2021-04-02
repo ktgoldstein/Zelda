@@ -33,8 +33,8 @@ namespace LegendOfZeldaClone
             BombsHeld = bombs;
             KeysHeld = keys;
             RupeesHeld = rupees;
-            HasMap = false;
-            HasCompass = false;
+            HasMap = hasMap;
+            HasCompass = hasCompass;
 
             heldItems = new Dictionary<UsableItemTypes, IUsableItem>();
         }
