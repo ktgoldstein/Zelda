@@ -22,7 +22,6 @@ namespace LegendOfZeldaClone
         public bool HasMap { get; set; } = false;
         public bool HasCompass { get; set; } = false;
         public bool HasArrow { get; set; } = false;
-        public bool HasPotion { get; set; } = false;
 
         private int bombsHeld;
         private int keysHeld;
