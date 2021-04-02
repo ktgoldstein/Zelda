@@ -7,20 +7,23 @@ namespace LegendOfZeldaClone
     {
         private readonly ISprite bBoxSprite;
         private readonly ISprite currItem;
-        private readonly Vector2 currItemLocation;
+        private GameStateMachine game;
 
-        public ABox()
+        public ABox(GameStateMachine game)
         {
             bBoxSprite = HUDTextureFactory.Instance.CreateABox();
             currItem = HUDTextureFactory.Instance.CreateInventorySword();
-            currItemLocation = LoZHelpers.ABoxItemLocation;
+            this.game = game;
         }
 
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 vector)
         {
             bBoxSprite.Draw(spriteBatch, vector);
-            currItem.Draw(spriteBatch, currItemLocation);
+            if (game.CurrentGameState == GameState.Play)
+                currItem.Draw(spriteBatch, LoZHelpers.ABoxItemLocation);
+            else
+                currItem.Draw(spriteBatch, LoZHelpers.ABoxItemPauseLocation);
         }
     }
 }

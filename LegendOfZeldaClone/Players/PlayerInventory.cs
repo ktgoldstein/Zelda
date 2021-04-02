@@ -21,6 +21,7 @@ namespace LegendOfZeldaClone
         }
         public bool HasMap { get; set; } = false;
         public bool HasCompass { get; set; } = false;
+        public bool HasArrow { get; set; } = false;
 
         private int bombsHeld;
         private int keysHeld;
@@ -32,8 +33,8 @@ namespace LegendOfZeldaClone
             BombsHeld = bombs;
             KeysHeld = keys;
             RupeesHeld = rupees;
-            HasMap = false;
-            HasCompass = false;
+            HasMap = hasMap;
+            HasCompass = hasCompass;
 
             heldItems = new Dictionary<UsableItemTypes, IUsableItem>();
         }
@@ -64,6 +65,9 @@ namespace LegendOfZeldaClone
                         break;
                     case UsableItemTypes.BowSilver:
                         heldItems.Add(itemType, new UsableBow(game, ArrowSkinType.Silver));
+                        break;
+                    case UsableItemTypes.LifePotion:
+                        heldItems.Add(itemType, new UsablePotion(game));
                         break;
                 }
             }

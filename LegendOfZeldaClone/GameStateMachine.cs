@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace LegendOfZeldaClone
 {
@@ -28,9 +29,13 @@ namespace LegendOfZeldaClone
         public ABox InventoryBoxA;
         public LifeText HUDLifeText;
         public HealthBar HUDHealthBar;
+        public InventoryScreen InventoryBox;
+        public MapCompassHolder MapCompassHolder;
+        public PauseMap PauseScreenMap;
 
         public int SwitchRoomDelay;
         public readonly int SwitchDelayLength;
+        public GameState CurrentGameState = GameState.Play;
 
         public GameStateMachine()
         {
@@ -50,64 +55,88 @@ namespace LegendOfZeldaClone
 
         public void Update()
         {
-            if (SwitchRoomDelay > 0)
-                SwitchRoomDelay--;
+            if (CurrentGameState == GameState.Play)
+            {
+                if (SwitchRoomDelay > 0)
+                    SwitchRoomDelay--;
 
-            Player.Update();
+                Player.Update();
 
-            PlayerProjectiles.AddRange(PlayerProjectilesQueue);
-            PlayerProjectilesQueue.Clear();
-            PlayerProjectiles = PlayerProjectiles.Except(UpdateGameObjectEnumerable(PlayerProjectiles)).ToList();
+                PlayerProjectiles.AddRange(PlayerProjectilesQueue);
+                PlayerProjectilesQueue.Clear();
+                PlayerProjectiles = PlayerProjectiles.Except(UpdateGameObjectEnumerable(PlayerProjectiles)).ToList();
 
-            Enemies = Enemies.Except(UpdateGameObjectEnumerable(Enemies)).ToList();
+                Enemies = Enemies.Except(UpdateGameObjectEnumerable(Enemies)).ToList();
 
-            EnemyProjectiles.AddRange(EnemyProjectilesQueue);
-            EnemyProjectilesQueue.Clear();
-            EnemyProjectiles = EnemyProjectiles.Except(UpdateGameObjectEnumerable(EnemyProjectiles)).ToList();
+                EnemyProjectiles.AddRange(EnemyProjectilesQueue);
+                EnemyProjectilesQueue.Clear();
+                EnemyProjectiles = EnemyProjectiles.Except(UpdateGameObjectEnumerable(EnemyProjectiles)).ToList();
 
-            Items = Items.Except(UpdateGameObjectEnumerable(Items)).ToList();
+                Items = Items.Except(UpdateGameObjectEnumerable(Items)).ToList();
 
-            Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
+                Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
 
-            HUDHealthBar.Update();
-            HUDMap.Update();
-            PlayerRupeeCount.Update();
-            PlayerBombCount.Update();
-            PlayerKeyCount.Update();
+                HUDHealthBar.Update();
+                HUDMap.Update();
+                PlayerRupeeCount.Update();
+                PlayerBombCount.Update();
+                PlayerKeyCount.Update();
 
-            Collisions.CollisionHandling.HandleCollisions(this);
+                Collisions.CollisionHandling.HandleCollisions(this);
+            }
+            else if (CurrentGameState == GameState.Pause)
+            {
+                InventoryBox.Update(Direction.None);
+                MapCompassHolder.Update();
+            }
         }
 
         public void Draw(SpriteBatch sprintBatch) 
         {
-            CurrentRoom.Draw(sprintBatch);
+            if (CurrentGameState == GameState.Play)
+            {
+                CurrentRoom.Draw(sprintBatch);
 
-            foreach (IObject block in Objects)
-                block.Draw(sprintBatch);
+                foreach (IObject block in Objects)
+                    block.Draw(sprintBatch);
 
-            foreach (IItem item in Items)
-                item.Draw(sprintBatch);
+                foreach (IItem item in Items)
+                    item.Draw(sprintBatch);
 
-            foreach (IEnemyProjectile projectile in EnemyProjectiles)
-                projectile.Draw(sprintBatch);
+                foreach (IEnemyProjectile projectile in EnemyProjectiles)
+                    projectile.Draw(sprintBatch);
 
-            foreach (IEnemy enemy in Enemies)
-                enemy.Draw(sprintBatch);
+                foreach (IEnemy enemy in Enemies)
+                    enemy.Draw(sprintBatch);
 
-            foreach (IPlayerProjectile projectile in PlayerProjectiles)
-                projectile.Draw(sprintBatch);
+                foreach (IPlayerProjectile projectile in PlayerProjectiles)
+                    projectile.Draw(sprintBatch);
 
-            Player.Draw(sprintBatch);
+                Player.Draw(sprintBatch);
 
-            HUDMap.Draw(sprintBatch);
-            DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNameLocation);
-            PlayerRupeeCount.Draw(sprintBatch, LoZHelpers.RupeeCountLocation);
-            PlayerKeyCount.Draw(sprintBatch, LoZHelpers.KeyCountLocation);
-            PlayerBombCount.Draw(sprintBatch, LoZHelpers.BombCountLocation);
-            InventoryBoxB.Draw(sprintBatch, LoZHelpers.BBoxLocation);
-            InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxLocation);
-            HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextLocation);
-            HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthLocation);
+                HUDMap.Draw(sprintBatch);
+                DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNameLocation);
+                PlayerRupeeCount.Draw(sprintBatch, LoZHelpers.RupeeCountLocation);
+                PlayerKeyCount.Draw(sprintBatch, LoZHelpers.KeyCountLocation);
+                PlayerBombCount.Draw(sprintBatch, LoZHelpers.BombCountLocation);
+                InventoryBoxB.Draw(sprintBatch, LoZHelpers.BBoxLocation);
+                InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxLocation);
+                HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextLocation);
+                HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthLocation);
+            }
+            else if (CurrentGameState == GameState.Pause)
+            {
+                InventoryBox.Draw(sprintBatch);
+                MapCompassHolder.Draw(sprintBatch);
+                DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNamePauseLocation);
+                PlayerRupeeCount.Draw(sprintBatch, LoZHelpers.RupeeCountPauseLocation);
+                PlayerKeyCount.Draw(sprintBatch, LoZHelpers.KeyCountPauseLocation);
+                PlayerBombCount.Draw(sprintBatch, LoZHelpers.BombCountPauseLocation);
+                InventoryBoxB.Draw(sprintBatch, LoZHelpers.BBoxPauseLocation);
+                InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxPauseLocation);
+                HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextPauseLocation);
+                HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthPauseLocation);
+            }
         }
 
         public void InitializeRooms()
@@ -165,10 +194,12 @@ namespace LegendOfZeldaClone
             PlayerRupeeCount = new RupeeCount(this);
             PlayerKeyCount = new KeyCount(this);
             PlayerBombCount = new BombCount(this);
-            InventoryBoxB = new BBox();
-            InventoryBoxA = new ABox();
+            InventoryBox = new InventoryScreen(this);
+            InventoryBoxB = new BBox(this);
+            InventoryBoxA = new ABox(this);
             HUDLifeText = new LifeText();
             HUDHealthBar = new HealthBar(this);
+            MapCompassHolder = new MapCompassHolder(this);
         }
 
         public List<T> UpdateGameObjectEnumerable<T>(List<T> gameObjects) where T : IGameObject
@@ -188,6 +219,7 @@ namespace LegendOfZeldaClone
             ResetPlayer();
             ResetLists();
             InitializeRooms();
+            ResetMiniMap();
         }
 
         public void ResetPlayer()
@@ -205,6 +237,11 @@ namespace LegendOfZeldaClone
             PlayerProjectilesQueue.Clear();
             EnemyProjectiles.Clear();
             EnemyProjectilesQueue.Clear();
+        }
+
+        public void ResetMiniMap()
+        {
+            HUDMap.Reset();
         }
     }
 }

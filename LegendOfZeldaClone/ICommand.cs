@@ -20,7 +20,13 @@ namespace LegendOfZeldaClone
         private GameStateMachine game;
 
         public MoveDown(GameStateMachine game) => this.game = game;
-        public void Execute() => game.Player.MoveDown();
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Play)
+                game.Player.MoveDown();
+            else if (game.CurrentGameState == GameState.Pause)
+                game.InventoryBox.Update(Direction.Down);
+        }
     }
 
     public class MoveUp : ICommand
@@ -28,7 +34,13 @@ namespace LegendOfZeldaClone
         private GameStateMachine game;
 
         public MoveUp(GameStateMachine game) => this.game = game;
-        public void Execute() => game.Player.MoveUp();
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Play)
+                game.Player.MoveUp();
+            else if (game.CurrentGameState == GameState.Pause)
+                game.InventoryBox.Update(Direction.Up);
+        }
     }
 
     public class MoveLeft : ICommand
@@ -36,7 +48,13 @@ namespace LegendOfZeldaClone
         private GameStateMachine game;
 
         public MoveLeft(GameStateMachine game) => this.game = game;
-        public void Execute() => game.Player.MoveLeft();
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Play)
+                game.Player.MoveLeft();
+            else if (game.CurrentGameState == GameState.Pause)
+                game.InventoryBox.Update(Direction.Left);
+        }
     }
 
     public class MoveRight : ICommand
@@ -44,7 +62,13 @@ namespace LegendOfZeldaClone
         private GameStateMachine game;
 
         public MoveRight(GameStateMachine game) => this.game = game;
-        public void Execute() => game.Player.MoveRight();
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Play)
+                game.Player.MoveRight();
+            else if (game.CurrentGameState == GameState.Pause)
+                game.InventoryBox.Update(Direction.Right);
+        }
     }
 
     public class ActionA : ICommand
@@ -52,7 +76,11 @@ namespace LegendOfZeldaClone
         private GameStateMachine game;
 
         public ActionA(GameStateMachine game) => this.game = game;
-        public void Execute() => game.Player.ActionA();
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Play)
+                game.Player.ActionA();
+        }
     }
 
     public class ActionB : ICommand
@@ -60,7 +88,11 @@ namespace LegendOfZeldaClone
         private GameStateMachine game;
 
         public ActionB(GameStateMachine game) => this.game = game;
-        public void Execute() => game.Player.ActionB();
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Play)
+                game.Player.ActionB();
+        }
     }
 
     public class DamageLink : ICommand
@@ -68,7 +100,11 @@ namespace LegendOfZeldaClone
         private GameStateMachine game;
 
         public DamageLink(GameStateMachine game) => this.game = game;
-        public void Execute() => game.Player.Damage(1, Direction.None);
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Play)
+                game.Player.Damage(1, Direction.None);
+        }
     }
         
     public class ResetGame : ICommand
@@ -77,7 +113,11 @@ namespace LegendOfZeldaClone
 
         public ResetGame(GameStateMachine game) => this.game = game;
 
-        public void Execute() => game.Reset();
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Play)
+                game.Reset();
+        }
     }
 
     public class MoveRoomDown : ICommand
@@ -88,13 +128,16 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomDown == null)
-                return;
-            else
-                game.SwitchRoomDelay = game.SwitchDelayLength;
+            if (game.CurrentGameState == GameState.Play)
+            {
+                if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomDown == null)
+                    return;
+                else
+                    game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            game.CurrentRoom = game.CurrentRoom.RoomDown;
-            game.CurrentRoom.LoadRoom();
+                game.CurrentRoom = game.CurrentRoom.RoomDown;
+                game.CurrentRoom.LoadRoom();
+            }
         }
     }
 
@@ -106,13 +149,16 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomUp == null)
-                return;
-            else
-                game.SwitchRoomDelay = game.SwitchDelayLength;
+            if (game.CurrentGameState == GameState.Play)
+            {
+                if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomUp == null)
+                    return;
+                else
+                    game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            game.CurrentRoom = game.CurrentRoom.RoomUp;
-            game.CurrentRoom.LoadRoom();
+                game.CurrentRoom = game.CurrentRoom.RoomUp;
+                game.CurrentRoom.LoadRoom();
+            }
         }
     }
 
@@ -124,13 +170,16 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomLeft == null)
-                return;
-            else
-                game.SwitchRoomDelay = game.SwitchDelayLength;
+            if (game.CurrentGameState == GameState.Play)
+            {
+                if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomLeft == null)
+                    return;
+                else
+                    game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            game.CurrentRoom = game.CurrentRoom.RoomLeft;
-            game.CurrentRoom.LoadRoom();
+                game.CurrentRoom = game.CurrentRoom.RoomLeft;
+                game.CurrentRoom.LoadRoom();
+            }
         }
     }
 
@@ -142,13 +191,47 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomRight == null)
-                return;
-            else
-                game.SwitchRoomDelay = game.SwitchDelayLength;
+            if (game.CurrentGameState == GameState.Play)
+            {
+                if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomRight == null)
+                    return;
+                else
+                    game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            game.CurrentRoom = game.CurrentRoom.RoomRight;
-            game.CurrentRoom.LoadRoom();
+                game.CurrentRoom = game.CurrentRoom.RoomRight;
+                game.CurrentRoom.LoadRoom();
+            }
+        }
+    }
+
+    public class PauseGame : ICommand
+    {
+        private GameStateMachine game;
+        public PauseGame(GameStateMachine game) => this.game = game;
+
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Play)
+            {
+                game.CurrentGameState = GameState.Pause;
+            }
+            else
+            {
+                game.CurrentGameState = GameState.Play;
+            }
+        }
+    }
+
+    public class SelectItem : ICommand
+    {
+        private GameStateMachine game;
+
+        public SelectItem(GameStateMachine game) => this.game = game; 
+        
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Pause)
+                game.InventoryBoxB.Update();
         }
     }
 }

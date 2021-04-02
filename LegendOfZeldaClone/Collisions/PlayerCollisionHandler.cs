@@ -69,6 +69,10 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.Inventory.HasMap = true;
             else if (item is Compass)
                 CurrentPlayer.Inventory.HasCompass = true;
+            else if (item is Arrow)
+                CurrentPlayer.Inventory.HasArrow = true;
+            else if (item is LifePotion)
+                CurrentPlayer.PickUpUsableItem(UsableItemTypes.LifePotion, item);
         }
 
 
