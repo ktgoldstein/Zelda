@@ -102,6 +102,11 @@ namespace LegendOfZeldaClone
                     (block as IDoor).ChangeRoom();
                     return;
                 }
+                else if(block is Stairs)
+                {
+                    (block as IDoor).ChangeRoom();
+                    return;
+                }
             }
         }
     }
@@ -124,6 +129,11 @@ namespace LegendOfZeldaClone
                 if (block is OpenDoorUp || block is TunnelFaceUp)
                 {
                     game.Player.Location = block.Location + new Vector2(LoZHelpers.Scale(8), LoZHelpers.Scale(14));
+                    (block as IDoor).ChangeRoom();
+                    return;
+                }
+                else if(block is LadderDoor)
+                {
                     (block as IDoor).ChangeRoom();
                     return;
                 }

@@ -180,24 +180,17 @@ namespace LegendOfZeldaClone
             return deadObjects;
         }
 
-        public void ShiftLink(Direction direction, bool secret)
+        public void ShiftLink(Direction direction)
         {
             int horizontalDisplacement = LoZHelpers.Scale(16);
             int verticalDisplacement = LoZHelpers.Scale(32);
-            System.Console.WriteLine("Current room secret = " + secret.ToString());
             switch (direction)
             {
                 case Direction.Up:
-                    if (secret)
-                        Player.Location -= new Vector2(0, verticalDisplacement + Player.Height + 118);
-                    else
-                        Player.Location -= new Vector2(0, verticalDisplacement + Player.Height);
+                    Player.Location -= new Vector2(0, verticalDisplacement + Player.Height);
                     break;
                 case Direction.Down:
-                    if(secret)
-                        Player.Location += new Vector2(0, verticalDisplacement + Player.Height);
-                    else
-                        Player.Location += new Vector2(0, verticalDisplacement + Player.Height);
+                    Player.Location += new Vector2(0, verticalDisplacement + Player.Height);
                     break;
                 case Direction.Left:
                     Player.Location -= new Vector2(horizontalDisplacement + Player.Width, 0);

@@ -56,7 +56,7 @@ namespace LegendOfZeldaClone.Display
                 game.CurrentGameState = GameState.Play;
                 game.CurrentRoom = game.NextRoom;
                 game.NextRoom = null;
-                game.ShiftLink(currentTransitionDirection, game.CurrentRoom.Secret);
+                game.ShiftLink(currentTransitionDirection);
             }
         }
 

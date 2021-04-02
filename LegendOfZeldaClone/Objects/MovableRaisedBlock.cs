@@ -19,6 +19,7 @@ namespace LegendOfZeldaClone.Objects
         public bool IsBombable { get; }
         public bool Alive { get; set; }
 
+        private Vector2 startingLocation;
         private ISprite sprite;
         private readonly int height;
         private readonly int width;
@@ -26,7 +27,8 @@ namespace LegendOfZeldaClone.Objects
         public MovableRaisedBlock(Vector2 location)
         {
             sprite = ObjectSpriteFactory.Instance.CreateRaisedBlock();
-            Location = location;
+            startingLocation = location;
+            Location = startingLocation;
             height = 16;
             width = 16;
             BlockHeight = ObjectHeight.CanFlyOver;
@@ -38,5 +40,6 @@ namespace LegendOfZeldaClone.Objects
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
         public void Die() => Alive = false;
+        public void Reset() => Location = startingLocation;
     }
 }
