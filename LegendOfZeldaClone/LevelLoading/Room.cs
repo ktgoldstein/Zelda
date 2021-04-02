@@ -248,7 +248,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
                     break;
                 case 29:
-                    AddIEnemy(new Keese(tileLocation));
+                    AddIEnemy(new Keese(tileLocation, game));
                     break;
                 case 30:
                     AddIEnemy(new Stalfos(game, tileLocation));
@@ -260,7 +260,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIEnemy(new Goriya(game, tileLocation));
                     break;
                 case 33:
-                    AddIEnemy(new Gel(tileLocation));
+                    AddIEnemy(new Gel(tileLocation, game));
                     break;
                 case 34:
                     AddIEnemy(new Aquamentus(game, tileLocation));

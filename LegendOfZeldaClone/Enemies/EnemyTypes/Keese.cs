@@ -28,8 +28,10 @@ namespace LegendOfZeldaClone.Enemy
         public override bool Invincible { get; set; }
         private int invincibleFrames = 0;
         private int timer = 0;
-        public Keese(Vector2 location)
+        public Keese(Vector2 location, GameStateMachine game)
         {
+            this.game = game;
+
             keeseSprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
             width = 16;
             height = 8;
@@ -90,6 +92,7 @@ namespace LegendOfZeldaClone.Enemy
             new EnemyDyingSoundEffect().Play();
             Alive = false;
             game.EnemiesQueue.Add(new DeathAnimation(Location));
+            game.KillCounter++;
         }
         public override void DropItem() {}
         public override void ChangeDirection(Direction direction = LegendOfZeldaClone.Direction.None) {}

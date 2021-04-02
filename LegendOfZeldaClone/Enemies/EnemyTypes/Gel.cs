@@ -30,8 +30,10 @@ namespace LegendOfZeldaClone.Enemy
         private int invincibleFrames = 0;
         private int timer = 0;
 
-        public Gel(Vector2 location)
+        public Gel(Vector2 location, GameStateMachine game)
         {
+            this.game = game;
+
             gelSprite = EnemySpriteFactory.Instance.CreateGelSprite();
             width = 8;
             height = 9;
@@ -91,6 +93,7 @@ namespace LegendOfZeldaClone.Enemy
             new EnemyDyingSoundEffect().Play();
             Alive = false;
             game.EnemiesQueue.Add(new DeathAnimation(Location));
+            game.KillCounter++;
         }
         public override void DropItem() {}
     }
