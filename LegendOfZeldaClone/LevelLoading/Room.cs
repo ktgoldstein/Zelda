@@ -18,6 +18,7 @@ namespace LegendOfZeldaClone.LevelLoading
         public List<IObject> Blocks = new List<IObject>();
         public List<IItem> Items = new List<IItem>();
         public List<IEnemy> Enemies = new List<IEnemy>();
+        public bool Secret { get; }
 
         private readonly ISprite tiles;
         private readonly ISprite walls;
@@ -34,6 +35,8 @@ namespace LegendOfZeldaClone.LevelLoading
             this.fileLocation = fileLocation;
             tiles = RoomTextureFactory.Instance.CreateTiles();
             walls = RoomTextureFactory.Instance.CreateWalls();
+            Secret = fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv") || 
+                fileLocation.Equals("Content\\LevelLoading\\room16.csv");
 
             List<List<int>> data = ProcessCSV();
 

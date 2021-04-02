@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 
+
 namespace LegendOfZeldaClone
 {
     public class GameStateMachine 
@@ -179,17 +180,24 @@ namespace LegendOfZeldaClone
             return deadObjects;
         }
 
-        public void ShiftLink(Direction direction)
+        public void ShiftLink(Direction direction, bool secret)
         {
             int horizontalDisplacement = LoZHelpers.Scale(16);
             int verticalDisplacement = LoZHelpers.Scale(32);
+            System.Console.WriteLine("Current room secret = " + secret.ToString());
             switch (direction)
             {
-                case Direction.Down:
-                    Player.Location += new Vector2(0, verticalDisplacement + Player.Height);
-                    break;
                 case Direction.Up:
-                    Player.Location -= new Vector2(0, verticalDisplacement + Player.Height);
+                    if (secret)
+                        Player.Location -= new Vector2(0, verticalDisplacement + Player.Height + 118);
+                    else
+                        Player.Location -= new Vector2(0, verticalDisplacement + Player.Height);
+                    break;
+                case Direction.Down:
+                    if(secret)
+                        Player.Location += new Vector2(0, verticalDisplacement + Player.Height);
+                    else
+                        Player.Location += new Vector2(0, verticalDisplacement + Player.Height);
                     break;
                 case Direction.Left:
                     Player.Location -= new Vector2(horizontalDisplacement + Player.Width, 0);
@@ -201,7 +209,6 @@ namespace LegendOfZeldaClone
                     break;
             }
         }
-
         public void Reset()
         {
             ResetPlayer();
