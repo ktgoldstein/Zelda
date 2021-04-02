@@ -48,5 +48,10 @@ namespace LegendOfZeldaClone
             link.Draw(spriteBatch, LoZHelpers.LinkLocationTrackerMini);
 
         }
+
+        public void Reset()
+        {
+            link.Reset();
+        }
     }
 }

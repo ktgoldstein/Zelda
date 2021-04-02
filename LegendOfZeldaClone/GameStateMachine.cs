@@ -30,6 +30,7 @@ namespace LegendOfZeldaClone
         public HealthBar HUDHealthBar;
         public InventoryScreen InventoryBox;
         public MapCompassHolder MapCompassHolder;
+        public PauseMap PauseScreenMap;
 
         public int SwitchRoomDelay;
         public readonly int SwitchDelayLength;
@@ -218,6 +219,7 @@ namespace LegendOfZeldaClone
             ResetPlayer();
             ResetLists();
             InitializeRooms();
+            ResetMiniMap();
         }
 
         public void ResetPlayer()
@@ -235,6 +237,11 @@ namespace LegendOfZeldaClone
             PlayerProjectilesQueue.Clear();
             EnemyProjectiles.Clear();
             EnemyProjectilesQueue.Clear();
+        }
+
+        public void ResetMiniMap()
+        {
+            HUDMap.Reset();
         }
     }
 }
