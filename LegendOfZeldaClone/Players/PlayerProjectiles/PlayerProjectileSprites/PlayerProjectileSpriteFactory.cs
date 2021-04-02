@@ -166,7 +166,7 @@ namespace LegendOfZeldaClone
             return new StaticProjectileSprite(playerProjectileSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight);
         }
 
-        public ISprite CreateBombExplosionSprite()
+        public ISprite CreateBombExplosionSprite(Color ? color = null)
         {
             int spriteWidth = 16;
             int spriteHeight = 16;
@@ -178,7 +178,7 @@ namespace LegendOfZeldaClone
                 new Point(xOffset + spriteWidth + atlasGap, yOffset),
                 new Point(xOffset + spriteWidth * 2 + atlasGap, yOffset)
             };
-            return new CyclingProjectileSprite(playerProjectileSpriteSheet, spriteWidth, spriteHeight, frameLocations);
+            return new CyclingProjectileSprite(playerProjectileSpriteSheet, spriteWidth, spriteHeight, frameLocations, color);
         }
 
         public ISprite CreateFireSprite()

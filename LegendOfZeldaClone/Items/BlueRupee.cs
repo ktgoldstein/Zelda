@@ -18,17 +18,29 @@ namespace LegendOfZeldaClone
         private ISprite blueRupee;
         private readonly int height;
         private readonly int width;
+        private int lifespan;
 
-        public BlueRupee(Vector2 location)
+        public BlueRupee(Vector2 location, int lifespan = -1)
         {
             blueRupee = ItemSpriteFactory.Instance.CreateBlueRupee();
             Location = location;
             width = 8;
             height = 16;
             Alive = true;
+            this.lifespan = lifespan;
         }
 
-        public void Update() { }
+        public void Update()
+        {
+            if (lifespan > 0 && Alive)
+            {
+                lifespan--;
+                if (lifespan == 0)
+                {
+                    Alive = false;
+                }
+            }
+        }
         public void Draw(SpriteBatch spriteBatch) => blueRupee.Draw(spriteBatch, Location);
         public void BeCollected()
         {

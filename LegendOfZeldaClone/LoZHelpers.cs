@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace LegendOfZeldaClone
 {
@@ -175,5 +177,10 @@ namespace LegendOfZeldaClone
         public static int WallmasterHP = 2;
         public static int WizardHP = 1000;
         public static int BombPickUpNumber = 4;
+        public static List<Type> DropTable = new List<Type>()
+        {   typeof(GoldRupee), typeof(Heart), typeof(GoldRupee), typeof(BlueRupee), typeof(Heart),
+            typeof(Clock), typeof(GoldRupee), typeof(GoldRupee), typeof(GoldRupee), typeof(BlueRupee)
+        };
+        public static Random random = new Random();
     }
 }

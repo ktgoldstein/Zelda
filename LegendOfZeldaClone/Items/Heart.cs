@@ -18,17 +18,30 @@ namespace LegendOfZeldaClone
         private ISprite heart;
         private readonly int height;
         private readonly int width;
+        private int lifespan;
 
-        public Heart(Vector2 location)
+        public Heart(Vector2 location, int lifespan = -1)
         {
             heart = ItemSpriteFactory.Instance.CreateHeart();
             Location = location;
             width = 7;
             height = 8;
             Alive = true;
+            this.lifespan = lifespan;
         }
 
-        public void Update() => heart.Update();
+        public void Update()
+        {
+            if (lifespan > 0 && Alive)
+            {
+                lifespan--;
+                if (lifespan == 0)
+                {
+                    Alive = false;
+                }
+            }
+            heart.Update();
+        }
         public void Draw(SpriteBatch spriteBatch) => heart.Draw(spriteBatch, Location);
         public void BeCollected()
         {

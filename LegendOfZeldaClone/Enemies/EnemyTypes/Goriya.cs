@@ -1,34 +1,35 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZeldaClone.Enemies;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    public class Goriya : IEnemy
+    public class Goriya : EnemyKernal
     {
-        public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation
+        public override Vector2 Location { get; set; }
+        public override Vector2 HurtBoxLocation
         {
             get { return Location; }
             set { Location = value; }
         }
-        public int Width { get { return LoZHelpers.Scale(width); } }
-        public int Height { get { return LoZHelpers.Scale(height); } }
+        public override int Width { get { return LoZHelpers.Scale(width); } }
+        public override int Height { get { return LoZHelpers.Scale(height); } }
         public bool HasBoomerang { get; set; }
-        public int AttackStat { get; }
-        public int Health { get; set; } = LoZHelpers.GoriyaHP;
-        public Vector2 Direction { get { return direction;} set { direction = value;} }
+        public override int AttackStat { get; }
+        public override int Health { get; set; } = LoZHelpers.GoriyaHP;
+        public override Vector2 Direction { get { return direction;} set { direction = value;} }
         private int invincibleFrames = 0;
 
-        private GameStateMachine game;
         private ISprite goriyaSprite;
         private int speed = LoZHelpers.Scale(2);
         private Vector2 direction = new Vector2(0, 1);
-        private int timer = 0;
+        private int timer = LoZHelpers.random.Next()%80;
         private readonly int width;
         private readonly int height;
         private Vector2 knockbackForce = Vector2.Zero;
-        public bool Invincible { get; set; }
-        public bool Alive { get; set; }
+        public override bool Invincible { get; set; }
+        public override bool Alive { get; set; }
+        private Vector2 previousDirection;
 
         public Goriya(GameStateMachine game, Vector2 location)
         {
@@ -42,16 +43,18 @@ namespace LegendOfZeldaClone.Enemy
             Invincible = false;
             Alive = true;
             AttackStat = 1;
+            base.game = game;
         }
 
-        public void Draw(SpriteBatch spritebatch)
+        public override void Draw(SpriteBatch spritebatch)
         {
             goriyaSprite.Draw(spritebatch, Location);
         }
 
-        public void Update()
+        public override void Update()
         {
             goriyaSprite.Update();
+            base.Update();
 
             Location += speed * direction + knockbackForce;
             knockbackForce *= .8f;
@@ -79,6 +82,27 @@ namespace LegendOfZeldaClone.Enemy
                 direction = Vector2.UnitX;
                 goriyaSprite = EnemySpriteFactory.Instance.CreateGoriyaRightSprite();
             }
+            if( direction != previousDirection )
+            {
+                if( direction.X > 0)
+                {
+                    goriyaSprite = EnemySpriteFactory.Instance.CreateGoriyaRightSprite();
+                }
+                if ( direction.X < 0)
+                {
+
+                    goriyaSprite = EnemySpriteFactory.Instance.CreateGoriyaLeftSprite();
+                }
+                if ( direction.Y < 0)
+                {
+
+                    goriyaSprite = EnemySpriteFactory.Instance.CreateGoriyaUpSprite();
+                }
+                if( direction.Y > 0)
+                {
+                    goriyaSprite = EnemySpriteFactory.Instance.CreateGoriyaDownSprite();
+                }
+            }
             timer++;
             if (timer > 79)
             {
@@ -93,6 +117,7 @@ namespace LegendOfZeldaClone.Enemy
                     invincibleFrames = 0;
                 }
             }
+            previousDirection = direction;
         }
 
         private void ThrowBoomerang(Vector2 direction)
@@ -103,11 +128,11 @@ namespace LegendOfZeldaClone.Enemy
                 HasBoomerang = true;
             }
         }
-        public void Knockback(Vector2 direction)
+        public override void Knockback(Vector2 direction)
         {
             knockbackForce = direction * 10;
         }
-        public void TakeDamage(Vector2 direction)
+        public override void TakeDamage(Vector2 direction)
         {
             if (!Invincible)
             {
@@ -120,10 +145,11 @@ namespace LegendOfZeldaClone.Enemy
             }
 
         }
-        public void Die()
+        public override void Die()
         {
             new EnemyDyingSoundEffect().Play();
             Alive = false;
+            game.EnemiesQueue.Add(new DeathAnimation(Location));
         }
     }
 }

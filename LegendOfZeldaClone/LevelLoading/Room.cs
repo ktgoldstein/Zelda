@@ -23,14 +23,14 @@ namespace LegendOfZeldaClone.LevelLoading
         private List<IObject> closedDoors = new List<IObject>();
         private int doorChangeCount = 0;
 
+        public Vector2 Offset = Vector2.Zero;
+
         private readonly ISprite tiles;
         private readonly ISprite walls;
         private readonly GameStateMachine game;
         private readonly string fileLocation;
         private int backgroundType;
         private int wallType;
-        private int offsetX;
-        private int offsetY;
 
         public Room(string fileLocation, GameStateMachine game)
         {
@@ -87,12 +87,11 @@ namespace LegendOfZeldaClone.LevelLoading
         public void Draw(SpriteBatch spritebatch)
         {
             if (wallType == 1)
-                walls.Draw(spritebatch, new Vector2(0 + LoZHelpers.GameWidth * offsetX, 
-                    (LoZHelpers.GameHeight - LoZHelpers.HUDHeight) * offsetY));
+                walls.Draw(spritebatch, new Vector2(0 + Offset.X, Offset.Y));
 
             if (backgroundType == 1)
-                tiles.Draw(spritebatch, new Vector2(LoZHelpers.TileSize * 2 + LoZHelpers.GameWidth * offsetX,
-                    LoZHelpers.TileSize * 2 + (LoZHelpers.GameHeight - LoZHelpers.HUDHeight) * offsetY));
+                tiles.Draw(spritebatch, new Vector2(LoZHelpers.TileSize * 2 + Offset.X,
+                    LoZHelpers.TileSize * 2 + Offset.Y));
         }
 
         public void AddNeighbors(Room roomUp, Room roomDown, Room roomLeft, Room roomRight)
@@ -115,8 +114,8 @@ namespace LegendOfZeldaClone.LevelLoading
                 var row = Array.ConvertAll(splitLine, s => int.Parse(s));
                 backgroundType = row[0];
                 wallType = row[1];
-                offsetX = row[2];
-                offsetY = row[3];
+                Offset.X = row[2] * LoZHelpers.GameWidth;
+                Offset.Y = row[3] * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
 
                 while ((roomInfo = roomFile.ReadLine()) != null)
                 {
@@ -130,14 +129,13 @@ namespace LegendOfZeldaClone.LevelLoading
 
         private void ProcessEntry(int gameObjectID, int column, int row)
         {
-            Vector2 tileLocation = new Vector2(LoZHelpers.TileSize * (column + 1) + LoZHelpers.GameWidth * offsetX, 
-                LoZHelpers.TileSize * (row + 1) + (LoZHelpers.GameHeight - LoZHelpers.HUDHeight) * offsetY);
+            Vector2 tileLocation = new Vector2(LoZHelpers.TileSize * (column + 1) + Offset.X, 
+                LoZHelpers.TileSize * (row + 1) + Offset.Y);
             if (fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv"))
-                tileLocation = new Vector2(LoZHelpers.TileSize * column + LoZHelpers.GameWidth * offsetX, 
-                    LoZHelpers.TileSize * (row + 1) + (LoZHelpers.GameHeight - LoZHelpers.HUDHeight) * offsetY);
+                tileLocation = new Vector2(LoZHelpers.TileSize * column + Offset.X, 
+                    LoZHelpers.TileSize * (row + 1) + Offset.Y);
 
-            Vector2 smallItemLocation = tileLocation + new Vector2(LoZHelpers.TileSize / 4 + LoZHelpers.GameWidth * offsetX, 
-                0 + LoZHelpers.GameHeight * offsetY);
+            Vector2 smallItemLocation = tileLocation + new Vector2(LoZHelpers.TileSize / 4 + Offset.X, Offset.Y);
             Vector2 doorLocationUp = tileLocation - new Vector2(0, LoZHelpers.TileSize);
             Vector2 doorLocationDown = tileLocation;
             Vector2 doorLocationRight = tileLocation - new Vector2(0, LoZHelpers.TileSize / 2);
@@ -253,10 +251,10 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIEnemy(new Keese(tileLocation));
                     break;
                 case 30:
-                    AddIEnemy(new Stalfos(tileLocation));
+                    AddIEnemy(new Stalfos(game, tileLocation));
                     break;
                 case 31:
-                    AddIEnemy(new Wallmaster(tileLocation));
+                    AddIEnemy(new Wallmaster(game, tileLocation));
                     break;
                 case 32:
                     AddIEnemy(new Goriya(game, tileLocation));
@@ -268,7 +266,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIEnemy(new Aquamentus(game, tileLocation));
                     break;
                 case 35:
-                    AddIEnemy(new BladeTrap(tileLocation));
+                    AddIEnemy(new BladeTrap(tileLocation, game.Player));
                     break;
                 case 39:
                     AddIItem(new Key(smallItemLocation));

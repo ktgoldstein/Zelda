@@ -8,8 +8,8 @@ namespace LegendOfZeldaClone.Enemy
         public bool Alive { get; set; }
         public int AttackStat { get; }
         public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation 
-        { 
+        public Vector2 HurtBoxLocation
+        {
             get { return Location; }
             set { Location = value; }
         }
@@ -37,10 +37,8 @@ namespace LegendOfZeldaClone.Enemy
             this.direction.Normalize();
             this.goriya = goriya;
         }
-        public void Draw(SpriteBatch spritebatch)
-        {
-            boomerangSprite.Draw(spritebatch, Location);
-        }
+
+        public void Draw(SpriteBatch spritebatch) => boomerangSprite.Draw(spritebatch, Location);
 
         public void Update()
         {
@@ -50,10 +48,15 @@ namespace LegendOfZeldaClone.Enemy
                 direction = goriya.Location - Location;
                 direction.Normalize();
             }
-
+            if( !goriya.Alive)
+            {
+                Alive = false;
+            }
             Location += direction * speed;
             boomerangSprite.Update();
         }
+
         public void Die() => Alive = false;
+        public void ComeBack() => timer = 21;
     }
 }

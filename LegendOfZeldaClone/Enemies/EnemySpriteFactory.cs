@@ -18,7 +18,6 @@ namespace LegendOfZeldaClone.Enemy
 		private Texture2D wallmasterSprite;
 		private Texture2D wizardSprite, wizardFireSprite;
 		private SpriteFont font;
-
         private EnemySpriteFactory() { }
 
 		public void LoadAllTextures(ContentManager content)

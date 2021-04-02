@@ -1,44 +1,38 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using LegendOfZeldaClone.Enemies;
 
 namespace LegendOfZeldaClone.Enemy
 {
-    class Aquamentus : IEnemy
+    public class Aquamentus : EnemyKernal
     {
-        public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation
+        public override Vector2 Location { get; set; }
+        public override Vector2 HurtBoxLocation
         {
             get { return Location; }
             set { Location = value; }
         }
-        public int Width { get { return LoZHelpers.Scale(width); } }
-        public int Height { get { return LoZHelpers.Scale(height); } }
-        public int AttackStat { get; }
-        public int Health { get; set; } = LoZHelpers.AquamentusHP;
+        public override int Width { get { return LoZHelpers.Scale(width); } }
+        public override int Height { get { return LoZHelpers.Scale(height); } }
+        public override int AttackStat { get; }
+        public override int Health { get; set; } = LoZHelpers.AquamentusHP;
         private Vector2 direction;
-        public Vector2 Direction { get { return direction;} set { direction = value;} }
+        public override Vector2 Direction { get { return direction;} set { direction = value;} }
         private bool _invincible;
-        public bool Invincible
+        public override bool Invincible
          {
             get => _invincible;
             set
             {
-                if( value == true)
-                {
-                    aquamentusSprite = EnemySpriteFactory.Instance.CreateDamagedAquamentusSprite();
-                }
-                else{
-                    aquamentusSprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
-                }
+                aquamentusSprite = value ? EnemySpriteFactory.Instance.CreateDamagedAquamentusSprite() : EnemySpriteFactory.Instance.CreateAquamentusSprite();                
                 _invincible = value;
             }
          }
 
-        public bool Alive { get; set; }
+        public override bool Alive { get; set; }
 
-        private GameStateMachine game;
         private ISprite aquamentusSprite;
-        private float speed = 2;
+        private float speed = LoZHelpers.Scale(1);
         private int timer = 0;
         private int invincibleFrames = 0;
         private readonly int width;
@@ -57,24 +51,17 @@ namespace LegendOfZeldaClone.Enemy
             Invincible = false;
             Alive = true;
             AttackStat = 2;
+            base.game = game;
         }
 
-        public void Draw(SpriteBatch spritebatch) => aquamentusSprite.Draw(spritebatch, Location);
+        public override void Draw(SpriteBatch spritebatch) => aquamentusSprite.Draw(spritebatch, Location);
 
-        public void Update()
+        public override void Update()
         {
             aquamentusSprite.Update();
 
             Location += speed * Direction + knockbackForce;
             knockbackForce *= .8f;
-            if (Location.Y > 192)
-            {
-                direction = new Vector2(0,-1);
-            }
-            if (Location.Y < 64)
-            {
-                direction = new Vector2(0,1);
-            }
 
             timer++;
             if(timer == 60)
@@ -100,11 +87,10 @@ namespace LegendOfZeldaClone.Enemy
             game.EnemyProjectilesQueue.Add(new Fireball(Location, new Vector2(-1, 0)));
             game.EnemyProjectilesQueue.Add(new Fireball(Location, new Vector2(-2, 1)));
         }
-        public void Knockback(Vector2 direction)
-        {
-            knockbackForce = direction * 10;
-        }
-        public void TakeDamage(Vector2 direction)
+
+        public override void Knockback(Vector2 direction) { }
+
+        public override void TakeDamage(Vector2 direction)
         {
             if (!Invincible)
             {
@@ -115,9 +101,13 @@ namespace LegendOfZeldaClone.Enemy
                     Die();
                 Knockback(direction);
             }
-
         }
-        public void Die() => Alive = false;
 
+        public override void Die()
+        {
+            Alive = false;
+            DropItem();
+            game.EnemiesQueue.Add(new DeathAnimation(Location));
+        }
     }
 }

@@ -11,7 +11,10 @@ namespace LegendOfZeldaClone
     public class GameStateMachine 
     {
         public IPlayer Player;
+
+        public List<IEnemy> EnemiesQueue;
         public List<IEnemy> Enemies;
+
         public List<IItem> Items;
         public List<IObject> Objects;
         private List<IObject> stashedBlocks;
@@ -24,10 +27,19 @@ namespace LegendOfZeldaClone
 
         public Room CurrentRoom;
         public Room NextRoom;
+        private Room firstRoom;
+
         public MiniMap DungeonMiniMap;
 
         public int SwitchRoomDelay;
         public readonly int SwitchDelayLength;
+
+        public int KillCounter
+        {
+            get { return killCounter; }
+            set { killCounter = value % 9; }
+        }
+        private int killCounter = 0;
 
         public Camera Camera;
         public GameState CurrentGameState = GameState.Play;
@@ -36,7 +48,9 @@ namespace LegendOfZeldaClone
         {
             Camera = new Camera(this);
 
+            EnemiesQueue = new List<IEnemy>();
             Enemies = new List<IEnemy>();
+
             Items = new List<IItem>();
             Objects = new List<IObject>();
 
@@ -65,6 +79,8 @@ namespace LegendOfZeldaClone
                 PlayerProjectilesQueue.Clear();
                 PlayerProjectiles = PlayerProjectiles.Except(UpdateGameObjectEnumerable(PlayerProjectiles)).ToList();
 
+                Enemies.AddRange(EnemiesQueue);
+                EnemiesQueue.Clear();
                 Enemies = Enemies.Except(UpdateGameObjectEnumerable(Enemies)).ToList();
 
                 EnemyProjectiles.AddRange(EnemyProjectilesQueue);
@@ -171,8 +187,17 @@ namespace LegendOfZeldaClone
             RoomList[16].AddNeighbors(null, RoomList[^1], null, RoomList[15]);
             RoomList[17].AddNeighbors(RoomList[16], null, null, null);
 
+            firstRoom = RoomList[0];
             CurrentRoom = RoomList[0];
             CurrentRoom.LoadRoom();
+        }
+
+        public void GoToTheStart()
+        {
+            ResetLists();
+            CurrentRoom = firstRoom;
+            CurrentRoom.LoadRoom();
+            Player.Location = LoZHelpers.LinkStartingLocation;
         }
 
         public void InitializeHUD()
@@ -236,6 +261,7 @@ namespace LegendOfZeldaClone
         public void ResetRoomSpecificLists()
         {
             Enemies.Clear();
+            EnemiesQueue.Clear();
             Items.Clear();
 
             PlayerProjectiles.Clear();
