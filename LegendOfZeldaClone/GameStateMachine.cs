@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace LegendOfZeldaClone
 {
@@ -85,8 +86,7 @@ namespace LegendOfZeldaClone
             }
             else if (CurrentGameState == GameState.Pause)
             {
-                InventoryBox.Update();
-                InventoryBoxB.Update();
+                InventoryBox.Update(Direction.None);
                 MapCompassHolder.Update();
             }
         }
@@ -194,11 +194,11 @@ namespace LegendOfZeldaClone
             PlayerRupeeCount = new RupeeCount(this);
             PlayerKeyCount = new KeyCount(this);
             PlayerBombCount = new BombCount(this);
-            InventoryBoxB = new BBox();
+            InventoryBox = new InventoryScreen(this);
+            InventoryBoxB = new BBox(this);
             InventoryBoxA = new ABox(this);
             HUDLifeText = new LifeText();
             HUDHealthBar = new HealthBar(this);
-            InventoryBox = new InventoryScreen(this);
             MapCompassHolder = new MapCompassHolder(this);
         }
 

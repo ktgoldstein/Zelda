@@ -24,6 +24,8 @@ namespace LegendOfZeldaClone
         {
             if (game.CurrentGameState == GameState.Play)
                 game.Player.MoveDown();
+            else if (game.CurrentGameState == GameState.Pause)
+                game.InventoryBox.Update(Direction.Down);
         }
     }
 
@@ -36,6 +38,8 @@ namespace LegendOfZeldaClone
         {
             if (game.CurrentGameState == GameState.Play)
                 game.Player.MoveUp();
+            else if (game.CurrentGameState == GameState.Pause)
+                game.InventoryBox.Update(Direction.Up);
         }
     }
 
@@ -48,6 +52,8 @@ namespace LegendOfZeldaClone
         {
             if (game.CurrentGameState == GameState.Play)
                 game.Player.MoveLeft();
+            else if (game.CurrentGameState == GameState.Pause)
+                game.InventoryBox.Update(Direction.Left);
         }
     }
 
@@ -60,6 +66,8 @@ namespace LegendOfZeldaClone
         {
             if (game.CurrentGameState == GameState.Play)
                 game.Player.MoveRight();
+            else if (game.CurrentGameState == GameState.Pause)
+                game.InventoryBox.Update(Direction.Right);
         }
     }
 
@@ -211,6 +219,19 @@ namespace LegendOfZeldaClone
             {
                 game.CurrentGameState = GameState.Play;
             }
+        }
+    }
+
+    public class SelectItem : ICommand
+    {
+        private GameStateMachine game;
+
+        public SelectItem(GameStateMachine game) => this.game = game; 
+        
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Pause)
+                game.InventoryBoxB.Update();
         }
     }
 }

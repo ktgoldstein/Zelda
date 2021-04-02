@@ -31,12 +31,12 @@ namespace LegendOfZeldaClone
             inventoryCursor = new Cursor(game);
         }
 
-        public void Update() => inventoryCursor.Update();
+        public void Update(Direction direction) => inventoryCursor.Update(direction);
         public void Draw(SpriteBatch spritebatch)
         {
             inventoryBox.Draw(spritebatch, LoZHelpers.InventoryBoxLocation);
             inventorySelectBox.Draw(spritebatch, LoZHelpers.InventorySelectionBoxLocation);
-            inventoryCursor.Draw(spritebatch, LoZHelpers.CursorLocation);
+            inventoryCursor.Draw(spritebatch);
             if (game.Player.Inventory.HasItem(UsableItemTypes.Bomb))
                 inventoryBomb.Draw(spritebatch, LoZHelpers.InventoryBombLocation);
             if (game.Player.Inventory.HasItem(UsableItemTypes.BowWooden))
