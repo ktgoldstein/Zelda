@@ -18,7 +18,7 @@ namespace LegendOfZeldaClone
         public void LoadAllTextures(ContentManager content)
         {
             linkSpriteSheet = content.Load<Texture2D>("linkSpriteSheet");
-            gameOverSparkleSpriteSheet = content.Load<Texture2D>("NAME OF SHEET HERE"); //need to add name of sheet
+            gameOverSparkleSpriteSheet = content.Load<Texture2D>("linkGameOverSparkleEffectSheet"); //need to add name of sheet
         }
             
 

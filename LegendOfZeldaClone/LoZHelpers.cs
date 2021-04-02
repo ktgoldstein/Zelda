@@ -71,7 +71,8 @@ namespace LegendOfZeldaClone
         BlueRing = 1,
         DamagedOne = 6,
         DamagedTwo = 7,
-        DamagedThreeDungeonOne = 9
+        DamagedThreeDungeonOne = 9,
+        DyingLink = 14
     }
 
     public enum LinkSpriteType
