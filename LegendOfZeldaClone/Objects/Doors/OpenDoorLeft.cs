@@ -47,13 +47,16 @@ namespace LegendOfZeldaClone.Objects
             if (game.NextRoom == null)
             {
                 game.NextRoom = game.CurrentRoom.RoomLeft;
-                game.NextRoom.LoadRoom();
-                game.Camera.CameraTransition(Direction.Left);
                 foreach (IObject block in game.NextRoom.Blocks)
                 {
                     if (block is LockedDoorRight)
-                        block.Alive = false;
+                    {
+                        game.NextRoom.Blocks.Remove(block);
+                        break;
+                    }
                 }
+                game.NextRoom.LoadRoom();
+                game.Camera.CameraTransition(Direction.Left);
             }
         }
         public void Die() { }
