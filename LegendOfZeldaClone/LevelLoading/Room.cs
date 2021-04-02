@@ -19,6 +19,9 @@ namespace LegendOfZeldaClone.LevelLoading
         public List<IItem> Items = new List<IItem>();
         public List<IEnemy> Enemies = new List<IEnemy>();
 
+        private List<IObject> secondaryBlocks = new List<IObject>();
+        private bool secondaryBlocksUsed = false;
+
         private readonly ISprite tiles;
         private readonly ISprite walls;
         private readonly GameStateMachine game;
@@ -46,6 +49,15 @@ namespace LegendOfZeldaClone.LevelLoading
             }
         }
 
+        public void CloseDoors()
+        {
+            if (!secondaryBlocksUsed)
+            {
+                game.Objects.AddRange(secondaryBlocks);
+                secondaryBlocksUsed = true;
+            }
+        }
+
         public void LoadRoom()
         {
             game.ResetRoomSpecificLists();
@@ -56,6 +68,7 @@ namespace LegendOfZeldaClone.LevelLoading
                 if (block is MovableRaisedBlock) (block as MovableRaisedBlock).Reset();
             }
 
+            secondaryBlocksUsed = false;
             game.Objects.AddRange(Blocks);
             game.Enemies.AddRange(Enemies);
             game.Items.AddRange(Items);
@@ -188,11 +201,13 @@ namespace LegendOfZeldaClone.LevelLoading
                     break;
                 case 20:
                     AddIObject(new OpenDoorLeft(game, doorLocationLeft));
-                    AddIObject(new ClosedDoorLeft(doorLocationLeft));
+                    AddIObject(new PressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
+                    secondaryBlocks.Add(new ClosedDoorLeft(doorLocationLeft));
                     break;
                 case 21:
                     AddIObject(new OpenDoorRight(game, doorLocationRight));
-                    AddIObject(new ClosedDoorRight(doorLocationRight));
+                    AddIObject(new PressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
+                    secondaryBlocks.Add(new ClosedDoorRight(doorLocationRight));
                     break;
                 case 23:
                     AddIObject(new WallUp(doorLocationUp));

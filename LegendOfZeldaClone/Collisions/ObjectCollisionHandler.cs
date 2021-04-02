@@ -45,6 +45,10 @@ namespace LegendOfZeldaClone.Collisions
             {
                 (CurrentObject as IDoor).ChangeRoom();
             }
+            else if(CurrentObject is PressurePlate)
+            {
+                (CurrentObject as PressurePlate).CloseDoors();
+            }
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
