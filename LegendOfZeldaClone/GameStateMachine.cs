@@ -231,7 +231,7 @@ namespace LegendOfZeldaClone
             ResetPlayer();
             ResetLists();
             InitializeRooms();
-            ResetMiniMap();
+            ResetMaps();
         }
 
         public void ResetPlayer()
@@ -253,9 +253,10 @@ namespace LegendOfZeldaClone
             MapRooms.Clear();
         }
 
-        public void ResetMiniMap()
+        public void ResetMaps()
         {
             HUDMap.Reset();
+            PauseMap.Reset();
         }
     }
 }

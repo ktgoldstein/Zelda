@@ -123,6 +123,13 @@ namespace LegendOfZeldaClone
             FindRoomInArray();
             currentRoom = roomList[roomIndex];
         }
+        public void Reset()
+        {
+            InitilizeMapRoomArray();
+            roomIndex = 0;
+            currentRoom = roomList[15];
+            currentRoom.Visited = true;
+        }
         private void addRoomToList(Direction roomPlacement)
         {
             FindRoomInArray();
