@@ -178,6 +178,7 @@ namespace LegendOfZeldaClone
         public static Vector2 BowAndArrowCursorLocation = new Vector2(CursorLocation.X + Scale(44), CursorLocation.Y);
         public static Vector2 CandleCursorLocation = new Vector2(CursorLocation.X + Scale(74), CursorLocation.Y);
         public static Vector2 PotionCursorLocation = new Vector2(CursorLocation.X + Scale(49), CursorLocation.Y + Scale(16));
+        public static Vector2 InventorySelectionBoxItemLocation = new Vector2(InventorySelectionBoxLocation.X + Scale(69), InventorySelectionBoxLocation.Y + Scale(49));
         public static int GameHeight => Scale(240);
         public static int GameWidth => Scale(256);
         public static int HUDHeight => Scale(64);

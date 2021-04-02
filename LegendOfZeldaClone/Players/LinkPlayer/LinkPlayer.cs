@@ -101,8 +101,6 @@ namespace LegendOfZeldaClone
         {
             Inventory.AddItem(itemType, game);
             linkState.PickUpItem(item);
-            if (itemType != UsableItemTypes.BlueRing)
-                Equip(itemType);
         }
 
         public void Equip(UsableItemTypes itemType)
