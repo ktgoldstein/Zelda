@@ -48,7 +48,9 @@ namespace LegendOfZeldaClone.Objects
             game.CurrentRoom = game.CurrentRoom.RoomUp;
             game.CurrentRoom.LoadRoom();
             game.HUDMap.UpdateLinkMapLocation(Direction.Up);
+            game.PauseMap.UpdateLinkMapLocation(Direction.Up);
             game.PauseMap.PlaceRoomOnMap(Direction.Up);
+
         }
     }
 }

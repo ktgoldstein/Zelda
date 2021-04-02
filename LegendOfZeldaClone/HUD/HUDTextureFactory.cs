@@ -55,6 +55,7 @@ namespace LegendOfZeldaClone
                 PauseMapRoomType.RoomUDR => new PauseMapSprite(addRoomOnMap, 117, 0, 8, 8),
                 PauseMapRoomType.RoomUDL => new PauseMapSprite(addRoomOnMap, 126, 0, 8, 8),
                 PauseMapRoomType.AllRooms => new PauseMapSprite(addRoomOnMap, 135, 0, 8, 8),
+                _ => null
             };
         }
         public ISprite CreateLocationTracker() => new MapSprite(locationTracker, 1, 1, 1);
