@@ -127,6 +127,14 @@ namespace LegendOfZeldaClone
             {
                 InventoryBox.Draw(sprintBatch);
                 MapCompassHolder.Draw(sprintBatch);
+                DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNamePauseLocation);
+                PlayerRupeeCount.Draw(sprintBatch, LoZHelpers.RupeeCountPauseLocation);
+                PlayerKeyCount.Draw(sprintBatch, LoZHelpers.KeyCountPauseLocation);
+                PlayerBombCount.Draw(sprintBatch, LoZHelpers.BombCountPauseLocation);
+                InventoryBoxB.Draw(sprintBatch, LoZHelpers.BBoxPauseLocation);
+                InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxPauseLocation);
+                HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextPauseLocation);
+                HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthPauseLocation);
             }
         }
 
@@ -186,7 +194,7 @@ namespace LegendOfZeldaClone
             PlayerKeyCount = new KeyCount(this);
             PlayerBombCount = new BombCount(this);
             InventoryBoxB = new BBox();
-            InventoryBoxA = new ABox();
+            InventoryBoxA = new ABox(this);
             HUDLifeText = new LifeText();
             HUDHealthBar = new HealthBar(this);
             InventoryBox = new InventoryScreen(this);

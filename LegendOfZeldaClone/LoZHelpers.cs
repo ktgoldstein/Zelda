@@ -162,6 +162,16 @@ namespace LegendOfZeldaClone
         public static Vector2 MapCompassHolderLocation => new Vector2(InventorySelectionBoxLocation.X + Scale(1), InventorySelectionBoxLocation.Y + Scale(88));
         public static Vector2 InventoryMapItemLocation => new Vector2(MapCompassHolderLocation.X + Scale(48), MapCompassHolderLocation.Y + Scale(25));
         public static Vector2 InventoryCompassLocation => new Vector2(InventoryMapItemLocation.X - Scale(5), InventoryMapItemLocation.Y + Scale(41));
+        public static Vector2 LevelNamePauseLocation => new Vector2(LevelNameLocation.X, GameHeight - Scale(56));
+        public static Vector2 RupeeCountPauseLocation => new Vector2(RupeeCountLocation.X, GameHeight - Scale(40));
+        public static Vector2 KeyCountPauseLocation => new Vector2(KeyCountLocation.X, GameHeight - Scale(24));
+        public static Vector2 BombCountPauseLocation => new Vector2(BombCountLocation.X, GameHeight - Scale(16));
+        public static Vector2 BBoxPauseLocation => new Vector2(BBoxLocation.X, RupeeCountPauseLocation.Y);
+        public static Vector2 BBoxItemPauseLocation => new Vector2(BBoxPauseLocation.X + Scale(5), BBoxPauseLocation.Y + Scale(8));
+        public static Vector2 ABoxPauseLocation => new Vector2(ABoxLocation.X, RupeeCountPauseLocation.Y);
+        public static Vector2 ABoxItemPauseLocation => new Vector2(ABoxPauseLocation.X + Scale(5), ABoxPauseLocation.Y + Scale(8));
+        public static Vector2 LifeTextPauseLocation => new Vector2(LifeTextLocation.X, RupeeCountPauseLocation.Y);
+        public static Vector2 HealthPauseLocation => new Vector2(HealthLocation.X, LifeTextPauseLocation.Y + Scale(24));
         public static int GameHeight => Scale(240);
         public static int GameWidth => Scale(256);
         public static int HUDHeight => Scale(64);
