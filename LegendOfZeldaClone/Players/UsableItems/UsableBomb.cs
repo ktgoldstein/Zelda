@@ -14,6 +14,10 @@ namespace LegendOfZeldaClone
             {
                 playerInventory.BombsHeld--;
                 game.PlayerProjectilesQueue.Add(new BombProjectile(game, location, direction));
+                if (playerInventory.BombsHeld == 0)
+                {
+                    playerInventory.heldItems.Remove(UsableItemTypes.Bomb);
+                }
                 new BombPlacingSoundEffect().Play();
             }
         }

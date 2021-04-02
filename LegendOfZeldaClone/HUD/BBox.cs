@@ -48,29 +48,58 @@ namespace LegendOfZeldaClone
                 {
                     boomerangSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
                     boomerang = true;
+                    game.Player.Equip(UsableItemTypes.BoomerangNormal);
+                    bomb = false;
+                    bow = false;
+                    candle = false;
+                    potion = false;
                 }
                 else if (cursor.location == LoZHelpers.BombCursorLocation)
                 {
                     bombSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
                     bomb = true;
+                    game.Player.Equip(UsableItemTypes.Bomb);
+                    boomerang = false;
+                    bow = false;
+                    candle = false;
+                    potion = false;
                 }
                 else if (cursor.location == LoZHelpers.BowAndArrowCursorLocation)
                 {
                     bowSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
                     bow = true;
+                    game.Player.Equip(UsableItemTypes.BowWooden);
+                    bomb = false;
+                    boomerang = false;
+                    candle = false;
+                    potion = false;
                 }
                 else if (cursor.location == LoZHelpers.CandleCursorLocation)
                 {
                     candleSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
                     candle = true;
+                    game.Player.Equip(UsableItemTypes.BlueCandle);
+                    bomb = false;
+                    bow = false;
+                    boomerang = false;
+                    potion = false;
                 }
                 else if (cursor.location == LoZHelpers.PotionCursorLocation)
                 {
                     potionSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
                     potion = true;
+                    game.Player.Equip(UsableItemTypes.BlueCandle);
+                    bomb = false;
+                    bow = false;
+                    candle = false;
+                    boomerang = false;
                 }
                 select = false;
             }
+            if (game.Player.Inventory.BombsHeld == 0)
+                bomb = false;
+            if (!game.Player.Inventory.HasItem(UsableItemTypes.LifePotion))
+                potion = false;
             if (game.CurrentGameState == GameState.Play)
             {
                 if (boomerang)

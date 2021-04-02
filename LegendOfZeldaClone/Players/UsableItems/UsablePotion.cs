@@ -14,6 +14,7 @@ namespace LegendOfZeldaClone
         public void Use(Vector2 location, Direction direction, PlayerInventory playerInventory)
         {
             game.Player.Health = game.Player.MaxHealth;
+            playerInventory.heldItems.Remove(UsableItemTypes.LifePotion);
         }
     }
 }

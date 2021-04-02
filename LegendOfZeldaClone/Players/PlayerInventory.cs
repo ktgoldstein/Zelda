@@ -26,7 +26,7 @@ namespace LegendOfZeldaClone
         private int bombsHeld;
         private int keysHeld;
         private int rupeesHeld;
-        private Dictionary<UsableItemTypes, IUsableItem> heldItems;
+        public Dictionary<UsableItemTypes, IUsableItem> heldItems;
 
         public PlayerInventory(int bombs, int keys, int rupees, bool hasMap, bool hasCompass)
         {
