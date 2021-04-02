@@ -89,6 +89,14 @@ namespace LegendOfZeldaClone
                 InventoryBox.Update(Direction.None);
                 MapCompassHolder.Update();
             }
+            else if (CurrentGameState == GameState.GameOver)
+            {
+
+            }
+            else if (CurrentGameState == GameState.GameWon)
+            {
+
+            }
         }
 
         public void Draw(SpriteBatch sprintBatch) 
@@ -136,6 +144,14 @@ namespace LegendOfZeldaClone
                 InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxPauseLocation);
                 HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextPauseLocation);
                 HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthPauseLocation);
+            }
+            else if (CurrentGameState == GameState.GameOver)
+            {
+
+            }
+            else if (CurrentGameState == GameState.GameWon)
+            {
+
             }
         }
 

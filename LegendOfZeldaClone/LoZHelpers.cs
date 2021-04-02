@@ -5,7 +5,9 @@ namespace LegendOfZeldaClone
     public enum GameState
     {
         Play,
-        Pause
+        Pause,
+        GameOver,
+        GameWon
     }
     public enum Direction
     {
