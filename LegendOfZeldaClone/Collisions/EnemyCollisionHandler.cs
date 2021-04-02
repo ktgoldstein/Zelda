@@ -32,6 +32,8 @@ namespace LegendOfZeldaClone.Collisions
         public void HandleItemCollision(IItem item, Direction direction) { }
         public void HandleObjectCollision(IObject block, Direction direction)
         {
+            if (block.BlockHeight == ObjectHeight.CanWalkOver) return;
+
             //they should stop and have to move around it (except keese if the object is not impassable)
             if (!(CurrentEnemy is Wallmaster && block is Objects.InvisibleBlock))
             {

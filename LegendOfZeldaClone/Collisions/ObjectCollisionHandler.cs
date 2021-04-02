@@ -22,24 +22,11 @@ namespace LegendOfZeldaClone.Collisions
                 new DoorUnlockingSoundEffect().Play();
                 player.Inventory.KeysHeld--;
             }
-            else if (CurrentObject.IsMovable)
+            else if (CurrentObject is MovableRaisedBlock)
             {
-                int blockPushingSpeedConstant = LoZHelpers.Scale(1);
-                switch (direction)
-                {
-                    case Direction.Down:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y - blockPushingSpeedConstant);
-                        break;
-                    case Direction.Up:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X, CurrentObject.Location.Y + blockPushingSpeedConstant);
-                        break;
-                    case Direction.Left:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X + blockPushingSpeedConstant, CurrentObject.Location.Y);
-                        break;
-                    case Direction.Right:
-                        CurrentObject.Location = new Vector2(CurrentObject.Location.X - blockPushingSpeedConstant, CurrentObject.Location.Y);
-                        break;
-                }
+                MovableRaisedBlock target = (CurrentObject as MovableRaisedBlock);
+                if (target.MovedDirection == Direction.None)
+                    target.MovedDirection = LoZHelpers.FlipDirection(direction);
             }
             else if (CurrentObject is IDoor)
             {
@@ -58,26 +45,6 @@ namespace LegendOfZeldaClone.Collisions
         public void HandleEnemyCollision(IEnemy enemy, Direction direction) { }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) { }
         public void HandleItemCollision(IItem item, Direction direction) { }
-        public void HandleObjectCollision(IObject block, Direction direction)
-        {
-            if (CurrentObject.IsMovable)
-            {
-                switch (direction)
-                {
-                    case Direction.Down:
-                        CurrentObject.HurtBoxLocation = new Vector2(CurrentObject.HurtBoxLocation.X, block.HurtBoxLocation.Y - CurrentObject.Height);
-                        break;
-                    case Direction.Up:
-                        CurrentObject.HurtBoxLocation = new Vector2(CurrentObject.HurtBoxLocation.X, block.HurtBoxLocation.Y + block.Height);
-                        break;
-                    case Direction.Left:
-                        CurrentObject.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X + block.Width, CurrentObject.HurtBoxLocation.Y);
-                        break;
-                    case Direction.Right:
-                        CurrentObject.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X - CurrentObject.Width, CurrentObject.HurtBoxLocation.Y);
-                        break;
-                }
-            }
-        }
+        public void HandleObjectCollision(IObject block, Direction direction) { }
     }
 }

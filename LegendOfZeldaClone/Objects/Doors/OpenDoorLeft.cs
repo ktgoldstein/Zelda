@@ -15,7 +15,6 @@ namespace LegendOfZeldaClone.Objects
             set { Location = value; }
         }
         public ObjectHeight BlockHeight { get; }
-        public bool IsMovable { get; }
         public bool IsBombable { get; }
         public bool Alive { get; set; }
 
@@ -34,7 +33,6 @@ namespace LegendOfZeldaClone.Objects
             width = 8;
             BlockHeight = ObjectHeight.CanWalkOver;
             hurtBoxOffset = Vector2.Zero;
-            IsMovable = false;
             IsBombable = false;
             Alive = true;
         }

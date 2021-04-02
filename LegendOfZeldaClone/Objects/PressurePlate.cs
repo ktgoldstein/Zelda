@@ -6,7 +6,6 @@ namespace LegendOfZeldaClone.Objects
     public class PressurePlate : IObject
     {
         public ObjectHeight BlockHeight => ObjectHeight.CanWalkOver;
-        public bool IsMovable => false;
         public bool IsBombable => false;
         public Vector2 Location { get; set; }
         public Vector2 HurtBoxLocation { get => Location; set => Location = value; }

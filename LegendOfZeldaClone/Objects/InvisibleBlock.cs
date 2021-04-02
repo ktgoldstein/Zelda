@@ -14,20 +14,18 @@ namespace LegendOfZeldaClone.Objects
             set { Location = value; }
         }
         public ObjectHeight BlockHeight { get; }
-        public bool IsMovable { get; }
         public bool IsBombable { get; }
         public bool Alive { get; set; }
 
         private readonly int height;
         private int width;
 
-        public InvisibleBlock(Vector2 location, Direction direction)
+        public InvisibleBlock(Vector2 location, Direction direction, ObjectHeight objectHeight)
         {
             Location = location;
             height = 16;
             width = 16;
-            BlockHeight = ObjectHeight.Impassable;
-            IsMovable = false;
+            BlockHeight = objectHeight;
             IsBombable = false;
             Alive = true;
 

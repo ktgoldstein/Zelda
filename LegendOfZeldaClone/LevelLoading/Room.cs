@@ -19,8 +19,8 @@ namespace LegendOfZeldaClone.LevelLoading
         public List<IItem> Items = new List<IItem>();
         public List<IEnemy> Enemies = new List<IEnemy>();
 
-        private List<IObject> secondaryBlocks = new List<IObject>();
-        private bool secondaryBlocksUsed = false;
+        private List<IObject> closedDoors = new List<IObject>();
+        private bool doorsWereClosed = false;
 
         private readonly ISprite tiles;
         private readonly ISprite walls;
@@ -51,10 +51,10 @@ namespace LegendOfZeldaClone.LevelLoading
 
         public void CloseDoors()
         {
-            if (!secondaryBlocksUsed)
+            if (!doorsWereClosed)
             {
-                game.Objects.AddRange(secondaryBlocks);
-                secondaryBlocksUsed = true;
+                game.Objects.AddRange(closedDoors);
+                doorsWereClosed = true;
             }
         }
 
@@ -68,7 +68,7 @@ namespace LegendOfZeldaClone.LevelLoading
                 if (block is MovableRaisedBlock) (block as MovableRaisedBlock).Reset();
             }
 
-            secondaryBlocksUsed = false;
+            doorsWereClosed = false;
             game.Objects.AddRange(Blocks);
             game.Enemies.AddRange(Enemies);
             game.Items.AddRange(Items);
@@ -136,13 +136,13 @@ namespace LegendOfZeldaClone.LevelLoading
             switch (gameObjectID)
             {
                 case -3:
-                    AddIObject(new InvisibleBlock(tileLocation, Direction.Left));
+                    AddIObject(new InvisibleBlock(tileLocation, Direction.Left, ObjectHeight.Impassable));
                     break;
                 case -2:
-                    AddIObject(new InvisibleBlock(tileLocation, Direction.Right));
+                    AddIObject(new InvisibleBlock(tileLocation, Direction.Right, ObjectHeight.Impassable));
                     break;
                 case -1:
-                    AddIObject(new InvisibleBlock(tileLocation, Direction.None));
+                    AddIObject(new InvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable));
                     break;
                 case 1:
                     AddIObject(new RaisedBlock(tileLocation));
@@ -209,12 +209,12 @@ namespace LegendOfZeldaClone.LevelLoading
                     break;
                 case 20:
                     AddIObject(new OpenDoorLeft(game, doorLocationLeft));
-                    secondaryBlocks.Add(new ClosedDoorLeft(doorLocationLeft));
+                    closedDoors.Add(new ClosedDoorLeft(doorLocationLeft));
                     AddIObject(new PressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
                     break;
                 case 21:
                     AddIObject(new OpenDoorRight(game, doorLocationRight));
-                    secondaryBlocks.Add(new ClosedDoorRight(doorLocationRight));
+                    closedDoors.Add(new ClosedDoorRight(doorLocationRight));
                     AddIObject(new PressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
                     break;
                 case 23:
