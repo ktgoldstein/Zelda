@@ -120,7 +120,6 @@ namespace LegendOfZeldaClone
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
         public void Update()
         {
-            Die();
             linkState.Update();
             if (game.CurrentGameState == GameState.Play && Health < 3 && game.MusicTimingHelperInt % 7 == 0)
                 new LowHealthBeepingSoundEffect().Play();
@@ -129,7 +128,8 @@ namespace LegendOfZeldaClone
         public void Die()
         {
             Health = 0;
-            linkState = GetStateDying();
+            //SetState(GetStateDying());
+            linkState.Die();
             game.CurrentGameState = GameState.GameOver;
         }
         

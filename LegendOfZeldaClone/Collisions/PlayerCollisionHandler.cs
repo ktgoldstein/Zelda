@@ -14,9 +14,7 @@ namespace LegendOfZeldaClone
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             if (playerProjectile is FireProjectile)
-            {
                 CurrentPlayer.Damage(1, direction);
-            }
         }
 
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
@@ -47,7 +45,6 @@ namespace LegendOfZeldaClone
                     CurrentPlayer.PickUpUsableItem(UsableItemTypes.Bomb, item);
                     new NewImportantItemAcquiredFanfareSoundEffect().Play();
                 }
-                    
                 CurrentPlayer.Inventory.BombsHeld += LoZHelpers.BombPickUpNumber;
             }
             else if (item is Key)

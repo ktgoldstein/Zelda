@@ -43,6 +43,7 @@ namespace LegendOfZeldaClone
         public GameState CurrentGameState = GameState.Play;
 
         public IGameSound GameBackgroundMusic;
+        public GameOverThemeMusic GameOverTheme;
         public int MusicTimingHelperInt;
 
         List<Room> RoomList;
@@ -126,8 +127,12 @@ namespace LegendOfZeldaClone
             }
             else if (CurrentGameState == GameState.GameOver)
             {
+                GameBackgroundMusic.StopPlaying();
+                GameOverTheme.ConditionalPlay();
                 Player.Update();
-                
+
+                //when player linkstate has AnimationDone = true then play the gameover theme instead of the link dying thing
+
                 Console.WriteLine("Game Over state");
                 //player enters dying state
                 //screen flashes red
@@ -267,6 +272,8 @@ namespace LegendOfZeldaClone
         {
             GameBackgroundMusic = new DungeonThemeMusic();
             GameBackgroundMusic.Play();
+            GameOverTheme = new GameOverThemeMusic();
+
         }
 
         public List<T> UpdateGameObjectEnumerable<T>(List<T> gameObjects) where T : IGameObject
