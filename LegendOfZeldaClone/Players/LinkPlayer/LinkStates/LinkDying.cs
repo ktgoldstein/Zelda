@@ -11,13 +11,10 @@ namespace LegendOfZeldaClone
 
         public Direction BlockingDirection { get { return Direction.None; } }
 
-        public LinkDying(ILinkPlayer link, IItem item, int frame = 0)
+        public LinkDying(ILinkPlayer link, int frame = 0)
         {
             linkPlayer = link;
             linkSprite = LinkSpriteFactory.Instance.CreateLinkDyingSprite(link.SkinType, frame);
-            //heldItem = item;
-
-            //heldItem.Location = new Vector2(link.Location.X + (link.Width - heldItem.Width) / 2, link.Location.Y - heldItem.Height);
         }
 
         public void MoveUp() { }
@@ -26,7 +23,8 @@ namespace LegendOfZeldaClone
         public void MoveRight() { }
         public void Action() { }
         public void PickUpItem(IItem item) { }
-        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.PickingUpItem, linkSprite.CurrentFrame);
+        public void PickUpTriforce(IItem triforce) { }
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.Dying, linkSprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch)
         {
             linkSprite.Draw(spriteBatch, linkPlayer.Location);

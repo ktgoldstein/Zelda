@@ -4,21 +4,21 @@ using System;
 
 namespace LegendOfZeldaClone
 {
-    public class LinkPickingUpItem : ILinkState
+    public class LinkPickingUpTriforce : ILinkState
     {
         private readonly ILinkPlayer linkPlayer;
         private readonly ILinkSprite linkSprite;
-        private readonly IItem heldItem;
+        private readonly IItem triforce;
 
         public Direction BlockingDirection { get { return Direction.None; } }
 
-        public LinkPickingUpItem(ILinkPlayer link, IItem item, int frame = 0)
+        public LinkPickingUpTriforce(ILinkPlayer link, IItem triforce, int frame = 0)
         {
             linkPlayer = link;
-            linkSprite = LinkSpriteFactory.Instance.CreateLinkPickingUpItemSprite(link.SkinType, frame);
-            heldItem = item;
+            linkSprite = LinkSpriteFactory.Instance.CreateLinkPickingUpTriforceSprite(link.SkinType, frame);
+            this.triforce = triforce;
 
-            heldItem.Location = new Vector2(link.Location.X + (link.Width - heldItem.Width) / 2, link.Location.Y - heldItem.Height);
+            this.triforce.Location = new Vector2(link.Location.X + (link.Width - this.triforce.Width) / 2, link.Location.Y - this.triforce.Height);
         }
 
         public void MoveUp() { }
@@ -28,11 +28,11 @@ namespace LegendOfZeldaClone
         public void Action() { }
         public void PickUpItem(IItem item) { }
         public void PickUpTriforce(IItem triforce) { }
-        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.PickingUpItem, linkSprite.CurrentFrame);
+        public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.PickingUpTriforce, linkSprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch)
         {
             linkSprite.Draw(spriteBatch, linkPlayer.Location);
-            heldItem.Draw(spriteBatch);
+            triforce.Draw(spriteBatch);
         }
 
         public void Update()
@@ -40,7 +40,7 @@ namespace LegendOfZeldaClone
             linkSprite.Update();
             if (linkSprite.AnimationDone())
             {
-                if (heldItem is BlueRing)
+                if (triforce is BlueRing)
                     linkPlayer.Equip(UsableItemTypes.BlueRing);
                 else
                     linkPlayer.SetState(linkPlayer.GetStateStandingDown());                

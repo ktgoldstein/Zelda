@@ -11,7 +11,7 @@ namespace LegendOfZeldaClone
         {
             Sound = GameSoundFactory.Instance.GetTriforceAcquiredFanfareMusic();
             SoundInstance = Sound.CreateInstance();
-            SoundInstance.IsLooped = true;
+            SoundInstance.IsLooped = false;
         }
         public void Play()
         {

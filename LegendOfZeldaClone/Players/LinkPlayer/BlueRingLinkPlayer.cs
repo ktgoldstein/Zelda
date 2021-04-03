@@ -108,15 +108,11 @@ namespace LegendOfZeldaClone
             linkState.PickUpItem(item);
             Equip(itemType);
         }
-
+        public void PickUpTriforce(IItem triforce) => linkState.PickUpTriforce(triforce);
         public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
         public void Update() => linkState.Update();
-        public void Die()
-        {
-            Health = 0;
-            //add gamestate change to losing
-        }
+        public void Die() => decoratedLinkPlayer.Die();
         public void SetState(ILinkState linkState) => this.linkState = linkState;
         public ILinkState GetStateStandingDown() => new LinkStandingDown(this);
         public ILinkState GetStateStandingUp() => new LinkStandingUp(this);
@@ -131,5 +127,7 @@ namespace LegendOfZeldaClone
         public ILinkState GetStateUsingItemLeft() => new LinkUsingItemLeft(this);
         public ILinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
         public ILinkState GetStatePickingUpItem(IItem item) => new LinkPickingUpItem(this, item);
+        public ILinkState GetStatePickingUpTriforce(IItem triforce) => new LinkPickingUpTriforce(this, triforce);
+        public ILinkState GetStateDying() => new LinkDying(this);
     }
 }

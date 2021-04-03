@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace LegendOfZeldaClone
 {
@@ -38,6 +39,11 @@ namespace LegendOfZeldaClone
         public readonly int SwitchDelayLength;
         public GameState CurrentGameState = GameState.Play;
 
+        public IGameSound GameBackgroundMusic;
+        public int MusicTimingHelperInt;
+
+        List<Room> RoomList;
+
         public GameStateMachine()
         {
             Enemies = new List<IEnemy>();
@@ -52,6 +58,9 @@ namespace LegendOfZeldaClone
 
             SwitchRoomDelay = 0;
             SwitchDelayLength = 5;
+
+            
+            MusicTimingHelperInt = 0;
         }
 
         public void Update()
@@ -84,6 +93,24 @@ namespace LegendOfZeldaClone
                 PlayerKeyCount.Update();
 
                 Collisions.CollisionHandling.HandleCollisions(this);
+
+                //debugging
+                if (MusicTimingHelperInt > 120)
+                {
+                    GameBackgroundMusic.StopPlaying();
+                }
+                MusicTimingHelperInt++;
+                if (MusicTimingHelperInt % 10 == 0)
+                {
+                    // new HeartPickupSoundEffect().Play();
+                }
+
+                  if (CurrentRoom == RoomList[7] || CurrentRoom == RoomList[13])
+                 {
+                   if (MusicTimingHelperInt % 60 == 0)
+                      new AquamentusScreamingSoundEffect().Play();
+                 }
+
             }
             else if (CurrentGameState == GameState.Pause)
             {
@@ -92,12 +119,18 @@ namespace LegendOfZeldaClone
             }
             else if (CurrentGameState == GameState.GameOver)
             {
-
+                Player.Update();
+                
+                Console.WriteLine("Game Over state");
+                //player enters dying state
+                //screen flashes red
+                //screen fades to black
             }
             else if (CurrentGameState == GameState.GameWon)
             {
 
             }
+            
         }
 
         public void Draw(SpriteBatch sprintBatch) 
@@ -149,7 +182,7 @@ namespace LegendOfZeldaClone
             }
             else if (CurrentGameState == GameState.GameOver)
             {
-
+                Player.Draw(sprintBatch);
             }
             else if (CurrentGameState == GameState.GameWon)
             {
@@ -159,7 +192,7 @@ namespace LegendOfZeldaClone
 
         public void InitializeRooms()
         {
-            List<Room> RoomList = new List<Room>()
+            RoomList = new List<Room>()
             {
                 new Room("Content\\LevelLoading\\room00.csv", this),
                 new Room("Content\\LevelLoading\\room01.csv", this),
@@ -219,6 +252,12 @@ namespace LegendOfZeldaClone
             HUDHealthBar = new HealthBar(this);
             MapCompassHolder = new MapCompassHolder(this);
             SelectionBox = new SelectionBoxItem(this);
+        }
+
+        public void InitializeMusic()
+        {
+            GameBackgroundMusic = new DungeonThemeMusic();
+            GameBackgroundMusic.Play();
         }
 
         public List<T> UpdateGameObjectEnumerable<T>(List<T> gameObjects) where T : IGameObject

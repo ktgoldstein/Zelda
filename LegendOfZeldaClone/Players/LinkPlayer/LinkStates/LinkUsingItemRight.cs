@@ -22,6 +22,7 @@ namespace LegendOfZeldaClone
         public void MoveRight() { }
         public void Action() { }
         public void PickUpItem(IItem item) => linkPlayer.SetState(linkPlayer.GetStatePickingUpItem(item));
+        public void PickUpTriforce(IItem triforce) => linkPlayer.SetState(linkPlayer.GetStatePickingUpTriforce(triforce));
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.UsingItemRight, linkSprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => linkSprite.Draw(spriteBatch, linkPlayer.Location);
 

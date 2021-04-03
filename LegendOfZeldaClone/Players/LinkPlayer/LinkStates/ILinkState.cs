@@ -12,6 +12,7 @@ namespace LegendOfZeldaClone
         public void MoveRight();
         public void Action();
         public void PickUpItem(IItem item);
+        public void PickUpTriforce(IItem triforce);
         public Tuple<LinkStateType, int> GetState();
         public void Draw(SpriteBatch spriteBatch);
         public void Update();

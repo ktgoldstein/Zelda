@@ -18,7 +18,7 @@ namespace LegendOfZeldaClone
         private GameStateMachine gameStateMachine;
 
         public IGameSound GameBackgroundMusic;
-        public int MusicTimingHelperInt;
+        public int MusicTimingHelperInt; //here for debugging purposes only; usually in gameStateMachine
         public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -103,9 +103,10 @@ namespace LegendOfZeldaClone
 
             gameStateMachine.ResetPlayer();
             gameStateMachine.InitializeRooms();
-            gameStateMachine.InitializeHUD();            
-            GameBackgroundMusic = new DungeonThemeMusic();
-            GameBackgroundMusic.Play();
+            gameStateMachine.InitializeHUD();
+            gameStateMachine.InitializeMusic();
+           // GameBackgroundMusic = new DungeonThemeMusic();
+          //  GameBackgroundMusic.Play();
             MusicTimingHelperInt = 0;
         }
 
@@ -117,20 +118,8 @@ namespace LegendOfZeldaClone
 
             base.Update(gameTime);
 
-            if (MusicTimingHelperInt > 120)
-            {
-                GameBackgroundMusic.StopPlaying();
-            }
-            MusicTimingHelperInt++;
-            if (MusicTimingHelperInt % 10 ==0)
-            {
-               // new HeartPickupSoundEffect().Play();
-            }
-          //  if (CurrentRoom == RoomList[7] || CurrentRoom == RoomList[13])
-           // {
-             //   if (MusicTimingHelperInt % 60 == 0)
-              //      new AquamentusScreamingSoundEffect().Play();
-           // }
+            
+
         }
 
         protected override void Draw(GameTime gameTime)

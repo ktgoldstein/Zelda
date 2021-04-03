@@ -43,7 +43,11 @@ namespace LegendOfZeldaClone
             else if (item is Bomb)
             {
                 if (!CurrentPlayer.Inventory.HasItem(UsableItemTypes.Bomb))
+                {
                     CurrentPlayer.PickUpUsableItem(UsableItemTypes.Bomb, item);
+                    new NewImportantItemAcquiredFanfareSoundEffect().Play();
+                }
+                    
                 CurrentPlayer.Inventory.BombsHeld += LoZHelpers.BombPickUpNumber;
             }
             else if (item is Key)
@@ -73,6 +77,8 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.Inventory.HasArrow = true;
             else if (item is LifePotion)
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.LifePotion, item);
+            else if (item is TriForcePiece)
+                CurrentPlayer.PickUpTriforce(item);
         }
 
 
