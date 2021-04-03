@@ -67,7 +67,6 @@ namespace LegendOfZeldaClone
         public GameState PreviousGameState;
         private GameState currentGameState = GameState.Play;
 
-
         public GameStateMachine()
         {
             RoomCamera = new Camera(this);
@@ -147,7 +146,6 @@ namespace LegendOfZeldaClone
 
         public void RoomDraw(SpriteBatch sprintBatch)
         {
-
             CurrentRoom.Draw(sprintBatch);
             NextRoom?.Draw(sprintBatch);
 

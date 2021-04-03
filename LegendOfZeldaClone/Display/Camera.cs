@@ -8,11 +8,13 @@ namespace LegendOfZeldaClone.Display
         private Vector2 position = Vector2.Zero;
         private Vector2 targetPosition;
         private readonly int speed = LoZHelpers.Scale(8);
-        private Direction currentTransitionDirection;
+        private Direction currentTransitionDirection = Direction.None;
+        private bool active = false;
 
         public Camera(GameStateMachine game)
         {
             this.game = game;
+            targetPosition = position;
         }
 
         public void Reset()
@@ -22,12 +24,13 @@ namespace LegendOfZeldaClone.Display
             currentTransitionDirection = Direction.None;
         }
 
-        public void CameraTransition(Direction direction)
+        public void CameraTransition(Direction direction, GameState newGameState)
         {
             if (game.CurrentGameState == GameState.ScreenTransition) return;
-            else if (game.CurrentGameState == GameState.Play)
-                game.CurrentGameState = GameState.ScreenTransition;
+            if (game.CurrentGameState == GameState.PauseTransition) return;
 
+            active = true;
+            game.CurrentGameState = newGameState;
             currentTransitionDirection = direction;
             switch (direction)
             {
@@ -52,11 +55,18 @@ namespace LegendOfZeldaClone.Display
 
         public void Update()
         {
-            if (targetPosition != position)
+            if (!active) return;
+            if ((targetPosition - position).Length() != 0)
             {
                 Vector2 direction = targetPosition - position;
-                direction.Normalize();
-                position += direction * speed;
+                if (direction.Length() < 8)
+                    position = targetPosition;
+                else
+                {
+                    direction.Normalize();
+                    position += direction * speed;
+                }
+                return;
             }
             else if (game.CurrentGameState == GameState.ScreenTransition)
             {
@@ -64,6 +74,7 @@ namespace LegendOfZeldaClone.Display
                 game.CurrentRoom = game.NextRoom;
                 game.NextRoom = null;
                 game.ShiftLink(currentTransitionDirection);
+                active = false;
             }
             else if (game.CurrentGameState == GameState.PauseTransition)
             {
@@ -71,6 +82,7 @@ namespace LegendOfZeldaClone.Display
                     game.CurrentGameState = GameState.Pause;
                 else
                     game.CurrentGameState = GameState.Play;
+                active = false;
             }
         }
 

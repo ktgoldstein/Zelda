@@ -18,6 +18,9 @@ namespace LegendOfZeldaClone
 
         public IGameSound GameBackgroundMusic;
         public int MusicTimingHelperInt;
+
+        private Texture2D blackBackground;
+
         public LegendOfZeldaDungeon()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -103,6 +106,8 @@ namespace LegendOfZeldaClone
             RoomTextureFactory.Instance.LoadAllTextures(Content);
             HUDTextureFactory.Instance.LoadAllTextures(Content);
 
+            blackBackground = Content.Load<Texture2D>("BackgroundFix");
+
             gameStateMachine.ResetPlayer();
             gameStateMachine.InitializeRooms();
             gameStateMachine.InitializeHUD();            
@@ -148,6 +153,9 @@ namespace LegendOfZeldaClone
             _SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
                 null, null, null, null, gameStateMachine.MenuCamera.Translation());
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
+
+            _SpriteBatch.Draw(blackBackground, new Rectangle(0, LoZHelpers.HUDHeight - LoZHelpers.GameHeight, LoZHelpers.GameWidth, LoZHelpers.GameHeight), Color.White);
+
             gameStateMachine.HUDDraw(_SpriteBatch);
             _SpriteBatch.End();
 

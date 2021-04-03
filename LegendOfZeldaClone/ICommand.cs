@@ -232,13 +232,10 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            if (game.CurrentGameState == GameState.PauseTransition) return;
-
-            game.CurrentGameState = GameState.PauseTransition;
-            if (game.PreviousGameState == GameState.Play)
-                game.MenuCamera.CameraTransition(Direction.Up);
-            else if (game.PreviousGameState == GameState.Pause)
-                game.MenuCamera.CameraTransition(Direction.Down);
+            if (game.CurrentGameState == GameState.Play)
+                game.MenuCamera.CameraTransition(Direction.Up, GameState.PauseTransition);
+            else if (game.CurrentGameState == GameState.Pause)
+                game.MenuCamera.CameraTransition(Direction.Down, GameState.PauseTransition);
         }
     }
 

@@ -175,7 +175,7 @@ namespace LegendOfZeldaClone
         public static Vector2 LinkLocationTrackerPause => new Vector2(PauseMapLocation.X + Scale(58), PauseMapLocation.Y + Scale(66));
         public static Vector2 TriForcePauseLocation => new Vector2(LinkLocationTrackerMini.X + Scale(32), LinkLocationTrackerMini.Y - Scale(21) - 1);
         public static Vector2 PauseMapLocation => new Vector2(InventorySelectionBoxLocation.X + Scale(100), InventorySelectionBoxLocation.Y + Scale(88));
-        public static Vector2 PauseMapRoomLocation => new Vector2(PauseMapLocation.X + Scale(56), PauseMapLocation.Y + Scale(64) - GameHeight + HUDHeight);
+        public static Vector2 PauseMapRoomLocation => new Vector2(PauseMapLocation.X + Scale(56), PauseMapLocation.Y + Scale(64));
         public static Vector2 LevelNameLocation => new Vector2(MiniMapLocation.X + Scale(6), MiniMapLocation.Y - Scale(9));
         public static Vector2 RupeeCountLocation => new Vector2(MiniMapLocation.X + Scale(87), MiniMapLocation.Y + Scale(4));
         public static Vector2 KeyCountLocation => new Vector2(RupeeCountLocation.X, RupeeCountLocation.Y + Scale(17));
