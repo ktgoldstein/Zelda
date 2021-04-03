@@ -40,6 +40,7 @@ namespace LegendOfZeldaClone
         public void BeCollected()
         {
             Die();
+            new InventoryItemPickupSoundEffect().Play();
             new TriforceAcquiredFanfareMusic().Play();
         }
         public void Die() => Alive = false;

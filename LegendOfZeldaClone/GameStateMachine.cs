@@ -45,11 +45,14 @@ namespace LegendOfZeldaClone
         public IGameSound GameBackgroundMusic;
         public GameOverThemeMusic GameOverTheme;
         public int MusicTimingHelperInt;
-        public int GameOverMusicTimingHelperInt;
+        public int EndScreenMusicTimingHelperInt;
         public int NumberOfLinkDyingFrames;
         public int NumberOfFramesBeforeBlackScreenGameOver;
         public int NumberOfFramesBeforeGameOverMessageAppears;
-        public Texture2D GameOverTexture;
+        public int NumberOfLinkPickingUpTriforceFrames;
+        public int NumberOfFramesBeforeBlackFadeOutBeginsGameWon;
+        public int NumberOfFramesBeforeBlackFadeOutEndsGameWon;
+        public Texture2D GameOverTexture; //refactor this out probably
 
         List<Room> RoomList;
 
@@ -70,11 +73,15 @@ namespace LegendOfZeldaClone
             SwitchRoomDelay = 0;
             SwitchDelayLength = 5;
 
-            GameOverMusicTimingHelperInt = 0;
+            EndScreenMusicTimingHelperInt = 0;
             MusicTimingHelperInt = 0;
             NumberOfLinkDyingFrames = 55;
             NumberOfFramesBeforeBlackScreenGameOver = NumberOfLinkDyingFrames - 16;
             NumberOfFramesBeforeGameOverMessageAppears = NumberOfLinkDyingFrames + 20;
+            NumberOfLinkPickingUpTriforceFrames = 180;
+            NumberOfFramesBeforeBlackFadeOutEndsGameWon = NumberOfLinkPickingUpTriforceFrames - 60;
+            NumberOfFramesBeforeBlackFadeOutBeginsGameWon = NumberOfFramesBeforeBlackFadeOutEndsGameWon - 40;
+
         }
 
         public void Update()
@@ -108,17 +115,12 @@ namespace LegendOfZeldaClone
 
                 Collisions.CollisionHandling.HandleCollisions(this);
 
-                //debugging
+                //for sound effect testing
                 if (MusicTimingHelperInt > 120)
                 {
                     GameBackgroundMusic.StopPlaying();
                 }
                 MusicTimingHelperInt++;
-                if (MusicTimingHelperInt % 10 == 0)
-                {
-                    // new HeartPickupSoundEffect().Play();
-                }
-
                   if (CurrentRoom == RoomList[7] || CurrentRoom == RoomList[13])
                  {
                    if (MusicTimingHelperInt % 60 == 0)
@@ -136,25 +138,20 @@ namespace LegendOfZeldaClone
             else if (CurrentGameState == GameState.GameOver)
             {
                 GameBackgroundMusic.StopPlaying();
-                GameOverMusicTimingHelperInt++;
-                if (GameOverMusicTimingHelperInt > NumberOfFramesBeforeGameOverMessageAppears)
+                EndScreenMusicTimingHelperInt++;
+                if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeGameOverMessageAppears)
                 {
                     GameOverTheme.ConditionalPlay();
                 }
-                
-
                 Player.Update();
-
-                //when player linkstate has AnimationDone = true then play the gameover theme instead of the link dying thing
-
-                //Console.WriteLine("Game Over state");
-                //player enters dying state
-                //screen flashes red
-                //screen fades to black
             }
             else if (CurrentGameState == GameState.GameWon)
             {
-
+                GameBackgroundMusic.StopPlaying();
+                EndScreenMusicTimingHelperInt++;
+                if (EndScreenMusicTimingHelperInt < NumberOfFramesBeforeBlackFadeOutEndsGameWon)
+                    Player.Update();
+                //also update the triforce so that it continues to flash as link holds it
             }
             
         }
@@ -215,7 +212,7 @@ namespace LegendOfZeldaClone
                 String resetGameMessage = "\nPress 'R' to reset your game.";
                 Rectangle sourceRectangle = new Rectangle(0, 0, 1, 1);
                 Rectangle destinationRectangle = new Rectangle(0, LoZHelpers.HUDHeight, LoZHelpers.GameWidth, LoZHelpers.GameHeight);
-                if (GameOverMusicTimingHelperInt < NumberOfFramesBeforeBlackScreenGameOver)
+                if (EndScreenMusicTimingHelperInt < NumberOfFramesBeforeBlackScreenGameOver)
                 {
                     CurrentRoom.Draw(spriteBatch);
 
@@ -234,15 +231,17 @@ namespace LegendOfZeldaClone
                     foreach (IPlayerProjectile projectile in PlayerProjectiles)
                         projectile.Draw(spriteBatch);
                     spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.DarkRed, 0.7f));
-                    if (GameOverMusicTimingHelperInt > 32)
+
+                    //screen fade to black:
+                    if (EndScreenMusicTimingHelperInt > 32)
                         spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.3f));
-                    if (GameOverMusicTimingHelperInt > 35)
+                    if (EndScreenMusicTimingHelperInt > 35)
                         spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.5f));
-                    if (GameOverMusicTimingHelperInt > 38)
+                    if (EndScreenMusicTimingHelperInt > 38)
                         spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.8f));
 
                 }
-                else if (GameOverMusicTimingHelperInt < NumberOfFramesBeforeGameOverMessageAppears) { }
+                else if (EndScreenMusicTimingHelperInt < NumberOfFramesBeforeGameOverMessageAppears) { }
                 else
                 {
                     spriteBatch.DrawString(font, gameOverMessage, new Vector2(LoZHelpers.GameWidth / 3, LoZHelpers.GameHeight / 2), Color.White);
@@ -258,10 +257,60 @@ namespace LegendOfZeldaClone
                 HUDHealthBar.Draw(spriteBatch, LoZHelpers.HealthLocation);
                 Player.Draw(spriteBatch);
             }
-            else if (CurrentGameState == GameState.GameWon)
+
+
+
+            else if (CurrentGameState == GameState.GameWon) /* **************GAME WON do NOT confuse these branches************************ */
             {
+                SpriteFont font = Enemy.EnemySpriteFactory.Instance.CreateFont();
+                String gameWonMessage = "YOU WON!";
+                String resetGameMessage = "\nPress 'R' to reset your game.";
+                Rectangle sourceRectangle = new Rectangle(0, 0, 1, 1);
+                Rectangle destinationRectangle = new Rectangle(0, LoZHelpers.HUDHeight, LoZHelpers.GameWidth, LoZHelpers.GameHeight);
+                if (EndScreenMusicTimingHelperInt < NumberOfFramesBeforeBlackScreenGameOver)
+                {
+                    CurrentRoom.Draw(spriteBatch);
 
+                    foreach (IObject block in Objects)
+                        block.Draw(spriteBatch);
 
+                    foreach (IItem item in Items)
+                        item.Draw(spriteBatch);
+
+                    foreach (IEnemyProjectile projectile in EnemyProjectiles)
+                        projectile.Draw(spriteBatch);
+
+                    foreach (IEnemy enemy in Enemies)
+                        enemy.Draw(spriteBatch);
+
+                    foreach (IPlayerProjectile projectile in PlayerProjectiles)
+                        projectile.Draw(spriteBatch);
+                    //spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.White, 0.3f));
+
+                    //screen fade to black:
+                    if (EndScreenMusicTimingHelperInt > 32)
+                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.3f));
+                    if (EndScreenMusicTimingHelperInt > 35)
+                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.5f));
+                    if (EndScreenMusicTimingHelperInt > 38)
+                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.8f));
+
+                }
+                else if (EndScreenMusicTimingHelperInt < NumberOfFramesBeforeGameOverMessageAppears) { }
+                else
+                {
+                    spriteBatch.DrawString(font, gameWonMessage, new Vector2(LoZHelpers.GameWidth / 3, LoZHelpers.GameHeight / 2), Color.White);
+                    spriteBatch.DrawString(font, resetGameMessage, new Vector2(LoZHelpers.GameWidth / 6, LoZHelpers.GameHeight / 2), Color.White);
+                }
+                HUDMap.Draw(spriteBatch);
+                DungeonLevelName.Draw(spriteBatch, LoZHelpers.LevelNameLocation);
+                PlayerRupeeCount.Draw(spriteBatch, LoZHelpers.RupeeCountLocation);
+                PlayerKeyCount.Draw(spriteBatch, LoZHelpers.KeyCountLocation);
+                PlayerBombCount.Draw(spriteBatch, LoZHelpers.BombCountLocation);
+                InventoryBoxB.Draw(spriteBatch, LoZHelpers.BBoxLocation);
+                HUDLifeText.Draw(spriteBatch, LoZHelpers.LifeTextLocation);
+                HUDHealthBar.Draw(spriteBatch, LoZHelpers.HealthLocation);
+                Player.Draw(spriteBatch);
             }
         }
 
