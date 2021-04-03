@@ -97,7 +97,7 @@ namespace LegendOfZeldaClone.Enemy
                 Invincible = true;
                 Health--;
                 new EnemyTakingDamageSoundEffect().Play();
-                if (Health <= 0) 
+                if (Health <= 0)
                     Die();
                 Knockback(direction);
             }
@@ -109,6 +109,7 @@ namespace LegendOfZeldaClone.Enemy
             Alive = false;
             game.EnemiesQueue.Add(new DeathAnimation(Location));
             game.KillCounter++;
+            DropItem();
         }
     }
 }

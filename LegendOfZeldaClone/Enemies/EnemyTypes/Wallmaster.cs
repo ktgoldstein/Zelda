@@ -118,6 +118,7 @@ namespace LegendOfZeldaClone.Enemy
             Alive = false;
             game.EnemiesQueue.Add(new DeathAnimation(Location));
             game.KillCounter++;
+            DropItem();
         }
     }
 }
