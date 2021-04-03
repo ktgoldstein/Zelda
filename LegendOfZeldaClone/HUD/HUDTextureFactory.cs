@@ -7,6 +7,7 @@ namespace LegendOfZeldaClone
     {
         private Texture2D miniMap;
         private Texture2D pauseMap;
+        private Texture2D addRoomOnMap;
         private Texture2D inventory;
         private Texture2D locationTracker;
         private Texture2D triForceIndicator;
@@ -26,13 +27,37 @@ namespace LegendOfZeldaClone
         {
             miniMap = content.Load<Texture2D>("HUD\\Level 1 (Blank)");
             pauseMap = content.Load<Texture2D>("HUD\\PauseMap");
+            addRoomOnMap = content.Load<Texture2D>("HUD\\Map Rooms");
             locationTracker = content.Load<Texture2D>("HUD\\Link Room Tracker");
             triForceIndicator = content.Load<Texture2D>("HUD\\TriForceFlash");
             inventory = content.Load<Texture2D>("LoZInventorySpriteSheet");
         }
 
         public ISprite CreateMiniMap() => new MapSprite(miniMap, 1, 1, 1);
-        public ISprite CreatePauseMap() => new MapSprite(pauseMap, 1, 1, 1);
+        public ISprite CreatePauseMap() => new PauseMapSprite(pauseMap, 5, 0, 128, 79);
+        public ISprite CreatePauseMapRooms(PauseMapRoomType roomType)
+        {
+            return roomType switch
+            {
+                PauseMapRoomType.NoRooms => new PauseMapSprite(addRoomOnMap, 0, 0, 8, 8),
+                PauseMapRoomType.RoomR => new PauseMapSprite(addRoomOnMap, 9, 0, 8, 8),
+                PauseMapRoomType.RoomL => new PauseMapSprite(addRoomOnMap, 18, 0, 8, 8),
+                PauseMapRoomType.RoomLR => new PauseMapSprite(addRoomOnMap, 27, 0, 8, 8),
+                PauseMapRoomType.RoomD => new PauseMapSprite(addRoomOnMap, 36, 0, 8, 8),
+                PauseMapRoomType.RoomDR => new PauseMapSprite(addRoomOnMap, 45, 0, 8, 8),
+                PauseMapRoomType.RoomDL => new PauseMapSprite(addRoomOnMap, 54, 0, 8, 8),
+                PauseMapRoomType.RoomDLR => new PauseMapSprite(addRoomOnMap, 63, 0, 8, 8),
+                PauseMapRoomType.RoomU => new PauseMapSprite(addRoomOnMap, 72, 0, 8, 8),
+                PauseMapRoomType.RoomUR => new PauseMapSprite(addRoomOnMap, 81, 0, 8, 8),
+                PauseMapRoomType.RoomUL => new PauseMapSprite(addRoomOnMap, 90, 0, 8, 8),
+                PauseMapRoomType.RoomULR => new PauseMapSprite(addRoomOnMap, 99, 0, 8, 8),
+                PauseMapRoomType.RoomUD => new PauseMapSprite(addRoomOnMap, 108, 0, 8, 8),
+                PauseMapRoomType.RoomUDR => new PauseMapSprite(addRoomOnMap, 117, 0, 8, 8),
+                PauseMapRoomType.RoomUDL => new PauseMapSprite(addRoomOnMap, 126, 0, 8, 8),
+                PauseMapRoomType.AllRooms => new PauseMapSprite(addRoomOnMap, 135, 0, 8, 8),
+                _ => null
+            };
+        }
         public ISprite CreateLocationTracker() => new MapSprite(locationTracker, 1, 1, 1);
         public ISprite CreateTriForceIndicator() => new MapSprite(triForceIndicator, 2, 1, 2);
         public ISprite CreateLevelName() => new InventorySprite(inventory, 584, 1, 48, 8);

@@ -17,7 +17,7 @@ namespace LegendOfZeldaClone
             this.location = location;
         }
 
-        public void Update() => map.Update();
+        public void Update() {}
         
         
         public void Draw(SpriteBatch spriteBatch, Vector2 vector) => map.Draw(spriteBatch, location);

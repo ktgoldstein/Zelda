@@ -20,8 +20,11 @@ namespace LegendOfZeldaClone
         public List<IEnemyProjectile> EnemyProjectilesQueue;
         public List<IEnemyProjectile> EnemyProjectiles;
 
+        public List<PauseMapRoom> MapRooms;
+
         public Room CurrentRoom;
         public HUDMap HUDMap;
+        public PauseScreenMap PauseMap;
         public LevelName DungeonLevelName;
         public RupeeCount PlayerRupeeCount;
         public KeyCount PlayerKeyCount;
@@ -32,7 +35,7 @@ namespace LegendOfZeldaClone
         public HealthBar HUDHealthBar;
         public InventoryScreen InventoryBox;
         public MapCompassHolder MapCompassHolder;
-        public PauseMap PauseScreenMap;
+        public PauseScreenMap PauseScreenMap;
         public SelectionBoxItem SelectionBox;
 
         public int SwitchRoomDelay;
@@ -55,6 +58,8 @@ namespace LegendOfZeldaClone
 
             EnemyProjectilesQueue = new List<IEnemyProjectile>();
             EnemyProjectiles = new List<IEnemyProjectile>();
+
+            MapRooms = new List<PauseMapRoom>();
 
             SwitchRoomDelay = 0;
             SwitchDelayLength = 5;
@@ -86,8 +91,8 @@ namespace LegendOfZeldaClone
 
                 Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
 
-                HUDHealthBar.Update();
                 HUDMap.Update();
+                HUDHealthBar.Update();
                 PlayerRupeeCount.Update();
                 PlayerBombCount.Update();
                 PlayerKeyCount.Update();
@@ -116,6 +121,8 @@ namespace LegendOfZeldaClone
             {
                 InventoryBox.Update(Direction.None);
                 MapCompassHolder.Update();
+                HUDMap.Update();
+                PauseMap.Update();
             }
             else if (CurrentGameState == GameState.GameOver)
             {
@@ -155,7 +162,6 @@ namespace LegendOfZeldaClone
                     projectile.Draw(sprintBatch);
 
                 Player.Draw(sprintBatch);
-
                 HUDMap.Draw(sprintBatch);
                 DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNameLocation);
                 PlayerRupeeCount.Draw(sprintBatch, LoZHelpers.RupeeCountLocation);
@@ -165,6 +171,7 @@ namespace LegendOfZeldaClone
                 InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxLocation);
                 HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextLocation);
                 HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthLocation);
+
             }
             else if (CurrentGameState == GameState.Pause)
             {
@@ -178,6 +185,8 @@ namespace LegendOfZeldaClone
                 InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxPauseLocation);
                 HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextPauseLocation);
                 HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthPauseLocation);
+                HUDMap.Draw(sprintBatch);
+                PauseMap.Draw(sprintBatch);
                 SelectionBox.Draw(sprintBatch);
             }
             else if (CurrentGameState == GameState.GameOver)
@@ -240,7 +249,7 @@ namespace LegendOfZeldaClone
         public void InitializeHUD()
         {
             HUDMap = new HUDMap(this);
-
+            PauseMap = new PauseScreenMap(this);
             DungeonLevelName = new LevelName();
             PlayerRupeeCount = new RupeeCount(this);
             PlayerKeyCount = new KeyCount(this);
@@ -277,7 +286,7 @@ namespace LegendOfZeldaClone
             ResetPlayer();
             ResetLists();
             InitializeRooms();
-            ResetMiniMap();
+            ResetMaps();
         }
 
         public void ResetPlayer()
@@ -295,11 +304,14 @@ namespace LegendOfZeldaClone
             PlayerProjectilesQueue.Clear();
             EnemyProjectiles.Clear();
             EnemyProjectilesQueue.Clear();
+
+            MapRooms.Clear();
         }
 
-        public void ResetMiniMap()
+        public void ResetMaps()
         {
             HUDMap.Reset();
+            PauseMap.Reset();
         }
     }
 }

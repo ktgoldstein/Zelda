@@ -6,7 +6,7 @@ namespace LegendOfZeldaClone
 
     public class HUDMap
     {
-        public LocationTrackingMini link;
+        public LinkLocationMiniMap link;
         public TriForceOnMap triForce;
         public MiniMap miniMap;
 
@@ -20,9 +20,10 @@ namespace LegendOfZeldaClone
             this.game = game;
 
             miniMap = new MiniMap(LoZHelpers.MiniMapLocation, game);
-            link = new LocationTrackingMini(LoZHelpers.LinkLocationTrackerMini, game);
+            link = new LinkLocationMiniMap(LoZHelpers.LinkLocationTrackerMini, game);
             triForce = new TriForceOnMap(LoZHelpers.TriForceLocation, game);
-            
+            hasCompass = game.Player.Inventory.HasMap;
+            hasMap = game.Player.Inventory.HasCompass;  
         }
 
         public void Update() {
@@ -30,12 +31,11 @@ namespace LegendOfZeldaClone
             hasMap = game.Player.Inventory.HasMap;
             hasCompass = game.Player.Inventory.HasCompass;
 
-            if(hasMap)
-                miniMap.Update();
             if(hasCompass)
                 triForce.Update();
 
             link.Update();
+
 
         }
         public void Draw(SpriteBatch spriteBatch)
@@ -44,10 +44,11 @@ namespace LegendOfZeldaClone
                 miniMap.Draw(spriteBatch, LoZHelpers.MiniMapLocation);
             if (hasCompass)
                 triForce.Draw(spriteBatch, LoZHelpers.TriForceLocation);
-
-            link.Draw(spriteBatch, LoZHelpers.LinkLocationTrackerMini);
-
+                
+            link.Draw(spriteBatch);
         }
+
+        public void UpdateLinkMapLocation(Direction direction) => link.moveLinkOnMiniMap(direction);
 
         public void Reset()
         {
