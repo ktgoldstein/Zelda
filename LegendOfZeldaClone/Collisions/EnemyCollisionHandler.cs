@@ -39,7 +39,7 @@ namespace LegendOfZeldaClone.Collisions
             if (block.BlockHeight == ObjectHeight.CanWalkOver) return;
 
             //they should stop and have to move around it (except keese if the object is not impassable)
-            if( CurrentEnemy is Wallmaster && ( (block is WallDown) || (block is WallUp) || (block is WallLeft) || (block is WallRight ) || (block.GetType().ToString().Contains("Door")) ))
+            if(CurrentEnemy is Wallmaster && (block is WallDown || block is WallUp || block is WallLeft || block is WallRight || (block.GetType().ToString().Contains("Door")) ))
             {
                 return;
             }

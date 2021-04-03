@@ -80,6 +80,7 @@ namespace LegendOfZeldaClone
         }
         public void Die()
         {
+            if (!Alive) return;
             Alive = false;
             player.SwordBeamLock--;
         }

@@ -44,7 +44,7 @@ namespace LegendOfZeldaClone
             Location += velocity;
             lifeSpan--;
             if (lifeSpan == 0)
-                SpawnSwordExplosion();
+                Die();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -101,6 +101,8 @@ namespace LegendOfZeldaClone
 
         public void Die()
         {
+            if (!Alive) return;
+
             SpawnSwordExplosion();
             Alive = false;
             player.SwordBeamLock--;
