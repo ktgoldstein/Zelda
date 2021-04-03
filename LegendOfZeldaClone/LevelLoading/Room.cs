@@ -135,7 +135,7 @@ namespace LegendOfZeldaClone.LevelLoading
                 tileLocation = new Vector2(LoZHelpers.TileSize * column + Offset.X, 
                     LoZHelpers.TileSize * (row + 1) + Offset.Y);
 
-            Vector2 smallItemLocation = tileLocation + new Vector2(LoZHelpers.TileSize / 4 + Offset.X, Offset.Y);
+            Vector2 smallItemLocation = tileLocation + new Vector2(LoZHelpers.TileSize / 4, 0);
             Vector2 doorLocationUp = tileLocation - new Vector2(0, LoZHelpers.TileSize);
             Vector2 doorLocationDown = tileLocation;
             Vector2 doorLocationRight = tileLocation - new Vector2(0, LoZHelpers.TileSize / 2);
