@@ -4,16 +4,16 @@ using Microsoft.Xna.Framework;
 namespace LegendOfZeldaClone
 {
 
-    public class LinkLocationPauseMap
+    public class LinkOnMiniMap
     {
         private readonly ISprite linkOnMap;
-        private Vector2 linkPauseLocation;
+        private Vector2 linkMiniLocation;
         private readonly GameStateMachine game;
 
-        public LinkLocationPauseMap(Vector2 location, GameStateMachine game)
+        public LinkOnMiniMap(Vector2 location, GameStateMachine game)
         {
             linkOnMap = HUDTextureFactory.Instance.CreateLocationTracker();
-            linkPauseLocation = location;
+            linkMiniLocation = location;
             this.game = game;
         }
 
@@ -21,33 +21,33 @@ namespace LegendOfZeldaClone
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            linkOnMap.Draw(spriteBatch, linkPauseLocation);
+            linkOnMap.Draw(spriteBatch, linkMiniLocation);
         }
 
-        public void moveLinkOnPauseMap(Direction room)
+        public void moveLinkOnMiniMap(Direction room)
         {
-            
             switch (room)
             {
                 case Direction.Left:
-                    linkPauseLocation.X -= LoZHelpers.RightLeftRoomPauseMapOffset;
+                    linkMiniLocation.X -= LoZHelpers.RightLeftRoomMiniMapOffset + 2;
                     break;
 
                 case Direction.Right:
-                    linkPauseLocation.X += LoZHelpers.RightLeftRoomPauseMapOffset;
+                    linkMiniLocation.X += LoZHelpers.RightLeftRoomMiniMapOffset + 2;
                     break;
 
                 case Direction.Down:
-                    linkPauseLocation.Y += LoZHelpers.UpDownRoomPauseMapOffset;
+                    linkMiniLocation.Y += LoZHelpers.UpDownRoomMiniMapOffset + 2;
                     break;
                 case Direction.Up:
-                    linkPauseLocation.Y -= LoZHelpers.UpDownRoomPauseMapOffset;
+                    linkMiniLocation.Y -= LoZHelpers.UpDownRoomMiniMapOffset + 2;
                     break;
             }
         }
+        
         public void Reset()
         {
-            this.linkPauseLocation = LoZHelpers.LinkLocationTrackerPause;
+            this.linkMiniLocation = LoZHelpers.LinkLocationTrackerMini;
         }
 
     }

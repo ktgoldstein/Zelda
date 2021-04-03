@@ -6,7 +6,7 @@ namespace LegendOfZeldaClone
 
     public class HUDMap
     {
-        public LinkLocationMiniMap link;
+        public LinkOnMiniMap link;
         public TriForceOnMap triForce;
         public MiniMap miniMap;
 
@@ -20,7 +20,7 @@ namespace LegendOfZeldaClone
             this.game = game;
 
             miniMap = new MiniMap(LoZHelpers.MiniMapLocation, game);
-            link = new LinkLocationMiniMap(LoZHelpers.LinkLocationTrackerMini, game);
+            link = new LinkOnMiniMap(LoZHelpers.LinkLocationTrackerMini, game);
             triForce = new TriForceOnMap(LoZHelpers.TriForceLocation, game);
             hasCompass = game.Player.Inventory.HasMap;
             hasMap = game.Player.Inventory.HasCompass;  

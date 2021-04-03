@@ -6,17 +6,18 @@ using LegendOfZeldaClone.LevelLoading;
 namespace LegendOfZeldaClone
 {
 
-    public class PauseScreenMap
+    public class PauseMap
     {
         public ISprite backgroundSprite;
 
         public List<PauseMapRoom> mapRooms;
         public PauseMapRoom currentRoom;
         
-        private LinkLocationPauseMap link;
+        private LinkOnPauseMap link;
+
         private readonly GameStateMachine game;
 
-        public PauseScreenMap(GameStateMachine game)
+        public PauseMap(GameStateMachine game)
         {
             this.game = game;
 
@@ -25,7 +26,7 @@ namespace LegendOfZeldaClone
             currentRoom = new PauseMapRoom(GetRoomType(game.CurrentRoom), LoZHelpers.PauseMapRoomLocation);
             mapRooms = new List<PauseMapRoom> { currentRoom };
 
-            link = new LinkLocationPauseMap(LoZHelpers.LinkLocationTrackerPause, game);
+            link = new LinkOnPauseMap(LoZHelpers.LinkLocationTrackerPause, game);
         }
 
         public void Draw(SpriteBatch spriteBatch)

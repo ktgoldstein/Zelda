@@ -6,9 +6,8 @@ namespace LegendOfZeldaClone
 
     public class PauseMapRoom 
     {
-        public Vector2 Location;
-
         private ISprite roomSprite;
+        private Vector2 Location;
 
         public PauseMapRoom(PauseMapRoomType type, Vector2 location)
         {

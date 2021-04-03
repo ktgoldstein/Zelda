@@ -23,7 +23,7 @@ namespace LegendOfZeldaClone
 
         public Room CurrentRoom;
         public HUDMap HUDMap;
-        public PauseScreenMap PauseMap;
+        public PauseMap PauseMap;
         public LevelName DungeonLevelName;
         public RupeeCount PlayerRupeeCount;
         public KeyCount PlayerKeyCount;
@@ -34,7 +34,7 @@ namespace LegendOfZeldaClone
         public HealthBar HUDHealthBar;
         public InventoryScreen InventoryBox;
         public MapCompassHolder MapCompassHolder;
-        public PauseScreenMap PauseScreenMap;
+        public PauseMap PauseScreenMap;
         public SelectionBoxItem SelectionBox;
 
         public int SwitchRoomDelay;
@@ -200,7 +200,7 @@ namespace LegendOfZeldaClone
         public void InitializeHUD()
         {
             HUDMap = new HUDMap(this);
-            PauseMap = new PauseScreenMap(this);
+            PauseMap = new PauseMap(this);
             DungeonLevelName = new LevelName();
             PlayerRupeeCount = new RupeeCount(this);
             PlayerKeyCount = new KeyCount(this);
