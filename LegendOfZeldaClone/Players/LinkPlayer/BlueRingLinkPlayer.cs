@@ -92,7 +92,8 @@ namespace LegendOfZeldaClone
 
         public void Damage(int amount, Direction knockbackDirection)
         {
-            Health -= amount / 2;
+            Health -= amount / 2 + amount % 2;
+            new LinkTakingDamageSoundEffect().Play();
             if (Health < 0)
                 Die();
             Tuple<LinkStateType, int> currentState = linkState.GetState();
