@@ -111,7 +111,12 @@ namespace LegendOfZeldaClone
 
         public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
-        public void Update() => linkState.Update();
+
+        public void Update()
+        {
+            linkState.Update();
+        }
+
         public void Die()
         {
             Health = 0;

@@ -119,7 +119,7 @@ namespace LegendOfZeldaClone
         {
             linkState.Update();
             //if (Health < 3 && game.MusicTimingHelperInt % 7 == 0)
-             //   new LowHealthBeepingSoundEffect().Play();
+            //   new LowHealthBeepingSoundEffect().Play();
         }
 
         public void Die()
