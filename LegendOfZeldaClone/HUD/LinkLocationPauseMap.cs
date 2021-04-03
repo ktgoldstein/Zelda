@@ -26,6 +26,7 @@ namespace LegendOfZeldaClone
 
         public void moveLinkOnPauseMap(Direction room)
         {
+            
             switch (room)
             {
                 case Direction.Left:
@@ -44,7 +45,6 @@ namespace LegendOfZeldaClone
                     break;
             }
         }
-        
         public void Reset()
         {
             this.linkPauseLocation = LoZHelpers.LinkLocationTrackerPause;

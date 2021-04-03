@@ -35,8 +35,6 @@ namespace LegendOfZeldaClone
                 triForce.Update();
 
             link.Update();
-
-
         }
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -44,7 +42,7 @@ namespace LegendOfZeldaClone
                 miniMap.Draw(spriteBatch, LoZHelpers.MiniMapLocation);
             if (hasCompass)
                 triForce.Draw(spriteBatch, LoZHelpers.TriForceLocation);
-                
+
             link.Draw(spriteBatch);
         }
 

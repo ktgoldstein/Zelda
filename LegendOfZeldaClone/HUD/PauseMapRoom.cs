@@ -8,19 +8,19 @@ namespace LegendOfZeldaClone
     {
         public bool Visited {get; set;}
         private ISprite roomSprite;
-        private Vector2 location;
+        public Vector2 location;
 
         public PauseMapRoom(PauseMapRoomType type)
         {
             roomSprite = HUDTextureFactory.Instance.CreatePauseMapRooms(type);
-            Visited = false;
             location = LoZHelpers.PauseMapRoomLocation;
+            Visited = false;
         }
 
         public void Update() {}
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (Visited)
+            if(Visited)
                 roomSprite.Draw(spriteBatch, location);
         }
 
@@ -31,7 +31,7 @@ namespace LegendOfZeldaClone
             {
                 case Direction.Left:
                     location.X -= LoZHelpers.RightLeftRoomPauseMapOffset;
-
+                    
                     break;
 
                 case Direction.Right:

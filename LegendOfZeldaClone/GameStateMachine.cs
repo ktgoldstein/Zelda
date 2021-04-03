@@ -120,6 +120,7 @@ namespace LegendOfZeldaClone
                 foreach (IPlayerProjectile projectile in PlayerProjectiles)
                     projectile.Draw(sprintBatch);
 
+
                 Player.Draw(sprintBatch);
                 HUDMap.Draw(sprintBatch);
                 DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNameLocation);
@@ -134,6 +135,9 @@ namespace LegendOfZeldaClone
             }
             else if (CurrentGameState == GameState.Pause)
             {
+                HUDMap.Draw(sprintBatch);
+                PauseMap.Draw(sprintBatch);
+                SelectionBox.Draw(sprintBatch);
                 InventoryBox.Draw(sprintBatch);
                 MapCompassHolder.Draw(sprintBatch);
                 DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNamePauseLocation);
@@ -144,9 +148,6 @@ namespace LegendOfZeldaClone
                 InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxPauseLocation);
                 HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextPauseLocation);
                 HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthPauseLocation);
-                HUDMap.Draw(sprintBatch);
-                PauseMap.Draw(sprintBatch);
-                SelectionBox.Draw(sprintBatch);
             }
         }
 

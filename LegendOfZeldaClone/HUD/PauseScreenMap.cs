@@ -8,10 +8,9 @@ namespace LegendOfZeldaClone
     {
         public ISprite map;
 
-        //public Room { get; } //Make private after refactoring
-
         public PauseMapRoom roomOnMap;
         public PauseMapRoom[] roomList;
+        
         private int roomIndex;
 
         LinkLocationPauseMap link;
@@ -21,9 +20,11 @@ namespace LegendOfZeldaClone
         public PauseScreenMap(GameStateMachine game)
         {
             this.game = game;
+
             map = HUDTextureFactory.Instance.CreatePauseMap();
 
             roomList = new PauseMapRoom[16];
+
             InitilizeMapRoomArray();
             roomIndex = 0;
 
@@ -33,13 +34,17 @@ namespace LegendOfZeldaClone
             link = new LinkLocationPauseMap(LoZHelpers.LinkLocationTrackerPause, game);
         }
 
-        public void Update() => link.Update();
-
+        public void Update()
+        {
+            link.Update();
+/*            if (!roomOnMap.Visited)
+                ChangeRoomType();*/
+            ChangeRoomType();
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             map.Draw(spriteBatch, LoZHelpers.PauseMapLocation);
-            roomOnMap.Draw(spriteBatch);
 
             foreach (PauseMapRoom room in roomList)
                 room.Draw(spriteBatch);
@@ -48,29 +53,23 @@ namespace LegendOfZeldaClone
         }
 
         public void UpdateLinkMapLocation(Direction direction) => link.moveLinkOnPauseMap(direction);
-        private void InitilizeMapRoomArray()
-        {
-            roomList[0] = new PauseMapRoom(PauseMapRoomType.NoRooms);
-            roomList[1] = new PauseMapRoom(PauseMapRoomType.RoomR);
-            roomList[2] = new PauseMapRoom(PauseMapRoomType.RoomL);
-            roomList[3] = new PauseMapRoom(PauseMapRoomType.RoomLR);
-            roomList[4] = new PauseMapRoom(PauseMapRoomType.RoomD);
-            roomList[5] = new PauseMapRoom(PauseMapRoomType.RoomDR);
-            roomList[6] = new PauseMapRoom(PauseMapRoomType.RoomDL);
-            roomList[7] = new PauseMapRoom(PauseMapRoomType.RoomDLR);
-            roomList[8] = new PauseMapRoom(PauseMapRoomType.RoomU);
-            roomList[9] = new PauseMapRoom(PauseMapRoomType.RoomUR);
-            roomList[10] = new PauseMapRoom(PauseMapRoomType.RoomUL);
-            roomList[11] = new PauseMapRoom(PauseMapRoomType.RoomULR);
-            roomList[12] = new PauseMapRoom(PauseMapRoomType.RoomUD);
-            roomList[13] = new PauseMapRoom(PauseMapRoomType.RoomUDR);
-            roomList[14] = new PauseMapRoom(PauseMapRoomType.RoomUDL);
-            roomList[15] = new PauseMapRoom(PauseMapRoomType.AllRooms);
 
-            foreach (PauseMapRoom room in roomList)
-                room.Visited = false;
+        public void PlaceRoomOnMap(Direction direction)
+        {
+            ChangeRoomType();
+            roomOnMap = roomList[roomIndex];
+
+            if(!roomOnMap.Visited)
+                roomOnMap.placeRoomWhenVisited(direction);
+
+        }
+        public void ChangeRoomType()
+        {
+            FindRoomInArray();
+            roomOnMap = roomList[roomIndex];
         }
         private void FindRoomInArray()
+
         {
             if (game.CurrentRoom.RoomDown == null && game.CurrentRoom.RoomUp == null && game.CurrentRoom.RoomLeft == null && game.CurrentRoom.RoomRight == null)
                 roomIndex = 0;
@@ -120,11 +119,25 @@ namespace LegendOfZeldaClone
             else if (game.CurrentRoom.RoomDown != null && game.CurrentRoom.RoomUp != null && game.CurrentRoom.RoomLeft != null && game.CurrentRoom.RoomRight != null)
                 roomIndex = 15;
         }
-        public void PlaceRoomOnMap(Direction direction) => roomOnMap.placeRoomWhenVisited(direction);
-        public void ChangeRoomType()
+
+        private void InitilizeMapRoomArray()
         {
-            FindRoomInArray();
-            roomOnMap = roomList[roomIndex];
+            roomList[0] = new PauseMapRoom(PauseMapRoomType.NoRooms);
+            roomList[1] = new PauseMapRoom(PauseMapRoomType.RoomR);
+            roomList[2] = new PauseMapRoom(PauseMapRoomType.RoomL);
+            roomList[3] = new PauseMapRoom(PauseMapRoomType.RoomLR);
+            roomList[4] = new PauseMapRoom(PauseMapRoomType.RoomD);
+            roomList[5] = new PauseMapRoom(PauseMapRoomType.RoomDR);
+            roomList[6] = new PauseMapRoom(PauseMapRoomType.RoomDL);
+            roomList[7] = new PauseMapRoom(PauseMapRoomType.RoomDLR);
+            roomList[8] = new PauseMapRoom(PauseMapRoomType.RoomU);
+            roomList[9] = new PauseMapRoom(PauseMapRoomType.RoomUR);
+            roomList[10] = new PauseMapRoom(PauseMapRoomType.RoomUL);
+            roomList[11] = new PauseMapRoom(PauseMapRoomType.RoomULR);
+            roomList[12] = new PauseMapRoom(PauseMapRoomType.RoomUD);
+            roomList[13] = new PauseMapRoom(PauseMapRoomType.RoomUDR);
+            roomList[14] = new PauseMapRoom(PauseMapRoomType.RoomUDL);
+            roomList[15] = new PauseMapRoom(PauseMapRoomType.AllRooms);
         }
         public void Reset()
         {
@@ -132,14 +145,8 @@ namespace LegendOfZeldaClone
             roomIndex = 0;
             roomOnMap = roomList[15];
             roomOnMap.Visited = true;
+            link.Reset();
         }
-        /*private void addRoomToList(Direction roomPlacement)
-        {
-            FindRoomInArray();
-            roomOnMap = roomList[roomIndex];
-            if (currentRoom.Visited == true)
-                game.MapRooms.Add(firstRoom);
-        }*/
 
     }
 }
