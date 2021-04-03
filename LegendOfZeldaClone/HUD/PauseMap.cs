@@ -66,7 +66,7 @@ namespace LegendOfZeldaClone
                     return;
                 }
             }
-            currentRoom = new PauseMapRoom(GetRoomType(game.CurrentRoom), targetLocation);
+            currentRoom = new PauseMapRoom(GetRoomType(game.NextRoom), targetLocation);
             mapRooms.Add(currentRoom);
         }
 
