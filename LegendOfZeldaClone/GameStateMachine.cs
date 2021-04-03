@@ -8,7 +8,7 @@ using LegendOfZeldaClone.Objects;
 
 namespace LegendOfZeldaClone
 {
-    public class GameStateMachine 
+    public class GameStateMachine
     {
         public IPlayer Player;
 
@@ -107,9 +107,9 @@ namespace LegendOfZeldaClone
             }
         }
 
-        public void RoomDraw(SpriteBatch sprintBatch) 
+        public void RoomDraw(SpriteBatch sprintBatch)
         {
-            
+
             CurrentRoom.Draw(sprintBatch);
             NextRoom?.Draw(sprintBatch);
 
@@ -129,7 +129,7 @@ namespace LegendOfZeldaClone
 
                 foreach (IPlayerProjectile projectile in PlayerProjectiles)
                     projectile.Draw(sprintBatch);
-                
+
                 Player.Draw(sprintBatch);
             }
             else if (CurrentGameState == GameState.ScreenTransition)

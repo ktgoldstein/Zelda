@@ -80,7 +80,7 @@ namespace LegendOfZeldaClone.Enemy
                     current++;
                     new TextAppearingSlowlySoundEffect().Play();
                 }
-                    
+
             }
         }
         public override void DropItem() {}
