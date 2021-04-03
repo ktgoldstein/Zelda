@@ -55,7 +55,7 @@ namespace LegendOfZeldaClone.Objects
                     }
                 }
                 game.NextRoom.LoadRoom();
-                game.Camera.CameraTransition(Direction.Right);
+                game.RoomCamera.CameraTransition(Direction.Right);
                 game.HUDMap.UpdateLinkMapLocation(Direction.Right);
                 game.PauseMap.MoveRooms(Direction.Right);
             }

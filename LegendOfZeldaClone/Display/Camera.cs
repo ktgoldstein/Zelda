@@ -24,30 +24,30 @@ namespace LegendOfZeldaClone.Display
 
         public void CameraTransition(Direction direction)
         {
-            if (game.CurrentGameState == GameState.Play)
-            {
-                currentTransitionDirection = direction;
+            if (game.CurrentGameState == GameState.ScreenTransition) return;
+            else if (game.CurrentGameState == GameState.Play)
                 game.CurrentGameState = GameState.ScreenTransition;
-                switch (direction)
-                {
-                    case Direction.Up:
-                        targetPosition = position + new Vector2
-                            (0, LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
-                        break;
-                    case Direction.Down:
-                        targetPosition = position - new Vector2
-                            (0, LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
-                        break;
-                    case Direction.Left:
-                        targetPosition = position + new Vector2(LoZHelpers.GameWidth, 0);
-                        break;              
-                    case Direction.Right:
-                        targetPosition = position + new Vector2(-LoZHelpers.GameWidth, 0);
-                        break;
-                    default:
-                        break;
-                }
-            }           
+
+            currentTransitionDirection = direction;
+            switch (direction)
+            {
+                case Direction.Up:
+                    targetPosition = position + new Vector2
+                        (0, LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+                    break;
+                case Direction.Down:
+                    targetPosition = position - new Vector2
+                        (0, LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+                    break;
+                case Direction.Left:
+                    targetPosition = position + new Vector2(LoZHelpers.GameWidth, 0);
+                    break;              
+                case Direction.Right:
+                    targetPosition = position + new Vector2(-LoZHelpers.GameWidth, 0);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Update()
@@ -64,6 +64,13 @@ namespace LegendOfZeldaClone.Display
                 game.CurrentRoom = game.NextRoom;
                 game.NextRoom = null;
                 game.ShiftLink(currentTransitionDirection);
+            }
+            else if (game.CurrentGameState == GameState.PauseTransition)
+            {
+                if (game.PreviousGameState == GameState.Play)
+                    game.CurrentGameState = GameState.Pause;
+                else
+                    game.CurrentGameState = GameState.Play;
             }
         }
 

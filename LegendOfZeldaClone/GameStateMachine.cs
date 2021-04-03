@@ -45,7 +45,6 @@ namespace LegendOfZeldaClone
 
         public int SwitchRoomDelay;
         public readonly int SwitchDelayLength;
-        public GameState CurrentGameState = GameState.Play;
 
         public int KillCounter
         {
@@ -54,12 +53,25 @@ namespace LegendOfZeldaClone
         }
         private int killCounter = 0;
 
-        public Camera Camera;
-        public GameState CurrentGameState = GameState.Play;
+        public Camera RoomCamera;
+        public Camera MenuCamera;
+        public GameState CurrentGameState
+        {
+            get { return currentGameState; }
+            set
+            {
+                PreviousGameState = currentGameState;
+                currentGameState = value;
+            }
+        }
+        public GameState PreviousGameState;
+        private GameState currentGameState = GameState.Play;
+
 
         public GameStateMachine()
         {
-            Camera = new Camera(this);
+            RoomCamera = new Camera(this);
+            MenuCamera = new Camera(this);
 
             EnemiesQueue = new List<IEnemy>();
             Enemies = new List<IEnemy>();
@@ -79,7 +91,8 @@ namespace LegendOfZeldaClone
 
         public void Update()
         {
-            Camera.Update();
+            RoomCamera.Update();
+            MenuCamera.Update();
 
             if (CurrentGameState == GameState.Play)
             {
@@ -166,7 +179,20 @@ namespace LegendOfZeldaClone
 
         public void HUDDraw(SpriteBatch sprintBatch)
         {
-            DungeonMiniMap.Draw(sprintBatch, LoZHelpers.MiniMapLocation);
+            HUDMap.Draw(sprintBatch);
+            DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNameLocation);
+            PlayerRupeeCount.Draw(sprintBatch, LoZHelpers.RupeeCountLocation);
+            PlayerKeyCount.Draw(sprintBatch, LoZHelpers.KeyCountLocation);
+            PlayerBombCount.Draw(sprintBatch, LoZHelpers.BombCountLocation);
+            InventoryBoxB.Draw(sprintBatch, LoZHelpers.BBoxLocation);
+            InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxLocation);
+            HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextLocation);
+            HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthLocation); 
+            
+            PauseMap.Draw(sprintBatch);
+            SelectionBox.Draw(sprintBatch);
+            InventoryBox.Draw(sprintBatch);
+            MapCompassHolder.Draw(sprintBatch);
         }
 
         public void InitializeRooms()
@@ -223,7 +249,7 @@ namespace LegendOfZeldaClone
             CurrentRoom = firstRoom;
             CurrentRoom.LoadRoom();
             Player.Location = LoZHelpers.LinkStartingLocation;
-            Camera.Reset();
+            RoomCamera.Reset();
         }
 
         public void InitializeHUD()
@@ -236,7 +262,7 @@ namespace LegendOfZeldaClone
             PlayerBombCount = new BombCount(this);
             InventoryBox = new InventoryScreen(this);
             InventoryBoxB = new BBox(this);
-            InventoryBoxA = new ABox(this);
+            InventoryBoxA = new ABox();
             HUDLifeText = new LifeText();
             HUDHealthBar = new HealthBar(this);
             MapCompassHolder = new MapCompassHolder(this);
@@ -282,7 +308,8 @@ namespace LegendOfZeldaClone
             ResetPlayer();
             ResetLists();
             InitializeRooms();
-            Camera = new Camera(this);
+            RoomCamera = new Camera(this);
+            MenuCamera = new Camera(this);
             ResetMaps();
         }
 

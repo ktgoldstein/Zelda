@@ -124,15 +124,6 @@ namespace LegendOfZeldaClone
                 GameBackgroundMusic.StopPlaying();
             }
             MusicTimingHelperInt++;
-            if (MusicTimingHelperInt % 10 ==0)
-            {
-               // new HeartPickupSoundEffect().Play();
-            }
-          //  if (CurrentRoom == RoomList[7] || CurrentRoom == RoomList[13])
-           // {
-             //   if (MusicTimingHelperInt % 60 == 0)
-              //      new AquamentusScreamingSoundEffect().Play();
-           // }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -145,7 +136,7 @@ namespace LegendOfZeldaClone
             _graphics.GraphicsDevice.Viewport = bottomViewport;
 
             _SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
-                null, null, null, null, gameStateMachine.Camera.Translation());
+                null, null, null, null, gameStateMachine.RoomCamera.Translation());
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
             gameStateMachine.RoomDraw(_SpriteBatch);
@@ -154,7 +145,9 @@ namespace LegendOfZeldaClone
             _graphics.GraphicsDevice.Viewport = startingViewport;
 
             // Camera transition here for inventory screen 
-            _SpriteBatch.Begin();
+            _SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
+                null, null, null, null, gameStateMachine.MenuCamera.Translation());
+            GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
             gameStateMachine.HUDDraw(_SpriteBatch);
             _SpriteBatch.End();
 

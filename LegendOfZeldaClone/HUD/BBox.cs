@@ -46,7 +46,7 @@ namespace LegendOfZeldaClone
             {
                 if (cursor.location == LoZHelpers.CursorLocation && game.Player.Inventory.HasItem(UsableItemTypes.BoomerangNormal))
                 {
-                    boomerangSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
+                    boomerangSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
                     boomerang = true;
                     game.Player.Equip(UsableItemTypes.BoomerangNormal);
                     bomb = false;
@@ -56,7 +56,7 @@ namespace LegendOfZeldaClone
                 }
                 else if (cursor.location == LoZHelpers.BombCursorLocation)
                 {
-                    bombSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
+                    bombSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
                     bomb = true;
                     game.Player.Equip(UsableItemTypes.Bomb);
                     boomerang = false;
@@ -66,7 +66,7 @@ namespace LegendOfZeldaClone
                 }
                 else if (cursor.location == LoZHelpers.BowAndArrowCursorLocation)
                 {
-                    bowSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
+                    bowSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
                     bow = true;
                     game.Player.Equip(UsableItemTypes.BowWooden);
                     bomb = false;
@@ -76,7 +76,7 @@ namespace LegendOfZeldaClone
                 }
                 else if (cursor.location == LoZHelpers.CandleCursorLocation)
                 {
-                    candleSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
+                    candleSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
                     candle = true;
                     game.Player.Equip(UsableItemTypes.BlueCandle);
                     bomb = false;
@@ -86,7 +86,7 @@ namespace LegendOfZeldaClone
                 }
                 else if (cursor.location == LoZHelpers.PotionCursorLocation)
                 {
-                    potionSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
+                    potionSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
                     potion = true;
                     game.Player.Equip(UsableItemTypes.LifePotion);
                     bomb = false;
@@ -100,32 +100,17 @@ namespace LegendOfZeldaClone
                 bomb = false;
             if (!game.Player.Inventory.HasItem(UsableItemTypes.LifePotion))
                 potion = false;
-            if (game.CurrentGameState == GameState.Play)
-            {
-                if (boomerang)
-                    boomerangSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
-                else if (bomb)
-                    bombSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
-                else if (bow)
-                    bowSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
-                else if (candle)
-                    candleSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
-                else if (potion)
-                    potionSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
-            }
-            else if (game.CurrentGameState == GameState.Pause)
-            {
-                if (boomerang)
-                    boomerangSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
-                else if (bomb)
-                    bombSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
-                else if (bow)
-                    bowSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
-                else if (candle)
-                    candleSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
-                else if (potion)
-                    potionSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
-            }
+
+            if (boomerang)
+                boomerangSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
+            else if (bomb)
+                bombSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
+            else if (bow)
+                bowSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
+            else if (candle)
+                candleSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
+            else if (potion)
+                potionSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace LegendOfZeldaClone.Objects
                 game.Player.Location = Location + new Vector2(LoZHelpers.Scale(-4 * 16), LoZHelpers.Scale(5 * 16));
                 game.NextRoom = game.CurrentRoom.RoomDown;
                 game.NextRoom.LoadRoom();
-                game.Camera.CameraTransition(Direction.Down);
+                game.RoomCamera.CameraTransition(Direction.Down);
                 game.HUDMap.UpdateLinkMapLocation(Direction.Down);
                 game.PauseMap.MoveRooms(Direction.Down);
             }
