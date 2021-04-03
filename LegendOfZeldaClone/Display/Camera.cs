@@ -15,6 +15,13 @@ namespace LegendOfZeldaClone.Display
             this.game = game;
         }
 
+        public void Reset()
+        {
+            position = Vector2.Zero;
+            targetPosition = position;
+            currentTransitionDirection = Direction.None;
+        }
+
         public void CameraTransition(Direction direction)
         {
             if (game.CurrentGameState == GameState.Play)
