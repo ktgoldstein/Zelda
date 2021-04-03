@@ -82,9 +82,7 @@ namespace LegendOfZeldaClone
 
         public void Damage(int amount, Direction knockbackDirection)
         {
-            Console.WriteLine("Damage taken.");
-            Health -= amount;
-            
+            Health -= amount;            
             new LinkTakingDamageSoundEffect().Play();
             if (Health <= 0)
                 Die();
