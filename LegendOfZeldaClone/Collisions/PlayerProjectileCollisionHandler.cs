@@ -27,15 +27,16 @@
         {
             if (CurrentPlayerProjectile is SwordProjectile)
             {
-                BoomerangProjectile boomerang = CurrentPlayerProjectile as BoomerangProjectile;
-                IPlayer player = boomerang.link;
-                if (item is FlashingRupee || item is BlueRupee || item is GoldRupee)
-                    player.Inventory.RupeesHeld++;
-                else if (item is Bomb)
-                    player.Inventory.BombsHeld++;
-                else if (item is Key)
-                    player.Inventory.KeysHeld++;
-
+                PlayerCollisionHandler.Instance.CurrentPlayer = (CurrentPlayerProjectile as SwordProjectile).player;
+                PlayerCollisionHandler.Instance.HandleItemCollision(item, direction);
+            }
+            else if (CurrentPlayerProjectile is BoomerangProjectile)
+            {
+                if (item is FlashingRupee || item is BlueRupee || item is GoldRupee || item is Bomb || item is Key)
+                {
+                    PlayerCollisionHandler.Instance.CurrentPlayer = (CurrentPlayerProjectile as BoomerangProjectile).link;
+                    PlayerCollisionHandler.Instance.HandleItemCollision(item, direction);
+                }
             }
         }
 
