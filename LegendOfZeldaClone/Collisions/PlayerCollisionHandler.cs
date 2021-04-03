@@ -29,7 +29,7 @@ namespace LegendOfZeldaClone
             if (CurrentPlayer.BlockingDirection != direction)
                 CurrentPlayer.Damage(enemyProjectile.AttackStat, direction);
             else
-                enemyProjectile.Alive = false;
+                enemyProjectile.Die();
         }
 
         public void HandleItemCollision(IItem item, Direction direction) 
@@ -56,10 +56,23 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BoomerangNormal, item);
             else if (item is Bow)
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.BowWooden, item);
+            else if (item is HeartContainer)
+            {
+                CurrentPlayer.MaxHealth += 2;
+                CurrentPlayer.Health += 2;
+            }
             else if (item is Heart)
-                CurrentPlayer.Heal(1);
+                CurrentPlayer.Heal(2);
             else if (item is Fairy)
                 CurrentPlayer.Heal(CurrentPlayer.MaxHealth);
+            else if (item is Map)
+                CurrentPlayer.Inventory.HasMap = true;
+            else if (item is Compass)
+                CurrentPlayer.Inventory.HasCompass = true;
+            else if (item is Arrow)
+                CurrentPlayer.Inventory.HasArrow = true;
+            else if (item is LifePotion)
+                CurrentPlayer.PickUpUsableItem(UsableItemTypes.LifePotion, item);
         }
 
         public void HandleObjectCollision(IObject block, Direction direction)

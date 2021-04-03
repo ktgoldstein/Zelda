@@ -19,6 +19,7 @@ namespace LegendOfZeldaClone
         private readonly int height;
         private readonly int width;
         private int lifespan;
+        private int animationSpeed;
 
         public Heart(Vector2 location, int lifespan = -1)
         {
@@ -28,6 +29,7 @@ namespace LegendOfZeldaClone
             height = 8;
             Alive = true;
             this.lifespan = lifespan;
+            animationSpeed = 0;
         }
 
         public void Update()
@@ -40,7 +42,9 @@ namespace LegendOfZeldaClone
                     Alive = false;
                 }
             }
-            heart.Update();
+            animationSpeed++;
+            if (animationSpeed % 2 == 0)
+                heart.Update();
         }
         public void Draw(SpriteBatch spriteBatch) => heart.Draw(spriteBatch, Location);
         public void BeCollected()

@@ -19,17 +19,22 @@ namespace LegendOfZeldaClone
             get { return rupeesHeld; }
             set { rupeesHeld = value < 0 ? 0 : value; }
         }
+        public bool HasMap { get; set; } = false;
+        public bool HasCompass { get; set; } = false;
+        public bool HasArrow { get; set; } = false;
 
         private int bombsHeld;
         private int keysHeld;
         private int rupeesHeld;
-        private Dictionary<UsableItemTypes, IUsableItem> heldItems;
+        public Dictionary<UsableItemTypes, IUsableItem> heldItems;
 
-        public PlayerInventory(int bombs, int keys, int rupees)
+        public PlayerInventory(int bombs, int keys, int rupees, bool hasMap, bool hasCompass)
         {
             BombsHeld = bombs;
             KeysHeld = keys;
             RupeesHeld = rupees;
+            HasMap = hasMap;
+            HasCompass = hasCompass;
 
             heldItems = new Dictionary<UsableItemTypes, IUsableItem>();
         }
@@ -60,6 +65,9 @@ namespace LegendOfZeldaClone
                         break;
                     case UsableItemTypes.BowSilver:
                         heldItems.Add(itemType, new UsableBow(game, ArrowSkinType.Silver));
+                        break;
+                    case UsableItemTypes.LifePotion:
+                        heldItems.Add(itemType, new UsablePotion(game));
                         break;
                 }
             }

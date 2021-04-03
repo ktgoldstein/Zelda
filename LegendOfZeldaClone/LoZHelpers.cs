@@ -6,6 +6,7 @@ namespace LegendOfZeldaClone
 {
     public enum GameState
     {
+        Pause,
         Play,
         ScreenTransition
     }
@@ -49,6 +50,7 @@ namespace LegendOfZeldaClone
         BoomerangMagic,
         BowWooden,
         BowSilver,
+        LifePotion,
         WoodenSword
     }
 
@@ -107,6 +109,26 @@ namespace LegendOfZeldaClone
         GoldRupeeValue = 100
     }
 
+    public enum PauseMapRoomType
+    {
+        NoRooms = 0b0000,
+        RoomR = 0b0001,
+        RoomL = 0b0010,
+        RoomLR = 0b0011,
+        RoomD = 0b0100,
+        RoomDR = 0b0101,
+        RoomDL = 0b0110,
+        RoomDLR = 0b0111,
+        RoomU = 0b1000,
+        RoomUR = 0b1001,
+        RoomUL = 0b1010,
+        RoomULR = 0b1011,
+        RoomUD = 0b1100,
+        RoomUDR = 0b1101,
+        RoomUDL = 0b1110,
+        AllRooms = 0b1111
+    }
+
     public static class LoZHelpers
     {
         public static Vector2 DirectionToVector(Direction direction)
@@ -142,12 +164,68 @@ namespace LegendOfZeldaClone
             vector.Normalize();
             return vector;
         }
+
         public static Vector2 LinkStartingLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(4 * 16 + 80));
-        public static Vector2 MiniMapLocation => new Vector2(GameWidth / 24, HUDHeight / 4);
+        public static Vector2 MiniMapLocation => new Vector2(GameWidth / 24, HUDHeight / 3);
+        public static Vector2 LinkLocationTrackerMini => new Vector2(MiniMapLocation.X + Scale(28), HUDHeight - Scale(12));
+        public static Vector2 TriForceLocation => new Vector2(LinkLocationTrackerMini.X + Scale(32),  LinkLocationTrackerMini.Y - Scale(21) - 1);
+
+        public static Vector2 MiniMapPauseLocation => new Vector2(InventorySelectionBoxLocation.X, GameHeight - Scale(50));
+        public static Vector2 LinkLocationTrackerPause => new Vector2(PauseMapLocation.X + Scale(58), PauseMapLocation.Y + Scale(66));
+        public static Vector2 TriForcePauseLocation => new Vector2(LinkLocationTrackerMini.X + Scale(32), LinkLocationTrackerMini.Y - Scale(21) - 1);
+        public static Vector2 PauseMapLocation => new Vector2(InventorySelectionBoxLocation.X + Scale(100), InventorySelectionBoxLocation.Y + Scale(88));
+        public static Vector2 PauseMapRoomLocation => new Vector2(PauseMapLocation.X + Scale(56), PauseMapLocation.Y + Scale(64));
+
+        public static Vector2 LevelNameLocation => new Vector2(MiniMapLocation.X + Scale(6), MiniMapLocation.Y - Scale(9));
+        public static Vector2 RupeeCountLocation => new Vector2(MiniMapLocation.X + Scale(87), MiniMapLocation.Y + Scale(4));
+        public static Vector2 KeyCountLocation => new Vector2(RupeeCountLocation.X, RupeeCountLocation.Y + Scale(17));
+        public static Vector2 BombCountLocation => new Vector2(KeyCountLocation.X, KeyCountLocation.Y + Scale(8));
+        public static Vector2 BBoxLocation => new Vector2(RupeeCountLocation.X + Scale(36), RupeeCountLocation.Y);
+        public static Vector2 BBoxItemLocation => new Vector2(BBoxLocation.X + Scale(5), BBoxLocation.Y + Scale(8));
+        public static Vector2 ABoxLocation => new Vector2(BBoxLocation.X + Scale(25), BBoxLocation.Y);
+        public static Vector2 ABoxItemLocation => new Vector2(ABoxLocation.X + Scale(5), ABoxLocation.Y + Scale(8));
+        public static Vector2 LifeTextLocation => new Vector2(ABoxLocation.X + Scale(30), ABoxLocation.Y);
+        public static Vector2 HealthLocation => new Vector2(LifeTextLocation.X, LifeTextLocation.Y + Scale(24));
+        public static int InventoryScreenHeight => Scale(120);
+        public static Vector2 InventorySelectionBoxLocation => new Vector2(Scale(0), Scale(0));
+        public static Vector2 InventoryBoxLocation => new Vector2(InventorySelectionBoxLocation.X + Scale(123), Scale(0));
+        public static Vector2 InventoryRingLocation => new Vector2(InventoryBoxLocation.X + Scale(41), InventoryBoxLocation.Y + Scale(24));
+        public static Vector2 InventoryBoomerangLocation => new Vector2(InventoryBoxLocation.X + Scale(9), InventoryBoxLocation.Y + Scale(48));
+        public static Vector2 InventoryBombLocation => new Vector2(InventoryBoomerangLocation.X + Scale(24), InventoryBoomerangLocation.Y);
+        public static Vector2 InventoryBowLocation => new Vector2(InventoryBombLocation.X + Scale(20), InventoryBombLocation.Y);
+        public static Vector2 InventoryArrowLocation => new Vector2(InventoryBowLocation.X + Scale(8), InventoryBowLocation.Y);
+        public static Vector2 InventoryCandleLocation => new Vector2(InventoryArrowLocation.X + Scale(20), InventoryArrowLocation.Y);
+        public static Vector2 InventoryPotionLocation => new Vector2(InventoryBowLocation.X + Scale(4), InventoryBowLocation.Y + Scale(16));
+        public static Vector2 InventorySelectionItemLocation => new Vector2(InventorySelectionBoxLocation.X + Scale(68), InventorySelectionBoxLocation.Y + Scale(48));
+        public static Vector2 MapCompassHolderLocation => new Vector2(InventorySelectionBoxLocation.X + Scale(1), InventorySelectionBoxLocation.Y + Scale(88));
+        public static Vector2 InventoryMapItemLocation => new Vector2(MapCompassHolderLocation.X + Scale(48), MapCompassHolderLocation.Y + Scale(25));
+        public static Vector2 InventoryCompassLocation => new Vector2(InventoryMapItemLocation.X - Scale(5), InventoryMapItemLocation.Y + Scale(41));
+        public static Vector2 LevelNamePauseLocation => new Vector2(LevelNameLocation.X, GameHeight - Scale(56));
+        public static Vector2 RupeeCountPauseLocation => new Vector2(RupeeCountLocation.X, GameHeight - Scale(40));
+        public static Vector2 KeyCountPauseLocation => new Vector2(KeyCountLocation.X, GameHeight - Scale(24));
+        public static Vector2 BombCountPauseLocation => new Vector2(BombCountLocation.X, GameHeight - Scale(16));
+        public static Vector2 BBoxPauseLocation => new Vector2(BBoxLocation.X, RupeeCountPauseLocation.Y);
+        public static Vector2 BBoxItemPauseLocation => new Vector2(BBoxPauseLocation.X + Scale(5), BBoxPauseLocation.Y + Scale(8));
+        public static Vector2 ABoxPauseLocation => new Vector2(ABoxLocation.X, RupeeCountPauseLocation.Y);
+        public static Vector2 ABoxItemPauseLocation => new Vector2(ABoxPauseLocation.X + Scale(5), ABoxPauseLocation.Y + Scale(8));
+        public static Vector2 LifeTextPauseLocation => new Vector2(LifeTextLocation.X, RupeeCountPauseLocation.Y);
+        public static Vector2 HealthPauseLocation => new Vector2(HealthLocation.X, GameHeight - Scale(24));
+        public static Vector2 CursorLocation => new Vector2(InventoryBoxLocation.X + Scale(4), InventoryBoomerangLocation.Y);
+        public static Vector2 BombCursorLocation = new Vector2(CursorLocation.X + Scale(24), CursorLocation.Y);
+        public static Vector2 BowAndArrowCursorLocation = new Vector2(CursorLocation.X + Scale(44), CursorLocation.Y);
+        public static Vector2 CandleCursorLocation = new Vector2(CursorLocation.X + Scale(74), CursorLocation.Y);
+        public static Vector2 PotionCursorLocation = new Vector2(CursorLocation.X + Scale(49), CursorLocation.Y + Scale(16));
+        public static Vector2 InventorySelectionBoxItemLocation = new Vector2(InventorySelectionBoxLocation.X + Scale(69), InventorySelectionBoxLocation.Y + Scale(49));
         public static int GameHeight => Scale(240);
         public static int GameWidth => Scale(256);
         public static int HUDHeight => Scale(64);
         public static int TileSize => Scale(16);
+        public static int RightLeftRoomMiniMapOffset => Scale(10);
+        public static int UpDownRoomMiniMapOffset => Scale(5) - 1;
+        public static int RightLeftRoomPauseMapOffset => Scale(8);
+        public static int UpDownRoomPauseMapOffset => Scale(8);
+
+
         public static int LinkInvincibilityFrames => 24;
         public static int LinkKnockbackFrames => 8;
         public static int SpriteSizeMultiplier => 3;

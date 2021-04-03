@@ -29,10 +29,23 @@ namespace LegendOfZeldaClone
         public Room NextRoom;
         private Room firstRoom;
 
-        public MiniMap DungeonMiniMap;
+        public HUDMap HUDMap;
+        public PauseMap PauseMap;
+        public LevelName DungeonLevelName;
+        public RupeeCount PlayerRupeeCount;
+        public KeyCount PlayerKeyCount;
+        public BombCount PlayerBombCount;
+        public BBox InventoryBoxB;
+        public ABox InventoryBoxA;
+        public LifeText HUDLifeText;
+        public HealthBar HUDHealthBar;
+        public InventoryScreen InventoryBox;
+        public MapCompassHolder MapCompassHolder;
+        public SelectionBoxItem SelectionBox;
 
         public int SwitchRoomDelay;
         public readonly int SwitchDelayLength;
+        public GameState CurrentGameState = GameState.Play;
 
         public int KillCounter
         {
@@ -104,6 +117,18 @@ namespace LegendOfZeldaClone
                     if (blocksInPlace)
                         CurrentRoom.OpenDoors();
                 }
+
+                HUDMap.Update();
+                HUDHealthBar.Update();
+                PlayerRupeeCount.Update();
+                PlayerBombCount.Update();
+                PlayerKeyCount.Update();
+            }
+            else if (CurrentGameState == GameState.Pause)
+            {
+                InventoryBox.Update(Direction.None);
+                MapCompassHolder.Update();
+                HUDMap.Update();
             }
         }
 
@@ -113,8 +138,8 @@ namespace LegendOfZeldaClone
             CurrentRoom.Draw(sprintBatch);
             NextRoom?.Draw(sprintBatch);
 
-            foreach (IObject block in Objects)
-                block.Draw(sprintBatch);
+                foreach (IObject block in Objects)
+                    block.Draw(sprintBatch);
 
             if (CurrentGameState == GameState.Play)
             {
@@ -203,7 +228,19 @@ namespace LegendOfZeldaClone
 
         public void InitializeHUD()
         {
-            DungeonMiniMap = new MiniMap(LoZHelpers.MiniMapLocation);
+            HUDMap = new HUDMap(this);
+            PauseMap = new PauseMap(this);
+            DungeonLevelName = new LevelName();
+            PlayerRupeeCount = new RupeeCount(this);
+            PlayerKeyCount = new KeyCount(this);
+            PlayerBombCount = new BombCount(this);
+            InventoryBox = new InventoryScreen(this);
+            InventoryBoxB = new BBox(this);
+            InventoryBoxA = new ABox(this);
+            HUDLifeText = new LifeText();
+            HUDHealthBar = new HealthBar(this);
+            MapCompassHolder = new MapCompassHolder(this);
+            SelectionBox = new SelectionBoxItem(this);
         }
 
         public List<T> UpdateGameObjectEnumerable<T>(List<T> gameObjects) where T : IGameObject
@@ -246,6 +283,7 @@ namespace LegendOfZeldaClone
             ResetLists();
             InitializeRooms();
             Camera = new Camera(this);
+            ResetMaps();
         }
 
         public void ResetPlayer()
@@ -283,6 +321,12 @@ namespace LegendOfZeldaClone
                     enemyProjectile.Die();
                 EnemyProjectiles.Clear();
             }
+        }
+
+        public void ResetMaps()
+        {
+            HUDMap.Reset();
+            PauseMap.Reset();
         }
 
         public void StashBlocks()

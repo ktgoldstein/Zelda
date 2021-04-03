@@ -320,33 +320,24 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIItem(new LifePotion(smallItemLocation));
                     break;
                 case 55:
-                    AddIItem(new NoHealthHeart(smallItemLocation));
-                    break;
-                case 56:
                     AddIItem(new Sword(smallItemLocation));
                     break;
-                case 57:
+                case 56:
                     AddIItem(new TriForcePiece(smallItemLocation));
                     break;
-                case 58:
+                case 57:
                     AddIItem(new BlueCandle(smallItemLocation));
                     break;
-                case 59:
+                case 58:
                     AddIItem(new BlueRupee(smallItemLocation));
                     break;
-                case 60:
+                case 59:
                     AddIItem(new FlashingRupee(smallItemLocation));
                     break;
-                case 61:
-                    AddIItem(new HalfHealthHeart(smallItemLocation));
-                    break;
-                case 62:
-                    AddIItem(new HalfHealthHeart(smallItemLocation));
-                    break;
-                case 63:
+                case 60:
                     AddIItem(new LifePotion(smallItemLocation));
                     break;
-                case 64:
+                case 61:
                     AddIObject(new LadderDoor(game, tileLocation));
                     break;
                 default:
