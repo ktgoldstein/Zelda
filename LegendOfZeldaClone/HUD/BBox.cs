@@ -88,7 +88,7 @@ namespace LegendOfZeldaClone
                 {
                     potionSprite.Draw(spriteBatch, LoZHelpers.BBoxItemPauseLocation);
                     potion = true;
-                    game.Player.Equip(UsableItemTypes.BlueCandle);
+                    game.Player.Equip(UsableItemTypes.LifePotion);
                     bomb = false;
                     bow = false;
                     candle = false;
