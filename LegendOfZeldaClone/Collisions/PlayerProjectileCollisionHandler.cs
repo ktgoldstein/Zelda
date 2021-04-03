@@ -19,7 +19,7 @@
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
             if(!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile
-                || CurrentPlayerProjectile is ArrowImpactProjectile))
+                || CurrentPlayerProjectile is ArrowImpactProjectile || CurrentPlayerProjectile is BombProjectile))
                 CurrentPlayerProjectile.Die();
         }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) {}
