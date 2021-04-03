@@ -100,23 +100,23 @@ namespace LegendOfZeldaClone
     }
 
     public enum PauseMapRoomType
-    { 
-        NoRooms,
-        RoomR,
-        RoomL,
-        RoomLR,
-        RoomD,
-        RoomDR,
-        RoomDL,
-        RoomDLR,
-        RoomU,
-        RoomUR,
-        RoomUL,
-        RoomULR,
-        RoomUD,
-        RoomUDR,
-        RoomUDL,
-        AllRooms
+    {
+        NoRooms = 0b0000,
+        RoomR = 0b0001,
+        RoomL = 0b0010,
+        RoomLR = 0b0011,
+        RoomD = 0b0100,
+        RoomDR = 0b0101,
+        RoomDL = 0b0110,
+        RoomDLR = 0b0111,
+        RoomU = 0b1000,
+        RoomUR = 0b1001,
+        RoomUL = 0b1010,
+        RoomULR = 0b1011,
+        RoomUD = 0b1100,
+        RoomUDR = 0b1101,
+        RoomUDL = 0b1110,
+        AllRooms = 0b1111
     }
 
     public static class LoZHelpers

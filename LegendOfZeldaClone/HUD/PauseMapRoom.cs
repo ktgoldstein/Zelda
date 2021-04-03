@@ -6,49 +6,19 @@ namespace LegendOfZeldaClone
 
     public class PauseMapRoom 
     {
-        public bool Visited {get; set;}
-        private ISprite roomSprite;
-        public Vector2 location;
+        public Vector2 Location;
 
-        public PauseMapRoom(PauseMapRoomType type)
+        private ISprite roomSprite;
+
+        public PauseMapRoom(PauseMapRoomType type, Vector2 location)
         {
             roomSprite = HUDTextureFactory.Instance.CreatePauseMapRooms(type);
-            location = LoZHelpers.PauseMapRoomLocation;
-            Visited = false;
+            Location = location;
         }
 
-        public void Update() {}
         public void Draw(SpriteBatch spriteBatch)
         {
-            if(Visited)
-                roomSprite.Draw(spriteBatch, location);
+            roomSprite.Draw(spriteBatch, Location);
         }
-
-        public void placeRoomWhenVisited(Direction room)
-        {
-            Visited = true;
-            switch (room)
-            {
-                case Direction.Left:
-                    location.X -= LoZHelpers.RightLeftRoomPauseMapOffset;
-                    
-                    break;
-
-                case Direction.Right:
-                    location.X += LoZHelpers.RightLeftRoomPauseMapOffset;
-
-                    break;
-
-                case Direction.Down:
-                    location.Y += LoZHelpers.UpDownRoomPauseMapOffset;
-
-                    break;
-                case Direction.Up:
-                    location.Y -= LoZHelpers.UpDownRoomPauseMapOffset;
-
-                    break;
-            }
-        }
-
     }
 }

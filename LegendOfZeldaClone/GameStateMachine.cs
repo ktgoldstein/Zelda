@@ -95,7 +95,6 @@ namespace LegendOfZeldaClone
                 InventoryBox.Update(Direction.None);
                 MapCompassHolder.Update();
                 HUDMap.Update();
-                PauseMap.Update();
             }
         }
 
