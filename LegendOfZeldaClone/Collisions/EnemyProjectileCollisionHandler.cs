@@ -17,15 +17,11 @@ namespace LegendOfZeldaClone.Collisions
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) {}
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            if (CurrentEnemyProjectile is Enemy.EnemyBoomerang)
+            if (CurrentEnemyProjectile is EnemyBoomerang)
             {
-                Enemy.EnemyBoomerang boomerang = CurrentEnemyProjectile as Enemy.EnemyBoomerang;
-                if (enemy is Enemy.Goriya && enemy == boomerang.goriya)
-                {
+                EnemyBoomerang boomerang = CurrentEnemyProjectile as EnemyBoomerang;
+                if (enemy is Goriya && enemy == boomerang.goriya)
                     CurrentEnemyProjectile.Die();
-                    Enemy.Goriya goriya = boomerang.goriya as Enemy.Goriya;
-                    goriya.HasBoomerang = false;
-                }
             }
         }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) {}

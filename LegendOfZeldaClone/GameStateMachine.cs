@@ -262,12 +262,26 @@ namespace LegendOfZeldaClone
         {
             Enemies.Clear();
             EnemiesQueue.Clear();
+
             Items.Clear();
 
-            PlayerProjectiles.Clear();
-            PlayerProjectilesQueue.Clear();
-            EnemyProjectiles.Clear();
-            EnemyProjectilesQueue.Clear();
+            while (PlayerProjectilesQueue.Count > 0 || PlayerProjectiles.Count > 0)
+            {
+                PlayerProjectiles.AddRange(PlayerProjectilesQueue);
+                PlayerProjectilesQueue.Clear();
+                foreach (IPlayerProjectile playerProjectile in PlayerProjectiles)
+                    playerProjectile.Die();
+                PlayerProjectiles.Clear();
+            }
+
+            while (EnemyProjectilesQueue.Count > 0 || EnemyProjectiles.Count > 0)
+            {
+                EnemyProjectiles.AddRange(EnemyProjectilesQueue);
+                EnemyProjectilesQueue.Clear();
+                foreach (IEnemyProjectile enemyProjectile in EnemyProjectiles)
+                    enemyProjectile.Die();
+                EnemyProjectiles.Clear();
+            }
         }
 
         public void StashBlocks()

@@ -56,7 +56,14 @@ namespace LegendOfZeldaClone.Enemy
             boomerangSprite.Update();
         }
 
-        public void Die() => Alive = false;
+        public void Die()
+        {
+            if (!Alive) return;
+
+            Alive = false;
+            goriya.HasBoomerang = false;
+        }
+
         public void ComeBack() => timer = 21;
     }
 }
