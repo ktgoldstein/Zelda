@@ -27,7 +27,7 @@ namespace LegendOfZeldaClone.Enemy
         private readonly int width;
         private readonly int height;
         public override bool Invincible { get; set; }
-        public override bool Alive { get; set; }
+        public override bool Alive { get; set; } = true;
 
         public BladeTrap(Vector2 location, IPlayer link)
         {

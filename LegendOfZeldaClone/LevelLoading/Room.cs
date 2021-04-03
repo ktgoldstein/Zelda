@@ -290,7 +290,10 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new MovableRaisedBlock(tileLocation));
                     break;
                 case 46:
-                    AddIEnemy(new Wizard(game, tileLocation));
+                    Wizard wizard = new Wizard(game, tileLocation);
+                    AddIEnemy(wizard);
+                    AddIEnemy(new WizardFire(game, tileLocation - new Vector2(LoZHelpers.Scale(3 * 16), 0), wizard));
+                    AddIEnemy(new WizardFire(game, tileLocation + new Vector2(LoZHelpers.Scale(3 * 16), 0), wizard));
                     break;
                 case 47:
                     AddIItem(new BlueRing(smallItemLocation));

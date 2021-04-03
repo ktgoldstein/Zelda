@@ -48,9 +48,6 @@ namespace LegendOfZeldaClone.Enemy
             Invincible = false;
             Alive = true;
             AttackStat = 0;
-
-            this.game.Enemies.Add(new WizardFire(game, Location - new Vector2(LoZHelpers.Scale(3 * 16), 0), this));
-            this.game.Enemies.Add(new WizardFire(game, Location + new Vector2(LoZHelpers.Scale(3 * 16), 0), this));
         }
 
         public override void Draw(SpriteBatch spriteBatch)
