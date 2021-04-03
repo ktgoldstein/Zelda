@@ -18,7 +18,7 @@
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) {}
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            if(!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile
+            if(!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile
                 || CurrentPlayerProjectile is ArrowImpactProjectile || CurrentPlayerProjectile is BombProjectile))
                 CurrentPlayerProjectile.Die();
         }
@@ -44,8 +44,8 @@
         {
             bool blockIsImpassable = block.BlockHeight == ObjectHeight.Impassable;
             bool projectileTypeIsStoppedByImpassableBlock = !(CurrentPlayerProjectile is BoomerangProjectile 
-                                                        || CurrentPlayerProjectile is SwordBeamExplosionProjectile 
-                                                        || CurrentPlayerProjectile is BombProjectile);
+                || CurrentPlayerProjectile is SwordProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile 
+                || CurrentPlayerProjectile is BombProjectile);
             if (projectileTypeIsStoppedByImpassableBlock && blockIsImpassable)
                 CurrentPlayerProjectile.Die();
         }
