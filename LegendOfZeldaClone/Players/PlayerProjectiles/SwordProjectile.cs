@@ -122,10 +122,8 @@ namespace LegendOfZeldaClone
 
         private void SpawnSwordBeam()
         {
-            System.Console.WriteLine($"Health: {player.Health} MaxHealth: {player.MaxHealth} SwordBeamLock: {player.SwordBeamLock}");
             if (player.Health == player.MaxHealth && player.SwordBeamLock == 0)
             {
-                System.Console.WriteLine("Test: C");
                 player.SwordBeamLock++;
                 game.PlayerProjectilesQueue.Add(new SwordBeamProjectile(Location, direction, game, player));
                 new SwordBeamSoundEffect().Play();
