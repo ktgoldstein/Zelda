@@ -105,6 +105,7 @@ namespace LegendOfZeldaClone
             gameStateMachine.InitializeRooms();
             gameStateMachine.InitializeHUD();
             gameStateMachine.InitializeMusic();
+            gameStateMachine.GameOverTexture = Content.Load<Texture2D>("gameScreenFilter");
            // GameBackgroundMusic = new DungeonThemeMusic();
           //  GameBackgroundMusic.Play();
             MusicTimingHelperInt = 0;

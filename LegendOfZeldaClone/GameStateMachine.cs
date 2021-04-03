@@ -45,6 +45,11 @@ namespace LegendOfZeldaClone
         public IGameSound GameBackgroundMusic;
         public GameOverThemeMusic GameOverTheme;
         public int MusicTimingHelperInt;
+        public int GameOverMusicTimingHelperInt;
+        public int NumberOfLinkDyingFrames;
+        public int NumberOfFramesBeforeBlackScreenGameOver;
+        public int NumberOfFramesBeforeGameOverMessageAppears;
+        public Texture2D GameOverTexture;
 
         List<Room> RoomList;
 
@@ -65,8 +70,11 @@ namespace LegendOfZeldaClone
             SwitchRoomDelay = 0;
             SwitchDelayLength = 5;
 
-            
+            GameOverMusicTimingHelperInt = 0;
             MusicTimingHelperInt = 0;
+            NumberOfLinkDyingFrames = 55;
+            NumberOfFramesBeforeBlackScreenGameOver = NumberOfLinkDyingFrames - 16;
+            NumberOfFramesBeforeGameOverMessageAppears = NumberOfLinkDyingFrames + 20;
         }
 
         public void Update()
@@ -128,12 +136,18 @@ namespace LegendOfZeldaClone
             else if (CurrentGameState == GameState.GameOver)
             {
                 GameBackgroundMusic.StopPlaying();
-                GameOverTheme.ConditionalPlay();
+                GameOverMusicTimingHelperInt++;
+                if (GameOverMusicTimingHelperInt > NumberOfFramesBeforeGameOverMessageAppears)
+                {
+                    GameOverTheme.ConditionalPlay();
+                }
+                
+
                 Player.Update();
 
                 //when player linkstate has AnimationDone = true then play the gameover theme instead of the link dying thing
 
-                Console.WriteLine("Game Over state");
+                //Console.WriteLine("Game Over state");
                 //player enters dying state
                 //screen flashes red
                 //screen fades to black
@@ -145,61 +159,108 @@ namespace LegendOfZeldaClone
             
         }
 
-        public void Draw(SpriteBatch sprintBatch) 
+        public void Draw(SpriteBatch spriteBatch) 
         {
             if (CurrentGameState == GameState.Play)
             {
-                CurrentRoom.Draw(sprintBatch);
+                CurrentRoom.Draw(spriteBatch);
 
                 foreach (IObject block in Objects)
-                    block.Draw(sprintBatch);
+                    block.Draw(spriteBatch);
 
                 foreach (IItem item in Items)
-                    item.Draw(sprintBatch);
+                    item.Draw(spriteBatch);
 
                 foreach (IEnemyProjectile projectile in EnemyProjectiles)
-                    projectile.Draw(sprintBatch);
+                    projectile.Draw(spriteBatch);
 
                 foreach (IEnemy enemy in Enemies)
-                    enemy.Draw(sprintBatch);
+                    enemy.Draw(spriteBatch);
 
                 foreach (IPlayerProjectile projectile in PlayerProjectiles)
-                    projectile.Draw(sprintBatch);
+                    projectile.Draw(spriteBatch);
 
-                Player.Draw(sprintBatch);
-                HUDMap.Draw(sprintBatch);
-                DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNameLocation);
-                PlayerRupeeCount.Draw(sprintBatch, LoZHelpers.RupeeCountLocation);
-                PlayerKeyCount.Draw(sprintBatch, LoZHelpers.KeyCountLocation);
-                PlayerBombCount.Draw(sprintBatch, LoZHelpers.BombCountLocation);
-                InventoryBoxB.Draw(sprintBatch, LoZHelpers.BBoxLocation);
-                InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxLocation);
-                HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextLocation);
-                HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthLocation);
+                Player.Draw(spriteBatch);
+                HUDMap.Draw(spriteBatch);
+                DungeonLevelName.Draw(spriteBatch, LoZHelpers.LevelNameLocation);
+                PlayerRupeeCount.Draw(spriteBatch, LoZHelpers.RupeeCountLocation);
+                PlayerKeyCount.Draw(spriteBatch, LoZHelpers.KeyCountLocation);
+                PlayerBombCount.Draw(spriteBatch, LoZHelpers.BombCountLocation);
+                InventoryBoxB.Draw(spriteBatch, LoZHelpers.BBoxLocation);
+                InventoryBoxA.Draw(spriteBatch, LoZHelpers.ABoxLocation);
+                HUDLifeText.Draw(spriteBatch, LoZHelpers.LifeTextLocation);
+                HUDHealthBar.Draw(spriteBatch, LoZHelpers.HealthLocation);
 
             }
             else if (CurrentGameState == GameState.Pause)
             {
-                InventoryBox.Draw(sprintBatch);
-                MapCompassHolder.Draw(sprintBatch);
-                DungeonLevelName.Draw(sprintBatch, LoZHelpers.LevelNamePauseLocation);
-                PlayerRupeeCount.Draw(sprintBatch, LoZHelpers.RupeeCountPauseLocation);
-                PlayerKeyCount.Draw(sprintBatch, LoZHelpers.KeyCountPauseLocation);
-                PlayerBombCount.Draw(sprintBatch, LoZHelpers.BombCountPauseLocation);
-                InventoryBoxB.Draw(sprintBatch, LoZHelpers.BBoxPauseLocation);
-                InventoryBoxA.Draw(sprintBatch, LoZHelpers.ABoxPauseLocation);
-                HUDLifeText.Draw(sprintBatch, LoZHelpers.LifeTextPauseLocation);
-                HUDHealthBar.Draw(sprintBatch, LoZHelpers.HealthPauseLocation);
-                HUDMap.Draw(sprintBatch);
-                PauseMap.Draw(sprintBatch);
-                SelectionBox.Draw(sprintBatch);
+                InventoryBox.Draw(spriteBatch);
+                MapCompassHolder.Draw(spriteBatch);
+                DungeonLevelName.Draw(spriteBatch, LoZHelpers.LevelNamePauseLocation);
+                PlayerRupeeCount.Draw(spriteBatch, LoZHelpers.RupeeCountPauseLocation);
+                PlayerKeyCount.Draw(spriteBatch, LoZHelpers.KeyCountPauseLocation);
+                PlayerBombCount.Draw(spriteBatch, LoZHelpers.BombCountPauseLocation);
+                InventoryBoxB.Draw(spriteBatch, LoZHelpers.BBoxPauseLocation);
+                InventoryBoxA.Draw(spriteBatch, LoZHelpers.ABoxPauseLocation);
+                HUDLifeText.Draw(spriteBatch, LoZHelpers.LifeTextPauseLocation);
+                HUDHealthBar.Draw(spriteBatch, LoZHelpers.HealthPauseLocation);
+                HUDMap.Draw(spriteBatch);
+                PauseMap.Draw(spriteBatch);
+                SelectionBox.Draw(spriteBatch);
             }
             else if (CurrentGameState == GameState.GameOver)
             {
-                Player.Draw(sprintBatch);
+                SpriteFont font = Enemy.EnemySpriteFactory.Instance.CreateFont();
+                String gameOverMessage = "GAME OVER";
+                String resetGameMessage = "\nPress 'R' to reset your game.";
+                Rectangle sourceRectangle = new Rectangle(0, 0, 1, 1);
+                Rectangle destinationRectangle = new Rectangle(0, LoZHelpers.HUDHeight, LoZHelpers.GameWidth, LoZHelpers.GameHeight);
+                if (GameOverMusicTimingHelperInt < NumberOfFramesBeforeBlackScreenGameOver)
+                {
+                    CurrentRoom.Draw(spriteBatch);
+
+                    foreach (IObject block in Objects)
+                        block.Draw(spriteBatch);
+
+                    foreach (IItem item in Items)
+                        item.Draw(spriteBatch);
+
+                    foreach (IEnemyProjectile projectile in EnemyProjectiles)
+                        projectile.Draw(spriteBatch);
+
+                    foreach (IEnemy enemy in Enemies)
+                        enemy.Draw(spriteBatch);
+
+                    foreach (IPlayerProjectile projectile in PlayerProjectiles)
+                        projectile.Draw(spriteBatch);
+                    spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.DarkRed, 0.7f));
+                    if (GameOverMusicTimingHelperInt > 32)
+                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.3f));
+                    if (GameOverMusicTimingHelperInt > 35)
+                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.5f));
+                    if (GameOverMusicTimingHelperInt > 38)
+                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.8f));
+
+                }
+                else if (GameOverMusicTimingHelperInt < NumberOfFramesBeforeGameOverMessageAppears) { }
+                else
+                {
+                    spriteBatch.DrawString(font, gameOverMessage, new Vector2(LoZHelpers.GameWidth / 3, LoZHelpers.GameHeight / 2), Color.White);
+                    spriteBatch.DrawString(font, resetGameMessage, new Vector2(LoZHelpers.GameWidth / 6, LoZHelpers.GameHeight / 2), Color.White);
+                }
+                HUDMap.Draw(spriteBatch);
+                DungeonLevelName.Draw(spriteBatch, LoZHelpers.LevelNameLocation);
+                PlayerRupeeCount.Draw(spriteBatch, LoZHelpers.RupeeCountLocation);
+                PlayerKeyCount.Draw(spriteBatch, LoZHelpers.KeyCountLocation);
+                PlayerBombCount.Draw(spriteBatch, LoZHelpers.BombCountLocation);
+                InventoryBoxB.Draw(spriteBatch, LoZHelpers.BBoxLocation);
+                HUDLifeText.Draw(spriteBatch, LoZHelpers.LifeTextLocation);
+                HUDHealthBar.Draw(spriteBatch, LoZHelpers.HealthLocation);
+                Player.Draw(spriteBatch);
             }
             else if (CurrentGameState == GameState.GameWon)
             {
+
 
             }
         }

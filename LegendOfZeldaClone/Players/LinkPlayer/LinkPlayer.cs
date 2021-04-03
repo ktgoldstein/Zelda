@@ -128,8 +128,8 @@ namespace LegendOfZeldaClone
         public void Die()
         {
             Health = 0;
-            //SetState(GetStateDying());
             linkState.Die();
+            new LinkDyingSoundEffect().Play();
             game.CurrentGameState = GameState.GameOver;
         }
         

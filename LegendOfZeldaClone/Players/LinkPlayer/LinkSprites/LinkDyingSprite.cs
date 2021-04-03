@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using System;
 
 namespace LegendOfZeldaClone
 {
@@ -27,8 +27,7 @@ namespace LegendOfZeldaClone
             CurrentFrame = currentFrame;
             linkTexture = linkSpriteSheet;
             gameOverSparkleTexture = gameOverSparkleSpriteSheet;
-            totalFrames = 150;
-            //xCoordStart = x;
+            totalFrames = 55;
             yCoordBaseColor = y;
             yCoordDyingColor = (int)LinkSkinType.DyingLink * (width + atlasGap);
             width = spriteWidth;
@@ -45,15 +44,16 @@ namespace LegendOfZeldaClone
         public void Reset() => CurrentFrame = 0;
         public void Update() => CurrentFrame += CurrentFrame < totalFrames ? 1 : 0;
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location) //don't think there's really a way to get rid of these magic numbers
+        public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
             Rectangle sourceRectangle;
-            if (CurrentFrame <= 136) //link texture sprite sheet
+            Color tintColor = Color.White;
+            if (CurrentFrame <= 50) //**link texture sprite sheet**
             {
-                if (CurrentFrame <= 80) //for frames 1->80
+                if (CurrentFrame <= 32) //for frames 1->32
                 {
-                    switch (CurrentFrame / 4)
+                    switch ((CurrentFrame / 2) % 4)
                     {
                         case 1:
                             sourceRectangle = new Rectangle(xCoordRight, yCoordBaseColor, width, height); //standing right sprite
@@ -68,26 +68,32 @@ namespace LegendOfZeldaClone
                             sourceRectangle = new Rectangle(xCoordDown, yCoordBaseColor, width, height); //standing down sprite
                             break;
                         default:
-                            sourceRectangle = new Rectangle(0, 0, width, height);
+                            sourceRectangle = new Rectangle(xCoordDown, yCoordDyingColor, width, height);
                             break;
                     }
                 }
-                else if (CurrentFrame <= 112) //for frames 81->112
-                    sourceRectangle = new Rectangle(xCoordDown, yCoordBaseColor, width, height); //standing down sprite
+                else if (CurrentFrame <= 36) //for frames 33->36
+                 sourceRectangle = new Rectangle(xCoordDown, yCoordBaseColor, width, height); //standing down sprite
 
-                else //for frames 113->136
-                    sourceRectangle = new Rectangle(xCoordDown, yCoordDyingColor, width, height); //WHITE standing down sprite
+                else if (CurrentFrame <= 50) //for frames 36->50--RED standing down sprite
+                {
+                    sourceRectangle = new Rectangle(xCoordDown, yCoordBaseColor, width, height);
+                    tintColor = Color.Red;
+                }
+                else
+                    sourceRectangle = new Rectangle(0, 0, 0, 0);
 
-                spriteBatch.Draw(linkTexture, destinationRectangle, sourceRectangle, Color.White);
+                spriteBatch.Draw(linkTexture, destinationRectangle, sourceRectangle, tintColor);
             }
-            else //gameover sparkle texture sprite sheet
+            else //**gameover sparkle texture sprite sheet**
             {
-                 if (CurrentFrame <= 146)
+                if (CurrentFrame <= 52)
                     sourceRectangle = new Rectangle(0, 0, width, height); //sparkle frame type one
 
-                else //the remainder of the frames up until 150
+                else if (CurrentFrame <= 54) //the remainder of the frames up until 54
                     sourceRectangle = new Rectangle(width, 0, width, height); //sparkle frame type two
-
+                else
+                    sourceRectangle = new Rectangle(0, 0, 0, 0);
                 spriteBatch.Draw(gameOverSparkleTexture, destinationRectangle, sourceRectangle, Color.White);
             }
         }
