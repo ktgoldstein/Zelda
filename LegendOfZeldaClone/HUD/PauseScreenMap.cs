@@ -119,8 +119,12 @@ namespace LegendOfZeldaClone
             else if (game.CurrentRoom.RoomDown != null && game.CurrentRoom.RoomUp != null && game.CurrentRoom.RoomLeft != null && game.CurrentRoom.RoomRight != null)
                 roomIndex = 15;
         }
+        public void PlaceRoomOnMap(Direction direction)
+        {
+            roomOnMap.placeRoomWhenVisited(direction);
+        }
 
-        private void InitilizeMapRoomArray()
+        public void ChangeRoomType()
         {
             roomList[0] = new PauseMapRoom(PauseMapRoomType.NoRooms);
             roomList[1] = new PauseMapRoom(PauseMapRoomType.RoomR);

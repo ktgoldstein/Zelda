@@ -50,7 +50,6 @@ namespace LegendOfZeldaClone.Objects
             game.HUDMap.UpdateLinkMapLocation(Direction.Up);
             game.PauseMap.UpdateLinkMapLocation(Direction.Up);
             game.PauseMap.PlaceRoomOnMap(Direction.Up);
-
         }
     }
 }
