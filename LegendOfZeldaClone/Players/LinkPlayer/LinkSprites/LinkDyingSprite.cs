@@ -11,7 +11,6 @@ namespace LegendOfZeldaClone
         private readonly Texture2D linkTexture;
         private readonly Texture2D gameOverSparkleTexture;
         private readonly int totalFrames;
-        //private readonly int xCoordStart;
         private readonly int yCoordBaseColor;
         private readonly int yCoordDyingColor;
         private readonly int width;
@@ -55,20 +54,20 @@ namespace LegendOfZeldaClone
                 {
                     switch ((CurrentFrame / 2) % 4)
                     {
-                        case 1:
+                        case 0:
                             sourceRectangle = new Rectangle(xCoordRight, yCoordBaseColor, width, height); //standing right sprite
                             break;
-                        case 2:
+                        case 1:
                             sourceRectangle = new Rectangle(xCoordUp, yCoordBaseColor, width, height); //standing up sprite
                             break;
-                        case 3:
+                        case 2:
                             sourceRectangle = new Rectangle(xCoordLeft, yCoordBaseColor, width, height); //standing left sprite
                             break;
-                        case 4:
+                        case 3:
                             sourceRectangle = new Rectangle(xCoordDown, yCoordBaseColor, width, height); //standing down sprite
                             break;
                         default:
-                            sourceRectangle = new Rectangle(xCoordDown, yCoordDyingColor, width, height);
+                            sourceRectangle = new Rectangle(xCoordDown, yCoordBaseColor, width, height);
                             break;
                     }
                 }

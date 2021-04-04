@@ -34,7 +34,7 @@ namespace LegendOfZeldaClone
         }
 
         private readonly GameStateMachine game;
-        private ILinkState linkState;
+        public ILinkState linkState;
         private readonly int width;
         private readonly int height;
         private readonly Vector2 hurtBoxOffset;
@@ -135,6 +135,7 @@ namespace LegendOfZeldaClone
             linkState.Die();
             new LinkDyingSoundEffect().Play();
             game.CurrentGameState = GameState.GameOver;
+            Alive = false;
         }
         
         public void SetState(ILinkState linkState) => this.linkState = linkState;

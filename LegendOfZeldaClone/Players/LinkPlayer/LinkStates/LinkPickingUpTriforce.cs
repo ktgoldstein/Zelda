@@ -18,7 +18,7 @@ namespace LegendOfZeldaClone
             linkSprite = LinkSpriteFactory.Instance.CreateLinkPickingUpTriforceSprite(link.SkinType, frame);
             this.triforce = triforce;
 
-            this.triforce.Location = new Vector2(link.Location.X + (link.Width - this.triforce.Width) / 2, link.Location.Y - this.triforce.Height);
+            this.triforce.Location = new Vector2(link.Location.X + (link.Width - this.triforce.Width + 6) / 2, link.Location.Y - this.triforce.Height);
         }
 
         public void MoveUp() { }
@@ -39,13 +39,9 @@ namespace LegendOfZeldaClone
         public void Update()
         {
             linkSprite.Update();
+            triforce.Update();
             if (linkSprite.AnimationDone())
-            {
-                if (triforce is BlueRing)
-                    linkPlayer.Equip(UsableItemTypes.BlueRing);
-                else
-                    linkPlayer.SetState(linkPlayer.GetStateStandingDown());                
-            }
+                linkPlayer.SetState(linkPlayer.GetStateStandingDown());
         }
     }
 }
