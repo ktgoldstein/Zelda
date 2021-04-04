@@ -18,8 +18,9 @@
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) {}
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            if(!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile
-                || CurrentPlayerProjectile is ArrowImpactProjectile || CurrentPlayerProjectile is BombProjectile))
+            if(!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordProjectile 
+                || CurrentPlayerProjectile is SwordBeamExplosionProjectile || CurrentPlayerProjectile is ArrowImpactProjectile 
+                || CurrentPlayerProjectile is BombProjectile || CurrentPlayerProjectile is BombExplosionProjectile))
                 CurrentPlayerProjectile.Die();
         }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) {}
