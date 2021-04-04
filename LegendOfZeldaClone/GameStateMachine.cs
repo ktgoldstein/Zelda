@@ -117,11 +117,6 @@ namespace LegendOfZeldaClone
 
                 Collisions.CollisionHandling.HandleCollisions(this);
 
-                //for sound effect testing
-                if (MusicTimingHelperInt > 120)
-                {
-                    GameBackgroundMusic.StopPlaying();
-                }
                 MusicTimingHelperInt++;
                   if (CurrentRoom == RoomList[7] || CurrentRoom == RoomList[13])
                   {
@@ -285,46 +280,22 @@ namespace LegendOfZeldaClone
                     foreach (IPlayerProjectile projectile in PlayerProjectiles)
                         projectile.Draw(spriteBatch);
                     
-
+                    //screen flashes:
                     if (EndScreenMusicTimingHelperInt == 13 || EndScreenMusicTimingHelperInt == 15 || EndScreenMusicTimingHelperInt == 17
                          || EndScreenMusicTimingHelperInt == 19 || EndScreenMusicTimingHelperInt == 21 || EndScreenMusicTimingHelperInt == 23)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, Color.White * 0.8f);
-
+                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, Color.White * 0.7f);
 
                     //screen fade to black:
                     if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 2)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 4)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 6)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 8)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 10)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 12)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 14)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 16)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 18)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 20)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 22)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 24)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 26)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 28)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-                    if (EndScreenMusicTimingHelperInt > NumberOfFramesBeforeBlackFadeOutBeginsGameWon + 30)
-                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, 0.06f));
-
+                    {
+                        float floatFadeOpacityModifier = (EndScreenMusicTimingHelperInt - NumberOfFramesBeforeBlackFadeOutBeginsGameWon);
+                        int floatHelper = (int)floatFadeOpacityModifier;
+                        if (floatFadeOpacityModifier < 32)
+                            floatFadeOpacityModifier = (floatHelper / 2) * 0.06f + 0.06f;
+                        else
+                            floatFadeOpacityModifier = 1f;
+                        spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.Black, floatFadeOpacityModifier));
+                    }
                 }
                 else if (EndScreenMusicTimingHelperInt < NumberOfFramesBeforeGameWonMessageAppears) { }
                 else
