@@ -15,15 +15,15 @@
                 CurrentPlayerProjectile.Alive = false;
             }
         }
-        public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) {}
+        public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) { }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
-            if(!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordProjectile 
-                || CurrentPlayerProjectile is SwordBeamExplosionProjectile || CurrentPlayerProjectile is ArrowImpactProjectile 
+            if (!(CurrentPlayerProjectile is BoomerangProjectile || CurrentPlayerProjectile is SwordProjectile
+                || CurrentPlayerProjectile is SwordBeamExplosionProjectile || CurrentPlayerProjectile is ArrowImpactProjectile
                 || CurrentPlayerProjectile is BombProjectile || CurrentPlayerProjectile is BombExplosionProjectile))
                 CurrentPlayerProjectile.Die();
         }
-        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) {}
+        public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) { }
         public void HandleItemCollision(IItem item, Direction direction)
         {
             if (CurrentPlayerProjectile is SwordProjectile)
@@ -44,9 +44,9 @@
         public void HandleObjectCollision(IObject block, Direction direction)
         {
             bool blockIsImpassable = block.BlockHeight == ObjectHeight.Impassable;
-            bool projectileTypeIsStoppedByImpassableBlock = !(CurrentPlayerProjectile is BoomerangProjectile 
-                || CurrentPlayerProjectile is SwordProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile 
-                || CurrentPlayerProjectile is BombProjectile);
+            bool projectileTypeIsStoppedByImpassableBlock = !(CurrentPlayerProjectile is BoomerangProjectile
+                || CurrentPlayerProjectile is SwordProjectile || CurrentPlayerProjectile is SwordBeamExplosionProjectile
+                || CurrentPlayerProjectile is BombProjectile || CurrentPlayerProjectile is BombExplosionProjectile);
             if (projectileTypeIsStoppedByImpassableBlock && blockIsImpassable)
                 CurrentPlayerProjectile.Die();
         }

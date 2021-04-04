@@ -7,7 +7,11 @@ namespace LegendOfZeldaClone
         public int BombsHeld
         {
             get { return bombsHeld; }
-            set { bombsHeld = value < 0 ? 0 : value; } 
+            set
+            {
+                bombsHeld = value < 0 ? 0 : value;
+                bombsHeld = value > 8 ? 8 : value;
+            }
         }
         public int KeysHeld
         {
