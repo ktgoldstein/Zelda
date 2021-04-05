@@ -25,13 +25,20 @@ namespace LegendOfZeldaClone
         public void Update() 
         {
             numberOfKeys = game.Player.Inventory.KeysHeld;
-            int placeHolder = numberOfKeys;
-            int digitCount = 0;
-            while (placeHolder > 0)
+            if (numberOfKeys == 0)
             {
-                digitArray[digitCount] = placeHolder % 10;
-                placeHolder /= 10;
-                digitCount++;
+                digitArray = new int[] { 0, 0, 0 };
+            }
+            else
+            {
+                int placeHolder = numberOfKeys;
+                int digitCount = 0;
+                while (placeHolder > 0)
+                {
+                    digitArray[digitCount] = placeHolder % 10;
+                    placeHolder /= 10;
+                    digitCount++;
+                }
             }
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 vector)
