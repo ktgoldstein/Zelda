@@ -215,7 +215,7 @@ namespace LegendOfZeldaClone
 
                 Player.Draw(spriteBatch);
             }
-            else if (CurrentGameState == GameState.ScreenTransition)
+            else if (CurrentGameState == GameState.ScreenTransition || CurrentGameState == GameState.PauseTransition)
             {
                 CurrentRoom.Draw(spriteBatch);
                 NextRoom?.Draw(spriteBatch);

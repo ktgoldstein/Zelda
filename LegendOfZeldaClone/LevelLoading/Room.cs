@@ -335,7 +335,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIItem(new FlashingRupee(smallItemLocation));
                     break;
                 case 60:
-                    AddIItem(new LifePotion(smallItemLocation));
+                    AddIItem(new Arrow(smallItemLocation));
                     break;
                 case 61:
                     AddIObject(new LadderDoor(game, tileLocation));
