@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Objects;
 using LegendOfZeldaClone.Enemy;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace LegendOfZeldaClone
 {
@@ -69,7 +70,7 @@ namespace LegendOfZeldaClone
         public GameState PreviousGameState;
         private GameState currentGameState = GameState.Play;
 
-        public IGameSound GameBackgroundMusic;
+        public DungeonThemeMusic GameBackgroundMusic;
         public GameOverThemeMusic GameOverTheme;
         public int MusicTimingHelperInt;
         public int EndScreenMusicTimingHelperInt;
@@ -80,7 +81,7 @@ namespace LegendOfZeldaClone
         public int NumberOfFramesBeforeBlackFadeOutBeginsGameWon;
         public int NumberOfFramesBeforeBlackFadeOutEndsGameWon;
         public int NumberOfFramesBeforeGameWonMessageAppears;
-        public Texture2D GameOverTexture; //refactor this out probably
+        public Texture2D GameOverTexture;
 
         public GameStateMachine()
         {
@@ -418,6 +419,8 @@ namespace LegendOfZeldaClone
 
         public void InitializeMusic()
         {
+            if (GameBackgroundMusic != null)
+                GameBackgroundMusic.StopPlaying();
             GameBackgroundMusic = new DungeonThemeMusic();
             GameBackgroundMusic.Play();
             GameOverTheme = new GameOverThemeMusic();
@@ -460,12 +463,14 @@ namespace LegendOfZeldaClone
         }
         public void Reset()
         {
+            CurrentGameState = GameState.Play;
             ResetPlayer();
             ResetLists();
             InitializeRooms();
             RoomCamera = new Camera(this);
             MenuCamera = new Camera(this);
             ResetMaps();
+            InitializeMusic();
         }
 
         public void ResetPlayer()

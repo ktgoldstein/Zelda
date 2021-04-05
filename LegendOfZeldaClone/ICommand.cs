@@ -116,7 +116,7 @@ namespace LegendOfZeldaClone
 
         public void Execute()
         {
-            if (game.CurrentGameState == GameState.Play)
+            if (game.CurrentGameState == GameState.Play || game.CurrentGameState == GameState.GameWon || game.CurrentGameState == GameState.GameOver)
                 game.Reset();
         }
     }
