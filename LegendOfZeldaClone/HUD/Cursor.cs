@@ -74,10 +74,10 @@ namespace LegendOfZeldaClone
                             location = LoZHelpers.PotionCursorLocation;
                         break;
                     case Direction.Left:
-                        if (game.Player.Inventory.HasItem(UsableItemTypes.BoomerangNormal))
-                            location = LoZHelpers.CursorLocation;
-                        else if (game.Player.Inventory.HasItem(UsableItemTypes.Bomb))
+                        if (game.Player.Inventory.HasItem(UsableItemTypes.Bomb))
                             location = LoZHelpers.BombCursorLocation;
+                        else if (game.Player.Inventory.HasItem(UsableItemTypes.BoomerangNormal))
+                            location = LoZHelpers.CursorLocation;
                         break;
                 }
             }
@@ -90,12 +90,12 @@ namespace LegendOfZeldaClone
                             location = LoZHelpers.PotionCursorLocation;
                         break;
                     case Direction.Left:
-                        if (game.Player.Inventory.HasItem(UsableItemTypes.BoomerangNormal))
-                            location = LoZHelpers.CursorLocation;
+                        if (game.Player.Inventory.HasItem(UsableItemTypes.BowWooden) && game.Player.Inventory.HasArrow)
+                            location = LoZHelpers.BowAndArrowCursorLocation;
                         else if (game.Player.Inventory.HasItem(UsableItemTypes.Bomb))
                             location = LoZHelpers.BombCursorLocation;
-                        else if (game.Player.Inventory.HasItem(UsableItemTypes.BowWooden) && game.Player.Inventory.HasArrow)
-                            location = LoZHelpers.BowAndArrowCursorLocation;
+                        else if (game.Player.Inventory.HasItem(UsableItemTypes.BoomerangNormal))
+                            location = LoZHelpers.CursorLocation;
                         break;
                 }
             }
