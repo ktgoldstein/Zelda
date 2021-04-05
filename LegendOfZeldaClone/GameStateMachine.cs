@@ -411,6 +411,8 @@ namespace LegendOfZeldaClone
             GameBackgroundMusic = new DungeonThemeMusic();
             GameBackgroundMusic.Play();
             GameOverTheme = new GameOverThemeMusic();
+            MusicTimingHelperInt = 0;
+            EndScreenMusicTimingHelperInt = 0;
 
         }
 
