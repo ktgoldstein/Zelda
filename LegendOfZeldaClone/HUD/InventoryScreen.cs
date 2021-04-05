@@ -37,7 +37,7 @@ namespace LegendOfZeldaClone
             inventoryBox.Draw(spritebatch, LoZHelpers.InventoryBoxLocation);
             inventorySelectBox.Draw(spritebatch, LoZHelpers.InventorySelectionBoxLocation);
             inventoryCursor.Draw(spritebatch);
-            if (game.Player.Inventory.HasItem(UsableItemTypes.Bomb))
+            if (game.Player.Inventory.BombsHeld > 0)
                 inventoryBomb.Draw(spritebatch, LoZHelpers.InventoryBombLocation);
             if (game.Player.Inventory.HasItem(UsableItemTypes.BowWooden))
                 inventoryBow.Draw(spritebatch, LoZHelpers.InventoryBowLocation);

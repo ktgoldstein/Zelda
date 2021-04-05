@@ -93,8 +93,6 @@ namespace LegendOfZeldaClone
         {
             _SpriteBatch = new SpriteBatch(_graphics.GraphicsDevice);
 
-            // Altering viewports before creating spritebatch has no effect
-
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
@@ -141,7 +139,6 @@ namespace LegendOfZeldaClone
 
             _graphics.GraphicsDevice.Viewport = startingViewport;
 
-            // Camera transition here for inventory screen 
             _SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
                 null, null, null, null, gameStateMachine.MenuCamera.Translation());
             GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;

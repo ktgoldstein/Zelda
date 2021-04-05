@@ -323,7 +323,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIItem(new Sword(smallItemLocation));
                     break;
                 case 56:
-                    AddIItem(new TriForcePiece(smallItemLocation));
+                    AddIItem(new TriForcePiece(tileLocation + new Vector2(LoZHelpers.Scale(3) + LoZHelpers.TileSize / 2, 0)));
                     break;
                 case 57:
                     AddIItem(new BlueCandle(smallItemLocation));
@@ -335,10 +335,18 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIItem(new FlashingRupee(smallItemLocation));
                     break;
                 case 60:
-                    AddIItem(new LifePotion(smallItemLocation));
+                    AddIItem(new Arrow(smallItemLocation));
                     break;
                 case 61:
                     AddIObject(new LadderDoor(game, tileLocation));
+                    break;
+                case 62:
+                    AddIObject(new StoneWall(tileLocation));
+                    AddIEnemy(new Keese(tileLocation, game));
+                    break;
+                case 63:
+                    AddIObject(new StoneWall(tileLocation));
+                    AddIObject(new InvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable));
                     break;
                 default:
                     break;
