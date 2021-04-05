@@ -28,7 +28,7 @@ namespace LegendOfZeldaClone.Objects
             Location = location;
             height = 16;
             width = 16;
-            BlockHeight = ObjectHeight.CanWalkOver;
+            BlockHeight = ObjectHeight.Impassable;
             IsBombable = false;
             Alive = true;
         }
