@@ -323,7 +323,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIItem(new Sword(smallItemLocation));
                     break;
                 case 56:
-                    AddIItem(new TriForcePiece(smallItemLocation));
+                    AddIItem(new TriForcePiece(tileLocation + new Vector2(LoZHelpers.Scale(3) + LoZHelpers.TileSize / 2, 0)));
                     break;
                 case 57:
                     AddIItem(new BlueCandle(smallItemLocation));
