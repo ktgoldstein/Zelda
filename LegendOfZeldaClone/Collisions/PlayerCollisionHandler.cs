@@ -27,7 +27,10 @@ namespace LegendOfZeldaClone
             if (CurrentPlayer.BlockingDirection != direction)
                 CurrentPlayer.Damage(enemyProjectile.AttackStat, direction);
             else
+            {
                 enemyProjectile.Die();
+                new ShieldDeflectingSoundEffect().Play();
+            }
         }
 
         public void HandleItemCollision(IItem item, Direction direction) 
