@@ -12,7 +12,6 @@ namespace LegendOfZeldaClone
             Sound = GameSoundFactory.Instance.GetDungeonThemeMusic();
             SoundInstance = Sound.CreateInstance();
             SoundInstance.IsLooped = true;
-            System.Console.WriteLine("Entered DungeonThemeMusic Constructor.");
         }
         public void Play()
         {
