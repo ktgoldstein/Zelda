@@ -26,13 +26,13 @@ namespace LegendOfZeldaClone
         {
             if (game.InventoryBox.inventoryCursor.location == LoZHelpers.CursorLocation && game.Player.Inventory.HasItem(UsableItemTypes.BoomerangNormal))
                 boomerang.Draw(spriteBatch, LoZHelpers.InventorySelectionItemLocation);
-            else if (game.InventoryBox.inventoryCursor.location == LoZHelpers.BombCursorLocation)
+            else if (game.InventoryBox.inventoryCursor.location == LoZHelpers.BombCursorLocation && game.Player.Inventory.BombsHeld > 0)
                 bomb.Draw(spriteBatch, LoZHelpers.InventorySelectionItemLocation);
-            else if (game.InventoryBox.inventoryCursor.location == LoZHelpers.BowAndArrowCursorLocation)
+            else if (game.InventoryBox.inventoryCursor.location == LoZHelpers.BowAndArrowCursorLocation && game.Player.Inventory.HasArrow && game.Player.Inventory.HasItem(UsableItemTypes.BowWooden))
                 arrow.Draw(spriteBatch, LoZHelpers.InventorySelectionItemLocation);
-            else if (game.InventoryBox.inventoryCursor.location == LoZHelpers.CandleCursorLocation)
+            else if (game.InventoryBox.inventoryCursor.location == LoZHelpers.CandleCursorLocation && game.Player.Inventory.HasItem(UsableItemTypes.BlueCandle))
                 candle.Draw(spriteBatch, LoZHelpers.InventorySelectionItemLocation);
-            else if (game.InventoryBox.inventoryCursor.location == LoZHelpers.PotionCursorLocation)
+            else if (game.InventoryBox.inventoryCursor.location == LoZHelpers.PotionCursorLocation && game.Player.Inventory.HasItem(UsableItemTypes.LifePotion))
                 potion.Draw(spriteBatch, LoZHelpers.InventorySelectionItemLocation);
         }
     }
