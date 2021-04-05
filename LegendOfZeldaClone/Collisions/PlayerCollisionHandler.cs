@@ -79,6 +79,8 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.LifePotion, item);
             else if (item is TriForcePiece)
                 CurrentPlayer.PickUpTriforce(item);
+            else if (item is Clock)
+                CurrentPlayer.Damage(0, Direction.None);
         }
 
 

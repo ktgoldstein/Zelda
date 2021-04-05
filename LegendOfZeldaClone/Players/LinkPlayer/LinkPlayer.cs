@@ -82,6 +82,9 @@ namespace LegendOfZeldaClone
 
         public void Damage(int amount, Direction knockbackDirection)
         {
+            Tuple<LinkStateType, int> currentState = linkState.GetState();
+            if (currentState.Item1 == LinkStateType.PickingUpItem)
+                return;
             Health -= amount;            
             new LinkTakingDamageSoundEffect().Play();
             if (Health <= 0)
@@ -89,9 +92,7 @@ namespace LegendOfZeldaClone
                 Die();
                 return;
             }
-            Tuple<LinkStateType, int> currentState = linkState.GetState();
-            if (currentState.Item1 != LinkStateType.PickingUpItem)
-                game.Player = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
+            game.Player = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
         }
 
         public void Heal(int amount)
