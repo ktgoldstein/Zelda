@@ -340,6 +340,10 @@ namespace LegendOfZeldaClone.LevelLoading
                 case 61:
                     AddIObject(new LadderDoor(game, tileLocation));
                     break;
+                case 62:
+                    AddIObject(new StoneWall(tileLocation));
+                    AddIEnemy(new Keese(tileLocation, game));
+                    break;
                 default:
                     break;
             }
