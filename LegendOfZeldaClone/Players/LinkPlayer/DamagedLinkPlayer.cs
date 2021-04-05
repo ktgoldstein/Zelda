@@ -181,7 +181,13 @@ namespace LegendOfZeldaClone
             }
         }
 
-        public void Die() { /* Cannot die in this state */ }
+        public void Die()
+        {
+            Health = 0;
+            new LinkDyingSoundEffect().Play();
+            decoratedLinkPlayer.Die();
+            game.CurrentGameState = GameState.GameOver;
+        }
 
         public void SetState(ILinkState linkState)
         {
