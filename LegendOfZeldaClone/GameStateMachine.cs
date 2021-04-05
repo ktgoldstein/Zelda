@@ -46,8 +46,9 @@ namespace LegendOfZeldaClone
         public MapCompassHolder MapCompassHolder;
         public SelectionBoxItem SelectionBox;
 
-        public int SwitchRoomDelay;
-        public readonly int SwitchDelayLength;
+        public int SwitchRoomDelay = 0;
+        public int SwitchCursorDelay = 0;
+        public readonly int SwitchDelayLength = 5;
 
         public int KillCounter
         {
@@ -94,12 +95,8 @@ namespace LegendOfZeldaClone
             EnemyProjectilesQueue = new List<IEnemyProjectile>();
             EnemyProjectiles = new List<IEnemyProjectile>();
 
-            SwitchRoomDelay = 0;
-            SwitchDelayLength = 5;
-
             EndScreenMusicTimingHelperInt = 0;
             MusicTimingHelperInt = 0;
-
         }
 
         public void Update()
@@ -107,11 +104,13 @@ namespace LegendOfZeldaClone
             RoomCamera.Update();
             MenuCamera.Update();
 
+            if (SwitchRoomDelay > 0)
+                SwitchRoomDelay--;
+            if (SwitchCursorDelay > 0)
+                SwitchCursorDelay--;
+
             if (CurrentGameState == GameState.Play)
             {
-                if (SwitchRoomDelay > 0)
-                    SwitchRoomDelay--;
-
                 Player.Update();
 
                 PlayerProjectiles.AddRange(PlayerProjectilesQueue);

@@ -25,8 +25,11 @@ namespace LegendOfZeldaClone
         {
             if (game.CurrentGameState == GameState.Play)
                 game.Player.MoveDown();
-            else if (game.CurrentGameState == GameState.Pause)
+            else if (game.CurrentGameState == GameState.Pause && game.SwitchCursorDelay == 0) 
+            { 
                 game.InventoryBox.Update(Direction.Down);
+                game.SwitchCursorDelay = game.SwitchDelayLength;
+            }
         }
     }
 
@@ -39,8 +42,11 @@ namespace LegendOfZeldaClone
         {
             if (game.CurrentGameState == GameState.Play)
                 game.Player.MoveUp();
-            else if (game.CurrentGameState == GameState.Pause)
+            else if (game.CurrentGameState == GameState.Pause && game.SwitchCursorDelay == 0) 
+            { 
                 game.InventoryBox.Update(Direction.Up);
+                game.SwitchCursorDelay = game.SwitchDelayLength;
+            }
         }
     }
 
@@ -53,8 +59,11 @@ namespace LegendOfZeldaClone
         {
             if (game.CurrentGameState == GameState.Play)
                 game.Player.MoveLeft();
-            else if (game.CurrentGameState == GameState.Pause)
+            else if (game.CurrentGameState == GameState.Pause && game.SwitchCursorDelay == 0)
+            {
                 game.InventoryBox.Update(Direction.Left);
+                game.SwitchCursorDelay = game.SwitchDelayLength;
+            }
         }
     }
 
@@ -67,8 +76,11 @@ namespace LegendOfZeldaClone
         {
             if (game.CurrentGameState == GameState.Play)
                 game.Player.MoveRight();
-            else if (game.CurrentGameState == GameState.Pause)
+            else if (game.CurrentGameState == GameState.Pause && game.SwitchCursorDelay == 0) 
+            {
                 game.InventoryBox.Update(Direction.Right);
+                game.SwitchCursorDelay = game.SwitchDelayLength;
+            }
         }
     }
 
