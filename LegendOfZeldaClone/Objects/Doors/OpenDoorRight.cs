@@ -33,7 +33,7 @@ namespace LegendOfZeldaClone.Objects
             height = 32;
             width = 8;
             hurtBoxOffset = new Vector2(LoZHelpers.Scale(32 - width), 0);
-            BlockHeight = ObjectHeight.CanWalkOver;
+            BlockHeight = ObjectHeight.Impassable;
             IsBombable = false;
             Alive = true;
         }
