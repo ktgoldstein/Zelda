@@ -44,55 +44,40 @@ namespace LegendOfZeldaClone
             bBoxSprite.Draw(spriteBatch, vector);
             if (select)
             {
+                boomerang = false;
+                bomb = false;
+                bow = false;
+                candle = false;
+                potion = false;
                 if (cursor.location == LoZHelpers.CursorLocation && game.Player.Inventory.HasItem(UsableItemTypes.BoomerangNormal))
                 {
                     boomerangSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
                     boomerang = true;
                     game.Player.Equip(UsableItemTypes.BoomerangNormal);
-                    bomb = false;
-                    bow = false;
-                    candle = false;
-                    potion = false;
                 }
                 else if (cursor.location == LoZHelpers.BombCursorLocation && game.Player.Inventory.BombsHeld > 0)
                 {
                     bombSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
                     bomb = true;
                     game.Player.Equip(UsableItemTypes.Bomb);
-                    boomerang = false;
-                    bow = false;
-                    candle = false;
-                    potion = false;
                 }
                 else if (cursor.location == LoZHelpers.BowAndArrowCursorLocation && game.Player.Inventory.HasArrow && game.Player.Inventory.HasItem(UsableItemTypes.BowWooden))
                 {
                     bowSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
                     bow = true;
                     game.Player.Equip(UsableItemTypes.BowWooden);
-                    bomb = false;
-                    boomerang = false;
-                    candle = false;
-                    potion = false;
                 }
                 else if (cursor.location == LoZHelpers.CandleCursorLocation && game.Player.Inventory.HasItem(UsableItemTypes.BlueCandle))
                 {
                     candleSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
                     candle = true;
                     game.Player.Equip(UsableItemTypes.BlueCandle);
-                    bomb = false;
-                    bow = false;
-                    boomerang = false;
-                    potion = false;
                 }
                 else if (cursor.location == LoZHelpers.PotionCursorLocation && game.Player.Inventory.HasItem(UsableItemTypes.LifePotion))
                 {
                     potionSprite.Draw(spriteBatch, LoZHelpers.BBoxItemLocation);
                     potion = true;
                     game.Player.Equip(UsableItemTypes.LifePotion);
-                    bomb = false;
-                    bow = false;
-                    candle = false;
-                    boomerang = false;
                 }
                 select = false;
             }

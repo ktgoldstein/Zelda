@@ -47,7 +47,6 @@ namespace LegendOfZeldaClone.Enemies
             Random random = new Random();
             if (random.NextDouble() < 0.5d)
             {
-                Console.WriteLine(game.KillCounter);
                 ConstructorInfo info = LoZHelpers.DropTable[game.KillCounter].GetConstructor(new Type[] { typeof(Vector2), typeof(int)});
                 IItem item = (IItem) info.Invoke(new object[] {Location, 100});
                 game.Items.Add(item);

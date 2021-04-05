@@ -414,7 +414,6 @@ namespace LegendOfZeldaClone
             GameOverTheme = new GameOverThemeMusic();
             MusicTimingHelperInt = 0;
             EndScreenMusicTimingHelperInt = 0;
-
         }
 
         public List<T> UpdateGameObjectEnumerable<T>(List<T> gameObjects) where T : IGameObject
@@ -458,11 +457,11 @@ namespace LegendOfZeldaClone
                 GameOverTheme.StopPlaying();
             ResetPlayer();
             ResetLists();
-            InitializeRooms();
+            InitializeRooms();            
             RoomCamera = new Camera(this);
             MenuCamera = new Camera(this);
-            ResetMaps();
             InitializeMusic();
+            InitializeHUD();
         }
 
         public void ResetPlayer()
@@ -500,12 +499,6 @@ namespace LegendOfZeldaClone
                     enemyProjectile.Die();
                 EnemyProjectiles.Clear();
             }
-        }
-
-        public void ResetMaps()
-        {
-            HUDMap.Reset();
-            PauseMap.Reset();
         }
 
         public void StashBlocks()
