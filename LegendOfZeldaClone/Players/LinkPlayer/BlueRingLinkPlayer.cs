@@ -94,8 +94,11 @@ namespace LegendOfZeldaClone
         {
             Health -= amount / 2 + amount % 2;
             new LinkTakingDamageSoundEffect().Play();
-            if (Health < 0)
+            if (Health <= 0)
+            {
                 Die();
+                return;
+            }
             Tuple<LinkStateType, int> currentState = linkState.GetState();
             if (Alive && currentState.Item1 != LinkStateType.PickingUpItem)
                 game.Player = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);

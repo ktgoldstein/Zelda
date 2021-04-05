@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Objects;
 using LegendOfZeldaClone.Enemy;
+using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfZeldaClone
 {
@@ -244,8 +245,8 @@ namespace LegendOfZeldaClone
                     SpriteFont font = EnemySpriteFactory.Instance.CreateFont();
                     string gameOverMessage = "GAME OVER";
                     string resetGameMessage = "\nPress 'R' to reset your game.";
-                    spriteBatch.DrawString(font, gameOverMessage, new Vector2(LoZHelpers.GameWidth / 3, LoZHelpers.GameHeight / 2) + RoomCamera.Position, Color.White);
-                    spriteBatch.DrawString(font, resetGameMessage, new Vector2(LoZHelpers.GameWidth / 6, LoZHelpers.GameHeight / 2) + RoomCamera.Position, Color.White);
+                    spriteBatch.DrawString(font, gameOverMessage, new Vector2(LoZHelpers.GameWidth / 3, LoZHelpers.GameHeight / 2) - RoomCamera.Position, Color.White);
+                    spriteBatch.DrawString(font, resetGameMessage, new Vector2(LoZHelpers.GameWidth / 6, LoZHelpers.GameHeight / 2) - RoomCamera.Position, Color.White);
                 }
                 else if (EndScreenMusicTimingHelperInt < NumberOfFramesBeforeBlackScreenGameOver)
                 {
@@ -268,7 +269,7 @@ namespace LegendOfZeldaClone
                         projectile.Draw(spriteBatch);
 
                     Rectangle sourceRectangle = new Rectangle(0, 0, 1, 1);
-                    Rectangle destinationRectangle = new Rectangle((int)RoomCamera.Position.X, (int)RoomCamera.Position.Y, LoZHelpers.GameWidth, LoZHelpers.GameHeight);
+                    Rectangle destinationRectangle = new Rectangle((int)-RoomCamera.Position.X, (int)-RoomCamera.Position.Y, LoZHelpers.GameWidth, LoZHelpers.GameHeight);
                     spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, new Color(Color.DarkRed, 0.7f));
                 }
                 Player.Draw(spriteBatch);
@@ -296,7 +297,7 @@ namespace LegendOfZeldaClone
 
                     //screen flashes:
                     Rectangle sourceRectangle = new Rectangle(0, 0, 1, 1);
-                    Rectangle destinationRectangle = new Rectangle((int)RoomCamera.Position.X, (int)RoomCamera.Position.Y, LoZHelpers.GameWidth, LoZHelpers.GameHeight);
+                    Rectangle destinationRectangle = new Rectangle((int)-RoomCamera.Position.X, (int)-RoomCamera.Position.Y, LoZHelpers.GameWidth, LoZHelpers.GameHeight);
                     if (EndScreenMusicTimingHelperInt > 12 && EndScreenMusicTimingHelperInt < 24 && EndScreenMusicTimingHelperInt % 2 == 1)
                         spriteBatch.Draw(GameOverTexture, destinationRectangle, sourceRectangle, Color.White * 0.7f);
 
@@ -316,8 +317,8 @@ namespace LegendOfZeldaClone
                     SpriteFont font = Enemy.EnemySpriteFactory.Instance.CreateFont();
                     string gameWonMessage = "YOU WON!";
                     string resetGameMessage = "\nPress 'R' to reset your game.";
-                    spriteBatch.DrawString(font, gameWonMessage, new Vector2(LoZHelpers.GameWidth / 3, LoZHelpers.GameHeight / 2) + RoomCamera.Position, Color.White);
-                    spriteBatch.DrawString(font, resetGameMessage, new Vector2(LoZHelpers.GameWidth / 6, LoZHelpers.GameHeight / 2) + RoomCamera.Position, Color.White);
+                    spriteBatch.DrawString(font, gameWonMessage, new Vector2(LoZHelpers.GameWidth / 3, LoZHelpers.GameHeight / 2) - RoomCamera.Position, Color.White);
+                    spriteBatch.DrawString(font, resetGameMessage, new Vector2(LoZHelpers.GameWidth / 6, LoZHelpers.GameHeight / 2) - RoomCamera.Position, Color.White);
                 }
                 Player.Draw(spriteBatch);
             }
