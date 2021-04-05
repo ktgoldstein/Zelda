@@ -110,7 +110,6 @@ namespace LegendOfZeldaClone
         {
             Inventory.AddItem(itemType, game);
             linkState.PickUpItem(item);
-            Equip(itemType);
         }
         public void PickUpTriforce(IItem triforce) => linkState.PickUpTriforce(triforce);
         public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);
