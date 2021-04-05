@@ -344,6 +344,10 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new StoneWall(tileLocation));
                     AddIEnemy(new Keese(tileLocation, game));
                     break;
+                case 63:
+                    AddIObject(new StoneWall(tileLocation));
+                    AddIObject(new InvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable));
+                    break;
                 default:
                     break;
             }
