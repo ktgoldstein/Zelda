@@ -87,5 +87,7 @@ namespace LegendOfZeldaClone
 
             link.Reset();
         }
+
+        public void GoToStart() => link.Reset();
     }
 }

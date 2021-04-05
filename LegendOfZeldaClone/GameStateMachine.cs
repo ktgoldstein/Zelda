@@ -384,6 +384,8 @@ namespace LegendOfZeldaClone
             CurrentRoom.LoadRoom();
             Player.Location = LoZHelpers.LinkStartingLocation;
             RoomCamera.Reset();
+            PauseMap.GoToStart();
+            HUDMap.Reset();
         }
 
         public void InitializeHUD()
