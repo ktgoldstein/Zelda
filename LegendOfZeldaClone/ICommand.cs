@@ -107,7 +107,7 @@ namespace LegendOfZeldaClone
                 game.Player.Damage(1, Direction.None);
         }
     }
-        
+
     public class ResetGame : ICommand
     {
         private GameStateMachine game;
@@ -243,8 +243,8 @@ namespace LegendOfZeldaClone
     {
         private GameStateMachine game;
 
-        public SelectItem(GameStateMachine game) => this.game = game; 
-        
+        public SelectItem(GameStateMachine game) => this.game = game;
+
         public void Execute()
         {
             if (game.CurrentGameState == GameState.Pause)

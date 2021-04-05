@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Enemy
             get => _invincible;
             set
             {
-                aquamentusSprite = value ? EnemySpriteFactory.Instance.CreateDamagedAquamentusSprite() : EnemySpriteFactory.Instance.CreateAquamentusSprite();                
+                aquamentusSprite = value ? EnemySpriteFactory.Instance.CreateDamagedAquamentusSprite() : EnemySpriteFactory.Instance.CreateAquamentusSprite();
                 _invincible = value;
             }
          }
@@ -109,6 +109,11 @@ namespace LegendOfZeldaClone.Enemy
             DropItem();
             game.EnemiesQueue.Add(new DeathAnimation(Location));
             game.KillCounter++;
+        }
+        public override void DropItem()
+        {
+            HeartContainer bossDrop = new HeartContainer(Location);
+            game.Items.Add(bossDrop);
         }
     }
 }
