@@ -20,5 +20,7 @@
         public ILinkState GetStateUsingItemLeft();
         public ILinkState GetStateUsingItemRight();
         public ILinkState GetStatePickingUpItem(IItem item);
+        public ILinkState GetStatePickingUpTriforce(IItem triforce);
+        public ILinkState GetStateDying();
     }
 }

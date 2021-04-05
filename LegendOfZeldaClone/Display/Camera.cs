@@ -4,8 +4,8 @@ namespace LegendOfZeldaClone.Display
 {
     public class Camera
     {
+        public Vector2 Position { get; set; } = Vector2.Zero;
         private GameStateMachine game;
-        private Vector2 position = Vector2.Zero;
         private Vector2 targetPosition;
         private readonly int speed = LoZHelpers.Scale(8);
         private Direction currentTransitionDirection = Direction.None;
@@ -14,13 +14,13 @@ namespace LegendOfZeldaClone.Display
         public Camera(GameStateMachine game)
         {
             this.game = game;
-            targetPosition = position;
+            targetPosition = Position;
         }
 
         public void Reset()
         {
-            position = Vector2.Zero;
-            targetPosition = position;
+            Position = Vector2.Zero;
+            targetPosition = Position;
             currentTransitionDirection = Direction.None;
         }
 
@@ -35,18 +35,18 @@ namespace LegendOfZeldaClone.Display
             switch (direction)
             {
                 case Direction.Up:
-                    targetPosition = position + new Vector2
+                    targetPosition = Position + new Vector2
                         (0, LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
                     break;
                 case Direction.Down:
-                    targetPosition = position - new Vector2
+                    targetPosition = Position - new Vector2
                         (0, LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
                     break;
                 case Direction.Left:
-                    targetPosition = position + new Vector2(LoZHelpers.GameWidth, 0);
+                    targetPosition = Position + new Vector2(LoZHelpers.GameWidth, 0);
                     break;              
                 case Direction.Right:
-                    targetPosition = position + new Vector2(-LoZHelpers.GameWidth, 0);
+                    targetPosition = Position + new Vector2(-LoZHelpers.GameWidth, 0);
                     break;
                 default:
                     break;
@@ -56,15 +56,15 @@ namespace LegendOfZeldaClone.Display
         public void Update()
         {
             if (!active) return;
-            if ((targetPosition - position).Length() != 0)
+            if ((targetPosition - Position).Length() != 0)
             {
-                Vector2 direction = targetPosition - position;
+                Vector2 direction = targetPosition - Position;
                 if (direction.Length() < 8)
-                    position = targetPosition;
+                    Position = targetPosition;
                 else
                 {
                     direction.Normalize();
-                    position += direction * speed;
+                    Position += direction * speed;
                 }
                 return;
             }
@@ -88,7 +88,7 @@ namespace LegendOfZeldaClone.Display
 
         public Matrix Translation()
         {
-            return Matrix.CreateTranslation(position.X, position.Y, 0);
+            return Matrix.CreateTranslation(Position.X, Position.Y, 0);
         }     
     }    
 }

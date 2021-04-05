@@ -33,6 +33,7 @@ namespace LegendOfZeldaClone
         public void BeCollected()
         {
             Die();
+            new NewImportantItemAcquiredFanfareSoundEffect().Play();
             new InventoryItemPickupSoundEffect().Play();
         }
         public void Die() => Alive = false;

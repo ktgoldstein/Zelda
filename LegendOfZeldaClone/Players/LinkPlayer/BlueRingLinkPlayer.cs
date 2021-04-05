@@ -92,15 +92,16 @@ namespace LegendOfZeldaClone
 
         public void Damage(int amount, Direction knockbackDirection)
         {
-            Health -= amount / 2;
+            Health -= amount / 2 + amount % 2;
+            new LinkTakingDamageSoundEffect().Play();
             if (Health < 0)
                 Die();
             Tuple<LinkStateType, int> currentState = linkState.GetState();
-            if (currentState.Item1 != LinkStateType.PickingUpItem)
+            if (Alive && currentState.Item1 != LinkStateType.PickingUpItem)
                 game.Player = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
         }
 
-        public void Heal(int amount) => decoratedLinkPlayer.Heal(amount);
+        public void Heal(int amount) => decoratedLinkPlayer.Heal(amount); 
 
         public void PickUpUsableItem(UsableItemTypes itemType, IItem item)
         {
@@ -108,20 +109,25 @@ namespace LegendOfZeldaClone
             linkState.PickUpItem(item);
             Equip(itemType);
         }
-
+        public void PickUpTriforce(IItem triforce) => linkState.PickUpTriforce(triforce);
         public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
 
         public void Update()
         {
             linkState.Update();
+            if (game.CurrentGameState == GameState.Play && Health < 3 && game.MusicTimingHelperInt % 7 == 0)
+                new LowHealthBeepingSoundEffect().Play();
         }
 
         public void Die()
         {
             Health = 0;
-            //add gamestate change to losing
+            linkState.Die();
+            new LinkDyingSoundEffect().Play();
+            game.CurrentGameState = GameState.GameOver;
         }
+
         public void SetState(ILinkState linkState) => this.linkState = linkState;
         public ILinkState GetStateStandingDown() => new LinkStandingDown(this);
         public ILinkState GetStateStandingUp() => new LinkStandingUp(this);
@@ -136,5 +142,7 @@ namespace LegendOfZeldaClone
         public ILinkState GetStateUsingItemLeft() => new LinkUsingItemLeft(this);
         public ILinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
         public ILinkState GetStatePickingUpItem(IItem item) => new LinkPickingUpItem(this, item);
+        public ILinkState GetStatePickingUpTriforce(IItem triforce) => new LinkPickingUpTriforce(this, triforce);
+        public ILinkState GetStateDying() => new LinkDying(this);
     }
 }

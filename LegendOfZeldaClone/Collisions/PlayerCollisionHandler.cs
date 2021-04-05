@@ -14,9 +14,7 @@ namespace LegendOfZeldaClone
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
             if (playerProjectile is FireProjectile)
-            {
                 CurrentPlayer.Damage(1, direction);
-            }
         }
 
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
@@ -43,7 +41,10 @@ namespace LegendOfZeldaClone
             else if (item is Bomb)
             {
                 if (!CurrentPlayer.Inventory.HasItem(UsableItemTypes.Bomb))
+                {
                     CurrentPlayer.PickUpUsableItem(UsableItemTypes.Bomb, item);
+                    new NewImportantItemAcquiredFanfareSoundEffect().Play();
+                }
                 CurrentPlayer.Inventory.BombsHeld += LoZHelpers.BombPickUpNumber;
             }
             else if (item is Key)
@@ -59,7 +60,7 @@ namespace LegendOfZeldaClone
             else if (item is HeartContainer)
             {
                 CurrentPlayer.MaxHealth += 2;
-                CurrentPlayer.Health += 2;
+                CurrentPlayer.Heal(2);
             }
             else if (item is Heart)
                 CurrentPlayer.Heal(2);
@@ -73,7 +74,10 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.Inventory.HasArrow = true;
             else if (item is LifePotion)
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.LifePotion, item);
+            else if (item is TriForcePiece)
+                CurrentPlayer.PickUpTriforce(item);
         }
+
 
         public void HandleObjectCollision(IObject block, Direction direction)
         {

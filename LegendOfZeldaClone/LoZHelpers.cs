@@ -6,6 +6,8 @@ namespace LegendOfZeldaClone
 {
     public enum GameState
     {
+        GameOver,
+        GameWon,
         Pause,
         PauseTransition,
         Play,
@@ -39,7 +41,9 @@ namespace LegendOfZeldaClone
         UsingItemUp,
         UsingItemLeft,
         UsingItemRight,
-        PickingUpItem
+        PickingUpItem,
+        Dying,
+        PickingUpTriforce
     }
 
     public enum UsableItemTypes
@@ -81,7 +85,8 @@ namespace LegendOfZeldaClone
         BlueRing = 1,
         DamagedOne = 6,
         DamagedTwo = 7,
-        DamagedThreeDungeonOne = 9
+        DamagedThreeDungeonOne = 9,
+        DyingLink = 14
     }
 
     public enum LinkSpriteType

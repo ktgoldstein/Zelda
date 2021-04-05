@@ -34,7 +34,7 @@ namespace LegendOfZeldaClone
         }
 
         private readonly GameStateMachine game;
-        private ILinkState linkState;
+        public ILinkState linkState;
         private readonly int width;
         private readonly int height;
         private readonly Vector2 hurtBoxOffset;
@@ -82,13 +82,13 @@ namespace LegendOfZeldaClone
 
         public void Damage(int amount, Direction knockbackDirection)
         {
-            Health -= amount;
-            if (Health < 0)
+            Health -= amount;            
+            new LinkTakingDamageSoundEffect().Play();
+            if (Health <= 0)
                 Die();
             Tuple<LinkStateType, int> currentState = linkState.GetState();
             if (currentState.Item1 != LinkStateType.PickingUpItem)
                 game.Player = new DamagedLinkPlayer(game, this, currentState.Item2, currentState.Item1, knockbackDirection);
-            new LinkTakingDamageSoundEffect().Play();
         }
 
         public void Heal(int amount)
@@ -96,15 +96,22 @@ namespace LegendOfZeldaClone
             Health += amount;
             if (Health > MaxHealth)
                 Health = MaxHealth;
-            for (int i = 0; i < amount; i++)
-                new HeartsRefillingSoundEffect().Play(); //this will likely need to be changed later
+                new HeartsRefillingSoundEffect().Play(); //this will likely need to be changed later to loop
         }
 
         public void PickUpUsableItem(UsableItemTypes itemType, IItem item)
-        {
+        {            
             Inventory.AddItem(itemType, game);
             linkState.PickUpItem(item);
         }
+
+        public void PickUpTriforce(IItem triforce)
+        {
+            linkState.PickUpTriforce(triforce);
+            game.CurrentGameState = GameState.GameWon;
+        }
+            
+            
 
         public void Equip(UsableItemTypes itemType)
         {
@@ -115,17 +122,21 @@ namespace LegendOfZeldaClone
         }
 
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
+
         public void Update()
         {
             linkState.Update();
-            //if (Health < 3 && game.MusicTimingHelperInt % 7 == 0)
-            //   new LowHealthBeepingSoundEffect().Play();
+            if (game.CurrentGameState == GameState.Play && Health < 3 && game.MusicTimingHelperInt % 7 == 0)
+                new LowHealthBeepingSoundEffect().Play();
         }
 
         public void Die()
         {
             Health = 0;
-            //add game state change to losing here
+            linkState.Die();
+            new LinkDyingSoundEffect().Play();
+            game.CurrentGameState = GameState.GameOver;
+            Alive = false;
         }
         
         public void SetState(ILinkState linkState) => this.linkState = linkState;
@@ -142,5 +153,7 @@ namespace LegendOfZeldaClone
         public ILinkState GetStateUsingItemLeft() => new LinkUsingItemLeft(this);
         public ILinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
         public ILinkState GetStatePickingUpItem(IItem item) => new LinkPickingUpItem(this, item);
+        public ILinkState GetStatePickingUpTriforce(IItem triforce) => new LinkPickingUpTriforce(this, triforce);
+        public ILinkState GetStateDying() => new LinkDying(this);
     }
 }

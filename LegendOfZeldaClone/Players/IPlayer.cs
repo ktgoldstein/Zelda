@@ -16,6 +16,7 @@
         public void Damage(int amount, Direction direction);
         public void Heal(int amount);
         public void PickUpUsableItem(UsableItemTypes itemType, IItem item);
+        public void PickUpTriforce(IItem triforce);
         public void Equip(UsableItemTypes itemType);
     }
 }

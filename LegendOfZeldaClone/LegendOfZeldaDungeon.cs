@@ -17,7 +17,6 @@ namespace LegendOfZeldaClone
         private GameStateMachine gameStateMachine;
 
         public IGameSound GameBackgroundMusic;
-        public int MusicTimingHelperInt;
 
         private Texture2D blackBackground;
 
@@ -110,10 +109,9 @@ namespace LegendOfZeldaClone
 
             gameStateMachine.ResetPlayer();
             gameStateMachine.InitializeRooms();
-            gameStateMachine.InitializeHUD();            
-            GameBackgroundMusic = new DungeonThemeMusic();
-            GameBackgroundMusic.Play();
-            MusicTimingHelperInt = 0;
+            gameStateMachine.InitializeHUD();
+            gameStateMachine.InitializeMusic();
+            gameStateMachine.GameOverTexture = Content.Load<Texture2D>("gameScreenFilter");
         }
 
         protected override void Update(GameTime gameTime)
@@ -123,12 +121,6 @@ namespace LegendOfZeldaClone
             gameStateMachine.Update();
 
             base.Update(gameTime);
-
-            if (MusicTimingHelperInt > 120)
-            {
-                GameBackgroundMusic.StopPlaying();
-            }
-            MusicTimingHelperInt++;
         }
 
         protected override void Draw(GameTime gameTime)

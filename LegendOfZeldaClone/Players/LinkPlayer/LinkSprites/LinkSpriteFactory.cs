@@ -8,13 +8,19 @@ namespace LegendOfZeldaClone
         public static LinkSpriteFactory Instance { get; } = new LinkSpriteFactory();
 
         private Texture2D linkSpriteSheet;
+        private Texture2D gameOverSparkleSpriteSheet;
         private readonly int spriteWidth = 16;
         private readonly int spriteHeight = 16;
         private readonly int atlasGap = 2;
 
         private LinkSpriteFactory() { }
 
-        public void LoadAllTextures(ContentManager content) => linkSpriteSheet = content.Load<Texture2D>("linkSpriteSheet");
+        public void LoadAllTextures(ContentManager content)
+        {
+            linkSpriteSheet = content.Load<Texture2D>("linkSpriteSheet");
+            gameOverSparkleSpriteSheet = content.Load<Texture2D>("linkGameOverSparkleEffectSheet"); //need to add name of sheet
+        }
+            
 
         public ILinkSprite CreateLinkStandingDownSprite(LinkSkinType skinOffset, int frame)
         {
@@ -105,6 +111,18 @@ namespace LegendOfZeldaClone
             int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
             int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.PickingUpItem;
             return new LinkPickingUpItemSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
+        }
+        public ILinkSprite CreateLinkDyingSprite(LinkSkinType skinOffset, int frame)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffsetStart = (spriteWidth + atlasGap) * (int)LinkSpriteType.FacingRight; 
+            return new LinkDyingSprite(linkSpriteSheet, gameOverSparkleSpriteSheet, xOffsetStart, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
+        }
+        public ILinkSprite CreateLinkPickingUpTriforceSprite(LinkSkinType skinOffset, int frame)
+        {
+            int yOffset = (spriteHeight + atlasGap) * (int)skinOffset;
+            int xOffset = (spriteHeight + atlasGap) * (int)LinkSpriteType.PickingUpItem;
+            return new LinkPickingUpTriforceSprite(linkSpriteSheet, xOffset, yOffset, spriteWidth, spriteHeight, atlasGap, frame);
         }
     }
 }

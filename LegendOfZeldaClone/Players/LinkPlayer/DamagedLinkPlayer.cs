@@ -140,6 +140,11 @@ namespace LegendOfZeldaClone
                 linkState.PickUpItem(item);
             Equip(itemType);
         }
+        public void PickUpTriforce(IItem triforce)
+        {
+            foreach (ILinkState linkState in linkStates)
+                linkState.PickUpTriforce(triforce);
+        }
 
         public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);
 
@@ -197,6 +202,8 @@ namespace LegendOfZeldaClone
         public ILinkState GetStateUsingItemLeft() => new LinkUsingItemLeft(this);
         public ILinkState GetStateUsingItemRight() => new LinkUsingItemRight(this);
         public ILinkState GetStatePickingUpItem(IItem item) => new LinkPickingUpItem(this, item);
+        public ILinkState GetStatePickingUpTriforce(IItem triforce) => new LinkPickingUpTriforce(this, triforce);
+        public ILinkState GetStateDying() => new LinkDying(this);
 
         private void NextSkinIndex() => skinTypesIndex = (skinTypesIndex + 1) % skinTypes.Length;
         private ILinkState GetSpecificState(ILinkPlayer player, LinkStateType linkState, int currentFrame)

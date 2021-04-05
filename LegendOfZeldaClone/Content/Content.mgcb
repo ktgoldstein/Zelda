@@ -236,6 +236,18 @@
 /processorParam:TextureFormat=Compressed
 /build:Font.spritefont
 
+#begin gameScreenFilter.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:gameScreenFilter.png
+
 #begin GameSounds/LOZArrowAndBoomerangLoopSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -428,7 +440,6 @@
 /processorParam:Quality=Best
 /build:GameSounds/LOZWalkingOnStairsSound.wav
 
-#begin LevelLoading/Level 1.png
 #begin HUD/Level 1 (Blank).png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -542,6 +553,18 @@
 
 #begin LevelLoading/SecretRoom.csv
 /copy:LevelLoading/SecretRoom.csv
+
+#begin linkGameOverSparkleEffectSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:linkGameOverSparkleEffectSheet.png
 
 #begin linkSpriteSheet.png
 /importer:TextureImporter
