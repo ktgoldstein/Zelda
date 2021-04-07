@@ -144,6 +144,7 @@ namespace LegendOfZeldaClone
         {
             foreach (ILinkState linkState in linkStates)
                 linkState.PickUpTriforce(triforce);
+            game.CurrentGameState = GameState.GameWon;
         }
 
         public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);

@@ -112,7 +112,12 @@ namespace LegendOfZeldaClone
             Inventory.AddItem(itemType, game);
             linkState.PickUpItem(item);
         }
-        public void PickUpTriforce(IItem triforce) => linkState.PickUpTriforce(triforce);
+        public void PickUpTriforce(IItem triforce)
+        {
+            linkState.PickUpTriforce(triforce);
+            game.CurrentGameState = GameState.GameWon;
+        }
+            
         public void Equip(UsableItemTypes itemType) => decoratedLinkPlayer.Equip(itemType);
         public void Draw(SpriteBatch spriteBatch) => linkState.Draw(spriteBatch);
 
