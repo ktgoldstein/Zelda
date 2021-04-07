@@ -88,6 +88,17 @@ namespace LegendOfZeldaClone
             link.Reset();
         }
 
-        public void GoToStart() => link.Reset();
+        public void GoToStart()
+        {
+            link.Reset();
+            foreach (PauseMapRoom room in mapRooms)
+            {
+                if (room.Location == LoZHelpers.PauseMapRoomLocation)
+                {
+                    currentRoom = room;
+                    return;
+                }
+            }
+        }
     }
 }
