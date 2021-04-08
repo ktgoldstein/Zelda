@@ -254,11 +254,11 @@ namespace LegendOfZeldaClone
         };
         public static Random random = new Random();
         public static int LinkDyingFrames = 55;
-        public static int FramesBeforeBlackScreenGameOver = LinkDyingFrames - 16; //39
-        public static int FramesBeforeGameOverMessageAppears = LinkDyingFrames + 20; //75
+        public static int FramesBeforeBlackScreenGameOver = LinkDyingFrames - 16; // 39
+        public static int FramesBeforeGameOverMessageAppears = LinkDyingFrames + 20; // 75
         public static int LinkPickingUpTriforceFrames = 180;
-        public static int FramesBeforeBlackFadeOutEndsGameWon = LinkPickingUpTriforceFrames - 60; //120
-        public static int FramesBeforeBlackFadeOutBeginsGameWon = FramesBeforeBlackFadeOutEndsGameWon - 40; //80
-        public static int FramesBeforeGameWonMessageAppears = FramesBeforeBlackFadeOutEndsGameWon + 20; //140
+        public static int FramesBeforeBlackFadeOutEndsGameWon = LinkPickingUpTriforceFrames - 60; // 120
+        public static int FramesBeforeBlackFadeOutBeginsGameWon = FramesBeforeBlackFadeOutEndsGameWon - 40; // 80
+        public static int FramesBeforeGameWonMessageAppears = FramesBeforeBlackFadeOutEndsGameWon + 20; // 140
     }
 }
