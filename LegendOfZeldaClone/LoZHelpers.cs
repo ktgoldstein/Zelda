@@ -215,8 +215,8 @@ namespace LegendOfZeldaClone
         public static int GameWidth => Scale(256);
         public static int HUDHeight => Scale(64);
         public static int TileSize => Scale(16);
-        public static int RightLeftRoomMiniMapOffset => Scale(10);
-        public static int UpDownRoomMiniMapOffset => Scale(5) - 1;
+        public static int RightLeftRoomMiniMapOffset => Scale(10) + 2;
+        public static int UpDownRoomMiniMapOffset => Scale(5) + 1;
         public static int RightLeftRoomPauseMapOffset => Scale(8);
         public static int UpDownRoomPauseMapOffset => Scale(8);
         public static int LinkInvincibilityFrames => 24;

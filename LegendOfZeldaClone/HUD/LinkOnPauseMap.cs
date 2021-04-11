@@ -8,23 +8,19 @@ namespace LegendOfZeldaClone
     {
         private readonly ISprite linkOnMap;
         private Vector2 linkPauseLocation;
-        private readonly GameStateMachine game;
 
-        public LinkOnPauseMap(Vector2 location, GameStateMachine game)
+        public LinkOnPauseMap(Vector2 location)
         {
             linkOnMap = HUDTextureFactory.Instance.CreateLocationTracker();
             linkPauseLocation = location;
-            this.game = game;
         }
-
-        public void Update() {}
 
         public void Draw(SpriteBatch spriteBatch)
         {
             linkOnMap.Draw(spriteBatch, linkPauseLocation);
         }
 
-        public void moveLinkOnPauseMap(Direction room)
+        public void MoveLinkOnPauseMap(Direction room)
         {
             
             switch (room)
