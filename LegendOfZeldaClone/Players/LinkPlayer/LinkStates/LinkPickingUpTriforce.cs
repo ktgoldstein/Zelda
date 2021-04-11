@@ -18,7 +18,7 @@ namespace LegendOfZeldaClone
             linkSprite = LinkSpriteFactory.Instance.CreateLinkPickingUpTriforceSprite(link.SkinType, frame);
             this.triforce = triforce;
 
-            this.triforce.Location = new Vector2(link.Location.X + (link.Width - this.triforce.Width + 6) / 2, link.Location.Y - this.triforce.Height);
+            this.triforce.Location = new Vector2(link.Location.X + (link.Width - this.triforce.Width + LoZHelpers.Scale(2)) / 2, link.Location.Y - this.triforce.Height);
         }
 
         public void MoveUp() { }
