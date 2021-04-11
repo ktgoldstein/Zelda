@@ -2,6 +2,5 @@
 {
     public interface IItem : IGameObject
     {
-        public void BeCollected();
     }
 }

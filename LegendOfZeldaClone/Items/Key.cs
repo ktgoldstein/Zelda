@@ -30,11 +30,10 @@ namespace LegendOfZeldaClone
 
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch) => key.Draw(spriteBatch, Location);
-        public void BeCollected()
+        public void Die()
         {
-            Die();
+            Alive = false;
             new KeyPickupSoundEffect().Play();
         }
-        public void Die() => Alive = false;
     }
 }

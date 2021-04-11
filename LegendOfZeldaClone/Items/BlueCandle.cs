@@ -30,12 +30,11 @@ namespace LegendOfZeldaClone
 
         public void Update() {}
         public void Draw(SpriteBatch spriteBatch) => blueCandle.Draw(spriteBatch, Location);
-        public void BeCollected()
+        public void Die()
         {
-            Die();
+            Alive = false;
             new InventoryItemPickupSoundEffect().Play();
             new NewImportantItemAcquiredFanfareSoundEffect().Play();
         }
-        public void Die() => Alive = false;
     }
 }
