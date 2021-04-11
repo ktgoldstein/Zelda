@@ -42,9 +42,9 @@ namespace LegendOfZeldaClone
         {
             int width = texture.Width / columns;
             int height = texture.Height / rows;
-            int row = (int)((float)currentFrame / (float)columns);
+            int row = (currentFrame / columns);
             int column = currentFrame % columns;
-
+            
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 4, height * 4);
 

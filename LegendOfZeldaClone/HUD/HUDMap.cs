@@ -6,12 +6,18 @@ namespace LegendOfZeldaClone
 
     public class HUDMap
     {
-        public LinkOnMiniMap link;
-        public TriForceOnMap triForce;
-        public MiniMap miniMap;
+        private Vector2 linkLocation;
+        private ISprite link;
 
-        private bool hasMap;
-        private bool hasCompass;
+        private Vector2 miniMapLocation;
+        private ISprite miniMap;
+
+        private Vector2 triForceOnMap;
+        private ISprite triForce;
+
+
+        private bool hasMap { get { return game.Player.Inventory.HasMap; } }
+        private bool hasCompass { get { return game.Player.Inventory.HasCompass; } }
 
         private readonly GameStateMachine game;
 
@@ -19,38 +25,55 @@ namespace LegendOfZeldaClone
         {
             this.game = game;
 
-            miniMap = new MiniMap(LoZHelpers.MiniMapLocation, game);
-            link = new LinkOnMiniMap(LoZHelpers.LinkLocationTrackerMini, game);
-            triForce = new TriForceOnMap(LoZHelpers.TriForceLocation, game);
-            hasCompass = game.Player.Inventory.HasMap;
-            hasMap = game.Player.Inventory.HasCompass;  
+            miniMapLocation = LoZHelpers.MiniMapLocation;
+            miniMap = HUDTextureFactory.Instance.CreateMiniMap();
+
+            linkLocation = LoZHelpers.LinkLocationTrackerMini;
+            link = HUDTextureFactory.Instance.CreateLocationTracker();
+
+            triForceOnMap = LoZHelpers.TriForceLocation;
+            triForce = HUDTextureFactory.Instance.CreateTriForceIndicator();
+
         }
 
         public void Update() {
-
-            hasMap = game.Player.Inventory.HasMap;
-            hasCompass = game.Player.Inventory.HasCompass;
-
             if(hasCompass)
                 triForce.Update();
-
-            link.Update();
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             if (hasMap)
-                miniMap.Draw(spriteBatch, LoZHelpers.MiniMapLocation);
+                miniMap.Draw(spriteBatch, miniMapLocation);
             if (hasCompass)
-                triForce.Draw(spriteBatch, LoZHelpers.TriForceLocation);
+                triForce.Draw(spriteBatch, triForceOnMap);
 
-            link.Draw(spriteBatch);
+            link.Draw(spriteBatch, linkLocation);
         }
 
-        public void UpdateLinkMapLocation(Direction direction) => link.moveLinkOnMiniMap(direction);
+        public void UpdateLinkMapLocation(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Left:
+                    linkLocation.X -= LoZHelpers.RightLeftRoomMiniMapOffset;
+                    break;
+
+                case Direction.Right:
+                    linkLocation.X += LoZHelpers.RightLeftRoomMiniMapOffset;
+                    break;
+
+                case Direction.Down:
+                    linkLocation.Y += LoZHelpers.UpDownRoomMiniMapOffset;
+                    break;
+                case Direction.Up:
+                    linkLocation.Y -= LoZHelpers.UpDownRoomMiniMapOffset;
+                    break;
+            }
+        }
 
         public void Reset()
         {
-            link.Reset();
+            linkLocation = LoZHelpers.LinkLocationTrackerMini;
         }
     }
 }

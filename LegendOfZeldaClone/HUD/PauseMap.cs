@@ -26,7 +26,7 @@ namespace LegendOfZeldaClone
             currentRoom = new PauseMapRoom(GetRoomType(game.CurrentRoom), LoZHelpers.PauseMapRoomLocation);
             mapRooms = new List<PauseMapRoom> { currentRoom };
 
-            link = new LinkOnPauseMap(LoZHelpers.LinkLocationTrackerPause, game);
+            link = new LinkOnPauseMap(LoZHelpers.LinkLocationTrackerPause);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -41,7 +41,7 @@ namespace LegendOfZeldaClone
 
         public void MoveRooms(Direction direction)
         {
-            link.moveLinkOnPauseMap(direction);
+            link.MoveLinkOnPauseMap(direction);
             Vector2 targetLocation = currentRoom.Location;
             switch (direction)
             {
