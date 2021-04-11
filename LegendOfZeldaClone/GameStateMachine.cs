@@ -178,7 +178,7 @@ namespace LegendOfZeldaClone
                 GameBackgroundMusic.StopPlaying();
                 EndScreenMusicTimingHelperInt++;
                 if (EndScreenMusicTimingHelperInt > LoZHelpers.FramesBeforeGameOverMessageAppears)
-                    GameOverTheme.ConditionalPlay();
+                    GameOverTheme.Play();
                 Player.Update();
             }
             else if (CurrentGameState == GameState.GameWon)
