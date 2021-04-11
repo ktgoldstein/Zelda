@@ -105,6 +105,7 @@ namespace LegendOfZeldaClone.Enemy
 
         public override void Die()
         {
+            if (!Alive) return;
             Alive = false;
             DropItem();
             game.EnemiesQueue.Add(new DeathAnimation(Location));

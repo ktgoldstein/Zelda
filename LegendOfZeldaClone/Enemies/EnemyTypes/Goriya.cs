@@ -147,6 +147,7 @@ namespace LegendOfZeldaClone.Enemy
         }
         public override void Die()
         {
+            if (!Alive) return;
             new EnemyDyingSoundEffect().Play();
             Alive = false;
             game.EnemiesQueue.Add(new DeathAnimation(Location));
