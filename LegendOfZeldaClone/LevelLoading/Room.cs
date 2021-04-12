@@ -129,10 +129,10 @@ namespace LegendOfZeldaClone.LevelLoading
 
         private void ProcessEntry(int gameObjectID, int column, int row)
         {
-            Vector2 tileLocation = new Vector2(LoZHelpers.TileSize * (column + 1) + Offset.X, 
+            Vector2 tileLocation = new Vector2(LoZHelpers.TileSize * (column + 1) + Offset.X,
                 LoZHelpers.TileSize * (row + 1) + Offset.Y);
             if (fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv"))
-                tileLocation = new Vector2(LoZHelpers.TileSize * column + Offset.X, 
+                tileLocation = new Vector2(LoZHelpers.TileSize * column + Offset.X,
                     LoZHelpers.TileSize * (row + 1) + Offset.Y);
 
             Vector2 smallItemLocation = tileLocation + new Vector2(LoZHelpers.TileSize / 4, 0);
@@ -347,6 +347,9 @@ namespace LegendOfZeldaClone.LevelLoading
                 case 63:
                     AddIObject(new StoneWall(tileLocation));
                     AddIObject(new InvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable));
+                    break;
+                case 64:
+                    AddIEnemy(new Dodongo(game, tileLocation));
                     break;
                 default:
                     break;

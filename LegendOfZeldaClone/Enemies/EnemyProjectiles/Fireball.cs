@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace LegendOfZeldaClone.Enemy
 {
@@ -21,8 +22,9 @@ namespace LegendOfZeldaClone.Enemy
         private float speed = 5;
         private readonly int width;
         private readonly int height;
+        private int lifespan;
 
-        public Fireball(Vector2 location, Vector2 direction)
+        public Fireball(Vector2 location, Vector2 direction, int lifespan = -1)
         {
             fireballSprite = EnemySpriteFactory.Instance.CreateFireballSprite();
             width = 8;
@@ -32,7 +34,8 @@ namespace LegendOfZeldaClone.Enemy
             AttackStat = 1;
             Location = location;
             this.direction = direction;
-            this.direction.Normalize();
+            if(direction != Vector2.Zero) this.direction.Normalize();
+            this.lifespan = lifespan;
         }
 
         public void Draw(SpriteBatch spritebatch)
@@ -44,6 +47,8 @@ namespace LegendOfZeldaClone.Enemy
         {
             fireballSprite.Update();
             Location += direction * speed;
+            lifespan--;
+            if(lifespan == 0) Die();
         }
 
         public void Die() => Alive = false;

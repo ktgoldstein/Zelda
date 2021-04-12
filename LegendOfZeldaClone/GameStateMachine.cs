@@ -75,7 +75,7 @@ namespace LegendOfZeldaClone
         public GameOverThemeMusic GameOverTheme;
         public int MusicTimingHelperInt;
         public int EndScreenMusicTimingHelperInt;
-        
+
         public Texture2D GameOverTexture;
 
         public GameStateMachine()
@@ -321,8 +321,8 @@ namespace LegendOfZeldaClone
             InventoryBoxB.Draw(spriteBatch, LoZHelpers.BBoxLocation);
             InventoryBoxA.Draw(spriteBatch, LoZHelpers.ABoxLocation);
             HUDLifeText.Draw(spriteBatch, LoZHelpers.LifeTextLocation);
-            HUDHealthBar.Draw(spriteBatch, LoZHelpers.HealthLocation); 
-            
+            HUDHealthBar.Draw(spriteBatch, LoZHelpers.HealthLocation);
+
             PauseMap.Draw(spriteBatch);
             SelectionBox.Draw(spriteBatch);
             InventoryBox.Draw(spriteBatch);
@@ -350,10 +350,11 @@ namespace LegendOfZeldaClone
                 new Room("Content\\LevelLoading\\room14.csv", this),
                 new Room("Content\\LevelLoading\\room15.csv", this),
                 new Room("Content\\LevelLoading\\room16.csv", this),
-                new Room("Content\\LevelLoading\\SecretRoom.csv", this)
+                new Room("Content\\LevelLoading\\SecretRoom.csv", this),
+                new Room("Content\\LevelLoading\\FinalBossRoom.csv", this)
             };
 
-            RoomList[0].AddNeighbors(RoomList[3], RoomList[0], RoomList[1], RoomList[2]);
+            RoomList[0].AddNeighbors(RoomList[3], RoomList[18], RoomList[1], RoomList[2]);
             RoomList[1].AddNeighbors(null, null, null, RoomList[0]);
             RoomList[2].AddNeighbors(null, null, RoomList[0], null);
             RoomList[3].AddNeighbors(RoomList[4], RoomList[0], null, null);
@@ -371,6 +372,7 @@ namespace LegendOfZeldaClone
             RoomList[15].AddNeighbors(null, RoomList[12], RoomList[16], null);
             RoomList[16].AddNeighbors(null, RoomList[^1], null, RoomList[15]);
             RoomList[17].AddNeighbors(RoomList[16], null, null, null);
+            RoomList[18].AddNeighbors(RoomList[0], null, null, null);
 
             firstRoom = RoomList[0];
             CurrentRoom = RoomList[0];
@@ -457,7 +459,7 @@ namespace LegendOfZeldaClone
                 GameOverTheme.StopPlaying();
             ResetPlayer();
             ResetLists();
-            InitializeRooms();            
+            InitializeRooms();
             RoomCamera = new Camera(this);
             MenuCamera = new Camera(this);
             InitializeMusic();

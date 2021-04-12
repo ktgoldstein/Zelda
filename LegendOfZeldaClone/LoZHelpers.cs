@@ -260,5 +260,15 @@ namespace LegendOfZeldaClone
         public static int FramesBeforeBlackFadeOutEndsGameWon => LinkPickingUpTriforceFrames - 60; // 120
         public static int FramesBeforeBlackFadeOutBeginsGameWon => FramesBeforeBlackFadeOutEndsGameWon - 40; // 80
         public static int FramesBeforeGameWonMessageAppears => FramesBeforeBlackFadeOutEndsGameWon + 20; // 140
+        public static int[,] FireballArray = new int[,]
+        {
+            {1,0,1,0,1,0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0,1,0,1,0,1},
+            {1,0,1,0,1,0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0,1,0,1,0,1},
+            {1,0,1,0,1,0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0,1,0,1,0,1},
+            {1,0,1,0,1,0,1,0,1,0,1,0},
+        };
     }
 }

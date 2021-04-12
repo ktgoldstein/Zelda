@@ -97,6 +97,18 @@
 /processorParam:TextureFormat=Color
 /build:EnemySprites/Boomerang.png
 
+#begin EnemySprites/Dodongo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemySprites/Dodongo.png
+
 #begin EnemySprites/Fireball.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -168,6 +180,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:EnemySprites/Goriya/GoriyaUp.png
+
+#begin EnemySprites/GreenDodongo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemySprites/GreenDodongo.png
 
 #begin EnemySprites/Keese.png
 /importer:TextureImporter
@@ -499,6 +523,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:HUD/TriForceFlash.png
+
+#begin LevelLoading/FinalBossRoom.csv
+/copy:LevelLoading/FinalBossRoom.csv
 
 #begin LevelLoading/room00.csv
 /copy:LevelLoading/room00.csv
