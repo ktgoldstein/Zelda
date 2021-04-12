@@ -17,7 +17,7 @@ namespace LegendOfZeldaClone.Enemy
         public override int Width { get { return LoZHelpers.Scale(width); } }
         public override int Height { get { return LoZHelpers.Scale(height); } }
         public override int AttackStat { get; }
-        public override int Health { get; set; } = LoZHelpers.AquamentusHP;
+        public override int Health { get; set; } = 20;
         private Vector2 direction;
         public override Vector2 Direction { get { return direction; } set { direction = value; } }
         private bool _invincible;
@@ -27,7 +27,7 @@ namespace LegendOfZeldaClone.Enemy
             set
             {
                 // aquamentusSprite = value ? EnemySpriteFactory.Instance.CreateDamagedAquamentusSprite() : EnemySpriteFactory.Instance.CreateAquamentusSprite();
-                // _invincible = value;
+                _invincible = value;
             }
         }
 
@@ -70,6 +70,7 @@ namespace LegendOfZeldaClone.Enemy
         {
             dodongoSprite.Update();
             state.Update();
+            Console.WriteLine(Invincible);
             if (Invincible)
             {
                 invincibleFrames++;
