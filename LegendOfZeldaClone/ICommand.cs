@@ -144,7 +144,7 @@ namespace LegendOfZeldaClone
             if (game.CurrentGameState != GameState.Play) return;
             if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomDown == null) return;
             game.SwitchRoomDelay = game.SwitchDelayLength;
-            foreach(IObject block in game.Objects)
+            foreach(IBlock block in game.Blocks)
             {
                 if(block is OpenDoorDown || block is TunnelFaceDown)
                 {
@@ -173,7 +173,7 @@ namespace LegendOfZeldaClone
             if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomUp == null) return;
             game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            foreach (IObject block in game.Objects)
+            foreach (IBlock block in game.Blocks)
             {
                 if (block is OpenDoorUp || block is TunnelFaceUp)
                 {
@@ -202,7 +202,7 @@ namespace LegendOfZeldaClone
             if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomLeft == null) return;
             game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            foreach (IObject block in game.Objects)
+            foreach (IBlock block in game.Blocks)
             {
                 if (block is OpenDoorLeft)
                 {
@@ -225,7 +225,7 @@ namespace LegendOfZeldaClone
             if (game.CurrentGameState != GameState.Play) return;
             if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomRight == null) return;
             game.SwitchRoomDelay = game.SwitchDelayLength;
-            foreach (IObject block in game.Objects)
+            foreach (IBlock block in game.Blocks)
             {
                 if (block is OpenDoorRight)
                 {

@@ -19,8 +19,8 @@ namespace LegendOfZeldaClone
         public List<IEnemy> Enemies;
 
         public List<IItem> Items;
-        public List<IObject> Objects;
-        private List<IObject> stashedBlocks;
+        public List<IBlock> Blocks;
+        private List<IBlock> stashedBlocks;
 
         public List<IPlayerProjectile> PlayerProjectilesQueue;
         public List<IPlayerProjectile> PlayerProjectiles;
@@ -87,7 +87,7 @@ namespace LegendOfZeldaClone
             Enemies = new List<IEnemy>();
 
             Items = new List<IItem>();
-            Objects = new List<IObject>();
+            Blocks = new List<IBlock>();
 
             PlayerProjectilesQueue = new List<IPlayerProjectile>();
             PlayerProjectiles = new List<IPlayerProjectile>();
@@ -127,14 +127,14 @@ namespace LegendOfZeldaClone
 
                 Items = Items.Except(UpdateGameObjectEnumerable(Items)).ToList();
 
-                Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
+                Blocks = Blocks.Except(UpdateGameObjectEnumerable(Blocks)).ToList();
 
                 Collisions.CollisionHandling.HandleCollisions(this);
 
                 if (Enemies.Count == 0)
                 {
                     bool blocksInPlace = true;
-                    foreach (IObject block in Objects)
+                    foreach (IBlock block in Blocks)
                     {
                         if (block is MovableRaisedBlock)
                             blocksInPlace &= (block as MovableRaisedBlock).Moved;
@@ -197,7 +197,7 @@ namespace LegendOfZeldaClone
                 CurrentRoom.Draw(spriteBatch);
                 NextRoom?.Draw(spriteBatch);
 
-                foreach (IObject block in Objects)
+                foreach (IBlock block in Blocks)
                     block.Draw(spriteBatch);
 
                 foreach (IItem item in Items)
@@ -219,10 +219,10 @@ namespace LegendOfZeldaClone
                 CurrentRoom.Draw(spriteBatch);
                 NextRoom?.Draw(spriteBatch);
 
-                foreach (IObject block in Objects)
+                foreach (IBlock block in Blocks)
                     block.Draw(spriteBatch);
 
-                foreach (IObject block in stashedBlocks)
+                foreach (IBlock block in stashedBlocks)
                     block.Draw(spriteBatch);
             }
             else if (CurrentGameState == GameState.GameOver)
@@ -240,7 +240,7 @@ namespace LegendOfZeldaClone
                     CurrentRoom.Draw(spriteBatch);
                     NextRoom?.Draw(spriteBatch);
 
-                    foreach (IObject block in Objects)
+                    foreach (IBlock block in Blocks)
                         block.Draw(spriteBatch);
 
                     foreach (IItem item in Items)
@@ -267,7 +267,7 @@ namespace LegendOfZeldaClone
                 {
                     CurrentRoom.Draw(spriteBatch);
 
-                    foreach (IObject block in Objects)
+                    foreach (IBlock block in Blocks)
                         block.Draw(spriteBatch);
 
                     foreach (IItem item in Items)
@@ -471,7 +471,7 @@ namespace LegendOfZeldaClone
 
         public void ResetLists()
         {
-            Objects.Clear();
+            Blocks.Clear();
             ResetRoomSpecificLists();
         }
 
@@ -503,8 +503,8 @@ namespace LegendOfZeldaClone
 
         public void StashBlocks()
         {
-            stashedBlocks = Objects;
-            Objects = new List<IObject>();
+            stashedBlocks = Blocks;
+            Blocks = new List<IBlock>();
         }
     }
 }

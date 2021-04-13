@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Enemy;
 using LegendOfZeldaClone.Objects;
-using System;
 
 namespace LegendOfZeldaClone.Collisions
 {
@@ -34,7 +33,7 @@ namespace LegendOfZeldaClone.Collisions
                 ((Goriya) CurrentEnemy).HasBoomerang = false;
         }
         public void HandleItemCollision(IItem item, Direction direction) { }
-        public void HandleObjectCollision(IObject block, Direction direction)
+        public void HandleBlockCollision(IBlock block, Direction direction)
         {
             if (block.BlockHeight == ObjectHeight.CanWalkOver) return;
 

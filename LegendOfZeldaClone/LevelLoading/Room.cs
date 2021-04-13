@@ -16,11 +16,11 @@ namespace LegendOfZeldaClone.LevelLoading
         public Room RoomLeft;
         public Room RoomRight;
 
-        public List<IObject> Blocks = new List<IObject>();
+        public List<IBlock> Blocks = new List<IBlock>();
         public List<IItem> Items = new List<IItem>();
         public List<IEnemy> Enemies = new List<IEnemy>();
 
-        private List<IObject> closedDoors = new List<IObject>();
+        private List<IBlock> closedDoors = new List<IBlock>();
         private int doorChangeCount = 0;
 
         public Vector2 Offset = Vector2.Zero;
@@ -54,7 +54,7 @@ namespace LegendOfZeldaClone.LevelLoading
         {
             if (doorChangeCount == 0)
             {
-                game.Objects.AddRange(closedDoors);
+                game.Blocks.AddRange(closedDoors);
                 doorChangeCount++;
             }
         }
@@ -63,7 +63,7 @@ namespace LegendOfZeldaClone.LevelLoading
         {
             if (doorChangeCount == 1)
             {
-                game.Objects = game.Objects.Except(closedDoors).ToList();
+                game.Blocks = game.Blocks.Except(closedDoors).ToList();
                 doorChangeCount++;
             }
         }
@@ -73,13 +73,13 @@ namespace LegendOfZeldaClone.LevelLoading
             game.ResetRoomSpecificLists();
             game.StashBlocks();
 
-            foreach(IObject block in Blocks)
+            foreach(IBlock block in Blocks)
             {
                 if (block is MovableRaisedBlock) (block as MovableRaisedBlock).Reset();
             }
 
             doorChangeCount = 0;
-            game.Objects.AddRange(Blocks);
+            game.Blocks.AddRange(Blocks);
             game.Enemies.AddRange(Enemies);
             game.Items.AddRange(Items);
         }
@@ -355,6 +355,6 @@ namespace LegendOfZeldaClone.LevelLoading
 
         private void AddIEnemy(IEnemy enemy) => Enemies.Add(enemy);
         private void AddIItem(IItem item) => Items.Add(item);
-        private void AddIObject(IObject block) => Blocks.Add(block);
+        private void AddIObject(IBlock block) => Blocks.Add(block);
     }
 }
