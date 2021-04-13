@@ -26,7 +26,7 @@ namespace LegendOfZeldaClone.Objects
         public OpenDoorUp(GameStateMachine game, Vector2 location)
         {
             this.game = game;
-            sprite = ObjectSpriteFactory.Instance.CreateOpenDoorUp();
+            sprite = BlockSpriteFactory.Instance.CreateOpenDoorUp();
             Location = location;
             height = 16;
             width = 32;

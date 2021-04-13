@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public BlueGargoyleStatue(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateBlueGargoyleStatue();
+            sprite = BlockSpriteFactory.Instance.CreateBlueGargoyleStatue();
             Location = location;
             height = 16;
             width = 16;

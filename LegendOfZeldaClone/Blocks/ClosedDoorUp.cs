@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public ClosedDoorUp(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateLockedDoorUp();
+            sprite = BlockSpriteFactory.Instance.CreateLockedDoorUp();
             Location = location;
             height = 32;
             width = 32;

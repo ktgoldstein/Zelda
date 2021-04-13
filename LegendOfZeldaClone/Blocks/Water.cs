@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public Water(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateWater();
+            sprite = BlockSpriteFactory.Instance.CreateWater();
             Location = location;
             height = 16;
             width = 16;

@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public LockedDoorRight(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateKeyDoorRight();
+            sprite = BlockSpriteFactory.Instance.CreateKeyDoorRight();
             Location = location;
             height = 32;
             width = 32;

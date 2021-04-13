@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public StoneWall(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateStoneWall();
+            sprite = BlockSpriteFactory.Instance.CreateStoneWall();
             Location = location;
             height = 16;
             width = 16;

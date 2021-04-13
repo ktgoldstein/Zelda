@@ -26,7 +26,7 @@ namespace LegendOfZeldaClone.Objects
         public LadderDoor(GameStateMachine game, Vector2 location)
         {
             this.game = game;
-            sprite = ObjectSpriteFactory.Instance.CreateDarkBlock();
+            sprite = BlockSpriteFactory.Instance.CreateDarkBlock();
             Location = location;
             height = 16;
             width = 16;

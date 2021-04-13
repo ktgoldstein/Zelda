@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public Ladder(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateLadder();
+            sprite = BlockSpriteFactory.Instance.CreateLadder();
             Location = location;
             height = 16;
             width = 16;

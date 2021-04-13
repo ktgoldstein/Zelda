@@ -28,7 +28,7 @@ namespace LegendOfZeldaClone.Objects
 
         public MovableRaisedBlock(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateRaisedBlock();
+            sprite = BlockSpriteFactory.Instance.CreateRaisedBlock();
             startingLocation = location;
             Location = startingLocation;
         }

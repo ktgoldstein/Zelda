@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public DarkBlock(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateDarkBlock();
+            sprite = BlockSpriteFactory.Instance.CreateDarkBlock();
             Location = location;
             height = 16;
             width = 16;

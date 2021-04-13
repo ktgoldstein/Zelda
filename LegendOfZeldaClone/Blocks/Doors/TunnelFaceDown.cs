@@ -27,7 +27,7 @@ namespace LegendOfZeldaClone.Objects
         public TunnelFaceDown(GameStateMachine game, Vector2 location)
         {
             this.game = game;
-            sprite = ObjectSpriteFactory.Instance.CreateTunnelFaceDown();
+            sprite = BlockSpriteFactory.Instance.CreateTunnelFaceDown();
             Location = location;
             height = 16;
             width = 32;

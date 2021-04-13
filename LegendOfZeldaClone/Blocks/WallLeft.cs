@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public WallLeft(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateWallFaceLeft();
+            sprite = BlockSpriteFactory.Instance.CreateWallFaceLeft();
             Location = location;
             height = 32;
             width = 32;

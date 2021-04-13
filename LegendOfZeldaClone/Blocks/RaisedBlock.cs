@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public RaisedBlock(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateRaisedBlock();
+            sprite = BlockSpriteFactory.Instance.CreateRaisedBlock();
             Location = location;
             height = 16;
             width = 16;

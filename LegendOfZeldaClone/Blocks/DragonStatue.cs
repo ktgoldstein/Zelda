@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public DragonStatue(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateDragonStatue();
+            sprite = BlockSpriteFactory.Instance.CreateDragonStatue();
             Location = location;
             height = 16;
             width = 16;

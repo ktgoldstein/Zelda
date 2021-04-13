@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public FlatBlock(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateFlatBlock();
+            sprite = BlockSpriteFactory.Instance.CreateFlatBlock();
             Location = location;
             height = 16;
             width = 16;

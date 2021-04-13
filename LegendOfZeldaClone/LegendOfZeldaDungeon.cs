@@ -96,7 +96,7 @@ namespace LegendOfZeldaClone
             LinkSpriteFactory.Instance.LoadAllTextures(Content);
             EnemySpriteFactory.Instance.LoadAllTextures(Content);
             ItemSpriteFactory.Instance.LoadAllTextures(Content);
-            ObjectSpriteFactory.Instance.LoadAllTextures(Content);
+            BlockSpriteFactory.Instance.LoadAllTextures(Content);
             GameSoundFactory.Instance.LoadAllSounds(Content);
 
             PlayerProjectileSpriteFactory.Instance.LoadAllTextures(Content);

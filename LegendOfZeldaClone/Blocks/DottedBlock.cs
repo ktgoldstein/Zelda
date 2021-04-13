@@ -24,7 +24,7 @@ namespace LegendOfZeldaClone.Objects
 
         public DottedBlock(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateDottedBlock();
+            sprite = BlockSpriteFactory.Instance.CreateDottedBlock();
             Location = location;
             height = 16;
             width = 16;

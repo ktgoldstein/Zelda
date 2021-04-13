@@ -159,7 +159,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new BlueGargoyleStatue(tileLocation));
                     break;
                 case 3:
-                    AddIObject(new BlueDragonStatue(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateBlueDragonStatue(tileLocation));
                     break;
                 case 4:
                     AddIObject(new DarkBlock(tileLocation));

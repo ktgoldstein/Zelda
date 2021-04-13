@@ -28,7 +28,7 @@ namespace LegendOfZeldaClone.Objects
         public OpenDoorRight(GameStateMachine game, Vector2 location)
         {
             this.game = game;
-            openDoorRight = ObjectSpriteFactory.Instance.CreateOpenDoorRight();
+            openDoorRight = BlockSpriteFactory.Instance.CreateOpenDoorRight();
             Location = location;
             height = 32;
             width = 8;

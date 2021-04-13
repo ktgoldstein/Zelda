@@ -23,7 +23,7 @@ namespace LegendOfZeldaClone.Objects
 
         public BombableWallDown(Vector2 location)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateWallFaceDown();
+            sprite = BlockSpriteFactory.Instance.CreateWallFaceDown();
             Location = location;
             height = 32;
             width = 32;

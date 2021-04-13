@@ -26,7 +26,7 @@ namespace LegendOfZeldaClone.Objects
         public Stairs(GameStateMachine game, Vector2 location)
         {
             this.game = game;
-            stairs = ObjectSpriteFactory.Instance.CreateStairs();
+            stairs = BlockSpriteFactory.Instance.CreateStairs();
             Location = location;
             height = 16;
             width = 16;

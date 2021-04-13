@@ -26,7 +26,7 @@ namespace LegendOfZeldaClone.Objects
         public TunnelFaceUp(GameStateMachine game, Vector2 location)
         {
             this.game = game;
-            sprite = ObjectSpriteFactory.Instance.CreateTunnelFaceUp();
+            sprite = BlockSpriteFactory.Instance.CreateTunnelFaceUp();
             Location = location;
             height = 16;
             width = 32;
