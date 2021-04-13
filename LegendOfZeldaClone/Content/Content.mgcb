@@ -551,6 +551,12 @@
 #begin LevelLoading/room16.csv
 /copy:LevelLoading/room16.csv
 
+#begin LevelLoading/roomMaze00.csv
+/copy:LevelLoading/roomMaze00.csv
+
+#begin LevelLoading/roomMaze01.csv
+/copy:LevelLoading/roomMaze01.csv
+
 #begin LevelLoading/SecretRoom.csv
 /copy:LevelLoading/SecretRoom.csv
 
