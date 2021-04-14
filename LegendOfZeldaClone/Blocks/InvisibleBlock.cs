@@ -28,5 +28,6 @@ namespace LegendOfZeldaClone
         }
 
         public override void Draw(SpriteBatch spriteBatch) { }
+        public override void DrawAt(SpriteBatch spriteBatch, Vector2 location) { }
     }
 }

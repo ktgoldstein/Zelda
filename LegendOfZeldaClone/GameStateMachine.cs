@@ -213,11 +213,38 @@ namespace LegendOfZeldaClone
             }
             else if (CurrentGameState == GameState.ScreenTransition || CurrentGameState == GameState.PauseTransition)
             {
+                Vector2? nextRoomOffset = CurrentRoom.Offset;
+                if (NextRoom == null)
+                    nextRoomOffset = null;
+                else if (NextRoom == CurrentRoom.RoomDown)
+                    nextRoomOffset += Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+                else if (NextRoom == CurrentRoom.RoomLeft)
+                    nextRoomOffset -= Vector2.UnitX * LoZHelpers.GameWidth;
+                else if (NextRoom == CurrentRoom.RoomRight)
+                    nextRoomOffset += Vector2.UnitX * LoZHelpers.GameWidth;
+                else if (NextRoom == CurrentRoom.RoomUp)
+                    nextRoomOffset -= Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+
                 CurrentRoom.Draw(spriteBatch);
-                NextRoom?.Draw(spriteBatch);
+                NextRoom?.DrawAt(spriteBatch, (Vector2)nextRoomOffset);
 
                 foreach (IBlock block in Blocks)
-                    block.Draw(spriteBatch);
+                {                    
+                    if (nextRoomOffset == null)
+                    {
+                        block.Draw(spriteBatch);
+                    }                        
+                    else
+                    {
+                        Vector2 relativeLocation = new Vector2(block.Location.X % LoZHelpers.GameWidth, block.Location.Y % (LoZHelpers.GameHeight - LoZHelpers.HUDHeight));
+                        if (relativeLocation.X < 0)
+                            relativeLocation += Vector2.UnitX * LoZHelpers.GameWidth;
+                        if (relativeLocation.Y < 0)
+                            relativeLocation += Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+
+                        block.DrawAt(spriteBatch, relativeLocation + (Vector2)nextRoomOffset);
+                    }
+                }
 
                 foreach (IBlock block in stashedBlocks)
                     block.Draw(spriteBatch);

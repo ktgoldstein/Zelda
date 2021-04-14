@@ -86,11 +86,18 @@ namespace LegendOfZeldaClone.LevelLoading
         public void Draw(SpriteBatch spritebatch)
         {
             if (wallType == 1)
-                walls.Draw(spritebatch, new Vector2(0 + Offset.X, Offset.Y));
+                walls.Draw(spritebatch, Offset);
 
             if (backgroundType == 1)
-                tiles.Draw(spritebatch, new Vector2(LoZHelpers.TileSize * 2 + Offset.X,
-                    LoZHelpers.TileSize * 2 + Offset.Y));
+                tiles.Draw(spritebatch, Offset + 2 * LoZHelpers.TileSize * Vector2.One);
+        }
+        public void DrawAt(SpriteBatch spritebatch, Vector2 offset)
+        {
+            if (wallType == 1)
+                walls.Draw(spritebatch, offset);
+
+            if (backgroundType == 1)
+                tiles.Draw(spritebatch, offset + 2 * LoZHelpers.TileSize * Vector2.One);
         }
 
         public void AddNeighbors(Room roomUp, Room roomDown, Room roomLeft, Room roomRight)

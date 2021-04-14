@@ -35,6 +35,7 @@ namespace LegendOfZeldaClone
 
         public virtual void Update() { }
         public virtual void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
+        public virtual void DrawAt(SpriteBatch spriteBatch, Vector2 location) => sprite.Draw(spriteBatch, location);
         public void Die() => Alive = false;
     }
 }
