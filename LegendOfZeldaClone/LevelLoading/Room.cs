@@ -351,17 +351,17 @@ namespace LegendOfZeldaClone.LevelLoading
                 case 64:
                     AddIObject(new OpenDoorUp(game, doorLocationUp));
                     closedDoors.Add(new ClosedDoorUp(doorLocationUp));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game));
+                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game, true));
                     break;
                 case 65:
                     AddIObject(new OpenDoorDown(game, doorLocationDown));
                     closedDoors.Add(new ClosedDoorDown(doorLocationDown));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
+                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game, true));
                     break;
                 case 66:
                     AddIObject(new PressurePlate(tileLocation + (LoZHelpers.Scale(3) + 2) * Vector2.One, game, false));
                     break;
-                case 65:
+                case 67:
                     AddIObject(new FreeMovableRaisedBlock(tileLocation));
                     break;
                 default:
