@@ -348,6 +348,16 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new StoneWall(tileLocation));
                     AddIObject(new InvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable));
                     break;
+                case 64:
+                    AddIObject(new OpenDoorUp(game, doorLocationUp));
+                    closedDoors.Add(new ClosedDoorUp(doorLocationUp));
+                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game));
+                    break;
+                case 65:
+                    AddIObject(new OpenDoorDown(game, doorLocationDown));
+                    closedDoors.Add(new ClosedDoorDown(doorLocationDown));
+                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
+                    break;
                 default:
                     break;
             }
