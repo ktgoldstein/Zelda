@@ -374,7 +374,7 @@ namespace LegendOfZeldaClone
                 new Room("Content\\LevelLoading\\SecretRoom.csv", this),
             };
 
-            RoomList[0].AddNeighbors(RoomList[3], RoomList[17], RoomList[1], RoomList[2]);
+            RoomList[0].AddNeighbors(RoomList[3], RoomList[0], RoomList[1], RoomList[2]);
             RoomList[1].AddNeighbors(null, null, null, RoomList[0]);
             RoomList[2].AddNeighbors(null, null, RoomList[0], null);
             RoomList[3].AddNeighbors(RoomList[4], RoomList[0], null, null);

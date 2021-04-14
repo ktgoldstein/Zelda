@@ -368,7 +368,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
                     break;
                 case 66:
-                    AddIObject(BlockFactory.Instance.CreateBlockPressurePlate(tileLocation, game));
+                    AddIObject(BlockFactory.Instance.CreateMovableBlockGoal(tileLocation));
                     break;
                 default:
                     break;

@@ -167,6 +167,12 @@ namespace LegendOfZeldaClone
             ObjectHeight.Impassable,
             Direction.Up);
 
+        public IBlock CreateMovableBlockGoal(Vector2 location) => new MovableBlockGoal(
+            location,
+            16,
+            16,
+            ObjectHeight.CanWalkOver);
+
         public IBlock CreateMovableRaisedBlock(Vector2 location) => new MovableBlock(
             location,
             BlockSpriteFactory.Instance.CreateRaisedBlock(),

@@ -4,23 +4,26 @@ namespace LegendOfZeldaClone
 {
     public class MovableBlock: BlockKernel
     {
+        public bool HitTarget { get; set; } = false;
         public Direction MovedDirection { get; set; } = Direction.None;
         public bool Moved => moved;
 
         private Vector2 startingLocation;
+        private Vector2 pastLocation;
         private bool moved = false;
 
         public MovableBlock(Vector2 location, ISprite sprite, int height, int width, ObjectHeight objectHeight)
             : base(location, sprite, height, width, objectHeight, false, false)
         {
             startingLocation = location;
+            pastLocation = startingLocation;
         }
 
         public override void Update()
         {
             if (moved) return;
 
-            Vector2 targetLocation = startingLocation;
+            Vector2 targetLocation = pastLocation;
             switch (MovedDirection)
             {
                 case Direction.Down:
@@ -43,7 +46,18 @@ namespace LegendOfZeldaClone
 
             displacement.Normalize();
             Location += displacement * LoZHelpers.BlockSpeed;
-            moved = Location == targetLocation;
+            if (Location == targetLocation)
+            {
+                moved = HitTarget;
+                MovedDirection = Direction.None;
+                pastLocation = Location;
+            }
+        }
+
+        public void CancelMovement()
+        {
+            Location = pastLocation;
+            MovedDirection = Direction.None;
         }
 
         public void Reset()
@@ -51,6 +65,7 @@ namespace LegendOfZeldaClone
             moved = false;
             MovedDirection = Direction.None;
             Location = startingLocation;
+            pastLocation = startingLocation;
         }
     }
 }
