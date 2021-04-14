@@ -34,6 +34,7 @@ namespace LegendOfZeldaClone.Collisions
             }
             else if(CurrentObject is PressurePlate)
             {
+                System.Console.WriteLine("HurtBox");
                 (CurrentObject as PressurePlate).CloseDoors();
             }
         }

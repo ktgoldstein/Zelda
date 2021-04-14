@@ -14,20 +14,33 @@ namespace LegendOfZeldaClone.Objects
         public bool Alive { get; set; } = true;
 
         private readonly GameStateMachine game;
-        private readonly int oversize = 3;
+        private readonly bool oversize;
+        private readonly int oversizeScale = 3;
         private readonly int height = 16;
         private readonly int width = 16;
+        private ISprite sprite;
 
-        public PressurePlate(Vector2 location, GameStateMachine game)
+        public PressurePlate(Vector2 location, GameStateMachine game, bool oversize)
         {
+            sprite = ObjectSpriteFactory.Instance.CreateDarkBlock();
             this.game = game;
-            Location = location - LoZHelpers.Scale(oversize) * Vector2.One;
-            height += oversize * 2;
-            width += oversize * 2;
+            this.oversize = oversize;
+            Location = location - LoZHelpers.Scale(oversizeScale) * Vector2.One;
+            if (oversize)
+            {
+                height += oversizeScale * 2;
+                width += oversizeScale * 2;
+            }
+            else
+            {
+                Location = location;
+                height -= oversizeScale * 5;
+                width -= oversizeScale * 5;
+            }
         }
 
         public void Die() { }
-        public void Draw(SpriteBatch spriteBatch) { }
+        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
         public void Update() { }
         public void CloseDoors()
         {

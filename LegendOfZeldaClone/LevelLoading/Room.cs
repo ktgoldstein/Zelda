@@ -182,48 +182,48 @@ namespace LegendOfZeldaClone.LevelLoading
                 case 10:
                     AddIObject(new OpenDoorUp(game, doorLocationUp));
                     AddIObject(new LockedDoorUp(doorLocationUp));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game));
+                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game, true));
                     break;
                 case 11:
                     AddIObject(new OpenDoorDown(game, doorLocationDown));
                     AddIObject(new LockedDoorDown(doorLocationDown));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
+                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game, true));
                     break;
                 case 13:
                     AddIObject(new OpenDoorRight(game, doorLocationRight));
                     AddIObject(new LockedDoorRight(doorLocationRight));
-                    AddIObject(new PressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
+                    AddIObject(new PressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game, true));
                     break;
                 case 14:
                     AddIObject(new OpenDoorLeft(game, doorLocationLeft));
                     AddIObject(new LockedDoorLeft(doorLocationLeft));
-                    AddIObject(new PressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
+                    AddIObject(new PressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game, true));
                     break;
                 case 15:
                     AddIObject(new OpenDoorUp(game, doorLocationUp));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game));
+                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game, true));
                     break;
                 case 16:
                     AddIObject(new OpenDoorDown(game, doorLocationDown));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
+                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game, true));
                     break;
                 case 17:
                     AddIObject(new OpenDoorRight(game, doorLocationRight));
-                    AddIObject(new PressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
+                    AddIObject(new PressurePlate(tileLocation - 2 * (LoZHelpers.TileSize / 2) * Vector2.UnitX, game, true));
                     break;
                 case 18:
                     AddIObject(new OpenDoorLeft(game, doorLocationLeft));
-                    AddIObject(new PressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
+                    AddIObject(new PressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game, true));
                     break;
                 case 20:
                     AddIObject(new OpenDoorLeft(game, doorLocationLeft));
                     closedDoors.Add(new ClosedDoorLeft(doorLocationLeft));
-                    AddIObject(new PressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
+                    AddIObject(new PressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game, true));
                     break;
                 case 21:
                     AddIObject(new OpenDoorRight(game, doorLocationRight));
                     closedDoors.Add(new ClosedDoorRight(doorLocationRight));
-                    AddIObject(new PressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
+                    AddIObject(new PressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game, true));
                     break;
                 case 23:
                     AddIObject(new WallUp(doorLocationUp));
@@ -240,12 +240,12 @@ namespace LegendOfZeldaClone.LevelLoading
                 case 27:
                     AddIObject(new TunnelFaceUp(game, doorLocationUp));
                     AddIObject(new BombableWallUp(doorLocationUp));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game));
+                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game, true));
                     break;
                 case 28:
                     AddIObject(new TunnelFaceDown(game, doorLocationDown));
                     AddIObject(new BombableWallDown(doorLocationDown));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
+                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game,true));
                     break;
                 case 29:
                     AddIEnemy(new Keese(tileLocation, game));
@@ -357,6 +357,9 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new OpenDoorDown(game, doorLocationDown));
                     closedDoors.Add(new ClosedDoorDown(doorLocationDown));
                     AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
+                    break;
+                case 66:
+                    AddIObject(new PressurePlate(tileLocation + (LoZHelpers.Scale(3) + 2) * Vector2.One, game, false));
                     break;
                 default:
                     break;
