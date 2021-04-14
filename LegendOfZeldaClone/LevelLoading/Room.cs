@@ -355,7 +355,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     break;
                 case 63:
                     AddIObject(BlockFactory.Instance.CreateStoneWall(tileLocation));
-                    AddIObject(BlockFactory.Instance.CreateInvisibleBlock(tileLocation, Direction.None, ObjectHeight.CanFlyOver, false));
+                    AddIObject(BlockFactory.Instance.CreateInvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable, true));
                     break;
                 default:
                     break;
