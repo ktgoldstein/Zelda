@@ -236,12 +236,7 @@ namespace LegendOfZeldaClone
                     }                        
                     else
                     {
-                        Vector2 relativeLocation = new Vector2(block.Location.X % LoZHelpers.GameWidth, block.Location.Y % (LoZHelpers.GameHeight - LoZHelpers.HUDHeight));
-                        if (relativeLocation.X < 0)
-                            relativeLocation += Vector2.UnitX * LoZHelpers.GameWidth;
-                        if (relativeLocation.Y < 0)
-                            relativeLocation += Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
-
+                        Vector2 relativeLocation = LoZHelpers.GetLocationInRoom(block.Location);
                         block.DrawAt(spriteBatch, relativeLocation + (Vector2)nextRoomOffset);
                     }
                 }
