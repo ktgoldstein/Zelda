@@ -1,39 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace LegendOfZeldaClone.Objects
+namespace LegendOfZeldaClone
 {
-    public class InvisibleBlock : IBlock
+    public class InvisibleBlock : BlockKernel
     {
-        public int Width { get { return LoZHelpers.Scale(width); } }
-        public int Height { get { return LoZHelpers.Scale(height); } }
-        public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation
+        public InvisibleBlock(Vector2 location, ISprite sprite, int height, int width, ObjectHeight objectHeight, bool isBorder, Direction direction) 
+            : base(location, sprite, height, width, objectHeight, false, isBorder)        
         {
-            get { return Location; }
-            set { Location = value; }
-        }
-        public ObjectHeight BlockHeight { get; }
-        public bool IsBombable { get; }
-        public bool Alive { get; set; }
-
-        private readonly int height;
-        private int width;
-
-        public InvisibleBlock(Vector2 location, Direction direction, ObjectHeight objectHeight)
-        {
-            Location = location;
-            height = 16;
-            width = 16;
-            BlockHeight = objectHeight;
-            IsBombable = false;
-            Alive = true;
-
             DirectionBasedSetUp(direction);
         }
-
-        public void Update() { }
-        public void Draw(SpriteBatch spriteBatch) { }
 
         private void DirectionBasedSetUp(Direction direction)
         {
@@ -50,6 +26,7 @@ namespace LegendOfZeldaClone.Objects
                     break;
             }
         }
-        public void Die() => Alive = false;
+
+        public override void Draw(SpriteBatch spriteBatch) { }
     }
 }

@@ -3,25 +3,26 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone
 {
-    public class StaticBlock : IBlock
+    public class BlockKernel : IBlock
     {
         public int Width { get { return LoZHelpers.Scale(width); } }
         public int Height { get { return LoZHelpers.Scale(height); } }
         public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation
+        public virtual Vector2 HurtBoxLocation
         {
             get { return Location; }
             set { Location = value; }
         }
         public ObjectHeight BlockHeight { get; }
         public bool IsBombable { get; }
+        public bool IsBorder { get; }
         public bool Alive { get; set; } = true;
 
         private readonly ISprite sprite;
-        private readonly int height;
-        private readonly int width;
+        protected int height;
+        protected int width;
 
-        public StaticBlock(Vector2 location, ISprite sprite, int height, int width, ObjectHeight objectHeight, bool isBombable)
+        public BlockKernel(Vector2 location, ISprite sprite, int height, int width, ObjectHeight objectHeight, bool isBombable, bool isBorder)
         {
             Location = location;
             this.sprite = sprite;
@@ -29,10 +30,11 @@ namespace LegendOfZeldaClone
             this.width = width;
             BlockHeight = objectHeight;
             IsBombable = isBombable;
+            IsBorder = isBorder;
         }
 
-        public void Update() { }
-        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
+        public virtual void Update() { }
+        public virtual void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
         public void Die() => Alive = false;
     }
 }

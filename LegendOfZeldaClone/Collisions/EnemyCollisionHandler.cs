@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Enemy;
-using LegendOfZeldaClone.Objects;
 
 namespace LegendOfZeldaClone.Collisions
 {
@@ -29,43 +28,36 @@ namespace LegendOfZeldaClone.Collisions
         public void HandleEnemyCollision(IEnemy enemy, Direction direction) { }
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
-            if (enemyProjectile is EnemyBoomerang && ((EnemyBoomerang) enemyProjectile).goriya == CurrentEnemy)
+            if (enemyProjectile is EnemyBoomerang boomerang && boomerang.goriya == CurrentEnemy)
                 ((Goriya) CurrentEnemy).HasBoomerang = false;
         }
         public void HandleItemCollision(IItem item, Direction direction) { }
         public void HandleBlockCollision(IBlock block, Direction direction)
         {
             if (block.BlockHeight == ObjectHeight.CanWalkOver) return;
+            if (CurrentEnemy is Wallmaster && block.IsBorder) return;
+            if (CurrentEnemy is Keese && block.BlockHeight == ObjectHeight.CanFlyOver) return;
 
-            //they should stop and have to move around it (except keese if the object is not impassable)
-            if(CurrentEnemy is Wallmaster && (block is WallDown || block is WallUp || block is WallLeft || block is WallRight || (block.GetType().ToString().Contains("Door")) ))
+            switch (direction)
             {
-                return;
+                case Direction.Down:
+                    CurrentEnemy.HurtBoxLocation = new Vector2(CurrentEnemy.HurtBoxLocation.X, block.HurtBoxLocation.Y - CurrentEnemy.Height);
+                    break;
+                case Direction.Up:
+                    CurrentEnemy.HurtBoxLocation = new Vector2(CurrentEnemy.HurtBoxLocation.X, block.HurtBoxLocation.Y + block.Height);
+                    break;
+                case Direction.Left:
+                    CurrentEnemy.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X + block.Width, CurrentEnemy.HurtBoxLocation.Y);
+                    break;
+                case Direction.Right:
+                    CurrentEnemy.HurtBoxLocation = new Vector2(block.HurtBoxLocation.X - CurrentEnemy.Width, CurrentEnemy.HurtBoxLocation.Y);
+                    break;
             }
-            if (!(CurrentEnemy is Wallmaster && block is Objects.InvisibleBlock))
-            {
-                if (CurrentEnemy is Keese && block.BlockHeight != ObjectHeight.Impassable) return;
-                Rectangle enemyRectangle = new Rectangle((int)CurrentEnemy.Location.X, (int)CurrentEnemy.Location.Y, CurrentEnemy.Width, CurrentEnemy.Height);
-                Rectangle blockRectangle = new Rectangle((int)block.Location.X, (int)block.Location.Y, block.Width, block.Height);
-                Rectangle overlap = Rectangle.Intersect(enemyRectangle, blockRectangle);
-                Vector2 vector = -LoZHelpers.DirectionToVector(direction);
-                if (vector.X == 0)
-                {
-                    CurrentEnemy.Location += vector * overlap.Height;
-                }
-                else
-                {
-                    CurrentEnemy.Location += vector * overlap.Width;
-                }
-                if ( !( CurrentEnemy is Aquamentus) && !( CurrentEnemy is BladeTrap ) && !(block is WallDown) && !(block is WallUp) && !(block is WallLeft) && !(block is WallRight))
-                {
-                    CurrentEnemy.ChangeDirection(direction);
-                }
-                else
-                {
-                    CurrentEnemy.Direction = -LoZHelpers.DirectionToVector(direction);
-                }
-            }
+
+            if (CurrentEnemy is Aquamentus || CurrentEnemy is BladeTrap || block.IsBorder)
+                CurrentEnemy.Direction = -LoZHelpers.DirectionToVector(direction);
+            else
+                CurrentEnemy.ChangeDirection(direction);
         }
     }
 }

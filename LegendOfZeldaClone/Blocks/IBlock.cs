@@ -4,5 +4,6 @@
     {
         public ObjectHeight BlockHeight { get; }
         public bool IsBombable { get; }
+        public bool IsBorder { get; }
     }
 }

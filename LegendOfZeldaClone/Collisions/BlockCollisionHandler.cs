@@ -1,9 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using LegendOfZeldaClone.Objects;
-
-
-
-namespace LegendOfZeldaClone.Collisions
+﻿namespace LegendOfZeldaClone.Collisions
 {
     class BlockCollisionHandler : ICollisionHandler
     {
@@ -14,23 +9,21 @@ namespace LegendOfZeldaClone.Collisions
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
-            if ((CurrentBlock is LockedDoorUp || CurrentBlock is LockedDoorDown ||
-                CurrentBlock is LockedDoorLeft || CurrentBlock is LockedDoorRight) &&
-                player.Inventory.KeysHeld > 0 )
+            if (CurrentBlock is LockedDoor && player.Inventory.KeysHeld > 0 )
             {
                 CurrentBlock.Die();
                 new DoorUnlockingSoundEffect().Play();
                 player.Inventory.KeysHeld--;
             }
-            else if (CurrentBlock is MovableRaisedBlock)
+            else if (CurrentBlock is MovableBlock)
             {
-                MovableRaisedBlock target = (CurrentBlock as MovableRaisedBlock);
+                MovableBlock target = (CurrentBlock as MovableBlock);
                 if (target.MovedDirection == Direction.None)
                     target.MovedDirection = LoZHelpers.FlipDirection(direction);
             }
-            else if (CurrentBlock is IDoor)
+            else if (CurrentBlock is DoorKernel)
             {
-                (CurrentBlock as IDoor).ChangeRoom();
+                (CurrentBlock as DoorKernel).ChangeRoom();
             }
             else if(CurrentBlock is PressurePlate)
             {

@@ -4,10 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using LegendOfZeldaClone.Objects;
 using LegendOfZeldaClone.Enemy;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
 
 namespace LegendOfZeldaClone
 {
@@ -136,8 +133,8 @@ namespace LegendOfZeldaClone
                     bool blocksInPlace = true;
                     foreach (IBlock block in Blocks)
                     {
-                        if (block is MovableRaisedBlock)
-                            blocksInPlace &= (block as MovableRaisedBlock).Moved;
+                        if (block is MovableBlock)
+                            blocksInPlace &= (block as MovableBlock).Moved;
                     }
                     if (blocksInPlace)
                         CurrentRoom.OpenDoors();

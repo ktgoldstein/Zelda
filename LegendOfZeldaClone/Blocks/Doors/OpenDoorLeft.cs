@@ -1,53 +1,25 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-
-namespace LegendOfZeldaClone.Objects
+namespace LegendOfZeldaClone
 {
-    public class OpenDoorLeft : IDoor
+    public class OpenDoorLeft : DoorKernel
     {
-        public int Width { get { return LoZHelpers.Scale(width); } }
-        public int Height { get { return LoZHelpers.Scale(height); } }
-        public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation
-        {
-            get { return Location + hurtBoxOffset; }
-            set { Location = value; }
-        }
-        public ObjectHeight BlockHeight { get; }
-        public bool IsBombable { get; }
-        public bool Alive { get; set; }
-
         private readonly GameStateMachine game;
-        private ISprite sprite;
-        private readonly int height;
-        private readonly int width;
-        private readonly Vector2 hurtBoxOffset;
 
-        public OpenDoorLeft(GameStateMachine game, Vector2 location)
+        public OpenDoorLeft(Vector2 location, ISprite sprite, int height, int width, GameStateMachine game)
+            : base(location, sprite, height, width)
         {
             this.game = game;
-            sprite = BlockSpriteFactory.Instance.CreateOpenDoorLeft();
-            Location = location;
-            height = 32;
-            width = 8;
-            BlockHeight = ObjectHeight.Impassable;
-            hurtBoxOffset = Vector2.Zero;
-            IsBombable = false;
-            Alive = true;
         }
 
-        public void Update() { }
-        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
-
-        public void ChangeRoom()
+        public override void ChangeRoom()
         {
             if (game.NextRoom == null)
             {
                 game.NextRoom = game.CurrentRoom.RoomLeft;
                 foreach (IBlock block in game.NextRoom.Blocks)
                 {
-                    if (block is LockedDoorRight)
+                    if (block is LockedDoor && (block as LockedDoor).Orientation == Direction.Right)
                     {
                         game.NextRoom.Blocks.Remove(block);
                         break;
@@ -59,6 +31,5 @@ namespace LegendOfZeldaClone.Objects
                 game.PauseMap.MoveRooms(Direction.Left);
             }
         }
-        public void Die() { }
     }
 }
