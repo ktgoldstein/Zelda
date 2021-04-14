@@ -171,6 +171,17 @@ namespace LegendOfZeldaClone
             return vector;
         }
 
+        public static Vector2 GetLocationInRoom(Vector2 location)
+        {
+            Vector2 newLocation = new Vector2(location.X % GameWidth, location.Y % (GameHeight - HUDHeight));
+            if (newLocation.X < 0)
+                newLocation += Vector2.UnitX * GameWidth;
+            if (newLocation.Y < 0)
+                newLocation += Vector2.UnitY * (GameHeight - HUDHeight);
+
+            return newLocation;
+        }
+
         public static Vector2 LinkStartingLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(3 * 16 + 80));
         public static Vector2 MiniMapLocation => new Vector2(GameWidth / 24, HUDHeight / 3);
         public static Vector2 LinkLocationTrackerMini => new Vector2(MiniMapLocation.X + Scale(28), HUDHeight - Scale(12));

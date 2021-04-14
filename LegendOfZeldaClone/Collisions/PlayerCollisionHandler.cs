@@ -84,7 +84,7 @@ namespace LegendOfZeldaClone
         }
 
 
-        public void HandleObjectCollision(IObject block, Direction direction)
+        public void HandleBlockCollision(IBlock block, Direction direction)
         {
             if (block.BlockHeight != ObjectHeight.CanWalkOver)
             {

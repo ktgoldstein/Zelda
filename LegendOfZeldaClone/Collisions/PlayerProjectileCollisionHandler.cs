@@ -41,7 +41,7 @@
             }
         }
 
-        public void HandleObjectCollision(IObject block, Direction direction)
+        public void HandleBlockCollision(IBlock block, Direction direction)
         {
             bool blockIsImpassable = block.BlockHeight == ObjectHeight.Impassable;
             bool projectileTypeIsStoppedByImpassableBlock = !(CurrentPlayerProjectile is BoomerangProjectile

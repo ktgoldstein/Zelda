@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using LegendOfZeldaClone.Objects;
 using LegendOfZeldaClone.Enemy;
 using System.Linq;
 
@@ -16,11 +15,11 @@ namespace LegendOfZeldaClone.LevelLoading
         public Room RoomLeft;
         public Room RoomRight;
 
-        public List<IObject> Blocks = new List<IObject>();
+        public List<IBlock> Blocks = new List<IBlock>();
         public List<IItem> Items = new List<IItem>();
         public List<IEnemy> Enemies = new List<IEnemy>();
 
-        private List<IObject> closedDoors = new List<IObject>();
+        private List<IBlock> closedDoors = new List<IBlock>();
         private int doorChangeCount = 0;
 
         public Vector2 Offset = Vector2.Zero;
@@ -54,7 +53,7 @@ namespace LegendOfZeldaClone.LevelLoading
         {
             if (doorChangeCount == 0)
             {
-                game.Objects.AddRange(closedDoors);
+                game.Blocks.AddRange(closedDoors);
                 doorChangeCount++;
             }
         }
@@ -63,7 +62,7 @@ namespace LegendOfZeldaClone.LevelLoading
         {
             if (doorChangeCount == 1)
             {
-                game.Objects = game.Objects.Except(closedDoors).ToList();
+                game.Blocks = game.Blocks.Except(closedDoors).ToList();
                 doorChangeCount++;
             }
         }
@@ -73,13 +72,13 @@ namespace LegendOfZeldaClone.LevelLoading
             game.ResetRoomSpecificLists();
             game.StashBlocks();
 
-            foreach(IObject block in Blocks)
+            foreach(IBlock block in Blocks)
             {
-                if (block is MovableRaisedBlock) (block as MovableRaisedBlock).Reset();
+                if (block is MovableBlock) (block as MovableBlock).Reset();
             }
 
             doorChangeCount = 0;
-            game.Objects.AddRange(Blocks);
+            game.Blocks.AddRange(Blocks);
             game.Enemies.AddRange(Enemies);
             game.Items.AddRange(Items);
         }
@@ -87,11 +86,18 @@ namespace LegendOfZeldaClone.LevelLoading
         public void Draw(SpriteBatch spritebatch)
         {
             if (wallType == 1)
-                walls.Draw(spritebatch, new Vector2(0 + Offset.X, Offset.Y));
+                walls.Draw(spritebatch, Offset);
 
             if (backgroundType == 1)
-                tiles.Draw(spritebatch, new Vector2(LoZHelpers.TileSize * 2 + Offset.X,
-                    LoZHelpers.TileSize * 2 + Offset.Y));
+                tiles.Draw(spritebatch, Offset + 2 * LoZHelpers.TileSize * Vector2.One);
+        }
+        public void DrawAt(SpriteBatch spritebatch, Vector2 offset)
+        {
+            if (wallType == 1)
+                walls.Draw(spritebatch, offset);
+
+            if (backgroundType == 1)
+                tiles.Draw(spritebatch, offset + 2 * LoZHelpers.TileSize * Vector2.One);
         }
 
         public void AddNeighbors(Room roomUp, Room roomDown, Room roomLeft, Room roomRight)
@@ -143,109 +149,112 @@ namespace LegendOfZeldaClone.LevelLoading
 
             switch (gameObjectID)
             {
+                case -4:
+                    AddIObject(BlockFactory.Instance.CreateInvisibleBlock(tileLocation, Direction.None, ObjectHeight.CanFlyOver, false));
+                    break;
                 case -3:
-                    AddIObject(new InvisibleBlock(tileLocation, Direction.Left, ObjectHeight.Impassable));
+                    AddIObject(BlockFactory.Instance.CreateInvisibleBlock(tileLocation, Direction.Left, ObjectHeight.Impassable, true));
                     break;
                 case -2:
-                    AddIObject(new InvisibleBlock(tileLocation, Direction.Right, ObjectHeight.Impassable));
+                    AddIObject(BlockFactory.Instance.CreateInvisibleBlock(tileLocation, Direction.Right, ObjectHeight.Impassable, true));
                     break;
                 case -1:
-                    AddIObject(new InvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable));
+                    AddIObject(BlockFactory.Instance.CreateInvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable, true));
                     break;
                 case 1:
-                    AddIObject(new RaisedBlock(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateRaisedBlock(tileLocation));
                     break;
                 case 2:
-                    AddIObject(new BlueGargoyleStatue(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateBlueGargoyleStatue(tileLocation));
                     break;
                 case 3:
-                    AddIObject(new BlueDragonStatue(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateBlueDragonStatue(tileLocation));
                     break;
                 case 4:
-                    AddIObject(new DarkBlock(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateDarkBlock(tileLocation));
                     break;
                 case 5:
-                    AddIObject(new DottedBlock(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateDottedBlock(tileLocation));
                     break;
                 case 6:
-                    AddIObject(new Water(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateWater(tileLocation));
                     break;
                 case 7:
-                    AddIObject(new GargoyleStatue(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateGargoyleStatue(tileLocation));
                     break;
                 case 8:
-                    AddIObject(new StoneWall(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateStoneWall(tileLocation));
                     break;
                 case 9:
-                    AddIObject(new Ladder(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateLadder(tileLocation));
                     break;
                 case 10:
-                    AddIObject(new OpenDoorUp(game, doorLocationUp));
-                    AddIObject(new LockedDoorUp(doorLocationUp));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorUp(doorLocationUp, game));
+                    AddIObject(BlockFactory.Instance.CreateLockedDoorUp(doorLocationUp));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game));
                     break;
                 case 11:
-                    AddIObject(new OpenDoorDown(game, doorLocationDown));
-                    AddIObject(new LockedDoorDown(doorLocationDown));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorDown(doorLocationDown, game));
+                    AddIObject(BlockFactory.Instance.CreateLockedDoorDown(doorLocationDown));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
                     break;
                 case 13:
-                    AddIObject(new OpenDoorRight(game, doorLocationRight));
-                    AddIObject(new LockedDoorRight(doorLocationRight));
-                    AddIObject(new PressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorRight(doorLocationRight, game));
+                    AddIObject(BlockFactory.Instance.CreateLockedDoorRight(doorLocationRight));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
                     break;
                 case 14:
-                    AddIObject(new OpenDoorLeft(game, doorLocationLeft));
-                    AddIObject(new LockedDoorLeft(doorLocationLeft));
-                    AddIObject(new PressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorLeft(doorLocationLeft, game));
+                    AddIObject(BlockFactory.Instance.CreateLockedDoorLeft(doorLocationLeft));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
                     break;
                 case 15:
-                    AddIObject(new OpenDoorUp(game, doorLocationUp));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorUp(doorLocationUp, game));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game));
                     break;
                 case 16:
-                    AddIObject(new OpenDoorDown(game, doorLocationDown));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorDown(doorLocationDown, game));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
                     break;
                 case 17:
-                    AddIObject(new OpenDoorRight(game, doorLocationRight));
-                    AddIObject(new PressurePlate(tileLocation - 2 * (LoZHelpers.TileSize / 2) * Vector2.UnitX, game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorRight(doorLocationRight, game));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
                     break;
                 case 18:
-                    AddIObject(new OpenDoorLeft(game, doorLocationLeft));
-                    AddIObject(new PressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorLeft(doorLocationLeft, game));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
                     break;
                 case 20:
-                    AddIObject(new OpenDoorLeft(game, doorLocationLeft));
-                    closedDoors.Add(new ClosedDoorLeft(doorLocationLeft));
-                    AddIObject(new PressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorLeft(doorLocationLeft, game));
+                    closedDoors.Add(BlockFactory.Instance.CreateClosedDoorLeft(doorLocationLeft));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
                     break;
                 case 21:
-                    AddIObject(new OpenDoorRight(game, doorLocationRight));
-                    closedDoors.Add(new ClosedDoorRight(doorLocationRight));
-                    AddIObject(new PressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorRight(doorLocationRight, game));
+                    closedDoors.Add(BlockFactory.Instance.CreateClosedDoorRight(doorLocationRight));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation - 2 * LoZHelpers.TileSize * Vector2.UnitX, game));
                     break;
                 case 23:
-                    AddIObject(new WallUp(doorLocationUp));
+                    AddIObject(BlockFactory.Instance.CreateWallUp(doorLocationUp));
                     break;
                 case 24:
-                    AddIObject(new WallDown(doorLocationDown));
+                    AddIObject(BlockFactory.Instance.CreateWallDown(doorLocationDown));
                     break;
                 case 25:
-                    AddIObject(new WallLeft(doorLocationLeft));
+                    AddIObject(BlockFactory.Instance.CreateWallLeft(doorLocationLeft));
                     break;
                 case 26:
-                    AddIObject(new WallRight(doorLocationRight));
+                    AddIObject(BlockFactory.Instance.CreateWallRight(doorLocationRight));
                     break;
                 case 27:
-                    AddIObject(new TunnelFaceUp(game, doorLocationUp));
-                    AddIObject(new BombableWallUp(doorLocationUp));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game, true));
+                    AddIObject(BlockFactory.Instance.CreateTunnelFaceUp(doorLocationUp, game));
+                    AddIObject(BlockFactory.Instance.CreateBombableWallUp(doorLocationUp));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game));
                     break;
                 case 28:
-                    AddIObject(new TunnelFaceDown(game, doorLocationDown));
-                    AddIObject(new BombableWallDown(doorLocationDown));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game,true));
+                    AddIObject(BlockFactory.Instance.CreateTunnelFaceDown(doorLocationDown, game));
+                    AddIObject(BlockFactory.Instance.CreateBombableWallDown(doorLocationDown));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
                     break;
                 case 29:
                     AddIEnemy(new Keese(tileLocation, game));
@@ -281,13 +290,13 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIItem(new Map(smallItemLocation));
                     break;
                 case 43:
-                    AddIObject(new DragonStatue(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateDragonStatue(tileLocation));
                     break;
                 case 44:
-                    AddIObject(new Stairs(game, tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateStairs(tileLocation, game));
                     break;
                 case 45:
-                    AddIObject(new MovableRaisedBlock(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateMovableRaisedBlock(tileLocation));
                     break;
                 case 46:
                     Wizard wizard = new Wizard(game, tileLocation);
@@ -338,28 +347,28 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIItem(new Arrow(smallItemLocation));
                     break;
                 case 61:
-                    AddIObject(new LadderDoor(game, tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateLadderDoor(tileLocation, game));
                     break;
                 case 62:
-                    AddIObject(new StoneWall(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateStoneWall(tileLocation));
                     AddIEnemy(new Keese(tileLocation, game));
                     break;
                 case 63:
-                    AddIObject(new StoneWall(tileLocation));
-                    AddIObject(new InvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable));
+                    AddIObject(BlockFactory.Instance.CreateStoneWall(tileLocation));
+                    AddIObject(BlockFactory.Instance.CreateInvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable, true));
                     break;
                 case 64:
-                    AddIObject(new OpenDoorUp(game, doorLocationUp));
-                    closedDoors.Add(new ClosedDoorUp(doorLocationUp));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorUp(doorLocationUp, game));
+                    closedDoors.Add(BlockFactory.Instance.CreateClosedDoorUp(doorLocationUp));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, 2 * LoZHelpers.TileSize), game));
                     break;
                 case 65:
-                    AddIObject(new OpenDoorDown(game, doorLocationDown));
-                    closedDoors.Add(new ClosedDoorDown(doorLocationDown));
-                    AddIObject(new PressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game, true));
+                    AddIObject(BlockFactory.Instance.CreateOpenDoorDown(doorLocationDown, game));
+                    closedDoors.Add(BlockFactory.Instance.CreateClosedDoorDown(doorLocationDown));
+                    AddIObject(BlockFactory.Instance.CreateEntryPressurePlate(tileLocation + new Vector2(LoZHelpers.TileSize / 2, -2 * LoZHelpers.TileSize), game));
                     break;
                 case 66:
-                    AddIObject(new PressurePlate(tileLocation + (LoZHelpers.Scale(3) + 2) * Vector2.One, game, false));
+                    AddIObject(BlockFactory.Instance.CreateBlockPressurePlate(tileLocation, game));
                     break;
                 default:
                     break;
@@ -368,6 +377,6 @@ namespace LegendOfZeldaClone.LevelLoading
 
         private void AddIEnemy(IEnemy enemy) => Enemies.Add(enemy);
         private void AddIItem(IItem item) => Items.Add(item);
-        private void AddIObject(IObject block) => Blocks.Add(block);
+        private void AddIObject(IBlock block) => Blocks.Add(block);
     }
 }

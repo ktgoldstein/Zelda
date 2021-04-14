@@ -1,5 +1,4 @@
-﻿using LegendOfZeldaClone.Objects;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace LegendOfZeldaClone
 {
@@ -144,17 +143,17 @@ namespace LegendOfZeldaClone
             if (game.CurrentGameState != GameState.Play) return;
             if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomDown == null) return;
             game.SwitchRoomDelay = game.SwitchDelayLength;
-            foreach(IObject block in game.Objects)
+            foreach(IBlock block in game.Blocks)
             {
                 if(block is OpenDoorDown || block is TunnelFaceDown)
                 {
                     game.Player.Location = block.Location + new Vector2(LoZHelpers.Scale(8), LoZHelpers.Scale(0));
-                    (block as IDoor).ChangeRoom();
+                    (block as DoorKernel).ChangeRoom();
                     return;
                 }
                 else if(block is Stairs)
                 {
-                    (block as IDoor).ChangeRoom();
+                    (block as DoorKernel).ChangeRoom();
                     return;
                 }
             }
@@ -173,17 +172,17 @@ namespace LegendOfZeldaClone
             if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomUp == null) return;
             game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            foreach (IObject block in game.Objects)
+            foreach (IBlock block in game.Blocks)
             {
                 if (block is OpenDoorUp || block is TunnelFaceUp)
                 {
                     game.Player.Location = block.Location + new Vector2(LoZHelpers.Scale(8), LoZHelpers.Scale(14));
-                    (block as IDoor).ChangeRoom();
+                    (block as DoorKernel).ChangeRoom();
                     return;
                 }
                 else if(block is LadderDoor)
                 {
-                    (block as IDoor).ChangeRoom();
+                    (block as DoorKernel).ChangeRoom();
                     return;
                 }
             }
@@ -202,12 +201,12 @@ namespace LegendOfZeldaClone
             if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomLeft == null) return;
             game.SwitchRoomDelay = game.SwitchDelayLength;
 
-            foreach (IObject block in game.Objects)
+            foreach (IBlock block in game.Blocks)
             {
                 if (block is OpenDoorLeft)
                 {
                     game.Player.Location = block.Location + new Vector2(LoZHelpers.Scale(0), LoZHelpers.Scale(8));
-                    (block as IDoor).ChangeRoom();
+                    (block as DoorKernel).ChangeRoom();
                     return;
                 }
             }
@@ -225,12 +224,12 @@ namespace LegendOfZeldaClone
             if (game.CurrentGameState != GameState.Play) return;
             if (game.SwitchRoomDelay != 0 || game.CurrentRoom.RoomRight == null) return;
             game.SwitchRoomDelay = game.SwitchDelayLength;
-            foreach (IObject block in game.Objects)
+            foreach (IBlock block in game.Blocks)
             {
                 if (block is OpenDoorRight)
                 {
                     game.Player.Location = block.Location + new Vector2(LoZHelpers.Scale(16), LoZHelpers.Scale(8));
-                    (block as IDoor).ChangeRoom();
+                    (block as DoorKernel).ChangeRoom();
                     return;
                 }
             }

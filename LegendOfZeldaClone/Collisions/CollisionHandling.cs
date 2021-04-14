@@ -12,7 +12,7 @@ namespace LegendOfZeldaClone.Collisions
             gameObjects.AddRange(game.Enemies);
             gameObjects.AddRange(game.EnemyProjectiles);
             gameObjects.AddRange(game.Items);
-            gameObjects.AddRange(game.Objects);
+            gameObjects.AddRange(game.Blocks);
 
             for (int firstIndex = 0; firstIndex < gameObjects.Count; firstIndex++)
             {
@@ -45,8 +45,8 @@ namespace LegendOfZeldaClone.Collisions
                 handler.HandleEnemyProjectileCollision(gameObject2 as IEnemyProjectile, direction);
             else if (gameObject2 is IItem)
                 handler.HandleItemCollision(gameObject2 as IItem, direction);
-            else if (gameObject2 is IObject)
-                handler.HandleObjectCollision(gameObject2 as IObject, direction);
+            else if (gameObject2 is IBlock)
+                handler.HandleBlockCollision(gameObject2 as IBlock, direction);
         }
 
         private static ICollisionHandler GetCollisionHandler(IGameObject gameObject)
@@ -78,10 +78,10 @@ namespace LegendOfZeldaClone.Collisions
                 correctHandler = ItemCollisionHandler.Instance;
                 ItemCollisionHandler.Instance.CurrentItem = gameObject as IItem;
             }
-            else if (gameObject is IObject)
+            else if (gameObject is IBlock)
             {
-                correctHandler = ObjectCollisionHandler.Instance;
-                ObjectCollisionHandler.Instance.CurrentObject = gameObject as IObject;
+                correctHandler = BlockCollisionHandler.Instance;
+                BlockCollisionHandler.Instance.CurrentBlock = gameObject as IBlock;
             }
 
             return correctHandler;

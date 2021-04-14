@@ -1,39 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-
-namespace LegendOfZeldaClone.Objects
+namespace LegendOfZeldaClone
 {
-    public class MovableRaisedBlock: IObject
+    public class MovableBlock: BlockKernel
     {
-        public int Width { get { return LoZHelpers.Scale(width); } }
-        public int Height { get { return LoZHelpers.Scale(height); } }
-        public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation
-        {
-            get { return Location; }
-            set { Location = value; }
-        }
-        public ObjectHeight BlockHeight => ObjectHeight.CanFlyOver;
-        public bool IsBombable => false;
-        public bool Alive { get; set; } = true;
         public Direction MovedDirection { get; set; } = Direction.None;
         public bool Moved => moved;
 
         private Vector2 startingLocation;
-        private ISprite sprite;
         private bool moved = false;
-        private readonly int height = 16;
-        private readonly int width = 16;
 
-        public MovableRaisedBlock(Vector2 location)
+        public MovableBlock(Vector2 location, ISprite sprite, int height, int width, ObjectHeight objectHeight)
+            : base(location, sprite, height, width, objectHeight, false, false)
         {
-            sprite = ObjectSpriteFactory.Instance.CreateRaisedBlock();
             startingLocation = location;
-            Location = startingLocation;
         }
 
-        public void Update() 
+        public override void Update()
         {
             if (moved) return;
 
@@ -63,8 +46,6 @@ namespace LegendOfZeldaClone.Objects
             moved = Location == targetLocation;
         }
 
-        public void Draw(SpriteBatch spriteBatch) => sprite.Draw(spriteBatch, Location);
-        public void Die() => Alive = false;
         public void Reset()
         {
             moved = false;

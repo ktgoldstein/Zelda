@@ -3,15 +3,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfZeldaClone
 {
-    public class ObjectSprite : ISprite
+    public class BlockSprite : ISprite
     {
-        private Texture2D texture;
-        private int height;
-        private int width;
-        private int sourcePosX;
-        private int sourcePosY;
+        private readonly Texture2D texture;
+        private readonly int height;
+        private readonly int width;
+        private readonly int sourcePosX;
+        private readonly int sourcePosY;
 
-        public ObjectSprite(Texture2D texture, int height, int width, int sourcePosX, int sourcePosY)
+        public BlockSprite(Texture2D texture, int height, int width, int sourcePosX, int sourcePosY)
         {
             this.texture = texture;
             this.height = height;

@@ -4,10 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using LegendOfZeldaClone.Objects;
 using LegendOfZeldaClone.Enemy;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
 
 namespace LegendOfZeldaClone
 {
@@ -19,8 +16,8 @@ namespace LegendOfZeldaClone
         public List<IEnemy> Enemies;
 
         public List<IItem> Items;
-        public List<IObject> Objects;
-        private List<IObject> stashedBlocks;
+        public List<IBlock> Blocks;
+        private List<IBlock> stashedBlocks;
 
         public List<IPlayerProjectile> PlayerProjectilesQueue;
         public List<IPlayerProjectile> PlayerProjectiles;
@@ -87,7 +84,7 @@ namespace LegendOfZeldaClone
             Enemies = new List<IEnemy>();
 
             Items = new List<IItem>();
-            Objects = new List<IObject>();
+            Blocks = new List<IBlock>();
 
             PlayerProjectilesQueue = new List<IPlayerProjectile>();
             PlayerProjectiles = new List<IPlayerProjectile>();
@@ -127,17 +124,17 @@ namespace LegendOfZeldaClone
 
                 Items = Items.Except(UpdateGameObjectEnumerable(Items)).ToList();
 
-                Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
+                Blocks = Blocks.Except(UpdateGameObjectEnumerable(Blocks)).ToList();
 
                 Collisions.CollisionHandling.HandleCollisions(this);
 
                 if (Enemies.Count == 0)
                 {
                     bool blocksInPlace = true;
-                    foreach (IObject block in Objects)
+                    foreach (IBlock block in Blocks)
                     {
-                        if (block is MovableRaisedBlock)
-                            blocksInPlace &= (block as MovableRaisedBlock).Moved;
+                        if (block is MovableBlock)
+                            blocksInPlace &= (block as MovableBlock).Moved;
                     }
                     if (blocksInPlace)
                         CurrentRoom.OpenDoors();
@@ -197,7 +194,7 @@ namespace LegendOfZeldaClone
                 CurrentRoom.Draw(spriteBatch);
                 NextRoom?.Draw(spriteBatch);
 
-                foreach (IObject block in Objects)
+                foreach (IBlock block in Blocks)
                     block.Draw(spriteBatch);
 
                 foreach (IItem item in Items)
@@ -216,13 +213,35 @@ namespace LegendOfZeldaClone
             }
             else if (CurrentGameState == GameState.ScreenTransition || CurrentGameState == GameState.PauseTransition)
             {
+                Vector2? nextRoomOffset = CurrentRoom.Offset;
+                if (NextRoom == null)
+                    nextRoomOffset = null;
+                else if (NextRoom == CurrentRoom.RoomDown)
+                    nextRoomOffset += Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+                else if (NextRoom == CurrentRoom.RoomLeft)
+                    nextRoomOffset -= Vector2.UnitX * LoZHelpers.GameWidth;
+                else if (NextRoom == CurrentRoom.RoomRight)
+                    nextRoomOffset += Vector2.UnitX * LoZHelpers.GameWidth;
+                else if (NextRoom == CurrentRoom.RoomUp)
+                    nextRoomOffset -= Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+
                 CurrentRoom.Draw(spriteBatch);
-                NextRoom?.Draw(spriteBatch);
+                NextRoom?.DrawAt(spriteBatch, (Vector2)nextRoomOffset);
 
-                foreach (IObject block in Objects)
-                    block.Draw(spriteBatch);
+                foreach (IBlock block in Blocks)
+                {                    
+                    if (nextRoomOffset == null)
+                    {
+                        block.Draw(spriteBatch);
+                    }                        
+                    else
+                    {
+                        Vector2 relativeLocation = LoZHelpers.GetLocationInRoom(block.Location);
+                        block.DrawAt(spriteBatch, relativeLocation + (Vector2)nextRoomOffset);
+                    }
+                }
 
-                foreach (IObject block in stashedBlocks)
+                foreach (IBlock block in stashedBlocks)
                     block.Draw(spriteBatch);
             }
             else if (CurrentGameState == GameState.GameOver)
@@ -240,7 +259,7 @@ namespace LegendOfZeldaClone
                     CurrentRoom.Draw(spriteBatch);
                     NextRoom?.Draw(spriteBatch);
 
-                    foreach (IObject block in Objects)
+                    foreach (IBlock block in Blocks)
                         block.Draw(spriteBatch);
 
                     foreach (IItem item in Items)
@@ -267,7 +286,7 @@ namespace LegendOfZeldaClone
                 {
                     CurrentRoom.Draw(spriteBatch);
 
-                    foreach (IObject block in Objects)
+                    foreach (IBlock block in Blocks)
                         block.Draw(spriteBatch);
 
                     foreach (IItem item in Items)
@@ -475,7 +494,7 @@ namespace LegendOfZeldaClone
 
         public void ResetLists()
         {
-            Objects.Clear();
+            Blocks.Clear();
             ResetRoomSpecificLists();
         }
 
@@ -507,8 +526,8 @@ namespace LegendOfZeldaClone
 
         public void StashBlocks()
         {
-            stashedBlocks = Objects;
-            Objects = new List<IObject>();
+            stashedBlocks = Blocks;
+            Blocks = new List<IBlock>();
         }
     }
 }

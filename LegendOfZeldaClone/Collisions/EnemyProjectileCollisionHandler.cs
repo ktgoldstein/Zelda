@@ -27,7 +27,7 @@ namespace LegendOfZeldaClone.Collisions
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) {}
         public void HandleItemCollision(IItem item, Direction direction) {}
 
-        public void HandleObjectCollision(IObject block, Direction direction)
+        public void HandleBlockCollision(IBlock block, Direction direction)
         {
             if (block.BlockHeight == ObjectHeight.Impassable)
             {
