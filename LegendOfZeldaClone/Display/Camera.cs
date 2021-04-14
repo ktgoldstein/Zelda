@@ -75,6 +75,7 @@ namespace LegendOfZeldaClone.Display
                 game.NextRoom = null;
                 game.ShiftLink(currentTransitionDirection);
                 game.Player.Location = game.CurrentRoom.Offset + LoZHelpers.GetLocationInRoom(game.Player.Location);
+                Position = -game.CurrentRoom.Offset;
                 active = false;
             }
             else if (game.CurrentGameState == GameState.PauseTransition)
