@@ -22,11 +22,20 @@ namespace LegendOfZeldaClone.Collisions
                 new DoorUnlockingSoundEffect().Play();
                 player.Inventory.KeysHeld--;
             }
-            else if (CurrentObject is MovableRaisedBlock)
+            else if (CurrentObject is MovableRaisedBlock || CurrentObject is FreeMovableRaisedBlock)
             {
-                MovableRaisedBlock target = (CurrentObject as MovableRaisedBlock);
-                if (target.MovedDirection == Direction.None)
-                    target.MovedDirection = LoZHelpers.FlipDirection(direction);
+                if (CurrentObject is MovableRaisedBlock)
+                { 
+                    MovableRaisedBlock target = (CurrentObject as MovableRaisedBlock);
+                    if (target.MovedDirection == Direction.None)
+                        target.MovedDirection = LoZHelpers.FlipDirection(direction);
+                }
+                //else
+                //{
+                //    FreeMovableRaisedBlock target = (CurrentObject as FreeMovableRaisedBlock);
+                //    if (target.MovedDirection == Direction.None)
+                //        target.MovedDirection = LoZHelpers.FlipDirection(direction);
+                //}
             }
             else if (CurrentObject is IDoor)
             {

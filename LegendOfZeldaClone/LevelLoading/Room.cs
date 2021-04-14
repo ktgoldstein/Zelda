@@ -361,6 +361,9 @@ namespace LegendOfZeldaClone.LevelLoading
                 case 66:
                     AddIObject(new PressurePlate(tileLocation + (LoZHelpers.Scale(3) + 2) * Vector2.One, game, false));
                     break;
+                case 65:
+                    AddIObject(new FreeMovableRaisedBlock(tileLocation));
+                    break;
                 default:
                     break;
             }
