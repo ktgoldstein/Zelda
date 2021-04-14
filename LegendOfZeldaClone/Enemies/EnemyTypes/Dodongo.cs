@@ -50,7 +50,7 @@ namespace LegendOfZeldaClone.Enemy
 
         public Dodongo(GameStateMachine game, Vector2 location)
         {
-            dodongoSprite = EnemySpriteFactory.Instance.CreateDodongoSprite();
+            dodongoSprite = EnemySpriteFactory.Instance.CreateDodongoPhaseOneSprite();
             width = 24;
             height = 32;
 

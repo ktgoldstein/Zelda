@@ -17,7 +17,7 @@ namespace LegendOfZeldaClone.Enemy
 		private Texture2D keeseSprite;
 		private Texture2D wallmasterSprite;
 		private Texture2D wizardSprite, wizardFireSprite;
-		private Texture2D dodongoSprite;
+		private Texture2D greenDodongoSprite, blueDodongoSprite, redDodongoSprite;
 		private SpriteFont font;
         private EnemySpriteFactory() { }
 
@@ -37,7 +37,9 @@ namespace LegendOfZeldaClone.Enemy
 			wallmasterSprite = content.Load<Texture2D>("EnemySprites\\Wallmaster");
 			wizardSprite = content.Load<Texture2D>("EnemySprites\\Wizard");
 			wizardFireSprite = content.Load<Texture2D>("EnemySprites\\WizardFire");
-			dodongoSprite = content.Load<Texture2D>("EnemySprites\\GreenDodongo");
+			greenDodongoSprite = content.Load<Texture2D>("EnemySprites\\GreenDodongo");
+			blueDodongoSprite = content.Load<Texture2D>("EnemySprites\\BlueDodongo");
+			redDodongoSprite = content.Load<Texture2D>("EnemySprites\\RedDodongo");
 			font = content.Load<SpriteFont>("Font");
 		}
 
@@ -56,7 +58,9 @@ namespace LegendOfZeldaClone.Enemy
 		public ISprite CreateWallmasterSprite() => new EnemySprite(wallmasterSprite, 2, 1, 2, 2);
 		public ISprite CreateWizardSprite() => new EnemySprite(wizardSprite, 1, 1, 0, 1);
 		public ISprite CreateWizardFireSprite() => new EnemySprite(wizardFireSprite, 2, 1, 2, 2);
-		public ISprite CreateDodongoSprite() => new EnemySprite(dodongoSprite, 2, 1, 2, 2);
+		public ISprite CreateDodongoPhaseOneSprite() => new EnemySprite(greenDodongoSprite, 2, 1, 2, 2);
+		public ISprite CreateDodongoPhaseTwoSprite() => new EnemySprite(blueDodongoSprite, 2, 1, 2, 2);
+		public ISprite CreateDodongoPhaseThreeSprite() => new EnemySprite(redDodongoSprite, 2, 1, 2, 2);
 		public SpriteFont CreateFont() => font;
 	}
 }

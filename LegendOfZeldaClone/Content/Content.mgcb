@@ -97,6 +97,18 @@
 /processorParam:TextureFormat=Color
 /build:EnemySprites/BladeTrap.png
 
+#begin EnemySprites/BlueDodongo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemySprites/BlueDodongo.png
+
 #begin EnemySprites/Boomerang.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -216,6 +228,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:EnemySprites/Keese.png
+
+#begin EnemySprites/RedDodongo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemySprites/RedDodongo.png
 
 #begin EnemySprites/Stalfos.png
 /importer:TextureImporter
