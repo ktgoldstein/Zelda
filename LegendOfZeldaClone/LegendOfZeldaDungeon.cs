@@ -58,7 +58,7 @@ namespace LegendOfZeldaClone
             ICommand pauseGame = new PauseGame(gameStateMachine);
             ICommand selectItem = new SelectItem(gameStateMachine);
 
-            KeyboardController keyboardController = new KeyboardController();
+            KeyboardController keyboardController = new KeyboardController(gameStateMachine);
 
             keyboardController.RegisterCommand(Keys.Q, quitGame);
             keyboardController.RegisterCommand(Keys.S, moveDown);

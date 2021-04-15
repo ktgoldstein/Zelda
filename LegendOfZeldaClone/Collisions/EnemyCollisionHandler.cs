@@ -2,6 +2,7 @@
 using LegendOfZeldaClone.Enemy;
 using LegendOfZeldaClone.Objects;
 using System;
+using LegendOfZeldaClone.Players.LinkPlayer.LinkStates;
 
 namespace LegendOfZeldaClone.Collisions
 {
@@ -14,6 +15,13 @@ namespace LegendOfZeldaClone.Collisions
         {
             if (CurrentEnemy is Wallmaster)
                 (CurrentEnemy as Wallmaster).game.GoToTheStart();
+
+            if( player is LinkPlayer && ((LinkPlayer)player).linkState is LinkSpin)
+            {
+                Vector2 hitDirection = CurrentEnemy.Location - player.Location;
+                hitDirection.Normalize();
+                CurrentEnemy.TakeDamage(hitDirection);
+            }
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {

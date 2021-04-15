@@ -263,4 +263,15 @@ namespace LegendOfZeldaClone
                 game.InventoryBoxB.Update();
         }
     }
+    public class Charge : ICommand
+    {
+        private GameStateMachine game;
+
+        public Charge(GameStateMachine game) => this.game = game;
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Play)
+                game.Player.Charge();
+        }
+    }
 }

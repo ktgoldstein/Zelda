@@ -1,10 +1,11 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System;
 
 
 namespace LegendOfZeldaClone
 {
-    public interface IController 
+    public interface IController
     {
         void Update();
     }
@@ -12,9 +13,11 @@ namespace LegendOfZeldaClone
     public class KeyboardController : IController
     {
         private Dictionary<Keys, ICommand> controllerMappings;
-
-        public KeyboardController()
+        private int chargeTimer = 0;
+        private GameStateMachine game;
+        public KeyboardController(GameStateMachine game)
         {
+            this.game = game;
             controllerMappings = new Dictionary<Keys, ICommand>();
         }
 
@@ -25,14 +28,29 @@ namespace LegendOfZeldaClone
 
         public void Update()
         {
+            bool hasZ = false;
             Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
 
             foreach(Keys key in pressedKeys)
             {
+                if (key == Keys.Z)
+                {
+                    chargeTimer++;
+                    hasZ = true;
+                }
                 if (controllerMappings.ContainsKey(key))
                 {
                     controllerMappings[key].Execute();
                 }
+            }
+            if (!hasZ)
+            {
+                chargeTimer = 0;
+            }
+            if (chargeTimer > 15)
+            {
+                ICommand charge = new Charge(game);
+                charge.Execute();
             }
         }
     }

@@ -21,15 +21,15 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes.DodongoStatePattern
             timer--;
             if (timer == 0)
             {
-                int r = LoZHelpers.random.Next() % 2;
-                if (r == 0)
-                {
-                    dodongo.State = new CheckerboardAttack(dodongo, g);
-                }
-                else
-                {
+                // int r = LoZHelpers.random.Next() % 2;
+                // if (r == 0)
+                // {
+                //     dodongo.State = new CheckerboardAttack(dodongo, g);
+                // }
+                // else
+                // {
                     dodongo.State = new HelicopterAttack(dodongo, g);
-                }
+                // }
             }
         }
     }

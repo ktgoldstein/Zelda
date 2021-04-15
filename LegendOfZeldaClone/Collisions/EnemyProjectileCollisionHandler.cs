@@ -1,4 +1,5 @@
 ﻿using LegendOfZeldaClone.Enemy;
+using LegendOfZeldaClone.Players.LinkPlayer.LinkStates;
 
 namespace LegendOfZeldaClone.Collisions
 {
@@ -11,12 +12,21 @@ namespace LegendOfZeldaClone.Collisions
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
+            if( player is LinkPlayer && ((LinkPlayer)player).linkState is LinkSpin && CurrentEnemyProjectile is Fireball)
+            {
+               ( CurrentEnemyProjectile as Fireball ).Reflect(CurrentEnemyProjectile.Location - player.Location);
+            }
             if (CurrentEnemyProjectile is Enemy.EnemyBoomerang)
                 ((EnemyBoomerang) CurrentEnemyProjectile).ComeBack();
         }
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction) {}
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
+            if( CurrentEnemyProjectile is Fireball && ((Fireball)CurrentEnemyProjectile).reflected)
+            {
+                enemy.TakeDamage(enemy.Location - CurrentEnemyProjectile.Location);
+                CurrentEnemyProjectile.Die();
+            }
             if (CurrentEnemyProjectile is EnemyBoomerang)
             {
                 EnemyBoomerang boomerang = CurrentEnemyProjectile as EnemyBoomerang;

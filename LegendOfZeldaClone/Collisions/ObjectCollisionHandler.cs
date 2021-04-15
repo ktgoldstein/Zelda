@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using LegendOfZeldaClone.Objects;
-
+using LegendOfZeldaClone.Players.LinkPlayer.LinkStates;
 
 
 namespace LegendOfZeldaClone.Collisions
@@ -14,6 +14,7 @@ namespace LegendOfZeldaClone.Collisions
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
+            if( player is LinkPlayer && ((LinkPlayer)player).linkState is LinkSpin) return;
             if ((CurrentObject is LockedDoorUp || CurrentObject is LockedDoorDown ||
                 CurrentObject is LockedDoorLeft || CurrentObject is LockedDoorRight) &&
                 player.Inventory.KeysHeld > 0 )

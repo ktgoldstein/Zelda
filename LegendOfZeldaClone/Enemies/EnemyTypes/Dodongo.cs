@@ -70,7 +70,6 @@ namespace LegendOfZeldaClone.Enemy
         {
             dodongoSprite.Update();
             state.Update();
-            Console.WriteLine(Invincible);
             if (Invincible)
             {
                 invincibleFrames++;

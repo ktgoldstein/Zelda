@@ -23,10 +23,11 @@ namespace LegendOfZeldaClone.Enemy
         private readonly int width;
         private readonly int height;
         private int lifespan;
+        public bool reflected = false;
 
         public Fireball(Vector2 location, Vector2 direction, int lifespan = -1)
         {
-            fireballSprite = EnemySpriteFactory.Instance.CreateFireballSprite();
+            fireballSprite = EnemySpriteFactory.Instance.CreateFireballSprite(Color.White);
             width = 8;
             height = 10;
 
@@ -52,5 +53,12 @@ namespace LegendOfZeldaClone.Enemy
         }
 
         public void Die() => Alive = false;
+        public void Reflect(Vector2 direction)
+        {
+            direction.Normalize();
+            this.direction = direction;
+            reflected = true;
+            fireballSprite = EnemySpriteFactory.Instance.CreateFireballSprite(Color.Blue);
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace LegendOfZeldaClone
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }
+        public void Charge() { }
         public void Action() => linkPlayer.SetState(linkPlayer.GetStateUsingItemRight());
         public void PickUpItem(IItem item) => linkPlayer.SetState(linkPlayer.GetStatePickingUpItem(item));
         public void PickUpTriforce(IItem triforce) => linkPlayer.SetState(linkPlayer.GetStatePickingUpTriforce(triforce));

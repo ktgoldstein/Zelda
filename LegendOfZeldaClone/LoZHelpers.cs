@@ -43,7 +43,9 @@ namespace LegendOfZeldaClone
         UsingItemRight,
         PickingUpItem,
         Dying,
-        PickingUpTriforce
+        PickingUpTriforce,
+        Charge,
+        Spin
     }
 
     public enum UsableItemTypes

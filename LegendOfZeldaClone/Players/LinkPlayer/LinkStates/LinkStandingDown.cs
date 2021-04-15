@@ -14,7 +14,7 @@ namespace LegendOfZeldaClone
             linkPlayer = link;
             linkSprite = LinkSpriteFactory.Instance.CreateLinkStandingDownSprite(link.SkinType, frame);
         }
-        
+
         public void MoveUp() => linkPlayer.SetState(linkPlayer.GetStateWalkingingUp());
         public void MoveDown() => linkPlayer.SetState(linkPlayer.GetStateWalkingingDown());
         public void MoveLeft() => linkPlayer.SetState(linkPlayer.GetStateWalkingingLeft());
@@ -23,6 +23,7 @@ namespace LegendOfZeldaClone
         public void PickUpItem(IItem item) => linkPlayer.SetState(linkPlayer.GetStatePickingUpItem(item));
         public void PickUpTriforce(IItem triforce) => linkPlayer.SetState(linkPlayer.GetStatePickingUpTriforce(triforce));
         public void Die() => linkPlayer.SetState(linkPlayer.GetStateDying());
+        public void Charge() { }
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingDown, linkSprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => linkSprite.Draw(spriteBatch, linkPlayer.Location);
         public void Update() => linkSprite.Update();

@@ -18,5 +18,6 @@
         public void PickUpUsableItem(UsableItemTypes itemType, IItem item);
         public void PickUpTriforce(IItem triforce);
         public void Equip(UsableItemTypes itemType);
+        public void Charge();
     }
 }
