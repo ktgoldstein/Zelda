@@ -185,15 +185,15 @@ namespace LegendOfZeldaClone
         public static Vector2 LinkStartingLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(3 * 16 + 80));
         public static Vector2 MiniMapLocation => new Vector2(GameWidth / 24, HUDHeight / 3);
         public static Vector2 LinkLocationTrackerMini => new Vector2(MiniMapLocation.X + Scale(28), HUDHeight - Scale(12));
-        public static Vector2 TriForceLocation => new Vector2(LinkLocationTrackerMini.X + Scale(32),  LinkLocationTrackerMini.Y - Scale(21) - 1);
+        public static Vector2 TriForceLocation => LinkLocationTrackerMini + new Vector2(Scale(32), -Scale(21) - 1);
 
         public static Vector2 MiniMapPauseLocation => new Vector2(InventorySelectionBoxLocation.X, GameHeight - Scale(50));
-        public static Vector2 LinkLocationTrackerPause => new Vector2(PauseMapLocation.X + Scale(58), PauseMapLocation.Y + Scale(66));
-        public static Vector2 TriForcePauseLocation => new Vector2(LinkLocationTrackerMini.X + Scale(32), LinkLocationTrackerMini.Y - Scale(21) - 1);
-        public static Vector2 PauseMapLocation => new Vector2(InventorySelectionBoxLocation.X + Scale(100), InventorySelectionBoxLocation.Y + Scale(88));
-        public static Vector2 PauseMapRoomLocation => new Vector2(PauseMapLocation.X + Scale(56), PauseMapLocation.Y + Scale(64));
-        public static Vector2 LevelNameLocation => new Vector2(MiniMapLocation.X + Scale(6), MiniMapLocation.Y - Scale(9));
-        public static Vector2 RupeeCountLocation => new Vector2(MiniMapLocation.X + Scale(87), MiniMapLocation.Y + Scale(4));
+        public static Vector2 LinkLocationTrackerPause => PauseMapLocation + new Vector2(Scale(58), Scale(66));
+        public static Vector2 TriForcePauseLocation => LinkLocationTrackerMini + new Vector2(Scale(32), -Scale(21) - 1);
+        public static Vector2 PauseMapLocation => InventorySelectionBoxLocation + new Vector2(Scale(100), Scale(88));
+        public static Vector2 PauseMapRoomLocation => PauseMapLocation + new Vector2(Scale(56), Scale(64));
+        public static Vector2 LevelNameLocation => MiniMapLocation + new Vector2(Scale(6), -Scale(9));
+        public static Vector2 RupeeCountLocation => MiniMapLocation + new Vector2(Scale(87), Scale(4));
         public static Vector2 KeyCountLocation => new Vector2(RupeeCountLocation.X, RupeeCountLocation.Y + Scale(17));
         public static Vector2 BombCountLocation => new Vector2(KeyCountLocation.X, KeyCountLocation.Y + Scale(8));
         public static Vector2 BBoxLocation => new Vector2(RupeeCountLocation.X + Scale(36), RupeeCountLocation.Y);

@@ -213,7 +213,7 @@ namespace LegendOfZeldaClone
             }
             else if (CurrentGameState == GameState.ScreenTransition || CurrentGameState == GameState.PauseTransition)
             {
-                Vector2? nextRoomOffset = CurrentRoom.Offset;
+                Vector2? nextRoomOffset = CurrentRoom.PixelOffset;
                 if (NextRoom == null)
                     nextRoomOffset = null;
                 else if (NextRoom == CurrentRoom.RoomDown)

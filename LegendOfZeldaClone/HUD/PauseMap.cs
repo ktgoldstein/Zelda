@@ -13,8 +13,7 @@ namespace LegendOfZeldaClone
         public List<PauseMapRoom> mapRooms;
         public PauseMapRoom currentRoom;
         
-        private LinkOnPauseMap link;
-
+        private readonly LinkOnPauseMap link;
         private readonly GameStateMachine game;
 
         public PauseMap(GameStateMachine game)

@@ -19,10 +19,14 @@ namespace LegendOfZeldaClone.LevelLoading
         public List<IItem> Items = new List<IItem>();
         public List<IEnemy> Enemies = new List<IEnemy>();
 
-        private List<IBlock> closedDoors = new List<IBlock>();
+        private readonly List<IBlock> closedDoors = new List<IBlock>();
         private int doorChangeCount = 0;
 
-        public Vector2 Offset = Vector2.Zero;
+        public Vector2 PixelOffset
+        {
+            get { return new Vector2(RoomOffset.X * LoZHelpers.GameWidth, RoomOffset.Y * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight)); }
+        }
+        public Vector2 RoomOffset = Vector2.Zero;
 
         private readonly ISprite tiles;
         private readonly ISprite walls;
@@ -86,10 +90,10 @@ namespace LegendOfZeldaClone.LevelLoading
         public void Draw(SpriteBatch spritebatch)
         {
             if (wallType == 1)
-                walls.Draw(spritebatch, Offset);
+                walls.Draw(spritebatch, PixelOffset);
 
             if (backgroundType == 1)
-                tiles.Draw(spritebatch, Offset + 2 * LoZHelpers.TileSize * Vector2.One);
+                tiles.Draw(spritebatch, PixelOffset + 2 * LoZHelpers.TileSize * Vector2.One);
         }
         public void DrawAt(SpriteBatch spritebatch, Vector2 offset)
         {
@@ -120,8 +124,7 @@ namespace LegendOfZeldaClone.LevelLoading
                 var row = Array.ConvertAll(splitLine, s => int.Parse(s));
                 backgroundType = row[0];
                 wallType = row[1];
-                Offset.X = row[2] * LoZHelpers.GameWidth;
-                Offset.Y = row[3] * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+                RoomOffset = new Vector2(row[2], row[3]);
 
                 while ((roomInfo = roomFile.ReadLine()) != null)
                 {
@@ -135,11 +138,11 @@ namespace LegendOfZeldaClone.LevelLoading
 
         private void ProcessEntry(int gameObjectID, int column, int row)
         {
-            Vector2 tileLocation = new Vector2(LoZHelpers.TileSize * (column + 1) + Offset.X, 
-                LoZHelpers.TileSize * (row + 1) + Offset.Y);
+            Vector2 tileLocation = new Vector2(LoZHelpers.TileSize * (column + 1) + PixelOffset.X, 
+                LoZHelpers.TileSize * (row + 1) + PixelOffset.Y);
             if (fileLocation.Equals("Content\\LevelLoading\\SecretRoom.csv"))
-                tileLocation = new Vector2(LoZHelpers.TileSize * column + Offset.X, 
-                    LoZHelpers.TileSize * (row + 1) + Offset.Y);
+                tileLocation = new Vector2(LoZHelpers.TileSize * column + PixelOffset.X, 
+                    LoZHelpers.TileSize * (row + 1) + PixelOffset.Y);
 
             Vector2 smallItemLocation = tileLocation + new Vector2(LoZHelpers.TileSize / 4, 0);
             Vector2 doorLocationUp = tileLocation - new Vector2(0, LoZHelpers.TileSize);
