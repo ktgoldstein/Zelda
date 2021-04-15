@@ -213,7 +213,7 @@ namespace LegendOfZeldaClone
             }
             else if (CurrentGameState == GameState.ScreenTransition || CurrentGameState == GameState.PauseTransition)
             {
-                Vector2? nextRoomOffset = CurrentRoom.Offset;
+                Vector2? nextRoomOffset = CurrentRoom.PixelOffset;
                 if (NextRoom == null)
                     nextRoomOffset = null;
                 else if (NextRoom == CurrentRoom.RoomDown)
@@ -414,17 +414,6 @@ namespace LegendOfZeldaClone
             CurrentRoom.LoadRoom();
         }
 
-        public void GoToTheStart()
-        {
-            ResetLists();
-            CurrentRoom = firstRoom;
-            CurrentRoom.LoadRoom();
-            Player.Location = LoZHelpers.LinkStartingLocation;
-            RoomCamera.Reset();
-            PauseMap.GoToStart();
-            HUDMap.Reset();
-        }
-
         public void InitializeHUD()
         {
             HUDMap = new HUDMap(this);
@@ -465,6 +454,40 @@ namespace LegendOfZeldaClone
             return deadObjects;
         }
 
+        public void GoToTheStart()
+        {
+            ResetLists();
+            CurrentRoom = firstRoom;
+            CurrentRoom.LoadRoom();
+            Player.Location = LoZHelpers.LinkStartingLocation;
+            RoomCamera.Reset();
+            PauseMap.GoToStart();
+            HUDMap.Reset();
+        }
+
+        public void MoveRoom(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Up:
+                    NextRoom = CurrentRoom.RoomUp;
+                    break;
+                case Direction.Down:
+                    NextRoom = CurrentRoom.RoomDown;
+                    break;
+                case Direction.Left:
+                    NextRoom = CurrentRoom.RoomLeft;
+                    break;
+                case Direction.Right:
+                    NextRoom = CurrentRoom.RoomRight;
+                    break;
+            }
+            NextRoom.LoadRoom();
+            RoomCamera.CameraTransition(direction, GameState.ScreenTransition);
+            HUDMap.UpdateLink(NextRoom);
+            PauseMap.MoveRooms(NextRoom);
+        }
+
         public void ShiftLink(Direction direction)
         {
             int horizontalDisplacement = LoZHelpers.Scale(16);
@@ -472,21 +495,21 @@ namespace LegendOfZeldaClone
             switch (direction)
             {
                 case Direction.Up:
-                    Player.Location -= new Vector2(0, verticalDisplacement + Player.Height);
+                    Player.Location -= (verticalDisplacement + Player.Height) * Vector2.UnitY;
                     break;
                 case Direction.Down:
-                    Player.Location += new Vector2(0, verticalDisplacement + Player.Height);
+                    Player.Location += (verticalDisplacement + Player.Height) * Vector2.UnitY;
                     break;
                 case Direction.Left:
-                    Player.Location -= new Vector2(horizontalDisplacement + Player.Width, 0);
+                    Player.Location -= (horizontalDisplacement + Player.Width) * Vector2.UnitX;
                     break;
                 case Direction.Right:
-                    Player.Location += new Vector2(horizontalDisplacement + Player.Width, 0);
-                    break;
-                case Direction.None:
+                    Player.Location += (horizontalDisplacement + Player.Width) * Vector2.UnitX;
                     break;
             }
+            Player.Location = CurrentRoom.PixelOffset + LoZHelpers.GetLocationInRoom(Player.Location);
         }
+
         public void Reset()
         {
             CurrentGameState = GameState.Play;

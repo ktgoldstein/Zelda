@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using LegendOfZeldaClone.LevelLoading;
 
 namespace LegendOfZeldaClone
 {
@@ -16,8 +17,8 @@ namespace LegendOfZeldaClone
         private ISprite triForce;
 
 
-        private bool hasMap { get { return game.Player.Inventory.HasMap; } }
-        private bool hasCompass { get { return game.Player.Inventory.HasCompass; } }
+        private bool HasMap { get { return game.Player.Inventory.HasMap; } }
+        private bool HasCompass { get { return game.Player.Inventory.HasCompass; } }
 
         private readonly GameStateMachine game;
 
@@ -28,7 +29,7 @@ namespace LegendOfZeldaClone
             miniMapLocation = LoZHelpers.MiniMapLocation;
             miniMap = HUDTextureFactory.Instance.CreateMiniMap();
 
-            linkLocation = LoZHelpers.LinkLocationTrackerMini;
+            linkLocation = LoZHelpers.HUDMapLinkStartingLocation;
             link = HUDTextureFactory.Instance.CreateLocationTracker();
 
             triForceOnMap = LoZHelpers.TriForceLocation;
@@ -37,43 +38,30 @@ namespace LegendOfZeldaClone
         }
 
         public void Update() {
-            if(hasCompass)
+            if(HasCompass)
                 triForce.Update();
         }
+
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (hasMap)
+            if (HasMap)
                 miniMap.Draw(spriteBatch, miniMapLocation);
-            if (hasCompass)
+            if (HasCompass)
                 triForce.Draw(spriteBatch, triForceOnMap);
 
             link.Draw(spriteBatch, linkLocation);
         }
 
-        public void UpdateLinkMapLocation(Direction direction)
+        public void UpdateLink(Room targetRoom)
         {
-            switch (direction)
-            {
-                case Direction.Left:
-                    linkLocation.X -= LoZHelpers.RightLeftRoomMiniMapOffset;
-                    break;
-
-                case Direction.Right:
-                    linkLocation.X += LoZHelpers.RightLeftRoomMiniMapOffset;
-                    break;
-
-                case Direction.Down:
-                    linkLocation.Y += LoZHelpers.UpDownRoomMiniMapOffset;
-                    break;
-                case Direction.Up:
-                    linkLocation.Y -= LoZHelpers.UpDownRoomMiniMapOffset;
-                    break;
-            }
+            linkLocation = LoZHelpers.HUDMapLinkStartingLocation
+                + new Vector2(targetRoom.RoomOffset.X * LoZHelpers.HUDMapHorizontalRoomOffset,
+                              targetRoom.RoomOffset.Y * LoZHelpers.HUDMapVerticalRoomOffset);
         }
 
         public void Reset()
         {
-            linkLocation = LoZHelpers.LinkLocationTrackerMini;
+            linkLocation = LoZHelpers.HUDMapLinkStartingLocation;
         }
     }
 }

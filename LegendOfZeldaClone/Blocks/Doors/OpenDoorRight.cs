@@ -25,19 +25,15 @@ namespace LegendOfZeldaClone
         {
             if (game.NextRoom == null)
             {
-                game.NextRoom = game.CurrentRoom.RoomRight;
-                foreach (IBlock block in game.NextRoom.Blocks)
+                foreach (IBlock block in game.CurrentRoom.RoomRight.Blocks)
                 {
                     if (block is LockedDoor && (block as LockedDoor).Orientation == Direction.Left)
                     {
-                        game.NextRoom.Blocks.Remove(block);
+                        game.CurrentRoom.RoomRight.Blocks.Remove(block);
                         break;
                     }
                 }
-                game.NextRoom.LoadRoom();
-                game.RoomCamera.CameraTransition(Direction.Right, GameState.ScreenTransition);
-                game.HUDMap.UpdateLinkMapLocation(Direction.Right);
-                game.PauseMap.MoveRooms(Direction.Right);
+                game.MoveRoom(Direction.Right);
             }
         }
     }
