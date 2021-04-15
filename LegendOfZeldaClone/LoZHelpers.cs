@@ -188,7 +188,7 @@ namespace LegendOfZeldaClone
         public static Vector2 TriForceLocation => LinkLocationTrackerMini + new Vector2(Scale(32), -Scale(21) - 1);
 
         public static Vector2 MiniMapPauseLocation => new Vector2(InventorySelectionBoxLocation.X, GameHeight - Scale(50));
-        public static Vector2 LinkLocationTrackerPause => PauseMapLocation + new Vector2(Scale(58), Scale(66));
+        public static Vector2 PauseMapTrackerStartingLocation => PauseMapLocation + new Vector2(Scale(58), Scale(66));
         public static Vector2 TriForcePauseLocation => LinkLocationTrackerMini + new Vector2(Scale(32), -Scale(21) - 1);
         public static Vector2 PauseMapLocation => InventorySelectionBoxLocation + new Vector2(Scale(100), Scale(88));
         public static Vector2 PauseMapRoomLocation => PauseMapLocation + new Vector2(Scale(56), Scale(64));
@@ -228,8 +228,8 @@ namespace LegendOfZeldaClone
         public static int TileSize => Scale(16);
         public static int RightLeftRoomMiniMapOffset => Scale(10) + 2;
         public static int UpDownRoomMiniMapOffset => Scale(5) + 1;
-        public static int RightLeftRoomPauseMapOffset => Scale(8);
-        public static int UpDownRoomPauseMapOffset => Scale(8);
+        public static int HorizontalPauseMapRoomOffset => Scale(8);
+        public static int VerticalPauseMapRoomOffset => Scale(8);
         public static int LinkInvincibilityFrames => 24;
         public static int LinkKnockbackFrames => 8;
         public static int SpriteSizeMultiplier => 3;

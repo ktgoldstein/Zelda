@@ -10,79 +10,55 @@ namespace LegendOfZeldaClone
     {
         public ISprite backgroundSprite;
 
-        public List<PauseMapRoom> mapRooms;
-        public PauseMapRoom currentRoom;
+        public List<PauseMapRoom> pauseMapRooms;
+        public PauseMapRoom currentPauseMapRoom;
         
-        private readonly LinkOnPauseMap link;
+        private readonly PauseMapLink link;
         private readonly GameStateMachine game;
+        private readonly Room startingRoom;
 
         public PauseMap(GameStateMachine game)
         {
             this.game = game;
+            startingRoom = game.CurrentRoom;
 
             backgroundSprite = HUDTextureFactory.Instance.CreatePauseMap();
 
-            currentRoom = new PauseMapRoom(GetRoomType(game.CurrentRoom), LoZHelpers.PauseMapRoomLocation);
-            mapRooms = new List<PauseMapRoom> { currentRoom };
+            currentPauseMapRoom = new PauseMapRoom(startingRoom);
+            pauseMapRooms = new List<PauseMapRoom> { currentPauseMapRoom };
 
-            link = new LinkOnPauseMap(LoZHelpers.LinkLocationTrackerPause);
+            link = new PauseMapLink(startingRoom);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             backgroundSprite.Draw(spriteBatch, LoZHelpers.PauseMapLocation);
 
-            foreach (PauseMapRoom room in mapRooms)
+            foreach (PauseMapRoom room in pauseMapRooms)
                 room.Draw(spriteBatch);
 
             link.Draw(spriteBatch);
         }
 
-        public void MoveRooms(Direction direction)
+        public void MoveRooms(Room targetRoom)
         {
-            link.MoveLinkOnPauseMap(direction);
-            Vector2 targetLocation = currentRoom.Location;
-            switch (direction)
+            link.MoveLinkOnPauseMap(targetRoom);
+            foreach (PauseMapRoom pauseMapRoom in pauseMapRooms)
             {
-                case Direction.Left:
-                    targetLocation.X -= LoZHelpers.RightLeftRoomPauseMapOffset;
-                    break;
-                case Direction.Right:
-                    targetLocation.X += LoZHelpers.RightLeftRoomPauseMapOffset;
-                    break;
-                case Direction.Down:
-                    targetLocation.Y += LoZHelpers.UpDownRoomPauseMapOffset;
-                    break;
-                case Direction.Up:
-                    targetLocation.Y -= LoZHelpers.UpDownRoomPauseMapOffset;
-                    break;
-            }
-            foreach (PauseMapRoom room in mapRooms)
-            {
-                if (room.Location == targetLocation)
+                if (pauseMapRoom.Room == targetRoom)
                 {
-                    currentRoom = room;
+                    currentPauseMapRoom = pauseMapRoom;
                     return;
                 }
             }
-            currentRoom = new PauseMapRoom(GetRoomType(game.NextRoom), targetLocation);
-            mapRooms.Add(currentRoom);
-        }
-
-        private PauseMapRoomType GetRoomType(Room target)
-        {
-            int roomType = 0;
-            roomType += (target.RoomUp != null) ? 0b1000 : 0;
-            roomType += (target.RoomDown != null) ? 0b0100 : 0;
-            roomType += (target.RoomLeft != null) ? 0b0010 : 0;
-            roomType += (target.RoomRight != null) ? 0b0001 : 0;
-            return (PauseMapRoomType)roomType;
-        }
+            currentPauseMapRoom = new PauseMapRoom(game.NextRoom);
+            pauseMapRooms.Add(currentPauseMapRoom);
+        }               
 
         public void Reset()
         {
-            currentRoom = new PauseMapRoom(GetRoomType(game.CurrentRoom), LoZHelpers.PauseMapRoomLocation);
-            mapRooms = new List<PauseMapRoom> { currentRoom };
+            currentPauseMapRoom = new PauseMapRoom(game.CurrentRoom);
+            pauseMapRooms = new List<PauseMapRoom> { currentPauseMapRoom };
 
             link.Reset();
         }
@@ -90,11 +66,11 @@ namespace LegendOfZeldaClone
         public void GoToStart()
         {
             link.Reset();
-            foreach (PauseMapRoom room in mapRooms)
+            foreach (PauseMapRoom pauseMapRoom in pauseMapRooms)
             {
-                if (room.Location == LoZHelpers.PauseMapRoomLocation)
+                if (pauseMapRoom.Room == startingRoom)
                 {
-                    currentRoom = room;
+                    currentPauseMapRoom = pauseMapRoom;
                     return;
                 }
             }

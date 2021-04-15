@@ -17,11 +17,7 @@ namespace LegendOfZeldaClone
             if (game.NextRoom == null)
             {
                 game.Player.Location = Location + new Vector2(LoZHelpers.Scale(2 * 16), LoZHelpers.Scale(-2 * 16));
-                game.NextRoom = game.CurrentRoom.RoomUp;
-                game.NextRoom.LoadRoom();
-                game.RoomCamera.CameraTransition(Direction.Up, GameState.ScreenTransition);
-                game.HUDMap.UpdateLinkMapLocation(Direction.Up);
-                game.PauseMap.MoveRooms(Direction.Up);
+                game.MoveRoom(Direction.Up);
             }
         }
     }
