@@ -350,7 +350,7 @@ namespace LegendOfZeldaClone
 
         public void InitializeRooms()
         {
-            List<Room> OriginalRoomList = new List<Room>()
+            List<Room> OriginalRooms = new List<Room>()
             {
                 new Room("Content\\LevelLoading\\room00.csv", this),
                 new Room("Content\\LevelLoading\\room01.csv", this),
@@ -369,8 +369,17 @@ namespace LegendOfZeldaClone
                 new Room("Content\\LevelLoading\\room14.csv", this),
                 new Room("Content\\LevelLoading\\room15.csv", this),
                 new Room("Content\\LevelLoading\\room16.csv", this),
+                new Room("Content\\LevelLoading\\SecretRoom.csv", this)
+            };
+
+            List<Room> ShopRooms = new List<Room>()
+            {
                 new Room("Content\\LevelLoading\\newRoom00.csv", this),
-                new Room("Content\\LevelLoading\\newRoom00.csv", this), // Place holder for shop
+                new Room("Content\\LevelLoading\\newRoom00.csv", this) // Place holder for shop
+            };
+
+            List<Room> MazeRooms = new List<Room>()
+            {
                 new Room("Content\\LevelLoading\\roomMaze00.csv", this),
                 new Room("Content\\LevelLoading\\roomMaze01.csv", this),
                 new Room("Content\\LevelLoading\\roomMaze02.csv", this),
@@ -380,41 +389,42 @@ namespace LegendOfZeldaClone
                 new Room("Content\\LevelLoading\\roomMaze06.csv", this),
                 new Room("Content\\LevelLoading\\roomMaze07.csv", this),
                 new Room("Content\\LevelLoading\\roomMaze08.csv", this),
-                new Room("Content\\LevelLoading\\SecretRoom.csv", this),
             };
 
-            OriginalRoomList[0].AddNeighbors(OriginalRoomList[3], OriginalRoomList[17], OriginalRoomList[1], OriginalRoomList[2]);
-            OriginalRoomList[1].AddNeighbors(null, null, null, OriginalRoomList[0]);
-            OriginalRoomList[2].AddNeighbors(null, null, OriginalRoomList[0], null);
-            OriginalRoomList[3].AddNeighbors(OriginalRoomList[4], OriginalRoomList[0], null, null);
-            OriginalRoomList[4].AddNeighbors(OriginalRoomList[9], OriginalRoomList[3], OriginalRoomList[6], OriginalRoomList[5]);
-            OriginalRoomList[5].AddNeighbors(OriginalRoomList[8], null, OriginalRoomList[4], null);
-            OriginalRoomList[6].AddNeighbors(OriginalRoomList[10], null, null, OriginalRoomList[4]);
-            OriginalRoomList[7].AddNeighbors(OriginalRoomList[13], null, OriginalRoomList[8], null);
-            OriginalRoomList[8].AddNeighbors(null, OriginalRoomList[5], OriginalRoomList[9], OriginalRoomList[7]);
-            OriginalRoomList[9].AddNeighbors(OriginalRoomList[12], OriginalRoomList[4], OriginalRoomList[10], OriginalRoomList[8]);
-            OriginalRoomList[10].AddNeighbors(null, OriginalRoomList[6], OriginalRoomList[11], OriginalRoomList[9]);
-            OriginalRoomList[11].AddNeighbors(null, null, null, OriginalRoomList[10]);
-            OriginalRoomList[12].AddNeighbors(OriginalRoomList[15], OriginalRoomList[9], null, null);
-            OriginalRoomList[13].AddNeighbors(null, OriginalRoomList[7], null, OriginalRoomList[14]);
-            OriginalRoomList[14].AddNeighbors(null, null, OriginalRoomList[13], null);
-            OriginalRoomList[15].AddNeighbors(null, OriginalRoomList[12], OriginalRoomList[16], null);
-            OriginalRoomList[16].AddNeighbors(null, OriginalRoomList[^1], null, OriginalRoomList[15]);
-            OriginalRoomList[17].AddNeighbors(OriginalRoomList[0], OriginalRoomList[19], null, null); // Entrance to maze newRoom00
-            OriginalRoomList[18].AddNeighbors(null, null, null, null); // Place holder for shop
-            OriginalRoomList[19].AddNeighbors(OriginalRoomList[20], null, null, null);
-            OriginalRoomList[20].AddNeighbors(OriginalRoomList[21], null, null, null);
-            OriginalRoomList[21].AddNeighbors(null, OriginalRoomList[22], null, null);
-            OriginalRoomList[22].AddNeighbors(null, OriginalRoomList[23], null, null);
-            OriginalRoomList[23].AddNeighbors(null, null, OriginalRoomList[24], null);
-            OriginalRoomList[24].AddNeighbors(null, null, null, OriginalRoomList[25]);
-            OriginalRoomList[25].AddNeighbors(null, null, OriginalRoomList[26], null);
-            OriginalRoomList[26].AddNeighbors(null, null, null, OriginalRoomList[27]);
-            OriginalRoomList[27].AddNeighbors(null, OriginalRoomList[0], null, null);
-            OriginalRoomList[28].AddNeighbors(OriginalRoomList[16], null, null, null);
+            OriginalRooms[0].AddNeighbors(OriginalRooms[3], ShopRooms[0], OriginalRooms[1], OriginalRooms[2]);
+            OriginalRooms[1].AddNeighbors(null, null, null, OriginalRooms[0]);
+            OriginalRooms[2].AddNeighbors(null, null, OriginalRooms[0], null);
+            OriginalRooms[3].AddNeighbors(OriginalRooms[4], OriginalRooms[0], null, null);
+            OriginalRooms[4].AddNeighbors(OriginalRooms[9], OriginalRooms[3], OriginalRooms[6], OriginalRooms[5]);
+            OriginalRooms[5].AddNeighbors(OriginalRooms[8], null, OriginalRooms[4], null);
+            OriginalRooms[6].AddNeighbors(OriginalRooms[10], null, null, OriginalRooms[4]);
+            OriginalRooms[7].AddNeighbors(OriginalRooms[13], null, OriginalRooms[8], null);
+            OriginalRooms[8].AddNeighbors(null, OriginalRooms[5], OriginalRooms[9], OriginalRooms[7]);
+            OriginalRooms[9].AddNeighbors(OriginalRooms[12], OriginalRooms[4], OriginalRooms[10], OriginalRooms[8]);
+            OriginalRooms[10].AddNeighbors(null, OriginalRooms[6], OriginalRooms[11], OriginalRooms[9]);
+            OriginalRooms[11].AddNeighbors(null, null, null, OriginalRooms[10]);
+            OriginalRooms[12].AddNeighbors(OriginalRooms[15], OriginalRooms[9], null, null);
+            OriginalRooms[13].AddNeighbors(null, OriginalRooms[7], null, OriginalRooms[14]);
+            OriginalRooms[14].AddNeighbors(null, null, OriginalRooms[13], null);
+            OriginalRooms[15].AddNeighbors(null, OriginalRooms[12], OriginalRooms[16], null);
+            OriginalRooms[16].AddNeighbors(null, OriginalRooms[^1], null, OriginalRooms[15]);
+            OriginalRooms[17].AddNeighbors(OriginalRooms[16], null, null, null);
 
-            firstRoom = OriginalRoomList[0];
-            CurrentRoom = OriginalRoomList[0];
+            ShopRooms[0].AddNeighbors(OriginalRooms[0], MazeRooms[0], ShopRooms[1], null);
+            ShopRooms[1].AddNeighbors(null, null, null, ShopRooms[0]); // Place holder for shop
+
+            MazeRooms[0].AddNeighbors(MazeRooms[1], null, null, null);
+            MazeRooms[1].AddNeighbors(MazeRooms[2], null, null, null);
+            MazeRooms[2].AddNeighbors(null, MazeRooms[3], null, null);
+            MazeRooms[3].AddNeighbors(null, MazeRooms[4], null, null);
+            MazeRooms[4].AddNeighbors(null, null, MazeRooms[5], null);
+            MazeRooms[5].AddNeighbors(null, null, null, MazeRooms[6]);
+            MazeRooms[6].AddNeighbors(null, null, MazeRooms[7], null);
+            MazeRooms[7].AddNeighbors(null, null, null, MazeRooms[8]);
+            MazeRooms[8].AddNeighbors(null, OriginalRooms[0], null, null);
+
+            firstRoom = OriginalRooms[0];
+            CurrentRoom = OriginalRooms[0];
             CurrentRoom.LoadRoom();
         }
 
