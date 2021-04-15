@@ -184,12 +184,12 @@ namespace LegendOfZeldaClone
 
         public static Vector2 LinkStartingLocation => new Vector2(Scale(6 * 16 + 8 + 16), Scale(3 * 16 + 80));
         public static Vector2 MiniMapLocation => new Vector2(GameWidth / 24, HUDHeight / 3);
-        public static Vector2 LinkLocationTrackerMini => new Vector2(MiniMapLocation.X + Scale(28), HUDHeight - Scale(12));
-        public static Vector2 TriForceLocation => LinkLocationTrackerMini + new Vector2(Scale(32), -Scale(21) - 1);
+        public static Vector2 HUDMapLinkStartingLocation => new Vector2(MiniMapLocation.X + Scale(28), HUDHeight - Scale(12));
+        public static Vector2 TriForceLocation => HUDMapLinkStartingLocation + new Vector2(Scale(32), -Scale(21) - 1);
 
         public static Vector2 MiniMapPauseLocation => new Vector2(InventorySelectionBoxLocation.X, GameHeight - Scale(50));
         public static Vector2 PauseMapTrackerStartingLocation => PauseMapLocation + new Vector2(Scale(58), Scale(66));
-        public static Vector2 TriForcePauseLocation => LinkLocationTrackerMini + new Vector2(Scale(32), -Scale(21) - 1);
+        public static Vector2 TriForcePauseLocation => HUDMapLinkStartingLocation + new Vector2(Scale(32), -Scale(21) - 1);
         public static Vector2 PauseMapLocation => InventorySelectionBoxLocation + new Vector2(Scale(100), Scale(88));
         public static Vector2 PauseMapRoomLocation => PauseMapLocation + new Vector2(Scale(56), Scale(64));
         public static Vector2 LevelNameLocation => MiniMapLocation + new Vector2(Scale(6), -Scale(9));
@@ -226,8 +226,8 @@ namespace LegendOfZeldaClone
         public static int GameWidth => Scale(256);
         public static int HUDHeight => Scale(64);
         public static int TileSize => Scale(16);
-        public static int RightLeftRoomMiniMapOffset => Scale(10) + 2;
-        public static int UpDownRoomMiniMapOffset => Scale(5) + 1;
+        public static int HUDMapHorizontalRoomOffset => Scale(10) + 2;
+        public static int HUDMapVerticalRoomOffset => Scale(5) + 1;
         public static int HorizontalPauseMapRoomOffset => Scale(8);
         public static int VerticalPauseMapRoomOffset => Scale(8);
         public static int LinkInvincibilityFrames => 24;

@@ -466,7 +466,7 @@ namespace LegendOfZeldaClone
             }
             NextRoom.LoadRoom();
             RoomCamera.CameraTransition(direction, GameState.ScreenTransition);
-            HUDMap.UpdateLinkMapLocation(direction);
+            HUDMap.UpdateLink(NextRoom);
             PauseMap.MoveRooms(NextRoom);
         }
 
