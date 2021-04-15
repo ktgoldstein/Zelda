@@ -59,8 +59,8 @@ namespace LegendOfZeldaClone.Enemy
 		public ISprite CreateWizardSprite() => new EnemySprite(wizardSprite, 1, 1, 0, 1);
 		public ISprite CreateWizardFireSprite() => new EnemySprite(wizardFireSprite, 2, 1, 2, 2);
 		public ISprite CreateDodongoPhaseOneSprite() => new EnemySprite(greenDodongoSprite, 2, 1, 2, 2);
-		public ISprite CreateDodongoPhaseTwoSprite() => new EnemySprite(blueDodongoSprite, 2, 1, 2, 2);
-		public ISprite CreateDodongoPhaseThreeSprite() => new EnemySprite(redDodongoSprite, 2, 1, 2, 2);
+		public ISprite CreateDodongoPhaseTwoSprite() => new EnemySprite(blueDodongoSprite, 2, 1, 2, 2, 2);
+		public ISprite CreateDodongoPhaseThreeSprite() => new EnemySprite(redDodongoSprite, 2, 1, 2, 2, 2);
 		public SpriteFont CreateFont() => font;
 	}
 }
