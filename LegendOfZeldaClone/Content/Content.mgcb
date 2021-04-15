@@ -557,6 +557,27 @@
 #begin LevelLoading/roomMaze01.csv
 /copy:LevelLoading/roomMaze01.csv
 
+#begin LevelLoading/roomMaze02.csv
+/copy:LevelLoading/roomMaze02.csv
+
+#begin LevelLoading/roomMaze03.csv
+/copy:LevelLoading/roomMaze03.csv
+
+#begin LevelLoading/roomMaze04.csv
+/copy:LevelLoading/roomMaze04.csv
+
+#begin LevelLoading/roomMaze05.csv
+/copy:LevelLoading/roomMaze05.csv
+
+#begin LevelLoading/roomMaze06.csv
+/copy:LevelLoading/roomMaze06.csv
+
+#begin LevelLoading/roomMaze07.csv
+/copy:LevelLoading/roomMaze07.csv
+
+#begin LevelLoading/roomMaze08.csv
+/copy:LevelLoading/roomMaze08.csv
+
 #begin LevelLoading/SecretRoom.csv
 /copy:LevelLoading/SecretRoom.csv
 

@@ -371,10 +371,17 @@ namespace LegendOfZeldaClone
                 new Room("Content\\LevelLoading\\room16.csv", this),
                 new Room("Content\\LevelLoading\\roomMaze00.csv", this),
                 new Room("Content\\LevelLoading\\roomMaze01.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze02.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze03.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze04.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze05.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze06.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze07.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze08.csv", this),
                 new Room("Content\\LevelLoading\\SecretRoom.csv", this),
             };
 
-            RoomList[0].AddNeighbors(RoomList[3], RoomList[0], RoomList[1], RoomList[2]);
+            RoomList[0].AddNeighbors(RoomList[3], RoomList[17], RoomList[1], RoomList[2]);
             RoomList[1].AddNeighbors(null, null, null, RoomList[0]);
             RoomList[2].AddNeighbors(null, null, RoomList[0], null);
             RoomList[3].AddNeighbors(RoomList[4], RoomList[0], null, null);
@@ -392,8 +399,15 @@ namespace LegendOfZeldaClone
             RoomList[15].AddNeighbors(null, RoomList[12], RoomList[16], null);
             RoomList[16].AddNeighbors(null, RoomList[^1], null, RoomList[15]);
             RoomList[17].AddNeighbors(RoomList[0], null, RoomList[18], null);
-            RoomList[18].AddNeighbors(null, null, null, RoomList[17]);
-            RoomList[19].AddNeighbors(RoomList[16], null, null, null);
+            RoomList[18].AddNeighbors(null, RoomList[19], null, RoomList[17]);
+            RoomList[19].AddNeighbors(RoomList[18], RoomList[20], null, null);
+            RoomList[20].AddNeighbors(RoomList[19], null, RoomList[21], null);
+            RoomList[21].AddNeighbors(null, RoomList[22], null, RoomList[20]);
+            RoomList[22].AddNeighbors(RoomList[21], null, RoomList[23], null);
+            RoomList[23].AddNeighbors(null, RoomList[24], null, RoomList[22]);
+            RoomList[24].AddNeighbors(RoomList[23], null, RoomList[25], null);
+            RoomList[25].AddNeighbors(null, RoomList[24], null, null);
+            RoomList[26].AddNeighbors(RoomList[16], null, null, null);
 
             firstRoom = RoomList[0];
             CurrentRoom = RoomList[0];
