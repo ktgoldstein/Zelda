@@ -373,6 +373,9 @@ namespace LegendOfZeldaClone.LevelLoading
                 case 66:
                     AddIObject(BlockFactory.Instance.CreateMovableBlockGoal(tileLocation));
                     break;
+                case 67:
+                    AddIObject(BlockFactory.Instance.CreateOrbSwitch(tileLocation));
+                    break;
                 default:
                     break;
             }

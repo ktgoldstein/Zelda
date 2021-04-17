@@ -311,5 +311,12 @@ namespace LegendOfZeldaClone
             16,
             32,
             game);
+
+        public IBlock CreateOrbSwitch(Vector2 location) => new OrbSwitch(
+            location,
+            BlockSpriteFactory.Instance.CreateBlueSwitch(),
+            16,
+            8,
+            ObjectHeight.Impassable);
     }
 }

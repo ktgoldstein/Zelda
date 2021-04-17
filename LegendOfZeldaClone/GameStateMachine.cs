@@ -135,6 +135,8 @@ namespace LegendOfZeldaClone
                     {
                         if (block is MovableBlock)
                             blocksInPlace &= (block as MovableBlock).Moved;
+                        if (block is OrbSwitch)
+                            blocksInPlace &= (block as OrbSwitch).WasHit;
                     }
                     if (blocksInPlace)
                         CurrentRoom.OpenDoors();
