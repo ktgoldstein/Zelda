@@ -9,7 +9,7 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes.DodongoStatePattern
     class CheckerboardAttack : IDodongoState
     {
         private Dodongo dodongo;
-        private int timer = 150;
+        private int timer = 120;
         private GameStateMachine game;
         private int something;
         public CheckerboardAttack(Dodongo dodongo, GameStateMachine g)
@@ -28,7 +28,7 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes.DodongoStatePattern
             }
             if(timer == 0)
             {
-                dodongo.State = new PhaseOneIdle(dodongo, game);
+                dodongo.State = new PhaseThreeIdle(dodongo, game);
             }
         }
         public void EntireRoomFireball()

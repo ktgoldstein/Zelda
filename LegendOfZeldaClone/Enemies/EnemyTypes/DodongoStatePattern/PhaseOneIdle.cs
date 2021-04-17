@@ -9,7 +9,7 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes.DodongoStatePattern
     {
         private Dodongo dodongo;
         private GameStateMachine g;
-        private int timer = 20;
+        private int timer = 40;
         public PhaseOneIdle(Dodongo dodongo, GameStateMachine g)
         {
             this.dodongo = dodongo;
@@ -28,8 +28,12 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes.DodongoStatePattern
                 // }
                 // else
                 // {
-                    dodongo.State = new HelicopterAttack(dodongo, g);
+                    // dodongo.State = new HelicopterAttack(dodongo, g);
                 // }
+                // dodongo.State = new CircleAttack(dodongo, g);
+                // dodongo.State = new CircleGapAttack(dodongo, g);
+                // dodongo.State = new HomingCircleAttack(dodongo, g);
+                // dodongo.State = new WallAttack(dodongo, g);
             }
         }
     }

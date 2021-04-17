@@ -20,6 +20,8 @@ namespace LegendOfZeldaClone.Enemy
 		private Texture2D dodongoSprite;
 		private Texture2D linkCharge, linkSpin;
 		private Texture2D greenDodongoSprite, blueDodongoSprite, redDodongoSprite;
+		private Texture2D greenDodongoDamagedSprite, blueDodongoDamagedSprite, redDodongoDamagedSprite;
+		private Texture2D hpBackground, bossHP;
 		private SpriteFont font;
         private EnemySpriteFactory() { }
 
@@ -45,6 +47,11 @@ namespace LegendOfZeldaClone.Enemy
 			greenDodongoSprite = content.Load<Texture2D>("EnemySprites\\GreenDodongo");
 			blueDodongoSprite = content.Load<Texture2D>("EnemySprites\\BlueDodongo");
 			redDodongoSprite = content.Load<Texture2D>("EnemySprites\\RedDodongo");
+			hpBackground = content.Load<Texture2D>("EnemySprites\\BossHPBackground");
+			bossHP = content.Load<Texture2D>("EnemySprites\\BossHP");
+			greenDodongoDamagedSprite = content.Load<Texture2D>("EnemySprites\\GreenDodongoDamaged");
+			blueDodongoDamagedSprite = content.Load<Texture2D>("EnemySprites\\BlueDodongoDamaged");
+			redDodongoDamagedSprite = content.Load<Texture2D>("EnemySprites\\RedDodongoDamaged");
 			font = content.Load<SpriteFont>("Font");
 		}
 
@@ -69,6 +76,11 @@ namespace LegendOfZeldaClone.Enemy
 		public ISprite CreateDodongoPhaseOneSprite() => new EnemySprite(greenDodongoSprite, 2, 1, 2, 2);
 		public ISprite CreateDodongoPhaseTwoSprite() => new EnemySprite(blueDodongoSprite, 2, 1, 2, 2, 2);
 		public ISprite CreateDodongoPhaseThreeSprite() => new EnemySprite(redDodongoSprite, 2, 1, 2, 2, 2);
+		public ISprite CreateBossHPBackground() => new EnemySprite(hpBackground, 1, 1, 0, 1);
+		public ISprite CreateBossHP() => new EnemySprite(bossHP, 1, 1, 0, 1);
+		public ISprite CreateGreenDodongoDamaged() => new EnemySprite(greenDodongoDamagedSprite, 1, 1, 2, 1);
+		public ISprite CreateBlueDodongoDamaged() => new EnemySprite(blueDodongoDamagedSprite, 1, 1, 2, 1);
+		public ISprite CreateRedDodongoDamaged() => new EnemySprite(redDodongoDamagedSprite, 1, 1, 2, 1);
 		public SpriteFont CreateFont() => font;
 	}
 }

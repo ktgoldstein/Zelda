@@ -84,5 +84,17 @@ namespace LegendOfZeldaClone.Enemy
 
             spritebatch.Draw(texture, destinationRectangle, sourceRectangle, color);
         }
+        public void HPDraw(float percentHP, SpriteBatch spritebatch, Vector2 location)
+        {
+            int width = texture.Width / columns - atlasGap;
+            int height = texture.Height / rows - atlasGap;
+            int row = currentFrame / columns;
+            int column = currentFrame % columns;
+
+            Rectangle sourceRectangle = new Rectangle((width + atlasGap) * column, (height + atlasGap) * row, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale((int)( width*percentHP )), LoZHelpers.Scale(height));
+
+            spritebatch.Draw(texture, destinationRectangle, sourceRectangle, color);
+        }
     }
 }

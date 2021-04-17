@@ -97,6 +97,18 @@
 /processorParam:TextureFormat=Color
 /build:EnemySprites/BlueDodongo.png
 
+#begin EnemySprites/BlueDodongoDamaged.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemySprites/BlueDodongoDamaged.png
+
 #begin EnemySprites/Boomerang.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -108,6 +120,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:EnemySprites/Boomerang.png
+
+#begin EnemySprites/BossHP.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemySprites/BossHP.png
+
+#begin EnemySprites/BossHPBackground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemySprites/BossHPBackground.png
 
 #begin EnemySprites/Dodongo.png
 /importer:TextureImporter
@@ -205,6 +241,18 @@
 /processorParam:TextureFormat=Color
 /build:EnemySprites/GreenDodongo.png
 
+#begin EnemySprites/GreenDodongoDamaged.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemySprites/GreenDodongoDamaged.png
+
 #begin EnemySprites/Keese.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -216,18 +264,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:EnemySprites/Keese.png
-
-#begin EnemySprites/RedDodongo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:EnemySprites/RedDodongo.png
 
 #begin EnemySprites/LinkCharge.png
 /importer:TextureImporter
@@ -253,7 +289,7 @@
 /processorParam:TextureFormat=Color
 /build:EnemySprites/LinkSpin.png
 
-#begin EnemySprites/LinkSpin.png
+#begin EnemySprites/RedDodongo.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -263,7 +299,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:EnemySprites/LinkSpin.png
+/build:EnemySprites/RedDodongo.png
+
+#begin EnemySprites/RedDodongoDamaged.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemySprites/RedDodongoDamaged.png
 
 #begin EnemySprites/Stalfos.png
 /importer:TextureImporter

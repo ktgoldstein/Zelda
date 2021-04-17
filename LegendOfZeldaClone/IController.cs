@@ -47,7 +47,7 @@ namespace LegendOfZeldaClone
             {
                 chargeTimer = 0;
             }
-            if (chargeTimer > 15)
+            if (chargeTimer > 10)
             {
                 ICommand charge = new Charge(game);
                 charge.Execute();

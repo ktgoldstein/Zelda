@@ -18,10 +18,10 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes.DodongoStatePattern
         {
             this.dodongo = dodongo;
             game = g;
-            Location = dodongo.Location;
         }
         public void Update()
         {
+            Location = dodongo.Location;
             timer--;
             angle += rotationSpeed;
             if (angle > 360)
@@ -31,7 +31,7 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes.DodongoStatePattern
             FireBallStream();
             if(timer == 0)
             {
-                dodongo.State = new PhaseOneIdle(dodongo, game);
+                dodongo.State = new PhaseTwoIdle(dodongo, game);
             }
         }
         public void FireBallStream()

@@ -22,7 +22,6 @@ namespace LegendOfZeldaClone.Players.LinkPlayer.LinkStates
         }
        public void MoveUp()
         {
-            Console.WriteLine("moving up");
             linkPlayer.Location += new Vector2(0, -linkPlayer.Speed/3);
         }
         public void MoveDown()

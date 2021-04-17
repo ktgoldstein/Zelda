@@ -21,7 +21,7 @@ namespace LegendOfZeldaClone.Enemy
         private Vector2 direction;
         public override Vector2 Direction { get { return direction;} set { direction = value;} }
         private ISprite stalfosSprite;
-        private float speed = 0;
+        private float speed = 2;
         private readonly int width;
         private readonly int height;
         private Vector2 knockbackForce = Vector2.Zero;
