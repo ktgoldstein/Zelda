@@ -5,28 +5,28 @@ namespace LegendOfZeldaClone
 {
     public class OrbSprite : ISprite
     {
-        private readonly Texture2D texture;
+        public Texture2D Texture;
         private readonly int height;
         private readonly int width;
-        private readonly int sourcePosX;
-        private readonly int sourcePosY;
+        public int SourcePosX { get; }
+        public int SourcePosY { get; }
 
         public OrbSprite(Texture2D texture, int height, int width, int sourcePosX, int sourcePosY)
         {
-            this.texture = texture;
+            this.Texture = texture;
             this.height = height;
             this.width = width;
-            this.sourcePosX = sourcePosX;
-            this.sourcePosY = sourcePosY;
+            this.SourcePosX = sourcePosX;
+            this.SourcePosY = sourcePosY;
         }
 
         public void Update() { }
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            Rectangle sourceRectangle = new Rectangle(sourcePosX, sourcePosY, width, height);
+            Rectangle sourceRectangle = new Rectangle(SourcePosX, SourcePosY, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, LoZHelpers.Scale(width), LoZHelpers.Scale(height));
 
-            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
+            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
         }
     }    
 }
