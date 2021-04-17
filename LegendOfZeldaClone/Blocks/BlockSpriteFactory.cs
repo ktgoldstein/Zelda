@@ -7,6 +7,7 @@ namespace LegendOfZeldaClone
     {
         private Texture2D objectSpriteSheet;
         private Texture2D doorSpriteSheet;
+        private Texture2D orbSpriteSheet;
 
         public static BlockSpriteFactory Instance { get; } = new BlockSpriteFactory();
         private BlockSpriteFactory() { }
@@ -15,6 +16,7 @@ namespace LegendOfZeldaClone
         {
             objectSpriteSheet = content.Load<Texture2D>("ZeldaObjects");
             doorSpriteSheet = content.Load<Texture2D>("Background");
+            orbSpriteSheet = content.Load<Texture2D>("DungeonEnemies");
         }
         public ISprite CreateFlatBlock()
         {
@@ -138,7 +140,7 @@ namespace LegendOfZeldaClone
         }
         public ISprite CreateBlueSwitch()
         {
-            return new OrbSprite(objectSpriteSheet, 16, 8, 378, 59);
+            return new OrbSprite(orbSpriteSheet, 16, 8, 378, 59);
         }
     }
 }
