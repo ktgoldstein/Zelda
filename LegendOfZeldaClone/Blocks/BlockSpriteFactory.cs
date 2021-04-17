@@ -136,6 +136,9 @@ namespace LegendOfZeldaClone
         {
             return new BlockSprite(doorSpriteSheet, 32, 32, 849, 44);
         }
-
+        public ISprite CreateBlueSwitch()
+        {
+            return new OrbSprite(objectSpriteSheet, 16, 8, 378, 59);
+        }
     }
 }
