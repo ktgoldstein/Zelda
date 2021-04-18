@@ -30,7 +30,7 @@ namespace LegendOfZeldaClone
             miniMap = HUDTextureFactory.Instance.CreateMiniMap();
 
             linkLocation = LoZHelpers.HUDMapLinkStartingLocation;
-            link = HUDTextureFactory.Instance.CreateLocationTracker();
+            link = HUDTextureFactory.Instance.CreateLocationTrackerHUD();
 
             triForceOnMap = LoZHelpers.TriForceLocation;
             triForce = HUDTextureFactory.Instance.CreateTriForceIndicator();

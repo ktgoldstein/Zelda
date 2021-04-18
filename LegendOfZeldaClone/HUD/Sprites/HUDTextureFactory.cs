@@ -9,7 +9,8 @@ namespace LegendOfZeldaClone
         private Texture2D pauseMap;
         private Texture2D addRoomOnMap;
         private Texture2D inventory;
-        private Texture2D locationTracker;
+        private Texture2D locationTrackerHUD;
+        private Texture2D locationTrackerPause;
         private Texture2D triForceIndicator;
 
         public static HUDTextureFactory Instance
@@ -28,13 +29,14 @@ namespace LegendOfZeldaClone
             miniMap = content.Load<Texture2D>("HUD\\Level 1 (Blank)");
             pauseMap = content.Load<Texture2D>("HUD\\PauseMap");
             addRoomOnMap = content.Load<Texture2D>("HUD\\Map Rooms");
-            locationTracker = content.Load<Texture2D>("HUD\\Link Room Tracker");
+            locationTrackerHUD = content.Load<Texture2D>("HUD\\HUDLinkTracker");
+            locationTrackerPause = content.Load<Texture2D>("HUD\\PauseLinkTracker");
             triForceIndicator = content.Load<Texture2D>("HUD\\TriForceFlash");
             inventory = content.Load<Texture2D>("LoZInventorySpriteSheet");
         }
 
         public ISprite CreateMiniMap() => new MapSprite(miniMap, 1, 1, 1);
-        public ISprite CreatePauseMap() => new PauseMapSprite(pauseMap, 5, 0, 128, 79);
+        public ISprite CreatePauseMap() => new PauseMapSprite(pauseMap, 5, 0, 128, 92);
         public ISprite CreatePauseMapRooms(PauseMapRoomType roomType)
         {
             return roomType switch
@@ -58,7 +60,8 @@ namespace LegendOfZeldaClone
                 _ => null
             };
         }
-        public ISprite CreateLocationTracker() => new MapSprite(locationTracker, 1, 1, 1);
+        public ISprite CreateLocationTrackerHUD() => new MapSprite(locationTrackerHUD, 1, 1, 1);
+        public ISprite CreateLocationTrackerPause() => new MapSprite(locationTrackerPause, 1, 1, 1);
         public ISprite CreateTriForceIndicator() => new MapSprite(triForceIndicator, 2, 1, 2);
         public ISprite CreateLevelName() => new InventorySprite(inventory, 584, 1, 48, 8);
         public ISprite CreateRupeeCount() => new InventorySprite(inventory, 346, 27, 8, 8);

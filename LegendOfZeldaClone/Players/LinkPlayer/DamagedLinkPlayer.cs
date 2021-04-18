@@ -138,8 +138,8 @@ namespace LegendOfZeldaClone
             Inventory.AddItem(itemType, game);
             foreach (ILinkState linkState in linkStates)
                 linkState.PickUpItem(item);
-            Equip(itemType);
         }
+
         public void PickUpTriforce(IItem triforce)
         {
             foreach (ILinkState linkState in linkStates)

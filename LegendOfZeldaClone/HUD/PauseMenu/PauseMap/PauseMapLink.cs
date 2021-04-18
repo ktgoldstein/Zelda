@@ -13,7 +13,7 @@ namespace LegendOfZeldaClone
         public PauseMapLink(Room startingRoom)
         {
             this.startingRoom = startingRoom;
-            linkOnMap = HUDTextureFactory.Instance.CreateLocationTracker();
+            linkOnMap = HUDTextureFactory.Instance.CreateLocationTrackerPause();
             location = RoomOffsetToLocation(startingRoom.RoomOffset);
         }
 
