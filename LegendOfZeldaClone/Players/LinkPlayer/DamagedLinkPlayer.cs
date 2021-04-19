@@ -187,6 +187,8 @@ namespace LegendOfZeldaClone
             Health = 0;
             new LinkDyingSoundEffect().Play();
             decoratedLinkPlayer.Die();
+            foreach (ILinkState linkState in linkStates)
+                linkState.Die();
             game.CurrentGameState = GameState.GameOver;
         }
 
