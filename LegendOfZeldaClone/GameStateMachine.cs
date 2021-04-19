@@ -430,13 +430,13 @@ namespace LegendOfZeldaClone
 
             MazeRooms[0].AddNeighbors(MazeRooms[1], OriginalRooms[0], MazeRooms[0], MazeRooms[0]);
             MazeRooms[1].AddNeighbors(MazeRooms[2], MazeRooms[1], MazeRooms[0], OriginalRooms[0]);
-            MazeRooms[2].AddNeighbors(null, MazeRooms[3], null, null);
-            MazeRooms[3].AddNeighbors(null, MazeRooms[4], null, null);
-            MazeRooms[4].AddNeighbors(MazeRooms[3], null, MazeRooms[5], null);
-            MazeRooms[5].AddNeighbors(null, null, null, MazeRooms[6]);
-            MazeRooms[6].AddNeighbors(null, null, MazeRooms[7], null);
-            MazeRooms[7].AddNeighbors(null, null, null, MazeRooms[8]);
-            MazeRooms[8].AddNeighbors(null, OriginalRooms[0], null, null);
+            MazeRooms[2].AddNeighbors(OriginalRooms[0], MazeRooms[3], MazeRooms[1], MazeRooms[0]);
+            MazeRooms[3].AddNeighbors(MazeRooms[2], MazeRooms[4], MazeRooms[3], MazeRooms[1]);
+            MazeRooms[4].AddNeighbors(MazeRooms[3], MazeRooms[0], MazeRooms[5], MazeRooms[2]);
+            MazeRooms[5].AddNeighbors(MazeRooms[1], OriginalRooms[0], MazeRooms[4], MazeRooms[6]);
+            MazeRooms[6].AddNeighbors(MazeRooms[4], MazeRooms[2], MazeRooms[7], MazeRooms[1]);
+            MazeRooms[7].AddNeighbors(MazeRooms[0], MazeRooms[3], MazeRooms[7], MazeRooms[8]);
+            MazeRooms[8].AddNeighbors(OriginalRooms[0], OriginalRooms[0], MazeRooms[5], MazeRooms[2]);
 
             firstRoom = OriginalRooms[0];
             CurrentRoom = OriginalRooms[0];
