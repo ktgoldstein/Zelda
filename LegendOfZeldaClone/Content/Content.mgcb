@@ -380,6 +380,12 @@
 /processorParam:TextureFormat=Color
 /build:gameScreenFilter.png
 
+#begin GameSounds/CustomBossThemeMusic.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameSounds/CustomBossThemeMusic.wav
+
 #begin GameSounds/LOZArrowAndBoomerangLoopSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

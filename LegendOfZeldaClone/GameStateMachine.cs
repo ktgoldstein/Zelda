@@ -73,6 +73,7 @@ namespace LegendOfZeldaClone
 
         public DungeonThemeMusic GameBackgroundMusic;
         public GameOverThemeMusic GameOverTheme;
+        public CustomBossThemeMusic BossTheme;
         public int MusicTimingHelperInt;
         public int EndScreenMusicTimingHelperInt;
 
@@ -150,20 +151,7 @@ namespace LegendOfZeldaClone
                 PlayerKeyCount.Update();
 
                 MusicTimingHelperInt++;
-                bool aquamentusNearby = false;
-                foreach (Room room in new Room[]{ CurrentRoom.RoomUp, CurrentRoom.RoomDown, CurrentRoom.RoomLeft, CurrentRoom.RoomRight })
-                {
-                    foreach (IEnemy enemy in (room == null ? new List<IEnemy>() : room.Enemies))
-                    {
-                        if (enemy is Aquamentus && enemy.Alive)
-                        {
-                            aquamentusNearby = true;
-                            break;
-                        }
-                    }
-                    if (aquamentusNearby) break;
-                }
-                if (aquamentusNearby && MusicTimingHelperInt % 60 == 0)
+                if (AquamentusIsNearby() && MusicTimingHelperInt % 60 == 0)
                     new AquamentusScreamingSoundEffect().Play();
             }
             else if (CurrentGameState == GameState.Pause)
@@ -188,6 +176,24 @@ namespace LegendOfZeldaClone
                 if (EndScreenMusicTimingHelperInt <= LoZHelpers.FramesBeforeBlackFadeOutEndsGameWon)
                     Player.Update();
             }
+        }
+
+        public bool AquamentusIsNearby()
+        {
+            bool aquamentusNearby = false;
+            foreach (Room room in new Room[] { CurrentRoom.RoomUp, CurrentRoom.RoomDown, CurrentRoom.RoomLeft, CurrentRoom.RoomRight })
+            {
+                foreach (IEnemy enemy in (room == null ? new List<IEnemy>() : room.Enemies))
+                {
+                    if (enemy is Aquamentus && enemy.Alive)
+                    {
+                        aquamentusNearby = true;
+                        break;
+                    }
+                }
+                if (aquamentusNearby) break;
+            }
+            return aquamentusNearby;
         }
 
         public void RoomDraw(SpriteBatch spriteBatch)
@@ -414,6 +420,7 @@ namespace LegendOfZeldaClone
             GameBackgroundMusic = new DungeonThemeMusic();
             GameBackgroundMusic.Play();
             GameOverTheme = new GameOverThemeMusic();
+            BossTheme = new CustomBossThemeMusic();
             MusicTimingHelperInt = 0;
             EndScreenMusicTimingHelperInt = 0;
         }

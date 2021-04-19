@@ -21,19 +21,14 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes.DodongoStatePattern
             timer--;
             if (timer == 0)
             {
-                // int r = LoZHelpers.random.Next() % 2;
-                // if (r == 0)
-                // {
-                //     dodongo.State = new CheckerboardAttack(dodongo, g);
-                // }
-                // else
-                // {
-                    // dodongo.State = new HelicopterAttack(dodongo, g);
-                // }
-                // dodongo.State = new CircleAttack(dodongo, g);
-                // dodongo.State = new CircleGapAttack(dodongo, g);
-                // dodongo.State = new HomingCircleAttack(dodongo, g);
-                // dodongo.State = new WallAttack(dodongo, g);
+                int randomSeed = LoZHelpers.random.Next() % 3;
+                if (randomSeed == 0)
+                    dodongo.State = new LinearAttack(dodongo, g);
+                else if (randomSeed == 1)
+                    dodongo.State = new DoubleLinearAttack(dodongo, g);
+                else
+                    dodongo.State = new SpiralAttack(dodongo, g);
+                //dodongo.State = new SpiralAttack(dodongo, g);
             }
         }
     }

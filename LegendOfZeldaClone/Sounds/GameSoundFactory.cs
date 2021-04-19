@@ -59,6 +59,7 @@ namespace LegendOfZeldaClone
             allGameMusic.Add(content.Load<SoundEffect>("GameSounds/LOZDungeonThemeLoopMusic")); //0
             allGameMusic.Add(content.Load<SoundEffect>("GameSounds/LOZGameOverThemeLoopMusic")); //1
             allGameMusic.Add(content.Load<SoundEffect>("GameSounds/LOZTriforceAcquiredFanfareMusic")); //2
+            allGameMusic.Add(content.Load<SoundEffect>("GameSounds/CustomBossThemeMusic"));
         }
 
         //Organizational note: Item Pickups & Inventory & Related Effects
@@ -97,12 +98,13 @@ namespace LegendOfZeldaClone
         public SoundEffect GetSecretRevealedSoundEffect() => allSoundEffects[20];
         public SoundEffect GetWalkingOnStairsSoundEffect() => allSoundEffects[27];
         public SoundEffect GetDoorUnlockingSoundEffect() => allSoundEffects[6];
-        public SoundEffect GetTextAppearingSoundEffect() => allSoundEffects[25]; //will this not be used?
+        public SoundEffect GetTextAppearingSoundEffect() => allSoundEffects[25];
         public SoundEffect GetTextAppearingSlowlySoundEffect() => allSoundEffects[26];
 
         //Organizational note: Music
         public SoundEffect GetDungeonThemeMusic() => allGameMusic[0];
         public SoundEffect GetGameOverThemeMusic() => allGameMusic[1];
         public SoundEffect GetTriforceAcquiredFanfareMusic() => allGameMusic[2];
+        public SoundEffect GetCustomBossThemeMusic() => allGameMusic[3];
     }
 }
