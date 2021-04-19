@@ -45,16 +45,10 @@ namespace LegendOfZeldaClone.Enemy
         private ISprite hpBackground;
         private ISprite bossHP;
         private float speed = LoZHelpers.Scale(1);
-        private int timer = 0;
         private int invincibleFrames = 0;
         private readonly int width;
         private readonly int height;
         private Vector2 knockbackForce = Vector2.Zero;
-        private int something = 1;
-        private bool stream;
-        private int streamTimer = 0;
-        private float angle = 0;
-        private float rotationSpeed = 1;
         private IDodongoState state;
         public IDodongoState State { get { return state; } set { state = value; } }
         private int phase = 1;
@@ -135,13 +129,6 @@ namespace LegendOfZeldaClone.Enemy
             direction = destination - Location;
             direction.Normalize();
             Location += speed * direction + knockbackForce;
-        }
-
-        private void SpitFireballs()
-        {
-            game.EnemyProjectilesQueue.Add(new Fireball(Location, new Vector2(-2, -1)));
-            game.EnemyProjectilesQueue.Add(new Fireball(Location, new Vector2(-1, 0)));
-            game.EnemyProjectilesQueue.Add(new Fireball(Location, new Vector2(-2, 1)));
         }
 
         public override void Knockback(Vector2 direction) { }

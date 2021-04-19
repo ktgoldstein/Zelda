@@ -48,7 +48,7 @@ namespace LegendOfZeldaClone.Enemy
 
         public override void Update()
         {
-            Vector2 centerOfRoom = game.CurrentRoom.Offset + new Vector2(LoZHelpers.GameWidth/2, (LoZHelpers.GameHeight - LoZHelpers.HUDHeight)/2);
+            Vector2 centerOfRoom = game.CurrentRoom.PixelOffset + new Vector2(LoZHelpers.GameWidth/2, (LoZHelpers.GameHeight - LoZHelpers.HUDHeight)/2);
             wallmasterSprite.Update();
             if (Location.X - centerOfRoom.X > LoZHelpers.Scale(128))
             {

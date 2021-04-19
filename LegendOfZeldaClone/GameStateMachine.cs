@@ -4,10 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using LegendOfZeldaClone.Objects;
 using LegendOfZeldaClone.Enemy;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
 
 namespace LegendOfZeldaClone
 {
@@ -19,8 +16,8 @@ namespace LegendOfZeldaClone
         public List<IEnemy> Enemies;
 
         public List<IItem> Items;
-        public List<IObject> Objects;
-        private List<IObject> stashedBlocks;
+        public List<IBlock> Blocks;
+        private List<IBlock> stashedBlocks;
 
         public List<IPlayerProjectile> PlayerProjectilesQueue;
         public List<IPlayerProjectile> PlayerProjectiles;
@@ -88,7 +85,7 @@ namespace LegendOfZeldaClone
             Enemies = new List<IEnemy>();
 
             Items = new List<IItem>();
-            Objects = new List<IObject>();
+            Blocks = new List<IBlock>();
 
             PlayerProjectilesQueue = new List<IPlayerProjectile>();
             PlayerProjectiles = new List<IPlayerProjectile>();
@@ -128,17 +125,19 @@ namespace LegendOfZeldaClone
 
                 Items = Items.Except(UpdateGameObjectEnumerable(Items)).ToList();
 
-                Objects = Objects.Except(UpdateGameObjectEnumerable(Objects)).ToList();
+                Blocks = Blocks.Except(UpdateGameObjectEnumerable(Blocks)).ToList();
 
                 Collisions.CollisionHandling.HandleCollisions(this);
 
                 if (Enemies.Count == 0)
                 {
                     bool blocksInPlace = true;
-                    foreach (IObject block in Objects)
+                    foreach (IBlock block in Blocks)
                     {
-                        if (block is MovableRaisedBlock)
-                            blocksInPlace &= (block as MovableRaisedBlock).Moved;
+                        if (block is MovableBlock)
+                            blocksInPlace &= (block as MovableBlock).Moved;
+                        if (block is OrbSwitch)
+                            blocksInPlace &= (block as OrbSwitch).WasHit;
                     }
                     if (blocksInPlace)
                         CurrentRoom.OpenDoors();
@@ -203,7 +202,7 @@ namespace LegendOfZeldaClone
                 CurrentRoom.Draw(spriteBatch);
                 NextRoom?.Draw(spriteBatch);
 
-                foreach (IObject block in Objects)
+                foreach (IBlock block in Blocks)
                     block.Draw(spriteBatch);
 
                 foreach (IItem item in Items)
@@ -222,13 +221,45 @@ namespace LegendOfZeldaClone
             }
             else if (CurrentGameState == GameState.ScreenTransition || CurrentGameState == GameState.PauseTransition)
             {
+                Vector2? nextRoomOffset = CurrentRoom.PixelOffset;
+                if (NextRoom == null)
+                    nextRoomOffset = null;
+                else
+                {
+                    switch (RoomCamera.CurrentTransitionDirection)
+                    {
+                        case Direction.Down:
+                            nextRoomOffset += Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+                            break;
+                        case Direction.Left:
+                            nextRoomOffset -= Vector2.UnitX * LoZHelpers.GameWidth;
+                            break;
+                        case Direction.Right:
+                            nextRoomOffset += Vector2.UnitX * LoZHelpers.GameWidth;
+                            break;
+                        case Direction.Up:
+                            nextRoomOffset -= Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+                            break;
+                    }
+                }
+
                 CurrentRoom.Draw(spriteBatch);
-                NextRoom?.Draw(spriteBatch);
+                NextRoom?.DrawAt(spriteBatch, (Vector2)nextRoomOffset);
 
-                foreach (IObject block in Objects)
-                    block.Draw(spriteBatch);
+                foreach (IBlock block in Blocks)
+                {                    
+                    if (nextRoomOffset == null)
+                    {
+                        block.Draw(spriteBatch);
+                    }                        
+                    else
+                    {
+                        Vector2 relativeLocation = LoZHelpers.GetLocationInRoom(block.Location);
+                        block.DrawAt(spriteBatch, relativeLocation + (Vector2)nextRoomOffset);
+                    }
+                }
 
-                foreach (IObject block in stashedBlocks)
+                foreach (IBlock block in stashedBlocks)
                     block.Draw(spriteBatch);
             }
             else if (CurrentGameState == GameState.GameOver)
@@ -246,7 +277,7 @@ namespace LegendOfZeldaClone
                     CurrentRoom.Draw(spriteBatch);
                     NextRoom?.Draw(spriteBatch);
 
-                    foreach (IObject block in Objects)
+                    foreach (IBlock block in Blocks)
                         block.Draw(spriteBatch);
 
                     foreach (IItem item in Items)
@@ -273,7 +304,7 @@ namespace LegendOfZeldaClone
                 {
                     CurrentRoom.Draw(spriteBatch);
 
-                    foreach (IObject block in Objects)
+                    foreach (IBlock block in Blocks)
                         block.Draw(spriteBatch);
 
                     foreach (IItem item in Items)
@@ -337,7 +368,7 @@ namespace LegendOfZeldaClone
 
         public void InitializeRooms()
         {
-            List<Room> RoomList = new List<Room>()
+            List<Room> OriginalRooms = new List<Room>()
             {
                 new Room("Content\\LevelLoading\\room00.csv", this),
                 new Room("Content\\LevelLoading\\room01.csv", this),
@@ -356,44 +387,67 @@ namespace LegendOfZeldaClone
                 new Room("Content\\LevelLoading\\room14.csv", this),
                 new Room("Content\\LevelLoading\\room15.csv", this),
                 new Room("Content\\LevelLoading\\room16.csv", this),
-                new Room("Content\\LevelLoading\\SecretRoom.csv", this),
-                new Room("Content\\LevelLoading\\FinalBossRoom.csv", this)
+                new Room("Content\\LevelLoading\\SecretRoom.csv", this)
             };
 
-            RoomList[0].AddNeighbors(RoomList[3], RoomList[18], RoomList[1], RoomList[2]);
-            RoomList[1].AddNeighbors(null, null, null, RoomList[0]);
-            RoomList[2].AddNeighbors(null, null, RoomList[0], null);
-            RoomList[3].AddNeighbors(RoomList[4], RoomList[0], null, null);
-            RoomList[4].AddNeighbors(RoomList[9], RoomList[3], RoomList[6], RoomList[5]);
-            RoomList[5].AddNeighbors(RoomList[8], null, RoomList[4], null);
-            RoomList[6].AddNeighbors(RoomList[10], null, null, RoomList[4]);
-            RoomList[7].AddNeighbors(RoomList[13], null, RoomList[8], null);
-            RoomList[8].AddNeighbors(null, RoomList[5], RoomList[9], RoomList[7]);
-            RoomList[9].AddNeighbors(RoomList[12], RoomList[4], RoomList[10], RoomList[8]);
-            RoomList[10].AddNeighbors(null, RoomList[6], RoomList[11], RoomList[9]);
-            RoomList[11].AddNeighbors(null, null, null, RoomList[10]);
-            RoomList[12].AddNeighbors(RoomList[15], RoomList[9], null, null);
-            RoomList[13].AddNeighbors(null, RoomList[7], null, RoomList[14]);
-            RoomList[14].AddNeighbors(null, null, RoomList[13], null);
-            RoomList[15].AddNeighbors(null, RoomList[12], RoomList[16], null);
-            RoomList[16].AddNeighbors(null, RoomList[^1], null, RoomList[15]);
-            RoomList[17].AddNeighbors(RoomList[16], null, null, null);
-            RoomList[18].AddNeighbors(RoomList[0], null, null, null);
+            List<Room> ShopRooms = new List<Room>()
+            {
+                new Room("Content\\LevelLoading\\newRoom00.csv", this),
+                new Room("Content\\LevelLoading\\newRoom00.csv", this) // Place holder for shop
+            };
 
-            firstRoom = RoomList[0];
-            CurrentRoom = RoomList[0];
-            CurrentRoom.LoadRoom();
-        }
+            List<Room> MazeRooms = new List<Room>()
+            {
+                new Room("Content\\LevelLoading\\roomMaze00.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze01.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze02.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze03.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze04.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze05.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze06.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze07.csv", this),
+                new Room("Content\\LevelLoading\\roomMaze08.csv", this),
+            };
 
-        public void GoToTheStart()
-        {
-            ResetLists();
-            CurrentRoom = firstRoom;
+            Room FinalBossRoom = new Room("Content\\LevelLoading\\FinalBossRoom.csv", this);
+
+            OriginalRooms[0].AddNeighbors(OriginalRooms[3], ShopRooms[0], OriginalRooms[1], OriginalRooms[2]);
+            OriginalRooms[1].AddNeighbors(null, null, null, OriginalRooms[0]);
+            OriginalRooms[2].AddNeighbors(null, null, OriginalRooms[0], null);
+            OriginalRooms[3].AddNeighbors(OriginalRooms[4], OriginalRooms[0], null, null);
+            OriginalRooms[4].AddNeighbors(OriginalRooms[9], OriginalRooms[3], OriginalRooms[6], OriginalRooms[5]);
+            OriginalRooms[5].AddNeighbors(OriginalRooms[8], null, OriginalRooms[4], null);
+            OriginalRooms[6].AddNeighbors(OriginalRooms[10], null, null, OriginalRooms[4]);
+            OriginalRooms[7].AddNeighbors(OriginalRooms[13], null, OriginalRooms[8], null);
+            OriginalRooms[8].AddNeighbors(null, OriginalRooms[5], OriginalRooms[9], OriginalRooms[7]);
+            OriginalRooms[9].AddNeighbors(OriginalRooms[12], OriginalRooms[4], OriginalRooms[10], OriginalRooms[8]);
+            OriginalRooms[10].AddNeighbors(null, OriginalRooms[6], OriginalRooms[11], OriginalRooms[9]);
+            OriginalRooms[11].AddNeighbors(null, null, null, OriginalRooms[10]);
+            OriginalRooms[12].AddNeighbors(OriginalRooms[15], OriginalRooms[9], null, null);
+            OriginalRooms[13].AddNeighbors(null, OriginalRooms[7], null, OriginalRooms[14]);
+            OriginalRooms[14].AddNeighbors(null, null, OriginalRooms[13], null);
+            OriginalRooms[15].AddNeighbors(null, OriginalRooms[12], OriginalRooms[16], null);
+            OriginalRooms[16].AddNeighbors(null, OriginalRooms[^1], null, OriginalRooms[15]);
+            OriginalRooms[17].AddNeighbors(OriginalRooms[16], null, null, null);
+
+            ShopRooms[0].AddNeighbors(OriginalRooms[0], MazeRooms[0], ShopRooms[1], null);
+            ShopRooms[1].AddNeighbors(null, null, null, ShopRooms[0]); // Place holder for shop
+
+            MazeRooms[0].AddNeighbors(MazeRooms[1], OriginalRooms[0], MazeRooms[0], MazeRooms[0]);
+            MazeRooms[1].AddNeighbors(MazeRooms[2], MazeRooms[1], MazeRooms[0], OriginalRooms[0]);
+            MazeRooms[2].AddNeighbors(OriginalRooms[0], MazeRooms[3], MazeRooms[1], MazeRooms[0]);
+            MazeRooms[3].AddNeighbors(MazeRooms[2], MazeRooms[4], MazeRooms[3], MazeRooms[1]);
+            MazeRooms[4].AddNeighbors(MazeRooms[3], MazeRooms[0], MazeRooms[5], MazeRooms[2]);
+            MazeRooms[5].AddNeighbors(MazeRooms[1], OriginalRooms[0], MazeRooms[4], MazeRooms[6]);
+            MazeRooms[6].AddNeighbors(MazeRooms[4], MazeRooms[2], MazeRooms[7], MazeRooms[1]);
+            MazeRooms[7].AddNeighbors(MazeRooms[0], MazeRooms[3], MazeRooms[7], MazeRooms[8]);
+            MazeRooms[8].AddNeighbors(OriginalRooms[0], FinalBossRoom, MazeRooms[5], MazeRooms[2]);
+
+            FinalBossRoom.AddNeighbors(MazeRooms[8], null, null, null);
+
+            firstRoom = OriginalRooms[0];
+            CurrentRoom = OriginalRooms[0];
             CurrentRoom.LoadRoom();
-            Player.Location = LoZHelpers.LinkStartingLocation;
-            RoomCamera.Reset();
-            PauseMap.GoToStart();
-            HUDMap.Reset();
         }
 
         public void InitializeHUD()
@@ -437,6 +491,40 @@ namespace LegendOfZeldaClone
             return deadObjects;
         }
 
+        public void GoToTheStart()
+        {
+            ResetLists();
+            CurrentRoom = firstRoom;
+            CurrentRoom.LoadRoom();
+            Player.Location = LoZHelpers.LinkStartingLocation;
+            RoomCamera.Reset();
+            PauseMap.GoToStart();
+            HUDMap.Reset();
+        }
+
+        public void MoveRoom(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Up:
+                    NextRoom = CurrentRoom.RoomUp;
+                    break;
+                case Direction.Down:
+                    NextRoom = CurrentRoom.RoomDown;
+                    break;
+                case Direction.Left:
+                    NextRoom = CurrentRoom.RoomLeft;
+                    break;
+                case Direction.Right:
+                    NextRoom = CurrentRoom.RoomRight;
+                    break;
+            }
+            NextRoom.LoadRoom();
+            RoomCamera.CameraTransition(direction, GameState.ScreenTransition);
+            HUDMap.UpdateLink(NextRoom);
+            PauseMap.MoveRooms(NextRoom);
+        }
+
         public void ShiftLink(Direction direction)
         {
             int horizontalDisplacement = LoZHelpers.Scale(16);
@@ -444,21 +532,21 @@ namespace LegendOfZeldaClone
             switch (direction)
             {
                 case Direction.Up:
-                    Player.Location -= new Vector2(0, verticalDisplacement + Player.Height);
+                    Player.Location -= (verticalDisplacement + Player.Height) * Vector2.UnitY;
                     break;
                 case Direction.Down:
-                    Player.Location += new Vector2(0, verticalDisplacement + Player.Height);
+                    Player.Location += (verticalDisplacement + Player.Height) * Vector2.UnitY;
                     break;
                 case Direction.Left:
-                    Player.Location -= new Vector2(horizontalDisplacement + Player.Width, 0);
+                    Player.Location -= (horizontalDisplacement + Player.Width) * Vector2.UnitX;
                     break;
                 case Direction.Right:
-                    Player.Location += new Vector2(horizontalDisplacement + Player.Width, 0);
-                    break;
-                case Direction.None:
+                    Player.Location += (horizontalDisplacement + Player.Width) * Vector2.UnitX;
                     break;
             }
+            Player.Location = CurrentRoom.PixelOffset + LoZHelpers.GetLocationInRoom(Player.Location);
         }
+
         public void Reset()
         {
             CurrentGameState = GameState.Play;
@@ -480,7 +568,7 @@ namespace LegendOfZeldaClone
 
         public void ResetLists()
         {
-            Objects.Clear();
+            Blocks.Clear();
             ResetRoomSpecificLists();
         }
 
@@ -512,8 +600,8 @@ namespace LegendOfZeldaClone
 
         public void StashBlocks()
         {
-            stashedBlocks = Objects;
-            Objects = new List<IObject>();
+            stashedBlocks = Blocks;
+            Blocks = new List<IBlock>();
         }
     }
 }

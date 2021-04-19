@@ -7,7 +7,7 @@
         public void HandleEnemyCollision(IEnemy enemy, Direction direction);
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction);
         public void HandleItemCollision(IItem item, Direction direction);
-        public void HandleObjectCollision(IObject block, Direction direction);
+        public void HandleBlockCollision(IBlock block, Direction direction);
     }
 }
 

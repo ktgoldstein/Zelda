@@ -89,7 +89,7 @@ namespace LegendOfZeldaClone
         }
 
 
-        public void HandleObjectCollision(IObject block, Direction direction)
+        public void HandleBlockCollision(IBlock block, Direction direction)
         {
             if( CurrentPlayer is LinkPlayer && ((LinkPlayer)CurrentPlayer).linkState is LinkSpin) return;
             if (block.BlockHeight != ObjectHeight.CanWalkOver)

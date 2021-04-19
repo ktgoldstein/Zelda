@@ -33,7 +33,7 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes.DodongoStatePattern
         }
         public void EntireRoomFireball()
         {
-            Vector2 topLeftCorner = game.CurrentRoom.Offset + new Vector2(LoZHelpers.GameWidth / 2, (LoZHelpers.GameHeight - LoZHelpers.HUDHeight) / 2) - new Vector2(6 * 48, 3.5f * 48) + new Vector2(12, 12);
+            Vector2 topLeftCorner = game.CurrentRoom.PixelOffset + new Vector2(LoZHelpers.GameWidth / 2, (LoZHelpers.GameHeight - LoZHelpers.HUDHeight) / 2) - new Vector2(6 * 48, 3.5f * 48) + new Vector2(12, 12);
             for (int i = 0; i < LoZHelpers.FireballArray.GetLength(0); i++)
             {
                 for (int j = 0; j < LoZHelpers.FireballArray.GetLength(1); j++)

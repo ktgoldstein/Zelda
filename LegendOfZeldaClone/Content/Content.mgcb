@@ -578,6 +578,18 @@
 /processorParam:Quality=Best
 /build:GameSounds/LOZWalkingOnStairsSound.wav
 
+#begin HUD/HUDLinkTracker.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:HUD/HUDLinkTracker.png
+
 #begin HUD/Level 1 (Blank).png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -590,18 +602,6 @@
 /processorParam:TextureFormat=Color
 /build:HUD/Level 1 (Blank).png
 
-#begin HUD/Link Room Tracker.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:HUD/Link Room Tracker.png
-
 #begin HUD/Map rooms.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -613,6 +613,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:HUD/Map rooms.png
+
+#begin HUD/PauseLinkTracker.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:HUD/PauseLinkTracker.png
 
 #begin HUD/PauseMap.png
 /importer:TextureImporter
@@ -640,6 +652,9 @@
 
 #begin LevelLoading/FinalBossRoom.csv
 /copy:LevelLoading/FinalBossRoom.csv
+
+#begin LevelLoading/newRoom00.csv
+/copy:LevelLoading/newRoom00.csv
 
 #begin LevelLoading/room00.csv
 /copy:LevelLoading/room00.csv
@@ -691,6 +706,33 @@
 
 #begin LevelLoading/room16.csv
 /copy:LevelLoading/room16.csv
+
+#begin LevelLoading/roomMaze00.csv
+/copy:LevelLoading/roomMaze00.csv
+
+#begin LevelLoading/roomMaze01.csv
+/copy:LevelLoading/roomMaze01.csv
+
+#begin LevelLoading/roomMaze02.csv
+/copy:LevelLoading/roomMaze02.csv
+
+#begin LevelLoading/roomMaze03.csv
+/copy:LevelLoading/roomMaze03.csv
+
+#begin LevelLoading/roomMaze04.csv
+/copy:LevelLoading/roomMaze04.csv
+
+#begin LevelLoading/roomMaze05.csv
+/copy:LevelLoading/roomMaze05.csv
+
+#begin LevelLoading/roomMaze06.csv
+/copy:LevelLoading/roomMaze06.csv
+
+#begin LevelLoading/roomMaze07.csv
+/copy:LevelLoading/roomMaze07.csv
+
+#begin LevelLoading/roomMaze08.csv
+/copy:LevelLoading/roomMaze08.csv
 
 #begin LevelLoading/SecretRoom.csv
 /copy:LevelLoading/SecretRoom.csv
