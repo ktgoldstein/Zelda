@@ -299,7 +299,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIItem(new BlueRing(smallItemLocation));
                     break;
                 case 48:
-                    AddIItem(new Bomb(smallItemLocation));
+                    AddIItem(new Bomb(smallItemLocation, game));
                     break;
                 case 49:
                     AddIItem(new Bow(smallItemLocation));
@@ -317,7 +317,7 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIItem(new HeartContainer(smallItemLocation));
                     break;
                 case 54:
-                    AddIItem(new LifePotion(smallItemLocation));
+                    AddIItem(new LifePotion(smallItemLocation, game));
                     break;
                 case 55:
                     AddIItem(new Sword(smallItemLocation));
@@ -347,6 +347,12 @@ namespace LegendOfZeldaClone.LevelLoading
                 case 63:
                     AddIObject(new StoneWall(tileLocation));
                     AddIObject(new InvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable));
+                    break;
+                case 64:
+                    MerchantRoom merchantroom = new MerchantRoom(game, tileLocation);
+                    AddIEnemy(merchantroom);
+                    AddIEnemy(new MerchantFire(game, tileLocation - new Vector2(LoZHelpers.Scale(3 * 16), 0), merchantroom));
+                    AddIEnemy(new MerchantFire(game, tileLocation + new Vector2(LoZHelpers.Scale(3 * 16), 0), merchantroom));
                     break;
                 default:
                     break;

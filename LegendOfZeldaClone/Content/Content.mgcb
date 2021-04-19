@@ -500,6 +500,9 @@
 /processorParam:TextureFormat=Color
 /build:HUD/TriForceFlash.png
 
+#begin LevelLoading/newRoom01.csv
+/copy:LevelLoading/newRoom01.csv
+
 #begin LevelLoading/room00.csv
 /copy:LevelLoading/room00.csv
 
@@ -554,6 +557,9 @@
 #begin LevelLoading/SecretRoom.csv
 /copy:LevelLoading/SecretRoom.csv
 
+#begin LevelLoading/ShopRoom.csv
+/copy:LevelLoading/ShopRoom.csv
+
 #begin linkGameOverSparkleEffectSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -601,6 +607,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:LoZItemsSpreadsheet.png
+
+#begin NPCSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:NPCSheet.png
 
 #begin playerProjectileSpriteSheet.png
 /importer:TextureImporter

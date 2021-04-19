@@ -101,6 +101,7 @@ namespace LegendOfZeldaClone
 
             PlayerProjectileSpriteFactory.Instance.LoadAllTextures(Content);
             RoomTextureFactory.Instance.LoadAllTextures(Content);
+            ShopSpriteFactory.Instance.LoadAllTextures(Content);
             HUDTextureFactory.Instance.LoadAllTextures(Content);
 
             blackBackground = Content.Load<Texture2D>("BackgroundFix");

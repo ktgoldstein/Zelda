@@ -8,9 +8,10 @@ namespace LegendOfZeldaClone
         private readonly ISprite rupeeCountSprite;
         private readonly ISprite xSprite;
         private ISprite numberSprite;
-        private int numberOfRupees;
         private int[] digitArray = new int[3];
         private readonly GameStateMachine game;
+
+        public int numberOfRupees;
 
         public RupeeCount(GameStateMachine game)
         {

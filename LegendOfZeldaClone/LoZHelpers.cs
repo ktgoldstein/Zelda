@@ -111,8 +111,13 @@ namespace LegendOfZeldaClone
     public enum RupeeValues
     {
         FlashingRupeeValue = 1,
-        BlueRupeeValue = 5,
+        BlueRupeeValue = 100,
         GoldRupeeValue = 100
+    }
+    public enum ShopPrices
+    {
+        LifePotionPrice = 50,
+        BombPrice = 10
     }
 
     public enum PauseMapRoomType

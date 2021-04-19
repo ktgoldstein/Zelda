@@ -211,6 +211,8 @@ namespace LegendOfZeldaClone
 
                 foreach (IPlayerProjectile projectile in PlayerProjectiles)
                     projectile.Draw(spriteBatch);
+                
+                // Put prices here
 
                 Player.Draw(spriteBatch);
             }
@@ -350,10 +352,13 @@ namespace LegendOfZeldaClone
                 new Room("Content\\LevelLoading\\room14.csv", this),
                 new Room("Content\\LevelLoading\\room15.csv", this),
                 new Room("Content\\LevelLoading\\room16.csv", this),
-                new Room("Content\\LevelLoading\\SecretRoom.csv", this)
+                new Room("Content\\LevelLoading\\SecretRoom.csv", this),
+                new Room("Content\\LevelLoading\\newRoom01.csv", this),
+                new Room("Content\\LevelLoading\\ShopRoom.csv", this)
+
             };
 
-            RoomList[0].AddNeighbors(RoomList[3], RoomList[0], RoomList[1], RoomList[2]);
+            RoomList[0].AddNeighbors(RoomList[3], RoomList[18], RoomList[1], RoomList[2]);
             RoomList[1].AddNeighbors(null, null, null, RoomList[0]);
             RoomList[2].AddNeighbors(null, null, RoomList[0], null);
             RoomList[3].AddNeighbors(RoomList[4], RoomList[0], null, null);
@@ -371,6 +376,8 @@ namespace LegendOfZeldaClone
             RoomList[15].AddNeighbors(null, RoomList[12], RoomList[16], null);
             RoomList[16].AddNeighbors(null, RoomList[^1], null, RoomList[15]);
             RoomList[17].AddNeighbors(RoomList[16], null, null, null);
+            RoomList[18].AddNeighbors(RoomList[0], null, RoomList[19], null);
+            RoomList[19].AddNeighbors(null, null, null, RoomList[18]);
 
             firstRoom = RoomList[0];
             CurrentRoom = RoomList[0];

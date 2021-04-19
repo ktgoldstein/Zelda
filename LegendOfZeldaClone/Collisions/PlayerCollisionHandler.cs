@@ -5,7 +5,7 @@ namespace LegendOfZeldaClone
     public class PlayerCollisionHandler : ICollisionHandler
     {
         public IPlayer CurrentPlayer { get; set; }
-
+        private GameStateMachine game;
         public static PlayerCollisionHandler Instance { get; } = new PlayerCollisionHandler();
         private PlayerCollisionHandler() { }
 
@@ -33,8 +33,9 @@ namespace LegendOfZeldaClone
             }
         }
 
-        public void HandleItemCollision(IItem item, Direction direction) 
+        public void HandleItemCollision(IItem item, Direction direction)
         {
+            
             if (item is FlashingRupee)
                 CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.FlashingRupeeValue;
             else if (item is BlueRupee)
@@ -43,6 +44,7 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.GoldRupeeValue;
             else if (item is Bomb)
             {
+                
                 if (!CurrentPlayer.Inventory.HasItem(UsableItemTypes.Bomb))
                 {
                     CurrentPlayer.PickUpUsableItem(UsableItemTypes.Bomb, item);
@@ -76,7 +78,9 @@ namespace LegendOfZeldaClone
             else if (item is Arrow)
                 CurrentPlayer.Inventory.HasArrow = true;
             else if (item is LifePotion)
+            {
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.LifePotion, item);
+            }
             else if (item is TriForcePiece)
                 CurrentPlayer.PickUpTriforce(item);
             else if (item is Clock)
