@@ -249,6 +249,7 @@ namespace LegendOfZeldaClone
         public static int StalfosHP = 2;
         public static int WallmasterHP = 2;
         public static int WizardHP = 1000;
+        public static int DodongoHP = 30;
         public static int BombPickUpNumber = 4;
         public static List<Type> DropTable = new List<Type>()
         {   typeof(GoldRupee), typeof(Heart), typeof(GoldRupee), typeof(BlueRupee), typeof(Heart),

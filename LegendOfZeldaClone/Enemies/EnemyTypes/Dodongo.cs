@@ -18,7 +18,7 @@ namespace LegendOfZeldaClone.Enemy
         public override int Width { get { return LoZHelpers.Scale(width); } }
         public override int Height { get { return LoZHelpers.Scale(height); } }
         public override int AttackStat { get; }
-        public override int Health { get; set; } = 1;
+        public override int Health { get; set; } = LoZHelpers.DodongoHP;
         private int maxHealth;
         private float healthRatio;
         private Vector2 direction;
