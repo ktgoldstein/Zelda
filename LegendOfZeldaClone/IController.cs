@@ -33,7 +33,7 @@ namespace LegendOfZeldaClone
 
             foreach(Keys key in pressedKeys)
             {
-                if (key == Keys.Z)
+                if (key == Keys.Z || key == Keys.N)
                 {
                     chargeTimer++;
                     hasZ = true;
