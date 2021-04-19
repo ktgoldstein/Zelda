@@ -5,6 +5,8 @@ namespace LegendOfZeldaClone.Display
     public class Camera
     {
         public Vector2 Position { get; set; } = Vector2.Zero;
+        public Direction CurrentTransitionDirection { get => currentTransitionDirection; }
+
         private GameStateMachine game;
         private Vector2 targetPosition;
         private readonly int speed = LoZHelpers.Scale(8);

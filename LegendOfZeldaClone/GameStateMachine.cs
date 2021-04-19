@@ -218,14 +218,27 @@ namespace LegendOfZeldaClone
                 Vector2? nextRoomOffset = CurrentRoom.PixelOffset;
                 if (NextRoom == null)
                     nextRoomOffset = null;
-                else if (NextRoom == CurrentRoom.RoomDown)
-                    nextRoomOffset += Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
-                else if (NextRoom == CurrentRoom.RoomLeft)
-                    nextRoomOffset -= Vector2.UnitX * LoZHelpers.GameWidth;
-                else if (NextRoom == CurrentRoom.RoomRight)
-                    nextRoomOffset += Vector2.UnitX * LoZHelpers.GameWidth;
-                else if (NextRoom == CurrentRoom.RoomUp)
-                    nextRoomOffset -= Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+                else
+                {
+                    switch (RoomCamera.CurrentTransitionDirection)
+                    {
+                        case Direction.Down:
+                            nextRoomOffset += Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+                            break;
+                        case Direction.Left:
+                            nextRoomOffset -= Vector2.UnitX * LoZHelpers.GameWidth;
+                            break;
+                        case Direction.Right:
+                            nextRoomOffset += Vector2.UnitX * LoZHelpers.GameWidth;
+                            break;
+                        case Direction.Up:
+                            nextRoomOffset -= Vector2.UnitY * (LoZHelpers.GameHeight - LoZHelpers.HUDHeight);
+                            break;
+                    }
+                }
+
+                if (NextRoom != null)
+                    System.Console.WriteLine($"{CurrentRoom.PixelOffset} {(Vector2)nextRoomOffset}");
 
                 CurrentRoom.Draw(spriteBatch);
                 NextRoom?.DrawAt(spriteBatch, (Vector2)nextRoomOffset);
@@ -415,8 +428,8 @@ namespace LegendOfZeldaClone
             ShopRooms[0].AddNeighbors(OriginalRooms[0], MazeRooms[0], ShopRooms[1], null);
             ShopRooms[1].AddNeighbors(null, null, null, ShopRooms[0]); // Place holder for shop
 
-            MazeRooms[0].AddNeighbors(MazeRooms[1], null, null, null);
-            MazeRooms[1].AddNeighbors(MazeRooms[2], null, null, null);
+            MazeRooms[0].AddNeighbors(MazeRooms[1], OriginalRooms[0], MazeRooms[0], MazeRooms[0]);
+            MazeRooms[1].AddNeighbors(MazeRooms[2], MazeRooms[1], MazeRooms[0], OriginalRooms[0]);
             MazeRooms[2].AddNeighbors(null, MazeRooms[3], null, null);
             MazeRooms[3].AddNeighbors(null, MazeRooms[4], null, null);
             MazeRooms[4].AddNeighbors(MazeRooms[3], null, MazeRooms[5], null);
