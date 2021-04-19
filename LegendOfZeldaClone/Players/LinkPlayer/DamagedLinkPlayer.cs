@@ -232,5 +232,10 @@ namespace LegendOfZeldaClone
                 _ => new LinkStandingDown(player)
             };
         }
+
+        public void Charge()
+        {
+            decoratedLinkPlayer.Charge();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZeldaClone.Players.LinkPlayer.LinkStates;
+using Microsoft.Xna.Framework;
 
 namespace LegendOfZeldaClone
 {
@@ -13,17 +14,20 @@ namespace LegendOfZeldaClone
 
         public void HandlePlayerProjectileCollision(IPlayerProjectile playerProjectile, Direction direction)
         {
+            if( CurrentPlayer is LinkPlayer && ((LinkPlayer)CurrentPlayer).linkState is LinkSpin) return;
             if (playerProjectile is FireProjectile)
                 CurrentPlayer.Damage(1, direction);
         }
 
         public void HandleEnemyCollision(IEnemy enemy, Direction direction)
         {
+            if( CurrentPlayer is LinkPlayer && ((LinkPlayer)CurrentPlayer).linkState is LinkSpin) return;
             CurrentPlayer.Damage(enemy.AttackStat, direction);
         }
 
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction)
         {
+            if( CurrentPlayer is LinkPlayer && ((LinkPlayer)CurrentPlayer).linkState is LinkSpin) return;
             if (CurrentPlayer.BlockingDirection != direction)
                 CurrentPlayer.Damage(enemyProjectile.AttackStat, direction);
             else
@@ -33,8 +37,9 @@ namespace LegendOfZeldaClone
             }
         }
 
-        public void HandleItemCollision(IItem item, Direction direction) 
+        public void HandleItemCollision(IItem item, Direction direction)
         {
+            if( CurrentPlayer is LinkPlayer && ((LinkPlayer)CurrentPlayer).linkState is LinkSpin) return;
             if (item is FlashingRupee)
                 CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.FlashingRupeeValue;
             else if (item is BlueRupee)
@@ -86,6 +91,7 @@ namespace LegendOfZeldaClone
 
         public void HandleBlockCollision(IBlock block, Direction direction)
         {
+            if( CurrentPlayer is LinkPlayer && ((LinkPlayer)CurrentPlayer).linkState is LinkSpin) return;
             if (block.BlockHeight != ObjectHeight.CanWalkOver)
             {
                 switch (direction)

@@ -376,6 +376,9 @@ namespace LegendOfZeldaClone.LevelLoading
                 case 67:
                     AddIObject(BlockFactory.Instance.CreateOrbSwitch(tileLocation));
                     break;
+                case 68:
+                    AddIEnemy(new Dodongo(game, tileLocation));
+                    break;
                 default:
                     break;
             }

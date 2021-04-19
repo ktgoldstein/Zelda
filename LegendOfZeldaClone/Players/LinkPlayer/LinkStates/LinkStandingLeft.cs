@@ -27,5 +27,6 @@ namespace LegendOfZeldaClone
         public Tuple<LinkStateType, int> GetState() => Tuple.Create(LinkStateType.StandingLeft, linkSprite.CurrentFrame);
         public void Draw(SpriteBatch spriteBatch) => linkSprite.Draw(spriteBatch, linkPlayer.Location);
         public void Update() => linkSprite.Update();
+        public void Charge() { }
     }
 }

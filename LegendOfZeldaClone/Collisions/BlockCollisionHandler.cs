@@ -1,4 +1,6 @@
-﻿namespace LegendOfZeldaClone.Collisions
+﻿using LegendOfZeldaClone.Players.LinkPlayer.LinkStates;
+
+namespace LegendOfZeldaClone.Collisions
 {
     class BlockCollisionHandler : ICollisionHandler
     {
@@ -9,6 +11,8 @@
 
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
+            if (player is LinkPlayer linkPlayer && linkPlayer.linkState is LinkSpin) return;
+
             if (CurrentBlock is LockedDoor && player.Inventory.KeysHeld > 0 )
             {
                 CurrentBlock.Die();

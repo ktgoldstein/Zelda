@@ -17,5 +17,6 @@ namespace LegendOfZeldaClone
         public Tuple<LinkStateType, int> GetState();
         public void Draw(SpriteBatch spriteBatch);
         public void Update();
+        public void Charge();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using LegendOfZeldaClone.Players.LinkPlayer.LinkStates;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace LegendOfZeldaClone
@@ -21,6 +22,7 @@ namespace LegendOfZeldaClone
         public void MoveLeft() { }
         public void MoveRight() { }
         public void Action() { }
+        public void Charge() => linkPlayer.SetState(new LinkChargeState(linkPlayer, 0));
         public void PickUpItem(IItem item) => linkPlayer.SetState(linkPlayer.GetStatePickingUpItem(item));
         public void PickUpTriforce(IItem triforce) => linkPlayer.SetState(linkPlayer.GetStatePickingUpTriforce(triforce));
         public void Die() => linkPlayer.SetState(linkPlayer.GetStateDying());

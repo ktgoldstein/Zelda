@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LegendOfZeldaClone.Players.LinkPlayer.LinkStates;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
@@ -10,14 +11,14 @@ namespace LegendOfZeldaClone
         public int MaxHealth { get; set; }
         public int Health
         {
-            get => health; 
+            get => health;
             set => health = value > MaxHealth ? MaxHealth : value;
         }
         public Direction BlockingDirection { get { return linkState.BlockingDirection; } }
         public PlayerInventory Inventory { get; }
         public Vector2 Location { get; set; }
-        public Vector2 HurtBoxLocation 
-        { 
+        public Vector2 HurtBoxLocation
+        {
             get { return Location + hurtBoxOffset; }
             set { Location = value - hurtBoxOffset; }
         }
@@ -35,9 +36,9 @@ namespace LegendOfZeldaClone
 
         private readonly GameStateMachine game;
         public ILinkState linkState;
-        private readonly int width;
-        private readonly int height;
-        private readonly Vector2 hurtBoxOffset;
+        private int width;
+        private int height;
+        private Vector2 hurtBoxOffset;
 
         private int health;
 
@@ -68,7 +69,7 @@ namespace LegendOfZeldaClone
         {
             Direction direction = linkState.BlockingDirection;
             linkState.Action();
-            if (direction != Direction.None && Sword != null)
+            if (direction != Direction.None && Sword != null && !( linkState is LinkChargeState || linkState is LinkSpin))
                 Sword.Use(Location, direction, Inventory);
         }
 
@@ -82,10 +83,11 @@ namespace LegendOfZeldaClone
 
         public void Damage(int amount, Direction knockbackDirection)
         {
+            if(linkState is LinkSpin) return;
             Tuple<LinkStateType, int> currentState = linkState.GetState();
             if (currentState.Item1 == LinkStateType.PickingUpItem)
                 return;
-            Health -= amount;            
+            Health -= amount;
             new LinkTakingDamageSoundEffect().Play();
             if (Health <= 0)
             {
@@ -104,7 +106,7 @@ namespace LegendOfZeldaClone
         }
 
         public void PickUpUsableItem(UsableItemTypes itemType, IItem item)
-        {            
+        {
             Inventory.AddItem(itemType, game);
             linkState.PickUpItem(item);
         }
@@ -114,8 +116,8 @@ namespace LegendOfZeldaClone
             linkState.PickUpTriforce(triforce);
             game.CurrentGameState = GameState.GameWon;
         }
-            
-            
+
+
 
         public void Equip(UsableItemTypes itemType)
         {
@@ -142,7 +144,23 @@ namespace LegendOfZeldaClone
             game.CurrentGameState = GameState.GameOver;
             Alive = false;
         }
-        
+        public void Charge()
+        {
+            linkState.Charge();
+        }
+        public void GrowCollider()
+        {
+            hurtBoxOffset = new Vector2(LoZHelpers.Scale(1) - Width, LoZHelpers.Scale(2) - Height);
+            width = 42;
+            height = 42;
+        }
+        public void ShrinkCollider()
+        {
+            hurtBoxOffset = new Vector2(LoZHelpers.Scale(1), LoZHelpers.Scale(2));
+            width = 14;
+            height = 14;
+        }
+
         public void SetState(ILinkState linkState) => this.linkState = linkState;
         public ILinkState GetStateStandingDown() => new LinkStandingDown(this);
         public ILinkState GetStateStandingUp() => new LinkStandingUp(this);

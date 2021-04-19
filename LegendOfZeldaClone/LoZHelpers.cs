@@ -43,7 +43,9 @@ namespace LegendOfZeldaClone
         UsingItemRight,
         PickingUpItem,
         Dying,
-        PickingUpTriforce
+        PickingUpTriforce,
+        Charge,
+        Spin
     }
 
     public enum UsableItemTypes
@@ -259,6 +261,7 @@ namespace LegendOfZeldaClone
         public static int StalfosHP = 2;
         public static int WallmasterHP = 2;
         public static int WizardHP = 1000;
+        public static int DodongoHP = 30;
         public static int BombPickUpNumber = 4;
         public static List<Type> DropTable = new List<Type>()
         {   typeof(GoldRupee), typeof(Heart), typeof(GoldRupee), typeof(BlueRupee), typeof(Heart),
@@ -272,5 +275,15 @@ namespace LegendOfZeldaClone
         public static int FramesBeforeBlackFadeOutEndsGameWon => LinkPickingUpTriforceFrames - 60; // 120
         public static int FramesBeforeBlackFadeOutBeginsGameWon => FramesBeforeBlackFadeOutEndsGameWon - 40; // 80
         public static int FramesBeforeGameWonMessageAppears => FramesBeforeBlackFadeOutEndsGameWon + 20; // 140
+        public static int[,] FireballArray = new int[,]
+        {
+            {1,0,1,0,1,0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0,1,0,1,0,1},
+            {1,0,1,0,1,0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0,1,0,1,0,1},
+            {1,0,1,0,1,0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0,1,0,1,0,1},
+            {1,0,1,0,1,0,1,0,1,0,1,0},
+        };
     }
 }

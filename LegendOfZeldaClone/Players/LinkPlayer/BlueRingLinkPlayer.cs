@@ -152,5 +152,10 @@ namespace LegendOfZeldaClone
         public ILinkState GetStatePickingUpItem(IItem item) => new LinkPickingUpItem(this, item);
         public ILinkState GetStatePickingUpTriforce(IItem triforce) => new LinkPickingUpTriforce(this, triforce);
         public ILinkState GetStateDying() => new LinkDying(this);
+
+        public void Charge()
+        {
+            decoratedLinkPlayer.Charge();
+        }
     }
 }

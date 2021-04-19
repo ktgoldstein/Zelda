@@ -70,9 +70,10 @@ namespace LegendOfZeldaClone
 
         public DungeonThemeMusic GameBackgroundMusic;
         public GameOverThemeMusic GameOverTheme;
+        public CustomBossThemeMusic BossTheme;
         public int MusicTimingHelperInt;
         public int EndScreenMusicTimingHelperInt;
-        
+
         public Texture2D GameOverTexture;
 
         public GameStateMachine()
@@ -149,20 +150,7 @@ namespace LegendOfZeldaClone
                 PlayerKeyCount.Update();
 
                 MusicTimingHelperInt++;
-                bool aquamentusNearby = false;
-                foreach (Room room in new Room[]{ CurrentRoom.RoomUp, CurrentRoom.RoomDown, CurrentRoom.RoomLeft, CurrentRoom.RoomRight })
-                {
-                    foreach (IEnemy enemy in (room == null ? new List<IEnemy>() : room.Enemies))
-                    {
-                        if (enemy is Aquamentus && enemy.Alive)
-                        {
-                            aquamentusNearby = true;
-                            break;
-                        }
-                    }
-                    if (aquamentusNearby) break;
-                }
-                if (aquamentusNearby && MusicTimingHelperInt % 60 == 0)
+                if (AquamentusIsNearby() && MusicTimingHelperInt % 60 == 0)
                     new AquamentusScreamingSoundEffect().Play();
             }
             else if (CurrentGameState == GameState.Pause)
@@ -187,6 +175,24 @@ namespace LegendOfZeldaClone
                 if (EndScreenMusicTimingHelperInt <= LoZHelpers.FramesBeforeBlackFadeOutEndsGameWon)
                     Player.Update();
             }
+        }
+
+        public bool AquamentusIsNearby()
+        {
+            bool aquamentusNearby = false;
+            foreach (Room room in new Room[] { CurrentRoom.RoomUp, CurrentRoom.RoomDown, CurrentRoom.RoomLeft, CurrentRoom.RoomRight })
+            {
+                foreach (IEnemy enemy in (room == null ? new List<IEnemy>() : room.Enemies))
+                {
+                    if (enemy is Aquamentus && enemy.Alive)
+                    {
+                        aquamentusNearby = true;
+                        break;
+                    }
+                }
+                if (aquamentusNearby) break;
+            }
+            return aquamentusNearby;
         }
 
         public void RoomDraw(SpriteBatch spriteBatch)
@@ -236,9 +242,6 @@ namespace LegendOfZeldaClone
                             break;
                     }
                 }
-
-                if (NextRoom != null)
-                    System.Console.WriteLine($"{CurrentRoom.PixelOffset} {(Vector2)nextRoomOffset}");
 
                 CurrentRoom.Draw(spriteBatch);
                 NextRoom?.DrawAt(spriteBatch, (Vector2)nextRoomOffset);
@@ -355,8 +358,8 @@ namespace LegendOfZeldaClone
             InventoryBoxB.Draw(spriteBatch, LoZHelpers.BBoxLocation);
             InventoryBoxA.Draw(spriteBatch, LoZHelpers.ABoxLocation);
             HUDLifeText.Draw(spriteBatch, LoZHelpers.LifeTextLocation);
-            HUDHealthBar.Draw(spriteBatch, LoZHelpers.HealthLocation); 
-            
+            HUDHealthBar.Draw(spriteBatch, LoZHelpers.HealthLocation);
+
             PauseMap.Draw(spriteBatch);
             SelectionBox.Draw(spriteBatch);
             InventoryBox.Draw(spriteBatch);
@@ -406,6 +409,8 @@ namespace LegendOfZeldaClone
                 new Room("Content\\LevelLoading\\roomMaze08.csv", this),
             };
 
+            Room FinalBossRoom = new Room("Content\\LevelLoading\\FinalBossRoom.csv", this);
+
             OriginalRooms[0].AddNeighbors(OriginalRooms[3], ShopRooms[0], OriginalRooms[1], OriginalRooms[2]);
             OriginalRooms[1].AddNeighbors(null, null, null, OriginalRooms[0]);
             OriginalRooms[2].AddNeighbors(null, null, OriginalRooms[0], null);
@@ -436,7 +441,9 @@ namespace LegendOfZeldaClone
             MazeRooms[5].AddNeighbors(MazeRooms[1], OriginalRooms[0], MazeRooms[4], MazeRooms[6]);
             MazeRooms[6].AddNeighbors(MazeRooms[4], MazeRooms[2], MazeRooms[7], MazeRooms[1]);
             MazeRooms[7].AddNeighbors(MazeRooms[0], MazeRooms[3], MazeRooms[7], MazeRooms[8]);
-            MazeRooms[8].AddNeighbors(OriginalRooms[0], OriginalRooms[0], MazeRooms[5], MazeRooms[2]);
+            MazeRooms[8].AddNeighbors(OriginalRooms[0], FinalBossRoom, MazeRooms[5], MazeRooms[2]);
+
+            FinalBossRoom.AddNeighbors(MazeRooms[8], null, null, null);
 
             firstRoom = OriginalRooms[0];
             CurrentRoom = OriginalRooms[0];
@@ -467,6 +474,7 @@ namespace LegendOfZeldaClone
             GameBackgroundMusic = new DungeonThemeMusic();
             GameBackgroundMusic.Play();
             GameOverTheme = new GameOverThemeMusic();
+            BossTheme = new CustomBossThemeMusic();
             MusicTimingHelperInt = 0;
             EndScreenMusicTimingHelperInt = 0;
         }
@@ -546,7 +554,7 @@ namespace LegendOfZeldaClone
                 GameOverTheme.StopPlaying();
             ResetPlayer();
             ResetLists();
-            InitializeRooms();            
+            InitializeRooms();
             RoomCamera = new Camera(this);
             MenuCamera = new Camera(this);
             InitializeMusic();
