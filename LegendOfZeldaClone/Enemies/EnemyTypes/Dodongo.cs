@@ -127,7 +127,7 @@ namespace LegendOfZeldaClone.Enemy
                 }
             }
             direction = destination - Location;
-            direction.Normalize();
+            if(direction != Vector2.Zero) direction.Normalize();
             Location += speed * direction + knockbackForce;
         }
 
