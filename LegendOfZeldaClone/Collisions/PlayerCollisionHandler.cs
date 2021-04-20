@@ -5,7 +5,6 @@ namespace LegendOfZeldaClone
     public class PlayerCollisionHandler : ICollisionHandler
     {
         public IPlayer CurrentPlayer { get; set; }
-        private GameStateMachine game;
         public static PlayerCollisionHandler Instance { get; } = new PlayerCollisionHandler();
         private PlayerCollisionHandler() { }
 
@@ -44,7 +43,6 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.GoldRupeeValue;
             else if (item is Bomb)
             {
-                
                 if (!CurrentPlayer.Inventory.HasItem(UsableItemTypes.Bomb))
                 {
                     CurrentPlayer.PickUpUsableItem(UsableItemTypes.Bomb, item);

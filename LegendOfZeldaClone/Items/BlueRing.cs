@@ -36,6 +36,5 @@ namespace LegendOfZeldaClone
             new InventoryItemPickupSoundEffect().Play();
             new NewImportantItemAcquiredFanfareSoundEffect().Play();
         }
-        public void BuyItem() { }
     }
 }

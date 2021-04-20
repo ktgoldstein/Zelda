@@ -37,9 +37,5 @@ namespace LegendOfZeldaClone
             Alive = false;
             new InventoryItemPickupSoundEffect().Play();
         }
-        public void BuyItem()
-        {
-            game.Player.Inventory.RupeesHeld -= (int)ShopPrices.BombPrice;
-        }
     }
 }

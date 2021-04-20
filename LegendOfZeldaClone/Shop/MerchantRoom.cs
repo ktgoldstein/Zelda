@@ -9,7 +9,7 @@ using System.Text;
 
 namespace LegendOfZeldaClone
 {
-    class MerchantRoom : EnemyKernal
+    public class MerchantRoom : EnemyKernal
     {
         public override int AttackStat { get; }
         public override int Health { get; set; } = LoZHelpers.WizardHP;
@@ -41,6 +41,7 @@ namespace LegendOfZeldaClone
         private string priceTwo = "100";
         private int current = 0;
         private int timer = 7;
+        private int currentRupeeCount;
 
         public MerchantRoom(GameStateMachine game, Vector2 location)
         {
@@ -51,6 +52,9 @@ namespace LegendOfZeldaClone
             base.game = game;
             Location = location;
             Shopping = true;
+            currentRupeeCount = game.Player.Inventory.RupeesHeld;
+
+
             //This stuff is just in case we want merchant fires to attack too
             width = 16;
             height = 16;
@@ -79,6 +83,8 @@ namespace LegendOfZeldaClone
         {
             merchantSprite.Update();
             rupeeSprite.Update();
+
+            
             timer--;
             if (timer == 0)
             {

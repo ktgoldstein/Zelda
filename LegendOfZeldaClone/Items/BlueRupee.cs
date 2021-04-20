@@ -47,6 +47,5 @@ namespace LegendOfZeldaClone
             Alive = false;
             new RupeePickupSoundEffect().Play();
         }
-        public void BuyItem() { }
     }
 }

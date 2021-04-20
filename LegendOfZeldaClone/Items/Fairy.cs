@@ -87,6 +87,5 @@ namespace LegendOfZeldaClone
             Alive = false;
             new FairyPickupSoundEffect().Play();
         }
-        public void BuyItem() { }
     }
 }

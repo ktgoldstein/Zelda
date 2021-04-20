@@ -47,6 +47,5 @@ namespace LegendOfZeldaClone
             Alive = false;
             new ClockPickupSoundEffect().Play();
         }
-        public void BuyItem() { }
     }
 }

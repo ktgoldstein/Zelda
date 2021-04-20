@@ -39,9 +39,5 @@ namespace LegendOfZeldaClone
             new InventoryItemPickupSoundEffect().Play();
         }
 
-        public void BuyItem()
-        {
-            game.Player.Inventory.RupeesHeld -= (int)ShopPrices.LifePotionPrice;
-        }
     }
 }
