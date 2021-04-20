@@ -15,6 +15,14 @@ namespace LegendOfZeldaClone.Collisions
             {
                 if (player is LinkPlayer) CurrentItem.Die();
             }
+            else if (CurrentItem is BuyableItem buyableItem)
+            {
+                if (player.Inventory.RupeesHeld >= buyableItem.Price)
+                {
+                    player.Inventory.RupeesHeld -= buyableItem.Price;
+                    CurrentItem.Die();
+                }
+            }
             else
                 CurrentItem.Die();
         }
@@ -28,7 +36,6 @@ namespace LegendOfZeldaClone.Collisions
                 if (CurrentItem is FlashingRupee || CurrentItem is BlueRupee || CurrentItem is GoldRupee || CurrentItem is Bomb || CurrentItem is Key)
                     CurrentItem.Die();
             }
-            
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction) {}
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) {}

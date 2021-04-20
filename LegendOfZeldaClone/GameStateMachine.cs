@@ -216,6 +216,8 @@ namespace LegendOfZeldaClone
 
                 foreach (IPlayerProjectile projectile in PlayerProjectiles)
                     projectile.Draw(spriteBatch);
+                
+                // Put prices here
 
                 Player.Draw(spriteBatch);
             }
@@ -387,13 +389,13 @@ namespace LegendOfZeldaClone
                 new Room("Content\\LevelLoading\\room14.csv", this),
                 new Room("Content\\LevelLoading\\room15.csv", this),
                 new Room("Content\\LevelLoading\\room16.csv", this),
-                new Room("Content\\LevelLoading\\SecretRoom.csv", this)
+                new Room("Content\\LevelLoading\\SecretRoom.csv", this),
             };
 
             List<Room> ShopRooms = new List<Room>()
             {
                 new Room("Content\\LevelLoading\\newRoom00.csv", this),
-                new Room("Content\\LevelLoading\\newRoom00.csv", this) // Place holder for shop
+                new Room("Content\\LevelLoading\\ShopRoom.csv", this)
             };
 
             List<Room> MazeRooms = new List<Room>()
@@ -431,7 +433,7 @@ namespace LegendOfZeldaClone
             OriginalRooms[17].AddNeighbors(OriginalRooms[16], null, null, null);
 
             ShopRooms[0].AddNeighbors(OriginalRooms[0], MazeRooms[0], ShopRooms[1], null);
-            ShopRooms[1].AddNeighbors(null, null, null, ShopRooms[0]); // Place holder for shop
+            ShopRooms[1].AddNeighbors(null, null, null, ShopRooms[0]);
 
             MazeRooms[0].AddNeighbors(MazeRooms[1], OriginalRooms[0], MazeRooms[0], MazeRooms[0]);
             MazeRooms[1].AddNeighbors(MazeRooms[2], MazeRooms[1], MazeRooms[0], OriginalRooms[0]);

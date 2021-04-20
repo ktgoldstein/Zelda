@@ -6,7 +6,6 @@ namespace LegendOfZeldaClone
     public class PlayerCollisionHandler : ICollisionHandler
     {
         public IPlayer CurrentPlayer { get; set; }
-
         public static PlayerCollisionHandler Instance { get; } = new PlayerCollisionHandler();
         private PlayerCollisionHandler() { }
 
@@ -81,7 +80,9 @@ namespace LegendOfZeldaClone
             else if (item is Arrow)
                 CurrentPlayer.Inventory.HasArrow = true;
             else if (item is LifePotion)
+            {
                 CurrentPlayer.PickUpUsableItem(UsableItemTypes.LifePotion, item);
+            }
             else if (item is TriForcePiece)
                 CurrentPlayer.PickUpTriforce(item);
             else if (item is Clock)

@@ -18,14 +18,16 @@ namespace LegendOfZeldaClone
         private ISprite bomb;
         private readonly int height;
         private readonly int width;
+        GameStateMachine game;
 
-        public Bomb(Vector2 location)
+        public Bomb(Vector2 location, GameStateMachine game)
         {
             bomb = ItemSpriteFactory.Instance.CreateBomb();
             Location = location;
             width = 8;
             height = 14;
             Alive = true;
+            this.game = game;
         }
 
         public void Update() { }
