@@ -1,15 +1,11 @@
 ﻿using LegendOfZeldaClone.Enemies;
 using LegendOfZeldaClone.Enemy;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LegendOfZeldaClone
 {
-    public class MerchantRoom : EnemyKernal
+    public class Merchant : EnemyKernal
     {
         public override int AttackStat { get; }
         public override int Health { get; set; } = LoZHelpers.WizardHP;
@@ -28,8 +24,6 @@ namespace LegendOfZeldaClone
         public override int Width { get { return LoZHelpers.Scale(width); } }
         public override int Height { get { return LoZHelpers.Scale(height); } }
 
-        public bool Shopping { get; set; }
-
         private ISprite merchantSprite;
         private ISprite rupeeSprite;
         private ISprite xSprite;
@@ -37,13 +31,12 @@ namespace LegendOfZeldaClone
         private readonly int height;
         private SpriteFont font;
         private string target = "Come spend your rupees!";
-        private string priceOne = "50";
-        private string priceTwo = "100";
+        private string priceOne = "20";
+        private string priceTwo = "50";
         private int current = 0;
         private int timer = 7;
-        private int currentRupeeCount;
 
-        public MerchantRoom(GameStateMachine game, Vector2 location)
+        public Merchant(GameStateMachine game, Vector2 location)
         {
             merchantSprite = ShopSpriteFactory.Instance.CreateShopKeeper();
             font = ShopSpriteFactory.Instance.CreateFont();
@@ -51,8 +44,6 @@ namespace LegendOfZeldaClone
             rupeeSprite = ItemSpriteFactory.Instance.CreateFlashingRupee();
             base.game = game;
             Location = location;
-            Shopping = true;
-            currentRupeeCount = game.Player.Inventory.RupeesHeld;
 
             width = 16;
             height = 16;
@@ -64,8 +55,9 @@ namespace LegendOfZeldaClone
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Shopping)
+            if (Alive)
             {
+                //Put locations in LoZ Helpers
                 merchantSprite.Draw(spriteBatch, Location - new Vector2(20, 0));
                 rupeeSprite.Draw(spriteBatch, Location + new Vector2(-250, 155));
                 xSprite.Draw(spriteBatch, Location + new Vector2(-210, 170));
@@ -82,7 +74,6 @@ namespace LegendOfZeldaClone
             merchantSprite.Update();
             rupeeSprite.Update();
 
-            
             timer--;
             if (timer == 0)
             {
@@ -97,6 +88,6 @@ namespace LegendOfZeldaClone
         public override void DropItem() { }
         public override void ChangeDirection(Direction direction = LegendOfZeldaClone.Direction.None) { }
         public override void TakeDamage(Vector2 direction) { }
-        public override void Die() { }
+        public override void Die() { Alive = false; }
     }
 }

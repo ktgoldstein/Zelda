@@ -31,7 +31,12 @@ namespace LegendOfZeldaClone
             Price = price;
         }
 
-        public void Draw(SpriteBatch spriteBatch) => ItemForSale.Draw(spriteBatch);
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            if (Alive)
+                ItemForSale.Draw(spriteBatch);
+            else return;
+        }
         public void Update() => ItemForSale.Update();
 
         public void Die()
@@ -42,11 +47,11 @@ namespace LegendOfZeldaClone
             Alive = false;
             foreach (IEnemy enemy in game.Enemies)
             {
-                if (enemy is MerchantRoom) enemy.Die();
+                if (enemy is Merchant) enemy.Die();
             }
             foreach (IItem item in game.Items)
             {
-                if (item is BuyableItem) item.Die();
+                if (item is BuyableItem) item.Alive = false;
             }
         }
     }

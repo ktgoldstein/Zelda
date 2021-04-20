@@ -349,10 +349,10 @@ namespace LegendOfZeldaClone.LevelLoading
                     AddIObject(new InvisibleBlock(tileLocation, Direction.None, ObjectHeight.Impassable));
                     break;
                 case 69:
-                    MerchantRoom merchantroom = new MerchantRoom(game, tileLocation);
-                    AddIEnemy(merchantroom);
-                    AddIEnemy(new MerchantFire(game, tileLocation - new Vector2(LoZHelpers.Scale(3 * 16), 0), merchantroom));
-                    AddIEnemy(new MerchantFire(game, tileLocation + new Vector2(LoZHelpers.Scale(3 * 16), 0), merchantroom));
+                    Merchant merchant = new Merchant(game, tileLocation);
+                    AddIEnemy(merchant);
+                    AddIEnemy(new MerchantFire(game, tileLocation - new Vector2(LoZHelpers.Scale(3 * 16), 0), merchant));
+                    AddIEnemy(new MerchantFire(game, tileLocation + new Vector2(LoZHelpers.Scale(3 * 16), 0), merchant));
                     break;
                 case 70:
                     Bomb bomb = new Bomb(smallItemLocation, game);

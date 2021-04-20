@@ -117,7 +117,7 @@ namespace LegendOfZeldaClone
     public enum ShopPrices
     {
         LifePotionPrice = 50,
-        BombPrice = 10
+        BombPrice = 20
     }
 
     public enum PauseMapRoomType

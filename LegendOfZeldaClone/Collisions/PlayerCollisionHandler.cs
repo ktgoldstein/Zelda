@@ -34,7 +34,7 @@ namespace LegendOfZeldaClone
 
         public void HandleItemCollision(IItem item, Direction direction)
         {
-            
+
             if (item is FlashingRupee)
                 CurrentPlayer.Inventory.RupeesHeld += (int)RupeeValues.FlashingRupeeValue;
             else if (item is BlueRupee)

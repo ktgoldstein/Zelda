@@ -28,8 +28,8 @@ namespace LegendOfZeldaClone.Enemy
         private ISprite merchantFireSprite;
         private readonly int width;
         private readonly int height;
-        public MerchantRoom Merchant;
-        public MerchantFire(GameStateMachine game, Vector2 location, MerchantRoom merchant)
+        public Merchant Merchant;
+        public MerchantFire(GameStateMachine game, Vector2 location, Merchant merchant)
         {
             merchantFireSprite = EnemySpriteFactory.Instance.CreateWizardFireSprite();
             width = 16;
