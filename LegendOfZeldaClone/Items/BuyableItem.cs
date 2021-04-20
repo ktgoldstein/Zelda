@@ -43,16 +43,18 @@ namespace LegendOfZeldaClone
         {
             if (!Alive) return;
 
-            game.Items.Add(ItemForSale);
             Alive = false;
+
             foreach (IEnemy enemy in game.Enemies)
             {
                 if (enemy is Merchant) enemy.Die();
             }
             foreach (IItem item in game.Items)
             {
-                if (item is BuyableItem) item.Alive = false;
+                if (item.Alive && item is BuyableItem) item.Alive = false;
             }
+
+            game.Items.Add(ItemForSale);
         }
     }
 }
