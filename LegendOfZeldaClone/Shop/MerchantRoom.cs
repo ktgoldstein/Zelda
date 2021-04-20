@@ -36,9 +36,9 @@ namespace LegendOfZeldaClone
         private readonly int width;
         private readonly int height;
         private SpriteFont font;
-        private String target = "Come spend your rupees!";
-        private String priceOne = "50";
-        private String priceTwo = "100";
+        private string target = "Come spend your rupees!";
+        private string priceOne = "50";
+        private string priceTwo = "100";
         private int current = 0;
         private int timer = 7;
 
@@ -70,8 +70,7 @@ namespace LegendOfZeldaClone
                 spriteBatch.DrawString(font, target.Substring(0, current), Location - new Vector2(220, 55), Color.White);
                 spriteBatch.DrawString(font, priceOne, Location + new Vector2(-145, 150), Color.White);
                 spriteBatch.DrawString(font, priceTwo, Location + new Vector2(90, 150), Color.White);
-            }
-           
+            }           
         }
 
         public override void Knockback(Vector2 direction) { }
@@ -89,23 +88,11 @@ namespace LegendOfZeldaClone
                     current++;
                     new TextAppearingSlowlySoundEffect().Play();
                 }
-
             }
         }
         public override void DropItem() { }
         public override void ChangeDirection(Direction direction = LegendOfZeldaClone.Direction.None) { }
         public override void TakeDamage(Vector2 direction) { }
         public override void Die() { }
-        public void BuyItem(IItem item)
-        {
-            if (Shopping)
-            {
-                if (item is Bomb && game.Player.Inventory.RupeesHeld >= (int)ShopPrices.BombPrice)
-                    game.Player.Inventory.RupeesHeld -= (int)ShopPrices.BombPrice;
-                else if(item is LifePotion && game.Player.Inventory.RupeesHeld >= (int)ShopPrices.LifePotionPrice)
-                    game.Player.Inventory.RupeesHeld -= (int)ShopPrices.LifePotionPrice;
-            }
-            Shopping = false;
-        }
     }
 }
