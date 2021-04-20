@@ -18,14 +18,16 @@ namespace LegendOfZeldaClone
         private ISprite lifePotion;
         private readonly int height;
         private readonly int width;
+        GameStateMachine game;
 
-        public LifePotion(Vector2 location)
+        public LifePotion(Vector2 location, GameStateMachine game)
         {
             lifePotion = ItemSpriteFactory.Instance.CreateLifePotion();
             Location = location;
             width = 8;
             height = 16;
             Alive = true;
+            this.game = game;
         }
 
         public void Update() { }
@@ -36,5 +38,6 @@ namespace LegendOfZeldaClone
             new NewImportantItemAcquiredFanfareSoundEffect().Play();
             new InventoryItemPickupSoundEffect().Play();
         }
+
     }
 }
