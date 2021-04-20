@@ -36,7 +36,6 @@ namespace LegendOfZeldaClone.Collisions
                 if (CurrentItem is FlashingRupee || CurrentItem is BlueRupee || CurrentItem is GoldRupee || CurrentItem is Bomb || CurrentItem is Key)
                     CurrentItem.Die();
             }
-            
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction) {}
         public void HandleEnemyProjectileCollision(IEnemyProjectile enemyProjectile, Direction direction) {}
