@@ -56,8 +56,6 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes.DodongoStatePattern
                     secondCurrentAttackIndex++;
                 else
                     secondCurrentAttackIndex = 0;
-                //firstCurrentAttackIndex = firstCurrentAttackIndex < 3 ? firstCurrentAttackIndex++ : 0;
-               // secondCurrentAttackIndex = secondCurrentAttackIndex < 3 ? secondCurrentAttackIndex++ : 0;
                 firstCurrentAttackDirection = attackDirections[firstCurrentAttackIndex];
                 secondCurrentAttackDirection = attackDirections[secondCurrentAttackIndex];
             }
