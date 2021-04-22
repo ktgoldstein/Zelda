@@ -36,7 +36,6 @@ namespace LegendOfZeldaClone.Enemies.EnemyTypes.DodongoStatePattern
         }
         private void ShootFireball()
         {
-               // Vector2 direction = LoZHelpers.DirectionToVector(currentAttackDirection);
             Vector2 direction = new Vector2((float)Math.Cos(angle * Math.PI / 180), (float)Math.Sin(angle * Math.PI / 180));
             game.EnemyProjectilesQueue.Add(new Fireball(Location, direction));
         }
