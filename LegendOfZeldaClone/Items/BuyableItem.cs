@@ -35,7 +35,6 @@ namespace LegendOfZeldaClone
         {
             if (Alive)
                 ItemForSale.Draw(spriteBatch);
-            else return;
         }
         public void Update() => ItemForSale.Update();
 

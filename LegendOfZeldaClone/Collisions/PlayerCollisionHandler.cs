@@ -87,6 +87,14 @@ namespace LegendOfZeldaClone
                 CurrentPlayer.PickUpTriforce(item);
             else if (item is Clock)
                 CurrentPlayer.Damage(0, Direction.None);
+            else if (item is BuyableItem buyableItem)
+            {
+                if (CurrentPlayer.Inventory.RupeesHeld >= buyableItem.Price)
+                {
+                    CurrentPlayer.Inventory.RupeesHeld -= buyableItem.Price;
+                    item.Die();
+                }
+            }
         }
 
 

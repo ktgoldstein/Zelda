@@ -24,15 +24,15 @@ namespace LegendOfZeldaClone
         public override int Width { get { return LoZHelpers.Scale(width); } }
         public override int Height { get { return LoZHelpers.Scale(height); } }
 
-        private ISprite merchantSprite;
-        private ISprite rupeeSprite;
-        private ISprite xSprite;
+        private readonly ISprite merchantSprite;
+        private readonly ISprite rupeeSprite;
+        private readonly ISprite xSprite;
         private readonly int width;
         private readonly int height;
-        private SpriteFont font;
-        private string target = "Come spend your rupees!";
-        private string priceOne = "20";
-        private string priceTwo = "50";
+        private readonly SpriteFont font;
+        private readonly string merchantMsg = "Come spend your rupees!";
+        private readonly string priceOne = "20";
+        private readonly string priceTwo = "50";
         private int current = 0;
         private int timer = 7;
 
@@ -61,7 +61,7 @@ namespace LegendOfZeldaClone
                 merchantSprite.Draw(spriteBatch, Location - new Vector2(20, 0));
                 rupeeSprite.Draw(spriteBatch, Location + new Vector2(-250, 155));
                 xSprite.Draw(spriteBatch, Location + new Vector2(-210, 170));
-                spriteBatch.DrawString(font, target.Substring(0, current), Location - new Vector2(220, 55), Color.White);
+                spriteBatch.DrawString(font, merchantMsg.Substring(0, current), Location - new Vector2(220, 55), Color.White);
                 spriteBatch.DrawString(font, priceOne, Location + new Vector2(-145, 150), Color.White);
                 spriteBatch.DrawString(font, priceTwo, Location + new Vector2(90, 150), Color.White);
             }           
@@ -78,7 +78,7 @@ namespace LegendOfZeldaClone
             if (timer == 0)
             {
                 timer = 7;
-                if (current < target.Length)
+                if (current < merchantMsg.Length)
                 {
                     current++;
                     new TextAppearingSlowlySoundEffect().Play();
