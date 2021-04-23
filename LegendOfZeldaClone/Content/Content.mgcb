@@ -61,6 +61,13 @@
 /processorParam:TextureFormat=Color
 /build:DungeonEnemies.png
 
+#begin EndScreensFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:EndScreensFont.spritefont
+
 #begin EnemySprites/Aquamentus.png
 /importer:TextureImporter
 /processor:TextureProcessor

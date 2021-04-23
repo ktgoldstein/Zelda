@@ -22,8 +22,10 @@ namespace LegendOfZeldaClone.Enemy
 		private Texture2D greenDodongoSprite, blueDodongoSprite, redDodongoSprite;
 		private Texture2D greenDodongoDamagedSprite, blueDodongoDamagedSprite, redDodongoDamagedSprite;
 		private Texture2D hpBackground, bossHP;
-		private SpriteFont font;
-        private EnemySpriteFactory() { }
+		private SpriteFont normalGameTextFont;
+		private SpriteFont endScreensTextFont;
+
+		private EnemySpriteFactory() { }
 
 		public void LoadAllTextures(ContentManager content)
 		{
@@ -52,7 +54,8 @@ namespace LegendOfZeldaClone.Enemy
 			greenDodongoDamagedSprite = content.Load<Texture2D>("EnemySprites\\GreenDodongoDamaged");
 			blueDodongoDamagedSprite = content.Load<Texture2D>("EnemySprites\\BlueDodongoDamaged");
 			redDodongoDamagedSprite = content.Load<Texture2D>("EnemySprites\\RedDodongoDamaged");
-			font = content.Load<SpriteFont>("Font");
+			normalGameTextFont = content.Load<SpriteFont>("Font");
+			endScreensTextFont = content.Load<SpriteFont>("EndScreensFont");
 		}
 
 		public ISprite CreateAquamentusSprite() => new EnemySprite(aquamentusSprite, 4, 1, 2, 4);
@@ -81,6 +84,7 @@ namespace LegendOfZeldaClone.Enemy
 		public ISprite CreateGreenDodongoDamaged() => new EnemySprite(greenDodongoDamagedSprite, 1, 1, 2, 1);
 		public ISprite CreateBlueDodongoDamaged() => new EnemySprite(blueDodongoDamagedSprite, 1, 1, 2, 1);
 		public ISprite CreateRedDodongoDamaged() => new EnemySprite(redDodongoDamagedSprite, 1, 1, 2, 1);
-		public SpriteFont CreateFont() => font;
+		public SpriteFont CreateFont() => normalGameTextFont;
+		public SpriteFont CreateEndScreensFont() => endScreensTextFont;
 	}
 }

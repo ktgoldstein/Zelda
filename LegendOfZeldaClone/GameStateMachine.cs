@@ -288,7 +288,7 @@ namespace LegendOfZeldaClone
             {
                 if (EndScreenMusicTimingHelperInt >= LoZHelpers.FramesBeforeGameOverMessageAppears)
                 {
-                    SpriteFont font = EnemySpriteFactory.Instance.CreateFont();
+                    SpriteFont font = EnemySpriteFactory.Instance.CreateEndScreensFont();
                     string gameOverMessage = "GAME OVER";
                     string resetGameMessage = "\nPress 'R' to reset your game.";
                     spriteBatch.DrawString(font, gameOverMessage, new Vector2(LoZHelpers.GameWidth / 3, LoZHelpers.GameHeight / 2) - RoomCamera.Position, Color.White);
@@ -360,7 +360,7 @@ namespace LegendOfZeldaClone
                 }
                 else if (EndScreenMusicTimingHelperInt >= LoZHelpers.FramesBeforeGameWonMessageAppears)
                 {
-                    SpriteFont font = Enemy.EnemySpriteFactory.Instance.CreateFont();
+                    SpriteFont font = Enemy.EnemySpriteFactory.Instance.CreateEndScreensFont();
                     string gameWonMessage = "YOU WON!";
                     string resetGameMessage = "\nPress 'R' to reset your game.";
                     spriteBatch.DrawString(font, gameWonMessage, new Vector2(LoZHelpers.GameWidth / 3, LoZHelpers.GameHeight / 2) - RoomCamera.Position, Color.White);
