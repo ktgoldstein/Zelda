@@ -152,6 +152,7 @@ namespace LegendOfZeldaClone
                 MusicTimingHelperInt++;
                 if (AquamentusIsNearby() && MusicTimingHelperInt % 60 == 0)
                     new AquamentusScreamingSoundEffect().Play();
+                ControlBossThemeMusic();
             }
             else if (CurrentGameState == GameState.Pause)
             {
@@ -163,6 +164,7 @@ namespace LegendOfZeldaClone
             else if (CurrentGameState == GameState.GameOver)
             {
                 GameBackgroundMusic.StopPlaying();
+                BossTheme.StopPlaying();
                 EndScreenMusicTimingHelperInt++;
                 if (EndScreenMusicTimingHelperInt > LoZHelpers.FramesBeforeGameOverMessageAppears)
                     GameOverTheme.Play();
@@ -193,6 +195,24 @@ namespace LegendOfZeldaClone
                 if (aquamentusNearby) break;
             }
             return aquamentusNearby;
+        }
+
+        public void ControlBossThemeMusic()
+        {
+            foreach (IEnemy enemy in CurrentRoom.Enemies)
+            {
+                if (enemy is Dodongo && enemy.Alive)
+                {
+                    GameBackgroundMusic.StopPlaying();
+                    BossTheme.Play();
+                    break;
+                }
+                else if (enemy is Dodongo && !enemy.Alive)
+                {
+                    BossTheme.StopPlaying();
+                    GameBackgroundMusic.Play();
+                }
+            }
         }
 
         public void RoomDraw(SpriteBatch spriteBatch)

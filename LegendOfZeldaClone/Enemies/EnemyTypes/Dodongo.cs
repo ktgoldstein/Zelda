@@ -58,7 +58,6 @@ namespace LegendOfZeldaClone.Enemy
         private const float left = 6*48;
         private List<Vector2> destinations;
         private Vector2 center;
-        private CustomBossThemeMusic bossTheme;
         public Dodongo(GameStateMachine game, Vector2 location)
         {
             dodongoSprite = EnemySpriteFactory.Instance.CreateDodongoPhaseOneSprite();
@@ -88,7 +87,6 @@ namespace LegendOfZeldaClone.Enemy
                 center + new Vector2(-left, 0),
                 center + new Vector2(right, 0)
             };
-            bossTheme = new CustomBossThemeMusic();
         }
 
         public override void Draw(SpriteBatch spritebatch)
@@ -100,8 +98,6 @@ namespace LegendOfZeldaClone.Enemy
 
         public override void Update()
         {
-            bossTheme.Play();
-            game.GameBackgroundMusic.StopPlaying();
             dodongoSprite.Update();
             state.Update();
             bossHP.Update();
@@ -165,7 +161,7 @@ namespace LegendOfZeldaClone.Enemy
             DropItem();
             game.EnemiesQueue.Add(new DeathAnimation(Location));
             game.KillCounter++;
-            bossTheme.StopPlaying();
+            //bossTheme.StopPlaying();
             game.GameBackgroundMusic = new DungeonThemeMusic();
             game.GameBackgroundMusic.Play();
         }
