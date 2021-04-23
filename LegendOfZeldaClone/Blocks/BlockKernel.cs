@@ -18,7 +18,7 @@ namespace LegendOfZeldaClone
         public bool IsBorder { get; }
         public bool Alive { get; set; } = true;
 
-        private readonly ISprite sprite;
+        protected readonly ISprite sprite;
         protected int height;
         protected int width;
 

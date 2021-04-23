@@ -39,13 +39,9 @@ namespace LegendOfZeldaClone.Collisions
             if (playerProjectile is BombExplosionProjectile && CurrentBlock.IsBombable)
                 CurrentBlock.Die();
             if ((playerProjectile is SwordProjectile || playerProjectile is SwordBeamProjectile || playerProjectile is BoomerangProjectile || 
-                playerProjectile is ArrowProjectile || playerProjectile is BombProjectile) && CurrentBlock is OrbSwitch)
+                playerProjectile is ArrowProjectile || playerProjectile is BombProjectile) && CurrentBlock is OrbSwitch orbSwitch)
             {
-                OrbSwitch orbSwitch = CurrentBlock as OrbSwitch;
-                if (orbSwitch.WasHit)
-                    orbSwitch.WasHit = false;
-                else
-                    orbSwitch.WasHit = true;
+                orbSwitch.Hit();
             }
         }
         public void HandleEnemyCollision(IEnemy enemy, Direction direction) { }

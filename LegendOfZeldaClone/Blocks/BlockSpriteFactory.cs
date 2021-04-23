@@ -140,7 +140,7 @@ namespace LegendOfZeldaClone
         }
         public ISprite CreateBlueSwitch()
         {
-            return new OrbSprite(orbSpriteSheet, 16, 8, 378, 59, 1);
+            return new AnimatedBlockSprite(orbSpriteSheet, 16, 8, 369, 59, 1, 1);
         }
     }
 }
