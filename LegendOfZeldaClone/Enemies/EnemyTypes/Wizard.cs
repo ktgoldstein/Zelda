@@ -31,7 +31,7 @@ namespace LegendOfZeldaClone.Enemy
         private readonly int width;
         private readonly int height;
         private SpriteFont font;
-        private String target = "Hit me, I dare you.\n You won't.";
+        private String target = "Up Up Down Down Left Right \nLeft Right";
         private int current = 0;
         private int timer = 7;
 

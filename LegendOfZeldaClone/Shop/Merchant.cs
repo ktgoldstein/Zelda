@@ -34,7 +34,7 @@ namespace LegendOfZeldaClone
         private readonly string priceOne = "20";
         private readonly string priceTwo = "50";
         private int current = 0;
-        private int timer = 7;
+        private int timer = 3;
 
         public Merchant(GameStateMachine game, Vector2 location)
         {
@@ -58,12 +58,12 @@ namespace LegendOfZeldaClone
             if (Alive)
             {
                 //Put locations in LoZ Helpers
-                merchantSprite.Draw(spriteBatch, Location - new Vector2(20, 0));
-                rupeeSprite.Draw(spriteBatch, Location + new Vector2(-250, 155));
-                xSprite.Draw(spriteBatch, Location + new Vector2(-210, 170));
-                spriteBatch.DrawString(font, merchantMsg.Substring(0, current), Location - new Vector2(220, 55), Color.White);
-                spriteBatch.DrawString(font, priceOne, Location + new Vector2(-145, 150), Color.White);
-                spriteBatch.DrawString(font, priceTwo, Location + new Vector2(90, 150), Color.White);
+                merchantSprite.Draw(spriteBatch, Location - LoZHelpers.merchantOffset);
+                rupeeSprite.Draw(spriteBatch, Location + LoZHelpers.shopRupeePos);
+                xSprite.Draw(spriteBatch, Location + LoZHelpers.shopXPos);
+                spriteBatch.DrawString(font, merchantMsg.Substring(0, current), Location - LoZHelpers.merchantMsgPos, Color.White);
+                spriteBatch.DrawString(font, priceOne, Location + LoZHelpers.priceOnePos, Color.White);
+                spriteBatch.DrawString(font, priceTwo, Location + LoZHelpers.priceTwoPos, Color.White);
             }           
         }
 
@@ -77,7 +77,7 @@ namespace LegendOfZeldaClone
             timer--;
             if (timer == 0)
             {
-                timer = 7;
+                timer = 3;
                 if (current < merchantMsg.Length)
                 {
                     current++;
