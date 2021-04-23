@@ -12,7 +12,9 @@ namespace LegendOfZeldaClone.Collisions
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
             if (CurrentItem is BlueRing)
+            {
                 if (player is LinkPlayer) CurrentItem.Die();
+            }
             else
                 CurrentItem.Die();
         }

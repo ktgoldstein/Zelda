@@ -19,8 +19,9 @@ namespace LegendOfZeldaClone
         private readonly int height;
         private readonly int width;
         private int animationSpeed;
+        private int lifespan;
 
-        public FlashingRupee(Vector2 location)
+        public FlashingRupee(Vector2 location, int lifespan = -1)
         {
             rupee = ItemSpriteFactory.Instance.CreateFlashingRupee();
             Location = location;
@@ -28,6 +29,7 @@ namespace LegendOfZeldaClone
             height = 16;
             Alive = true;
             animationSpeed = 0;
+            this.lifespan = lifespan;
         }
 
         public void Update()
@@ -35,6 +37,14 @@ namespace LegendOfZeldaClone
             animationSpeed++;
             if (animationSpeed % 2 == 0)
                 rupee.Update();
+            if (lifespan > 0 && Alive)
+            {
+                lifespan--;
+                if (lifespan == 0)
+                {
+                    Alive = false;
+                }
+            }
         }
         public void Draw(SpriteBatch spriteBatch) => rupee.Draw(spriteBatch, Location);
         public void Die()
