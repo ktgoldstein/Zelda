@@ -441,9 +441,9 @@ namespace LegendOfZeldaClone
             MazeRooms[3].AddNeighbors(MazeRooms[2], MazeRooms[4], MazeRooms[3], MazeRooms[1]);
             MazeRooms[4].AddNeighbors(MazeRooms[3], MazeRooms[0], MazeRooms[5], MazeRooms[2]);
             MazeRooms[5].AddNeighbors(MazeRooms[1], OriginalRooms[0], MazeRooms[4], MazeRooms[6]);
-            MazeRooms[6].AddNeighbors(MazeRooms[4], MazeRooms[2], MazeRooms[7], MazeRooms[1]);
+            MazeRooms[6].AddNeighbors(MazeRooms[4], MazeRooms[2], MazeRooms[7], MazeRooms[5]);
             MazeRooms[7].AddNeighbors(MazeRooms[0], MazeRooms[3], MazeRooms[7], MazeRooms[8]);
-            MazeRooms[8].AddNeighbors(OriginalRooms[0], FinalBossRoom, MazeRooms[5], MazeRooms[2]);
+            MazeRooms[8].AddNeighbors(OriginalRooms[0], FinalBossRoom, MazeRooms[7], MazeRooms[2]);
 
             FinalBossRoom.AddNeighbors(MazeRooms[8], null, null, null);
 

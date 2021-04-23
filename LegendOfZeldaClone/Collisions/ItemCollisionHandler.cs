@@ -12,17 +12,7 @@ namespace LegendOfZeldaClone.Collisions
         public void HandlePlayerCollision(IPlayer player, Direction direction)
         {
             if (CurrentItem is BlueRing)
-            {
                 if (player is LinkPlayer) CurrentItem.Die();
-            }
-            else if (CurrentItem is BuyableItem buyableItem)
-            {
-                if (player.Inventory.RupeesHeld >= buyableItem.Price)
-                {
-                    player.Inventory.RupeesHeld -= buyableItem.Price;
-                    CurrentItem.Die();
-                }
-            }
             else
                 CurrentItem.Die();
         }

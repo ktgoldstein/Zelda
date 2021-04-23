@@ -64,6 +64,7 @@ namespace LegendOfZeldaClone
         {
             moved = false;
             MovedDirection = Direction.None;
+            HitTarget = false;
             Location = startingLocation;
             pastLocation = startingLocation;
         }
