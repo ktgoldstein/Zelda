@@ -24,6 +24,7 @@ namespace LegendOfZeldaClone
         public void StopPlaying()
         {
             SoundInstance.Dispose();
+            songHasAlreadyStartedPlaying = false;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace LegendOfZeldaClone
     {
         public SoundEffect Sound { get; }
         private SoundEffectInstance SoundInstance;
+        private bool songHasAlreadyStartedPlaying = false;
 
         public DungeonThemeMusic()
         {
@@ -15,11 +16,14 @@ namespace LegendOfZeldaClone
         }
         public void Play()
         {
-            SoundInstance.Play();
+            if (!songHasAlreadyStartedPlaying)
+                SoundInstance.Play();
+            songHasAlreadyStartedPlaying = true;
         }
         public void StopPlaying()
         {
             SoundInstance.Dispose();
+            songHasAlreadyStartedPlaying = false;
         }
     }
 }
