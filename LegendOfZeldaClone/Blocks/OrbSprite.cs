@@ -11,7 +11,7 @@ namespace LegendOfZeldaClone
         public int SourcePosX { get; }
         public int SourcePosY { get; }
 
-        public OrbSprite(Texture2D texture, int height, int width, int sourcePosX, int sourcePosY)
+        public OrbSprite(Texture2D texture, int height, int width, int sourcePosX, int sourcePosY, int atlasWidth)
         {
             this.Texture = texture;
             this.height = height;
