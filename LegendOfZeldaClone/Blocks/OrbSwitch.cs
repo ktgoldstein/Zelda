@@ -5,16 +5,15 @@ namespace LegendOfZeldaClone
 {
     public class OrbSwitch : BlockKernel
     {
-        public bool WasHit { get; set; } = false;
+        public bool WasHit { get => wasHit; }
+        private bool wasHit = false;
         private OrbSprite sprite;
 
         public OrbSwitch(Vector2 location, ISprite sprite, int height, int width, ObjectHeight objectHeight)
             : base(location, sprite, height, width, objectHeight, false, false)
         {
             if (sprite is OrbSprite)
-            {
                 this.sprite = sprite as OrbSprite;
-            }
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -27,6 +26,10 @@ namespace LegendOfZeldaClone
 
             spriteBatch.Draw(sprite.Texture, destinationRectangle, sourceRectangle, Color.White);
         }
-        public void Reset() => WasHit = false;
+        public void Reset() => wasHit = false;
+        public void Hit()
+        {
+            wasHit = !wasHit;
+        }
     }
 }
