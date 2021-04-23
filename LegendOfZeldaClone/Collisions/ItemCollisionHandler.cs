@@ -15,7 +15,7 @@ namespace LegendOfZeldaClone.Collisions
             {
                 if (player is LinkPlayer) CurrentItem.Die();
             }
-            else
+            else if (!(CurrentItem is BuyableItem))
                 CurrentItem.Die();
         }
 
