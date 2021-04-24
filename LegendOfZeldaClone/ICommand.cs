@@ -119,6 +119,18 @@ namespace LegendOfZeldaClone
         }
     }
 
+    public class HealLink : ICommand
+    {
+        private GameStateMachine game;
+
+        public HealLink(GameStateMachine game) => this.game = game;
+        public void Execute()
+        {
+            if (game.CurrentGameState == GameState.Play)
+                game.Player.Heal(game.Player.MaxHealth);
+        }
+    }
+
     public class ResetGame : ICommand
     {
         private GameStateMachine game;

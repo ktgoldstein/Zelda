@@ -48,6 +48,7 @@ namespace LegendOfZeldaClone
             ICommand actionA = new ActionA(gameStateMachine);
             ICommand actionB = new ActionB(gameStateMachine);
             ICommand damageLink = new DamageLink(gameStateMachine);
+            ICommand healLink = new HealLink(gameStateMachine);
 
             ICommand resetGame = new ResetGame(gameStateMachine);
 
@@ -57,6 +58,7 @@ namespace LegendOfZeldaClone
             ICommand moveRoomRight = new MoveRoomRight(gameStateMachine);
             ICommand pauseGame = new PauseGame(gameStateMachine);
             ICommand selectItem = new SelectItem(gameStateMachine);
+            
 
             KeyboardController keyboardController = new KeyboardController(gameStateMachine);
 
@@ -73,7 +75,8 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.N, actionA);
             keyboardController.RegisterCommand(Keys.X, actionB);
             keyboardController.RegisterCommand(Keys.M, actionB);
-            keyboardController.RegisterCommand(Keys.E, damageLink);
+            //keyboardController.RegisterCommand(Keys.E, damageLink);
+            keyboardController.RegisterCommand(Keys.E, healLink);
 
             keyboardController.RegisterCommand(Keys.R, resetGame);
 
@@ -82,6 +85,8 @@ namespace LegendOfZeldaClone
             keyboardController.RegisterCommand(Keys.J, moveRoomLeft);
             keyboardController.RegisterCommand(Keys.L, moveRoomRight);
             keyboardController.RegisterCommand(Keys.P, pauseGame);
+            keyboardController.RegisterCommand(Keys.LeftShift, pauseGame);
+            keyboardController.RegisterCommand(Keys.RightShift, pauseGame);
             keyboardController.RegisterCommand(Keys.Enter, selectItem);
 
             controllerKeyboard = keyboardController;
